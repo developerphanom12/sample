@@ -1,20 +1,21 @@
-import React from 'react';
+import React from "react";
 import baseStyled, {
   ThemedStyledInterface,
   createGlobalStyle,
   ThemeProvider,
-} from 'styled-components';
+} from "styled-components";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const COLORS = {
-  lightGray: '#F5F5F7',
-  gray: '#C4C4C4',
-  orange: '#FF5252',
-  white: '#ffffff',
-  black: '#222B38',
+  lighterGrey: "#F5F5F7",
+  lightGray: "#F2F2F2",
+  gray: "#C4C4C4",
+  orange: "#FF5252",
+  white: "#ffffff",
+  black: "#222B38",
 };
 
 export const Z_INDEX = {
@@ -31,18 +32,18 @@ export const Z_INDEX = {
 export const theme = {
   colors: { ...COLORS },
   size: {
-    normal: '15px',
-    default: '14px',
-    medium: '18px',
-    mediumSmall: '13px',
-    small: '10px',
-    ultraSmall: '7px',
-    title: '24px',
-    mediumLarge: '20px',
-    big: '32px'
+    normal: "15px",
+    default: "14px",
+    medium: "18px",
+    mediumSmall: "13px",
+    small: "10px",
+    ultraSmall: "7px",
+    title: "24px",
+    mediumLarge: "20px",
+    big: "32px",
   },
   font: {
-    regular: 'regular',
+    openSans: "Open Sans",
   },
   zIndex: {
     ...Z_INDEX,
