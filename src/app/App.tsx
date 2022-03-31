@@ -1,5 +1,5 @@
-import { AppRouter } from './app.router';
-import { AppTheme } from './theme';
+import { AppRouter } from "./app.router";
+import { AppTheme } from "./theme";
 
 const App = () => {
   return (
