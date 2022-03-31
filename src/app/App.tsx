@@ -1,17 +1,11 @@
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persisterStore } from '../services/redux/store';
-import { Theme } from './theme';
+import { AppRouter } from './app.router';
+import { AppTheme } from './theme';
 
 const App = () => {
   return (
-    // <Provider store={store}>
-    //   <PersistGate loading={null} persistor={persisterStore}>
-    <Theme>
-      <div>App hello world</div>
-    </Theme>
-    //   </PersistGate>
-    // </Provider>
+    <AppTheme>
+      <AppRouter />
+    </AppTheme>
   );
 };
 export default App;

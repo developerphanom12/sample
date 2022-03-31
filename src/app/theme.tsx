@@ -11,6 +11,7 @@ interface Props {
 
 export const COLORS = {
   lightGray: '#F5F5F7',
+  gray: '#C4C4C4',
   orange: '#FF5252',
   white: '#ffffff',
   black: '#222B38',
@@ -38,6 +39,7 @@ export const theme = {
     ultraSmall: '7px',
     title: '24px',
     mediumLarge: '20px',
+    big: '32px'
   },
   font: {
     regular: 'regular',
@@ -48,7 +50,7 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
-export const styled = baseStyled as ThemedStyledInterface<any>;
+export const styled = baseStyled as ThemedStyledInterface<Theme>;
 
 const GlobalStyle = createGlobalStyle`
 
@@ -142,8 +144,8 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 `;
-// eslint-disable-next-line
-export const Theme = ({ children }: Props) => {
+
+export const AppTheme = ({ children }: Props) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
