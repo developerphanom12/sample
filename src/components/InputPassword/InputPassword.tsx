@@ -1,6 +1,7 @@
-import React from "react";
-import { Icon } from "components/Icons/Icons";
-import { InputPasswordStyles } from "./InputPassword.style";
+import React from 'react';
+import { Icon } from 'components/Icons/Icons';
+import { Styled } from './InputPassword.style';
+import { ErrorText } from '../ErrorText';
 
 interface InputProps {
   text: string;
@@ -8,28 +9,42 @@ interface InputProps {
   password: string;
   onChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
+  inputName?: string;
+  errorText?: string;
+  touched?: boolean;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputPassword: React.FC<InputProps> = ({
-  text,
-  showPassword,
-  password,
-  onChangePassword,
-  onClick,
-}) => {
+export const InputPassword: React.FC<InputProps> = (props) => {
+  const {
+    text,
+    showPassword,
+    password,
+    inputName,
+    errorText,
+    touched,
+    onChangePassword,
+    onClick,
+    onBlur,
+  } = props;
+
   return (
-    <div>
-      <InputPasswordStyles.Label>{text}</InputPasswordStyles.Label>
-      <InputPasswordStyles.WrapperInput>
-        <InputPasswordStyles.Input
-          type={showPassword ? "text" : "password"}
+    <>
+      <Styled.Label>{text}</Styled.Label>
+      <Styled.WrapperInput>
+        <Styled.Input
+          isError={!!errorText && touched}
+          onBlur={onBlur}
+          name={inputName}
+          type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={onChangePassword}
         />
-        <InputPasswordStyles.Button onClick={onClick}>
+        <Styled.Button onClick={onClick}>
           <Icon type="showPassword" />
-        </InputPasswordStyles.Button>
-      </InputPasswordStyles.WrapperInput>
-    </div>
+        </Styled.Button>
+        {touched && !!errorText && <ErrorText errorText={errorText} />}
+      </Styled.WrapperInput>
+    </>
   );
 };

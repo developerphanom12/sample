@@ -1,41 +1,55 @@
-import { STRINGS } from "constants/strings";
-import { LoginStyles } from "./Login.style";
-import signIn from "assets/icons/sign-in-up.png";
+import { STRINGS } from 'constants/strings';
+import signIn from 'assets/icons/sign-in-up.png';
+import { LoginForm } from './LoginForm/LoginForm';
+import { useLoginState } from './Login.state';
+import { Styled } from './Login.style';
 
 export const Login = () => {
+  const { isShowPassword, formik, onTogglePasswordVisibility } =
+    useLoginState();
+
   return (
-    <LoginStyles.MainWrapper>
-      <LoginStyles.Section>
-        <LoginStyles.LeftSideContentWrapper>
-          <LoginStyles.Title>
+    <Styled.MainWrapper>
+      <Styled.Section>
+        <Styled.LeftSideContentWrapper>
+          <Styled.Title>
             {STRINGS.sign_in_up.title}
-            <LoginStyles.BoldText>
+            <Styled.BoldText>
               {STRINGS.sign_in_up.hub}
-            </LoginStyles.BoldText>
-          </LoginStyles.Title>
-          <LoginStyles.SubTitle>
+            </Styled.BoldText>
+          </Styled.Title>
+          <Styled.SubTitle>
             {STRINGS.sign_in_up.sub_title}
-          </LoginStyles.SubTitle>
+          </Styled.SubTitle>
 
-          <LoginStyles.ImageWrapper>
+          <Styled.ImageWrapper>
             <img src={signIn} alt="Log In" />
-          </LoginStyles.ImageWrapper>
-        </LoginStyles.LeftSideContentWrapper>
-      </LoginStyles.Section>
+          </Styled.ImageWrapper>
+        </Styled.LeftSideContentWrapper>
+      </Styled.Section>
 
-      <LoginStyles.Section>
-        <LoginStyles.RightSideContentWrapper>
-          <LoginStyles.TabsWrapper>
-            <LoginStyles.ActiveTabWrapper>
-              <LoginStyles.Tab isActive>
+      <Styled.Section>
+        <Styled.RightSideContentWrapper>
+          <Styled.TabsWrapper>
+            <Styled.ActiveTabWrapper>
+              <Styled.Tab isActive>
                 {STRINGS.sign_in_up.sign_in}
-              </LoginStyles.Tab>
-              <LoginStyles.ActiveLine />
-            </LoginStyles.ActiveTabWrapper>
-            <LoginStyles.Tab>{STRINGS.sign_in_up.sign_up}</LoginStyles.Tab>
-          </LoginStyles.TabsWrapper>
-        </LoginStyles.RightSideContentWrapper>
-      </LoginStyles.Section>
-    </LoginStyles.MainWrapper>
+              </Styled.Tab>
+              <Styled.ActiveLine />
+            </Styled.ActiveTabWrapper>
+            <Styled.Tab>{STRINGS.sign_in_up.sign_up}</Styled.Tab>
+          </Styled.TabsWrapper>
+
+          <LoginForm
+            onFormHandleSubmit={formik.handleSubmit}
+            formikProps={formik.getFieldProps}
+            formikMeta={formik.getFieldMeta}
+            onTogglePasswordVisibility={onTogglePasswordVisibility}
+            isShowPassword={isShowPassword}
+            isValid={formik.isValid}
+          />
+        </Styled.RightSideContentWrapper>
+      </Styled.Section>
+    </Styled.MainWrapper>
   );
 };

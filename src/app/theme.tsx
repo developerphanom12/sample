@@ -1,23 +1,26 @@
-import React from "react";
+import React from 'react';
 import baseStyled, {
   ThemedStyledInterface,
   createGlobalStyle,
   ThemeProvider,
-} from "styled-components";
+} from 'styled-components';
 
-import OpenSans from "assets/fonts/OpenSans.ttf";
+import OpenSans from 'assets/fonts/OpenSans.ttf';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const COLORS = {
-  lighterGrey: "#F5F5F7",
-  lightGray: "#F2F2F2",
-  gray: "#C4C4C4",
-  orange: "#FF5252",
-  white: "#ffffff",
-  black: "#222B38",
+  lighterGrey: '#F5F5F7',
+  red: '#FD3E5B',
+  lightGray: '#F2F2F2',
+  gray: '#C4C4C4',
+  orange: '#FF5252',
+  white: '#ffffff',
+  black: '#222B38',
+  opacityBlack: 'rgba(34, 43, 56, 0.1)',
+  boxShadowBlack: 'rgba(34, 43, 56, 0.25)',
 };
 
 export const Z_INDEX = {
@@ -33,19 +36,26 @@ export const Z_INDEX = {
 
 export const theme = {
   colors: { ...COLORS },
+  fontWeight: {
+    semiBold: 600,
+    bold: 700,
+    medium: 500,
+    normal: 400,
+  },
   size: {
-    normal: "15px",
-    default: "14px",
-    medium: "18px",
-    mediumSmall: "13px",
-    small: "10px",
-    ultraSmall: "7px",
-    title: "24px",
-    mediumLarge: "20px",
-    big: "32px",
+    normal: '15px',
+    default: '14px',
+    medium: '18px',
+    mediumSmall: '13px',
+    biggerSmall: '12px',
+    small: '10px',
+    ultraSmall: '7px',
+    title: '24px',
+    mediumLarge: '20px',
+    big: '32px',
   },
   font: {
-    openSans: "Open Sans",
+    openSans: 'Open Sans',
   },
   zIndex: {
     ...Z_INDEX,
@@ -121,9 +131,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     margin: 0 auto;
     background-color: #fff;
-    font-family: 'Avenir Next', 'apple-system', 'BlinkMacSystemFont', 'Segoe UI',
-      'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

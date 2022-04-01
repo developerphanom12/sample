@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "../Icons/Icons";
-import { InputSearchStyles } from "./InputSearch.style";
+import { Styled } from "./InputSearch.style";
 
 interface InputProps {
   search: string;
@@ -12,17 +12,17 @@ export const InputSearch: React.FC<InputProps> = ({
   onChangeSearch,
 }) => {
   return (
-    <div>
-      <InputSearchStyles.WrapperInput>
-        <InputSearchStyles.Input
+    <>
+      <Styled.WrapperInput>
+        <Styled.Input
           value={search}
           onChange={onChangeSearch}
           placeholder="Search here..."
         />
-        <InputSearchStyles.WrapperIcon>
+        <Styled.WrapperIcon>
           <Icon type="search" />
-        </InputSearchStyles.WrapperIcon>
-      </InputSearchStyles.WrapperInput>
-    </div>
+        </Styled.WrapperIcon>
+      </Styled.WrapperInput>
+    </>
   );
 };

@@ -1,6 +1,6 @@
-import { styled } from "../../app/theme";
+import { styled } from 'app/theme';
 
-export const InputSearchStyles = {
+export const Styled = {
   Input: styled.input`
     font-family: ${(props) => props.theme.font.openSans};
     font-size: ${(props) => props.theme.size.default};
@@ -9,7 +9,7 @@ export const InputSearchStyles = {
     width: 300px;
     border-radius: 5px;
     border: 1px solid ${(props) => props.theme.colors.gray};
-    box-shadow: 0px 1px 1px rgba(34, 43, 56, 0.25);
+    box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
   `,
   WrapperIcon: styled.div`
     background-color: transparent;
