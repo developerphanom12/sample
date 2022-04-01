@@ -5,6 +5,8 @@ import baseStyled, {
   ThemeProvider,
 } from "styled-components";
 
+import OpenSans from "assets/fonts/OpenSans.ttf";
+
 interface Props {
   children: React.ReactNode;
 }
@@ -54,6 +56,11 @@ export type Theme = typeof theme;
 export const styled = baseStyled as ThemedStyledInterface<Theme>;
 
 const GlobalStyle = createGlobalStyle`
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(${OpenSans});
+}
 
   body,
   h1,
