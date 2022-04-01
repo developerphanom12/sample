@@ -1,6 +1,6 @@
-import { STRINGS } from 'constants/strings';
-import { LoginStyles } from './Login.style';
-import signIn from 'assets/icons/sign-in-up.png';
+import { STRINGS } from "constants/strings";
+import { LoginStyles } from "./Login.style";
+import signIn from "assets/icons/sign-in-up.png";
 
 export const Login = () => {
   return (
@@ -27,14 +27,12 @@ export const Login = () => {
         <LoginStyles.RightSideContentWrapper>
           <LoginStyles.TabsWrapper>
             <LoginStyles.ActiveTabWrapper>
-            <LoginStyles.Tab isActive>
-              {STRINGS.sign_in_up.sign_in}
-            </LoginStyles.Tab>
+              <LoginStyles.Tab isActive>
+                {STRINGS.sign_in_up.sign_in}
+              </LoginStyles.Tab>
               <LoginStyles.ActiveLine />
             </LoginStyles.ActiveTabWrapper>
-            <LoginStyles.Tab>
-              {STRINGS.sign_in_up.sign_up}
-            </LoginStyles.Tab>
+            <LoginStyles.Tab>{STRINGS.sign_in_up.sign_up}</LoginStyles.Tab>
           </LoginStyles.TabsWrapper>
         </LoginStyles.RightSideContentWrapper>
       </LoginStyles.Section>

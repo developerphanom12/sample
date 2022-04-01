@@ -4,7 +4,6 @@ import { InputStyles } from "./Input.style";
 
 interface InputProps {
   text: string;
-
   value: string;
   onChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
