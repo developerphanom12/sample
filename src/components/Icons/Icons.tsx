@@ -1,7 +1,9 @@
 import { FunctionComponent, SVGProps } from "react";
 import { ReactComponent as showPassword } from "../../assets/icons/show-password.svg";
 import { ReactComponent as capiumLogo } from "../../assets/icons/capium-icon.svg";
-import { ReactComponent as arrow } from "../../assets/icons/arrow.svg";
+import { ReactComponent as arrowDown } from "../../assets/icons/arrow-down.svg";
+import { ReactComponent as arrowRight } from "../../assets/icons/arrow-right.svg";
+import { ReactComponent as arrowLeft } from "../../assets/icons/arrow-left.svg";
 import { ReactComponent as checkmark } from "../../assets/icons/checkmark.svg";
 import { ReactComponent as searchIcon } from "../../assets/icons/search-icon.svg";
 import { ReactComponent as calendar } from "../../assets/icons/calendar.svg";
@@ -9,7 +11,9 @@ import { ReactComponent as calendar } from "../../assets/icons/calendar.svg";
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   showPassword,
   capiumLogo,
-  arrow,
+  arrowDown,
+  arrowRight,
+  arrowLeft,
   checkmark,
   searchIcon,
   calendar,

@@ -2,7 +2,7 @@ import React from "react";
 import { ButtonStyles } from "./Button.style";
 import { Icon } from "components/Icons/Icons";
 
-export type ButtonStyleProps = {
+export type ButtonProps = {
   themedButton: "primary" | "secondary" | "capium";
   width: "auth" | "primary" | "secondary";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -14,7 +14,7 @@ export const Button = ({
   width,
   children,
   onClick,
-}: ButtonStyleProps) => {
+}: ButtonProps) => {
   return (
     <ButtonStyles.Button
       themedButton={themedButton}
