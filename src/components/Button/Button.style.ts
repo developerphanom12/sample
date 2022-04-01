@@ -1,6 +1,6 @@
 import { styled } from "app/theme";
 import { css } from "styled-components";
-import { ButtonStyleProps } from "./Button";
+import { ButtonProps } from "./Button";
 
 const THEME = {
   primary: css`
@@ -34,7 +34,7 @@ const WIDTH = {
 };
 
 export const ButtonStyles = {
-  Button: styled.button<ButtonStyleProps>`
+  Button: styled.button<ButtonProps>`
     font-size: ${(props) => props.theme.size.default};
     height: 45px;
     border-radius: 5px;
