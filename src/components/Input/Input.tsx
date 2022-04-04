@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Styled } from './Input.style';
 import { ErrorText } from '../ErrorText';
 
@@ -13,15 +14,8 @@ interface InputProps {
 }
 
 export const Input: React.FC<InputProps> = (props) => {
-  const {
-    text,
-    inputName,
-    value,
-    errorText,
-    touched,
-    onChangeValue,
-    onBlur,
-  } = props;
+  const { text, inputName, value, errorText, touched, onChangeValue, onBlur } =
+    props;
 
   return (
     <Styled.InputWrapper>

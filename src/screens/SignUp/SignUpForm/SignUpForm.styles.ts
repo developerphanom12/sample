@@ -1,11 +1,10 @@
 import { styled } from 'app/theme';
 
-export const Styled = {
+export const SignUpFormStyles = {
   Form: styled.form`
     max-width: 500px;
     width: 100%;
   `,
-
   ForgotPassword: styled.div`
     display: flex;
     font-weight: 600;

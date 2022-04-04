@@ -1,10 +1,14 @@
 import { FC } from 'react';
+import { FieldInputProps, FieldMetaProps } from 'formik';
+
 import { Input } from 'components/Input/Input';
 import { InputPassword } from 'components/InputPassword/InputPassword';
-import { STRINGS } from 'constants/strings';
-import { Styled } from './LoginForm.styles';
-import { FieldInputProps, FieldMetaProps } from 'formik';
 import { Button } from 'components/Button/Button';
+import { DivideLine } from 'components/DivideLine/DivideLine';
+
+import { Styled } from './LoginForm.styles';
+
+import { STRINGS } from 'constants/strings';
 
 interface ILoginFormProps {
   onFormHandleSubmit: (
@@ -24,6 +28,7 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
     onTogglePasswordVisibility,
     formikMeta,
     isShowPassword,
+    isValid,
   } = props;
 
   const {
@@ -70,8 +75,14 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       <Styled.ForgotPassword>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
-      <Button themedButton="primary" width="primary">
+      <Button isDisabled={!isValid} themedButton="primary" width="auth">
         {STRINGS.sign_in_up.sign_in}
+      </Button>
+
+      <DivideLine />
+
+      <Button themedButton="capium" width="auth">
+        {STRINGS.sign_in_up.continue_Capium}
       </Button>
     </Styled.Form>
   );
