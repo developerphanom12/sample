@@ -1,17 +1,19 @@
+import { FC } from 'react';
+
 import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 
-import { useLoginState } from './Login.state';
-import { LoginForm } from './LoginForm/LoginForm';
-import { Styled } from './Login.style';
+import { useSignUpState } from './SignUp.state';
+import { SignUpForm } from './SignUpForm/SignUpForm';
+import { SignUpStyles as Styled } from './SignUp.styles';
 
-export const Login = () => {
+export const SignUp: FC = () => {
   const {
+    onLoginClickHandler,
+    onTogglePasswordVisibility,
     isShowPassword,
     formik,
-    onSignUpClickHandler,
-    onTogglePasswordVisibility,
-  } = useLoginState();
+  } = useSignUpState();
 
   return (
     <Styled.MainWrapper>
@@ -19,13 +21,13 @@ export const Login = () => {
 
       <Styled.Section>
         <Styled.RightSideContentWrapper>
-          <AuthTabs onSignUpClickHandler={onSignUpClickHandler} />
+          <AuthTabs isSignUp onSignInClickHandler={onLoginClickHandler} />
 
-          <LoginForm
-            onFormHandleSubmit={formik.handleSubmit}
-            formikProps={formik.getFieldProps}
+          <SignUpForm
             formikMeta={formik.getFieldMeta}
+            formikProps={formik.getFieldProps}
             onTogglePasswordVisibility={onTogglePasswordVisibility}
+            onFormHandleSubmit={formik.handleSubmit}
             isShowPassword={isShowPassword}
             isValid={formik.isValid && formik.dirty}
           />

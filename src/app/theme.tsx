@@ -12,15 +12,16 @@ interface Props {
 }
 
 export const COLORS = {
-  lighterGrey: "#F5F5F7",
-  red: "#FD3E5B",
-  lightGray: "#F2F2F2",
-  gray: "#C4C4C4",
-  orange: "#FF5252",
-  white: "#ffffff",
-  black: "#222B38",
-  opacityBlack: "rgba(34, 43, 56, 0.1)",
-  boxShadowBlack: "rgba(34, 43, 56, 0.25)",
+  lighterGrey: '#F5F5F7',
+  red: '#FD3E5B',
+  lightGray: '#F2F2F2',
+  whiteGray: '#E5E5E5',
+  gray: '#C4C4C4',
+  orange: '#FF5252',
+  white: '#ffffff',
+  black: '#222B38',
+  opacityBlack: 'rgba(34, 43, 56, 0.1)',
+  boxShadowBlack: 'rgba(34, 43, 56, 0.25)',
   halfTranparentBlack: "rgba(34, 43, 56, 0.5)",
 };
 

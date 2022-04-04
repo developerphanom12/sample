@@ -1,6 +1,6 @@
-import { styled } from 'app/theme';
+import { styled } from "app/theme";
 
-export const Styled = {
+export const SignUpStyles = {
   MainWrapper: styled.div`
     display: flex;
     width: 100%;

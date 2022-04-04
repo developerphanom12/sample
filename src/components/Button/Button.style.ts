@@ -1,6 +1,8 @@
-import { styled } from "app/theme";
-import { css } from "styled-components";
-import { ButtonProps } from "./Button";
+import { css } from 'styled-components';
+
+import { styled } from 'app/theme';
+
+import { ButtonStyleProps } from './Button';
 
 const THEME = {
   primary: css`
@@ -34,13 +36,15 @@ const WIDTH = {
 };
 
 export const ButtonStyles = {
-  Button: styled.button<ButtonProps>`
+  Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
     height: 45px;
     border-radius: 5px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
     ${(props) => props.themedButton && THEME[props.themedButton]};
     ${(props) => props.width && WIDTH[props.width]};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    opacity: ${(props) => (props.disabled ? 0.8 : 1)};
   `,
   Content: styled.div`
     &:not(:last-child) {

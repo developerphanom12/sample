@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
 import { emailValidation, passwordValidation } from 'services/validation';
+
+import { ROUTES } from '../../constants/routes';
 
 interface IuseLoginStateState {
   isShowPassword: boolean;
@@ -12,6 +16,12 @@ export const useLoginState = () => {
     isShowPassword: false,
   };
   const [state, setState] = useState<IuseLoginStateState>(initialState);
+
+  const navigate = useNavigate();
+
+  const onSignUpClickHandler = () => {
+    navigate(ROUTES.sign_up);
+  };
 
   const onTogglePasswordVisibility = () => {
     setState((prevState) => ({
@@ -36,6 +46,7 @@ export const useLoginState = () => {
   return {
     ...state,
     formik,
+    onSignUpClickHandler,
     onTogglePasswordVisibility,
   };
 };
