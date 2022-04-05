@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { FC } from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import { Login } from 'screens/Login/Login';
-import { SignUp } from 'screens/SignUp/SignUp';
+import { Login } from "screens/Login/Login";
+import { SignUp } from "screens/SignUp/SignUp";
 
-import { ROUTES } from 'constants/routes';
+import { ROUTES } from "constants/routes";
 
 export const AppRouter: FC = () => {
   return (

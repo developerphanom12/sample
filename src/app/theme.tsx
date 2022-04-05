@@ -1,29 +1,29 @@
-import React from 'react';
+import React from "react";
 import baseStyled, {
   ThemedStyledInterface,
   createGlobalStyle,
   ThemeProvider,
-} from 'styled-components';
+} from "styled-components";
 
-import OpenSans from 'assets/fonts/OpenSans.ttf';
+import OpenSans from "assets/fonts/OpenSans.ttf";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const COLORS = {
-  lighterGrey: '#F5F5F7',
-  red: '#FD3E5B',
-  lightGray: '#F2F2F2',
-  whiteGray: '#E5E5E5',
-  gray: '#C4C4C4',
-  orange: '#FF5252',
-  white: '#ffffff',
-  black: '#222B38',
-  opacityBlack: 'rgba(34, 43, 56, 0.1)',
-  boxShadowBlack: 'rgba(34, 43, 56, 0.25)',
-  halfTranparentBlack: 'rgba(34, 43, 56, 0.5)',
-  overlay: 'rgba(196, 196, 196, 0.5)',
+  lighterGrey: "#F5F5F7",
+  red: "#FD3E5B",
+  lightGray: "#F2F2F2",
+  whiteGray: "#E5E5E5",
+  gray: "#C4C4C4",
+  orange: "#FF5252",
+  white: "#ffffff",
+  black: "#222B38",
+  opacityBlack: "rgba(34, 43, 56, 0.1)",
+  boxShadowBlack: "rgba(34, 43, 56, 0.25)",
+  halfTranparentBlack: "rgba(34, 43, 56, 0.5)",
+  overlay: "rgba(196, 196, 196, 0.5)",
 };
 
 export const Z_INDEX = {
@@ -46,19 +46,20 @@ export const theme = {
     normal: 400,
   },
   size: {
-    normal: '15px',
-    default: '14px',
-    medium: '18px',
-    mediumSmall: '13px',
-    biggerSmall: '12px',
-    small: '10px',
-    ultraSmall: '7px',
-    title: '24px',
-    mediumLarge: '18px',
-    big: '32px',
+    xnormal: "16px",
+    normal: "15px",
+    default: "14px",
+    medium: "18px",
+    mediumSmall: "13px",
+    biggerSmall: "12px",
+    small: "10px",
+    ultraSmall: "7px",
+    title: "24px",
+    mediumLarge: "20px",
+    big: "32px",
   },
   font: {
-    openSans: 'Open Sans',
+    openSans: "Open Sans",
   },
   zIndex: {
     ...Z_INDEX,
