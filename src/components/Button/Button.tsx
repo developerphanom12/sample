@@ -8,6 +8,7 @@ export type ButtonStyleProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   isDisabled?: boolean;
+  type?: 'submit' | 'reset' | 'button';
   themedButton: 'primary' | 'secondary' | 'capium';
   width: 'auth' | 'primary' | 'secondary';
 };
@@ -17,10 +18,12 @@ export const Button = ({
   width,
   children,
   onClick,
+  type,
   isDisabled,
 }: ButtonStyleProps) => {
   return (
     <ButtonStyles.Button
+      type={type || 'button'}
       themedButton={themedButton}
       width={width}
       onClick={onClick}

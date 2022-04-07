@@ -75,7 +75,7 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       <Styled.ForgotPassword>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
-      <Button isDisabled={!isValid} themedButton="primary" width="auth">
+      <Button isDisabled={!isValid} themedButton="primary" width="auth" type='submit'>
         {STRINGS.sign_in_up.sign_in}
       </Button>
 

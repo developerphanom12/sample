@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import {
-  ActionMeta,
-} from 'react-select';
+import { ActionMeta } from 'react-select';
 
 import { DropdownIndicator } from './DropdownIndicator';
 import { StyledReactSelect } from './CustomSelect.style';
@@ -9,12 +7,12 @@ import { StyledReactSelect } from './CustomSelect.style';
 import { IOption } from './types';
 
 interface ICustomSelectProps {
-  onChangeValueHandler?: (
+  onChangeValueHandler: (
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
   ) => void;
-  defaultOption?: IOption;
-  options?: IOption[];
+  defaultOption: IOption | unknown;
+  options: IOption[];
 }
 
 export const CustomSelect: FC<ICustomSelectProps> = (props) => {

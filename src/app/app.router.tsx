@@ -1,18 +1,34 @@
-import { FC } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { FC } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import { Login } from "screens/Login/Login";
-import { SignUp } from "screens/SignUp/SignUp";
+import { Layout } from 'components/Layout/Layout';
 
-import { ROUTES } from "constants/routes";
+import { Login } from 'screens/Login/Login';
+import { SignUp } from 'screens/SignUp/SignUp';
+import { Preference } from 'screens/Preference';
+import { ForgotPassword } from 'screens/ForgotPassword/ForgotPassword';
 
-export const AppRouter: FC = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.home} element={<Login />} />
-        <Route path={ROUTES.sign_up} element={<SignUp />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+import { PrivateRouter } from './privateRouter';
+
+import { ROUTES } from 'constants/routes';
+
+export const AppRouter: FC = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path={ROUTES.home} element={<Layout />}>
+        <Route
+          index
+          element={
+            <PrivateRouter>
+              <div>HOME</div>
+            </PrivateRouter>
+          }
+        />
+      </Route>
+      <Route path={ROUTES.preference} element={<Preference />} />
+      <Route path={ROUTES.login} element={<Login />} />
+      <Route path={ROUTES.sign_up} element={<SignUp />} />
+      <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+    </Routes>
+  </BrowserRouter>
+);

@@ -8,7 +8,7 @@ export const IconWrapper = styled.div<{ isOpen: boolean }>`
   transition: all 0.2s linear;
 `;
 
-export const StyledReactSelect = styled(Select)`
+export const StyledReactSelect = styled(Select)<{ marginBottom?: number }>`
   .Select__control {
     background: ${({ theme }) => theme.colors.white};
     border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};
@@ -18,6 +18,8 @@ export const StyledReactSelect = styled(Select)`
     width: 100%;
     max-width: 500px;
     cursor: pointer;
+    margin-bottom: ${({ marginBottom }) =>
+      marginBottom ? `${marginBottom}px` : '24px'};
   }
   .Select__control--is-focused {
     outline: none;

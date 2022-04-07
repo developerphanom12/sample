@@ -7,4 +7,6 @@ export enum ROUTES {
   master = "/master",
   settings = "/settings",
   support = "/support",
+  preference = '/preference',
+  forgotPassword = '/forgot-password'
 }
