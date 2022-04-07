@@ -19,7 +19,7 @@ export const Login = () => {
 
       <Styled.Section>
         <Styled.RightSideContentWrapper>
-          <AuthTabs onSignUpClickHandler={onSignUpClickHandler} />
+          <AuthTabs isAuth onSignUpClickHandler={onSignUpClickHandler} />
 
           <LoginForm
             onFormHandleSubmit={formik.handleSubmit}

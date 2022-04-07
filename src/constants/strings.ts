@@ -16,3 +16,22 @@ export const STRINGS = {
     without_acc: 'Don’t have an account?',
   },
 };
+
+export const DATE_FORMATS = [
+  {
+    value: 'MMM-DD-YYYY',
+    label: 'MMM-DD-YYYY',
+  },
+  {
+    value: 'DD-MMM-YYYY',
+    label: 'DD-MMM-YYYY',
+  },
+  {
+    value: 'DDDD-MMMM-D-YYYY',
+    label: 'DDDD-MMMM-D-YYYY',
+  },
+  {
+    value: 'MMMM-D-YYYY',
+    label: 'MMMM-D-YYYY',
+  },
+];

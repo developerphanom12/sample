@@ -49,8 +49,8 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
       <Styled.ForgotPassword>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
-      <Button isDisabled={!isValid} themedButton="primary" width="auth">
-        {STRINGS.sign_in_up.sign_in}
+      <Button isDisabled={!isValid} type='submit' themedButton="primary" width="auth">
+        {STRINGS.sign_in_up.sign_up}
       </Button>
 
       <DivideLine />

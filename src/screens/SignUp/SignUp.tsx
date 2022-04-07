@@ -21,7 +21,11 @@ export const SignUp: FC = () => {
 
       <Styled.Section>
         <Styled.RightSideContentWrapper>
-          <AuthTabs isSignUp onSignInClickHandler={onLoginClickHandler} />
+          <AuthTabs
+            isAuth
+            isSignUp
+            onSignInClickHandler={onLoginClickHandler}
+          />
 
           <SignUpForm
             formikMeta={formik.getFieldMeta}

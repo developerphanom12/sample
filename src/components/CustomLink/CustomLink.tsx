@@ -1,7 +1,7 @@
-import React from "react";
-import { useMatch } from "react-router-dom";
+import React from 'react';
+import { useMatch } from 'react-router-dom';
 
-import { CustomLinkStyles as Styled } from "./CustomLink.style";
+import { CustomLinkStyles as Styled } from './CustomLink.style';
 
 export interface CustomLinkProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export const CustomLink = (props: CustomLinkProps) => {
   const isActive = useMatch(to);
 
   return (
-    <Styled.Link isActive={isActive} to={to}>
+    <Styled.Link active={isActive} to={to}>
       {children}
     </Styled.Link>
   );
