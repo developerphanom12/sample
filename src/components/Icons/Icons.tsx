@@ -11,6 +11,7 @@ import { ReactComponent as warning } from "../../assets/icons/warning.svg";
 import { ReactComponent as closeWindow } from "../../assets/icons/close-window-icon.svg";
 import { ReactComponent as avatar } from "../../assets/icons/avatar.svg";
 import { ReactComponent as notification } from "../../assets/icons/bell.svg";
+import { ReactComponent as checkbox } from "../../assets/icons/checkbox.svg";
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   showPassword,
@@ -25,6 +26,7 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   closeWindow,
   avatar,
   notification,
+  checkbox,
 };
 
 export const Icon = (props: {

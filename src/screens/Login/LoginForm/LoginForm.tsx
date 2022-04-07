@@ -1,14 +1,15 @@
-import { FC } from 'react';
-import { FieldInputProps, FieldMetaProps } from 'formik';
+import { FC } from "react";
+import { FieldInputProps, FieldMetaProps } from "formik";
 
-import { Input } from 'components/Input/Input';
-import { InputPassword } from 'components/InputPassword/InputPassword';
-import { Button } from 'components/Button/Button';
-import { DivideLine } from 'components/DivideLine/DivideLine';
+import { Input } from "components/Input/Input";
+import { InputPassword } from "components/InputPassword/InputPassword";
+import { Button } from "components/Button/Button";
+import { DivideLine } from "components/DivideLine/DivideLine";
 
-import { Styled } from './LoginForm.styles';
+import { Styled } from "./LoginForm.styles";
 
-import { STRINGS } from 'constants/strings';
+import { STRINGS } from "constants/strings";
+import { CheckboxItem } from "components/Checkbox/Checkbox";
 
 interface ILoginFormProps {
   onFormHandleSubmit: (
@@ -36,18 +37,18 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
     onBlur: onBlurEmail,
     onChange: onChangeEmail,
     name: emailName,
-  } = formikProps('email');
+  } = formikProps("email");
 
   const {
     value: passwordInputValue,
     onBlur: onBlurPassword,
     onChange: onChangePassword,
     name: passwordName,
-  } = formikProps('password');
+  } = formikProps("password");
 
-  const { touched: emailTouched, error: emailError } = formikMeta('email');
+  const { touched: emailTouched, error: emailError } = formikMeta("email");
   const { touched: passwordTouched, error: passwordError } =
-    formikMeta('password');
+    formikMeta("password");
 
   return (
     <Styled.Form onSubmit={onFormHandleSubmit}>
@@ -78,9 +79,7 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       <Button isDisabled={!isValid} themedButton="primary" width="auth" type='submit'>
         {STRINGS.sign_in_up.sign_in}
       </Button>
-
       <DivideLine />
-
       <Button themedButton="capium" width="auth">
         {STRINGS.sign_in_up.continue_Capium}
       </Button>
