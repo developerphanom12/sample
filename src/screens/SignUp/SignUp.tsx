@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
-import { AuthTabs } from 'components/AuthTabs/AuthTabs';
+import { AuthImageSection } from "components/AuthImageSection/AuthImageSection";
+import { AuthTabs } from "components/AuthTabs/AuthTabs";
 
-import { useSignUpState } from './SignUp.state';
-import { SignUpForm } from './SignUpForm/SignUpForm';
-import { SignUpStyles as Styled } from './SignUp.styles';
+import { useSignUpState } from "./SignUp.state";
+import { SignUpForm } from "./SignUpForm/SignUpForm";
+import { SignUpStyles as Styled } from "./SignUp.styles";
 
 export const SignUp: FC = () => {
   const {
