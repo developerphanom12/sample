@@ -4,6 +4,13 @@ import { CONFIG } from 'constants/config';
 
 import { storageService } from './storage-service';
 
+export interface ICapiumAuthPayload {
+  email: string;
+  password: string;
+}
+
+const capiumBaseURL = 'https://identity.diyboox.com/api/Auth/AuthenticateUser';
+
 const getInstance = () => {
   const instance = axios.create({
     baseURL: CONFIG.apiUrl,
@@ -42,5 +49,9 @@ export const apiServices = {
   },
   updateData: async (requestUrl: string, payload: any) => {
     return getInstance().patch(`${requestUrl}`, payload);
+  },
+  capiumFetchData: async (payload: ICapiumAuthPayload) => {
+    const data = axios.post(capiumBaseURL, payload);
+    return data;
   },
 };

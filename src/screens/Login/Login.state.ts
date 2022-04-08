@@ -46,7 +46,7 @@ export const useLoginState = () => {
       storageService.setToken(data.token);
       storageService.setUser(data.user);
 
-      navigate(ROUTES.home);
+      navigate(data.user.isOnboardingDone ? ROUTES.home : ROUTES.preference);
     } catch (error) {
       console.log(error);
     }

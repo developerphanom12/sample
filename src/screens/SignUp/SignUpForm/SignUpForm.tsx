@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { FieldInputProps, FieldMetaProps } from 'formik';
 
 import { Button } from 'components/Button/Button';
@@ -9,6 +10,7 @@ import { InputItem } from '../InputsBox/InputItem';
 import { inputs } from '../SignUp.constants';
 
 import { STRINGS } from 'constants/strings';
+import { ROUTES } from 'constants/routes';
 
 interface ISignUpFormProps {
   onTogglePasswordVisibility: () => void;
@@ -49,15 +51,22 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
       <Styled.ForgotPassword>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
-      <Button isDisabled={!isValid} type='submit' themedButton="primary" width="auth">
+      <Button
+        isDisabled={!isValid}
+        type="submit"
+        themedButton="primary"
+        width="auth"
+      >
         {STRINGS.sign_in_up.sign_up}
       </Button>
 
       <DivideLine />
 
-      <Button themedButton="capium" width="auth">
-        {STRINGS.sign_in_up.continue_Capium}
-      </Button>
+      <Link to={ROUTES.capiumLogin}>
+        <Button themedButton="capium" width="auth">
+          {STRINGS.sign_in_up.continue_Capium}
+        </Button>
+      </Link>
     </Styled.Form>
   );
 };
