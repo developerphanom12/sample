@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { FieldInputProps, FieldMetaProps } from "formik";
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { FieldInputProps, FieldMetaProps } from 'formik';
 
 import { Input } from "components/Input/Input";
 import { InputPassword } from "components/InputPassword/InputPassword";
@@ -8,8 +9,8 @@ import { DivideLine } from "components/DivideLine/DivideLine";
 
 import { Styled } from "./LoginForm.styles";
 
-import { STRINGS } from "constants/strings";
-import { CheckboxItem } from "components/Checkbox/Checkbox";
+import { STRINGS } from 'constants/strings';
+import { ROUTES } from 'constants/routes';
 
 interface ILoginFormProps {
   onFormHandleSubmit: (
@@ -76,13 +77,26 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       <Styled.ForgotPassword>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
-      <Button isDisabled={!isValid} themedButton="primary" width="auth" type='submit'>
+      <Button
+        isDisabled={!isValid}
+        themedButton="primary"
+        width="auth"
+        type="submit"
+      >
         {STRINGS.sign_in_up.sign_in}
       </Button>
       <DivideLine />
-      <Button themedButton="capium" width="auth">
-        {STRINGS.sign_in_up.continue_Capium}
-      </Button>
+      <Link to={ROUTES.capiumLogin}>
+        <Button themedButton="capium" width="auth">
+          {STRINGS.sign_in_up.continue_Capium}
+        </Button>
+      </Link>
+      <Styled.SignUpLink>
+        <Styled.Text>{STRINGS.sign_in_up.without_acc}</Styled.Text>
+        <Styled.SignUpText to={ROUTES.sign_up}>
+          {STRINGS.sign_in_up.sign_up}
+        </Styled.SignUpText>
+      </Styled.SignUpLink>
     </Styled.Form>
   );
 };
