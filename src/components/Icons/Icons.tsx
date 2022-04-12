@@ -13,8 +13,10 @@ import { ReactComponent as avatar } from '../../assets/icons/avatar.svg';
 import { ReactComponent as notification } from '../../assets/icons/bell.svg';
 import { ReactComponent as checkbox } from '../../assets/icons/checkbox.svg';
 import { ReactComponent as infoIcon } from '../../assets/icons/info-icon.svg';
+import { ReactComponent as accountIcon } from '../../assets/icons/account-icon.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
+  accountIcon,
   infoIcon,
   showPassword,
   capiumLogo,
