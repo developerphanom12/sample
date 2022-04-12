@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 
+import { setCapiumAccount } from './reducer/capiumLogin.reducer';
 import { storageService } from 'services/storage-service';
 import { capiumValidationSchema } from 'services/validation';
+import { IState } from 'services/redux/reducer';
 
 import { setSocialAccount, setUser } from '../SignUp/reducer/signup.reducer';
 import { capiumFetchUser, capiumLogin } from './capiumLogin.api';
@@ -12,34 +14,47 @@ import { capiumFetchUser, capiumLogin } from './capiumLogin.api';
 import { ROUTES } from 'constants/routes';
 
 interface IuseCapiumLoginState {
-  emailValue: string;
-  passwordValue: string;
   isHoverInfo: boolean;
   errorMessage: string;
   isSuccess: boolean;
   isShowPassword: boolean;
+  isModalOpen: boolean;
 }
 export const useCapiumLoginState = () => {
   const initialState = {
-    emailValue: '',
-    passwordValue: '',
     isHoverInfo: false,
     errorMessage: '',
     isSuccess: true,
     isShowPassword: false,
+    isModalOpen: false,
   };
   const [state, setState] = useState<IuseCapiumLoginState>(initialState);
+
+  const {
+    capiumLoginAccount: { capiumAccounts },
+  } = useSelector((state: IState) => state);
+
+  useEffect(() => {
+    onChangeStateField('isModalOpen', !!capiumAccounts.length);
+  }, []);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const onTogglePasswordVisibility = () => {
+    onChangeStateField('isShowPassword', !state.isShowPassword);
+  };
+
+  const onToggleModalWindowHandler = () => {
+    onChangeStateField('isModalOpen', !state.isModalOpen);
+  };
+
+  const onChangeStateField = (optionName: string, value: any) =>
     setState((prevState) => ({
       ...prevState,
-      isShowPassword: !prevState.isShowPassword,
+      [optionName]: value,
     }));
-  };
 
   const onMouseEnterHandler = () =>
     setState((prevState) => ({
@@ -53,19 +68,17 @@ export const useCapiumLoginState = () => {
       isHoverInfo: false,
     }));
 
-  const onChangeEmailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prevState) => ({
-      ...prevState,
-      emailValue: event.target.value,
-    }));
-  };
-  const onChangePasswordHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const onChooseCapiumAccountHandler = (
+    event: React.MouseEvent<HTMLDivElement>
   ) => {
-    setState((prevState) => ({
-      ...prevState,
-      passwordValue: event.target.value,
-    }));
+    const accountData = capiumAccounts.find(
+      (account) => account.id === event.currentTarget.id
+    );
+    onCapiumLoginHandler({
+      email: accountData?.email || '',
+      fullName: accountData?.fullName || '',
+      type: 'capium',
+    });
   };
 
   const formik = useFormik({
@@ -77,12 +90,14 @@ export const useCapiumLoginState = () => {
     validationSchema: capiumValidationSchema,
   });
 
-  const onCapiumLoginHandler = async (payload: {
-    socialAccountId: string;
-    email: string;
-    fullName: string;
-    type: string;
-  }) => {
+  const onCapiumLoginHandler = async (
+    payload: {
+      email: string;
+      fullName: string;
+      type: string;
+    },
+    isFirstLogin?: boolean
+  ) => {
     try {
       const { data } = await capiumLogin(payload);
 
@@ -97,14 +112,21 @@ export const useCapiumLoginState = () => {
           id: data.socialAccount.id,
         })
       );
+
+      isFirstLogin &&
+        dispatch(
+          setCapiumAccount({
+            id: data.socialAccount.id,
+            email: data.socialAccount.capiumEmail,
+            fullName: data.user.fullName,
+          })
+        );
+
       navigate(data.user.isOnboardingDone ? ROUTES.home : ROUTES.preference);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const isDisabledButton =
-    !state.emailValue.length || !state.passwordValue.length;
 
   const onSubmitFormHandler = async (values: {
     email: string;
@@ -128,7 +150,7 @@ export const useCapiumLoginState = () => {
           fullName: data.name,
           type: 'capium',
         };
-        onCapiumLoginHandler(payload);
+        onCapiumLoginHandler(payload, true);
       }
     } catch (error) {
       console.log(error);
@@ -137,12 +159,12 @@ export const useCapiumLoginState = () => {
 
   return {
     ...state,
-    isDisabledButton,
     formik,
+    capiumAccounts,
+    onChooseCapiumAccountHandler,
     onTogglePasswordVisibility,
+    onToggleModalWindowHandler,
     setState,
-    onChangeEmailHandler,
-    onChangePasswordHandler,
     onSubmitFormHandler,
     onMouseEnterHandler,
     onMouseLeaveHandler,

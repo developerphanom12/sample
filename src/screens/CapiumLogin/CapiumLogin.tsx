@@ -3,10 +3,12 @@ import { FC, useEffect } from 'react';
 import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 import { Icon } from 'components/Icons/Icons';
+import { CapiumAccountModalWindow } from 'components/CapiumAccountModalWindow';
 
 import { CapiumLoginStyle as Styled } from './CapiumLogin.style';
 import { CapiumLoginForm } from './CapiumLoginForm/CapiumLoginForm';
 import { useCapiumLoginState } from './CapiumLogin.state';
+
 import { CAPIUM_LOGIN_STRINGS } from './capiumLogin.contants';
 
 export const CapiumLogin: FC = () => {
@@ -15,6 +17,10 @@ export const CapiumLogin: FC = () => {
     isSuccess,
     isShowPassword,
     formik,
+    isModalOpen,
+    capiumAccounts,
+    onChooseCapiumAccountHandler,
+    onToggleModalWindowHandler,
     onTogglePasswordVisibility,
     setState,
     onMouseEnterHandler,
@@ -33,6 +39,12 @@ export const CapiumLogin: FC = () => {
 
   return (
     <Styled.MainWrapper>
+      <CapiumAccountModalWindow
+        isModalWindowOpen={isModalOpen}
+        accounts={capiumAccounts}
+        onCloseModalWindowHandler={onToggleModalWindowHandler}
+        onChooseCapiumAccountHandler={onChooseCapiumAccountHandler}
+      />
       <AuthImageSection />
 
       <Styled.Section>

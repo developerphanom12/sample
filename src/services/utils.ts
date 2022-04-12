@@ -1,3 +1,10 @@
-import { createHashHistory } from 'history';
+export const getInitials = (name: string) => {
+  let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
 
-export const history = createHashHistory();
+  let initials = [...(name.matchAll(rgx) as any)] || [];
+
+  initials = (
+    (initials.shift()?.[1] || '') + (initials.pop()?.[1] || '')
+  ).toUpperCase();
+  return initials;
+};

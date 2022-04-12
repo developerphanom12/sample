@@ -1,7 +1,6 @@
 import { apiServices, ICapiumAuthPayload } from 'services/api-service';
 
 interface ICapiumLogin {
-  socialAccountId: string;
   email: string;
   fullName: string;
   type: string;
