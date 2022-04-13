@@ -9,5 +9,6 @@ export enum ROUTES {
   support = '/support',
   preference = '/preference',
   forgotPassword = '/forgot-password',
+  resetPassword = '/reset-password',
   capiumLogin = '/capium-login',
 }

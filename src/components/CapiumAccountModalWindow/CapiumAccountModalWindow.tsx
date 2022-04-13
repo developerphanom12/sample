@@ -10,6 +10,7 @@ import {
   CapiumModalWindowStyles,
   CapiumModalWindowContentStyles as Styled,
 } from './CapiumAccountModalWindow.style';
+import { useDispatch } from 'react-redux';
 
 interface ICapiumAccountModalWindowProps {
   onCloseModalWindowHandler: () => void;
@@ -28,7 +29,7 @@ export const CapiumAccountModalWindow: FC<ICapiumAccountModalWindowProps> = (
     onCloseModalWindowHandler,
     onChooseCapiumAccountHandler,
   } = props;
-
+  
   return (
     <Modal
       isOpen={isModalWindowOpen}

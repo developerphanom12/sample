@@ -1,6 +1,6 @@
 import { styled } from 'app/theme';
 
-export const ForgotPasswordStyles = {
+export const ResetPasswordStyles = {
   MainWrapper: styled.div`
     display: flex;
     width: 100%;

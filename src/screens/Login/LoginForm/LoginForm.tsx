@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { FieldInputProps, FieldMetaProps } from 'formik';
 
-import { Input } from "components/Input/Input";
-import { InputPassword } from "components/InputPassword/InputPassword";
-import { Button } from "components/Button/Button";
-import { DivideLine } from "components/DivideLine/DivideLine";
+import { Input } from 'components/Input/Input';
+import { InputPassword } from 'components/InputPassword/InputPassword';
+import { Button } from 'components/Button/Button';
+import { DivideLine } from 'components/DivideLine/DivideLine';
 
-import { Styled } from "./LoginForm.styles";
+import { Styled } from './LoginForm.styles';
 
 import { STRINGS } from 'constants/strings';
 import { ROUTES } from 'constants/routes';
@@ -38,18 +38,18 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
     onBlur: onBlurEmail,
     onChange: onChangeEmail,
     name: emailName,
-  } = formikProps("email");
+  } = formikProps('email');
 
   const {
     value: passwordInputValue,
     onBlur: onBlurPassword,
     onChange: onChangePassword,
     name: passwordName,
-  } = formikProps("password");
+  } = formikProps('password');
 
-  const { touched: emailTouched, error: emailError } = formikMeta("email");
+  const { touched: emailTouched, error: emailError } = formikMeta('email');
   const { touched: passwordTouched, error: passwordError } =
-    formikMeta("password");
+    formikMeta('password');
 
   return (
     <Styled.Form onSubmit={onFormHandleSubmit}>
@@ -74,9 +74,11 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
         onBlur={onBlurPassword}
         touched={passwordTouched}
       />
-      <Styled.ForgotPassword>
-        {STRINGS.sign_in_up.forgot_password}
-      </Styled.ForgotPassword>
+      <Link to={ROUTES.forgotPassword}>
+        <Styled.ForgotPassword>
+          {STRINGS.sign_in_up.forgot_password}
+        </Styled.ForgotPassword>
+      </Link>
       <Button
         isDisabled={!isValid}
         themedButton="primary"

@@ -8,6 +8,7 @@ import { SignUp } from 'screens/SignUp/SignUp';
 import { Preference } from 'screens/Preference';
 import { ForgotPassword } from 'screens/ForgotPassword/ForgotPassword';
 import { CapiumLogin } from 'screens/CapiumLogin/CapiumLogin';
+import { ResetPassword } from 'screens/ResetPassword';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -30,6 +31,7 @@ export const AppRouter: FC = () => (
       <Route path={ROUTES.login} element={<Login />} />
       <Route path={ROUTES.sign_up} element={<SignUp />} />
       <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+      <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
       <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
     </Routes>
   </BrowserRouter>

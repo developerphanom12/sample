@@ -12,12 +12,11 @@ export const ForgotPasswordFormStyles = {
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.biggerSmall};
-    margin-bottom: 30px;
   `,
   InputWrapper: styled.div`
     position: relative;
   `,
   ButtonWrapper: styled.div`
-    padding-top: 9px;
+    padding-top: 21px;
   `,
 };

@@ -11,8 +11,16 @@ export const emailValidation = Yup.string()
 
 export const passwordValidation = Yup.string()
   .required('Enter password please')
-  .min(8, 'Wrong password. Try again or click Forgot password to reset it.')
+  .min(8, 'Password must be at least 8 characters')
+  .max(30, 'Password must be no more than 30 characters')
   .matches(REGEXPS.password, 'Password should be like "ExamPL123@@"');
+
+export const confirmPasswordValidation = Yup.string()
+  .required('Please confirm your password')
+  .min(8, 'Password must be at least 8 characters')
+  .max(30, 'Password must be no more than 30 characters')
+  .matches(REGEXPS.password, 'Password should be like "ExamPL123@@"')
+  .oneOf([Yup.ref('newPassword')], 'Passwords do not match');
 
 export const capiumPasswordValidation = Yup.string()
   .required('Enter password please')
@@ -47,6 +55,11 @@ export const signUpValidationSchema = Yup.object().shape({
 export const capiumValidationSchema = Yup.object().shape({
   email: emailValidation,
   password: capiumPasswordValidation,
+});
+
+export const resetPasswordValidationSchema = Yup.object().shape({
+  newPassword: passwordValidation,
+  confirmPassword: confirmPasswordValidation,
 });
 
 export const validationHashMapping: Record<string, React.ReactNode> = {

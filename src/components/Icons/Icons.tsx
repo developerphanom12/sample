@@ -16,9 +16,11 @@ import { ReactComponent as infoIcon } from '../../assets/icons/info-icon.svg';
 import { ReactComponent as accountIcon } from '../../assets/icons/account-icon.svg';
 import { ReactComponent as edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as remove } from '../../assets/icons/remove.svg';
+import { ReactComponent as hidePassword } from '../../assets/icons/hide-password.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   accountIcon,
+  hidePassword,
   infoIcon,
   showPassword,
   capiumLogo,
