@@ -1,8 +1,8 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
-import { styled } from "app/theme";
+import { styled } from 'app/theme';
 
-import { StatusLabelProps } from "./StatusLabel";
+import { StatusLabelProps } from './StatusLabel';
 
 const COLORS = {
   processing: css`
@@ -22,6 +22,10 @@ const COLORS = {
   `,
   approved: css`
     background-color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
+  `,
+  departures: css`
+    background-color: ${(props) => props.theme.colors.transparentOrange};
     color: ${(props) => props.theme.colors.black};
   `,
 };
