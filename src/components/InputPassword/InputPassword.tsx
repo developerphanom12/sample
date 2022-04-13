@@ -1,18 +1,20 @@
 import React from 'react';
+
 import { Icon } from 'components/Icons/Icons';
+
 import { Styled } from './InputPassword.style';
 import { ErrorText } from '../ErrorText';
 
 interface InputProps {
+  inputName?: string;
+  errorText?: string;
+  touched?: boolean;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   text: string;
   showPassword: boolean;
   password: string;
   onChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
-  inputName?: string;
-  errorText?: string;
-  touched?: boolean;
-  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputPassword: React.FC<InputProps> = (props) => {
@@ -41,7 +43,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
           onChange={onChangePassword}
         />
         <Styled.Button onClick={onClick}>
-          <Icon type="showPassword" />
+          <Icon type={showPassword ? 'hidePassword' : 'showPassword'} />
         </Styled.Button>
         {touched && !!errorText && <ErrorText errorText={errorText} />}
       </Styled.WrapperInput>

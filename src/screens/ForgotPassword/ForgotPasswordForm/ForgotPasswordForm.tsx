@@ -35,7 +35,7 @@ export const ForgotPasswordForm: FC<IForgotPasswordFormProps> = (props) => {
           onBlur={onBlur}
           touched={touched}
         />
-        {isValid && (
+        {!error && (
           <Styled.Description>
             {FORGOT_PASSWORD_STRINGS.description}
           </Styled.Description>
