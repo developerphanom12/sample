@@ -1,9 +1,10 @@
-import { AuthImageSection } from "components/AuthImageSection/AuthImageSection";
-import { AuthTabs } from "components/AuthTabs/AuthTabs";
+import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
+import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 
-import { useLoginState } from "./Login.state";
-import { LoginForm } from "./LoginForm/LoginForm";
-import { Styled } from "./Login.style";
+import { useLoginState } from './Login.state';
+import { LoginForm } from './LoginForm/LoginForm';
+import { Styled } from './Login.style';
+import { EmailModalWindow } from '../../components/EmailModalWindow';
 
 export const Login = () => {
   const {

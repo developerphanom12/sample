@@ -1,8 +1,8 @@
 import React from 'react';
-import App from './app/App';
-import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 
+import App from './app/App';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.createRoot(document.querySelector('#root') as Element).render(
   <React.StrictMode>
