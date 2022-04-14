@@ -11,4 +11,5 @@ export enum ROUTES {
   forgotPassword = '/forgot-password',
   resetPassword = '/reset-password',
   capiumLogin = '/capium-login',
+  notFound = '*',
 }

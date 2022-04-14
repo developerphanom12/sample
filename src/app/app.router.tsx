@@ -9,6 +9,7 @@ import { Preference } from 'screens/Preference';
 import { ForgotPassword } from 'screens/ForgotPassword/ForgotPassword';
 import { CapiumLogin } from 'screens/CapiumLogin/CapiumLogin';
 import { ResetPassword } from 'screens/ResetPassword';
+import { NotFound } from 'screens/NotFound';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -18,14 +19,10 @@ export const AppRouter: FC = () => (
   <BrowserRouter>
     <Routes>
       <Route path={ROUTES.home} element={<Layout />}>
-        <Route
-          index
-          element={
-            <PrivateRouter>
-              <div>HOME</div>
-            </PrivateRouter>
-          }
-        />
+        <Route element={<PrivateRouter />}>
+          <Route index element={<div>HOME</div>} />
+          <Route path={ROUTES.notFound} element={<NotFound />} />
+        </Route>
       </Route>
       <Route path={ROUTES.preference} element={<Preference />} />
       <Route path={ROUTES.login} element={<Login />} />
