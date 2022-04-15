@@ -82,15 +82,15 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       </Link>
       <Button
         isDisabled={!isValid}
-        themedButton="primary"
-        width="auth"
-        type="submit"
+        themedButton='primary'
+        width='auth'
+        type='submit'
       >
         {STRINGS.sign_in_up.sign_in}
       </Button>
       <DivideLine />
       <Link to={ROUTES.capiumLogin}>
-        <Button themedButton="capium" width="auth">
+        <Button themedButton='capium' width='auth'>
           {STRINGS.sign_in_up.continue_Capium}
         </Button>
       </Link>

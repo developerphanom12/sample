@@ -39,7 +39,7 @@ export const CapiumLogin: FC = () => {
         <Styled.RightSideContentWrapper>
           <Styled.TabWrapper>
             <Styled.IconWrapper>
-              <Icon type="capiumLogo" />
+              <Icon type='capiumLogo' />
             </Styled.IconWrapper>
             <AuthTabs tabText={CAPIUM_LOGIN_STRINGS.continueCapium} />
           </Styled.TabWrapper>
