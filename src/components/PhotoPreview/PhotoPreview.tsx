@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { LoaderComponent } from '../Loader';
 
+import { LoaderComponent } from '../Loader';
 import { PhotoPreviewStyles } from './PhotoPreview.style';
 
 interface IPhotoPreviewProps {

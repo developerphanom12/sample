@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { PhotoDetailsTabsStyles as Styled } from './PhotoDetailsTabs.styles';
 
-
 export const PhotoDetailsTabs: FC = () =>  (
     <Styled.TabsWrapper>
       <Styled.ActiveTabWrapper>
