@@ -5,7 +5,6 @@ import { FormikHelpers, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { emailValidation, passwordValidation } from 'services/validation';
-import { storageService } from 'services/storage-service';
 
 import { login } from './login.api';
 import { ILogin } from './types/login.types';
@@ -48,6 +47,7 @@ export const useLoginState = () => {
   ) => {
     try {
       const { data } = await login(loginValues);
+      !data.user.isOnboardingDone && dispatch(setCurrencies(data.currencies));
 
       dispatch(setCurrencies(data.currencies));
 

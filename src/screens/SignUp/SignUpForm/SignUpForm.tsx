@@ -66,9 +66,9 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
       </Styled.ForgotPassword>
       <Button
         isDisabled={!isValid}
-        type='submit'
-        themedButton='primary'
-        width='auth'
+        type="submit"
+        themedButton="primary"
+        width="auth"
       >
         {STRINGS.sign_in_up.sign_up}
       </Button>
@@ -76,7 +76,7 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
       <DivideLine />
 
       <Link to={ROUTES.capiumLogin}>
-        <Button themedButton='capium' width='auth'>
+        <Button themedButton="capium" width="auth">
           {STRINGS.sign_in_up.continue_Capium}
         </Button>
       </Link>

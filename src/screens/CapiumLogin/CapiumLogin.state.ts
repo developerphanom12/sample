@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { FormikHelpers, useFormik } from 'formik';
 
-import { storageService } from 'services/storage-service';
 import { capiumValidationSchema } from 'services/validation';
 import { IState } from 'services/redux/reducer';
 

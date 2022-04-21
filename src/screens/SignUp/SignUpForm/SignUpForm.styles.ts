@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { styled } from 'app/theme';
+import { Link } from 'react-router-dom';
 
 export const SignUpFormStyles = {
   Form: styled.form`
