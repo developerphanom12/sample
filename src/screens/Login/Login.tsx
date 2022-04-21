@@ -4,7 +4,6 @@ import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 import { useLoginState } from './Login.state';
 import { LoginForm } from './LoginForm/LoginForm';
 import { Styled } from './Login.style';
-import { TableInboxAdmin } from '../../components/Table/TableInboxAdmin/TableInboxAdmin';
 
 export const Login = () => {
   const {

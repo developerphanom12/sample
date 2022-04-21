@@ -4,6 +4,7 @@ export const Styled = {
   MainWrapper: styled.div`
     display: flex;
     width: 100%;
+    height: 100%;
   `,
   Section: styled.section`
     display: flex;
