@@ -1,4 +1,15 @@
-export const METRICS = [
+interface IMetrics {
+  metric:
+    | 'processing'
+    | 'review'
+    | 'completed'
+    | 'decline'
+    | 'awaitingApproval'
+    | 'approved';
+  title: string;
+}
+
+export const METRICS: IMetrics[] = [
   {
     metric: 'processing',
     title: 'Processing',

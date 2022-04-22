@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { HeaderBoxStyles } from './HeaderBox.style';
 import { Icon } from '../../Icons';
