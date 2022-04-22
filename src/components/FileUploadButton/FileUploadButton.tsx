@@ -8,7 +8,6 @@ interface IFileUploadButtonProps {
 
 export const FileUploadButton: FC<IFileUploadButtonProps> = (props) => {
   const { onChangeFiles } = props;
-
   return (
     <Styled.ButtonWrapper>
       <Styled.UploadInput
