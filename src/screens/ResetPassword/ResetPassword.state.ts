@@ -11,7 +11,6 @@ import { ROUTES } from 'constants/routes';
 
 export const useResetPasswordState = () => {
   const { token } = useParams();
-
   const navigate = useNavigate();
 
   const [isSuccess, setSuccess] = useState(false);

@@ -19,11 +19,11 @@ import { FilesUploadPreview } from 'screens/FilesUploadPreview';
 import { TermsOfService } from 'components/TermsOfService';
 import { PrivacyPolicy } from 'components/PrivacyPolicy';
 import { Support } from 'screens/Support';
+import { MyAccount } from 'screens/Settings/MyAccount';
 
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
-import { MyAccount } from '../screens/Settings/MyAccount';
 
 export const AppRouter: FC = () => (
   <HashRouter>

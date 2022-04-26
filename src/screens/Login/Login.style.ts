@@ -3,6 +3,7 @@ import { styled } from 'app/theme';
 export const Styled = {
   MainWrapper: styled.div`
     display: flex;
+    overflow-y: scroll;
     width: 100%;
     height: 100%;
   `,
