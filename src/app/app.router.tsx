@@ -24,7 +24,6 @@ import { MyAccount } from 'screens/Settings/MyAccount';
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
-import { Settings } from '../screens/Settings';
 
 export const AppRouter: FC = () => (
   <HashRouter>
