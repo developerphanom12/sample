@@ -6,6 +6,7 @@ import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 import { useSignUpState } from './SignUp.state';
 import { SignUpForm } from './SignUpForm/SignUpForm';
 import { SignUpStyles as Styled } from './SignUp.styles';
+import { CustomDatePicker } from '../../components/CustomDatePicker';
 
 export const SignUp: FC = () => {
   const {
