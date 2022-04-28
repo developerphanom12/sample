@@ -1,11 +1,5 @@
 interface IMetrics {
-  metric:
-    | 'processing'
-    | 'review'
-    | 'completed'
-    | 'decline'
-    | 'awaitingApproval'
-    | 'approved';
+  metric: 'processing' | 'review' | 'completed' | 'decline';
   title: string;
 }
 
@@ -25,13 +19,5 @@ export const METRICS: IMetrics[] = [
   {
     metric: 'decline',
     title: 'Decline',
-  },
-  {
-    metric: 'awaitingApproval',
-    title: 'Awaiting approval',
-  },
-  {
-    metric: 'approved',
-    title: 'Approved',
   },
 ];
