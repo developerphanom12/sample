@@ -4,11 +4,19 @@ export const PhotoDetailsContentStyles = {
   MainWrapper: styled.div`
     overflow-y: scroll;
     width: 100%;
+    overflow-y: scroll;
+    height: 490px;
     max-width: 600px;
     display: flex;
     flex-flow: column;
     padding: 10px;
     height: 100%;
+  `,
+  RadioButtonWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 80%;
   `,
   RadioButtonWrapper: styled.div`
     display: flex;
