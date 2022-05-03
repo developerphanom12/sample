@@ -15,7 +15,6 @@ export const FilesUploadPreview: FC = () => {
     onCancelClickHandler,
     onSaveClickHandler,
   } = useFilesUploadPreviewState();
-
   return (
     <Styled.LayoutWrapper>
       <ReceiptDetailsHeader isBackButton onGoBackHandler={onGoBackHandler} />

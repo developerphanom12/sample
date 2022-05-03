@@ -6,5 +6,8 @@ export const InboxStyles = {
     align-items: center;
     justify-content: center;
     height: 100%;
+
+    display: grid;
+    grid-template-rows: 65px;
   `,
 };
