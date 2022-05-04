@@ -11,8 +11,6 @@ import { ActionMenuContent } from './ActionMenuContent';
 
 import { EMPTY_DATA_STRINGS as Strings } from 'constants/strings';
 
-import { ROUTES } from 'constants/routes';
-
 export const Inbox: FC = () => {
   const {
     onSelectFilesHandler,

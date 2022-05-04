@@ -35,6 +35,9 @@ export const HeaderPanelStyles = {
   DatePickerWrapper: styled.div`
     max-width: 140px;
   `,
+  SelectWrapper: styled.div`
+    width: 150px;
+  `,
   SearchInputWrapper: styled.div`
     display: flex;
     position: relative;
@@ -44,7 +47,7 @@ export const HeaderPanelStyles = {
   IconWrapper: styled.div`
     display: flex;
     position: absolute;
-    top: 50%;
+    top: 35%;
     right: 14px;
     transform: translateY(-50%);
   `,
