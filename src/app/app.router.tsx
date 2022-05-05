@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import { Layout } from 'components/Layout/Layout';
 
@@ -27,7 +27,7 @@ import { ROUTES } from 'constants/routes';
 import { FilesUploadPreview } from '../screens/FilesUploadPreview';
 
 export const AppRouter: FC = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Routes>
       <Route path={ROUTES.home} element={<Layout />}>
         <Route element={<PrivateRouter />}>
@@ -56,5 +56,5 @@ export const AppRouter: FC = () => (
       <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
       <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 );
