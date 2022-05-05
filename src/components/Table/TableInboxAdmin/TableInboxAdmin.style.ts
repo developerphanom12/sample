@@ -26,6 +26,7 @@ export const TableInboxAdminStyles = {
     padding-left: 19px;
     padding-right: 9px;
   `,
+
   Checkbox: styled.div`
     display: flex;
     align-items: center;

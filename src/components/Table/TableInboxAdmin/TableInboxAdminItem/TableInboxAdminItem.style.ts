@@ -32,10 +32,6 @@ export const TableInboxAdminItemStyles = {
     text-decoration: underline;
     margin-right: 3px;
   `,
-  Link: styled.a<{ isVisited: boolean }>`
-    color: ${(props) => (props.isVisited ? 'violet' : props.theme.colors.blue)};
-    text-decoration: underline;
-  `,
   Checkbox: styled.div`
     display: flex;
     align-items: center;
