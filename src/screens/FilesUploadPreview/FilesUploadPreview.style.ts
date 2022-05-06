@@ -31,6 +31,7 @@ export const FilesUploadPreviewStyles = {
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-left: 15px;
   `,
   ImageWrapper: styled.div`
     display: flex;
