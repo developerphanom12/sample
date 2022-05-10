@@ -20,7 +20,6 @@ export const FilesUploadPreview: FC = () => {
     <Styled.LayoutWrapper>
       <ReceiptDetailsHeader isBackButton onGoBackHandler={onGoBackHandler} />
       <Styled.MainWrapper>
-
         <Styled.Wrapper>
           <Styled.PhotosWrapper>
             {previewFiles?.map((file, index) => {
@@ -64,7 +63,6 @@ export const FilesUploadPreview: FC = () => {
             </Styled.ButtonsBoxWrapper>
           </Styled.PhotoPreviewWrapper>
         </Styled.Wrapper>
-
       </Styled.MainWrapper>
     </Styled.LayoutWrapper>
   );

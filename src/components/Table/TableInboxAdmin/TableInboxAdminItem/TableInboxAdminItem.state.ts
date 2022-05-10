@@ -26,7 +26,6 @@ export const useTableInboxAdminItemState = (
   const onReceiptDetailsClickHandler = (
     event: React.MouseEvent<HTMLDivElement>
   ) => {
-
     dispatch(selectReceipt(receiptIndex));
     navigate(ROUTES.receiptDetails);
   };

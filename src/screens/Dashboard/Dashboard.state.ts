@@ -10,7 +10,6 @@ import {
   getTodayDateRange,
   getYesterdayDateRange,
 } from 'services/utils';
-import { ROUTES } from 'constants/routes';
 
 import { setFiles } from '../FilesUploadPreview/reducer';
 import { getReceiptStatistic } from './dashboard.api';
@@ -128,6 +127,18 @@ export const useDashboardState = () => {
 
     getReceiptsStatisticHandler(dateHashMapping[newValue.value], true);
   };
+
+  const getReceiptsStatisticHandler = async () => {
+    try {
+      const { data } = await getReceiptStatistic();
+
+      dispatch(setStatistic(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const lastReceipts = receipts?.slice(-4);
 
   return {
     ...state,

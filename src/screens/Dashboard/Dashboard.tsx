@@ -21,7 +21,6 @@ export const Dashboard: FC = () => {
     receipts,
     company,
     user,
-
     isLoading,
     isContentLoading,
   } = useDashboardState();

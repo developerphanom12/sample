@@ -448,12 +448,6 @@ export const useInboxState = () => {
     }
   };
 
-  const onChangeIsVisitedHandler = () =>
-    setState((prevState) => ({
-      ...prevState,
-      isVisited: true,
-    }));
-
   return {
     ...state,
     count,

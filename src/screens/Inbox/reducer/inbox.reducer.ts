@@ -77,6 +77,14 @@ export const InboxSlice = createSlice({
     ) => {
       state.isFetchingData = action.payload;
     },
+    selectReceipt: (
+      state: IINBOX_INITIAL_STATE,
+      action: PayloadAction<number>
+    ) => {
+      state.selectedReceiptIndex = action.payload;
+      state.selectedReceipt =
+        state.receipts.find((item, index) => index === action.payload) || null;
+    },
   },
 });
 
