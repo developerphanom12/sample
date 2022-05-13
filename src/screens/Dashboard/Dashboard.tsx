@@ -29,6 +29,7 @@ export const Dashboard: FC = () => {
     getReceiptsStatisticHandler();
   }, []);
 
+
   return (
     <Styled.LayoutWrapper>
       <Styled.MainWrapper>

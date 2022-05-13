@@ -128,18 +128,6 @@ export const useDashboardState = () => {
     getReceiptsStatisticHandler(dateHashMapping[newValue.value], true);
   };
 
-  const getReceiptsStatisticHandler = async () => {
-    try {
-      const { data } = await getReceiptStatistic();
-
-      dispatch(setStatistic(data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const lastReceipts = receipts?.slice(-4);
-
   return {
     ...state,
     onSelectFilesHandler,

@@ -4,8 +4,6 @@ export const PhotoDetailsContentStyles = {
   MainWrapper: styled.div`
     overflow-y: scroll;
     width: 100%;
-    overflow-y: scroll;
-    height: 490px;
     max-width: 600px;
     display: flex;
     flex-flow: column;
@@ -48,7 +46,6 @@ export const PhotoDetailsContentStyles = {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
     align-items: center;
     margin-bottom: 12px;
   `,

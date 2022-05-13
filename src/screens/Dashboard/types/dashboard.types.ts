@@ -1,3 +1,5 @@
+import { IReceipt } from '../../Inbox/types/inbox.types';
+
 export interface IMetric {
   accepted: number | null;
   rejected: number | null;

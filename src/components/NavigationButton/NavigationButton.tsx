@@ -7,7 +7,7 @@ import { NavigationButtonStyles } from './NavigationButton.style';
 
 export type NavigationButtonProps = {
   iconBehavior?: 'iconPrevious' | 'iconNext' | 'iconBack' | 'iconForward';
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   isReverse?: boolean;
   isWithoutArrow?: boolean;
