@@ -47,7 +47,6 @@ export const useFilesUploadPreviewState = () => {
       dispatch(setReceipts({ count: data.count, data: data.data }));
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
-
       setIsLoading(false);
       navigate(ROUTES.inbox, { replace: true });
     } catch (error) {

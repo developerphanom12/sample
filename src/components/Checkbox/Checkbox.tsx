@@ -22,7 +22,7 @@ export const CheckboxItem = (props: CheckboxProps) => {
           type="checkbox"
           id={name}
           name={name}
-          onChange={() => {}}
+          onChange={onChange}
           checked={isChecked}
         />
         <Checkbox.StyledCheckbox isChecked={isChecked}>

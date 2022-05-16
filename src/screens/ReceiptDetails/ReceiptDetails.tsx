@@ -12,12 +12,12 @@ export const ReceiptDetails: FC = () => {
     onGoBackHandler,
     onClickGetNextReceiptHandler,
     onClickGetPrevReceiptHandler,
-    onGetReceiptImageHandler,
     imageSrc,
     selectedReceipt,
     receipts,
     selectedReceiptIndex,
     isImageLoading,
+    onGetReceiptImageHandler,
   } = useReceiptDetailsState();
 
   useEffect(() => {

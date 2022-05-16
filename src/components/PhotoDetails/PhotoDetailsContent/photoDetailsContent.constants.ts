@@ -3,6 +3,9 @@ import { IOption } from '../../CustomSelect/types';
 export const photoDetailsContentInitialState = {
   statusValue: '',
   dateValue: null,
+  categoryValue: '',
+  typeValue: '',
+  supplierValue: '',
   supplierAccountValue: '',
   currencyValueId: '',
   taxValue: null,

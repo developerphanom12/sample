@@ -65,4 +65,13 @@ export const EmptyDataStyles = {
     justify-content: center;
     margin-top: 5px;
   `,
+  ImageWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    max-height: 500px;
+    min-width: 400px;
+    height: 100%;
+    width: 100%;
+  `,
 };

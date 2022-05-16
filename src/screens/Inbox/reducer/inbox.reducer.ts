@@ -85,6 +85,12 @@ export const InboxSlice = createSlice({
       state.selectedReceipt =
         state.receipts.find((item, index) => index === action.payload) || null;
     },
+    setIsFetchingDate: (
+      state: IINBOX_INITIAL_STATE,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isFetchingData = action.payload;
+    },
   },
 });
 
