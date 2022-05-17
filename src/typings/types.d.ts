@@ -213,6 +213,19 @@ declare global {
       IDeleteModalWindowProps {}
 }
 
+interface IPagination {
+  onChangeInputValue: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  inputPaginationValue: string;
+  onGoToClick: () => void;
+  onChangePage?: ({ selected: number }) => void;
+  onForwardClick: () => void;
+  onBackwardClick: () => void;
+  currentPage: number;
+  pages: number;
+}
+
 export {
   IModalWindowsBox,
   IMasterModalWindowProps,

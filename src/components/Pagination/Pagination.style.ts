@@ -51,30 +51,25 @@ export const PaginationStyles = {
       opacity: 0.5;
     }
   `,
-
   Wrapper: styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
   `,
-
   Pages: styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
   `,
-
   GoToWrapper: styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
   `,
-
   InputWrapper: styled.div`
     padding-top: 10px;
     max-width: 50px;
   `,
-
   Dots: styled.div`
     width: 100%;
   `,
