@@ -9,7 +9,6 @@ export interface CustomLinkProps {
   tabs?: string[];
   children: React.ReactNode;
   to: string;
-  isLast?: boolean;
 }
 
 export const CustomLink = (props: CustomLinkProps) => {

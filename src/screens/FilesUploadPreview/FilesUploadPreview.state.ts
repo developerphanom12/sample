@@ -56,6 +56,7 @@ export const useFilesUploadPreviewState = () => {
     } finally {
       setIsLoading(false);
     }
+    navigate(from.pathname, { replace: true });
   };
 
   return {

@@ -8,5 +8,6 @@ export const PhotoDetailsStyles = {
     padding: 20px 76px 15px 37px;
     width: 100%;
     overflow: hidden;
+    position: relative;
   `,
 };

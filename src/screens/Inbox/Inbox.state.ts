@@ -38,6 +38,8 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { getReceiptStatistic } from '../Dashboard/dashboard.api';
+import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 
 export const useInboxState = () => {
   const {
@@ -103,6 +105,8 @@ export const useInboxState = () => {
         checkedIds: [],
       }));
       const { data } = await getReceipts(params);
+      !totalReceiptCount && onGetStatisticHandler();
+
       !totalReceiptCount && onGetStatisticHandler();
 
       dispatch(setReceipts({ count: data.count, data: data.data }));

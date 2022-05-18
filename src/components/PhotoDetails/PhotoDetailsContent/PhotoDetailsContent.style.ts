@@ -16,12 +16,6 @@ export const PhotoDetailsContentStyles = {
     flex-wrap: wrap;
     width: 80%;
   `,
-  RadioButtonWrapper: styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 80%;
-  `,
   FieldWrapper: styled.div`
     display: flex;
     flex-direction: column;
