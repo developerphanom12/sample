@@ -77,6 +77,14 @@ export const InboxSlice = createSlice({
     ) => {
       state.isFetchingData = action.payload;
     },
+    updateReceipt: (
+      state: IINBOX_INITIAL_STATE,
+      action: PayloadAction<IReceipt>
+    ) => {
+      state.receipts = state.receipts.map((receipt) =>
+        receipt.id === action.payload.id ? action.payload : receipt
+      );
+    },
     selectReceipt: (
       state: IINBOX_INITIAL_STATE,
       action: PayloadAction<number>

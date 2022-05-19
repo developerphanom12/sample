@@ -301,7 +301,6 @@ export const usePhotoDetailsContentState = () => {
   );
 
   const datePickerRef = useRef<HTMLButtonElement>(null);
-
   return {
     ...state,
     inputFields,
