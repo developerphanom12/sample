@@ -16,7 +16,7 @@ export const MasterSlice = createSlice({
   name: 'masterSlice',
   initialState,
   reducers: {
-    setCategories: (
+    setCategoriesForSelect: (
       state: IMASTER_INITIAL_STATE,
       action: PayloadAction<{ data: ITabItem[]; count: number }>
     ) => {
@@ -53,7 +53,7 @@ export const MasterSlice = createSlice({
 });
 
 export const {
-  setCategories,
+  setCategoriesForSelect,
   setSuppliers,
   setTypes,
   setTabItem,

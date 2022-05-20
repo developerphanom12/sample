@@ -32,7 +32,7 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
           <CloseButton onClickHandler={onCloseDeleteModalWindowHandler} />
         </Styled.HeaderBox>
         <Styled.MainContentWrapper>
-          <Icon type='warning' />
+          <Icon type="warning" />
           <Styled.SubTitle>
             {`Sure, you want to delete ${deleteItemName} ?`}
           </Styled.SubTitle>
