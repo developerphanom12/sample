@@ -48,8 +48,7 @@ export const useLoginState = () => {
     try {
       const { data } = await login(loginValues);
 
-      (!data.user.active_account || !data.user.accounts.length) &&
-        dispatch(setCurrencies(data.currencies));
+      dispatch(setCurrencies(data.currencies));
 
       dispatch(setCurrencies(data.currencies));
 

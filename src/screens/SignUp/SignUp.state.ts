@@ -8,6 +8,8 @@ import { signUpValidationSchema } from 'services/validation';
 
 import { IOption } from 'components/CustomSelect/types';
 
+import { IOption } from 'components/CustomSelect/types';
+
 import { formikInitialValues } from './SignUp.constants';
 import { createUser } from './signup.api';
 import { ICreateUser } from './types/signup.types';

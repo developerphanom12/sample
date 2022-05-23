@@ -13,7 +13,6 @@ export const TableMaster: React.FC<TableMasterProps> = (props) => {
     tabName,
     onDeleteIconClickHandler,
     onEditIconClickHandler,
-
     searchValue,
     searchedItems,
   } = props;
