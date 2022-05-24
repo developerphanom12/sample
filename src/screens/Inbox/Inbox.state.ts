@@ -248,6 +248,12 @@ export const useInboxState = () => {
     onChangeStateFieldHandler('showActions', !state.showActions);
   const onActionsClose = () => onChangeStateFieldHandler('showActions', false);
 
+  const onActionsClose = () =>
+    setState((prevState) => ({
+      ...prevState,
+      showActions: false,
+    }));
+
   const onChangeReceiptsPerPage = (newValue: any) => {
     setState((prevState) => ({
       ...prevState,

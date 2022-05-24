@@ -28,11 +28,3 @@ export const TAB_INITIAL_STATE = {
   searchedItems: [],
   isContentLoading: false,
 };
-
-export const TAB_INITIAL_STATE = {
-  isEdit: false,
-  searchValue: '',
-  modalInputValue: '',
-  prevInputValue: '',
-  isLoading: false,
-};

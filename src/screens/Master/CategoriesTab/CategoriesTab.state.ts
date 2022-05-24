@@ -165,15 +165,6 @@ export const useCategoriesTabState = () => {
     }
   };
 
-  const onModalWindowCancelClickButtonHandler = () => {
-    onModalWindowToggle();
-    setState((prevState) => ({
-      ...prevState,
-      modalInputValue: '',
-      isEdit: false,
-    }));
-  };
-
   const onEditItemClickHandler = async (itemId: string) => {
     try {
       const { data } = await getTabItemById(itemId, 'category');
@@ -310,6 +301,15 @@ export const useCategoriesTabState = () => {
   };
 
   const isDisableButton = state.modalInputValue === state.prevInputValue;
+
+  const onModalWindowCancelClickButtonHandler = () => {
+    onModalWindowToggle();
+    setState((prevState) => ({
+      ...prevState,
+      modalInputValue: '',
+      isEdit: false,
+    }));
+  };
 
   const onFocusSearchHandler = () => onChangeStateFieldHandler('isFocus', true);
   const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);

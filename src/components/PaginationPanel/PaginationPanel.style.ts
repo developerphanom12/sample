@@ -14,6 +14,5 @@ export const PaginationPanelStyles = {
     display: flex;
     align-items: center;
     width: 130px;
-    margin-top: 15px;
   `,
 };
