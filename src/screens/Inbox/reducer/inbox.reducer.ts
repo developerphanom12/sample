@@ -77,28 +77,6 @@ export const InboxSlice = createSlice({
     ) => {
       state.isFetchingData = action.payload;
     },
-    updateReceipt: (
-      state: IINBOX_INITIAL_STATE,
-      action: PayloadAction<IReceipt>
-    ) => {
-      state.receipts = state.receipts.map((receipt) =>
-        receipt.id === action.payload.id ? action.payload : receipt
-      );
-    },
-    selectReceipt: (
-      state: IINBOX_INITIAL_STATE,
-      action: PayloadAction<number>
-    ) => {
-      state.selectedReceiptIndex = action.payload;
-      state.selectedReceipt =
-        state.receipts.find((item, index) => index === action.payload) || null;
-    },
-    setIsFetchingDate: (
-      state: IINBOX_INITIAL_STATE,
-      action: PayloadAction<boolean>
-    ) => {
-      state.isFetchingData = action.payload;
-    },
   },
 });
 

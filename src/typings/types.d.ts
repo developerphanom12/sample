@@ -225,8 +225,22 @@ declare global {
     currentPage: number;
     pages: number;
   }
+
   interface IPaginationData {
     selected: number;
+  }
+
+  export interface ICreator {
+    id: string;
+    name: string;
+    role: string;
+  }
+
+  export interface ITabItem {
+    id: string;
+    created: string;
+    name: string;
+    creator: ICreator;
   }
 }
 

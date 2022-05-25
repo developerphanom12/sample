@@ -9,6 +9,10 @@ interface IReceiptsIds {
   receipts: string[];
 }
 
+interface IReceiptsIds {
+  receipts: string[];
+}
+
 export const getReceipts = (params?: IGetReceiptsParams) => {
   const URL = '/receipt/get-all';
   return apiServices.fetchData(URL, params);

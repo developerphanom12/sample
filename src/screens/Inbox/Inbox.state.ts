@@ -38,6 +38,7 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 export const useInboxState = () => {
   const {
@@ -248,12 +249,6 @@ export const useInboxState = () => {
     onChangeStateFieldHandler('showActions', !state.showActions);
   const onActionsClose = () => onChangeStateFieldHandler('showActions', false);
 
-  const onActionsClose = () =>
-    setState((prevState) => ({
-      ...prevState,
-      showActions: false,
-    }));
-
   const onChangeReceiptsPerPage = (newValue: any) => {
     setState((prevState) => ({
       ...prevState,
@@ -371,7 +366,6 @@ export const useInboxState = () => {
       console.log(error);
     }
   };
-
   const onCheckedPublishMockFuncHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {

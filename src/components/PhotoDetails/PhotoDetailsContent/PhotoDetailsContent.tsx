@@ -32,7 +32,6 @@ export const PhotoDetailsContent: FC = () => {
   useEffect(() => {
     onGetAllMasterItemsHandler();
   }, []);
-
   return (
     <>
       <Styled.MainWrapper>
