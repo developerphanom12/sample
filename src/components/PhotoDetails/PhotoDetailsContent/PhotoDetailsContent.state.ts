@@ -172,7 +172,7 @@ export const usePhotoDetailsContentState = () => {
   const onChangeCurrencyFieldHandler = (
     newValue: any,
     actionMeta: ActionMeta<unknown>
-  ) => onChangeStateFieldHandler('currencyValue', newValue.value as string);
+  ) => onChangeStateFieldHandler('currencyValue', newValue);
 
   const onChangeTypeFieldHandler = (
     newValue: unknown,

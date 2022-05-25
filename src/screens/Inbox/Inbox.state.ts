@@ -414,8 +414,6 @@ export const useInboxState = () => {
     }
   };
 
-  const isDownloadButtonDisabled = !state.checkedIds.length;
-
   const onDeleteReceiptHandler = async () => {
     try {
       await receiptDelete({ receipts: state.checkedIds }, token);
@@ -448,6 +446,8 @@ export const useInboxState = () => {
       console.log(error);
     }
   };
+
+  const isDownloadButtonDisabled = !state.checkedIds.length;
 
   return {
     ...state,

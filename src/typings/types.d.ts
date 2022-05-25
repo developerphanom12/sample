@@ -211,7 +211,6 @@ declare global {
   interface IModalWindowsBox
     extends IMasterModalWindowProps,
       IDeleteModalWindowProps {}
-}
 
   interface IPagination {
     onChangeInputValue: (

@@ -10,4 +10,9 @@ export const InboxStyles = {
   CSVLinkWrapper: styled.div`
     position: absolute;
   `,
+  ExcelLink: styled.a`
+    position: absolute;
+    width: 0;
+    height: 0;
+  `,
 };

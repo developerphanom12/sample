@@ -53,10 +53,7 @@ export const useFilesUploadPreviewState = () => {
       setIsLoading(false);
       dispatch(setIsFetchingDate(false));
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
-    navigate(from.pathname, { replace: true });
   };
 
   return {
