@@ -38,7 +38,6 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
-import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 export const useInboxState = () => {
   const {

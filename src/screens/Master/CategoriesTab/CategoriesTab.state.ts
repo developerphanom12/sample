@@ -29,6 +29,7 @@ export const useCategoriesTabState = () => {
       categories: { data: categoriesList, count },
       selectedCategory,
     },
+
     user: {
       userInfo: {
         company: { date_format },

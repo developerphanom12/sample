@@ -8,7 +8,7 @@ export const EmptyDataStyles = {
     justify-content: center;
     align-items: center;
   `,
-  ContentWrapper: styled.div`
+  ContentWrapper: styled.div<{ isUploadFile?: boolean }>`
     width: 100%;
     height: 100%;
     display: flex;
@@ -64,18 +64,5 @@ export const EmptyDataStyles = {
     display: flex;
     justify-content: center;
     margin-top: 5px;
-  `,
-  ImageWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    max-height: 500px;
-    min-width: 400px;
-    height: 100%;
-    width: 100%;
-  `,
-  ButtonWrapper: styled.div`
-    display: flex;
-    justify-content: center;
   `,
 };
