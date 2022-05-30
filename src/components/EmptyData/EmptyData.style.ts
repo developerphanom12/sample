@@ -8,7 +8,7 @@ export const EmptyDataStyles = {
     justify-content: center;
     align-items: center;
   `,
-  ContentWrapper: styled.div<{ isUploadFile?: boolean }>`
+  ContentWrapper: styled.div<{ isUploadFile?: boolean; isMaster?: boolean }>`
     width: 100%;
     height: 100%;
     display: flex;

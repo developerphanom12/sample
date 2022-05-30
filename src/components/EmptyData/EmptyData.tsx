@@ -17,6 +17,7 @@ interface IEmptyDataProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isNoResults?: boolean;
   isUploadFile?: boolean;
+  isMaster?: boolean;
 }
 export const EmptyData: FC<IEmptyDataProps> = (props) => {
   const {
@@ -26,6 +27,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
     title,
     isNoResults,
     isUploadFile,
+    isMaster,
     onAddReceiptHandler,
     onClick,
   } = props;
@@ -38,7 +40,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
           <Styled.Title>No results</Styled.Title>
         </Styled.ImageWrapper>
       ) : (
-        <Styled.ContentWrapper>
+        <Styled.ContentWrapper isMaster={isMaster}>
           <Styled.Image src={imageUrl || emptyDataSrc}></Styled.Image>
           <Styled.Title>{title}</Styled.Title>
           <Styled.SubTitle>{firstSubtitle}</Styled.SubTitle>

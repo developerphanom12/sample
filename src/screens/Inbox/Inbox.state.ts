@@ -74,6 +74,7 @@ export const useInboxState = () => {
     Number(metric?.review);
 
   const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+
     if (!event.target.files?.length) return;
     const selectedFilesArray = Array.from(event.target.files);
 
@@ -95,7 +96,10 @@ export const useInboxState = () => {
       navigate(ROUTES.filesUploadPreview, { state: { from: location } });
   };
 
-  const onFetchReceiptsHandler = async (params?: IGetReceiptsParams) => {
+  const onFetchReceiptsHandler = async (
+    params?: IGetReceiptsParams,
+    isSearching?: boolean
+  ) => {
     try {
       setState((prevState) => ({
         ...prevState,

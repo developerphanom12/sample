@@ -112,6 +112,7 @@ export const TypesTab: FC = () => {
           secondSubtitle={Strings.type.secondSubtitle}
           title={Strings.type.title}
           onClick={onModalWindowToggle}
+          isMaster
         />
       ) : !isFetchingData && isHeaderPanel ? (
         <TypesContent

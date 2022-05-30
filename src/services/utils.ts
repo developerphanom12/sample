@@ -95,3 +95,17 @@ export const getReceiptDetailsCurrentSelectItem = (
 ) => {
   return itemsArray.find((item) => item.id === itemId);
 };
+
+export const getFilteredItems = (list: ITabItem[], searchValue: string) => list
+    ?.filter((category) =>
+      category.name.toLowerCase().includes(searchValue.toLowerCase())
+    ).sort((a, b) => {
+      if (a.created < b.created) {
+        return 1;
+      }
+      if (a.created > b.created) {
+        return -1;
+      }
+      return 0;
+    });
+

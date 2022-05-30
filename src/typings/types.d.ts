@@ -225,21 +225,74 @@ declare global {
     pages: number;
   }
 
+  interface IPaginationPanel extends IPagination {
+    onChangeReceiptsPerPage: (newValue: unknown) => void;
+    receiptsPerPage: { value: string; label: string };
+  }
+
   interface IPaginationData {
     selected: number;
   }
 
-  export interface ICreator {
+  interface ICreator {
     id: string;
     name: string;
     role: string;
   }
 
-  export interface ITabItem {
+  interface ITabItem {
     id: string;
     created: string;
     name: string;
     creator: ICreator;
+  }
+
+  interface TableInboxAdminProps {
+    onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onCheckedAllItemsHandler?: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
+    onCheckedPublishMockFuncHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
+    isVisited: boolean;
+    receiptList: IReceipt[];
+    isAllChecked: boolean;
+    onCheckedPaidHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => Promise<void>;
+    dateFormat: string;
+  }
+
+  interface IReceipt {
+    category: ISelectItem | null;
+    currency: ICurrency;
+    description: string | null;
+    id: string;
+    custom_id: string;
+    net: number | null;
+    photos: string[];
+    receipt_date: Date;
+    status: string;
+    supplier: ISelectItem | null;
+    supplier_account: string | null;
+    tax: number | null;
+    total: number | null;
+    payment_type: ISelectItem | null;
+    vat_code: string | null;
+    publish_status: boolean;
+    payment_status: boolean;
+    isChecked: boolean;
+  }
+
+  interface IInboxContent
+    extends IHeaderPanelProps,
+      TableInboxAdminProps,
+      IPagination {
+    isContentLoading: boolean;
+    onChangeReceiptsPerPage: (newValue: unknown) => void;
+    receiptsPerPage: { value: string; label: string };
+    receipts: IReceipt[];
   }
 }
 

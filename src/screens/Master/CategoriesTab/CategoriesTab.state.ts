@@ -19,7 +19,11 @@ import { IMasterParams, IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
 export const useCategoriesTabState = () => {
-  const initialState = TAB_INITIAL_STATE;
+  const initialState = {
+    ...TAB_INITIAL_STATE,
+    isFocus: false,
+    isHeaderPanel: false,
+  };
 
   const dispatch = useDispatch();
   const [state, setState] = useState<IuseMasterState>(initialState);
@@ -29,7 +33,6 @@ export const useCategoriesTabState = () => {
       categories: { data: categoriesList, count },
       selectedCategory,
     },
-
     user: {
       userInfo: {
         company: { date_format },
