@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TermsOfServiceStyles as Styles } from './TermsOfService.style';
 
 import { TERMS_TITLE, TERMS } from './constants/termsOfService.constants';
