@@ -8,6 +8,8 @@ import { TableMaster } from 'components/Table/TableMaster';
 import { ITabContentProps } from '../../types/master.types';
 import { SupplierContentStyles as Styled } from './SupplierContent.style';
 
+import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
+
 export const SupplierContent: FC<ITabContentProps> = (props) => {
   const {
     categories,

@@ -108,7 +108,6 @@ export const SupliersTab: FC = () => {
           secondSubtitle={Strings.suppliers.secondSubtitle}
           title={Strings.suppliers.title}
           onClick={onModalWindowToggle}
-          isMaster
         />
       ) : !isFetchingData && isHeaderPanel ? (
         <SupplierContent

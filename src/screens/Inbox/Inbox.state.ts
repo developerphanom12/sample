@@ -38,6 +38,7 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { IOption } from '../../components/CustomSelect/types';
 
 export const useInboxState = () => {
   const {
@@ -74,7 +75,6 @@ export const useInboxState = () => {
     Number(metric?.review);
 
   const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-
     if (!event.target.files?.length) return;
     const selectedFilesArray = Array.from(event.target.files);
 
@@ -450,6 +450,11 @@ export const useInboxState = () => {
       }));
       onFetchReceiptsHandler({});
       onGetStatisticHandler();
+      setState((prevState) => ({
+        ...prevState,
+        isContentLoading: receipts.length !== 1 ? true : false,
+        isFetchingReceipts: receipts.length === 1 ? true : false,
+      }));
       onActionsClick();
     } catch (error) {
       onActionsClick();

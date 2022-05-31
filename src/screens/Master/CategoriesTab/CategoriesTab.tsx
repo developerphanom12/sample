@@ -109,7 +109,6 @@ export const CategoriesTab: FC = () => {
           secondSubtitle={Strings.categories.secondSubtitle}
           title={Strings.categories.title}
           onClick={onModalWindowToggle}
-          isMaster
         />
       ) : isHeaderPanel ? (
         <CategoryContent
