@@ -24,6 +24,7 @@ import { MyAccount } from 'screens/Settings/MyAccount';
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
+import { MyAccount } from '../screens/Settings/MyAccount';
 
 export const AppRouter: FC = () => (
   <BrowserRouter>

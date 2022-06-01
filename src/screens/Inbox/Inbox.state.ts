@@ -38,7 +38,6 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
-import { IOption } from '../../components/CustomSelect/types';
 
 export const useInboxState = () => {
   const {

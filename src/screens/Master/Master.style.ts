@@ -21,7 +21,6 @@ export const MasterStyles = {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 20px 30px;
     flex-wrap: wrap;
     height: 100%;
   `,

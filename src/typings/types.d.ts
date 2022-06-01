@@ -294,6 +294,13 @@ declare global {
     receiptsPerPage: { value: string; label: string };
     receipts: IReceipt[];
   }
+
+  interface IOption {
+    value: string;
+    label: string;
+    id?: string;
+    [key: string]: string | undefined;
+  }
 }
 
 export {
