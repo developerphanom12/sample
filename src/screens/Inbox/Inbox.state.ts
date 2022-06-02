@@ -38,6 +38,8 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { IOption } from '../../components/CustomSelect/types';
+import { emailSendValidationSchema } from '../../services/validation';
 
 export const useInboxState = () => {
   const {
@@ -209,24 +211,6 @@ export const useInboxState = () => {
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
   const [isEmailModalWindowOpen, onEmailModalWindowToggle] = useToggle();
-
-  const onChangeEmailStateFieldHandler = (optionName: string, value: string) =>
-    setState((prevState) => ({
-      ...prevState,
-      [optionName]: value,
-    }));
-
-  const onChangeEmailToFieldHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeEmailStateFieldHandler('emailTo', event.target.value);
-
-  const onChangeEmailSubjectFieldHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeEmailStateFieldHandler('emailSubject', event.target.value);
-
-  const onChangeEmailMessageFieldHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeEmailStateFieldHandler('emailMessage', event.target.value);
 
   const onEmailClick = () => {
     onEmailModalWindowToggle();
@@ -496,9 +480,6 @@ export const useInboxState = () => {
     onEmailModalWindowToggle,
     onEmailClick,
     onPostEmailHandler,
-    onChangeEmailToFieldHandler,
-    onChangeEmailSubjectFieldHandler,
-    onChangeEmailMessageFieldHandler,
     receipts,
     isFetchingData,
     company,
