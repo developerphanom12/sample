@@ -39,7 +39,6 @@ import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
 import { IOption } from '../../components/CustomSelect/types';
-import { emailSendValidationSchema } from '../../services/validation';
 
 export const useInboxState = () => {
   const {
