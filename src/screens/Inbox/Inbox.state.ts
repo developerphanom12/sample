@@ -96,10 +96,7 @@ export const useInboxState = () => {
       navigate(ROUTES.filesUploadPreview, { state: { from: location } });
   };
 
-  const onFetchReceiptsHandler = async (
-    params?: IGetReceiptsParams,
-    isSearching?: boolean
-  ) => {
+  const onFetchReceiptsHandler = async (params?: IGetReceiptsParams) => {
     try {
       setState((prevState) => ({
         ...prevState,
@@ -369,6 +366,7 @@ export const useInboxState = () => {
       console.log(error);
     }
   };
+
   const onCheckedPublishMockFuncHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -435,8 +433,14 @@ export const useInboxState = () => {
       setState((prevState) => ({
         ...prevState,
         isContentLoading: receipts.length !== 1 ? true : false,
-        isFetchingReceipts: receipts.length === 1 ? true : false,
+        isFetchingReceipts:
+          receipts.length === 1 ||
+          receipts.length === prevState.checkedIds.length
+            ? true
+            : false,
       }));
+      onFetchReceiptsHandler({});
+      onGetStatisticHandler();
       onActionsClick();
     } catch (error) {
       onActionsClick();

@@ -44,7 +44,7 @@ export const useMyAccountState = () => {
   const dispatch = useDispatch();
 
   const formatedCurrencies = getFormatedCurrencies(currencies);
-  const currentCurrency = formatedCurrencies.find(
+  const currentCurrency = formatedCurrencies?.find(
     (item) => item.id === currency.id
   );
   const currentDate = DATE_FORMATS.find((item) => item.value === date_format);
@@ -68,7 +68,7 @@ export const useMyAccountState = () => {
 
   const formikInitialValues = {
     fullName: user.fullName,
-    email: user.email,
+    email: user.email || '',
   };
 
   const [state, setState] = useState<IuseMyAccountState>(initialState);
@@ -228,9 +228,9 @@ export const useMyAccountState = () => {
   });
 
   const isDisableUpdateUserProfileButton =
-    state.country.value === prevValues?.country?.value &&
-    state.currency.value === prevValues?.currency?.value &&
-    state.dateFormat.value === prevValues?.dateFormat?.value &&
+    state.country?.value === prevValues?.country?.value &&
+    state.currency?.value === prevValues?.currency?.value &&
+    state.dateFormat?.value === prevValues?.dateFormat?.value &&
     formik.values.fullName === prevValues.fullName &&
     formik.values.email === prevValues.email;
 

@@ -18,6 +18,11 @@ export const MyAccountStyles = {
       max-width: 500px;
     }
   `,
+  ContentWrapper: styled.div<{ isResetPassword: boolean }>`
+    max-width: ${({ isResetPassword }) =>
+      isResetPassword ? '500px' : '1050px'};
+    width: 100%;
+  `,
   Title: styled.h2`
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.xnormal};
@@ -64,5 +69,24 @@ export const MyAccountStyles = {
     top: 10px;
     max-width: 290px;
     width: 100%;
+  `,
+  ResetPasswordButtonWrapper: styled.div`
+    width: 160px;
+  `,
+  ResetFieldsWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+  `,
+  ResetPasswordFiledsWrapper: styled.div`
+    padding: 35px 0 30px;
+    &:not(:last-child) {
+      margin-top: 15px;
+    }
+    &:not(:first-child) {
+      margin-bottom: 25px;
+    }
   `,
 };

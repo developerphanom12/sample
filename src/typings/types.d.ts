@@ -293,14 +293,32 @@ declare global {
     onChangeReceiptsPerPage: (newValue: unknown) => void;
     receiptsPerPage: { value: string; label: string };
     receipts: IReceipt[];
+    isFetchingReceipts: boolean;
   }
-
   interface IOption {
     value: string;
     label: string;
     id?: string;
     [key: string]: string | undefined;
   }
+  enum Statuses {
+    processing = 'processing',
+    review = 'review',
+    accepted = 'accepted',
+    rejected = 'rejected',
+  }
+  interface IEmailModalWindowProps {
+    onCloseModalWindowHandler: () => void;
+    isModalWindowOpen: boolean;
+    onFormHandleSubmit: (
+      e?: React.FormEvent<HTMLFormElement> | undefined
+    ) => void;
+    formikProps: (nameOrOptions: string) => FieldInputProps<string>;
+    formikMeta: (name: string) => FieldMetaProps<string>;
+    isValid: boolean;
+    checkedIds: string[];
+  }
+  type TStatuses = keyof typeof Statuses;
 }
 
 export {
