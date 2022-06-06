@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { IState } from 'services/redux/reducer';
+import { ROUTES } from '../../constants/routes';
 
 import { getReceipts } from '../Inbox/inbox.api';
 import { setIsFetchingDate, setReceipts } from '../Inbox/reducer/inbox.reducer';
