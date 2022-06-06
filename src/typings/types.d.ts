@@ -186,6 +186,24 @@ declare global {
 
   type TStatuses = keyof typeof Statuses;
 
+  enum Roles {
+    owner = 'owner',
+    member = 'member',
+  }
+  type TRoles = keyof typeof Roles;
+
+  interface TableSettingsProps {
+    userRole: TRoles;
+    onDeleteIconClickHandler: (itemId: string) => Promise<void>;
+    onEditIconClickHandler: (itemId: string) => Promise<void>;
+  }
+
+  interface TableSettingsItemProps {
+    userRole: TRoles;
+    onDeleteIconClickHandler: (itemId: string) => Promise<void>;
+    onEditIconClickHandler: (itemId: string) => Promise<void>;
+  }
+
   interface IMasterModalWindowProps {
     isDisableButton?: boolean;
     isLoading: boolean;
@@ -211,118 +229,12 @@ declare global {
   interface IModalWindowsBox
     extends IMasterModalWindowProps,
       IDeleteModalWindowProps {}
-
-  interface IPagination {
-    onChangeInputValue: (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => void;
-    inputPaginationValue: string;
-    onGoToClick: () => void;
-    onChangePage?: ({ selected: number }) => void;
-    onForwardClick: () => void;
-    onBackwardClick: () => void;
-    currentPage: number;
-    pages: number;
-  }
-
-  interface IPaginationPanel extends IPagination {
-    onChangeReceiptsPerPage: (newValue: unknown) => void;
-    receiptsPerPage: { value: string; label: string };
-  }
-
-  interface IPaginationData {
-    selected: number;
-  }
-
-  interface ICreator {
-    id: string;
-    name: string;
-    role: string;
-  }
-
-  interface ITabItem {
-    id: string;
-    created: string;
-    name: string;
-    creator: ICreator;
-  }
-
-  interface TableInboxAdminProps {
-    onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onCheckedAllItemsHandler?: (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => void;
-    onCheckedPublishMockFuncHandler: (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => void;
-    isVisited: boolean;
-    receiptList: IReceipt[];
-    isAllChecked: boolean;
-    onCheckedPaidHandler: (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => Promise<void>;
-    dateFormat: string;
-  }
-
-  interface IReceipt {
-    category: ISelectItem | null;
-    currency: ICurrency;
-    description: string | null;
-    id: string;
-    custom_id: string;
-    net: number | null;
-    photos: string[];
-    receipt_date: Date;
-    status: string;
-    supplier: ISelectItem | null;
-    supplier_account: string | null;
-    tax: number | null;
-    total: number | null;
-    payment_type: ISelectItem | null;
-    vat_code: string | null;
-    publish_status: boolean;
-    payment_status: boolean;
-    isChecked: boolean;
-  }
-
-  interface IInboxContent
-    extends IHeaderPanelProps,
-      TableInboxAdminProps,
-      IPagination {
-    isContentLoading: boolean;
-    onChangeReceiptsPerPage: (newValue: unknown) => void;
-    receiptsPerPage: { value: string; label: string };
-    receipts: IReceipt[];
-    isFetchingReceipts: boolean;
-  }
-  interface IOption {
-    value: string;
-    label: string;
-    id?: string;
-    [key: string]: string | undefined;
-  }
-  enum Statuses {
-    processing = 'processing',
-    review = 'review',
-    accepted = 'accepted',
-    rejected = 'rejected',
-  }
-  interface IEmailModalWindowProps {
-    onCloseModalWindowHandler: () => void;
-    isModalWindowOpen: boolean;
-    onFormHandleSubmit: (
-      e?: React.FormEvent<HTMLFormElement> | undefined
-    ) => void;
-    formikProps: (nameOrOptions: string) => FieldInputProps<string>;
-    formikMeta: (name: string) => FieldMetaProps<string>;
-    isValid: boolean;
-    checkedIds: string[];
-  }
-  type TStatuses = keyof typeof Statuses;
 }
 
 export {
   IModalWindowsBox,
+  TableSettingsProps,
+  TRoles,
   IMasterModalWindowProps,
   IDeleteModalWindowProps,
   TStatuses,

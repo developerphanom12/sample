@@ -32,17 +32,6 @@ export const NotFoundStyles = {
     background-size: contain;
     background-position: 50% 50%;
   `,
-  Image: styled.div<{ src: string }>`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    min-width: 750px;
-    max-height: 500px;
-    background: ${(props) => `url(${props.src})`};
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 50% 50%;
-  `,
   Title: styled.p`
     display: flex;
     justify-content: center;
@@ -50,6 +39,7 @@ export const NotFoundStyles = {
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.xnormal};
+    margin-bottom: 15px;
   `,
   SubTitle: styled.p`
     justify-content: center;

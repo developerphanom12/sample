@@ -10,7 +10,6 @@ export const AuthTabsStyles = {
       margin-bottom: 15px;
     }
   `,
-
   ActiveTabWrapper: styled.div`
     display: flex;
     flex-direction: column;

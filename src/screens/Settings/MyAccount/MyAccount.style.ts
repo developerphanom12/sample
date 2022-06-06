@@ -22,6 +22,9 @@ export const MyAccountStyles = {
     max-width: ${({ isResetPassword }) =>
       isResetPassword ? '500px' : '1050px'};
     width: 100%;
+    @media (max-width: 1445px) {
+      max-width: 500px;
+    }
   `,
   Title: styled.h2`
     color: ${({ theme }) => theme.colors.black};
