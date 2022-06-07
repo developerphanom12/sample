@@ -33,14 +33,20 @@ const WIDTH = {
   secondary: css`
     width: 100px;
   `,
+  actions: css`
+    width: 42px;
+    height: 45px;
+  `,
 };
 
 export const ButtonStyles = {
   Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
-    height: 45px;
+    max-height: 45px;
+    min-height: 42px;
     border-radius: 5px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    background-color: ${(props) => props.theme.colors.lightGray};
     ${(props) => props.themedButton && THEME[props.themedButton]};
     ${(props) => props.width && WIDTH[props.width]};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};

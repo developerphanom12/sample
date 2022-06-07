@@ -7,16 +7,31 @@ export const IconWrapper = styled.div<{ isOpen: boolean }>`
   transform: ${(props) => (props.isOpen ? 'rotate(180deg)' : 'rotate(0)')};
   transition: all 0.2s linear;
 `;
-
-export const StyledReactSelect = styled(Select)<{ marginBottom?: number }>`
+export const SelectWrapper = styled.div`
+  width: 100%;
+`;
+export const StyledReactSelect = styled(Select)<{
+  marginBottom?: string;
+  height?: string;
+  paginate?: boolean;
+}>`
   .Select__control {
-    background: ${({ theme }) => theme.colors.white};
-    border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};
+    background: ${(props) => props.theme.colors.white};
+    border: ${(props) =>
+      `1px solid ${
+        props.paginate
+          ? props.theme.colors.gray
+          : props.theme.colors.opacityBlack
+      }`};
     box-sizing: border-box;
-    box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
+    box-shadow: ${(props) =>
+      props.paginate ? '' : `0px 1px 1px ${props.theme.colors.boxShadowBlack}`};
     border-radius: 5px;
     width: 100%;
     max-width: 500px;
+    max-height: 45px;
+    min-height: 41.2px;
+    height: ${({ height }) => (height ? `${height}px` : '100%')};
     cursor: pointer;
     margin-bottom: ${({ marginBottom }) =>
       marginBottom ? `${marginBottom}px` : '24px'};
@@ -29,6 +44,9 @@ export const StyledReactSelect = styled(Select)<{ marginBottom?: number }>`
   }
   .Select__indicator-separator {
     display: none;
+  }
+  .Select__control--is-disabled {
+    background: ${({ theme }) => theme.colors.lightGray};
   }
   .Select__menu {
     width: 100%;
@@ -51,5 +69,8 @@ export const StyledReactSelect = styled(Select)<{ marginBottom?: number }>`
   }
   .Select__indicators {
     padding-right: 5px;
+  }
+  .css-b62m3t-container {
+    height: 100% !important;
   }
 `;

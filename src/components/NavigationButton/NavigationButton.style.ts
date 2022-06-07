@@ -1,8 +1,8 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
-import { styled } from "app/theme";
+import { styled } from 'app/theme';
 
-import { NavigationButtonProps } from "./NavigationButton";
+import { NavigationButtonProps } from './NavigationButton';
 
 const THEME = {
   navigation: css`
@@ -15,6 +15,8 @@ const THEME = {
   pagination: css`
     background-color: transparent;
     color: ${(props) => props.theme.colors.black};
+    padding: 0 2px 0 2px;
+    margin: 0 4px 0 0;
   `,
   current: css`
     display: flex;
@@ -25,18 +27,39 @@ const THEME = {
     background-color: ${(props) => props.theme.colors.orange};
     color: ${(props) => props.theme.colors.white};
     border-radius: 5px;
+    margin: 0 4px 0 0;
   `,
 };
 
 export const NavigationButtonStyles = {
   Button: styled.button<NavigationButtonProps>`
+    display: flex;
     max-height: 25px;
     font-size: ${(props) => props.theme.size.default};
     ${(props) => props.themedButton && THEME[props.themedButton]};
+    flex-direction: ${(props) => props.isReverse && 'row-reverse'};
+    cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
+    padding-bottom: 2px;
   `,
-  Content: styled.div`
+  Content: styled.div<{
+    isReverse?: boolean;
+    isWithoutArrow?: boolean;
+    isArrow?: boolean;
+    isDisabled?: boolean;
+  }>`
+    margin: ${({ isDisabled }) => isDisabled && '0 4px 0 0'};
+    padding: ${({ isDisabled }) => isDisabled && '0 2px 0 2px'};
     &:not(:last-child) {
-      margin-right: 14px;
+      margin: ${({ isWithoutArrow }) => (isWithoutArrow ? '0' : '0 14px 0 0')};
+      margin: ${({ isArrow }) => isArrow && '0 6px 0 6px'};
+      margin: ${({ isReverse }) => isReverse && '0 0 0 14px'};
     }
+  `,
+  IconWrapper: styled.div<{
+    isDisabled?: boolean;
+  }>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `,
 };

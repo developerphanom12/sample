@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import { RequiredStringSchema } from 'yup/lib/string';
+import { AnyObject } from 'yup/lib/types';
 import { REGEXPS } from '../constants/validation-regexp';
 
 export const VALIDATION_TYPE = {
@@ -13,19 +15,31 @@ export const passwordValidation = Yup.string()
   .required('Enter password please')
   .min(8, 'Password must be at least 8 characters')
   .max(30, 'Password must be no more than 30 characters')
-  .matches(REGEXPS.password, 'Password should be like "ExamPL123@@"');
+  .matches(REGEXPS.password, 'Password should be like "example123@@"');
+
+export const currentPasswordValidation = Yup.string()
+  .required('Enter a current password please')
+  .min(8, 'Current password must be at least 8 characters')
+  .max(30, 'Current password must be no more than 30 characters')
+  .matches(REGEXPS.password, 'Password should be like "example123@@"');
+
+export const resetCurrentPasswordValidation = Yup.string()
+  .optional()
+  .min(8, 'Current password must be at least 8 characters')
+  .max(30, 'Current password must be no more than 30 characters')
+  .matches(REGEXPS.password, 'Password should be like "example123@@"');
 
 export const confirmPasswordValidation = Yup.string()
   .required('Please confirm your password')
   .min(8, 'Password must be at least 8 characters')
   .max(30, 'Password must be no more than 30 characters')
-  .matches(REGEXPS.password, 'Password should be like "ExamPL123@@"')
+  .matches(REGEXPS.password, 'Password should be like "example123@@"')
   .oneOf([Yup.ref('newPassword')], 'Passwords do not match');
 
 export const capiumPasswordValidation = Yup.string()
   .required('Enter password please')
   .min(8, 'Passwords must contain at least eight characters.')
-  .max(30);
+  .max(30, 'Password must be no more than 30 characters');
 
 export const countryValidation = Yup.string()
   .required('Enter a country please')
@@ -42,14 +56,39 @@ export const nameValidation = Yup.string()
     'Name must be at least 3 characters and contains only latin letters'
   )
   .max(40)
-  .min(3, 'full name must be at least 3 characters')
+  .min(3, 'Full name must be at least 3 characters')
   .required('Full name is a required field');
+
+export const subjectValidation = Yup.string()
+  .trim()
+  .matches(
+    /^[A-Z][a-z0-9.,_-\s]*$/,
+    'Subject must contains at least 3 characters, begins with capital character'
+  )
+  .max(40)
+  .min(3, 'subject must be at least 3 characters')
+  .required('Subject is a required field');
+
+export const myAccountValidationScheme = Yup.object().shape({
+  fullName: nameValidation,
+  email: emailValidation,
+});
+
+export const resetPasswordValidationScheme = Yup.object().shape({
+  currentPassword: resetCurrentPasswordValidation,
+  newPassword: passwordValidation,
+  confirmPassword: confirmPasswordValidation,
+});
 
 export const signUpValidationSchema = Yup.object().shape({
   email: emailValidation,
   fullName: nameValidation,
-  country: countryValidation,
   password: passwordValidation,
+});
+
+export const emailSendValidationSchema = Yup.object().shape({
+  to: emailValidation,
+  subject: subjectValidation,
 });
 
 export const capiumValidationSchema = Yup.object().shape({
@@ -62,7 +101,9 @@ export const resetPasswordValidationSchema = Yup.object().shape({
   confirmPassword: confirmPasswordValidation,
 });
 
-export const validationHashMapping: Record<string, React.ReactNode> = {
+export const validationHashMapping: {
+  [x: string]: RequiredStringSchema<string | undefined, AnyObject>;
+} = {
   [VALIDATION_TYPE.email]: emailValidation,
   [VALIDATION_TYPE.password]: passwordValidation,
 };

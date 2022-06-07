@@ -1,0 +1,48 @@
+import { FC } from 'react';
+
+import { Button } from 'components/Button';
+import { ModalButtonsBox } from 'components/ModalButtonsBox';
+
+import { ButtonsStyles as Styled } from './Buttons.style';
+
+interface IButtons {
+  settingsButtonText: string;
+  onClickSettingsButtonHandler: () => void;
+  onCancelbuttonClickHandler: () => void;
+  isDisabledButton: boolean;
+  isLoading: boolean;
+  isCancelButton: boolean;
+}
+
+export const Buttons: FC<IButtons> = (props) => {
+  const {
+    onClickSettingsButtonHandler,
+    onCancelbuttonClickHandler,
+    isCancelButton,
+    settingsButtonText,
+    isDisabledButton,
+    isLoading,
+  } = props;
+  return (
+    <Styled.ButtonsWrapper>
+      <Styled.ResetPasswordButtonWrapper>
+        <Button
+          onClick={onClickSettingsButtonHandler}
+          themedButton="secondary"
+          width="auth"
+        >
+          {settingsButtonText}
+        </Button>
+      </Styled.ResetPasswordButtonWrapper>
+      <ModalButtonsBox
+        onCancelClickHandler={onCancelbuttonClickHandler}
+        isNoPadding
+        isSaveButton
+        isCancelButton={isCancelButton}
+        isLoading={isLoading}
+        isDisableButton={isDisabledButton}
+        type="submit"
+      />
+    </Styled.ButtonsWrapper>
+  );
+};

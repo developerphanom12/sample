@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { AuthTabs } from 'components/AuthTabs/AuthTabs';
@@ -14,7 +14,6 @@ import { CAPIUM_LOGIN_STRINGS } from './capiumLogin.contants';
 export const CapiumLogin: FC = () => {
   const {
     isHoverInfo,
-    isSuccess,
     isShowPassword,
     formik,
     isModalOpen,
@@ -22,20 +21,9 @@ export const CapiumLogin: FC = () => {
     onChooseCapiumAccountHandler,
     onToggleModalWindowHandler,
     onTogglePasswordVisibility,
-    setState,
     onMouseEnterHandler,
     onMouseLeaveHandler,
   } = useCapiumLoginState();
-
-  useEffect(() => {
-    !isSuccess &&
-      setTimeout(() => {
-        setState((prevState) => ({
-          ...prevState,
-          isSuccess: true,
-        }));
-      }, 3500);
-  }, [isSuccess]);
 
   return (
     <Styled.MainWrapper>
@@ -57,7 +45,6 @@ export const CapiumLogin: FC = () => {
           </Styled.TabWrapper>
           <CapiumLoginForm
             isHoverInfo={isHoverInfo}
-            isSuccess={isSuccess}
             isShowPassword={isShowPassword}
             formikProps={formik.getFieldProps}
             formikMeta={formik.getFieldMeta}

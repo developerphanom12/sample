@@ -2,7 +2,13 @@ import axios from 'axios';
 
 import { CONFIG } from 'constants/config';
 
-import { storageService } from './storage-service';
+import { TypeStore } from './redux/store';
+
+let store: TypeStore;
+
+export const injectStore = (_store: TypeStore) => {
+  store = _store;
+};
 
 export interface ICapiumAuthPayload {
   email: string;
@@ -17,7 +23,8 @@ const getInstance = () => {
   });
 
   instance.interceptors.request.use(async (config) => {
-    const token = await storageService.getToken();
+    const token = store.getState().user.token;
+
     if (!token) {
       return config;
     }

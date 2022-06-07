@@ -12,10 +12,10 @@ import { DATE_FORMATS } from 'constants/strings';
 
 export const Preference: FC = () => {
   const {
-    formatedCurrencies,
     onChangeCurrencyHandler,
     onChangeDateFormatHandler,
     onContinueButtonClickHandler,
+    formatedCurrencies,
     selectedCurrencyValue,
     selectedFormatDate,
   } = usePreferenceState();
@@ -28,31 +28,27 @@ export const Preference: FC = () => {
         <Styled.RightSideContentWrapper>
           <Styled.TitleWrapper>
             <Styled.Title>{STRINGS.preferenceTitle}</Styled.Title>
-            <Styled.Line />
           </Styled.TitleWrapper>
-          <Styled.Form>
+          <Styled.Form onSubmit={onContinueButtonClickHandler}>
             <Styled.SubTitle>{STRINGS.currency}</Styled.SubTitle>
             <CustomSelect
               options={formatedCurrencies}
               onChangeValueHandler={onChangeCurrencyHandler}
-              defaultOption={selectedCurrencyValue}
+              value={selectedCurrencyValue}
             />
 
             <Styled.SubTitle>{STRINGS.dateFormat}</Styled.SubTitle>
             <CustomSelect
               options={DATE_FORMATS}
               onChangeValueHandler={onChangeDateFormatHandler}
-              defaultOption={selectedFormatDate}
+              value={selectedFormatDate}
             />
 
-            <Button
-              themedButton="primary"
-              width="auth"
-              onClick={onContinueButtonClickHandler}
-            >
+            <Button themedButton="primary" width="auth" type="submit">
               {STRINGS.buttonText}
             </Button>
           </Styled.Form>
+          <Styled.EmptyDiv />
         </Styled.RightSideContentWrapper>
       </Styled.Section>
     </Styled.MainWrapper>

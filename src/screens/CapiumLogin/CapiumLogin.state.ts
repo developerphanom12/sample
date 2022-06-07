@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 
-import { setCapiumAccount } from './reducer/capiumLogin.reducer';
 import { storageService } from 'services/storage-service';
 import { capiumValidationSchema } from 'services/validation';
 import { IState } from 'services/redux/reducer';
 
-import { setSocialAccount, setUser } from '../SignUp/reducer/signup.reducer';
+import { setCapiumAccount } from './reducer/capiumLogin.reducer';
+import {
+  setCurrencies,
+  setSocialAccount,
+  setUser,
+} from '../SignUp/reducer/signup.reducer';
 import { capiumFetchUser, capiumLogin } from './capiumLogin.api';
 
 import { ROUTES } from 'constants/routes';
@@ -16,7 +20,6 @@ import { ROUTES } from 'constants/routes';
 interface IuseCapiumLoginState {
   isHoverInfo: boolean;
   errorMessage: string;
-  isSuccess: boolean;
   isShowPassword: boolean;
   isModalOpen: boolean;
 }
@@ -24,7 +27,6 @@ export const useCapiumLoginState = () => {
   const initialState = {
     isHoverInfo: false,
     errorMessage: '',
-    isSuccess: true,
     isShowPassword: false,
     isModalOpen: false,
   };
@@ -86,7 +88,7 @@ export const useCapiumLoginState = () => {
       email: '',
       password: '',
     },
-    onSubmit: (values) => onSubmitFormHandler(values),
+    onSubmit: (values, actions) => onSubmitFormHandler(values, actions),
     validationSchema: capiumValidationSchema,
   });
 
@@ -101,10 +103,8 @@ export const useCapiumLoginState = () => {
     try {
       const { data } = await capiumLogin(payload);
 
-      storageService.setToken(data.token);
-      storageService.setUser(data.user);
-
       dispatch(setUser(data));
+      !data.user.isOnboardingDone && dispatch(setCurrencies(data.currencies));
       dispatch(
         setSocialAccount({
           capiumEmail: data.socialAccount.email,
@@ -128,10 +128,13 @@ export const useCapiumLoginState = () => {
     }
   };
 
-  const onSubmitFormHandler = async (values: {
-    email: string;
-    password: string;
-  }) => {
+  const onSubmitFormHandler = async (
+    values: {
+      email: string;
+      password: string;
+    },
+    actions: FormikHelpers<{ email: string; password: string }>
+  ) => {
     try {
       const { data } = await capiumFetchUser({
         email: values.email,
@@ -139,10 +142,11 @@ export const useCapiumLoginState = () => {
       });
 
       if (!data.isSuccess) {
-        setState((prevState) => ({
-          ...prevState,
-          isSuccess: data.isSuccess,
-        }));
+        data.errors.length &&
+          actions.setErrors({
+            email: ' ',
+            password: 'Invalid email or password',
+          });
       } else {
         const payload = {
           socialAccountId: data.id,

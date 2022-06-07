@@ -2,55 +2,84 @@ import React from 'react';
 
 import { Styled } from './Input.style';
 import { ErrorText } from '../ErrorText';
+import { CustomDatePicker } from '../CustomDatePicker';
 
 interface InputProps {
   inputHeight?: string;
   isTextArea?: boolean;
+  isNoMargin?: boolean;
   inputName?: string;
   errorText?: string;
+  placeHolder?: string;
+  inputTheme?: 'search';
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   touched?: boolean;
   isHiddenLabel?: boolean;
   text?: string;
-  onChangeValue: (
+  onChangeValue?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onKeyDown?: (event: React.KeyboardEvent) => void;
   value: string;
+  isInputDate?: boolean;
+  inputType?: string;
+  onFocus?: () => void;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
   const {
     text,
     inputName,
+    inputTheme,
     isTextArea,
     inputHeight,
     value,
     errorText,
     touched,
     isHiddenLabel,
+    isNoMargin,
+    placeHolder,
+    isInputDate,
+    inputType,
     onChangeValue,
+    onKeyDown,
     onBlur,
+    onFocus,
   } = props;
 
   return (
-    <Styled.InputWrapper>
+    <Styled.InputWrapper isNoMargin={isNoMargin}>
       {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
       {isTextArea ? (
         <Styled.TextArea
-        
           inputHeight={inputHeight}
           onChange={onChangeValue}
           value={value}
+          name={inputName}
         />
       ) : (
-        <Styled.Input
-          type="text"
-          isError={!!errorText && touched}
-          onBlur={onBlur}
-          name={inputName}
-          value={value}
-          onChange={onChangeValue}
-        />
+        <>
+          {isInputDate ? (
+            <CustomDatePicker
+              isInputDate={isInputDate}
+              selectedDate={new Date()}
+              formattedDate=""
+            />
+          ) : (
+            <Styled.Input
+              inputTheme={inputTheme}
+              type={inputType || 'text'}
+              isError={!!errorText && touched}
+              onBlur={onBlur}
+              onFocus={onFocus}
+              name={inputName}
+              value={value}
+              onChange={onChangeValue}
+              onKeyDown={onKeyDown}
+              placeholder={placeHolder}
+            />
+          )}
+        </>
       )}
       {touched && !!errorText && <ErrorText errorText={errorText} />}
     </Styled.InputWrapper>

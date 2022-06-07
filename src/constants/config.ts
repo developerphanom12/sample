@@ -1,8 +1,9 @@
-const ENV = process.env.REACT_APP_ENV || 'dev';
+const ENV = process.env.REACT_APP_ENV || 'development';
 
 const ENV_HASH_MAP: Record<string, string> = {
-  dev: 'http://localhost:3000/',
-
+  local: 'http://localhost:3000/',
+  development: 'http://3.9.95.221/',
+  staging: 'http://35.176.97.72/',
 };
 
 export const CONFIG = {

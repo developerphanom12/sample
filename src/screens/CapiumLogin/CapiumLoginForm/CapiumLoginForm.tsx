@@ -12,7 +12,6 @@ import { CAPIUM_LOGIN_STRINGS as STRINGS } from '../capiumLogin.contants';
 
 interface ICapiumLoginForm {
   isHoverInfo: boolean;
-  isSuccess: boolean;
   isShowPassword: boolean;
   isValid: boolean;
   isSubmiting: boolean;
@@ -29,7 +28,6 @@ interface ICapiumLoginForm {
 export const CapiumLoginForm: FC<ICapiumLoginForm> = (props) => {
   const {
     isHoverInfo,
-    isSuccess,
     isShowPassword,
     isValid,
     isSubmiting,
@@ -77,7 +75,7 @@ export const CapiumLoginForm: FC<ICapiumLoginForm> = (props) => {
         onChangeValue={onChangeEmail}
         onBlur={onBlurEmail}
         inputName={emailName}
-        errorText={!isSuccess ? ' ' : emailError}
+        errorText={emailError}
         touched={emailTouched}
       />
 
@@ -89,8 +87,8 @@ export const CapiumLoginForm: FC<ICapiumLoginForm> = (props) => {
         onChangePassword={onChangePassword}
         onClick={onTogglePasswordVisibility}
         onBlur={onBlurPassword}
-        errorText={!isSuccess ? STRINGS.invalidCapium : passwordError}
-        touched={!isSuccess || passwordTouched}
+        errorText={passwordError}
+        touched={passwordTouched}
       />
       <Styled.ButtonWrapper>
         <Button

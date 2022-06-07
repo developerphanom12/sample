@@ -13,8 +13,13 @@ interface IAuthTabsprops {
 }
 
 export const AuthTabs: FC<IAuthTabsprops> = (props) => {
-  const { onSignInClickHandler, onSignUpClickHandler, isSignUp, isAuth, tabText } =
-    props;
+  const {
+    onSignInClickHandler,
+    onSignUpClickHandler,
+    isSignUp,
+    isAuth,
+    tabText,
+  } = props;
   return (
     <Styled.TabsWrapper>
       {isAuth ? (
@@ -23,19 +28,16 @@ export const AuthTabs: FC<IAuthTabsprops> = (props) => {
             <Styled.Tab isActive={!isSignUp}>
               {STRINGS.sign_in_up.sign_in}
             </Styled.Tab>
-            {!isSignUp && <Styled.ActiveLine />}
           </Styled.ActiveTabWrapper>
           <Styled.ActiveTabWrapper>
             <Styled.Tab isActive={isSignUp} onClick={onSignUpClickHandler}>
               {STRINGS.sign_in_up.sign_up}
             </Styled.Tab>
-            {isSignUp && <Styled.ActiveLine />}
           </Styled.ActiveTabWrapper>
         </>
       ) : (
         <Styled.ActiveTabWrapper>
           <Styled.Tab isActive>{tabText}</Styled.Tab>
-          <Styled.ActiveLine />
         </Styled.ActiveTabWrapper>
       )}
     </Styled.TabsWrapper>

@@ -4,6 +4,7 @@ import baseStyled, {
   createGlobalStyle,
   ThemeProvider,
 } from 'styled-components';
+import styledNormalize from 'styled-normalize';
 
 import OpenSans from 'assets/fonts/OpenSans.ttf';
 
@@ -13,10 +14,18 @@ interface Props {
 
 export const COLORS = {
   lighterGrey: '#F5F5F7',
+  lighterBlue: '#0092DB1A',
+  lightBlue: '#DFECFF',
+  lightRed: '#FF525233',
+  lemon: '#A3BD424D',
+  yellow: '#FAA94D4D',
   blue: '#0092DB',
   mango: '#FAA94D',
+  lightGreen: '#EBFFD8',
+  swampGreen: '#A3BD42',
   green: '#5FAD00',
   red: '#FD3E5B',
+  pink: 'rgba(255, 82, 82, 0.1);',
   lightGray: '#F2F2F2',
   whiteGray: '#E5E5E5',
   gray: '#C4C4C4',
@@ -26,9 +35,11 @@ export const COLORS = {
   black: '#222B38',
   transparentOrange: 'rgba(255, 82, 82, 0.6)',
   opacityBlack: 'rgba(34, 43, 56, 0.1)',
+  boxShadowPureBlack: 'rgba(0, 0, 0, 0.25)',
   boxShadowBlack: 'rgba(34, 43, 56, 0.25)',
   halfTranparentBlack: 'rgba(34, 43, 56, 0.5)',
   overlay: 'rgba(196, 196, 196, 0.5)',
+  metricBoxShadow: '0px 0px 5px rgb(0 0 0 / 30%)',
 };
 
 export const Z_INDEX = {
@@ -60,6 +71,7 @@ export const theme = {
     biggerSmall: '12px',
     small: '10px',
     ultraSmall: '7px',
+    subTitle: '22px',
     title: '24px',
     mediumLarge: '20px',
     big: '32px',
@@ -81,6 +93,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Open Sans';
   src: url(${OpenSans});
 }
+${styledNormalize}
 
   body,
   h1,
@@ -134,16 +147,29 @@ const GlobalStyle = createGlobalStyle`
   ol[class] {
     list-style: none;
   }
+  
+  #root {
+    min-height: 100%;
+  }
+  html {
+    min-height: 100%;
+  }
 
   body {
+    width: 100%;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    line-height: 1.5;
+    min-height: 100vh;
     margin: 0 auto;
+    line-height: 1.2;
     background-color: #fff;
     font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  input {
+    line-height: 0;
   }
   
   .no-evt * {
@@ -169,13 +195,23 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     cursor: pointer;
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `;
 
 export const AppTheme = ({ children }: Props) => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {children}
+      <>
+        <GlobalStyle />
+        {children}
+      </>
     </ThemeProvider>
   );
 };

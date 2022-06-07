@@ -1,10 +1,11 @@
 import { styled } from 'app/theme';
 
 export const DivideLineStyles = {
-  Line: styled.div`
+  Line: styled.div<{ isAuth?: boolean; isSignUp?: boolean }>`
     width: 100%;
     height: 1px;
     background: ${({ theme }) => theme.colors.whiteGray};
-    margin: 25px 0;
+    margin: ${({ isAuth, isSignUp }) =>
+      isAuth ? '10px 0 0 0' : isSignUp ? '5px 0 5px 0' : '25px 0'};
   `,
 };

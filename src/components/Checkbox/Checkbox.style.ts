@@ -1,14 +1,14 @@
-import { styled } from "app/theme";
+import { styled } from 'app/theme';
 
 export const Checkbox = {
   CheckboxContainer: styled.div`
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    width: 18px;
+    height: 18px;
   `,
-  HiddenCheckbox: styled.input.attrs({ type: "checkbox" })`
+  HiddenCheckbox: styled.input`
     border: 0;
     clip: rect(0 0 0 0);
-    clippath: inset(50%);
     height: 1px;
     margin: -1px;
     overflow: hidden;
@@ -18,17 +18,28 @@ export const Checkbox = {
     width: 1px;
   `,
   StyledCheckbox: styled.div<{ isChecked: boolean }>`
-    display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: ${(props) =>
-      props.isChecked ? props.theme.colors.black : "transparent"};
+      props.isChecked ? props.theme.colors.black : 'transparent'};
     border-radius: 3px;
     border: solid 2px ${(props) => props.theme.colors.black};
     transition: all 50ms;
     cursor: pointer;
+  `,
+  LabelText: styled.span`
+    margin-left: 13px;
+    color: ${(props) => props.theme.colors.black};
+    font-weight: ${(props) => props.theme.fontWeight.normal};
+    font-size: ${(props) => props.theme.size.default};
+    cursor: pointer;
+  `,
+  Label: styled.label`
+    display: flex;
+    align-items: center;
+    position: relative;
   `,
 };

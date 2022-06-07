@@ -10,44 +10,48 @@ import {
   DeleteModalWindowContentStyles as Styled,
 } from './DeleteModalWindow.styles';
 
-interface IDeleteModalWindowProps {
-  onCloseModalWindowHandler: () => void;
-  isModalWindowOpen: boolean;
-  categoryName: string;
-  itemName: string;
-}
 export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
   const {
-    isModalWindowOpen,
-    itemName,
-    categoryName,
-    onCloseModalWindowHandler,
+    isDeleteModalWindowOpen,
+    deleteItemName,
+    isLoading,
+    onDeleteButtonClickHandler,
+    onCloseDeleteModalWindowHandler,
   } = props;
 
   return (
     <Modal
-      isOpen={isModalWindowOpen}
-      onRequestClose={onCloseModalWindowHandler}
+      isOpen={isDeleteModalWindowOpen}
+      onRequestClose={onCloseDeleteModalWindowHandler}
       ariaHideApp={false}
       style={DeleteModalWindowStyles}
     >
       <Styled.ContentWrapper>
         <Styled.HeaderBox>
           <Styled.Title>Delete Confirmation</Styled.Title>
-          <CloseButton onClickHandler={onCloseModalWindowHandler} />
+          <CloseButton onClickHandler={onCloseDeleteModalWindowHandler} />
         </Styled.HeaderBox>
         <Styled.MainContentWrapper>
           <Icon type="warning" />
           <Styled.SubTitle>
-            {`Sure, you want to delete ${categoryName} “${itemName}” ?`}
+            {`Sure, you want to delete ${deleteItemName} ?`}
           </Styled.SubTitle>
           <Styled.ButtonsBox>
             <Styled.ButtonsWrapper>
-              <Button themedButton="secondary" width="secondary">
-                Yes
-              </Button>
-              <Button themedButton="primary" width="primary">
+              <Button
+                onClick={onCloseDeleteModalWindowHandler}
+                themedButton="secondary"
+                width="secondary"
+              >
                 No
+              </Button>
+              <Button
+                onClick={onDeleteButtonClickHandler}
+                themedButton="primary"
+                width="primary"
+                isLoading={isLoading}
+              >
+                Yes
               </Button>
             </Styled.ButtonsWrapper>
           </Styled.ButtonsBox>

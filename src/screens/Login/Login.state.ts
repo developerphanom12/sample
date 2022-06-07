@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { emailValidation, passwordValidation } from 'services/validation';
@@ -9,7 +9,11 @@ import { storageService } from 'services/storage-service';
 
 import { login } from './login.api';
 import { ILogin } from './types/login.types';
-import { setUser } from '../SignUp/reducer/signup.reducer';
+import {
+  setCompany,
+  setCurrencies,
+  setUser,
+} from '../SignUp/reducer/signup.reducer';
 
 import { ROUTES } from 'constants/routes';
 
@@ -38,16 +42,31 @@ export const useLoginState = () => {
     }));
   };
 
-  const onSignInButtonClickHandler = async (loginValues: ILogin) => {
+  const onSignInButtonClickHandler = async (
+    loginValues: ILogin,
+    actions: FormikHelpers<{ email: string; password: string }>
+  ) => {
     try {
       const { data } = await login(loginValues);
 
-      dispatch(setUser(data));
-      storageService.setToken(data.token);
-      storageService.setUser(data.user);
+      dispatch(setCurrencies(data.currencies));
 
-      navigate(data.user.isOnboardingDone ? ROUTES.home : ROUTES.preference);
-    } catch (error) {
+      dispatch(setUser(data));
+      dispatch(setCompany(data.company));
+
+      navigate(
+        !data.user.active_account || !data.user.accounts.length
+          ? ROUTES.preference
+          : ROUTES.home
+      );
+    } catch (error: any) {
+      const { data } = error.response;
+
+      (data.message === 'WRONG PASSWORD' || 'USER NOT EXIST') &&
+        actions.setErrors({
+          email: ' ',
+          password: 'Invalid email or password',
+        });
       console.log(error);
     }
   };
@@ -57,7 +76,7 @@ export const useLoginState = () => {
       email: '',
       password: '',
     },
-    onSubmit: (values) => onSignInButtonClickHandler(values),
+    onSubmit: (values, actions) => onSignInButtonClickHandler(values, actions),
 
     validationSchema: Yup.object().shape({
       email: emailValidation,

@@ -8,18 +8,20 @@ import { TableInboxItemStyles } from './TableInboxItem.style';
 
 interface TableInboxItemProps {
   isChecked: boolean;
+  onChecked?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onShowClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const TableInboxItem: React.FC<TableInboxItemProps> = (props) => {
-  const { isChecked } = props;
+  const { isChecked, onChecked, onShowClick } = props;
   return (
     <TableInboxItemStyles.Item>
       <TableInboxItemStyles.StaticBlock>
-        <TableInboxItemStyles.Checkbox>
+        <TableInboxItemStyles.Checkbox onChange={onChecked}>
           <CheckboxItem isChecked={isChecked} />
         </TableInboxItemStyles.Checkbox>
-        <TableInboxItemStyles.View>
-          <Icon type='showPassword' />
+        <TableInboxItemStyles.View onClick={onShowClick}>
+          <Icon type="showPassword" />
         </TableInboxItemStyles.View>
       </TableInboxItemStyles.StaticBlock>
       <TableInboxItemStyles.ColumnID>ID</TableInboxItemStyles.ColumnID>
@@ -30,13 +32,13 @@ export const TableInboxItem: React.FC<TableInboxItemProps> = (props) => {
         Date on Receipt
       </TableInboxItemStyles.ColumnDateOnReceipt>
       <TableInboxItemStyles.ColumnStatus>
-        <StatusLabel colors='review' text='Review' />
+        <StatusLabel status="review" />
       </TableInboxItemStyles.ColumnStatus>
       <TableInboxItemStyles.ColumnDepartures>
-        <StatusLabel colors='departures' text='14-Mar-2022, 11:30:00' />
+        <StatusLabel status="accepted" text="14-Mar-2022, 11:30:00" />
       </TableInboxItemStyles.ColumnDepartures>
       <TableInboxItemStyles.ColumnDepartures>
-        <StatusLabel colors='departures' text='N/A' />
+        <StatusLabel status="accepted" text="N/A" />
       </TableInboxItemStyles.ColumnDepartures>
     </TableInboxItemStyles.Item>
   );

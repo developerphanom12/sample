@@ -3,24 +3,34 @@ import { styled } from 'app/theme';
 
 export const NotFoundStyles = {
   MainWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
   `,
   ContentWrapper: styled.div`
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    flex: 1 0 auto;
+    justify-content: center;
     align-items: center;
-    max-width: 750px;
-    width: 100%;
-    height: 100%;
+    padding: 10px 0;
   `,
-  ImageWrapper: styled.div`
+  Image: styled.div<{ src: string }>`
+    display: flex;
     width: 100%;
     height: 100%;
+    min-width: 750px;
+    min-height: 200px;
+    min-width: 350px;
     max-height: 500px;
+    background: ${(props) => `url(${props.src})`};
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
   `,
   Title: styled.p`
     display: flex;
@@ -38,11 +48,10 @@ export const NotFoundStyles = {
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.default};
-    margin-bottom: 44px;
+    margin-bottom: 23px;
   `,
-  ButtonWrapper: styled(Link)`
-    display: flex;
-    width: 100%;
+  Link: styled(Link)`
     max-width: 250px;
+    width: 100%;
   `,
 };

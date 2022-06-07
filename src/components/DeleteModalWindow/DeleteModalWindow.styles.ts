@@ -54,6 +54,7 @@ export const DeleteModalWindowContentStyles = {
     color: ${({ theme }) => theme.colors.black};
     line-height: 19px;
     margin: 32px 0 25px 0;
+    text-align: center;
   `,
   ButtonsBox: styled.div`
     display: flex;

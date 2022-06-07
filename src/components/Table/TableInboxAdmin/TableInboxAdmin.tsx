@@ -4,54 +4,99 @@ import { CheckboxItem } from 'components/Checkbox/Checkbox';
 
 import { TableButton } from '../TableButton/TableButton';
 import { TableInboxAdminItem } from './TableInboxAdminItem/TableInboxAdminItem';
-import { TableInboxAdminStyles } from './TableInboxAdmin.style';
-
-interface TableInboxAdminProps {
-  isChecked: boolean;
-}
+import { TableInboxAdminStyles as Styled } from './TableInboxAdmin.style';
 
 export const TableInboxAdmin: React.FC<TableInboxAdminProps> = (props) => {
-  const { isChecked } = props;
+  const {
+    onCheckedItemHandler,
+    onCheckedPublishMockFuncHandler,
+    onCheckedAllItemsHandler,
+    onCheckedPaidHandler,
+    isVisited,
+    receiptList,
+    isAllChecked,
+    dateFormat,
+    isReceipts,
+  } = props;
+
   return (
-    <>
-      <TableInboxAdminStyles.Head>
-        <TableInboxAdminStyles.Checkbox>
-          <CheckboxItem isChecked={isChecked} />
-        </TableInboxAdminStyles.Checkbox>
-        <TableInboxAdminStyles.View>View</TableInboxAdminStyles.View>
-        <TableInboxAdminStyles.Publish>Publish</TableInboxAdminStyles.Publish>
-        <TableInboxAdminStyles.Date>
+    <div>
+      <Styled.Head>
+        <Styled.Checkbox>
+          <CheckboxItem
+            isChecked={isAllChecked}
+            onChange={onCheckedAllItemsHandler}
+            name="allChecked"
+          />
+        </Styled.Checkbox>
+        <Styled.Text>ID</Styled.Text>
+        <Styled.Selector>
           <TableButton>Date</TableButton>
-        </TableInboxAdminStyles.Date>
-        <TableInboxAdminStyles.Supplier>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Supplier</TableButton>
-        </TableInboxAdminStyles.Supplier>
-        <TableInboxAdminStyles.Selector>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Supplier Account</TableButton>
-        </TableInboxAdminStyles.Selector>
-        <TableInboxAdminStyles.Selector>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Category</TableButton>
-        </TableInboxAdminStyles.Selector>
-        <TableInboxAdminStyles.Selector>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>VAT Code</TableButton>
-        </TableInboxAdminStyles.Selector>
-        <TableInboxAdminStyles.NumericCredentials>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>CUR</TableButton>
-        </TableInboxAdminStyles.NumericCredentials>
-        <TableInboxAdminStyles.NumericCredentials>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Net</TableButton>
-        </TableInboxAdminStyles.NumericCredentials>
-        <TableInboxAdminStyles.NumericCredentials>
-          <TableButton>VAT</TableButton>
-        </TableInboxAdminStyles.NumericCredentials>
-        <TableInboxAdminStyles.NumericCredentials>
+        </Styled.Selector>
+        <Styled.Selector>
+          <TableButton>Tax</TableButton>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Total</TableButton>
-        </TableInboxAdminStyles.NumericCredentials>
-        <TableInboxAdminStyles.NumericCredentials>
+        </Styled.Selector>
+        <Styled.Selector>
+          <TableButton>Publish</TableButton>
+        </Styled.Selector>
+        <Styled.Selector>
           <TableButton>Paid</TableButton>
-        </TableInboxAdminStyles.NumericCredentials>
-      </TableInboxAdminStyles.Head>
-      <TableInboxAdminItem isChecked={false} />
-    </>
+        </Styled.Selector>
+        <Styled.Text>Status</Styled.Text>
+      </Styled.Head>
+      {isReceipts ? (
+        receiptList?.map((receipt, index) => (
+          <TableInboxAdminItem
+            publishStatus={receipt.publish_status}
+            paymentStatus={receipt.payment_status}
+            key={receipt.id}
+            receiptIndex={index}
+            customId={receipt.custom_id}
+            receiptId={receipt.id}
+            currency={receipt.currency.value}
+            category={receipt.category?.name}
+            date={receipt.receipt_date}
+            net={receipt.net}
+            total={receipt.total}
+            vatCode={receipt.vat_code}
+            tax={receipt.tax}
+            status={receipt.status}
+            supplier={receipt.supplier?.name}
+            supplierAccount={receipt.supplier_account}
+            isChecked={receipt.isChecked}
+            isVisited={isVisited}
+            onCheckedItemHandler={onCheckedItemHandler}
+            onCheckedPaidHandler={onCheckedPaidHandler}
+            onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
+            dateFormat={dateFormat}
+          />
+        ))
+      ) : (
+        <Styled.EmptyContentWrapper>
+          No records found
+        </Styled.EmptyContentWrapper>
+      )}
+    </div>
   );
 };

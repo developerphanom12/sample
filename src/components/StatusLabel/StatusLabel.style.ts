@@ -1,46 +1,21 @@
-import { css } from 'styled-components';
-
 import { styled } from 'app/theme';
 
-import { StatusLabelProps } from './StatusLabel';
+import { STATUS_COLORS } from 'constants/status-colors';
 
-const COLORS = {
-  processing: css`
-    background-color: ${(props) => props.theme.colors.blue};
-  `,
-  review: css`
-    background-color: ${(props) => props.theme.colors.mango};
-  `,
-  completed: css`
-    background-color: ${(props) => props.theme.colors.green};
-  `,
-  decline: css`
-    background-color: ${(props) => props.theme.colors.orange};
-  `,
-  awaitingApproval: css`
-    background-color: ${(props) => props.theme.colors.darkGray};
-  `,
-  approved: css`
-    background-color: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.black};
-  `,
-  departures: css`
-    background-color: ${(props) => props.theme.colors.transparentOrange};
-    color: ${(props) => props.theme.colors.black};
-  `,
-};
+const COLORS = STATUS_COLORS
 
 export const StatusLabelStyles = {
-  Label: styled.div<StatusLabelProps>`
+  Label: styled.div<{ color: keyof typeof Statuses }>`
     width: 100%;
-    min-width: 135px;
+    min-width: 100px;
     height: 31px;
-    border-radius: 5px;
+    border-radius: ${(props) => props.theme.size.borderRadius};
     display: flex;
     align-items: center;
     padding-left: 9px;
+    box-shadow: 0px 1px 1px ${(props) => props.theme.colors.boxShadowPureBlack};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.lightGray};
-    ${(props) => props.colors && COLORS[props.colors]};
+    ${(props) => props.color && COLORS[props.color]};
   `,
 };

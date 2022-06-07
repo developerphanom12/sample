@@ -1,18 +1,20 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { AuthImageSection } from "components/AuthImageSection/AuthImageSection";
-import { AuthTabs } from "components/AuthTabs/AuthTabs";
+import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
+import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 
-import { useSignUpState } from "./SignUp.state";
-import { SignUpForm } from "./SignUpForm/SignUpForm";
-import { SignUpStyles as Styled } from "./SignUp.styles";
+import { useSignUpState } from './SignUp.state';
+import { SignUpForm } from './SignUpForm/SignUpForm';
+import { SignUpStyles as Styled } from './SignUp.styles';
 
 export const SignUp: FC = () => {
   const {
     onLoginClickHandler,
     onTogglePasswordVisibility,
+    onChangeCountryValueHandler,
     isShowPassword,
     formik,
+    countryValue,
   } = useSignUpState();
 
   return (
@@ -26,7 +28,6 @@ export const SignUp: FC = () => {
             isSignUp
             onSignInClickHandler={onLoginClickHandler}
           />
-
           <SignUpForm
             formikMeta={formik.getFieldMeta}
             formikProps={formik.getFieldProps}
@@ -34,6 +35,8 @@ export const SignUp: FC = () => {
             onFormHandleSubmit={formik.handleSubmit}
             isShowPassword={isShowPassword}
             isValid={formik.isValid && formik.dirty}
+            countryValue={countryValue}
+            onChangeCountryValueHandler={onChangeCountryValueHandler}
           />
         </Styled.RightSideContentWrapper>
       </Styled.Section>

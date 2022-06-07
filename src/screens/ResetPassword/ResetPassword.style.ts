@@ -8,11 +8,20 @@ export const ResetPasswordStyles = {
   Section: styled.section`
     display: flex;
     width: 100%;
+    height: 100vh;
   `,
   RightSideContentWrapper: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 174px 151px 0 69px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 10px 20px 50px;
+    width: 100%;
+  `,
+  EmptyDiv: styled.div`
+    max-height: 200px;
+    display: flex;
+    height: 100%;
     width: 100%;
   `,
 };

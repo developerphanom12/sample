@@ -6,21 +6,29 @@ export const Styled = {
   Form: styled.form`
     max-width: 500px;
     width: 100%;
+    max-height: 420px;
+    height: 100%;
+    @media (max-width: 768px) {
+      max-height: max-content;
+      height: auto;
+    }
   `,
-
   ForgotPassword: styled.div`
     display: flex;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.orange};
     font-size: ${({ theme }) => theme.size.default};
     cursor: pointer;
-    margin: 21px 0 23px 0;
     text-decoration: underline;
+    margin: 20px 0;
   `,
   SignUpLink: styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
   `,
   Text: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.normal};
@@ -34,5 +42,12 @@ export const Styled = {
     text-decoration: underline;
     margin-left: 4px;
     cursor: pointer;
+  `,
+  Label: styled.p`
+    font-family: ${(props) => props.theme.font.openSans};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
+    font-size: ${(props) => props.theme.size.default};
+    color: ${(props) => props.theme.colors.black};
+    margin-bottom: 10px;
   `,
 };

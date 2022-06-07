@@ -1,4 +1,5 @@
-import { Z_INDEX, COLORS, styled } from 'app/theme';
+import { Z_INDEX, COLORS } from 'app/theme';
+import styled from 'styled-components';
 
 export const EmailModalStyles = {
   content: {
@@ -22,38 +23,6 @@ export const EmailModalStyles = {
   },
 };
 
-export const EmailModalWindowStyles = {
-  ContentWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-  `,
-  MainContentWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 21px 33px 0 33px;
-    width: 100%;
-    flex: 1;
-  `,
-  SubTitle: styled.p`
-    font-weight: ${({ theme }) => theme.fontWeight.normal};
-    font-size: ${({ theme }) => theme.size.default};
-    color: ${({ theme }) => theme.colors.black};
-    line-height: 19px;
-    margin: 32px 0 25px 0;
-  `,
-  Label: styled.p`
-    font-weight: ${(props) => props.theme.fontWeight.semiBold};
-    font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
-    margin-bottom: 10px;
-  `,
-  AttachmentsWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    max-height: 90px;
-    overflow: hidden;
-    overflow-y: scroll;
-    margin-bottom: 26px;
-    border-radius: 5px;
-  `,
+export const Styles = {
+  Form: styled.form``,
 };

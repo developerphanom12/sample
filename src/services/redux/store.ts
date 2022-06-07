@@ -5,10 +5,11 @@ import { rootReducer } from './reducer';
 const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware({
-    serializableCheck: false
-  })
+    serializableCheck: false,
+  }),
 });
 
-const persisterStore = persistStore(store)
-export {persisterStore, store}
+const persisterStore = persistStore(store);
+export { persisterStore, store };
 export type RootState = ReturnType<typeof store.getState>;
+export type TypeStore = typeof store;

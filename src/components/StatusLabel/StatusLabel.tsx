@@ -1,27 +1,22 @@
-import React from 'react';
+import { FC } from 'react';
+
+import { getFirstLetterUppercase } from 'services/utils';
 
 import { StatusLabelStyles } from './StatusLabel.style';
 
-export interface StatusLabelProps {
-  colors:
-    | 'processing'
-    | 'review'
-    | 'completed'
-    | 'decline'
-    | 'awaitingApproval'
-    | 'approved'
-    | 'departures';
+export interface IStatusLabelProps {
+  status: TStatuses;
   text?: string;
 }
 
-export const StatusLabel = (props: StatusLabelProps) => {
-  const { colors, text } = props;
+export const StatusLabel: FC<IStatusLabelProps> = (props) => {
+  const { status } = props;
 
-  const upperText = colors.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
-    letter.toUpperCase()
-  );
+  const upperText = getFirstLetterUppercase(status);
 
   return (
-    <StatusLabelStyles.Label colors={colors}>{text}</StatusLabelStyles.Label>
+    <StatusLabelStyles.Label color={status}>
+      {upperText}
+    </StatusLabelStyles.Label>
   );
 };

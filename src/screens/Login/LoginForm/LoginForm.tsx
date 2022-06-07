@@ -53,19 +53,20 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
 
   return (
     <Styled.Form onSubmit={onFormHandleSubmit}>
+      <Styled.Label>{STRINGS.sign_in_up.email_input}</Styled.Label>
       <Input
         inputName={emailName}
-        text={STRINGS.sign_in_up.email_input}
         value={emailInputValue}
         onChangeValue={onChangeEmail}
         errorText={emailError}
         onBlur={onBlurEmail}
         touched={emailTouched}
+        isHiddenLabel
       />
-
+      <Styled.Label>{STRINGS.sign_in_up.password_input}</Styled.Label>
       <InputPassword
+        isHiddenLabel
         inputName={passwordName}
-        text={STRINGS.sign_in_up.password_input}
         showPassword={isShowPassword}
         password={passwordInputValue}
         onChangePassword={onChangePassword}

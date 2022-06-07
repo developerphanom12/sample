@@ -1,21 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import { ActionMeta } from 'react-select';
 
 import { signUpValidationSchema } from 'services/validation';
-import { storageService } from 'services/storage-service';
 
+import { IOption } from 'components/CustomSelect/types';
 
 import { formikInitialValues } from './SignUp.constants';
 import { createUser } from './signup.api';
 import { ICreateUser } from './types/signup.types';
-import { setUser } from './reducer/signup.reducer';
+import { setCurrencies, setUser } from './reducer/signup.reducer';
 
 import { ROUTES } from 'constants/routes';
 
 interface IuseSignUpState {
   isShowPassword: boolean;
+  countryValue: IOption;
 }
 
 export const useSignUpState = () => {
@@ -24,10 +26,19 @@ export const useSignUpState = () => {
 
   const initialState = {
     isShowPassword: false,
+    countryValue: { value: 'United Kingdom', label: 'United Kingdom' },
   };
   const [state, setState] = useState<IuseSignUpState>(initialState);
- 
-  
+
+  const onChangeCountryValueHandler = (
+    newValue: any,
+    actionMeta: ActionMeta<IOption> | unknown
+  ) => {
+    setState((prevState) => ({
+      ...prevState,
+      countryValue: newValue,
+    }));
+  };
 
   const onTogglePasswordVisibility = () => {
     setState((prevState) => ({
@@ -40,23 +51,36 @@ export const useSignUpState = () => {
     navigate(ROUTES.login);
   };
 
-  const onSignUpHandler = async (signUpValues: ICreateUser) => {
+  const onSignUpHandler = async (
+    signUpValues: Omit<ICreateUser, 'country'>,
+    actions: FormikHelpers<typeof formikInitialValues>
+  ) => {
     try {
-      const { data } = await createUser(signUpValues);
+      const { data } = await createUser({
+        ...signUpValues,
+        country: state.countryValue.value,
+      });
 
       dispatch(setUser(data));
-      storageService.setToken(data.token);
-      storageService.setUser(data.user);
+      dispatch(setCurrencies(data.currencies));
 
-      navigate(ROUTES.preference)
-    } catch (error) {
+      navigate(ROUTES.preference);
+    } catch (error: any) {
+      const { data } = error.response;
+
+      data.message === 'USER ALREADY EXIST' &&
+        actions.setErrors({
+          email: ' ',
+          fullName: ' ',
+          password: 'User has already been registered',
+        });
       console.log(error);
     }
   };
 
   const formik = useFormik({
     initialValues: formikInitialValues,
-    onSubmit: (values) => onSignUpHandler(values),
+    onSubmit: (values, actions) => onSignUpHandler(values, actions),
     validationSchema: signUpValidationSchema,
   });
 
@@ -65,5 +89,6 @@ export const useSignUpState = () => {
     formik,
     onTogglePasswordVisibility,
     onLoginClickHandler,
+    onChangeCountryValueHandler,
   };
 };

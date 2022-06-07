@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { Styled } from './ErrorText.styles';
 
 interface IErrorTextProps {

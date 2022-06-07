@@ -17,21 +17,53 @@ export const STRINGS = {
   },
 };
 
+export const EMPTY_DATA_STRINGS = {
+  title: 'Uploaded receipts will be shown here...',
+  firstSubtitle:
+    'We have created everything for you, please upload your receipts to start.',
+  secondSubtitle: 'You can do that by using Add button below',
+  buttonText: 'Add',
+};
+
+export const EMPTY_DATA_STRINGS_MASTER = {
+  categories: {
+    title: 'Categories will be shown here...',
+    firstSubtitle:
+      'We have created everything for you, please add your categories to start.',
+    secondSubtitle: 'You can do that by using Add button below',
+    buttonText: 'Add',
+  },
+  suppliers: {
+    title: 'Suppliers will be shown here...',
+    firstSubtitle:
+      'We have created everything for you, please add your suppliers to start.',
+    secondSubtitle: 'You can do that by using Add button below',
+    buttonText: 'Add',
+  },
+  type: {
+    title: 'Types will be shown here...',
+    firstSubtitle:
+      'We have created everything for you, please add your type to start.',
+    secondSubtitle: 'You can do that by using Add button below',
+    buttonText: 'Add',
+  },
+};
+
 export const DATE_FORMATS = [
   {
-    value: 'MMM-DD-YYYY',
-    label: 'MMM-DD-YYYY',
+    value: 'MMM-dd-yyyy',
+    label: 'MMM-dd-yyyy',
   },
   {
-    value: 'DD-MMM-YYYY',
-    label: 'DD-MMM-YYYY',
+    value: 'dd-MMM-yyyy',
+    label: 'dd-MMM-yyyy',
   },
   {
-    value: 'DDDD-MMMM-D-YYYY',
-    label: 'DDDD-MMMM-D-YYYY',
+    value: 'dd-MM-yy',
+    label: 'dd-MM-yy',
   },
   {
-    value: 'MMMM-D-YYYY',
-    label: 'MMMM-D-YYYY',
+    value: 'MM/dd/yyyy',
+    label: 'MM/dd/yyyy',
   },
 ];

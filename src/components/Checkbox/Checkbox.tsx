@@ -1,24 +1,35 @@
-import React from "react";
+import React from 'react';
 
-import { Icon } from "components/Icons/Icons";
+import { Icon } from 'components/Icons/Icons';
 
-import { Checkbox } from "./Checkbox.style";
+import { Checkbox } from './Checkbox.style';
 
 export interface CheckboxProps {
-  isChecked: boolean;
   children?: React.ReactNode;
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+  labelText?: string;
+  isChecked: boolean;
 }
 
 export const CheckboxItem = (props: CheckboxProps) => {
-  const { isChecked, children } = props;
+  const { isChecked, labelText, onChange, name } = props;
+
   return (
-    <Checkbox.CheckboxContainer>
-      <Checkbox.HiddenCheckbox />
-      <Checkbox.StyledCheckbox isChecked={isChecked}>
-        {!!isChecked && <Icon type="checkbox" />}
-        {children}
-      </Checkbox.StyledCheckbox>
-    </Checkbox.CheckboxContainer>
+    <Checkbox.Label>
+      <Checkbox.CheckboxContainer>
+        <Checkbox.HiddenCheckbox
+          type="checkbox"
+          id={name}
+          name={name}
+          onChange={onChange}
+          checked={isChecked}
+        />
+        <Checkbox.StyledCheckbox isChecked={isChecked}>
+          {!!isChecked && <Icon type="checkbox" />}
+        </Checkbox.StyledCheckbox>
+      </Checkbox.CheckboxContainer>
+      <Checkbox.LabelText>{labelText}</Checkbox.LabelText>
+    </Checkbox.Label>
   );
 };

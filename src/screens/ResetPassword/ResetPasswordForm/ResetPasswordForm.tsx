@@ -5,7 +5,6 @@ import { Button } from 'components/Button';
 import { InputItem } from 'components/InputItem';
 
 import { ResetPasswordFormStyles as Styled } from './ResetPasswordForm.style';
-
 import { RESET_PASSWORD_INPUTS, RESET_PASSWORD_STRINGS } from '../constants';
 
 interface IResetPasswordFormProps {
@@ -25,24 +24,27 @@ export const ResetPasswordForm: FC<IResetPasswordFormProps> = (props) => {
   return (
     <Styled.Form onSubmit={onFormHandleSubmit}>
       {RESET_PASSWORD_INPUTS.map((input) => (
-        <Styled.ButtonWrapper key={input.inputName}>
+        <Styled.InputWrapper isValid={isValid} key={input.inputName}>
           <InputItem
+            key={input.inputName}
             inputName={input.inputName}
             inputType={input.inputType}
             labelText={input.labelText}
             formikProps={formikProps}
             formikMeta={formikMeta}
           />
-        </Styled.ButtonWrapper>
+        </Styled.InputWrapper>
       ))}
-      <Button
-        isDisabled={!isValid || isSubmiting}
-        type="submit"
-        themedButton="primary"
-        width="auth"
-      >
-        {RESET_PASSWORD_STRINGS.buttonText}
-      </Button>
+      <Styled.ButtonWrapper>
+        <Button
+          isDisabled={!isValid || isSubmiting}
+          type="submit"
+          themedButton="primary"
+          width="auth"
+        >
+          {RESET_PASSWORD_STRINGS.buttonText}
+        </Button>
+      </Styled.ButtonWrapper>
     </Styled.Form>
   );
 };

@@ -1,21 +1,19 @@
 import { FC } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { storageService } from '../services/storage-service';
+import { IState } from '../services/redux/reducer';
 
-import { ROUTES } from '../constants/routes';
+import { ROUTES } from 'constants/routes';
 
-interface IPrivateRouterProps {
-  children?: React.ReactElement;
-}
-
-export const PrivateRouter: FC<IPrivateRouterProps> = (props) => {
-  const { children } = props;
+export const PrivateRouter: FC = () => {
+  const {
+    user: { token },
+  } = useSelector((state: IState) => state);
 
   const location = useLocation();
-  const isToken = storageService.getToken();
 
-  return true ? (
+  return token ? (
     <Outlet />
   ) : (
     <Navigate to={ROUTES.login} state={{ from: location }} />

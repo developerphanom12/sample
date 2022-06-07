@@ -1,29 +1,72 @@
 import React from 'react';
 
+import { MasterItem } from 'screens/Master/MasterItem';
+import { TableMasterProps } from 'screens/Master/types/master.types';
+
 import { TableButton } from '../TableButton/TableButton';
-import { TableMasterItem } from './TableMasterItem/TableMasterItem';
-import { TableMasterStyles } from './TableMaster.style';
+import { TableMasterStyles as Styled } from './TableMaster.style';
 
-interface TableMasterProps {}
+export const TableMaster: React.FC<TableMasterProps> = (props) => {
+  const {
+    categories,
+    dateFormat,
+    tabName,
+    onDeleteIconClickHandler,
+    onEditIconClickHandler,
 
-export const TableMaster: React.FC<TableMasterProps> = (props) => (
-  <>
-    <TableMasterStyles.Head>
-      <TableMasterStyles.Actions>Actions</TableMasterStyles.Actions>
-      <TableMasterStyles.Column>
-        <TableButton>Type</TableButton>
-      </TableMasterStyles.Column>
-      <TableMasterStyles.Column>
-        <TableMasterStyles.Column>
-          <TableButton>Created On</TableButton>
-        </TableMasterStyles.Column>
-      </TableMasterStyles.Column>
-      <TableMasterStyles.Column>
-        <TableMasterStyles.Column>
-          <TableButton>Created By</TableButton>
-        </TableMasterStyles.Column>
-      </TableMasterStyles.Column>
-    </TableMasterStyles.Head>
-    <TableMasterItem />
-  </>
-);
+    searchValue,
+    searchedItems,
+  } = props;
+
+  return (
+    <>
+      <Styled.Head>
+        <Styled.Actions>Actions</Styled.Actions>
+        <Styled.Column>
+          <TableButton>{tabName}</TableButton>
+        </Styled.Column>
+        <Styled.Column>
+          <Styled.Column>
+            <TableButton>Created On</TableButton>
+          </Styled.Column>
+        </Styled.Column>
+        <Styled.Column>
+          <Styled.Column>
+            <TableButton>Created By</TableButton>
+          </Styled.Column>
+        </Styled.Column>
+      </Styled.Head>
+      {searchedItems?.length ? (
+        searchedItems?.map((category) => (
+          <MasterItem
+            key={category.id}
+            categoryId={category.id}
+            categoryName={category.name}
+            createdDate={category.created}
+            categoryCreator={category.creator.name}
+            dateFormat={dateFormat}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+          />
+        ))
+      ) : searchValue && !searchedItems?.length ? (
+        <Styled.EmptyContentWrapper>
+          No results found
+        </Styled.EmptyContentWrapper>
+      ) : (
+        categories?.map((category) => (
+          <MasterItem
+            key={category.id}
+            categoryId={category.id}
+            categoryName={category.name}
+            createdDate={category.created}
+            categoryCreator={category.creator.name}
+            dateFormat={dateFormat}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+          />
+        ))
+      )}
+    </>
+  );
+};

@@ -1,9 +1,14 @@
-import { styled } from "app/theme";
+import { styled } from 'app/theme';
 
 export const AuthTabsStyles = {
   TabsWrapper: styled.div`
     display: flex;
-    margin-bottom: 38px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+    @media (max-width: 1366px) {
+      margin-bottom: 15px;
+    }
   `,
   ActiveTabWrapper: styled.div`
     display: flex;
@@ -23,6 +28,22 @@ export const AuthTabsStyles = {
       isActive ? theme.colors.orange : theme.colors.black};
     font-size: ${({ theme }) => theme.size.title};
     cursor: ${({ isActive }) => !isActive && 'pointer'};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-bottom: 7px;
+    position: relative;
+    &::before {
+      ${({ theme, isActive }) =>
+        isActive &&
+        `
+        position: absolute;
+        content: '';
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background: ${theme.colors.orange};
+        border-radius: 10px;`}
+    }
   `,
 };

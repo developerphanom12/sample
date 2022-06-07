@@ -9,12 +9,13 @@ interface InputProps {
   inputName?: string;
   errorText?: string;
   touched?: boolean;
+  isHiddenLabel?: boolean;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  text: string;
+  text?: string;
+  onClick?: () => void;
   showPassword: boolean;
   password: string;
   onChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: () => void;
 }
 
 export const InputPassword: React.FC<InputProps> = (props) => {
@@ -25,6 +26,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
     inputName,
     errorText,
     touched,
+    isHiddenLabel,
     onChangePassword,
     onClick,
     onBlur,
@@ -32,7 +34,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
 
   return (
     <>
-      <Styled.Label>{text}</Styled.Label>
+      {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
       <Styled.WrapperInput>
         <Styled.Input
           isError={!!errorText && touched}

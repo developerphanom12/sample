@@ -11,6 +11,7 @@ import { inputs } from '../SignUp.constants';
 
 import { STRINGS } from 'constants/strings';
 import { ROUTES } from 'constants/routes';
+import { ActionMeta } from 'react-select';
 
 interface ISignUpFormProps {
   onTogglePasswordVisibility: () => void;
@@ -21,16 +22,26 @@ interface ISignUpFormProps {
     e?: React.FormEvent<HTMLFormElement> | undefined
   ) => void;
   isValid: boolean;
+  countryValue: {
+    label: string;
+    value: string;
+  };
+  onChangeCountryValueHandler: (
+    newValue: unknown,
+    actionMeta: ActionMeta<unknown>
+  ) => void;
 }
 
 export const SignUpForm: FC<ISignUpFormProps> = (props) => {
   const {
     isShowPassword,
     isValid,
+    countryValue,
     onTogglePasswordVisibility,
     onFormHandleSubmit,
     formikMeta,
     formikProps,
+    onChangeCountryValueHandler,
   } = props;
 
   return (
@@ -45,10 +56,12 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
           formikProps={formikProps}
           isShowPassword={isShowPassword}
           onTogglePasswordVisibility={onTogglePasswordVisibility}
+          countryValue={countryValue}
+          onChangeCountryValueHandler={onChangeCountryValueHandler}
         />
       ))}
 
-      <Styled.ForgotPassword>
+      <Styled.ForgotPassword to={ROUTES.forgotPassword}>
         {STRINGS.sign_in_up.forgot_password}
       </Styled.ForgotPassword>
       <Button

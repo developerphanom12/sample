@@ -1,57 +1,128 @@
 import React from 'react';
+import { format } from 'date-fns';
+
+import { getCorrectCustomId } from 'services/utils';
 
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
-import { Icon } from 'components/Icons/Icons';
+import { StatusLabel } from 'components/StatusLabel/StatusLabel';
 
-import { TableInboxAdminItemStyles } from './TableInboxAdminItem.style';
+import { TableInboxAdminItemStyles as Styled } from './TableInboxAdminItem.style';
+import { useTableInboxAdminItemState } from './TableInboxAdminItem.state';
 
 interface TableInboxAdminProps {
+  onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onCheckedPaidHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => Promise<void>;
+  onCheckedPublishMockFuncHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   isChecked: boolean;
+  isVisited: boolean;
+  tax: number | null;
+  date: Date;
+  supplier?: string | null;
+  supplierAccount: string | null;
+  category?: string | null;
+  vatCode: string | null;
+  currency: string | null;
+  net: number | null;
+  total: number | null;
+  status: string;
+  receiptId: string;
+  receiptIndex: number;
+  customId: string;
+  publishStatus: boolean;
+  paymentStatus: boolean;
+  dateFormat: string;
 }
 
 export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
-  const { isChecked } = props;
+  const {
+    isChecked,
+    isVisited,
+    category,
+    currency,
+    date,
+    net,
+    status,
+    supplier,
+    supplierAccount,
+    total,
+    vatCode,
+    tax,
+    receiptId,
+    receiptIndex,
+    customId,
+    paymentStatus,
+    publishStatus,
+    dateFormat,
+    onCheckedPaidHandler,
+    onCheckedItemHandler,
+    onCheckedPublishMockFuncHandler,
+  } = props;
+
+  const { onReceiptDetailsClickHandler } = useTableInboxAdminItemState({
+    receiptId,
+    receiptIndex,
+  });
+
   return (
-    <TableInboxAdminItemStyles.Item>
-      <TableInboxAdminItemStyles.Checkbox>
-        <CheckboxItem isChecked={isChecked} />
-      </TableInboxAdminItemStyles.Checkbox>
-      <TableInboxAdminItemStyles.View>
-        <Icon type='showPassword' />
-      </TableInboxAdminItemStyles.View>
-      <TableInboxAdminItemStyles.Publish>
-        <Icon type='checkmark' />
-      </TableInboxAdminItemStyles.Publish>
-      <TableInboxAdminItemStyles.Date>
-        21-Feb-2022
-      </TableInboxAdminItemStyles.Date>
-      <TableInboxAdminItemStyles.Supplier>
-        Starbucks
-      </TableInboxAdminItemStyles.Supplier>
-      <TableInboxAdminItemStyles.Selector>
-        <TableInboxAdminItemStyles.SelectorMock />
-      </TableInboxAdminItemStyles.Selector>
-      <TableInboxAdminItemStyles.Selector>
-        <TableInboxAdminItemStyles.SelectorMock />
-      </TableInboxAdminItemStyles.Selector>
-      <TableInboxAdminItemStyles.Selector>
-        <TableInboxAdminItemStyles.SelectorMock />
-      </TableInboxAdminItemStyles.Selector>
-      <TableInboxAdminItemStyles.NumericCredentials>
-        GBR
-      </TableInboxAdminItemStyles.NumericCredentials>
-      <TableInboxAdminItemStyles.NumericCredentials>
-        2.33
-      </TableInboxAdminItemStyles.NumericCredentials>
-      <TableInboxAdminItemStyles.NumericCredentials>
-        0.67
-      </TableInboxAdminItemStyles.NumericCredentials>
-      <TableInboxAdminItemStyles.NumericCredentials>
-        3.00
-      </TableInboxAdminItemStyles.NumericCredentials>
-      <TableInboxAdminItemStyles.PaidCheck>
-        <CheckboxItem isChecked={isChecked} />
-      </TableInboxAdminItemStyles.PaidCheck>
-    </TableInboxAdminItemStyles.Item>
+    <Styled.Item>
+      <Styled.Checkbox>
+        <CheckboxItem
+          name={receiptId}
+          isChecked={isChecked}
+          onChange={onCheckedItemHandler}
+        />
+      </Styled.Checkbox>
+      <Styled.View id={receiptId} onClick={onReceiptDetailsClickHandler}>
+        <Styled.Link isVisited={isVisited}>
+          {getCorrectCustomId(customId)}
+        </Styled.Link>
+      </Styled.View>
+      <Styled.Selector>
+        {!!date ? format(new Date(date), dateFormat) : '---'}
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{supplierAccount || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{category || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{vatCode || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>{currency || '---'}</Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{net || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{tax || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Selector>
+        <Styled.ValueWrapper>{total || '---'}</Styled.ValueWrapper>
+      </Styled.Selector>
+      <Styled.Checkbox>
+        <CheckboxItem
+          isChecked={publishStatus}
+          onChange={onCheckedPublishMockFuncHandler}
+          name={receiptId}
+        />
+      </Styled.Checkbox>
+      <Styled.Checkbox>
+        <CheckboxItem
+          isChecked={paymentStatus}
+          onChange={onCheckedPaidHandler}
+          name={receiptId}
+        />
+      </Styled.Checkbox>
+      <Styled.Status>
+        <StatusLabel status={status as Statuses} />
+      </Styled.Status>
+    </Styled.Item>
   );
 };

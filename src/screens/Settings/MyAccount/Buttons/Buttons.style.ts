@@ -1,0 +1,13 @@
+import { styled } from 'app/theme';
+
+export const ButtonsStyles = {
+  ButtonsWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 5px;
+  `,
+  ResetPasswordButtonWrapper: styled.div`
+    width: 160px;
+  `,
+};

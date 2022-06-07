@@ -8,15 +8,16 @@ import { TableInboxItem } from './TableInboxItem/TableInboxItem';
 
 interface TableInboxProps {
   isChecked: boolean;
+  onChecked?: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const TableInbox: React.FC<TableInboxProps> = (props) => {
-  const { isChecked } = props;
+  const { isChecked, onChecked } = props;
   return (
     <>
       <TableInboxStyles.Head>
         <TableInboxStyles.StaticBlock>
-          <TableInboxStyles.Checkbox>
+          <TableInboxStyles.Checkbox onChange={onChecked}>
             <CheckboxItem isChecked={isChecked} />
           </TableInboxStyles.Checkbox>
           <TableInboxStyles.View>View</TableInboxStyles.View>

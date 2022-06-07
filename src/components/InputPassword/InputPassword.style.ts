@@ -14,7 +14,8 @@ export const Styled = {
     background-color: ${(props) => props.theme.colors.white};
     font-size: ${(props) => props.theme.size.normal};
     padding: 10px 40px 10px 10px;
-    height: 45px;
+    max-height: 45px;
+    min-height: 35px;
     width: 100%;
     border-radius: 5px;
     border: ${({ isError, theme }) =>
@@ -22,13 +23,18 @@ export const Styled = {
         ? `1px solid ${theme.colors.red}`
         : `1px solid ${theme.colors.opacityBlack}`};
     box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
+    &::-webkit-contacts-auto-fill-button,
+    ::-webkit-credentials-auto-fill-button {
+      visibility: hidden;
+      position: absolute;
+      right: 0;
+    }
   `,
   Button: styled.div`
     display: flex;
     background-color: transparent;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 12px;
     right: 13px;
     cursor: pointer;
   `,

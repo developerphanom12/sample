@@ -1,4 +1,4 @@
-import { styled } from "app/theme";
+import { styled } from 'app/theme';
 
 export const AvatarStyles = {
   Wrapper: styled.div`

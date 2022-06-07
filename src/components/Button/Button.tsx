@@ -3,14 +3,16 @@ import React from 'react';
 import { Icon } from 'components/Icons/Icons';
 
 import { ButtonStyles } from './Button.style';
+import { LoaderComponent } from '../Loader';
 
 export type ButtonStyleProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   isDisabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
+  isLoading?: boolean;
   themedButton: 'primary' | 'secondary' | 'capium';
-  width: 'auth' | 'primary' | 'secondary';
+  width: 'auth' | 'primary' | 'secondary' | 'actions';
 };
 
 export const Button = ({
@@ -20,6 +22,7 @@ export const Button = ({
   onClick,
   type,
   isDisabled,
+  isLoading,
 }: ButtonStyleProps) => {
   return (
     <ButtonStyles.Button
@@ -32,7 +35,10 @@ export const Button = ({
       <ButtonStyles.Content>
         {themedButton === 'capium' && <Icon type="capiumLogo" />}
       </ButtonStyles.Content>
-      <ButtonStyles.Content>{children}</ButtonStyles.Content>
+      {width === 'actions' && <Icon type="threeDots" />}
+      <ButtonStyles.Content>
+        {isLoading ? <LoaderComponent /> : children}
+      </ButtonStyles.Content>
     </ButtonStyles.Button>
   );
 };

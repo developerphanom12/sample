@@ -7,14 +7,14 @@ export const TableMasterItemStyles = {
     border-left: solid 1px ${(props) => props.theme.colors.gray};
     border-right: solid 1px ${(props) => props.theme.colors.gray};
     border-bottom: solid 1px ${(props) => props.theme.colors.gray};
-    height: 50px;
+    min-height: 50px;
+    max-height: fit-content;
     width: 100%;
     padding-left: 22px;
   `,
   Action: styled.div`
     display: flex;
     align-items: center;
-
     width: 160px;
   `,
   ActionButton: styled.div`
@@ -32,5 +32,11 @@ export const TableMasterItemStyles = {
     display: flex;
     align-items: center;
     width: 180px;
+  `,
+  NameWrapper: styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   `,
 };

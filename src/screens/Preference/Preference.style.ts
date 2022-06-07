@@ -8,12 +8,29 @@ export const PreferenceStyles = {
   Section: styled.section`
     display: flex;
     width: 100%;
+    height: 100vh;
   `,
   RightSideContentWrapper: styled.div`
     display: flex;
+    overflow-y: scroll;
     flex-direction: column;
-    padding: 174px 151px 0 69px;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 10px 20px 50px;
     width: 100%;
+    @media (max-width: 768px) {
+      padding: 15px;
+      align-items: center;
+    }
+  `,
+  EmptyDiv: styled.div`
+    max-height: 230px;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    @media (max-width: 768px) {
+      display: none;
+    }
   `,
   SubTitle: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
@@ -21,24 +38,29 @@ export const PreferenceStyles = {
     color: ${(props) => props.theme.colors.black};
     margin-bottom: ${(props) => props.theme.size.small};
   `,
-  Title: styled.p`
+  TitleWrapper: styled.div`
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+  `,
+  Title: styled.h1`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.title};
     color: ${(props) => props.theme.colors.orange};
     padding-bottom: 7px;
-  `,
-  TitleWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    max-width: 257px;
+    position: relative;
     margin-bottom: 38px;
-  `,
-  Line: styled.div`
-    height: 2px;
-    background: ${({ theme }) => theme.colors.orange};
-    border-radius: 10px;
-    width: 100%;
+    &::before {
+      ${({ theme }) =>
+        `
+        position: absolute;
+        content: '';
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background: ${theme.colors.orange};
+        border-radius: 10px;`}
+    }
   `,
   Form: styled.form`
     max-width: 500px;

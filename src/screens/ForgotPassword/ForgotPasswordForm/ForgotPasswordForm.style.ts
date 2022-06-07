@@ -6,12 +6,17 @@ export const ForgotPasswordFormStyles = {
     width: 100%;
   `,
   Description: styled.p`
-    position: absolute;
     bottom: -18px;
     left: 0;
+    position: absolute;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.biggerSmall};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    line-height: 1.3;
   `,
   InputWrapper: styled.div`
     position: relative;

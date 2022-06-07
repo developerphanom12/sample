@@ -42,7 +42,12 @@ export const ForgotPasswordForm: FC<IForgotPasswordFormProps> = (props) => {
         )}
       </Styled.InputWrapper>
       <Styled.ButtonWrapper>
-        <Button isDisabled={!isValid} themedButton={'primary'} width={'auth'}>
+        <Button
+          isDisabled={!isValid}
+          type="submit"
+          themedButton="primary"
+          width="auth"
+        >
           {FORGOT_PASSWORD_STRINGS.buttonText}
         </Button>
       </Styled.ButtonWrapper>

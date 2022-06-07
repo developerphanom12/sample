@@ -22,4 +22,15 @@ export const TableMasterStyles = {
     align-items: center;
     width: 180px;
   `,
+  EmptyContentWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.colors.white};
+    border-left: solid 1px ${(props) => props.theme.colors.gray};
+    border-right: solid 1px ${(props) => props.theme.colors.gray};
+    border-bottom: solid 1px ${(props) => props.theme.colors.gray};
+    min-height: 50px;
+    width: 100%;
+  `,
 };

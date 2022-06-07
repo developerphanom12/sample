@@ -15,10 +15,25 @@ import { ReactComponent as checkbox } from '../../assets/icons/checkbox.svg';
 import { ReactComponent as infoIcon } from '../../assets/icons/info-icon.svg';
 import { ReactComponent as accountIcon } from '../../assets/icons/account-icon.svg';
 import { ReactComponent as edit } from '../../assets/icons/edit.svg';
-import { ReactComponent as remove } from '../../assets/icons/remove.svg';
 import { ReactComponent as hidePassword } from '../../assets/icons/hide-password.svg';
+import { ReactComponent as remove } from '../../assets/icons/remove.svg';
+import { ReactComponent as accepted } from '../../assets/icons/approved.svg';
+import { ReactComponent as awaitingApproval } from '../../assets/icons/awaiting-approval.svg';
+import { ReactComponent as completed } from '../../assets/icons/completed.svg';
+import { ReactComponent as rejected } from '../../assets/icons/decline.svg';
+import { ReactComponent as metric } from '../../assets/icons/metric.svg';
+import { ReactComponent as processing } from '../../assets/icons/processing.svg';
+import { ReactComponent as review } from '../../assets/icons/review.svg';
+import { ReactComponent as shadowedMetric } from '../../assets/icons/shadowed-metric.svg';
+import { ReactComponent as settingsAvatar } from '../../assets/icons/settings-avatar.svg';
+import { ReactComponent as deletePhotoIcon } from '../../assets/icons/delete-photo-icon.svg';
+import { ReactComponent as threeDots } from '../../assets/icons/three-dots.svg';
+import { ReactComponent as receiptHubLogo } from '../../assets/icons/receiptHub-logo.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
+  receiptHubLogo,
+  deletePhotoIcon,
+  settingsAvatar,
   accountIcon,
   hidePassword,
   infoIcon,
@@ -37,10 +52,18 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   checkbox,
   edit,
   remove,
+  accepted,
+  awaitingApproval,
+  completed,
+  rejected,
+  metric,
+  processing,
+  review,
+  shadowedMetric,
+  threeDots,
 };
 
 export const Icon = (props: {
-  type: string;
   className?: string;
   fill?: string;
   width?: number | string;
@@ -50,6 +73,7 @@ export const Icon = (props: {
   borderRadius?: number | string;
   key?: string;
   id?: string;
+  type: string;
 }) => {
   const NewIcon = ICONS[props.type];
   if (!NewIcon) {

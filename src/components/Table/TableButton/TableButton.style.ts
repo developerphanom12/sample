@@ -13,10 +13,11 @@ export const TableButtonStyles = {
     background-color: transparent;
     font-size: ${(props) => props.theme.size.default};
     font-family: ${(props) => props.theme.font.openSans};
+    cursor: default;
   `,
   Content: styled.div`
     &:not(:last-child) {
-      margin-right: 7px;
+      margin-right: 5px;
     }
   `,
 };

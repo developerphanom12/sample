@@ -1,30 +1,56 @@
 import { FC } from 'react';
-import { ActionMeta } from 'react-select';
+import { ActionMeta, SingleValue, OnChangeValue } from 'react-select';
 
 import { DropdownIndicator } from './DropdownIndicator';
-import { StyledReactSelect } from './CustomSelect.style';
+import { StyledReactSelect, SelectWrapper } from './CustomSelect.style';
 
-import { IOption } from './types';
+import { IOption, IsMulti } from './types';
 
 interface ICustomSelectProps {
-  onChangeValueHandler: (
-    newValue: unknown,
-    actionMeta: ActionMeta<unknown>
+  name?: string;
+  onChangeValueHandler?: (
+    newValue: OnChangeValue<IOption, IsMulti> | unknown,
+    actionMeta: ActionMeta<IOption | unknown>
   ) => void;
-  defaultOption: IOption | unknown;
-  options: IOption[];
+  marginBottom?: string;
+  value?: SingleValue<IOption>;
+  height?: string;
+  defaultOption?: IOption;
+  options?: IOption[];
+  paginate?: boolean;
+  isDisabled?: boolean;
 }
 
 export const CustomSelect: FC<ICustomSelectProps> = (props) => {
-  const { onChangeValueHandler, defaultOption, options } = props;
+  const {
+    onChangeValueHandler,
+    defaultOption,
+    options,
+    value,
+    marginBottom,
+    height,
+    paginate,
+    name,
+    isDisabled,
+  } = props;
 
   return (
-    <StyledReactSelect
-      components={{ DropdownIndicator }}
-      classNamePrefix="Select"
-      options={options}
-      defaultValue={defaultOption}
-      onChange={onChangeValueHandler}
-    />
+    <SelectWrapper>
+      <StyledReactSelect
+        height={height}
+        marginBottom={marginBottom}
+        components={{ DropdownIndicator }}
+        classNamePrefix="Select"
+        options={options}
+        defaultValue={defaultOption}
+        value={value}
+        onChange={onChangeValueHandler}
+        paginate={paginate}
+        name={name}
+        menuPlacement="auto"
+        isDisabled={isDisabled}
+        placeholder={isDisabled && 'Nothing for select'}
+      />
+    </SelectWrapper>
   );
 };
