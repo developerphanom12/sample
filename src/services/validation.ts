@@ -72,7 +72,10 @@ export const subjectValidation = Yup.string()
 export const myAccountValidationScheme = Yup.object().shape({
   fullName: nameValidation,
   email: emailValidation,
-  currentPassword: currentPasswordValidation,
+});
+
+export const resetPasswordValidationScheme = Yup.object().shape({
+  currentPassword: resetCurrentPasswordValidation,
   newPassword: passwordValidation,
   confirmPassword: confirmPasswordValidation,
 });
