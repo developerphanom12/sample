@@ -39,7 +39,7 @@ jobs:
         echo "ECR_REPOSITORY=rh-web-stage-repo" >> $GITHUB_ENV
         echo "ECS_SERVICE=rh-web-stage-service" >> $GITHUB_ENV
         echo "ECS_CLUSTER=rh-web-stage-cluster" >> $GITHUB_ENV
-        echo "CONTAINER_NAME=rh-web-stage-containerr" >> $GITHUB_ENV
+        echo "CONTAINER_NAME=rh-web-stage-container" >> $GITHUB_ENV
         echo "ECS_TASK_DEFINITION=deploy/task-definition-stage.json" >> $GITHUB_ENV
 
     - name: Create env file
