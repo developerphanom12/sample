@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActionMeta } from 'react-select';
 import { useNavigate } from 'react-router-dom';
@@ -154,6 +154,12 @@ export const usePhotoDetailsContentState = () => {
     onChangeStateFieldHandler('radioButtonValue', event.target.value);
   };
 
+  const onForbiddenCharacterClick = (event: React.KeyboardEvent) => {
+    if (event.key === '-' || event.key === 'e' || event.key === '+') {
+      event.preventDefault();
+    }
+  };
+
   const onChangeCategoryFieldHandler = (
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
@@ -181,11 +187,17 @@ export const usePhotoDetailsContentState = () => {
 
   const onChangeTaxFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('taxValue', event.target.value);
+  ) => {
+    if (event.target.value.length > 8) return;
+    onChangeStateFieldHandler('taxValue', event.target.value);
+  };
 
   const onChangeVatCodeFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('vatCodeValue', event.target.value);
+  ) => {
+    if (event.target.value.length > 15) return;
+    onChangeStateFieldHandler('vatCodeValue', event.target.value);
+  };
 
   const onChangeNetFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -313,5 +325,6 @@ export const usePhotoDetailsContentState = () => {
     onCancelButtonClickHandler,
     onSaveButtonClickHandler,
     onGetAllMasterItemsHandler,
+    onForbiddenCharacterClick,
   };
 };

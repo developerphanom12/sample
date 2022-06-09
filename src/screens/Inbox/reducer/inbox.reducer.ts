@@ -63,6 +63,17 @@ export const InboxSlice = createSlice({
         receipt.id === action.payload.id ? action.payload : receipt
       );
     },
+    selectReceiptWithId: (
+      state: IINBOX_INITIAL_STATE,
+      action: PayloadAction<string>
+    ) => {
+      const activeIndex = state.receipts.findIndex(
+        (item) => item.id === action.payload
+      );
+      state.selectedReceiptIndex = activeIndex;
+      state.selectedReceipt =
+        state.receipts.find((item, index) => index === activeIndex) || null;
+    },
     selectReceipt: (
       state: IINBOX_INITIAL_STATE,
       action: PayloadAction<number>
@@ -83,6 +94,7 @@ export const InboxSlice = createSlice({
 export const {
   setReceipts,
   selectReceipt,
+  selectReceiptWithId,
   setIsFetchingDate,
   updateReceipt,
   setCheckedItem,

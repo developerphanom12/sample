@@ -26,4 +26,9 @@ export const ReceiptsItemStyles = {
     color: ${({ theme }) => theme.colors.black};
     padding-top: 10px;
   `,
+  Link: styled.a`
+    color: ${(props) => props.theme.colors.blue};
+    text-decoration: underline;
+    margin-right: 3px;
+  `,
 };

@@ -4,15 +4,26 @@ import { ReceiptsItem } from '../ReceiptsItem/ReceiptsItem';
 import { IReceiptsItemsListProps } from '../types/receiptItem.types';
 
 export const ReceiptsItemsList: React.FC<IReceiptsItemsListProps> = (props) => {
-  const { date, status, supplier, total, currency, dateFormat } = props;
+  const {
+    date,
+    status,
+    customId,
+    total,
+    currency,
+    dateFormat,
+    receiptId,
+    receiptIndex,
+  } = props;
   return (
     <ReceiptsItem
       currency={currency}
       date={date}
       status={status}
-      supplier={supplier}
+      customId={customId}
       total={total}
       dateFormat={dateFormat}
+      receiptId={receiptId}
+      receiptIndex={receiptIndex}
     />
   );
 };

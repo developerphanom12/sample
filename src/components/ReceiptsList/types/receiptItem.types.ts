@@ -1,10 +1,12 @@
 export interface IReceiptsItemsListProps {
-  supplier?: string | null;
+  customId: string;
   total: number | null;
   date: Date;
   status: TStatuses;
   currency: string | null;
   dateFormat: string;
+  receiptId: string;
+  receiptIndex: number;
 }
 
 export interface IReceiptsItemProps extends IReceiptsItemsListProps {

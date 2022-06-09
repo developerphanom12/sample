@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { styled } from 'app/theme';
 
 export const HeaderStyles = {
@@ -25,6 +27,7 @@ export const HeaderStyles = {
     justify-content: center;
     align-items: center;
     margin-left: 18px;
+    height: 100%;
   `,
   Title: styled.h1`
     color: ${(props) => props.theme.colors.white};
@@ -52,4 +55,5 @@ export const HeaderStyles = {
   Notifications: styled.div`
     display: flex;
   `,
+  Link: styled(Link)``,
 };

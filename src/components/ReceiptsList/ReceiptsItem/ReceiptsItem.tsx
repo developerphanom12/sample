@@ -1,20 +1,41 @@
 import React from 'react';
 
-import { getFormattedDate } from 'services/utils';
+import { getCorrectCustomId, getFormattedDate } from 'services/utils';
 
 import { ReceiptsItemStyles } from './ReceiptsItem.style';
 import { StatusLabel } from '../../StatusLabel/StatusLabel';
 import { IReceiptsItemProps } from '../types';
+import { useReceiptsItemState } from './ReceiptsItem.state';
 
 export const ReceiptsItem: React.FC<IReceiptsItemProps> = (props) => {
-  const { onItemClick, dateFormat, date, status, supplier, total, currency } =
-    props;
+  const {
+    onItemClick,
+    dateFormat,
+    date,
+    status,
+    customId,
+    total,
+    currency,
+    receiptId,
+    receiptIndex,
+  } = props;
+
+  const { onReceiptDetailsClickHandler } = useReceiptsItemState({
+    receiptId,
+  });
+
+  console.log(receiptIndex);
 
   return (
     <ReceiptsItemStyles.Wrapper onClick={onItemClick}>
       <ReceiptsItemStyles.PaymentBlock>
-        <ReceiptsItemStyles.SupplierItem>
-          {supplier || '---'}
+        <ReceiptsItemStyles.SupplierItem
+          id={receiptId}
+          onClick={onReceiptDetailsClickHandler}
+        >
+          <ReceiptsItemStyles.Link>
+            {getCorrectCustomId(customId) || '---'}
+          </ReceiptsItemStyles.Link>
         </ReceiptsItemStyles.SupplierItem>
         <ReceiptsItemStyles.Item>{`${currency || '---'} ${
           total || '---'

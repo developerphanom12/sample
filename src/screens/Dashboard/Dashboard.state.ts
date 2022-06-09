@@ -23,6 +23,7 @@ interface IuseDashboardState {
   };
   isLoading: boolean;
   isContentLoading: boolean;
+  isVisited: boolean;
 }
 
 export const useDashboardState = () => {
@@ -45,6 +46,7 @@ export const useDashboardState = () => {
     timeFilterValue: timeFilterOptions[0],
     isLoading: false,
     isContentLoading: false,
+    isVisited: false,
   };
   const totalReceiptCount =
     Number(metric?.accepted) +

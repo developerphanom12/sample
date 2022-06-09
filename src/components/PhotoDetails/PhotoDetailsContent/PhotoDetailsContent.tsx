@@ -27,6 +27,7 @@ export const PhotoDetailsContent: FC = () => {
     onSaveButtonClickHandler,
     onCancelButtonClickHandler,
     onGetAllMasterItemsHandler,
+    onForbiddenCharacterClick,
   } = usePhotoDetailsContentState();
 
   useEffect(() => {
@@ -78,6 +79,16 @@ export const PhotoDetailsContent: FC = () => {
                 onChangeValueHandler={item.onChangeSelect}
                 marginBottom="0px"
                 isDisabled={item.isDisabled}
+              />
+            ) : item.inputType === 'number' ? (
+              <Input
+                value={item.value as string}
+                inputType={item.inputType}
+                onChangeValue={item.onChange}
+                isTextArea={item.isTextArea}
+                isHiddenLabel
+                isNoMargin
+                onKeyDown={onForbiddenCharacterClick}
               />
             ) : item.type === 'input' ? (
               <Input

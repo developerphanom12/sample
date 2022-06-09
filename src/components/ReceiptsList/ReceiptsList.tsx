@@ -30,6 +30,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
     countPerTimeFilter,
     dateFormat,
     isContentLoading,
+
     onChangeCategoryFieldHandler,
   } = props;
 
@@ -44,15 +45,17 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
         <LoaderComponent theme="preview" />
       ) : countPerTimeFilter ? (
         <Styled.ItemWrapper>
-          {lastReceipts?.map((receipt) => (
+          {lastReceipts?.map((receipt, index) => (
             <ReceiptsItemsList
               key={receipt.id}
               date={receipt.receipt_date}
               status={receipt.status as Statuses}
-              supplier={receipt.supplier?.name}
+              customId={receipt.custom_id}
               total={receipt.total}
               currency={receipt.currency?.value}
               dateFormat={dateFormat}
+              receiptId={receipt.id}
+              receiptIndex={index}
             />
           ))}
         </Styled.ItemWrapper>

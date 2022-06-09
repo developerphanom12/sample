@@ -1,12 +1,14 @@
 import { FC } from 'react';
 
-import { HeaderStyles as Styled } from './Header.style';
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { Notification } from 'components/Notification/Notification';
 import { Avatar } from 'components/Avatar/Avatar';
 
-import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
+import { HeaderStyles as Styled } from './Header.style';
 import { Icon } from '../Icons';
+
+import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
+import { ROUTES } from 'constants/routes';
 
 export interface HeaderProps {
   role: 'admin' | 'customer';
@@ -17,13 +19,14 @@ export const Header: FC<HeaderProps> = (props) => {
   return (
     <Styled.Header>
       <Styled.Container>
-        <Styled.LogoWrapper>
-          <Styled.LogoIconWrapper>
-            <Icon type="receiptHubLogo" />
-          </Styled.LogoIconWrapper>
-          <Styled.Title>ReceiptHub</Styled.Title>
-        </Styled.LogoWrapper>
-
+        <Styled.Link to={ROUTES.home}>
+          <Styled.LogoWrapper>
+            <Styled.LogoIconWrapper>
+              <Icon type="receiptHubLogo" />
+            </Styled.LogoIconWrapper>
+            <Styled.Title>ReceiptHub</Styled.Title>
+          </Styled.LogoWrapper>
+        </Styled.Link>
         <Styled.BlocksWrapper>
           <Styled.Links>
             <Styled.LinkWrapper>
@@ -46,8 +49,9 @@ export const Header: FC<HeaderProps> = (props) => {
             </Styled.LinkWrapper>
           </Styled.Links>
           <Styled.Notifications>
-            <Notification />
-            <Avatar />
+            <Styled.Link to={ROUTES.settings}>
+              <Avatar />
+            </Styled.Link>
           </Styled.Notifications>
         </Styled.BlocksWrapper>
       </Styled.Container>
