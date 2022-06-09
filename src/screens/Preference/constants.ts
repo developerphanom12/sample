@@ -5,3 +5,6 @@ export const STRINGS = {
   buttonText: 'Continue',
 };
 
+export const formikInitialValues = {
+  companyName: '',
+};

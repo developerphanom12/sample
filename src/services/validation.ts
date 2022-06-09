@@ -59,6 +59,16 @@ export const nameValidation = Yup.string()
   .min(3, 'Full name must be at least 3 characters')
   .required('Full name is a required field');
 
+export const companyNameValidation = Yup.string()
+  .trim()
+  .matches(
+    /^[A-Za-z ]*$/,
+    'Company Name must be at least 3 characters and contains only latin letters'
+  )
+  .max(30)
+  .min(3, 'Company Name must be at least 3 characters')
+  .required('Company Name is a required field');
+
 export const subjectValidation = Yup.string()
   .trim()
   .matches(
@@ -68,6 +78,10 @@ export const subjectValidation = Yup.string()
   .max(40)
   .min(3, 'subject must be at least 3 characters')
   .required('Subject is a required field');
+
+export const companyNameValidationScheme = Yup.object().shape({
+  companyName: companyNameValidation,
+});
 
 export const myAccountValidationScheme = Yup.object().shape({
   fullName: nameValidation,

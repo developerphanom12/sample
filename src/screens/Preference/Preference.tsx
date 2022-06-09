@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { CustomSelect } from 'components/CustomSelect';
 import { Button } from 'components/Button/Button';
+import { Input } from 'components/Input';
 
 import { PreferenceStyles as Styled } from './Preference.style';
 import { usePreferenceState } from './Preference.state';
@@ -14,7 +15,9 @@ export const Preference: FC = () => {
   const {
     onChangeCurrencyHandler,
     onChangeDateFormatHandler,
-    onContinueButtonClickHandler,
+    isLoading,
+    isDisabledButton,
+    formik,
     formatedCurrencies,
     selectedCurrencyValue,
     selectedFormatDate,
@@ -29,22 +32,35 @@ export const Preference: FC = () => {
           <Styled.TitleWrapper>
             <Styled.Title>{STRINGS.preferenceTitle}</Styled.Title>
           </Styled.TitleWrapper>
-          <Styled.Form onSubmit={onContinueButtonClickHandler}>
+          <Styled.Form onSubmit={formik.handleSubmit}>
+            <Input
+              errorText={formik.errors.companyName}
+              touched={formik.touched.companyName}
+              value={formik.values.companyName}
+              inputName="companyName"
+              text="Company Name"
+              onChangeValue={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
             <Styled.SubTitle>{STRINGS.currency}</Styled.SubTitle>
             <CustomSelect
               options={formatedCurrencies}
               onChangeValueHandler={onChangeCurrencyHandler}
               value={selectedCurrencyValue}
             />
-
             <Styled.SubTitle>{STRINGS.dateFormat}</Styled.SubTitle>
             <CustomSelect
               options={DATE_FORMATS}
               onChangeValueHandler={onChangeDateFormatHandler}
               value={selectedFormatDate}
             />
-
-            <Button themedButton="primary" width="auth" type="submit">
+            <Button
+              themedButton="primary"
+              width="auth"
+              type="submit"
+              isDisabled={isDisabledButton}
+              isLoading={isLoading}
+            >
               {STRINGS.buttonText}
             </Button>
           </Styled.Form>

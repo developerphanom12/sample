@@ -1,7 +1,7 @@
 import { apiServices } from 'services/api-service';
 
 export const userInfoCreate = (payload: {
-  name?: string;
+  name: string;
   currency: string;
   date_format: string;
 }) => {
