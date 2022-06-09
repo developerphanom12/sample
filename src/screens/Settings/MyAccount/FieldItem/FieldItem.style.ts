@@ -21,8 +21,5 @@ export const FieldItemStyles = {
     &:last-child {
       margin-bottom: 0;
     }
-    @media (max-width: 1445px) {
-      margin-right: 0;
-    }
   `,
 };

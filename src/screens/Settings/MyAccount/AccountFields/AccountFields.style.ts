@@ -3,11 +3,16 @@ import { styled } from 'app/theme';
 export const AccountFieldsStyle = {
   FieldsWrapper: styled.div`
     display: flex;
-    flex-wrap: wrap;
-    padding: 0 0 30px;
-    @media (max-width: 1445px) {
-      padding-bottom: 27px;
+    &:first-child {
+      padding-right: 50px;
     }
+    width: 100%;
+    flex-direction: column;
+  `,
+  FieldsBlockWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 30px;
   `,
   ResetFieldsWrapper: styled.div`
     display: flex;

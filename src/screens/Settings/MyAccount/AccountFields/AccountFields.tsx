@@ -24,6 +24,7 @@ export const AccountFields: FC<IAccountFieldsProps> = (props) => {
     resetPasswordFormikMeta,
     resetPasswordFormikProps,
   } = props;
+
   return (
     <>
       {isResetPassword ? (
@@ -42,21 +43,38 @@ export const AccountFields: FC<IAccountFieldsProps> = (props) => {
           ))}
         </Styled.ResetPasswordFiledsWrapper>
       ) : (
-        <Styled.FieldsWrapper>
-          {accountsFields.map((item) => (
-            <FieldItem
-              selectValue={item?.value}
-              key={item.label}
-              onChangeSelectHandler={item.onChangeSelect}
-              inputName={item.name}
-              inputType={item.type}
-              labelText={item.label}
-              selectOptions={item.options}
-              formikMeta={formikMeta}
-              formikProps={formikProps}
-            />
-          ))}
-        </Styled.FieldsWrapper>
+        <Styled.FieldsBlockWrapper>
+          <Styled.FieldsWrapper>
+            {accountsFields.slice(0, 3).map((item) => (
+              <FieldItem
+                selectValue={item?.value}
+                key={item.label}
+                onChangeSelectHandler={item.onChangeSelect}
+                inputName={item.name}
+                inputType={item.type}
+                labelText={item.label}
+                selectOptions={item.options}
+                formikMeta={formikMeta}
+                formikProps={formikProps}
+              />
+            ))}
+          </Styled.FieldsWrapper>
+          <Styled.FieldsWrapper>
+            {accountsFields.slice(3).map((item) => (
+              <FieldItem
+                selectValue={item?.value}
+                key={item.label}
+                onChangeSelectHandler={item.onChangeSelect}
+                inputName={item.name}
+                inputType={item.type}
+                labelText={item.label}
+                selectOptions={item.options}
+                formikMeta={formikMeta}
+                formikProps={formikProps}
+              />
+            ))}
+          </Styled.FieldsWrapper>
+        </Styled.FieldsBlockWrapper>
       )}
     </>
   );

@@ -10,7 +10,6 @@ import {
   getTodayDateRange,
   getYesterdayDateRange,
 } from 'services/utils';
-import { ROUTES } from 'constants/routes';
 
 import { setFiles } from '../FilesUploadPreview/reducer';
 import { getReceiptStatistic } from './dashboard.api';
@@ -87,7 +86,6 @@ export const useDashboardState = () => {
         isContentLoading: isTimeFilter ? true : false,
       }));
       const { data } = await getReceiptStatistic(timeFrames);
-
       dispatch(setStatistic(data));
       setState((prevState) => ({
         ...prevState,
@@ -100,7 +98,7 @@ export const useDashboardState = () => {
     }
   };
 
-  const lastReceipts = receipts?.data.slice(-4);
+  const lastReceipts = receipts?.data.slice(-5);
 
   const onChangeStateFieldHandler = (optionName: string, value: any) =>
     setState((prevState) => ({

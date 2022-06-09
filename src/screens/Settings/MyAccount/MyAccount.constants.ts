@@ -19,25 +19,9 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       name: 'fullName',
     },
     {
-      type: 'select',
-      name: 'select',
-      label: 'Currency',
-      value: state.currency,
-      options: formatedCurrencies,
-      onChangeSelect: funcArray[0],
-    },
-    {
       type: 'input',
       label: 'Email',
       name: 'email',
-    },
-    {
-      type: 'select',
-      name: 'dateFormat',
-      label: 'Date Format',
-      value: state.dateFormat,
-      options: dateFormats,
-      onChangeSelect: funcArray[1],
     },
     {
       type: 'select',
@@ -46,6 +30,22 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       value: state.country,
       options: countries,
       onChangeSelect: funcArray[2],
+    },
+    {
+      type: 'select',
+      name: 'select',
+      label: 'Currency',
+      value: state.currency,
+      options: formatedCurrencies,
+      onChangeSelect: funcArray[0],
+    },
+    {
+      type: 'select',
+      name: 'dateFormat',
+      label: 'Date Format',
+      value: state.dateFormat,
+      options: dateFormats,
+      onChangeSelect: funcArray[1],
     },
   ];
 };

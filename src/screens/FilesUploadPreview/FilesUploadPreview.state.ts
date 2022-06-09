@@ -18,6 +18,8 @@ export const useFilesUploadPreviewState = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const onNavigateToInboxPage = () => navigate(ROUTES.inbox);
+
   const { from } = location.state as LocationState;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -61,6 +63,7 @@ export const useFilesUploadPreviewState = () => {
     previewFiles,
     filesArray,
     isLoading,
+    onNavigateToInboxPage,
     onGoBackHandler,
     onCancelClickHandler,
     onSaveClickHandler,

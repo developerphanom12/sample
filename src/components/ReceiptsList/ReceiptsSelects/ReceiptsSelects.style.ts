@@ -7,7 +7,7 @@ export const ReceiptsSelectsStyles = {
   SelectorWrapper: styled.div`
     display: flex;
     justify-content: end;
-    margin-bottom: 49px;
+    margin-bottom: 45px;
   `,
   SelectorTitle: styled.p`
     font-size: ${({ theme }) => theme.size.default};

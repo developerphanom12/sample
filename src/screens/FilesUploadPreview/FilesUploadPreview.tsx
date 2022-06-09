@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { Button } from 'components/Button';
 import { ReceiptDetailsHeader } from 'components/ReceiptDetailsHeader';
@@ -10,11 +10,17 @@ import { FilesUploadPreviewStyles as Styled } from './FilesUploadPreview.style';
 export const FilesUploadPreview: FC = () => {
   const {
     previewFiles,
+    filesArray,
     isLoading,
+    onNavigateToInboxPage,
     onGoBackHandler,
     onCancelClickHandler,
     onSaveClickHandler,
   } = useFilesUploadPreviewState();
+
+  useEffect(() => {
+    !filesArray[0]?.name && onNavigateToInboxPage();
+  }, []);
 
   return (
     <Styled.LayoutWrapper>
