@@ -77,7 +77,6 @@ export const Input: React.FC<InputProps> = (props) => {
               onChange={onChangeValue}
               onKeyDown={onKeyDown}
               placeholder={placeHolder}
-              maxLength={8}
             />
           )}
         </>

@@ -24,8 +24,6 @@ export const ReceiptsItem: React.FC<IReceiptsItemProps> = (props) => {
     receiptId,
   });
 
-  console.log(receiptIndex);
-
   return (
     <ReceiptsItemStyles.Wrapper onClick={onItemClick}>
       <ReceiptsItemStyles.PaymentBlock>
