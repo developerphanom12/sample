@@ -136,7 +136,7 @@ export const TypesTab: FC = () => {
           pages={pages}
           receiptsPerPage={itemsPerPage}
           searchValue={searchValue}
-          tabName="Supplier"
+          tabName="Type"
           onBlurHandler={onBlurHandler}
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}

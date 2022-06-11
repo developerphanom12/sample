@@ -5,6 +5,7 @@ import { Notification } from 'components/Notification/Notification';
 import { Avatar } from 'components/Avatar/Avatar';
 
 import { HeaderStyles as Styled } from './Header.style';
+import { CompanySwitcher } from '../CompanySwitcher/CompanySwitcher';
 import { Icon } from '../Icons';
 
 import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
@@ -49,6 +50,7 @@ export const Header: FC<HeaderProps> = (props) => {
             </Styled.LinkWrapper>
           </Styled.Links>
           <Styled.Notifications>
+            <CompanySwitcher />
             <Styled.Link to={ROUTES.settings}>
               <Avatar />
             </Styled.Link>

@@ -29,6 +29,7 @@ import { ReactComponent as settingsAvatar } from '../../assets/icons/settings-av
 import { ReactComponent as deletePhotoIcon } from '../../assets/icons/delete-photo-icon.svg';
 import { ReactComponent as threeDots } from '../../assets/icons/three-dots.svg';
 import { ReactComponent as receiptHubLogo } from '../../assets/icons/receiptHub-logo.svg';
+import { ReactComponent as active } from '../../assets/icons/active.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   receiptHubLogo,
@@ -61,6 +62,7 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   review,
   shadowedMetric,
   threeDots,
+  active,
 };
 
 export const Icon = (props: {

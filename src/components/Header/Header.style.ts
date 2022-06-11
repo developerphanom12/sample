@@ -54,6 +54,7 @@ export const HeaderStyles = {
   `,
   Notifications: styled.div`
     display: flex;
+    align-items: center;
   `,
   Link: styled(Link)``,
 };

@@ -1,20 +1,24 @@
 import React from 'react';
 
 import { CompanySwitcherMenuStyles as Styled } from './CompanySwitcherMenu.style';
+import { CompanySwitcherMenuItem } from './CompanySwitcherMenuItem';
 
-import { MOCKED_COMPANIES_LIST } from './CompanyMock.constants';
+import { MOCKED_COMPANIES_LIST } from '../CompanySwitcher/CompanyMock.constants';
 
-export interface ICompanySwitcherMenuMenu {
+export interface ICompanySwitcherMenu {
   isLoading?: boolean;
-  onClick?: () => void;
+  isActive?: boolean;
 }
 
-export const CompanySwitcherMenuMenu = (props: ICompanySwitcherMenuMenu) => {
-  const { isLoading, onClick } = props;
+export const CompanySwitcherMenu = (props: ICompanySwitcherMenu) => {
+  const { isLoading } = props;
   return (
     <Styled.Wrapper>
       {MOCKED_COMPANIES_LIST.map((item) => (
-        <Styled.Item onClick={onClick}>{item.name}</Styled.Item>
+        <CompanySwitcherMenuItem>
+          {item.name}
+          {item.logo}
+        </CompanySwitcherMenuItem>
       ))}
     </Styled.Wrapper>
   );

@@ -12,7 +12,7 @@ export const RadioButton: FC<IRadioButtonProps> = (props) => {
   const { labelText, isChecked, value, onChange } = props;
   return (
     <Styled.RadioButtonLabel>
-      <Styled.RadioButtonWrapper>
+      <Styled.RadioButtonWrapper isChecked={isChecked}>
         <Styled.HiddenRadioButtonInput
           onChange={onChange}
           value={value}

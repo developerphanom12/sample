@@ -1,11 +1,15 @@
 import { styled } from 'app/theme';
 
 export const RadioButtonStyles = {
-  RadioButtonWrapper: styled.div`
+  RadioButtonWrapper: styled.div<{ isChecked: boolean }>`
     display: flex;
     align-items: center;
     height: 18px;
     width: 18px;
+    border-radius: 50%;
+    border: solid 2px
+      ${(props) =>
+        props.isChecked ? props.theme.colors.orange : props.theme.colors.black};
   `,
   StyledRadioButton: styled.div<{ isChecked: boolean }>`
     width: 100%;
@@ -16,7 +20,7 @@ export const RadioButtonStyles = {
     background: ${(props) =>
       props.isChecked ? props.theme.colors.orange : 'transparent'};
     border-radius: 50%;
-    border: solid 3px ${(props) => props.theme.colors.black};
+    border: solid 3px ${(props) => props.theme.colors.white};
     transition: all 50ms;
     cursor: pointer;
   `,

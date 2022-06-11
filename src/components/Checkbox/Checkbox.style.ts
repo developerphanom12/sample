@@ -24,9 +24,11 @@ export const Checkbox = {
     align-items: center;
     justify-content: center;
     background: ${(props) =>
-      props.isChecked ? props.theme.colors.black : 'transparent'};
+      props.isChecked ? props.theme.colors.orange : 'transparent'};
     border-radius: 3px;
-    border: solid 2px ${(props) => props.theme.colors.black};
+    border: solid 2px
+      ${(props) =>
+        props.isChecked ? props.theme.colors.orange : props.theme.colors.black};
     transition: all 50ms;
     cursor: pointer;
   `,
