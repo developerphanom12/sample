@@ -2,45 +2,46 @@ import { styled } from 'app/theme';
 
 export const FilesUploadPreviewStyles = {
   LayoutWrapper: styled.div`
-    display: grid;
-    grid-template-rows: 55px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: ${({ theme }) => theme.colors.lighterGrey};
   `,
   MainWrapper: styled.div`
     width: 100%;
+    height: 100%;
+    padding: 15px 35px;
+    display: flex;
     background: ${({ theme }) => theme.colors.lighterGrey};
   `,
   Wrapper: styled.div`
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    padding: 15px 35px;
-  `,
-  PhotosWrapper: styled.div`
-    background: ${({ theme }) => theme.colors.white};
-    width: 100%;
-    height: 100%;
-    padding: 14px 35px;
-    display: flex;
-    flex-wrap: wrap;
-  `,
-  PhotoPreviewWrapper: styled.div`
-    background: ${({ theme }) => theme.colors.white};
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    background: white;
+    align-items: center;
+    padding: 15px 20px;
   `,
   ImageWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
+    margin: 15px 0 25px 0;
+    flex: 1;
   `,
   ReceiptImage: styled.img`
-    width: 254px;
-    height: 358px;
+    max-width: 254px;
+    max-height: 358px;
+    min-width: 250px;
+    max-height: 310px;
+    width: 100%;
+    height: 100%;
+  `,
+  TestImage: styled.img`
+    width: 100px;
+    height: 100px;
   `,
   CenterWrapper: styled.div`
     display: flex;
@@ -56,6 +57,6 @@ export const FilesUploadPreviewStyles = {
     width: 100%;
     justify-content: flex-end;
     display: flex;
-    padding: 0 10px 18px 0px;
+    padding: 0;
   `,
 };

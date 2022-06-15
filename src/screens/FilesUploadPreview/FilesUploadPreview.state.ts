@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { IState } from 'services/redux/reducer';
-import { ROUTES } from '../../constants/routes';
 
 import { getReceipts } from '../Inbox/inbox.api';
 import { setIsFetchingDate, setReceipts } from '../Inbox/reducer/inbox.reducer';
 import { receiptCreate } from './filesUploadPreview.api';
-import { resetState } from './reducer/filesUploadPreview.reducer';
+import {
+  resetState,
+  setActiveIndex,
+} from './reducer/filesUploadPreview.reducer';
 import { LocationState } from './types/filesUploadPreview.types';
+import { INITIAL_STATE } from './filesUploadPreview.constants';
+
+import { ROUTES } from 'constants/routes';
 
 import { ROUTES } from 'constants/routes';
 
@@ -25,9 +30,28 @@ export const useFilesUploadPreviewState = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const {
-    filesUpload: { previewFiles, filesArray },
+    filesUpload: { previewFiles, filesArray, activeIndex },
     user: { token },
   } = useSelector((state: IState) => state);
+
+  const [state, setState] = useState(INITIAL_STATE);
+
+  useEffect(() => {
+    setState((prevState) => ({
+      ...prevState,
+      currentFileName: previewFiles[activeIndex]?.fileName,
+      currentFileSrc: previewFiles[activeIndex]?.fileSrc,
+    }));
+  }, [previewFiles]);
+
+  const onChooseReceiptHandler = (fileName: string, fileSrc: string) => {
+    setState((prevState) => ({
+      ...prevState,
+      currentFileName: fileName,
+      currentFileSrc: fileSrc,
+    }));
+    dispatch(setActiveIndex(fileName));
+  };
 
   const onGoBackHandler = () => navigate(-1);
 
@@ -60,9 +84,11 @@ export const useFilesUploadPreviewState = () => {
   };
 
   return {
+    ...state,
     previewFiles,
     filesArray,
     isLoading,
+    onChooseReceiptHandler,
     onNavigateToInboxPage,
     onGoBackHandler,
     onCancelClickHandler,

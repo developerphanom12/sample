@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react';
 import { Button } from 'components/Button';
 import { ReceiptDetailsHeader } from 'components/ReceiptDetailsHeader';
 import { ReceiptPreviewItem } from 'components/ReceiptPreviewItem';
+import { CustomCarousel } from 'components/CustomCarousel';
 
 import { useFilesUploadPreviewState } from './FilesUploadPreview.state';
 import { FilesUploadPreviewStyles as Styled } from './FilesUploadPreview.style';
@@ -12,6 +13,9 @@ export const FilesUploadPreview: FC = () => {
     previewFiles,
     filesArray,
     isLoading,
+    currentFileName,
+    currentFileSrc,
+    onChooseReceiptHandler,
     onNavigateToInboxPage,
     onGoBackHandler,
     onCancelClickHandler,
@@ -24,50 +28,49 @@ export const FilesUploadPreview: FC = () => {
 
   return (
     <Styled.LayoutWrapper>
-      <ReceiptDetailsHeader isBackButton onGoBackHandler={onGoBackHandler} />
+      <ReceiptDetailsHeader
+        backButtonText="Back to list"
+        isBackButton
+        onGoBackHandler={onGoBackHandler}
+      />
       <Styled.MainWrapper>
         <Styled.Wrapper>
-          <Styled.PhotosWrapper>
-            {previewFiles?.map((file, index) => {
+          <Styled.ButtonsBoxWrapper>
+            <Styled.ButtonsBox>
+              <Button
+                onClick={onCancelClickHandler}
+                themedButton="secondary"
+                width="secondary"
+              >
+                Cancel
+              </Button>
+              <Button
+                isLoading={isLoading}
+                themedButton="primary"
+                width="secondary"
+                onClick={onSaveClickHandler}
+              >
+                {`Upload receipt (${previewFiles.length})`}
+              </Button>
+            </Styled.ButtonsBox>
+          </Styled.ButtonsBoxWrapper>
+          <Styled.ImageWrapper>
+            <Styled.ReceiptImage src={currentFileSrc} alt={currentFileName} />
+          </Styled.ImageWrapper>
+          <CustomCarousel>
+            {previewFiles?.map((file) => {
               return (
                 <ReceiptPreviewItem
                   key={file.fileName}
                   imageSrc={file.fileSrc}
-                  isActive
-                  altName={`receipt${index}`}
+                  fileName={file.fileName}
+                  isActive={currentFileName === file.fileName}
+                  isLastReceipt={previewFiles?.length === 1}
+                  onChooseReceiptHandler={onChooseReceiptHandler}
                 />
               );
             })}
-          </Styled.PhotosWrapper>
-          <Styled.PhotoPreviewWrapper>
-            <Styled.CenterWrapper>
-              <Styled.ImageWrapper>
-                <Styled.ReceiptImage
-                  src={previewFiles[0]?.fileSrc}
-                  alt={previewFiles[0]?.fileName}
-                />
-              </Styled.ImageWrapper>
-            </Styled.CenterWrapper>
-            <Styled.ButtonsBoxWrapper>
-              <Styled.ButtonsBox>
-                <Button
-                  onClick={onCancelClickHandler}
-                  themedButton="secondary"
-                  width="secondary"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  isLoading={isLoading}
-                  themedButton="primary"
-                  width="secondary"
-                  onClick={onSaveClickHandler}
-                >
-                  Upload receipt (1)
-                </Button>
-              </Styled.ButtonsBox>
-            </Styled.ButtonsBoxWrapper>
-          </Styled.PhotoPreviewWrapper>
+          </CustomCarousel>
         </Styled.Wrapper>
       </Styled.MainWrapper>
     </Styled.LayoutWrapper>

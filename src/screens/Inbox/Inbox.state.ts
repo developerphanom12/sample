@@ -88,12 +88,12 @@ export const useInboxState = () => {
         fileName: file.name,
       });
     });
-    imagesArray.length &&
+    if (imagesArray.length) {
       dispatch(
         setFiles({ filesArray: selectedFilesArray, previewFiles: imagesArray })
       );
-    imagesArray.length &&
       navigate(ROUTES.filesUploadPreview, { state: { from: location } });
+    }
   };
 
   const onFetchReceiptsHandler = async (params?: IGetReceiptsParams) => {
@@ -141,10 +141,7 @@ export const useInboxState = () => {
     }
   };
 
-  const debouncedValue = useDebounce(
-    state.searchValue,
-    state.searchValue.length === 1 ? 300 : 500
-  );
+  const debouncedValue = useDebounce(state.searchValue, 250);
 
   const onChangeSearchValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

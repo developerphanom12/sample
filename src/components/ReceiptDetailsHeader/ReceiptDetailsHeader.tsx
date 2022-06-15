@@ -7,6 +7,7 @@ import { ReceiptDetailsHeaderStyles as Styled } from './ReceiptDetailsHeader.sty
 
 interface IReceiptDetailsHeaderProps {
   isBackButton?: boolean;
+  backButtonText?: string;
   onGoBackHandler?: () => void;
   totalReceiptsCount?: number;
   currentReceiptPosition?: number;
@@ -17,6 +18,7 @@ interface IReceiptDetailsHeaderProps {
 
 export const ReceiptDetailsHeader: FC<IReceiptDetailsHeaderProps> = (props) => {
   const {
+    backButtonText,
     onGoBackHandler,
     onClickGetNextReceiptHandler,
     onClickGetPrevReceiptHandler,
@@ -35,7 +37,7 @@ export const ReceiptDetailsHeader: FC<IReceiptDetailsHeaderProps> = (props) => {
               themedButton="navigation"
               iconBehavior="iconPrevious"
             >
-              <Styled.ButtonText>Back</Styled.ButtonText>
+              <Styled.ButtonText>{backButtonText || 'Back'}</Styled.ButtonText>
             </NavigationButton>
           </Styled.BoxWrapper>
         ) : (

@@ -17,6 +17,9 @@ export const FileUploadButton: FC<IFileUploadButtonProps> = (props) => {
         id="uploadFile"
         name="uploadFile"
         accept="image/jpeg, image/jpg, image/png"
+        multiple
+        max={2}
+        maxLength={2}
       />
       <Styled.Label htmlFor="uploadFile">Add</Styled.Label>
     </Styled.ButtonWrapper>

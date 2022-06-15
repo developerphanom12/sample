@@ -5,6 +5,7 @@ import { Button } from '../Button';
 import { ModalButtonsBoxStyles as Styled } from './ModalButtonsBox.style';
 
 interface IModalButtonsBox {
+  saveButtonText?: string;
   isNoPadding?: boolean;
   isCancelButton?: boolean;
   isSaveButton?: boolean;
@@ -19,6 +20,7 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
   const {
     onSaveButtonCLickHandler,
     onCancelClickHandler,
+    saveButtonText,
     isSaveButton,
     isDisableButton,
     isLoading,
@@ -46,7 +48,7 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
           type={type}
           onClick={onSaveButtonCLickHandler}
         >
-          {isSaveButton ? 'Save' : 'Send'}
+          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Save' : 'Send'}
         </Button>
       </Styled.ButtonsWrapper>
     </Styled.ButtonsBox>

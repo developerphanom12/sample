@@ -12,13 +12,18 @@ export const ReceiptPreviewItemStyles = {
     justify-content: center;
     align-items: center;
   `,
-  Image: styled.img`
+  Image: styled.img<{ isActive?: boolean }>`
     width: 92px;
     height: 130px;
+    box-shadow: ${({ theme, isActive }) =>
+      !isActive && `0px 4px 4px 1px ${theme.colors.halfTranparentBlack}`};
   `,
   ImageWrapper: styled.div`
     display: flex;
     position: relative;
+    &:hover {
+      cursor: pointer;
+    }
   `,
   IconWrapper: styled.div`
     cursor: pointer;
