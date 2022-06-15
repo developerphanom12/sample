@@ -7,10 +7,13 @@ export const PrivacyPolicyStyles = {
   `,
   Title: styled.h1`
     margin-bottom: 10px;
+    font-size: ${(props) => props.theme.size.xnormal};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
   `,
   SubTitle: styled.h2`
     margin-bottom: 5px;
-    font-size: ${(props) => props.theme.size.medium};
+    font-size: ${(props) => props.theme.size.default};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
   `,
   Paragraph: styled.p`
     font-size: ${(props) => props.theme.size.default};

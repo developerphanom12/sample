@@ -12,7 +12,7 @@ export const StatusBarStyles = {
     border-radius: 5px;
     padding: 10px;
     width: 100%;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
     font-size: ${({ theme }) => theme.size.default};
     ${({ status }) => (status ? COLORS[status] : COLORS.review)};
     border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};

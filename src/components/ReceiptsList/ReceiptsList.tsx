@@ -30,17 +30,18 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
     countPerTimeFilter,
     dateFormat,
     isContentLoading,
-
     onChangeCategoryFieldHandler,
   } = props;
 
   return (
     <Styled.Container>
-      <Styled.Title>Receipts List</Styled.Title>
-      <ReceiptsSelects
-        timeFilterOptions={timeFilterOptions}
-        onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
-      />
+      <Styled.HeaderWrapper>
+        <Styled.Title>Receipts List</Styled.Title>
+        <ReceiptsSelects
+          timeFilterOptions={timeFilterOptions}
+          onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
+        />
+      </Styled.HeaderWrapper>
       {isContentLoading ? (
         <LoaderComponent theme="preview" />
       ) : countPerTimeFilter ? (

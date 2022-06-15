@@ -4,6 +4,7 @@ export const DateButtonStyles = {
   Button: styled.button<{ isInputDate: boolean }>`
     font-size: ${(props) => props.theme.size.default};
     background-color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
     max-height: 45px;
     min-height: 40px;
     width: ${(props) => (props.isInputDate ? '100%' : '140px')};

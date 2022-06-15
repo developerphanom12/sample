@@ -26,7 +26,7 @@ export const Styled = {
     inputTheme?: string;
   }>`
     line-height: 1.3;
-    font-size: ${(props) => props.theme.size.normal};
+    font-size: ${(props) => props.theme.size.default};
     padding: 10px;
     background-color: ${(props) => props.theme.colors.white};
     max-height: ${(props) => props.inputHeight || '45px'};
@@ -45,10 +45,13 @@ export const Styled = {
       position: absolute;
       right: 0;
     }
+    &:focus {
+      background-color: ${({ theme }) => theme.colors.pink};
+    }
   `,
   TextArea: styled.textarea<{ inputHeight?: string }>`
     font-family: ${(props) => props.theme.font.openSans};
-    font-size: ${(props) => props.theme.size.normal};
+    font-size: ${(props) => props.theme.size.default};
     padding: 10px;
     background-color: ${(props) => props.theme.colors.white};
     height: ${(props) => props.inputHeight || '45px'};
@@ -57,6 +60,9 @@ export const Styled = {
     border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};
     box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
     resize: none;
+    &:focus {
+      background-color: ${({ theme }) => theme.colors.pink};
+    }
   `,
   InputWrapper: styled.div<{ isNoMargin?: boolean }>`
     margin-bottom: ${({ isNoMargin }) => (isNoMargin ? '0' : '21px')};

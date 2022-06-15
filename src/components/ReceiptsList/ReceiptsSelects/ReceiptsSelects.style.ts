@@ -2,17 +2,18 @@ import { styled } from 'app/theme';
 
 export const ReceiptsSelectsStyles = {
   SelectorBox: styled.div`
-    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
   `,
   SelectorWrapper: styled.div`
-    display: flex;
-    justify-content: end;
-    margin-bottom: 45px;
+    width: 55%;
   `,
   SelectorTitle: styled.p`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};
-    margin-bottom: 10px;
+    margin-right: 35px;
   `,
 };

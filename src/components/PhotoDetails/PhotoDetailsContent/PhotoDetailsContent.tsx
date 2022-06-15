@@ -36,9 +36,12 @@ export const PhotoDetailsContent: FC = () => {
   return (
     <>
       <Styled.MainWrapper>
-        <PhotoDetailsContentItem label="Status">
-          <StatusBar status={statusValue as TStatuses} />
-        </PhotoDetailsContentItem>
+        <Styled.StatusBarWrapper>
+          <PhotoDetailsContentItem label="Status">
+            <StatusBar status={statusValue as TStatuses} />
+          </PhotoDetailsContentItem>
+        </Styled.StatusBarWrapper>
+
         {statusValue === 'review' && (
           <PhotoDetailsContentItem label="Mark as">
             <Styled.RadioButtonWrapper>
@@ -100,12 +103,14 @@ export const PhotoDetailsContent: FC = () => {
                 isNoMargin
               />
             ) : (
-              <CheckboxItem
-                name={item.label}
-                isChecked={item.value as boolean}
-                labelText={item.labelText}
-                onChange={item.onChangeCheckbox}
-              />
+              <Styled.CheckBoxWrapper>
+                <CheckboxItem
+                  name={item.label}
+                  isChecked={item.value as boolean}
+                  labelText={item.labelText}
+                  onChange={item.onChangeCheckbox}
+                />
+              </Styled.CheckBoxWrapper>
             )}
           </PhotoDetailsContentItem>
         ))}

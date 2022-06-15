@@ -7,7 +7,7 @@ export const PhotoDetailsContentStyles = {
     max-width: 600px;
     display: flex;
     flex-flow: column;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     height: 100%;
   `,
   RadioButtonWrapper: styled.div`
@@ -15,6 +15,7 @@ export const PhotoDetailsContentStyles = {
     justify-content: space-between;
     flex-wrap: wrap;
     width: 80%;
+    height: 45px;
   `,
   FieldWrapper: styled.div`
     display: flex;
@@ -31,10 +32,19 @@ export const PhotoDetailsContentStyles = {
   ContentWrapper: styled.div`
     display: flex;
   `,
+  StatusBarWrapper: styled.div`
+    height: 60px;
+    margin-bottom: 10px;
+  `,
 
   ChildrenWrapper: styled.div`
     max-width: 381px;
     width: 100%;
+  `,
+  CheckBoxWrapper: styled.div`
+    height: 45px;
+    display: flex;
+    align-items: center;
   `,
   ItemWrapper: styled.div`
     display: flex;

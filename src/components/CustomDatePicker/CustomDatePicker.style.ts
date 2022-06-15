@@ -7,12 +7,32 @@ export const CustomDatePickerStyles = {
     display: flex;
     width: 100%;
   `,
-  Wrapper: styled.div`
+  Wrapper: styled.div<{ isInputDate?: boolean }>`
     .react-datepicker {
+      font-family: ${(props) => props.theme.font.openSans};
+      font-size: ${(props) => props.theme.size.default};
+      color: ${(props) => props.theme.colors.black};
       position: absolute;
-      top: 50px;
+      top: 45px;
       right: 0;
       z-index: ${(props) => props.theme.zIndex.m};
+      @media (min-width: 1300px) {
+        display: ${(props) => props.isInputDate && 'flex'};
+        align-items: ${(props) => props.isInputDate && 'center'};
+        justify-content: ${(props) => props.isInputDate && 'center'};
+        width: ${(props) => props.isInputDate && '100%'};
+      }
+    }
+
+    .react-datepicker__header {
+      background-color: ${(props) => props.theme.colors.lightGray};
+      @media (min-width: 1300px) {
+        display: ${(props) => props.isInputDate && 'flex'};
+        align-items: ${(props) => props.isInputDate && 'center'};
+        justify-content: ${(props) => props.isInputDate && 'center'};
+        width: ${(props) => props.isInputDate && '100%'};
+        flex-wrap: ${(props) => props.isInputDate && 'wrap'};
+      }
     }
 
     .react-datepicker__day.react-datepicker__day--selected.react-datepicker__day--today {

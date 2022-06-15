@@ -26,7 +26,6 @@ export const PaginationPanel: React.FC<IPaginationPanel> = (props) => {
       <Styled.SelectorWrapper>
         <CustomSelect
           height="45"
-          paginate
           options={PAGINATION_ARRAY}
           onChangeValueHandler={onChangeReceiptsPerPage}
           value={receiptsPerPage}

@@ -5,12 +5,16 @@ export const ReceiptsListStyles = {
     padding: 28px 38px 56px 38px;
     height: 100%;
   `,
+  HeaderWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+  `,
   Title: styled.h2`
     font-size: ${({ theme }) => theme.size.xnormal};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};
-    margin-bottom: 19px;
-    text-align: start;
   `,
   ItemWrapper: styled.div``,
   EmptyDataWrapper: styled.div`

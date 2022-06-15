@@ -16,6 +16,7 @@ export const StyledReactSelect = styled(Select)<{
   paginate?: boolean;
 }>`
   .Select__control {
+    font-size: ${({ theme }) => theme.size.default};
     background: ${(props) => props.theme.colors.white};
     border: ${(props) =>
       `1px solid ${
@@ -37,7 +38,9 @@ export const StyledReactSelect = styled(Select)<{
       marginBottom ? `${marginBottom}px` : '24px'};
   }
   .Select__control--is-focused {
+    font-size: ${({ theme }) => theme.size.default};
     outline: none;
+    background: ${({ theme }) => theme.colors.pink};
   }
   .Select__control--is-focused:hover {
     border: ${({ theme }) => `1px solid ${theme.colors.lightGray}`};
@@ -53,6 +56,7 @@ export const StyledReactSelect = styled(Select)<{
     max-width: 500px;
     padding: 3px 5px;
     font-size: ${({ theme }) => theme.size.default};
+    margin-top: 1px;
   }
   .Select__option {
     border-radius: 5px;
@@ -61,14 +65,17 @@ export const StyledReactSelect = styled(Select)<{
     background-color: ${({ theme }) => theme.colors.white};
   }
   .Select__option--is-selected {
-    background: ${({ theme }) => theme.colors.gray};
+    background: ${({ theme }) => theme.colors.pink};
     color: ${({ theme }) => theme.colors.black};
   }
   .Select__option:hover {
-    background: ${({ theme }) => theme.colors.lightGray};
+    background: ${({ theme }) => theme.colors.pink};
   }
   .Select__indicators {
     padding-right: 5px;
+  }
+  .Select__single-value {
+    font-size: ${({ theme }) => theme.size.default};
   }
   .css-b62m3t-container {
     height: 100% !important;
