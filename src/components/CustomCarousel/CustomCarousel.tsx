@@ -1,28 +1,30 @@
 import { FC } from 'react';
-import Carousel, { RenderArrowProps } from 'react-elastic-carousel';
+import Slider from 'react-slick';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import { CustomCarouselStyles as Styled } from './CustomCarousel.style';
-import { RenderArrow } from './RenderArrow';
+import { SliderArrow } from '../SliderArrow';
+import { settings } from './customSelect.constants';
 
 interface ICustomCarouselProps {
   children: React.ReactElement[];
 }
 export const CustomCarousel: FC<ICustomCarouselProps> = (props) => {
   const { children } = props;
+
   return (
-    <Styled.SliderWrapper>
-      <Carousel
-        pagination={false}
-        isRTL={false}
-        enableSwipe={true}
-        itemsToShow={8}
-        disableArrowsOnEnd
-        showEmptySlots
-        itemPadding={[0, 5]}
-        renderArrow={(props: RenderArrowProps) => RenderArrow(props)}
-      >
-        {children}
-      </Carousel>
-    </Styled.SliderWrapper>
+    <Styled.Container>
+      <Styled.SliderWrapper>
+        <Slider
+          {...settings}
+          nextArrow={<SliderArrow isForwardButton />}
+          prevArrow={<SliderArrow />}
+        >
+          {children}
+        </Slider>
+      </Styled.SliderWrapper>
+    </Styled.Container>
   );
 };

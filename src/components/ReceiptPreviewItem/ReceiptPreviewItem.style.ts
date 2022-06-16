@@ -6,6 +6,7 @@ export const ReceiptPreviewItemStyles = {
     width: 129px;
     height: 158px;
     border-radius: 5px;
+    margin-right: 15px;
     background: ${({ theme, isActive }) =>
       isActive ? theme.colors.pink : theme.colors.white};
     display: flex;

@@ -7,6 +7,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 const persisterStore = persistStore(store);
