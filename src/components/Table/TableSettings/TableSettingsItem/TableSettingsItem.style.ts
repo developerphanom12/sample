@@ -14,8 +14,8 @@ export const TableSettingsItemStyles = {
   Action: styled.div`
     display: flex;
     align-items: center;
-
-    width: 160px;
+    width: 100%;
+    max-width: 160px;
   `,
   ActionButton: styled.div`
     display: flex;
@@ -30,6 +30,7 @@ export const TableSettingsItemStyles = {
     font-size: ${(props) => props.theme.size.default};
     display: flex;
     align-items: center;
-    width: 180px;
+    max-width: 180px;
+    width: 100%;
   `,
 };

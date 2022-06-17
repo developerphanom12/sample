@@ -20,6 +20,7 @@ import { TermsOfService } from 'components/TermsOfService';
 import { PrivacyPolicy } from 'components/PrivacyPolicy';
 import { Support } from 'screens/Support';
 import { MyAccount } from 'screens/Settings/MyAccount';
+import { UsersList } from 'screens/Settings/UsersList';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -40,6 +41,7 @@ export const AppRouter: FC = () => (
           </Route>
           <Route path={ROUTES.settings} element={<Settings />}>
             <Route index element={<MyAccount />} />
+            <Route path={ROUTES.usersList} element={<UsersList />} />
             <Route path={ROUTES.termsOfService} element={<TermsOfService />} />
             <Route path={ROUTES.privacyPolicy} element={<PrivacyPolicy />} />
           </Route>

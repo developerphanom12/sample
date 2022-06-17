@@ -14,12 +14,14 @@ export const TableSettingsStyles = {
   Actions: styled.div`
     display: flex;
     align-items: center;
-    width: 160px;
+    max-width: 160px;
+    width: 100%;
     font-size: ${(props) => props.theme.size.default};
   `,
   Column: styled.div`
     display: flex;
     align-items: center;
-    width: 180px;
+    width: 100%;
+    max-width: 180px;
   `,
 };

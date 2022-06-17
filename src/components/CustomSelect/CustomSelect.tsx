@@ -19,6 +19,8 @@ interface ICustomSelectProps {
   options?: IOption[];
   paginate?: boolean;
   isDisabled?: boolean;
+  isMulti?: boolean;
+  isFullWidth?: boolean;
 }
 
 export const CustomSelect: FC<ICustomSelectProps> = (props) => {
@@ -32,6 +34,8 @@ export const CustomSelect: FC<ICustomSelectProps> = (props) => {
     paginate,
     name,
     isDisabled,
+    isMulti,
+    isFullWidth,
   } = props;
 
   return (
@@ -50,6 +54,9 @@ export const CustomSelect: FC<ICustomSelectProps> = (props) => {
         menuPlacement="auto"
         isDisabled={isDisabled}
         placeholder={isDisabled && 'Nothing for select'}
+        isMulti={isMulti}
+        isClearable={false}
+        isFullWidth={isFullWidth}
       />
     </SelectWrapper>
   );

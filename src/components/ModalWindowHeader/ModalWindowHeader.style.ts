@@ -13,7 +13,7 @@ export const ModalWindowHeaderStyles = {
   `,
   Title: styled.p`
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    font-size: ${({ theme }) => theme.size.mediumLarge};
+    font-size: ${({ theme }) => theme.size.medium};
     color: ${({ theme }) => theme.colors.black};
   `,
 };

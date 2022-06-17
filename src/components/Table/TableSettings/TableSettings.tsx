@@ -17,6 +17,9 @@ export const TableSettings: React.FC<TableSettingsProps> = (props) => (
         <TableButton>Email</TableButton>
       </TableSettingsStyles.Column>
       <TableSettingsStyles.Column>
+        <TableButton>Role</TableButton>
+      </TableSettingsStyles.Column>
+      <TableSettingsStyles.Column>
         <TableButton>Created On</TableButton>
       </TableSettingsStyles.Column>
       <TableSettingsStyles.Column>

@@ -9,6 +9,7 @@ export enum ROUTES {
   settings = '/settings',
   termsOfService = '/settings/terms-of-service',
   privacyPolicy = '/settings/privacy-policy',
+  usersList = '/settings/users-list',
   support = '/support',
   preference = '/preference',
   forgotPassword = '/forgot-password',

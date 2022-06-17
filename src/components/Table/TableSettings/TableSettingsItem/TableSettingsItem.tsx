@@ -15,15 +15,16 @@ export const TableSettingsItem: React.FC<TableMasterItemProps> = (props) => {
     <TableSettingsItemStyles.Item>
       <TableSettingsItemStyles.Action>
         <TableSettingsItemStyles.ActionButton onClick={onEditClick}>
-          <Icon type='edit' />
+          <Icon type="edit" />
         </TableSettingsItemStyles.ActionButton>
         <TableSettingsItemStyles.ActionButton onClick={onDeleteClick}>
-          <Icon type='remove' />
+          <Icon type="remove" />
         </TableSettingsItemStyles.ActionButton>
       </TableSettingsItemStyles.Action>
 
       <TableSettingsItemStyles.Column>Name</TableSettingsItemStyles.Column>
       <TableSettingsItemStyles.Column>Email</TableSettingsItemStyles.Column>
+      <TableSettingsItemStyles.Column>Role</TableSettingsItemStyles.Column>
       <TableSettingsItemStyles.Column>
         Created On
       </TableSettingsItemStyles.Column>
