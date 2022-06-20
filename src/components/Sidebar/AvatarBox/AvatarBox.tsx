@@ -13,13 +13,14 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
     <Styled.MainWrapper>
       <Styled.ContentWrapper>
         <Styled.Label>Settings</Styled.Label>
-
         <Styled.ImageWrapper>
           <Icon type="settingsAvatar" />
         </Styled.ImageWrapper>
+      </Styled.ContentWrapper>
+      <Styled.UserInfoWrapper>
         <Styled.NameAndStatus>{userFullName}</Styled.NameAndStatus>
         <Styled.NameAndStatus isStatus>Administrator</Styled.NameAndStatus>
-      </Styled.ContentWrapper>
+      </Styled.UserInfoWrapper>
     </Styled.MainWrapper>
   );
 };

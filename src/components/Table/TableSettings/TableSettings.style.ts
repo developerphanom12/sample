@@ -14,7 +14,7 @@ export const TableSettingsStyles = {
   Actions: styled.div`
     display: flex;
     align-items: center;
-    max-width: 160px;
+    max-width: 140px;
     width: 100%;
     font-size: ${(props) => props.theme.size.default};
   `,

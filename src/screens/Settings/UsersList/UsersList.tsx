@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
 import { TableSettings } from 'components/Table/TableSettings';
+import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
 
 import { UserListStyles as Styled } from './UserList.styles';
 import { useUserListState } from './UserList.state';
-import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
 
 export const UsersList: FC = () => {
   const {

@@ -15,7 +15,7 @@ export const TableSettingsItemStyles = {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 160px;
+    max-width: 140px;
   `,
   ActionButton: styled.div`
     display: flex;

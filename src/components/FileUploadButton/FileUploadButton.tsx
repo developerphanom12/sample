@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { UploadInput } from '../UploadInput';
 
 import { FileUploadButtonStyles as Styled } from './FileUploadButton.style';
 
@@ -11,16 +12,7 @@ export const FileUploadButton: FC<IFileUploadButtonProps> = (props) => {
 
   return (
     <Styled.ButtonWrapper>
-      <Styled.UploadInput
-        onChange={onChangeFiles}
-        type="file"
-        id="uploadFile"
-        name="uploadFile"
-        accept="image/jpeg, image/jpg, image/png"
-        multiple
-        max={2}
-        maxLength={2}
-      />
+      <UploadInput onChangeFiles={onChangeFiles} />
       <Styled.Label htmlFor="uploadFile">Add</Styled.Label>
     </Styled.ButtonWrapper>
   );

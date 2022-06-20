@@ -5,10 +5,15 @@ export const AvatarBoxStyles = {
     padding: 30px 10px 0;
     justify-content: center;
     display: flex;
+    flex-direction: column;
   `,
   ContentWrapper: styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+  `,
+  UserInfoWrapper: styled.div`
+    margin-left: 40px;
   `,
   Label: styled.p`
     display: flex;
@@ -20,8 +25,8 @@ export const AvatarBoxStyles = {
     color: ${({ theme }) => theme.colors.black};
   `,
   ImageWrapper: styled.div`
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border: 1px solid rgba(34, 43, 56, 0.25);
     box-sizing: border-box;
     box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
@@ -41,5 +46,6 @@ export const AvatarBoxStyles = {
     font-weight: ${({ theme, isStatus }) =>
       isStatus ? theme.fontWeight.normal : theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};
+    margin-top: ${({ isStatus }) => isStatus && '5px'}; ;
   `,
 };

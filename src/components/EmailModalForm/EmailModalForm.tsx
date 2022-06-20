@@ -19,10 +19,9 @@ export const EmailModalForm: FC<IEmailModalFormProps> = (props) => {
   return (
     <Styled.MainContentWrapper>
       {emailInputs.map((input) => (
-        <>
+        <div key={input.inputName}>
           <Styled.Label>{input.labelText}</Styled.Label>
           <EmailInputItem
-            key={input.inputName}
             inputName={input.inputName}
             labelText={input.labelText}
             isTextArea={input.isTextArea}
@@ -30,7 +29,7 @@ export const EmailModalForm: FC<IEmailModalFormProps> = (props) => {
             formikMeta={formikMeta}
             formikProps={formikProps}
           />
-        </>
+        </div>
       ))}
       {checkedIds.length && (
         <>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Icon } from 'components/Icons/Icons';
 
-import { TableSettingsItemStyles } from './TableSettingsItem.style';
+import { TableSettingsItemStyles as Styled } from './TableSettingsItem.style';
 
 interface TableMasterItemProps {
   onDeleteClick?: (event: React.MouseEvent<HTMLElement>) => void;
@@ -14,24 +14,18 @@ export const TableSettingsCompanyItem: React.FC<TableMasterItemProps> = (
 ) => {
   const { onEditClick, onDeleteClick } = props;
   return (
-    <TableSettingsItemStyles.Item>
-      <TableSettingsItemStyles.Action>
-        <TableSettingsItemStyles.ActionButton onClick={onEditClick}>
-          <Icon type='edit' />
-        </TableSettingsItemStyles.ActionButton>
-        <TableSettingsItemStyles.ActionButton onClick={onDeleteClick}>
-          <Icon type='remove' />
-        </TableSettingsItemStyles.ActionButton>
-      </TableSettingsItemStyles.Action>
-      <TableSettingsItemStyles.Column>Company</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>Name</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>Email</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>
-        Created On
-      </TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>
-        Created By
-      </TableSettingsItemStyles.Column>
-    </TableSettingsItemStyles.Item>
+    <Styled.Item>
+      <Styled.Action>
+        <Styled.ActionButton onClick={onEditClick}>
+          <Icon type="edit" />
+        </Styled.ActionButton>
+        <Styled.ActionButton onClick={onDeleteClick}>
+          <Icon type="remove" />
+        </Styled.ActionButton>
+      </Styled.Action>
+      <Styled.Column>Company</Styled.Column>
+      <Styled.Column>Created On</Styled.Column>
+      <Styled.Column>Created By</Styled.Column>
+    </Styled.Item>
   );
 };
