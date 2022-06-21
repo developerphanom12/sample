@@ -38,9 +38,6 @@ export const MyAccountStyles = {
     width: 100%;
     margin-bottom: 20px;
   `,
-  ResetPasswordButtonWrapper: styled.div`
-    width: 160px;
-  `,
   ResetPasswordFiledsWrapper: styled.div`
     padding: 35px 0 30px;
     &:not(:last-child) {

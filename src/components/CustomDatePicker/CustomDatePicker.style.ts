@@ -7,13 +7,13 @@ export const CustomDatePickerStyles = {
     display: flex;
     width: 100%;
   `,
-  Wrapper: styled.div<{ isInputDate?: boolean }>`
+  Wrapper: styled.div<{ isInputDate?: boolean; isFormattedDate?: boolean }>`
     .react-datepicker {
       font-family: ${(props) => props.theme.font.openSans};
       font-size: ${(props) => props.theme.size.default};
       color: ${(props) => props.theme.colors.black};
       position: absolute;
-      top: 45px;
+      top: ${({ isFormattedDate }) => (isFormattedDate ? '45px' : '40px')};
       right: 0;
       z-index: ${(props) => props.theme.zIndex.m};
       @media (min-width: 1300px) {

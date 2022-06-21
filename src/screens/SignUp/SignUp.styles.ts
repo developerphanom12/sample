@@ -14,21 +14,15 @@ export const SignUpStyles = {
     width: 100%;
     height: 100%;
   `,
-  Wrapper: styled.div`
-    display: flex;
-    width: 100%;
-    height: 100%;
-  `,
   RightSideContentWrapper: styled.div`
     display: flex;
     overflow-y: scroll;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     padding: 5px 10px 5px 50px;
     height: 100%;
     width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
     @media (max-width: 768px) {
       padding: 15px;
       align-items: center;

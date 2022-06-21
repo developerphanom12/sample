@@ -38,7 +38,6 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
-import { IOption } from '../../components/CustomSelect/types';
 
 export const useInboxState = () => {
   const {
@@ -104,8 +103,6 @@ export const useInboxState = () => {
         checkedIds: [],
       }));
       const { data } = await getReceipts(params);
-      !totalReceiptCount && onGetStatisticHandler();
-
       !totalReceiptCount && onGetStatisticHandler();
 
       dispatch(setReceipts({ count: data.count, data: data.data }));
@@ -413,20 +410,11 @@ export const useInboxState = () => {
     }
   };
 
+  const isDownloadButtonDisabled = !state.checkedIds.length;
+
   const onDeleteReceiptHandler = async () => {
     try {
       await receiptDelete({ receipts: state.checkedIds }, token);
-      setState((prevState) => ({
-        ...prevState,
-        isContentLoading: receipts.length !== 1 ? true : false,
-        isFetchingReceipts:
-          receipts.length === 1 ||
-          receipts.length === prevState.checkedIds.length
-            ? true
-            : false,
-      }));
-      onFetchReceiptsHandler({});
-      onGetStatisticHandler();
       setState((prevState) => ({
         ...prevState,
         isContentLoading: receipts.length !== 1 ? true : false,
@@ -456,8 +444,6 @@ export const useInboxState = () => {
       console.log(error);
     }
   };
-
-  const isDownloadButtonDisabled = !state.checkedIds.length;
 
   return {
     ...state,

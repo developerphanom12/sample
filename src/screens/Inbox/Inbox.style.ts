@@ -7,12 +7,4 @@ export const InboxStyles = {
     justify-content: center;
     height: 100%;
   `,
-  CSVLinkWrapper: styled.div`
-    position: absolute;
-  `,
-  ExcelLink: styled.a`
-    position: absolute;
-    width: 0;
-    height: 0;
-  `,
 };

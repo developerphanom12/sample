@@ -50,8 +50,6 @@ export const useLoginState = () => {
 
       dispatch(setCurrencies(data.currencies));
 
-      dispatch(setCurrencies(data.currencies));
-
       dispatch(setUser(data));
       dispatch(setCompany(data.company));
 

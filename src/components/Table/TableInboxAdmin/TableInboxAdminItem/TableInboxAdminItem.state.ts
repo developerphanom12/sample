@@ -15,7 +15,7 @@ interface IuseTableInboxAdminItemState {
 export const useTableInboxAdminItemState = (
   props: IuseTableInboxAdminItemState
 ) => {
-  const { receiptIndex } = props;
+  const { receiptIndex, } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
