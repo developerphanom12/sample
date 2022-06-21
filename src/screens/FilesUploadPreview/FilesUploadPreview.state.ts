@@ -16,8 +16,6 @@ import { INITIAL_STATE } from './filesUploadPreview.constants';
 
 import { ROUTES } from 'constants/routes';
 
-import { ROUTES } from 'constants/routes';
-
 export const useFilesUploadPreviewState = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

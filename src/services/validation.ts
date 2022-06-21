@@ -94,12 +94,6 @@ export const resetPasswordValidationScheme = Yup.object().shape({
   confirmPassword: confirmPasswordValidation,
 });
 
-export const resetPasswordValidationScheme = Yup.object().shape({
-  currentPassword: resetCurrentPasswordValidation,
-  newPassword: passwordValidation,
-  confirmPassword: confirmPasswordValidation,
-});
-
 export const signUpValidationSchema = Yup.object().shape({
   email: emailValidation,
   fullName: nameValidation,
