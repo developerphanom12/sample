@@ -25,6 +25,8 @@ export interface IuseMasterState {
 }
 
 export interface IHeaderPanelMasterProps {
+  isGuard?: boolean;
+  userRole?: TRoles;
   onChangeSearchValueHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;

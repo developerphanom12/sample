@@ -4,25 +4,22 @@ import { Icon } from 'components/Icons/Icons';
 
 import { TableSettingsItemStyles as Styled } from './TableSettingsItem.style';
 
-interface TableMasterItemProps {
-  onDeleteClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  onEditClick?: (event: React.MouseEvent<HTMLElement>) => void;
-}
-
-export const TableSettingsCompanyItem: React.FC<TableMasterItemProps> = (
+export const TableSettingsCompanyItem: React.FC<TableSettingsItemProps> = (
   props
 ) => {
-  const { onEditClick, onDeleteClick } = props;
+  const { onEditIconClickHandler, onDeleteIconClickHandler, userRole } = props;
   return (
     <Styled.Item>
-      <Styled.Action>
-        <Styled.ActionButton onClick={onEditClick}>
-          <Icon type="edit" />
-        </Styled.ActionButton>
-        <Styled.ActionButton onClick={onDeleteClick}>
-          <Icon type="remove" />
-        </Styled.ActionButton>
-      </Styled.Action>
+      {userRole === 'owner' && (
+        <Styled.Action>
+          <Styled.ActionButton onClick={() => onEditIconClickHandler('1')}>
+            <Icon type="edit" />
+          </Styled.ActionButton>
+          <Styled.ActionButton onClick={() => onDeleteIconClickHandler('1')}>
+            <Icon type="remove" />
+          </Styled.ActionButton>
+        </Styled.Action>
+      )}
       <Styled.Column>Company</Styled.Column>
       <Styled.Column>Created On</Styled.Column>
       <Styled.Column>Created By</Styled.Column>

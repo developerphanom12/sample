@@ -14,6 +14,8 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
     onAddClickButtonHandler,
     onBlurHandler,
     onFocusSearchHandler,
+    isGuard,
+    userRole,
   } = props;
   return (
     <Styled.HeaderPanelWrapper>
@@ -34,15 +36,17 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
           </Styled.IconWrapper>
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
-      <Styled.ButtonWrapper>
-        <Button
-          onClick={onAddClickButtonHandler}
-          themedButton="primary"
-          width="primary"
-        >
-          Add
-        </Button>
-      </Styled.ButtonWrapper>
+      {isGuard && userRole !== 'owner' ? null : (
+        <Styled.ButtonWrapper>
+          <Button
+            onClick={onAddClickButtonHandler}
+            themedButton="primary"
+            width="primary"
+          >
+            Add
+          </Button>
+        </Styled.ButtonWrapper>
+      )}
     </Styled.HeaderPanelWrapper>
   );
 };

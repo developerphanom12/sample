@@ -9,6 +9,7 @@ export const PhotoPreviewStyles = {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 5px;
   `,
   Content: styled.div<{ imageSrc: string }>`
     width: 254px;

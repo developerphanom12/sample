@@ -45,7 +45,7 @@ export const Dashboard: FC = () => {
               buttonText={Strings.buttonText}
               onAddReceiptHandler={onSelectFilesHandler}
             />
-          ) : isLoading && !isContentLoading ? (
+          ) : isLoading || isContentLoading ? (
             <Styled.LoaderWrapper>
               <LoaderComponent theme="preview" />
             </Styled.LoaderWrapper>
@@ -56,7 +56,6 @@ export const Dashboard: FC = () => {
               countPerTimeFilter={receipts?.count}
               onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
               dateFormat={company.date_format}
-              isContentLoading={isContentLoading}
             />
           )}
         </Styled.RightSideContentWrapper>

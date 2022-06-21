@@ -7,6 +7,9 @@ export const CustomLinkStyles = {
     position: relative;
     max-width: 110px;
     min-width: 80px;
+    &:first-child {
+      padding: 0 10px;
+    }
     min-width: ${({ is_last }) => is_last === 'true' && '140px'};
     width: 100%;
     height: 100%;

@@ -1,9 +1,21 @@
 import { styled } from 'app/theme';
+import { css } from 'styled-components';
 
+const centeredContainerStyle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
 export const ReceiptsListStyles = {
-  Container: styled.div`
-    padding: 28px 38px 56px 38px;
-    height: 100%;
+  Container: styled.div<{ isContentCentered?: boolean }>`
+    ${({ isContentCentered }) => isContentCentered && centeredContainerStyle};
+  `,
+  CenterWrapper: styled.div`
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: center;
   `,
   HeaderWrapper: styled.div`
     display: flex;
@@ -21,6 +33,7 @@ export const ReceiptsListStyles = {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   `,
   Image: styled.div<{ src: string }>`
     display: flex;

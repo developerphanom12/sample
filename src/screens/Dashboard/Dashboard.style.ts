@@ -28,6 +28,9 @@ export const DashboardStyles = {
     background: ${({ theme }) => theme.colors.white};
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 38px 56px 38px;
   `,
   LoaderWrapper: styled.div`
     display: flex;

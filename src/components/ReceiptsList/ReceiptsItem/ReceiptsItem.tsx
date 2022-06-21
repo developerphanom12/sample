@@ -17,7 +17,6 @@ export const ReceiptsItem: React.FC<IReceiptsItemProps> = (props) => {
     total,
     currency,
     receiptId,
-    receiptIndex,
   } = props;
 
   const { onReceiptDetailsClickHandler } = useReceiptsItemState({

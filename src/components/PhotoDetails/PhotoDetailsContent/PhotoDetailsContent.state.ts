@@ -77,10 +77,10 @@ export const usePhotoDetailsContentState = () => {
     setState((prevState) => ({
       ...prevState,
       statusValue: selectedReceipt?.status || '',
-      categoryValue: currentCategory,
-      typeValue: currentType,
+      categoryValue: currentCategory || null,
+      typeValue: currentType || null,
       dateValue: selectedReceipt?.receipt_date || null,
-      supplierValue: currentSupplier,
+      supplierValue: currentSupplier || null,
       supplierAccountValue: selectedReceipt?.supplier_account || '',
       currencyValue: currentCurrency,
       currencyValueId: selectedReceipt?.currency.id || '',
@@ -95,7 +95,7 @@ export const usePhotoDetailsContentState = () => {
         ? format(new Date(selectedReceipt?.receipt_date), company.date_format)
         : '',
     }));
-  }, [selectedReceipt]);
+  }, [selectedReceipt?.id]);
 
   const [state, setState] =
     useState<IusePhotoDetailsContentState>(initialState);
@@ -129,14 +129,12 @@ export const usePhotoDetailsContentState = () => {
           items: categoriesData.data,
         })
       );
-
       dispatch(
         setItemsForSelect({
           fieldName: 'suppliersForSelect',
           items: supplierData.data,
         })
       );
-
       dispatch(
         setItemsForSelect({
           fieldName: 'typesForSelect',

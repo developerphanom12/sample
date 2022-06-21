@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { CustomLink } from 'components/CustomLink/CustomLink';
-import { Notification } from 'components/Notification/Notification';
 import { Avatar } from 'components/Avatar/Avatar';
 
 import { HeaderStyles as Styled } from './Header.style';

@@ -51,7 +51,7 @@ export const StyledReactSelect = styled(Select)<{
     display: none;
   }
   .Select__control--is-disabled {
-    background: ${({ theme }) => theme.colors.lightGray};
+    background: ${({ theme }) => theme.colors.lighterGrey};
   }
   .Select__menu {
     width: 100%;

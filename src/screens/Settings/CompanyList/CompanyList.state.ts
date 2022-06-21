@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 
+import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
+
 interface IuseCompanyListState {
   searchValue: string;
   isLoading: boolean;
@@ -10,17 +12,11 @@ interface IuseCompanyListState {
   companyName: string;
   logoSrc: string;
   logoName: string;
+  isEdit: boolean;
 }
 
 export const useCompanyListState = () => {
-  const initialState = {
-    companyName: '',
-    searchValue: '',
-    isLoading: false,
-    isContentLoading: false,
-    logoSrc: '',
-    logoName: '',
-  };
+  const initialState = COMPANY_LIST_INITIAL_STATE;
 
   const [state, setState] = useState<IuseCompanyListState>(initialState);
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -64,6 +60,30 @@ export const useCompanyListState = () => {
       logoSrc: '',
     }));
 
+  const onDeleteIconClickHandler = async (itemId: string) => {
+    try {
+      onDeleteModalWindowToggle();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onEditIconClickHandler = async (itemId: string) => {
+    try {
+      onModalWindowToggle();
+      setState((prevState) => ({
+        ...prevState,
+        isEdit: true,
+      }));
+    } catch (error) {
+      console.log(error);
+      setState((prevState) => ({
+        ...prevState,
+        isEdit: false,
+      }));
+    }
+  };
+
   const onEnterInsertUser = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
   };
@@ -81,6 +101,7 @@ export const useCompanyListState = () => {
   return {
     ...state,
     debouncedValue,
+    onDeleteIconClickHandler,
     onDeleteLogoHandler,
     onChangeCompanyNameHandler,
     onModalWindowToggle,
@@ -90,5 +111,6 @@ export const useCompanyListState = () => {
     isDeleteModalWindowOpen,
     onChangeSearchValueHandler,
     onEnterInsertUser,
+    onEditIconClickHandler,
   };
 };

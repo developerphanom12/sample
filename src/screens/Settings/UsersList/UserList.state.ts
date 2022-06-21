@@ -3,8 +3,9 @@ import { useFormik } from 'formik';
 
 import { useDebounce } from 'hooks/useDebounce';
 import { useToggle } from 'hooks/useToggle';
-
 import { myAccountValidationScheme } from 'services/validation';
+
+import { USERS_LIST_INITIAL_STATE } from './userList.constants';
 
 interface IuseUserListState {
   searchValue: string;
@@ -13,11 +14,7 @@ interface IuseUserListState {
 }
 
 export const useUserListState = () => {
-  const initialState = {
-    searchValue: '',
-    isLoading: false,
-    isContentLoading: false,
-  };
+  const initialState = USERS_LIST_INITIAL_STATE
 
   const formikInitialValues = {
     fullName: '',
@@ -62,10 +59,36 @@ export const useUserListState = () => {
     validateOnBlur: true,
   });
 
+  const onDeleteIconClickHandler = async (itemId: string) => {
+    try {
+      onDeleteModalWindowToggle();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onEditIconClickHandler = async (itemId: string) => {
+    try {
+      onModalWindowToggle();
+      setState((prevState) => ({
+        ...prevState,
+        isEdit: true,
+      }));
+    } catch (error) {
+      console.log(error);
+      setState((prevState) => ({
+        ...prevState,
+        isEdit: false,
+      }));
+    }
+  };
+
   return {
     ...state,
     formik,
     debouncedValue,
+    onEditIconClickHandler,
+    onDeleteIconClickHandler,
     onModalWindowToggle,
     onDeleteModalWindowToggle,
     isModalWindowOpen,
