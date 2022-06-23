@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { Avatar } from 'components/Avatar/Avatar';
@@ -10,12 +10,25 @@ import { Icon } from '../Icons';
 import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
 
+import { useHeaderState } from './Header.state';
+
 export interface HeaderProps {
   role: 'admin' | 'customer';
 }
 
 export const Header: FC<HeaderProps> = (props) => {
   const { role } = props;
+  const {
+    isOpenSwitcher,
+    switcherRef,
+    onClickSwitcherHandler,
+    onSwitchCompanyHandler,
+    onGetAllCompaniesHandler,
+  } = useHeaderState();
+
+  useEffect(() => {
+    onGetAllCompaniesHandler();
+  }, []);
   return (
     <Styled.Header>
       <Styled.Container>
@@ -49,7 +62,12 @@ export const Header: FC<HeaderProps> = (props) => {
             </Styled.LinkWrapper>
           </Styled.Links>
           <Styled.Notifications>
-            <CompanySwitcher />
+            <CompanySwitcher
+              isOpenSwitcher={isOpenSwitcher}
+              onClickSwitcherHandler={onClickSwitcherHandler}
+              switcherRef={switcherRef}
+              onSwitchCompanyHandler={onSwitchCompanyHandler}
+            />
             <Styled.Link to={ROUTES.settings}>
               <Avatar />
             </Styled.Link>

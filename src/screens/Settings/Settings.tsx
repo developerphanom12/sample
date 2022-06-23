@@ -7,10 +7,15 @@ import { SettingsStyles } from './Settings.style';
 import { useSettingsState } from './Settings.state';
 
 export const Settings: FC = () => {
-  const userFullName = useSettingsState();
+  const { fileData, fullName, onChangeFileHandler } = useSettingsState();
   return (
     <SettingsStyles.Wrapper>
-      <Sidebar userFullName={userFullName} />
+      <Sidebar
+        avatarName={fileData.fileName}
+        avatatSrc={fileData.fileSrc}
+        userFullName={fullName}
+        onChangeFileHandler={onChangeFileHandler}
+      />
       <Outlet />
     </SettingsStyles.Wrapper>
   );

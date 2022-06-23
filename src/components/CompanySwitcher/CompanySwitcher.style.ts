@@ -12,6 +12,9 @@ export const CompanySwitcherStyles = {
     align-items: center;
     padding-left: 22px;
     margin-right: 15px;
+    &:hover {
+      cursor: pointer;
+    }
   `,
   Content: styled.div`
     font-size: ${(props) => props.theme.size.xnormal};

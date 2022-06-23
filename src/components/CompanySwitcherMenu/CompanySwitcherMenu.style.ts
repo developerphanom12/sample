@@ -3,6 +3,7 @@ import { styled } from 'app/theme';
 export const CompanySwitcherMenuStyles = {
   Wrapper: styled.div`
     position: absolute;
+    cursor: pointer;
     top: 100%;
     right: -1px;
     width: 311px;

@@ -10,7 +10,7 @@ export const TableSettingsCompanyItem: React.FC<TableSettingsItemProps> = (
   const { onEditIconClickHandler, onDeleteIconClickHandler, userRole } = props;
   return (
     <Styled.Item>
-      {userRole === 'owner' && (
+      {(userRole === 'owner' || userRole === 'admin') && (
         <Styled.Action>
           <Styled.ActionButton onClick={() => onEditIconClickHandler('1')}>
             <Icon type="edit" />

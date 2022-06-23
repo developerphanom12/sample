@@ -5,15 +5,16 @@ import { CompanySwitcherMenuItemStyles as Styled } from './CompanySwitcherMenuIt
 
 export interface ICompanySwitcherMenuItem {
   isLoading?: boolean;
-  onClick?: () => void;
   children?: React.ReactNode;
   isActive?: boolean;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  companyId: string;
 }
 
 export const CompanySwitcherMenuItem = (props: ICompanySwitcherMenuItem) => {
-  const { isLoading, onClick, children, isActive } = props;
+  const { isLoading, onClick, companyId, children, isActive } = props;
   return (
-    <Styled.Item>
+    <Styled.Item onClick={onClick} id={companyId}>
       <Styled.Content>{children}</Styled.Content>
       {isActive && (
         <Styled.Logo>

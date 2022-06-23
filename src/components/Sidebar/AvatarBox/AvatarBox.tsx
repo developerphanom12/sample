@@ -1,21 +1,50 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import { Icon } from '../../Icons';
-import { AvatarBoxStyles as Styled } from './AvatarBox.style';
+import { UploadInput } from '../../UploadInput';
+import { AvatarBoxStyles as Styled, HoverUploadLogo } from './AvatarBox.style';
 
 interface IAvatarBoxProps {
   userFullName: string;
+  id: string;
+  name: string;
+  onChangeAvatarHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  avatarName: string;
+  avatarSrc: string;
 }
 
 export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
-  const { userFullName } = props;
+  const {
+    userFullName,
+    id,
+    name,
+    avatarName,
+    avatarSrc,
+    onChangeAvatarHandler,
+  } = props;
+
   return (
     <Styled.MainWrapper>
       <Styled.ContentWrapper>
         <Styled.Label>Settings</Styled.Label>
-        <Styled.ImageWrapper>
-          <Icon type="settingsAvatar" />
-        </Styled.ImageWrapper>
+        <Styled.ProfileImageWrapper>
+          <UploadInput
+            id={id}
+            name={name}
+            onChangeFiles={onChangeAvatarHandler}
+          />
+          <Styled.InputLabel htmlFor={id} />
+          {avatarSrc ? (
+            <Styled.Image imageSrc={avatarSrc} />
+          ) : (
+            <Styled.ImageWrapper>
+              <Icon type="settingsAvatar" />
+            </Styled.ImageWrapper>
+          )}
+          <HoverUploadLogo>
+            <Icon type="cloudUpload" />
+          </HoverUploadLogo>
+        </Styled.ProfileImageWrapper>
       </Styled.ContentWrapper>
       <Styled.UserInfoWrapper>
         <Styled.NameAndStatus>{userFullName}</Styled.NameAndStatus>

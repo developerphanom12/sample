@@ -9,7 +9,9 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
   return (
     <>
       <Styled.Head>
-        {userRole === 'owner' && <Styled.Actions>Actions</Styled.Actions>}
+        {(userRole === 'owner' || userRole === 'admin') && (
+          <Styled.Actions>Actions</Styled.Actions>
+        )}
         <Styled.Column>
           <TableButton>Company</TableButton>
         </Styled.Column>

@@ -189,6 +189,7 @@ declare global {
   enum Roles {
     owner = 'owner',
     member = 'member',
+    admin = 'admin',
   }
   type TRoles = keyof typeof Roles;
 
