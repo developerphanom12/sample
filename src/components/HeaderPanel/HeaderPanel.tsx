@@ -36,6 +36,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
     onDownloadExcelFileHandler,
     onDeleteReceiptHandler,
     onMarkAsPaidButtonHandler,
+    datePickerRef,
   } = props;
   const ref = useOutsideClick(onActionsClose);
   return (
@@ -64,6 +65,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
               onDatePickerClickHandler={setIsDatePickerOpen}
               selectedDate={dateValue}
               formattedDate={formattedDate}
+              datePickerRef={datePickerRef}
             />
           </Styled.DatePickerWrapper>
         </Styled.FilterWrapper>

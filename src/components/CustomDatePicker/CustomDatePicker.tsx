@@ -55,7 +55,7 @@ export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
       </DateButton>
       {isDatePickerOpen && (
         <Styled.Wrapper
-          isFormattedDate={!!formattedDate}
+          isFormattedDate={!!dateLabelCondition}
           isInputDate={isInputDate}
         >
           <DatePicker

@@ -36,8 +36,8 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
           </Styled.IconWrapper>
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
-      {(isGuard && userRole !== 'admin') ||
-      (isGuard && userRole !== 'owner') ? null : (
+      {(isGuard && userRole === 'admin') ||
+      (isGuard && userRole === 'owner') ? (
         <Styled.ButtonWrapper>
           <Button
             onClick={onAddClickButtonHandler}
@@ -47,7 +47,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             Add
           </Button>
         </Styled.ButtonWrapper>
-      )}
+      ) : null}
     </Styled.HeaderPanelWrapper>
   );
 };

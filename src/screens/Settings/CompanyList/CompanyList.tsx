@@ -1,9 +1,8 @@
 import { FC } from 'react';
 
-import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
-import { TableSettingsCompany } from 'components/Table/TableSettings/TableSettingsCompany';
 import { InsertCompanyModalWindow } from 'components/InsertCompanyModalWindow';
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
+import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
 
 import { CompanyListStyles as Styled } from './CompanyList.style';
 import { useCompanyListState } from './CompanyList.state';
@@ -29,6 +28,16 @@ export const CompanyList: FC = () => {
     onModalWindowToggle,
     onChangeSearchValueHandler,
     onDeleteLogoHandler,
+    onChangeInputValue,
+    onForwardClick,
+    onBackwardClick,
+    onEnterGoToClick,
+    onChangeItemsPerPage,
+    onGoToClick,
+    itemsPerPage,
+    inputPaginationValue,
+    pages,
+    currentPage,
   } = useCompanyListState();
   return (
     <Styled.Section>
@@ -54,20 +63,25 @@ export const CompanyList: FC = () => {
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={`company ${'Company 1'}`}
       />
-      <Styled.ContentWrapper>
-        <HeaderPanelMaster
-          onChangeSearchValueHandler={onChangeSearchValueHandler}
-          searchValue={searchValue}
-          onAddClickButtonHandler={onModalWindowToggle}
-          isGuard
-          userRole="owner"
-        />
-        <TableSettingsCompany
-          userRole="owner"
-          onDeleteIconClickHandler={onDeleteIconClickHandler}
-          onEditIconClickHandler={onEditIconClickHandler}
-        />
-      </Styled.ContentWrapper>
+      <SettingsItemPageContent
+        userRole="owner"
+        onDeleteIconClickHandler={onDeleteIconClickHandler}
+        onEditIconClickHandler={onEditIconClickHandler}
+        pages={pages}
+        currentPage={currentPage}
+        onChangeInputValue={onChangeInputValue}
+        onForwardClick={onForwardClick}
+        onBackwardClick={onBackwardClick}
+        onEnterGoToClick={onEnterGoToClick}
+        onChangeReceiptsPerPage={onChangeItemsPerPage}
+        receiptsPerPage={itemsPerPage}
+        inputPaginationValue={inputPaginationValue}
+        onGoToClick={onGoToClick}
+        onChangeSearchValueHandler={onChangeSearchValueHandler}
+        searchValue={searchValue}
+        onAddClickButtonHandler={onModalWindowToggle}
+        isGuard
+      />
     </Styled.Section>
   );
 };

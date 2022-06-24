@@ -445,8 +445,19 @@ export const useInboxState = () => {
     }
   };
 
+  const onClickOutsideDatePickerHandler = (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    datePickerRef.current &&
+      !datePickerRef?.current.contains(event.target as Node) &&
+      setIsDatePickerOpen();
+  };
+
+  const datePickerRef = useRef<HTMLButtonElement>(null);
+
   return {
     ...state,
+    datePickerRef,
     count,
     location,
     formik,
@@ -491,5 +502,6 @@ export const useInboxState = () => {
     onCheckedPublishMockFuncHandler,
     onDeleteReceiptHandler,
     onMarkAsPaidButtonHandler,
+    onClickOutsideDatePickerHandler,
   };
 };

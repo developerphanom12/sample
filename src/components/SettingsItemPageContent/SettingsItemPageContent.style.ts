@@ -1,0 +1,10 @@
+import { styled } from 'app/theme';
+
+export const SettingsItemPageContentStyle = {
+  ContentWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    flex: 1 0 auto;
+  `,
+};

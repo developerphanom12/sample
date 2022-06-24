@@ -50,6 +50,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     onChangePage,
     receipts,
     isFetchingReceipts,
+    datePickerRef,
   } = props;
 
   return (
@@ -57,6 +58,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
       <Styled.Wrapper>
         {!isFetchingReceipts && (
           <HeaderPanel
+            datePickerRef={datePickerRef}
             statusValue={statusValue}
             onSelectFilesHandler={onSelectFilesHandler}
             onChangeStatusValueHandler={onChangeStatusValueHandler}

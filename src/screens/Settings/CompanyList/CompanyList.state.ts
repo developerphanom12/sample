@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { SingleValue } from 'react-select';
 
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
-
-interface IuseCompanyListState {
-  searchValue: string;
-  isLoading: boolean;
-  isContentLoading: boolean;
-  companyName: string;
-  logoSrc: string;
-  logoName: string;
-  isEdit: boolean;
-}
+import { IuseCompanyListState } from './types/companyList.types';
 
 export const useCompanyListState = () => {
   const initialState = COMPANY_LIST_INITIAL_STATE;
@@ -24,12 +16,88 @@ export const useCompanyListState = () => {
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
-    value: string | boolean
+    value: string | boolean | number | SingleValue<IOption>
   ) => {
     setState((prevState) => ({
       ...prevState,
       [optionName]: value,
     }));
+  };
+
+  const count = 0;
+  const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
+    onChangeStateFieldHandler('itemsPerPage', newValue);
+    onChangeStateFieldHandler('isContentLoading', true);
+    onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler('currentPage', initialState.currentPage);
+    if (!count) return;
+    onChangePagesAmount(Number(newValue?.value), count);
+  };
+
+  const onChangePage = (data: IPaginationData) => {
+    const selected = data.selected;
+    setState((prevState) => ({
+      ...prevState,
+      currentPage: selected,
+      skipReceipts: selected * Number(state.itemsPerPage.value),
+      isContentLoading: true,
+    }));
+  };
+
+  const onChangePagesAmount = (itemsCount: number, count: number) => {
+    if (!count) return;
+    onChangeStateFieldHandler('pages', Math.ceil(count / itemsCount));
+  };
+
+  const onChangeInputValue = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
+
+  const onEnterGoToClick = (event: React.KeyboardEvent) => {
+    if (event.key !== 'Enter') return;
+    onGoToClick();
+  };
+
+  const onGoToClick = () => {
+    if (Number(state.inputPaginationValue) === state.currentPage + 1) {
+      onChangeStateFieldHandler(
+        'inputPaginationValue',
+        initialState.inputPaginationValue
+      );
+      return;
+    }
+    if (Number(state.inputPaginationValue) <= state.pages) {
+      const goTo = Number(state.inputPaginationValue);
+      onChangePage({ selected: goTo - 1 });
+      onChangeStateFieldHandler(
+        'currentPage',
+        Number(state.inputPaginationValue) - 1
+      );
+    }
+    onChangeStateFieldHandler(
+      'inputPaginationValue',
+      initialState.inputPaginationValue
+    );
+  };
+
+  const onForwardClick = () => {
+    if (state.currentPage === state.pages - 1) return;
+    const forward = state.currentPage + 5;
+    if (forward < state.pages) {
+      onChangePage({ selected: forward });
+    } else {
+      onChangePage({ selected: state.pages - 1 });
+    }
+  };
+
+  const onBackwardClick = () => {
+    if (state.currentPage === 0) return;
+    const backward = state.currentPage - 5;
+    if (backward < 0) {
+      onChangePage({ selected: 0 });
+    } else {
+      onChangePage({ selected: backward });
+    }
   };
 
   const debouncedValue = useDebounce(state.searchValue, 250);
@@ -112,5 +180,11 @@ export const useCompanyListState = () => {
     onChangeSearchValueHandler,
     onEnterInsertUser,
     onEditIconClickHandler,
+    onChangeInputValue,
+    onForwardClick,
+    onBackwardClick,
+    onEnterGoToClick,
+    onChangeItemsPerPage,
+    onGoToClick,
   };
 };

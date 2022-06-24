@@ -69,6 +69,8 @@ export const Inbox: FC = () => {
     dateStart,
     location,
     count,
+    datePickerRef,
+    onClickOutsideDatePickerHandler,
     onChangePagesAmount,
     onDownloadExcelFileHandler,
     onDeleteReceiptHandler,
@@ -117,6 +119,7 @@ export const Inbox: FC = () => {
         <>
           {!isFetchingReceipts && isContentVisible && !isFetchingData ? (
             <InboxContent
+              datePickerRef={datePickerRef}
               pages={pages}
               currentPage={currentPage}
               onChangeReceiptsPerPage={onChangeReceiptsPerPage}
@@ -134,7 +137,7 @@ export const Inbox: FC = () => {
               onChangeSearchValueHandler={onChangeSearchValueHandler}
               searchValue={searchValue}
               onChangeDate={onChangeDate}
-              onClickOutsideDatePickerHandler={setIsDatePickerOpen}
+              onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
               isDatePickerOpen={isDatePickerOpen}
               dateValue={dateValue}
               setIsDatePickerOpen={setIsDatePickerOpen}

@@ -218,16 +218,16 @@ export const useCategoriesTabState = () => {
     }
   };
 
-  const onChangeItemsPerPage = (newValue: any) => {
+  const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
     onChangeStateFieldHandler('itemsPerPage', newValue);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('isFocus', true);
     onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllCategoriesHandler({ take: Number(newValue.value) });
+    onGetAllCategoriesHandler({ take: Number(newValue?.value) });
     onChangeStateFieldHandler('currentPage', initialState.currentPage);
     if (!count) return;
-    onChangePagesAmount(Number(newValue.value), count);
+    onChangePagesAmount(Number(newValue?.value), count);
   };
 
   const onChangePage = (data: IPaginationData) => {

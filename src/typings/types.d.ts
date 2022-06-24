@@ -25,6 +25,7 @@ declare global {
   }
 
   interface IHeaderPanelProps {
+    datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteReceiptHandler: () => Promise<void>;
     onMarkAsPaidButtonHandler: () => Promise<void>;
     onClickDownloadCSVButtonHandler: () => Promise<void>;
@@ -39,7 +40,9 @@ declare global {
     ) => void;
     searchValue: string;
     onChangeDate: (date: Date) => void;
-    onClickOutsideDatePickerHandler: () => void;
+    onClickOutsideDatePickerHandler: (
+      event: React.MouseEvent<HTMLDivElement>
+    ) => void;
     isDatePickerOpen: boolean;
     dateValue: Date | null;
     setIsDatePickerOpen: () => void;
@@ -86,7 +89,7 @@ declare global {
   }
 
   interface IPaginationPanel extends IPagination {
-    onChangeReceiptsPerPage: (newValue: unknown) => void;
+    onChangeReceiptsPerPage: (newValue: SingleValue<IOption>) => void;
     receiptsPerPage: { value: string; label: string };
   }
 
@@ -155,6 +158,7 @@ declare global {
     receiptsPerPage: { value: string; label: string };
     receipts: IReceipt[];
     isFetchingReceipts: boolean;
+    datePickerRef: React.RefObject<HTMLButtonElement>;
   }
 
   interface IOption {
@@ -230,10 +234,21 @@ declare global {
   interface IModalWindowsBox
     extends IMasterModalWindowProps,
       IDeleteModalWindowProps {}
+
+  interface IPaginationState {
+    itemsPerPage: SingleValue<IOption> | any;
+    skipItems: number;
+    currentPage: number;
+    inputPaginationValue: string;
+    pages: number;
+    forwardDisabled: boolean;
+    backwardDisabled: boolean;
+  }
 }
 
 export {
   IModalWindowsBox,
+  IPaginationState,
   TableSettingsProps,
   TRoles,
   IMasterModalWindowProps,
