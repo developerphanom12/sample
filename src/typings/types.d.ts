@@ -196,19 +196,16 @@ declare global {
     admin = 'admin',
   }
   type TRoles = keyof typeof Roles;
-
   interface TableSettingsProps {
     userRole: TRoles;
     onDeleteIconClickHandler: (itemId: string) => Promise<void>;
     onEditIconClickHandler: (itemId: string) => Promise<void>;
   }
-
   interface TableSettingsItemProps {
     userRole: TRoles;
     onDeleteIconClickHandler: (itemId: string) => Promise<void>;
     onEditIconClickHandler: (itemId: string) => Promise<void>;
   }
-
   interface IMasterModalWindowProps {
     isDisableButton?: boolean;
     isLoading: boolean;
@@ -244,9 +241,28 @@ declare global {
     forwardDisabled: boolean;
     backwardDisabled: boolean;
   }
+  interface IMember {
+    id: string;
+    name: string;
+    role: TRoles;
+    email?: string;
+  }
+  interface IMemberTableProps extends TableSettingsProps {
+    members?: IMember[];
+    searchedUsers: IMember[];
+    searchValue: string;
+  }
+  interface ISearchParams {
+    search?: string;
+    take?: number;
+    skip?: number;
+  }
 }
 
 export {
+  ISearchParams,
+  IMemberTableProps,
+  IMember,
   IModalWindowsBox,
   IPaginationState,
   TableSettingsProps,

@@ -7,4 +7,10 @@ export const SettingsItemPageContentStyle = {
     padding: 20px 30px;
     flex: 1 0 auto;
   `,
+  LoaderWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  `,
 };

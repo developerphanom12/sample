@@ -15,7 +15,7 @@ import {
 } from '../master.api';
 
 import { setSuppliers, setTabItem } from '../reducer/master.reducer';
-import { IMasterParams, IuseMasterState } from '../types/master.types';
+import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
 export const useSuppliersTabState = () => {
@@ -71,7 +71,7 @@ export const useSuppliersTabState = () => {
   ) => onChangeStateFieldHandler('modalInputValue', event.target.value);
 
   const onGetAllSuppliersHandler = async (
-    params?: IMasterParams,
+    params?: ISearchParams,
     isSearching?: boolean
   ) => {
     try {

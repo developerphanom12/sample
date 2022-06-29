@@ -1,37 +1,54 @@
 import React from 'react';
 
+import { getFirstLetterUppercase } from 'services/utils';
+
 import { Icon } from 'components/Icons/Icons';
 
-import { TableSettingsItemStyles } from './TableSettingsItem.style';
+import { TableSettingsItemStyles as Styled } from './TableSettingsItem.style';
+import { useTableSettingsItemState } from './TableSettingsItem.state';
 
-export const TableSettingsItem: React.FC<TableSettingsItemProps> = (props) => {
-  const { onDeleteIconClickHandler, onEditIconClickHandler, userRole } = props;
+interface ITableSettingsItemProps extends TableSettingsItemProps {
+  memberEmail?: string;
+  memberId: string;
+  memberName: string;
+}
+export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
+  const {
+    onDeleteIconClickHandler,
+    onEditIconClickHandler,
+    userRole,
+    memberEmail,
+    memberId,
+    memberName,
+  } = props;
+
+  const { onClickDeleteIconHandler, onClickEditIconHandler } =
+    useTableSettingsItemState({
+      itemId: memberId,
+      onDeleteIconClickHandler,
+      onEditIconClickHandler,
+    });
   return (
-    <TableSettingsItemStyles.Item>
+    <Styled.Item>
       {(userRole === 'owner' || userRole === 'admin') && (
-        <TableSettingsItemStyles.Action>
-          <TableSettingsItemStyles.ActionButton
-            onClick={() => onEditIconClickHandler('1')}
-          >
+        <Styled.Action>
+          <Styled.ActionButton onClick={onClickEditIconHandler}>
             <Icon type="edit" />
-          </TableSettingsItemStyles.ActionButton>
-          <TableSettingsItemStyles.ActionButton
-            onClick={() => onDeleteIconClickHandler('1')}
-          >
+          </Styled.ActionButton>
+          <Styled.ActionButton onClick={onClickDeleteIconHandler}>
             <Icon type="remove" />
-          </TableSettingsItemStyles.ActionButton>
-        </TableSettingsItemStyles.Action>
+          </Styled.ActionButton>
+        </Styled.Action>
       )}
-
-      <TableSettingsItemStyles.Column>Name</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>Email</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>Role</TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>
-        Created On
-      </TableSettingsItemStyles.Column>
-      <TableSettingsItemStyles.Column>
-        Created By
-      </TableSettingsItemStyles.Column>
-    </TableSettingsItemStyles.Item>
+      <Styled.Column>
+        <Styled.TextWrapper>{memberName}</Styled.TextWrapper>
+      </Styled.Column>
+      <Styled.Column>
+        <Styled.TextWrapper>Smith@gmail.com</Styled.TextWrapper>
+      </Styled.Column>
+      <Styled.Column>{getFirstLetterUppercase(userRole)}</Styled.Column>
+      <Styled.Column>Created On</Styled.Column>
+      <Styled.Column>Created By</Styled.Column>
+    </Styled.Item>
   );
 };

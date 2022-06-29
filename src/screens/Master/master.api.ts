@@ -2,7 +2,6 @@ import { apiServices } from 'services/api-service';
 import {
   IUpdateCategory,
   ICreateCategory,
-  IMasterParams,
 } from './types/master.types';
 
 type Direction = 'category' | 'supplier' | 'payment-type';
@@ -23,7 +22,7 @@ export const updateTabItem = (
 };
 export const getAllTabItems = (
   urlDirection: Direction,
-  params?: IMasterParams
+  params?: ISearchParams
 ) => {
   const URL = `${urlDirection}/get-many`;
   return apiServices.fetchData(URL, params);

@@ -1,3 +1,5 @@
+import { USER_ROLES } from 'constants/strings';
+
 export const InsertUserInputs = [
   {
     labelText: 'Full Name',
@@ -19,5 +21,6 @@ export const InsertUserInputs = [
     labelText: 'Role',
     inputName: 'Role',
     inputType: 'select',
+    options: USER_ROLES,
   },
 ];

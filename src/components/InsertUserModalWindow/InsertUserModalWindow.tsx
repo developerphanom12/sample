@@ -4,18 +4,22 @@ import ReactModal from 'react-modal';
 
 import { ModalButtonsBox } from '../ModalButtonsBox';
 import { ModalWindowHeader } from '../ModalWindowHeader';
-import { InsertUserInputs } from './insertUserModalWindow.constants';
 import { InsertUserModalWindowStyles as Styled } from './InsertUserModalWindow.style';
 import { UserModalWindowStyles } from './InsertUserModalWindow.style';
 import { ModalInputs } from './ModalInputs/ModalInputs';
+import { TInputFields } from './types/insertUser.types';
 
 interface InsertUserModalWindowProps
   extends Omit<
     IMasterModalWindowProps,
-    'onChangeInputValueHandler' | 'inputValue'
+    'onChangeInputValueHandler' | 'inputValue' | 'onSaveButtonCLickHandler'
   > {
+  onSaveButtonCLickHandler: (
+    e?: React.FormEvent<HTMLFormElement> | undefined
+  ) => void;
   formikMeta: (name: string) => FieldMetaProps<string>;
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
+  modalFields: TInputFields;
 }
 
 export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
@@ -31,6 +35,7 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
     isDisableButton,
     formikMeta,
     formikProps,
+    modalFields,
   } = props;
   return (
     <ReactModal
@@ -44,17 +49,20 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
         onCloseButtonHandler={onCloseModalWindowHandler}
       />
       <Styled.Content>
-        <Styled.Form>
+        <Styled.Form onSubmit={onSaveButtonCLickHandler}>
           <Styled.InputsWrapper>
-            {InsertUserInputs.map((input) => (
+            {modalFields.map((input) => (
               <ModalInputs
-                label={input.labelText}
-                key={input.inputName}
-                inputName={input.inputName}
-                inputType={input.inputType}
+                selectValue={input.value}
+                label={input.label}
+                key={input.name}
+                inputName={input.name}
+                inputType={input.type}
                 formikMeta={formikMeta}
                 formikProps={formikProps}
                 onEnterCreateItemClick={onEnterCreateItemClick}
+                options={input.options}
+                onChangeSelectHandler={input.onChangeSelect}
               />
             ))}
           </Styled.InputsWrapper>

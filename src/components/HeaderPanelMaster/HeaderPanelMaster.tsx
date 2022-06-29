@@ -16,6 +16,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
     onFocusSearchHandler,
     isGuard,
     userRole,
+    isButton,
   } = props;
   return (
     <Styled.HeaderPanelWrapper>
@@ -37,7 +38,8 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
       {(isGuard && userRole === 'admin') ||
-      (isGuard && userRole === 'owner') ? (
+      (isGuard && userRole === 'owner') ||
+      isButton ? (
         <Styled.ButtonWrapper>
           <Button
             onClick={onAddClickButtonHandler}

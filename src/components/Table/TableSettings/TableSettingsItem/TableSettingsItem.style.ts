@@ -33,4 +33,11 @@ export const TableSettingsItemStyles = {
     max-width: 180px;
     width: 100%;
   `,
+  TextWrapper: styled.span`
+    max-width: 109px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  `,
 };

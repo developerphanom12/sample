@@ -40,6 +40,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
   return (
     <Styled.ContentWrapper>
       <HeaderPanelMaster
+        isButton
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onAddClickButtonHandler={onAddClickButtonHandler}

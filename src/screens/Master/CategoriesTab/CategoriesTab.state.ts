@@ -15,7 +15,7 @@ import {
 } from '../master.api';
 
 import { setCategories, setTabItem } from '../reducer/master.reducer';
-import { IMasterParams, IuseMasterState } from '../types/master.types';
+import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
 export const useCategoriesTabState = () => {
@@ -67,7 +67,7 @@ export const useCategoriesTabState = () => {
   ) => onChangeStateFieldHandler('modalInputValue', event.target.value);
 
   const onGetAllCategoriesHandler = async (
-    params?: IMasterParams,
+    params?: ISearchParams,
     isSearching?: boolean
   ) => {
     try {

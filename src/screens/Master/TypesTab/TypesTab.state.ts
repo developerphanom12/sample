@@ -15,7 +15,7 @@ import {
 } from '../master.api';
 
 import { setTabItem, setTypes } from '../reducer/master.reducer';
-import { IMasterParams, IuseMasterState } from '../types/master.types';
+import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
 export const useTypesTabState = () => {
@@ -70,7 +70,7 @@ export const useTypesTabState = () => {
   const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);
 
   const onGetAllTypesHandler = async (
-    params?: IMasterParams,
+    params?: ISearchParams,
     isSearching?: boolean
   ) => {
     try {

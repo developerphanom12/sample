@@ -81,6 +81,7 @@ export const CompanyList: FC = () => {
         searchValue={searchValue}
         onAddClickButtonHandler={onModalWindowToggle}
         isGuard
+        searchedUsers={[]}
       />
     </Styled.Section>
   );

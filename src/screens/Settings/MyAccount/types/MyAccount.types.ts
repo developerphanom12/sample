@@ -31,6 +31,7 @@ export type TInputFields = (
       onChangeSelect?: undefined;
     }
   | {
+      isMulti?: boolean;
       type: string;
       name: string;
       label: string;

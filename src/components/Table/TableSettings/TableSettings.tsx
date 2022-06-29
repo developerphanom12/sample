@@ -1,38 +1,69 @@
 import React from 'react';
 
-import { TableSettingsStyles } from './TableSettings.style';
+import { TableSettingsStyles as Styled } from './TableSettings.style';
 import { TableSettingsItem } from './TableSettingsItem/TableSettingsItem';
 import { TableButton } from '../TableButton/TableButton';
 
-export const TableSettings: React.FC<TableSettingsProps> = (props) => {
-  const { onDeleteIconClickHandler, onEditIconClickHandler, userRole } = props;
+export const TableSettings: React.FC<IMemberTableProps> = (props) => {
+  const {
+    onDeleteIconClickHandler,
+    onEditIconClickHandler,
+    userRole,
+    members,
+    searchedUsers,
+    searchValue
+  } = props;
   return (
     <>
-      <TableSettingsStyles.Head>
+      <Styled.Head>
         {(userRole === 'owner' || userRole === 'admin') && (
-          <TableSettingsStyles.Actions>Actions</TableSettingsStyles.Actions>
+          <Styled.Actions>Actions</Styled.Actions>
         )}
-        <TableSettingsStyles.Column>
+        <Styled.Column>
           <TableButton>Name</TableButton>
-        </TableSettingsStyles.Column>
-        <TableSettingsStyles.Column>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Email</TableButton>
-        </TableSettingsStyles.Column>
-        <TableSettingsStyles.Column>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Role</TableButton>
-        </TableSettingsStyles.Column>
-        <TableSettingsStyles.Column>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Created On</TableButton>
-        </TableSettingsStyles.Column>
-        <TableSettingsStyles.Column>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Created By</TableButton>
-        </TableSettingsStyles.Column>
-      </TableSettingsStyles.Head>
-      <TableSettingsItem
-        onDeleteIconClickHandler={onDeleteIconClickHandler}
-        onEditIconClickHandler={onEditIconClickHandler}
-        userRole={userRole}
-      />
+        </Styled.Column>
+      </Styled.Head>
+      {searchedUsers?.length ? (
+        searchedUsers?.map((member) => (
+          <TableSettingsItem
+            key={member.id}
+            memberId={member.id}
+            memberEmail={member?.email}
+            memberName={member.name}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+            userRole={member.role}
+          />
+        ))
+      ) : searchValue && !searchedUsers?.length ? (
+        <Styled.EmptyContentWrapper>
+          No results found
+        </Styled.EmptyContentWrapper>
+      ) : (
+        members?.map((member) => (
+          <TableSettingsItem
+            key={member.id}
+            memberId={member.id}
+            memberEmail={member?.email}
+            memberName={member.name}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+            userRole={member.role}
+          />
+        ))
+      )}
     </>
   );
 };

@@ -25,6 +25,7 @@ export interface IuseMasterState {
 }
 
 export interface IHeaderPanelMasterProps {
+  isButton?: boolean;
   isGuard?: boolean;
   userRole?: TRoles;
   onChangeSearchValueHandler: (
@@ -48,7 +49,7 @@ export interface TableMasterProps {
 
 export interface ITabContentProps
   extends TableMasterProps,
-    IHeaderPanelMasterProps,
+    Omit<IHeaderPanelMasterProps, 'isButton'>,
     IPaginationPanel {
   isFetchingData?: boolean;
   isFocus?: boolean;
@@ -70,10 +71,4 @@ export interface IMASTER_INITIAL_STATE {
   types: { data: ITabItem[]; count: number | null };
   activeTabName: string;
   selectedCategory: ITabItem | null;
-}
-
-export interface IMasterParams {
-  search?: string;
-  take?: number;
-  skip?: number;
 }

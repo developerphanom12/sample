@@ -6,8 +6,13 @@ import { Input } from '../../Input';
 import { ModalFormStyles as Styled } from './ModalInputs.styles';
 
 interface IModalFormProps {
-  inputType: string;
+  selectValue?: IOption;
+  onChangeSelectHandler?:
+    | ((newValue: any, actionMeta: unknown) => void)
+    | undefined;
+  options?: IOption[];
   isMulti?: boolean;
+  inputType: string;
   label: string;
   inputName: string;
   formikMeta: (name: string) => FieldMetaProps<string>;
@@ -20,7 +25,10 @@ export const ModalInputs: FC<IModalFormProps> = (props) => {
     isMulti,
     label,
     inputName,
+    options,
+    selectValue,
     formikMeta,
+    onChangeSelectHandler,
     formikProps,
     onEnterCreateItemClick,
   } = props;
@@ -46,7 +54,13 @@ export const ModalInputs: FC<IModalFormProps> = (props) => {
       ) : (
         <>
           <Styled.Label>{label}</Styled.Label>
-          <CustomSelect isFullWidth isMulti={isMulti} />
+          <CustomSelect
+            onChangeValueHandler={onChangeSelectHandler}
+            options={options}
+            isFullWidth
+            isMulti={isMulti}
+            value={selectValue}
+          />
         </>
       )}
     </>

@@ -24,4 +24,14 @@ export const TableSettingsStyles = {
     width: 100%;
     max-width: 180px;
   `,
+  EmptyContentWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => props.theme.colors.white};
+    border: 1px solid ${(props) => props.theme.colors.gray};
+    border-top: 0;
+    min-height: 50px;
+    width: 100%;
+  `,
 };

@@ -34,6 +34,11 @@ import {
   ReceiptDetailsReducer,
   RECEIPT_DETAILS_INITIAL_STATE,
 } from 'screens/ReceiptDetails/reducer/receiptDetails.reducer';
+import {
+  SettingsReducer,
+  SETTINGS_INITIAL_STATE,
+} from 'screens/Settings/reducer/settings.reducer';
+import { ISETTINGS_INITIAL_STATE } from 'screens/Settings/types/settings.types';
 
 export const persistConfig = {
   key: 'root',
@@ -46,6 +51,7 @@ export const persistConfig = {
     'dashboard',
     'receiptDetails',
     'master',
+    'settings',
   ],
 };
 
@@ -57,6 +63,7 @@ export interface IState {
   dashboard: IDASHBOARD_INITIAL_STATE;
   master: IMASTER_INITIAL_STATE;
   receiptDetails: IRECEIPT_DETAILS_INITIAL_STATE;
+  settings: ISETTINGS_INITIAL_STATE;
 }
 
 const combineReducer = combineReducers<IState>({
@@ -67,6 +74,7 @@ const combineReducer = combineReducers<IState>({
   dashboard: dashboardReducer,
   master: MasterReducer,
   receiptDetails: ReceiptDetailsReducer,
+  settings: SettingsReducer,
 });
 
 export type combineReducerType = ReturnType<typeof combineReducer>;
@@ -82,6 +90,7 @@ const reducer = (state: combineReducerType | undefined, action: AnyAction) => {
         inbox: INBOX_INITIAL_STATE,
         filesUpload: FILES_UPLOAD_PREVIEW_INITIAL_STATE,
         receiptDetails: RECEIPT_DETAILS_INITIAL_STATE,
+        settings: SETTINGS_INITIAL_STATE,
       };
     }
   }

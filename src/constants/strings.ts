@@ -67,3 +67,18 @@ export const DATE_FORMATS = [
     label: 'MM/dd/yyyy',
   },
 ];
+
+export const USER_ROLES = [
+  {
+    value: 'owner',
+    label: 'Owner',
+  },
+  {
+    value: 'admin',
+    label: 'Admin',
+  },
+  {
+    value: 'regular user',
+    label: 'Regular User',
+  },
+];
