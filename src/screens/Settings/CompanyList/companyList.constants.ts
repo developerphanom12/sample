@@ -7,8 +7,6 @@ export const COMPANY_LIST_INITIAL_STATE = {
   isContentLoading: false,
   logoSrc: '',
   logoName: '',
-  isEdit: false,
-
   itemsPerPage: PAGINATION_ARRAY[1],
   skipItems: 0,
   currentPage: 0,
@@ -16,4 +14,9 @@ export const COMPANY_LIST_INITIAL_STATE = {
   forwardDisabled: true,
   backwardDisabled: true,
   inputPaginationValue: '',
+  isSearching: false,
+  isFocus: false,
+  selectedItemId: '',
+  searchedCompnies: [],
+  isFetchingData: true,
 };

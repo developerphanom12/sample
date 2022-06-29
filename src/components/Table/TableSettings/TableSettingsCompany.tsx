@@ -5,7 +5,12 @@ import { TableSettingsCompanyItem } from './TableSettingsItem/TableSettingsCompa
 import { TableButton } from '../TableButton/TableButton';
 
 export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
-  const { onDeleteIconClickHandler, onEditIconClickHandler, userRole } = props;
+  const {
+    onDeleteIconClickHandler,
+    onEditIconClickHandler,
+    userRole,
+    companies,
+  } = props;
   return (
     <>
       <Styled.Head>
@@ -22,11 +27,15 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
           <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
-      <TableSettingsCompanyItem
-        userRole={userRole}
-        onDeleteIconClickHandler={onDeleteIconClickHandler}
-        onEditIconClickHandler={onEditIconClickHandler}
-      />
+      {companies?.map((company) => (
+        <TableSettingsCompanyItem
+          key={company.id}
+          companyName={company.name}
+          userRole={userRole}
+          onDeleteIconClickHandler={onDeleteIconClickHandler}
+          onEditIconClickHandler={onEditIconClickHandler}
+        />
+      ))}
     </>
   );
 };

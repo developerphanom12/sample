@@ -5,5 +5,9 @@ export interface IuseCompanyListState extends IPaginationState {
   companyName: string;
   logoSrc: string;
   logoName: string;
-  isEdit: boolean;
+  isSearching: boolean;
+  isFocus: boolean;
+  selectedItemId: string;
+  searchedCompnies: ICompanySettings[];
+  isFetchingData: boolean;
 }

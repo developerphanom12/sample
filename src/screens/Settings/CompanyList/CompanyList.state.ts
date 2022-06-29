@@ -1,16 +1,26 @@
 import { useState } from 'react';
 import { SingleValue } from 'react-select';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
+import { IState } from 'services/redux/reducer';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
 import { IuseCompanyListState } from './types/companyList.types';
+import { getAllCompanies } from '../settings.api';
+import { setCompanies } from '../reducer/settings.reducer';
 
 export const useCompanyListState = () => {
   const initialState = COMPANY_LIST_INITIAL_STATE;
 
+  const dispatch = useDispatch();
   const [state, setState] = useState<IuseCompanyListState>(initialState);
+  const [isEdit, setIsEdit] = useState(false);
+  const {
+    settings: { companies },
+  } = useSelector((state: IState) => state);
+
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
   const [isDeleteModalWindowOpen, onDeleteModalWindowToggle] = useToggle();
 
@@ -25,6 +35,34 @@ export const useCompanyListState = () => {
   };
 
   const count = 0;
+
+  const onGetAllCompaniesHandler = async (
+    params?: ISearchParams,
+    isSearching?: boolean
+  ) => {
+    try {
+      onChangeStateFieldHandler('isLoading', true);
+      const { data } = await getAllCompanies();
+      dispatch(setCompanies(data));
+
+      setState((prevState) => ({
+        ...prevState,
+        isSearching: false,
+        isLoading: false,
+        isFetchingData: false,
+        isContentLoading: false,
+      }));
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isSearching: false,
+        isLoading: false,
+        isFetchingData: false,
+        isContentLoading: false,
+      }));
+      console.log(error);
+    }
+  };
   const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
     onChangeStateFieldHandler('itemsPerPage', newValue);
     onChangeStateFieldHandler('isContentLoading', true);
@@ -128,28 +166,13 @@ export const useCompanyListState = () => {
       logoSrc: '',
     }));
 
-  const onDeleteIconClickHandler = async (itemId: string) => {
-    try {
-      onDeleteModalWindowToggle();
-    } catch (error) {
-      console.log(error);
-    }
+  const onDeleteIconClickHandler = (itemId: string) => {
+    onDeleteModalWindowToggle();
   };
 
-  const onEditIconClickHandler = async (itemId: string) => {
-    try {
-      onModalWindowToggle();
-      setState((prevState) => ({
-        ...prevState,
-        isEdit: true,
-      }));
-    } catch (error) {
-      console.log(error);
-      setState((prevState) => ({
-        ...prevState,
-        isEdit: false,
-      }));
-    }
+  const onEditIconClickHandler = (itemId: string) => {
+    onModalWindowToggle();
+    setIsEdit(true);
   };
 
   const onEnterInsertUser = (event: React.KeyboardEvent) => {
@@ -168,6 +191,9 @@ export const useCompanyListState = () => {
 
   return {
     ...state,
+    isEdit,
+    companies,
+    onGetAllCompaniesHandler,
     debouncedValue,
     onDeleteIconClickHandler,
     onDeleteLogoHandler,

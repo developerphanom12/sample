@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useDebounce } from 'hooks/useDebounce';
 import { useToggle } from 'hooks/useToggle';
+
 import { myAccountValidationScheme } from 'services/validation';
 import { IState } from 'services/redux/reducer';
+import { getFirstLetterUppercase } from 'services/utils';
 
 import { getInputFields, USERS_LIST_INITIAL_STATE } from './userList.constants';
 import { IuseUserListState } from './types/userList.types';
@@ -15,8 +17,13 @@ import {
   deleteCompanyMember,
   getAllCompanies,
   getCompanyMembers,
+  updateCompanyMember,
 } from '../settings.api';
-import { setCompanies, setMembers } from '../reducer/settings.reducer';
+import {
+  setCompanies,
+  setCurrentMember,
+  setMembers,
+} from '../reducer/settings.reducer';
 
 import { USER_ROLES } from 'constants/strings';
 
@@ -31,6 +38,7 @@ export const useUserListState = () => {
     settings: {
       companies,
       companyMembers: { count, members },
+      currentMember,
     },
   } = useSelector((state: IState) => state);
 
@@ -39,11 +47,8 @@ export const useUserListState = () => {
     label: item.name,
   }));
 
-  const initialState = {
-    ...USERS_LIST_INITIAL_STATE,
-    role: null,
-    company: null,
-  };
+  const initialState = USERS_LIST_INITIAL_STATE;
+
   const [state, setState] = useState<IuseUserListState>(initialState);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -57,6 +62,7 @@ export const useUserListState = () => {
   const onModalWindowCancelClickButtonHandler = () => {
     onModalWindowToggle();
     setIsEdit(false);
+    onChangeStateFieldHandler('role', null);
     formik.resetForm();
   };
 
@@ -110,17 +116,27 @@ export const useUserListState = () => {
         ...prevState,
         isSearching: false,
         isLoading: false,
+        isFetchingData: false,
         isContentLoading: false,
       }));
     } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        isSearching: false,
+        isLoading: false,
+        isFetchingData: false,
+        isContentLoading: false,
+      }));
       console.log(error);
     }
   };
+
   const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
     onChangeStateFieldHandler('itemsPerPage', newValue);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
-
+    onChangeStateFieldHandler('isFocus', true);
+    onGetAllCompanyMembersHandler({ take: Number(newValue?.value) });
     onChangeStateFieldHandler('currentPage', initialState.currentPage);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
@@ -134,6 +150,10 @@ export const useUserListState = () => {
       skipReceipts: selected * Number(state.itemsPerPage.value),
       isContentLoading: true,
     }));
+    onGetAllCompanyMembersHandler({
+      take: Number(state.itemsPerPage.value),
+      skip: selected * Number(state.itemsPerPage.value),
+    });
   };
 
   const onChangePagesAmount = (itemsCount: number, count: number) => {
@@ -212,7 +232,8 @@ export const useUserListState = () => {
 
   const formik = useFormik({
     initialValues: formikInitialValues,
-    onSubmit: (values) => onInviteUserToCompanyHandler(values),
+    onSubmit: (values) =>
+      isEdit ? onEditUserHandler(values) : onInviteUserToCompanyHandler(values),
     validationSchema: myAccountValidationScheme,
     validateOnBlur: true,
   });
@@ -226,21 +247,56 @@ export const useUserListState = () => {
     }
   };
 
-  const onEditIconClickHandler = async (itemId: string) => {
-    try {
-      onChangeStateFieldHandler('selectedItemId', itemId);
-      setIsEdit(true);
-      onModalWindowToggle();
-    } catch (error) {
-      console.log(error);
-      setIsEdit(false);
-    }
+  const onEditIconClickHandler = (itemId: string) => {
+    dispatch(setCurrentMember(itemId));
+    formik.setValues({
+      email: currentMember?.email || '',
+      fullName: currentMember?.name || '',
+    });
+    setState((prevState) => ({
+      ...prevState,
+      isEdit: true,
+      role: {
+        label: getFirstLetterUppercase(currentMember?.role || ''),
+        value: currentMember?.role || '',
+      },
+      selectedItemId: itemId,
+    }));
+    onModalWindowToggle();
   };
 
   const onClickDeleteUserButton = async () => {
     try {
       await deleteCompanyMember(selectedUser?.id || '');
+
+      const { data } = await getCompanyMembers();
+      dispatch(setMembers({ count: data.count, members: data.data }));
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onEditUserHandler = async (values: typeof formikInitialValues) => {
+    try {
+      onChangeStateFieldHandler('isLoading', true);
+      await updateCompanyMember(
+        {
+          name: values.fullName,
+          role: state.role?.value || '',
+        },
+        currentMember?.id || ''
+      );
+      const { data } = await getCompanyMembers();
+      dispatch(setMembers({ count: data.count, members: data.data }));
+      onChangeStateFieldHandler('isLoading', false);
+      setIsEdit(false);
+      formik.resetForm();
+      onModalWindowToggle();
+    } catch (error) {
+      onChangeStateFieldHandler('isLoading', false);
+      setIsEdit(false);
+      formik.resetForm();
+      onModalWindowToggle();
       console.log(error);
     }
   };
@@ -252,7 +308,7 @@ export const useUserListState = () => {
       const payload = {
         email: values.email,
         name: values.fullName,
-        role: 'admin',
+        role: state.role?.value || '',
       };
       await createCompanyMember(payload);
     } catch (error) {
@@ -272,6 +328,8 @@ export const useUserListState = () => {
   return {
     ...state,
     isEdit,
+    count,
+    onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
     selectedUser,
     modalFields,

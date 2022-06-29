@@ -196,16 +196,28 @@ declare global {
     admin = 'admin',
   }
   type TRoles = keyof typeof Roles;
+
+  interface ICompanySettings {
+    date_format: string;
+    id: string;
+    name: string;
+  }
   interface TableSettingsProps {
+    companies?: ICompanySettings[];
     userRole: TRoles;
-    onDeleteIconClickHandler: (itemId: string) => Promise<void>;
-    onEditIconClickHandler: (itemId: string) => Promise<void>;
+    onDeleteIconClickHandler: (itemId: string) => void;
+    onEditIconClickHandler: (itemId: string) => void;
   }
   interface TableSettingsItemProps {
     userRole: TRoles;
-    onDeleteIconClickHandler: (itemId: string) => Promise<void>;
-    onEditIconClickHandler: (itemId: string) => Promise<void>;
+    onDeleteIconClickHandler: (itemId: string) => void;
+    onEditIconClickHandler: (itemId: string) => void;
   }
+
+  interface TableCompanySettingsItemProps extends TableSettingsItemProps {
+    companyName: string;
+  }
+
   interface IMasterModalWindowProps {
     isDisableButton?: boolean;
     isLoading: boolean;
@@ -249,7 +261,7 @@ declare global {
   }
   interface IMemberTableProps extends TableSettingsProps {
     members?: IMember[];
-    searchedUsers: IMember[];
+    searchedUsers?: IMember[];
     searchValue: string;
   }
   interface ISearchParams {
@@ -260,6 +272,8 @@ declare global {
 }
 
 export {
+  TableCompanySettingsItemProps,
+  ICompanySettings,
   ISearchParams,
   IMemberTableProps,
   IMember,

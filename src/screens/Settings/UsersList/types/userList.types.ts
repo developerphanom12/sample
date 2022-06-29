@@ -8,6 +8,7 @@ export interface IuseUserListState extends IPaginationState {
   searchedUsers: IMember[];
   role: IOption | null;
   company: IOption | null;
+  isFetchingData: boolean;
 }
 export interface IgetInputFieldsProps {
   options: IOption[][];

@@ -18,6 +18,9 @@ export const USERS_LIST_INITIAL_STATE = {
   isEdit: false,
   selectedItemId: '',
   searchedUsers: [],
+  isFetchingData: true,
+  role: null,
+  company: null,
 };
 
 export const getInputFields = (props: IgetInputFieldsProps) => {

@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react';
 import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
 import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
+import { LoaderComponent } from 'components/Loader';
 
 import { UserListStyles as Styled } from './UserList.styles';
 import { useUserListState } from './UserList.state';
@@ -19,7 +20,6 @@ export const UsersList: FC = () => {
     onEditIconClickHandler,
     onChangeSearchValueHandler,
     onEnterInsertUser,
-    onModalWindowToggle,
     onChangeInputValue,
     onForwardClick,
     onBackwardClick,
@@ -41,6 +41,9 @@ export const UsersList: FC = () => {
     searchedUsers,
     isSearching,
     modalFields,
+    count,
+    isFetchingData,
+    onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
     onModalWindowToggleHandler,
     onFocusSearchHandler,
@@ -56,6 +59,11 @@ export const UsersList: FC = () => {
     debouncedValue &&
       onGetAllCompanyMembersHandler({ search: debouncedValue }, isSearching);
   }, [debouncedValue]);
+
+  useEffect(() => {
+    if (!count) return;
+    onChangePagesAmount(Number(itemsPerPage.value), count);
+  }, [count, itemsPerPage]);
 
   return (
     <Styled.Section>
@@ -78,32 +86,39 @@ export const UsersList: FC = () => {
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={`user ${selectedUser?.name}`}
       />
-      <SettingsItemPageContent
-        isContentLoading={isContentLoading}
-        isFocus={isFocus}
-        searchedUsers={searchedUsers}
-        onFocusSearchHandler={onFocusSearchHandler}
-        onBlurHandler={onBlurHandler}
-        members={members}
-        isMemeberList
-        userRole="owner"
-        onDeleteIconClickHandler={onDeleteIconClickHandler}
-        onEditIconClickHandler={onEditIconClickHandler}
-        pages={pages}
-        currentPage={currentPage}
-        onChangeInputValue={onChangeInputValue}
-        onForwardClick={onForwardClick}
-        onBackwardClick={onBackwardClick}
-        onEnterGoToClick={onEnterGoToClick}
-        onChangeReceiptsPerPage={onChangeItemsPerPage}
-        receiptsPerPage={itemsPerPage}
-        inputPaginationValue={inputPaginationValue}
-        onGoToClick={onGoToClick}
-        onChangeSearchValueHandler={onChangeSearchValueHandler}
-        searchValue={searchValue}
-        onAddClickButtonHandler={onModalWindowToggleHandler}
-        isGuard
-      />
+      {isFetchingData ? (
+        <Styled.LoaderWrapper>
+          <LoaderComponent theme="preview" />
+        </Styled.LoaderWrapper>
+      ) : (
+        <SettingsItemPageContent
+          isFetchingData={isFetchingData}
+          isContentLoading={isContentLoading}
+          isFocus={isFocus}
+          searchedUsers={searchedUsers}
+          onFocusSearchHandler={onFocusSearchHandler}
+          onBlurHandler={onBlurHandler}
+          members={members}
+          isMemeberList
+          userRole="owner"
+          onDeleteIconClickHandler={onDeleteIconClickHandler}
+          onEditIconClickHandler={onEditIconClickHandler}
+          pages={pages}
+          currentPage={currentPage}
+          onChangeInputValue={onChangeInputValue}
+          onForwardClick={onForwardClick}
+          onBackwardClick={onBackwardClick}
+          onEnterGoToClick={onEnterGoToClick}
+          onChangeReceiptsPerPage={onChangeItemsPerPage}
+          receiptsPerPage={itemsPerPage}
+          inputPaginationValue={inputPaginationValue}
+          onGoToClick={onGoToClick}
+          onChangeSearchValueHandler={onChangeSearchValueHandler}
+          searchValue={searchValue}
+          onAddClickButtonHandler={onModalWindowToggleHandler}
+          isGuard
+        />
+      )}
     </Styled.Section>
   );
 };

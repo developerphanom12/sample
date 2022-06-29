@@ -1,6 +1,6 @@
 interface IuseTableSettingsItemStateProps {
-  onDeleteIconClickHandler: (itemId: string) => Promise<void>;
-  onEditIconClickHandler: (itemId: string) => Promise<void>;
+  onDeleteIconClickHandler: (itemId: string) => void;
+  onEditIconClickHandler: (itemId: string) => void;
   itemId: string;
 }
 export const useTableSettingsItemState = (
@@ -10,6 +10,6 @@ export const useTableSettingsItemState = (
 
   const onClickDeleteIconHandler = () => onDeleteIconClickHandler(itemId);
   const onClickEditIconHandler = () => onEditIconClickHandler(itemId);
-  
+
   return { onClickEditIconHandler, onClickDeleteIconHandler };
 };

@@ -3,9 +3,8 @@ import { FC } from 'react';
 import { HeaderPanelMaster } from '../HeaderPanelMaster';
 import { LoaderComponent } from '../Loader';
 import { PaginationPanel } from '../PaginationPanel';
-import { TableSettings } from '../Table/TableSettings';
-import { TableSettingsCompany } from '../Table/TableSettings/TableSettingsCompany';
 import { SettingsItemPageContentStyle as Styled } from './SettingsItemPageContent.style';
+import { Table } from './Table';
 import { ISettingsItemPageContentProps } from './types/settingsItemPageContent.types';
 
 export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
@@ -36,7 +35,15 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
     members,
     isMemeberList,
     isContentLoading,
+    isFetchingData,
+    companies,
   } = props;
+
+  const isPaginationPanel = isMemeberList
+    ? (searchValue && searchedUsers?.length) ||
+      (!searchValue && members?.length)
+    : !searchValue && companies?.length;
+
   return (
     <Styled.ContentWrapper>
       <HeaderPanelMaster
@@ -52,26 +59,19 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !isContentLoading ? (
+      ) : !isFetchingData && !isContentLoading ? (
         <div>
-          {isMemeberList ? (
-            <TableSettings
-              searchValue={searchValue}
-              searchedUsers={searchedUsers}
-              members={members}
-              userRole={userRole}
-              onDeleteIconClickHandler={onDeleteIconClickHandler}
-              onEditIconClickHandler={onEditIconClickHandler}
-            />
-          ) : (
-            <TableSettingsCompany
-              userRole={userRole}
-              onDeleteIconClickHandler={onDeleteIconClickHandler}
-              onEditIconClickHandler={onEditIconClickHandler}
-            />
-          )}
-          {(searchValue && searchedUsers?.length) ||
-          (!searchValue && members?.length) ? (
+          <Table
+            isMemeberList={isMemeberList}
+            searchValue={searchValue}
+            searchedUsers={searchedUsers}
+            members={members}
+            userRole={userRole}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+            companies={companies}
+          />
+          {isPaginationPanel ? (
             <PaginationPanel
               pages={pages}
               currentPage={currentPage}

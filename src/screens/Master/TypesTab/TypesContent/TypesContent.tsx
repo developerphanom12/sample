@@ -36,6 +36,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
     isFocus,
     searchedItems,
   } = props;
+  console.log(isContentLoading, isFocus);
 
   return (
     <Styled.ContentWrapper>
