@@ -15,7 +15,17 @@ export const CompanySwitcherMenuItemStyles = {
       border-color: ${({ theme }) => theme.colors.lightGray};
       background-color: ${({ theme }) => theme.colors.pink};
     }
+    &:last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
   `,
-  Content: styled.div``,
+  CompanyNameWrapper: styled.div`
+    display: flex;
+  `,
+  Content: styled.div`
+    display: flex;
+    align-items: center;
+  `,
   Logo: styled.div``,
 };

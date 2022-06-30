@@ -39,9 +39,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
           onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
         />
       </Styled.HeaderWrapper>
-      <Styled.Container
-        isContentCentered={!lastReceipts?.length}
-      >
+      <Styled.Container isContentCentered={!lastReceipts?.length}>
         {countPerTimeFilter ? (
           <Styled.ItemWrapper>
             {lastReceipts?.map((receipt, index) => (
@@ -49,7 +47,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
                 key={receipt.id}
                 date={receipt.receipt_date}
                 status={receipt.status as Statuses}
-                customId={receipt.custom_id}
+                supplier={receipt.supplier?.name}
                 total={receipt.total}
                 currency={receipt.currency?.value}
                 dateFormat={dateFormat}

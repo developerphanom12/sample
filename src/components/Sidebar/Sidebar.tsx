@@ -5,6 +5,7 @@ import { LinksList } from './LinksList';
 import { SidebarStyles as Styled } from './Sidebar.style';
 
 interface ISideBar {
+  userRole: TRoles;
   userFullName: string;
   avatarName: string;
   avatatSrc: string;
@@ -12,17 +13,13 @@ interface ISideBar {
 }
 
 export const Sidebar: FC<ISideBar> = (props) => {
-  const {
-    userFullName,
-    avatarName,
-    avatatSrc,
-    onChangeFileHandler,
-  } = props;
+  const { userFullName, avatarName, userRole, avatatSrc, onChangeFileHandler } = props;
   return (
     <Styled.MainWrapper>
       <AvatarBox
         id="avatar"
         name="avatar"
+        userRole={userRole}
         avatarName={avatarName}
         avatarSrc={avatatSrc}
         onChangeAvatarHandler={onChangeFileHandler}

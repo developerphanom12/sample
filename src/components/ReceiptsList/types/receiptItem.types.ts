@@ -1,5 +1,5 @@
 export interface IReceiptsItemsListProps {
-  customId: string;
+  supplier: string | null;
   total: number | null;
   date: Date;
   status: TStatuses;
@@ -7,8 +7,4 @@ export interface IReceiptsItemsListProps {
   dateFormat: string;
   receiptId: string;
   receiptIndex: number;
-}
-
-export interface IReceiptsItemProps extends IReceiptsItemsListProps {
-  onItemClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }

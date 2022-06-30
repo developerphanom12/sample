@@ -94,3 +94,8 @@ export const getReceiptDetailsCurrentSelectItem = (
 ) => {
   return itemsArray.find((item) => item.id === itemId);
 };
+
+export const getCompanyInitials = (companyName: string) => {
+  if (!companyName) return;
+  return companyName.split('')[0].toUpperCase();
+};

@@ -1,8 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 
 import { CompanySwitcherStyles as Styled } from './CompanySwitcher.style';
 import { MOCKED_COMPANIES_LIST } from './CompanyMock.constants';
 import { CompanySwitcherMenu } from '../CompanySwitcherMenu';
+import { CompanySwitcherLogo } from '../CompanySwitcherLogo';
 
 export interface ICompanySwitcher {
   isLoading?: boolean;
@@ -14,18 +15,31 @@ export interface ICompanySwitcher {
   switcherRef: React.MutableRefObject<null>;
 }
 
-export const CompanySwitcher = (props: ICompanySwitcher) => {
-  const { isLoading, isOpenSwitcher, switcherRef, onSwitchCompanyHandler, onClickSwitcherHandler } =
-    props;
+export const CompanySwitcher: FC<ICompanySwitcher> = (props) => {
+  const {
+    isLoading,
+    isOpenSwitcher,
+    switcherRef,
+    onSwitchCompanyHandler,
+    onClickSwitcherHandler,
+  } = props;
 
   const activeCompany = MOCKED_COMPANIES_LIST.find(
     (item) => item.active === true
   );
   return (
     <Styled.Wrapper ref={switcherRef} onClick={onClickSwitcherHandler}>
+      <CompanySwitcherLogo
+        companyLogoSrc=""
+        companyName={activeCompany?.name || ''}
+      />
       <Styled.Content>{activeCompany?.name}</Styled.Content>
-      <Styled.Content> {activeCompany?.logo}</Styled.Content>
-      {isOpenSwitcher && <CompanySwitcherMenu onSwitchCompanyHandler={onSwitchCompanyHandler} />}
+      {isOpenSwitcher && (
+        <CompanySwitcherMenu
+          onSwitchCompanyHandler={onSwitchCompanyHandler}
+          selectedCompanyId=""
+        />
+      )}
     </Styled.Wrapper>
   );
 };

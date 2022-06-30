@@ -6,14 +6,19 @@ import { useUploadPhoto } from 'hooks/useUploadPhoto';
 
 export const useSettingsState = () => {
   const {
-    user: { fullName },
+    user: { fullName, active_account, accounts },
   } = useSelector((state: IState) => state.user);
 
   const { fileData, onChangeFileHandler } = useUploadPhoto();
 
+  const activeAccount = accounts?.find(
+    (account) => account.id === active_account
+  );
+
   return {
     fullName,
     fileData,
+    activeAccount,
     onChangeFileHandler,
   };
 };

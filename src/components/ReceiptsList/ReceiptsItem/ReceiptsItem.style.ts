@@ -2,6 +2,7 @@ import { styled } from 'app/theme';
 
 export const ReceiptsItemStyles = {
   Wrapper: styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     padding: 10px 19px 7px 21px;
@@ -25,10 +26,5 @@ export const ReceiptsItemStyles = {
     font-size: ${({ theme }) => theme.size.default};
     color: ${({ theme }) => theme.colors.black};
     padding-top: 10px;
-  `,
-  Link: styled.a`
-    color: ${(props) => props.theme.colors.blue};
-    text-decoration: underline;
-    margin-right: 3px;
   `,
 };

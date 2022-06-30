@@ -19,5 +19,6 @@ export const CompanySwitcherStyles = {
   Content: styled.div`
     font-size: ${(props) => props.theme.size.xnormal};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
+    margin-left: -5px;
   `,
 };

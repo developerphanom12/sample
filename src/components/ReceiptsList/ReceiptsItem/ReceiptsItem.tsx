@@ -1,22 +1,21 @@
 import React from 'react';
 
-import { getCorrectCustomId, getFormattedDate } from 'services/utils';
+import { getFormattedDate } from 'services/utils';
 
-import { ReceiptsItemStyles } from './ReceiptsItem.style';
+import { ReceiptsItemStyles as Styled } from './ReceiptsItem.style';
 import { StatusLabel } from '../../StatusLabel/StatusLabel';
-import { IReceiptsItemProps } from '../types';
+import { IReceiptsItemsListProps } from '../types';
 import { useReceiptsItemState } from './ReceiptsItem.state';
 
-export const ReceiptsItem: React.FC<IReceiptsItemProps> = (props) => {
+export const ReceiptsItem: React.FC<IReceiptsItemsListProps> = (props) => {
   const {
-    onItemClick,
     dateFormat,
     date,
     status,
-    customId,
     total,
     currency,
     receiptId,
+    supplier,
   } = props;
 
   const { onReceiptDetailsClickHandler } = useReceiptsItemState({
@@ -24,26 +23,19 @@ export const ReceiptsItem: React.FC<IReceiptsItemProps> = (props) => {
   });
 
   return (
-    <ReceiptsItemStyles.Wrapper onClick={onItemClick}>
-      <ReceiptsItemStyles.PaymentBlock>
-        <ReceiptsItemStyles.SupplierItem
-          id={receiptId}
-          onClick={onReceiptDetailsClickHandler}
-        >
-          <ReceiptsItemStyles.Link>
-            {getCorrectCustomId(customId) || '---'}
-          </ReceiptsItemStyles.Link>
-        </ReceiptsItemStyles.SupplierItem>
-        <ReceiptsItemStyles.Item>{`${currency || '---'} ${
-          total || '---'
-        }`}</ReceiptsItemStyles.Item>
-      </ReceiptsItemStyles.PaymentBlock>
-      <ReceiptsItemStyles.StatusBlock>
+    <Styled.Wrapper id={receiptId} onClick={onReceiptDetailsClickHandler}>
+      <Styled.PaymentBlock>
+        <Styled.SupplierItem>
+          <Styled.Item>{supplier || '---'}</Styled.Item>
+        </Styled.SupplierItem>
+        <Styled.Item>{`${currency || '---'} ${total || '---'}`}</Styled.Item>
+      </Styled.PaymentBlock>
+      <Styled.StatusBlock>
         <StatusLabel status={status} />
-        <ReceiptsItemStyles.Item>
+        <Styled.Item>
           {date ? getFormattedDate(date, dateFormat) : '---'}
-        </ReceiptsItemStyles.Item>
-      </ReceiptsItemStyles.StatusBlock>
-    </ReceiptsItemStyles.Wrapper>
+        </Styled.Item>
+      </Styled.StatusBlock>
+    </Styled.Wrapper>
   );
 };

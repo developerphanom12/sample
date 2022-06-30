@@ -7,19 +7,19 @@ export const ReceiptsItemsList: React.FC<IReceiptsItemsListProps> = (props) => {
   const {
     date,
     status,
-    customId,
     total,
     currency,
     dateFormat,
     receiptId,
     receiptIndex,
+    supplier,
   } = props;
   return (
     <ReceiptsItem
+      supplier={supplier}
       currency={currency}
       date={date}
       status={status}
-      customId={customId}
       total={total}
       dateFormat={dateFormat}
       receiptId={receiptId}
