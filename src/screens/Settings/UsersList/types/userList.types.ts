@@ -7,8 +7,10 @@ export interface IuseUserListState extends IPaginationState {
   isFocus: boolean;
   searchedUsers: IMember[];
   role: IOption | null;
+  prevRole: IOption | null;
   company: IOption | null;
   isFetchingData: boolean;
+  selectedUserName: string;
 }
 export interface IgetInputFieldsProps {
   options: IOption[][];

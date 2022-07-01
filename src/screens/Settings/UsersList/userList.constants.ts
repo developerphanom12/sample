@@ -21,6 +21,13 @@ export const USERS_LIST_INITIAL_STATE = {
   isFetchingData: true,
   role: null,
   company: null,
+  prevRole: null,
+  selectedUserName: '',
+};
+
+export const formikInitialValues = {
+  fullName: '',
+  email: '',
 };
 
 export const getInputFields = (props: IgetInputFieldsProps) => {

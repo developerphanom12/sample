@@ -1,12 +1,11 @@
 import { FC, useEffect } from 'react';
 
-import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
-import { DeleteModalWindow } from 'components/DeleteModalWindow';
 import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
 import { LoaderComponent } from 'components/Loader';
 
 import { UserListStyles as Styled } from './UserList.styles';
 import { useUserListState } from './UserList.state';
+import { ModalBox } from './ModalBox';
 
 export const UsersList: FC = () => {
   const {
@@ -26,9 +25,9 @@ export const UsersList: FC = () => {
     onEnterGoToClick,
     onChangeItemsPerPage,
     onGoToClick,
+    userRole,
     onClickDeleteUserButton,
-    onInviteUserToCompanyHandler,
-    selectedUser,
+    selectedUserName,
     itemsPerPage,
     inputPaginationValue,
     pages,
@@ -43,6 +42,7 @@ export const UsersList: FC = () => {
     modalFields,
     count,
     isFetchingData,
+    isDisableButton,
     onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
     onModalWindowToggleHandler,
@@ -67,10 +67,10 @@ export const UsersList: FC = () => {
 
   return (
     <Styled.Section>
-      <InsertUserModalWindow
+      <ModalBox
         modalFields={modalFields}
         isLoading={isLoading}
-        isDisableButton={false}
+        isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onSaveButtonCLickHandler={formik.handleSubmit}
         onEnterCreateItemClick={onEnterInsertUser}
@@ -78,13 +78,10 @@ export const UsersList: FC = () => {
         headerText={isEdit ? 'Edit User' : 'Insert User'}
         formikMeta={formik.getFieldMeta}
         formikProps={formik.getFieldProps}
-      />
-      <DeleteModalWindow
-        isLoading={isLoading}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
-        onDeleteButtonClickHandler={async () => {}}
+        onDeleteButtonClickHandler={onClickDeleteUserButton}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`user ${selectedUser?.name}`}
+        deleteItemName={`user ${selectedUserName}`}
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
@@ -100,7 +97,7 @@ export const UsersList: FC = () => {
           onBlurHandler={onBlurHandler}
           members={members}
           isMemeberList
-          userRole="owner"
+          userRole={userRole as TRoles}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
           onEditIconClickHandler={onEditIconClickHandler}
           pages={pages}

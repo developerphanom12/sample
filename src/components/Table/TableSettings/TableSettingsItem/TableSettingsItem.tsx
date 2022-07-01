@@ -11,6 +11,7 @@ interface ITableSettingsItemProps extends TableSettingsItemProps {
   memberEmail?: string;
   memberId: string;
   memberName: string;
+  memberRole: TRoles;
 }
 export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
   const {
@@ -18,6 +19,7 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
     onEditIconClickHandler,
     userRole,
     memberEmail,
+    memberRole,
     memberId,
     memberName,
   } = props;
@@ -46,7 +48,7 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
       <Styled.Column>
         <Styled.TextWrapper>Smith@gmail.com</Styled.TextWrapper>
       </Styled.Column>
-      <Styled.Column>{getFirstLetterUppercase(userRole)}</Styled.Column>
+      <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
       <Styled.Column>Created On</Styled.Column>
       <Styled.Column>Created By</Styled.Column>
     </Styled.Item>

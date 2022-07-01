@@ -192,7 +192,7 @@ declare global {
 
   enum Roles {
     owner = 'owner',
-    member = 'member',
+    user = 'regular user',
     admin = 'admin',
   }
   type TRoles = keyof typeof Roles;
@@ -269,9 +269,16 @@ declare global {
     take?: number;
     skip?: number;
   }
+
+  interface IAccount {
+    id: string;
+    name: string;
+    role: string;
+  }
 }
 
 export {
+  IAccount,
   TableCompanySettingsItemProps,
   ICompanySettings,
   ISearchParams,

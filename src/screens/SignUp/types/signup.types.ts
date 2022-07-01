@@ -4,13 +4,6 @@ export interface ICreateUser {
   fullName: string;
   country: string;
 }
-
-export interface IAccount {
-  id: string;
-  name: string;
-  role: string;
-}
-
 export interface ICompany {
   date_format: string;
   currency: ICurrency;

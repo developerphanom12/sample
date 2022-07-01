@@ -26,7 +26,7 @@ export type TInputFields = (
       type: string;
       label: string;
       name: string;
-      value?: string;
+      value?: undefined;
       options?: undefined;
       onChangeSelect?: undefined;
     }
@@ -35,7 +35,7 @@ export type TInputFields = (
       type: string;
       name: string;
       label: string;
-      value: IOption;
+      value: IOption | null;
       options: IOption[];
       onChangeSelect: (
         newValue: IOption | any,

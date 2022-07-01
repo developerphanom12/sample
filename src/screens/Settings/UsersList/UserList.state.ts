@@ -8,9 +8,17 @@ import { useToggle } from 'hooks/useToggle';
 
 import { myAccountValidationScheme } from 'services/validation';
 import { IState } from 'services/redux/reducer';
-import { getFirstLetterUppercase } from 'services/utils';
+import {
+  getFirstLetterUppercase,
+  getSelectedUser,
+  getUserRole,
+} from 'services/utils';
 
-import { getInputFields, USERS_LIST_INITIAL_STATE } from './userList.constants';
+import {
+  formikInitialValues,
+  getInputFields,
+  USERS_LIST_INITIAL_STATE,
+} from './userList.constants';
 import { IuseUserListState } from './types/userList.types';
 import {
   createCompanyMember,
@@ -19,28 +27,23 @@ import {
   getCompanyMembers,
   updateCompanyMember,
 } from '../settings.api';
-import {
-  setCompanies,
-  setCurrentMember,
-  setMembers,
-} from '../reducer/settings.reducer';
+import { setCompanies, setMembers } from '../reducer/settings.reducer';
 
 import { USER_ROLES } from 'constants/strings';
 
 export const useUserListState = () => {
-  const formikInitialValues = {
-    fullName: '',
-    email: '',
-  };
-
   const dispatch = useDispatch();
   const {
+    user: {
+      user: { active_account, accounts },
+    },
     settings: {
       companies,
       companyMembers: { count, members },
-      currentMember,
     },
   } = useSelector((state: IState) => state);
+
+  const userRole = getUserRole(accounts || [], active_account || '');
 
   const formattedCompanies = companies.map((item) => ({
     value: item.id,
@@ -51,11 +54,6 @@ export const useUserListState = () => {
 
   const [state, setState] = useState<IuseUserListState>(initialState);
   const [isEdit, setIsEdit] = useState(false);
-
-  const selectedUser = members.find(
-    (member) => member.id === state.selectedItemId
-  );
-
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
   const [isDeleteModalWindowOpen, onDeleteModalWindowToggle] = useToggle();
 
@@ -240,7 +238,12 @@ export const useUserListState = () => {
 
   const onDeleteIconClickHandler = async (itemId: string) => {
     try {
-      onChangeStateFieldHandler('selectedItemId', itemId);
+      setState((prevState) => ({
+        ...prevState,
+        selectedItemId: itemId,
+        selectedUserName: selectedUser?.name || '',
+      }));
+      const selectedUser = getSelectedUser(members, itemId);
       onDeleteModalWindowToggle();
     } catch (error) {
       console.log(error);
@@ -248,30 +251,43 @@ export const useUserListState = () => {
   };
 
   const onEditIconClickHandler = (itemId: string) => {
-    dispatch(setCurrentMember(itemId));
+    const selectedUser = getSelectedUser(members, itemId);
     formik.setValues({
-      email: currentMember?.email || '',
-      fullName: currentMember?.name || '',
+      email: selectedUser?.email || '',
+      fullName: selectedUser?.name || '',
     });
+    setIsEdit(true);
     setState((prevState) => ({
       ...prevState,
-      isEdit: true,
       role: {
-        label: getFirstLetterUppercase(currentMember?.role || ''),
-        value: currentMember?.role || '',
+        label: getFirstLetterUppercase(selectedUser?.role || ''),
+        value: selectedUser?.role || '',
+      },
+      prevRole: {
+        label: getFirstLetterUppercase(selectedUser?.role || ''),
+        value: selectedUser?.role || '',
       },
       selectedItemId: itemId,
+      selectedUserName: selectedUser?.name || '',
     }));
     onModalWindowToggle();
   };
 
   const onClickDeleteUserButton = async () => {
     try {
-      await deleteCompanyMember(selectedUser?.id || '');
+      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
+      onChangeStateFieldHandler('isLoading', true);
 
+      await deleteCompanyMember(state.selectedItemId || '');
       const { data } = await getCompanyMembers();
       dispatch(setMembers({ count: data.count, members: data.data }));
+
+      onChangePage({ selected: state.currentPage });
+      onChangeStateFieldHandler('isLoading', false);
+      onDeleteModalWindowToggle();
     } catch (error) {
+      onChangeStateFieldHandler('isLoading', false);
+      onDeleteModalWindowToggle();
       console.log(error);
     }
   };
@@ -281,10 +297,10 @@ export const useUserListState = () => {
       onChangeStateFieldHandler('isLoading', true);
       await updateCompanyMember(
         {
-          name: values.fullName,
+          name: values.fullName || '',
           role: state.role?.value || '',
         },
-        currentMember?.id || ''
+        state.selectedItemId
       );
       const { data } = await getCompanyMembers();
       dispatch(setMembers({ count: data.count, members: data.data }));
@@ -305,13 +321,21 @@ export const useUserListState = () => {
     values: typeof formikInitialValues
   ) => {
     try {
+      onChangeStateFieldHandler('isLoading', true);
       const payload = {
-        email: values.email,
-        name: values.fullName,
+        email: values.email || '',
+        name: values.fullName || '',
         role: state.role?.value || '',
       };
       await createCompanyMember(payload);
+      onGetAllCompanyMembersHandler();
+      onModalWindowToggle();
+      onChangeStateFieldHandler('isLoading', false);
+      formik.resetForm();
     } catch (error) {
+      onModalWindowToggle();
+      formik.resetForm();
+      onChangeStateFieldHandler('isLoading', false);
       console.log(error);
     }
   };
@@ -325,29 +349,35 @@ export const useUserListState = () => {
     funcArray: [onChangeRoleValueHandler, onChangeCompanyValueHandler],
   });
 
+  const isDisableButton = isEdit
+    ? state.prevRole?.value === state.role?.value && !formik.isValid
+    : !formik.isValid && !formik.dirty;
+
   return {
     ...state,
+    userRole,
     isEdit,
     count,
+    modalFields,
+    formik,
+    members,
+    debouncedValue,
+    isModalWindowOpen,
+    isDeleteModalWindowOpen,
+    isDisableButton,
+    onEditUserHandler,
     onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
-    selectedUser,
-    modalFields,
     onModalWindowToggleHandler,
     onBlurHandler,
     onFocusSearchHandler,
     onClickDeleteUserButton,
-    formik,
-    members,
     onInviteUserToCompanyHandler,
     onGetAllCompanyMembersHandler,
-    debouncedValue,
     onEditIconClickHandler,
     onDeleteIconClickHandler,
     onModalWindowToggle,
     onDeleteModalWindowToggle,
-    isModalWindowOpen,
-    isDeleteModalWindowOpen,
     onChangeSearchValueHandler,
     onEnterInsertUser,
     onChangeInputValue,

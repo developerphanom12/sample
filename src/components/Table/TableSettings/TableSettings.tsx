@@ -11,7 +11,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
     userRole,
     members,
     searchedUsers,
-    searchValue
+    searchValue,
   } = props;
   return (
     <>
@@ -44,7 +44,8 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
-            userRole={member.role}
+            memberRole={member.role}
+            userRole={userRole}
           />
         ))
       ) : searchValue && !searchedUsers?.length ? (
@@ -60,7 +61,8 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
-            userRole={member.role}
+            memberRole={member.role}
+            userRole={userRole}
           />
         ))
       )}

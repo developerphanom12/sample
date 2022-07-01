@@ -99,3 +99,13 @@ export const getCompanyInitials = (companyName: string) => {
   if (!companyName) return;
   return companyName.split('')[0].toUpperCase();
 };
+
+export const getUserRole = (accounts: IAccount[], active_account: string) => {
+  if (!accounts.length || !active_account) return;
+  return accounts?.find((account) => account.id === active_account)?.role;
+};
+
+export const getSelectedUser = (members: IMember[], memberId: string) => {
+  if (!members.length) return;
+  return members.find((member) => member.id === memberId);
+};

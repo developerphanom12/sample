@@ -25,12 +25,12 @@ export const updateCompanyMember = (
   payload: Omit<ICreateCompanyMemberPayload, 'email'>,
   memberId: string
 ) => {
-  const URL = `company-member/update${memberId}`;
+  const URL = `company-member/update/${memberId}`;
   return apiServices.changeData(URL, payload);
 };
 
 export const deleteCompanyMember = (memberId: string) => {
-  const URL = `company-member/delete${memberId}`;
+  const URL = `company-member/delete/${memberId}`;
   return apiServices.deleteData(URL);
 };
 
