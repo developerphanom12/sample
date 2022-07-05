@@ -37,6 +37,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
       {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
       <Styled.WrapperInput>
         <Styled.Input
+          data-testid="input-field"
           isError={!!errorText && touched}
           onBlur={onBlur}
           name={inputName}
@@ -44,7 +45,7 @@ export const InputPassword: React.FC<InputProps> = (props) => {
           value={password}
           onChange={onChangePassword}
         />
-        <Styled.Button onClick={onClick}>
+        <Styled.Button onClick={onClick} data-testid="button">
           <Icon type={showPassword ? 'hidePassword' : 'showPassword'} />
         </Styled.Button>
         {touched && !!errorText && <ErrorText errorText={errorText} />}

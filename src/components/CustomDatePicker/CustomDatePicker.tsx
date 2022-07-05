@@ -45,7 +45,7 @@ export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
       : 'Choose Date';
 
   return (
-    <Styled.Container>
+    <Styled.Container data-testid="date-picker-component">
       <DateButton
         datePickerRef={datePickerRef}
         onClick={onDatePickerClickHandler}
@@ -57,8 +57,10 @@ export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
         <Styled.Wrapper
           isFormattedDate={!!dateLabelCondition}
           isInputDate={isInputDate}
+          data-testid="date-picker-menu"
         >
           <DatePicker
+            data-testid="date-picker1"
             onClickOutside={onClickOutsideDatePickerHandler}
             selected={selectedDate}
             onChange={onChangeDateHandler}

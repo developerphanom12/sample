@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Styled } from './Input.style';
 import { ErrorText } from '../ErrorText';
@@ -47,8 +47,10 @@ export const Input: React.FC<InputProps> = (props) => {
     onFocus,
   } = props;
 
+  const [value1, setValue] = useState('');
+  const handle = (e: any) => setValue(e.target.value);
   return (
-    <Styled.InputWrapper isNoMargin={isNoMargin}>
+    <Styled.InputWrapper data-testid="input-component" isNoMargin={isNoMargin}>
       {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
       {isTextArea ? (
         <Styled.TextArea
@@ -67,14 +69,15 @@ export const Input: React.FC<InputProps> = (props) => {
             />
           ) : (
             <Styled.Input
+              data-testid="input-field"
               inputTheme={inputTheme}
               type={inputType || 'text'}
               isError={!!errorText && touched}
               onBlur={onBlur}
               onFocus={onFocus}
               name={inputName}
-              value={value}
-              onChange={onChangeValue}
+              value={value1}
+              onChange={handle}
               onKeyDown={onKeyDown}
               placeholder={placeHolder}
             />
