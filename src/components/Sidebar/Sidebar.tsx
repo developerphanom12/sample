@@ -7,23 +7,40 @@ import { SidebarStyles as Styled } from './Sidebar.style';
 interface ISideBar {
   userRole: TRoles;
   userFullName: string;
-  avatarName: string;
   avatatSrc: string;
-  onChangeFileHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onUploadProfilePhotoHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => Promise<void>;
+  isUploadingPhoto: boolean;
+  isHover: boolean;
+  onMouseEnterHandler: () => void;
+  onMouseLeaveHandler: () => void;
 }
 
 export const Sidebar: FC<ISideBar> = (props) => {
-  const { userFullName, avatarName, userRole, avatatSrc, onChangeFileHandler } = props;
+  const {
+    userFullName,
+    userRole,
+    avatatSrc,
+    isUploadingPhoto,
+    isHover,
+    onMouseEnterHandler,
+    onMouseLeaveHandler,
+    onUploadProfilePhotoHandler,
+  } = props;
   return (
     <Styled.MainWrapper>
       <AvatarBox
         id="avatar"
         name="avatar"
+        isUploadingPhoto={isUploadingPhoto}
         userRole={userRole}
-        avatarName={avatarName}
         avatarSrc={avatatSrc}
-        onChangeAvatarHandler={onChangeFileHandler}
+        onChangeAvatarHandler={onUploadProfilePhotoHandler}
         userFullName={userFullName}
+        isHover={isHover}
+        onMouseEnterHandler={onMouseEnterHandler}
+        onMouseLeaveHandler={onMouseLeaveHandler}
       />
       <LinksList />
     </Styled.MainWrapper>

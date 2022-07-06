@@ -1,10 +1,15 @@
 import { styled, Z_INDEX } from 'app/theme';
 
 export const HoverUploadLogo = styled.div`
-  display: none;
+  display: block;
   width: 75px;
   height: 75px;
   cursor: pointer;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  opacity: 1;
 `;
 
 export const AvatarBoxStyles = {
@@ -41,55 +46,21 @@ export const AvatarBoxStyles = {
     z-index: ${Z_INDEX.m};
     cursor: pointer;
   `,
-  ImageWrapper: styled.div`
-    width: 150px;
-    height: 150px;
-    border: ${({ theme }) => `1px solid ${theme.colors.boxShadowBlack}`};
-    box-sizing: border-box;
-    box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
-    border-radius: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  `,
   UploadIconWrapper: styled.div`
     display: flex;
     position: absolute;
     width: 100%;
     height: 100%;
   `,
-  ProfileImageWrapper: styled.div<{ isHover?: boolean }>`
+  ProfileImageWrapper: styled.div<{ isHover: boolean; isLoading: boolean }>`
     position: relative;
     border-radius: 100px;
     cursor: pointer;
-    &:hover {
-      & div {
-        opacity: 0.5;
-      }
-      ${HoverUploadLogo} {
-        display: block;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        opacity: 1;
-      }
+    ${(props) => props.isHover && `${HoverUploadLogo} {opacity: 1;}`}
+    & div {
+      opacity: ${({ isLoading, isHover }) =>
+        isHover && !isLoading ? '0.5' : '1'};
     }
-  `,
-  Image: styled.div<{ imageSrc?: string }>`
-    width: 150px;
-    height: 150px;
-    border-radius: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background: ${(props) => `url(${props.imageSrc})`};
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-    border: ${({ theme }) => `1px solid ${theme.colors.boxShadowBlack}`};
   `,
   NameBox: styled.div`
     display: flex;

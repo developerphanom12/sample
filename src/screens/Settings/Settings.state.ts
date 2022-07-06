@@ -1,15 +1,61 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IState } from 'services/redux/reducer';
 
-import { useUploadPhoto } from 'hooks/useUploadPhoto';
+import { getProfilePhoto, profileUploadPhoto } from './settings.api';
+import { setUserAvatar } from '../SignUp/reducer/signup.reducer';
 
 export const useSettingsState = () => {
   const {
-    user: { fullName, active_account, accounts },
+    user: { fullName, active_account, accounts, profile_image },
+    token,
   } = useSelector((state: IState) => state.user);
 
-  const { fileData, onChangeFileHandler } = useUploadPhoto();
+  const dispatch = useDispatch();
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(true);
+  const [isHover, setIsHover] = useState(false);
+  const [userProfilePhoto, setUserProfilePhoto] = useState('');
+
+  const onMouseEnterHandler = () => setIsHover(true);
+  const onMouseLeaveHandler = () => setIsHover(false);
+
+  const onGetProfilePhoto = async (profileImage?: string) => {
+    try {
+      const { data } = await getProfilePhoto(
+        profileImage || profile_image,
+        token
+      );
+      setUserProfilePhoto(URL.createObjectURL(data));
+      setIsUploadingPhoto(false);
+    } catch (error) {
+      setIsUploadingPhoto(false);
+      console.log(error);
+    }
+  };
+
+  const onUploadProfilePhotoHandler = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      if (
+        !event.target.files?.length ||
+        !event.target.files[0].type.match('image')
+      )
+        return;
+      const formData = new FormData();
+      formData.append('profile_image', event.target.files[0]);
+      const { data } = await profileUploadPhoto(formData, token);
+      dispatch(setUserAvatar(data.profile_image));
+      setIsUploadingPhoto(true);
+      onGetProfilePhoto(data.profile_image);
+      setIsHover(false);
+    } catch (error) {
+      setIsHover(false);
+      setIsUploadingPhoto(false);
+      console.log(error);
+    }
+  };
 
   const activeAccount = accounts?.find(
     (account) => account.id === active_account
@@ -17,8 +63,13 @@ export const useSettingsState = () => {
 
   return {
     fullName,
-    fileData,
     activeAccount,
-    onChangeFileHandler,
+    isUploadingPhoto,
+    isHover,
+    userProfilePhoto,
+    onGetProfilePhoto,
+    onMouseEnterHandler,
+    onUploadProfilePhotoHandler,
+    onMouseLeaveHandler,
   };
 };

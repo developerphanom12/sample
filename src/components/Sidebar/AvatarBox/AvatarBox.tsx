@@ -1,19 +1,22 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { getFirstLetterUppercase } from 'services/utils';
 
-import { Icon } from '../../Icons';
 import { UploadInput } from '../../UploadInput';
-import { AvatarBoxStyles as Styled, HoverUploadLogo } from './AvatarBox.style';
+import { Avatar } from './Avatar/Avatar';
+import { AvatarBoxStyles as Styled } from './AvatarBox.style';
 
 interface IAvatarBoxProps {
   userFullName: string;
   id: string;
   name: string;
   onChangeAvatarHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  avatarName: string;
   avatarSrc: string;
   userRole: TRoles;
+  isUploadingPhoto: boolean;
+  isHover: boolean;
+  onMouseEnterHandler: () => void;
+  onMouseLeaveHandler: () => void;
 }
 
 export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
@@ -21,9 +24,12 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
     userFullName,
     id,
     name,
-    avatarName,
+    isUploadingPhoto,
     avatarSrc,
     userRole,
+    isHover,
+    onMouseEnterHandler,
+    onMouseLeaveHandler,
     onChangeAvatarHandler,
   } = props;
 
@@ -31,23 +37,25 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
     <Styled.MainWrapper>
       <Styled.ContentWrapper>
         <Styled.Label>Settings</Styled.Label>
-        <Styled.ProfileImageWrapper>
+        <Styled.ProfileImageWrapper
+          isHover={isHover}
+          isLoading={isUploadingPhoto}
+        >
           <UploadInput
             id={id}
             name={name}
             onChangeFiles={onChangeAvatarHandler}
           />
-          <Styled.InputLabel htmlFor={id} />
-          {avatarSrc ? (
-            <Styled.Image imageSrc={avatarSrc} />
-          ) : (
-            <Styled.ImageWrapper>
-              <Icon type="settingsAvatar" />
-            </Styled.ImageWrapper>
-          )}
-          <HoverUploadLogo>
-            <Icon type="cloudUpload" />
-          </HoverUploadLogo>
+          <Styled.InputLabel
+            htmlFor={id}
+            onMouseEnter={onMouseEnterHandler}
+            onMouseLeave={onMouseLeaveHandler}
+          />
+          <Avatar
+            isUploadingPhoto={isUploadingPhoto}
+            isHover={isHover}
+            avatarSrc={avatarSrc}
+          />
         </Styled.ProfileImageWrapper>
       </Styled.ContentWrapper>
       <Styled.UserInfoWrapper>

@@ -20,6 +20,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
     accounts: null,
     active_account: null,
     socialAuth: null,
+    profile_image: '',
   },
   token: '',
   socialAccount: {
@@ -104,6 +105,12 @@ export const SignUpUserSlice = createSlice({
       state.userInfo.company.currency = company.currency;
       state.userInfo.company.date_format = company.date_format;
     },
+    setUserAvatar: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<string>
+    ) => {
+      state.user.profile_image = action.payload;
+    },
   },
 });
 
@@ -115,6 +122,7 @@ export const {
   setCurrencies,
   setCompany,
   updateUserProfile,
+  setUserAvatar,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

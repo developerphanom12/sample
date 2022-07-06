@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Styled } from './Input.style';
 import { ErrorText } from '../ErrorText';
@@ -46,9 +46,6 @@ export const Input: React.FC<InputProps> = (props) => {
     onBlur,
     onFocus,
   } = props;
-
-  const [value1, setValue] = useState('');
-  const handle = (e: any) => setValue(e.target.value);
   return (
     <Styled.InputWrapper data-testid="input-component" isNoMargin={isNoMargin}>
       {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
@@ -76,8 +73,8 @@ export const Input: React.FC<InputProps> = (props) => {
               onBlur={onBlur}
               onFocus={onFocus}
               name={inputName}
-              value={value1}
-              onChange={handle}
+              value={value}
+              onChange={onChangeValue}
               onKeyDown={onKeyDown}
               placeholder={placeHolder}
             />

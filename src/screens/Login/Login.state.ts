@@ -46,7 +46,7 @@ export const useLoginState = () => {
     actions: FormikHelpers<{ email: string; password: string }>
   ) => {
     try {
-      const { data } = await login(loginValues);   
+      const { data } = await login(loginValues);
       dispatch(setCurrencies(data.currencies));
       dispatch(setUser(data));
       dispatch(setCompany(data.company));

@@ -16,6 +16,7 @@ export interface IUser extends ICreateUser {
   id: string;
   active_account: string | null;
   accounts: IAccount[] | null;
+  profile_image: string;
 }
 
 export interface ISocialAccount {
