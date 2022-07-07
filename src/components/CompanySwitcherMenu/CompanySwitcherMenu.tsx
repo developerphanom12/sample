@@ -3,27 +3,28 @@ import { FC } from 'react';
 import { CompanySwitcherMenuStyles as Styled } from './CompanySwitcherMenu.style';
 import { CompanySwitcherMenuItem } from './CompanySwitcherMenuItem';
 
-import { MOCKED_COMPANIES_LIST } from '../CompanySwitcher/CompanyMock.constants';
-
 export interface ICompanySwitcherMenu {
   isLoading?: boolean;
-  selectedCompanyId: string;
+  activeAccountId: string;
+  companies: ICompaniesSwitcher[];
   onSwitchCompanyHandler: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const CompanySwitcherMenu: FC<ICompanySwitcherMenu> = (props) => {
-  const { isLoading, selectedCompanyId, onSwitchCompanyHandler } = props;
+  const { isLoading, companies, activeAccountId, onSwitchCompanyHandler } =
+    props;
+
   return (
     <Styled.Wrapper>
       <Styled.Title>Company(s)</Styled.Title>
-      {MOCKED_COMPANIES_LIST.map((item) => (
+      {companies.map((company) => (
         <CompanySwitcherMenuItem
-          isActive={item.name === selectedCompanyId}
-          companyId={item.name}
-          companyName={item.name}
+          key={company.id}
+          isActive={company.id === activeAccountId}
+          companyId={company.id}
+          companyName={company.company.name}
           onClick={onSwitchCompanyHandler}
-          key={item.name}
-          companyLogoSrc=""
+          companyLogoSrc={company.company.logo}
         />
       ))}
     </Styled.Wrapper>

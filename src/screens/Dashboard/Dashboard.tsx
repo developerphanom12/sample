@@ -27,7 +27,7 @@ export const Dashboard: FC = () => {
 
   useEffect(() => {
     getReceiptsStatisticHandler();
-  }, []);
+  }, [user.active_account]);
 
   return (
     <Styled.LayoutWrapper>

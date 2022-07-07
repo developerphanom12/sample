@@ -70,6 +70,7 @@ export const Inbox: FC = () => {
     location,
     count,
     datePickerRef,
+    active_account,
     onClickOutsideDatePickerHandler,
     onChangePagesAmount,
     onDownloadExcelFileHandler,
@@ -86,7 +87,7 @@ export const Inbox: FC = () => {
       date_end: dateEnd || '',
       status: statusValue.value === 'all' ? '' : statusValue.value,
     });
-  }, [debouncedValue, isFetchingData]);
+  }, [debouncedValue, isFetchingData, active_account]);
 
   useEffect(() => {
     if (!count) return;

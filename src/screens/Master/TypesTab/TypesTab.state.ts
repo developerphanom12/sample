@@ -30,6 +30,7 @@ export const useTypesTabState = () => {
       selectedCategory,
     },
     user: {
+      user: { active_account },
       userInfo: {
         company: { date_format },
       },
@@ -314,6 +315,7 @@ export const useTypesTabState = () => {
 
   return {
     ...state,
+    active_account,
     selectedCategory,
     onChangeSearchValueHandler,
     onGetAllTypesHandler,

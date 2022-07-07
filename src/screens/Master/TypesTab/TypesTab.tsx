@@ -58,11 +58,12 @@ export const TypesTab: FC = () => {
     isContentLoading,
     searchedItems,
     isSearching,
+    active_account,
   } = useTypesTabState();
 
   useEffect(() => {
     !searchValue && onGetAllTypesHandler();
-  }, [searchValue]);
+  }, [searchValue, active_account]);
 
   useEffect(() => {
     debouncedValue &&

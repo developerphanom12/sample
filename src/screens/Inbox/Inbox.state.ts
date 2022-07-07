@@ -44,6 +44,7 @@ export const useInboxState = () => {
     inbox: { count, receipts, isFetchingData, isAllChecked },
     dashboard: { metric },
     user: {
+      user: { active_account },
       userInfo: { company },
       token,
     },
@@ -457,6 +458,7 @@ export const useInboxState = () => {
 
   return {
     ...state,
+    active_account,
     datePickerRef,
     count,
     location,

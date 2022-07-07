@@ -275,9 +275,26 @@ declare global {
     name: string;
     role: string;
   }
+
+  interface ICompany {
+    date_format: string;
+    currency: ICurrency;
+    id: string;
+    name: string;
+    logo: string;
+  }
+
+  interface ICompaniesSwitcher {
+    company: Omit<ICompany, 'currency'>;
+    id: string;
+    name: string;
+    role: string;
+  }
 }
 
 export {
+  ICompaniesSwitcher,
+  ICompany,
   IAccount,
   TableCompanySettingsItemProps,
   ICompanySettings,

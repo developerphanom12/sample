@@ -10,7 +10,7 @@ export const CompanySwitcherStyles = {
     background-color: ${(props) => props.theme.colors.white};
     display: flex;
     align-items: center;
-    padding-left: 22px;
+    padding-left: 18px;
     margin-right: 15px;
     &:hover {
       cursor: pointer;
@@ -20,5 +20,8 @@ export const CompanySwitcherStyles = {
     font-size: ${(props) => props.theme.size.xnormal};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     margin-left: -5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
 };

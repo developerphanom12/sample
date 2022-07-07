@@ -30,6 +30,7 @@ export const useCategoriesTabState = () => {
       selectedCategory,
     },
     user: {
+      user: { active_account },
       userInfo: {
         company: { date_format },
       },
@@ -318,6 +319,7 @@ export const useCategoriesTabState = () => {
     ...state,
     selectedCategory,
     debouncedValue,
+    active_account,
     onBlurHandler,
     onFocusSearchHandler,
     onChangePagesAmount,

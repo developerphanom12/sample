@@ -4,13 +4,6 @@ export interface ICreateUser {
   fullName: string;
   country: string;
 }
-export interface ICompany {
-  date_format: string;
-  currency: ICurrency;
-  id: string;
-  name: string;
-}
-
 export interface IUser extends ICreateUser {
   socialAuth?: null;
   id: string;
@@ -48,4 +41,9 @@ export interface ISIGN_UP_USER_INITIAL_STATE {
 export interface IUpdateUserProfile {
   company: Pick<ICompany, 'currency' | 'date_format'>;
   user: Pick<IUser, 'email' | 'country' | 'fullName'>;
+}
+
+export interface ISwitchAccount {
+  user: Omit<IUser, 'socialAuth'>;
+  company: Omit<ICompany, 'currency'>;
 }

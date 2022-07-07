@@ -7,10 +7,10 @@ import { HeaderStyles as Styled } from './Header.style';
 import { CompanySwitcher } from '../CompanySwitcher/CompanySwitcher';
 import { Icon } from '../Icons';
 
+import { useHeaderState } from './Header.state';
+
 import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
-
-import { useHeaderState } from './Header.state';
 
 export interface HeaderProps {
   role: 'admin' | 'customer';
@@ -21,6 +21,9 @@ export const Header: FC<HeaderProps> = (props) => {
   const {
     isOpenSwitcher,
     switcherRef,
+    companySwitcher,
+    activeCompany,
+    activeAccountId,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
     onGetAllCompaniesHandler,
@@ -63,6 +66,9 @@ export const Header: FC<HeaderProps> = (props) => {
           </Styled.Links>
           <Styled.Notifications>
             <CompanySwitcher
+              activeAccountId={activeAccountId}
+              activeCompany={activeCompany}
+              companies={companySwitcher}
               isOpenSwitcher={isOpenSwitcher}
               onClickSwitcherHandler={onClickSwitcherHandler}
               switcherRef={switcherRef}

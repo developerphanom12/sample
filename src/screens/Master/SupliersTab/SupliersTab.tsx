@@ -57,11 +57,12 @@ export const SupliersTab: FC = () => {
     isHeaderPanel,
     isSearching,
     searchedItems,
+    active_account,
   } = useSuppliersTabState();
 
   useEffect(() => {
     !searchValue && onGetAllSuppliersHandler();
-  }, [searchValue]);
+  }, [searchValue, active_account]);
 
   useEffect(() => {
     debouncedValue &&

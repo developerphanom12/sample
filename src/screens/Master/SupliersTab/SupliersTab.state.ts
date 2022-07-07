@@ -30,6 +30,7 @@ export const useSuppliersTabState = () => {
       selectedCategory,
     },
     user: {
+      user: { active_account },
       userInfo: {
         company: { date_format },
       },
@@ -317,6 +318,7 @@ export const useSuppliersTabState = () => {
 
   return {
     ...state,
+    active_account,
     debouncedValue,
     onChangePagesAmount,
     onBlurHandler,

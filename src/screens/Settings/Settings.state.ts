@@ -13,7 +13,9 @@ export const useSettingsState = () => {
   } = useSelector((state: IState) => state.user);
 
   const dispatch = useDispatch();
-  const [isUploadingPhoto, setIsUploadingPhoto] = useState(true);
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(
+    !profile_image ? false : true
+  );
   const [isHover, setIsHover] = useState(false);
   const [userProfilePhoto, setUserProfilePhoto] = useState('');
 
@@ -22,6 +24,7 @@ export const useSettingsState = () => {
 
   const onGetProfilePhoto = async (profileImage?: string) => {
     try {
+      if (!profile_image) return;
       const { data } = await getProfilePhoto(
         profileImage || profile_image,
         token

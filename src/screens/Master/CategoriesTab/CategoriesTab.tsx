@@ -57,11 +57,12 @@ export const CategoriesTab: FC = () => {
     isContentLoading,
     isSearching,
     searchedItems,
+    active_account,
   } = useCategoriesTabState();
 
   useEffect(() => {
     !searchValue && onGetAllCategoriesHandler();
-  }, [searchValue]);
+  }, [searchValue, active_account]);
 
   useEffect(() => {
     debouncedValue &&

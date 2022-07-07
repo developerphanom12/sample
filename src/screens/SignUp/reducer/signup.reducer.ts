@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
-  ICompany,
   ICurrency,
   ISIGN_UP_USER_INITIAL_STATE,
   ISocialAccount,
+  ISwitchAccount,
   IUpdateUserProfile,
   IUser,
   IUserInfo,
@@ -40,6 +40,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
       date_format: '',
       id: '',
       name: '',
+      logo: '',
     },
   },
   currencies: [
@@ -111,6 +112,16 @@ export const SignUpUserSlice = createSlice({
     ) => {
       state.user.profile_image = action.payload;
     },
+    switchAccount: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<ISwitchAccount>
+    ) => {
+      state.user = { ...state.user, ...action.payload.user };
+      state.userInfo.company = {
+        ...state.userInfo.company,
+        ...action.payload.company,
+      };
+    },
   },
 });
 
@@ -123,6 +134,7 @@ export const {
   setCompany,
   updateUserProfile,
   setUserAvatar,
+  switchAccount,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

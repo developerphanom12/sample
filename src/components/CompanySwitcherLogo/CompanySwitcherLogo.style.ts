@@ -2,7 +2,7 @@ import { styled } from 'app/theme';
 
 export const CompanySwitcherLogoStyles = {
   Wrapper: styled.div`
-    width: 40px;
+    min-width: 40px;
     height: 40px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.orange};
