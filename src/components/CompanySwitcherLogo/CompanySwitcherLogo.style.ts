@@ -19,6 +19,7 @@ export const CompanySwitcherLogoStyles = {
   LogoImage: styled.img`
     width: 40px;
     height: 40px;
+    margin-right: 20px;
     border-radius: 50%;
   `,
 };

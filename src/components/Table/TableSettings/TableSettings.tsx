@@ -40,7 +40,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
           <TableSettingsItem
             key={member.id}
             memberId={member.id}
-            memberEmail={member?.email}
+            memberEmail={member?.user.email}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
@@ -57,7 +57,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
           <TableSettingsItem
             key={member.id}
             memberId={member.id}
-            memberEmail={member?.email}
+            memberEmail={member?.user.email}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}

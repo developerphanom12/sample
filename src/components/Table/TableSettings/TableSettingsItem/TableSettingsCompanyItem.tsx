@@ -12,9 +12,10 @@ export const TableSettingsCompanyItem: React.FC<
     onDeleteIconClickHandler,
     userRole,
     companyName,
+    isCompanyTable,
   } = props;
   return (
-    <Styled.Item>
+    <Styled.Item isCompanyTable={isCompanyTable}>
       {(userRole === 'owner' || userRole === 'admin') && (
         <Styled.Action>
           <Styled.ActionButton onClick={() => onEditIconClickHandler('1')}>

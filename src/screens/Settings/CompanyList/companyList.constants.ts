@@ -19,4 +19,5 @@ export const COMPANY_LIST_INITIAL_STATE = {
   selectedItemId: '',
   searchedCompnies: [],
   isFetchingData: true,
+  companyLogo: null,
 };

@@ -5,7 +5,7 @@ import { getCompanyInitials } from 'services/utils';
 import { CompanySwitcherLogoStyles as Styled } from './CompanySwitcherLogo.style';
 
 interface ICompanySwitcherLogoProps {
-  companyLogoSrc: string;
+  companyLogoSrc?: string | null;
   companyName: string;
 }
 

@@ -216,6 +216,7 @@ declare global {
 
   interface TableCompanySettingsItemProps extends TableSettingsItemProps {
     companyName: string;
+    isCompanyTable: boolean;
   }
 
   interface IMasterModalWindowProps {
@@ -257,7 +258,14 @@ declare global {
     id: string;
     name: string;
     role: TRoles;
-    email?: string;
+    user: {
+      active_account: string;
+      country: string;
+      email: string;
+      fullName: string;
+      id: string;
+      profile_image: null | string;
+    };
   }
   interface IMemberTableProps extends TableSettingsProps {
     members?: IMember[];
@@ -281,7 +289,7 @@ declare global {
     currency: ICurrency;
     id: string;
     name: string;
-    logo: string;
+    logo: string | null;
   }
 
   interface ICompaniesSwitcher {

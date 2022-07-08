@@ -35,6 +35,7 @@ export const CompanyList: FC = () => {
     onEnterGoToClick,
     onChangeItemsPerPage,
     onGoToClick,
+    onCreateCompanyHandler,
     itemsPerPage,
     inputPaginationValue,
     pages,
@@ -56,7 +57,7 @@ export const CompanyList: FC = () => {
         isLoading={isLoading}
         onCloseModalWindowHandler={onModalWindowToggle}
         onChangeInputValueHandler={onChangeCompanyNameHandler}
-        onSaveButtonCLickHandler={async () => {}}
+        onSaveButtonCLickHandler={onCreateCompanyHandler}
         onEnterCreateItemClick={onEnterInsertUser}
         onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}
         inputValue={companyName}

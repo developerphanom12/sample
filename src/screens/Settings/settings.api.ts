@@ -42,6 +42,27 @@ export const getAllCompanies = () => {
   return apiServices.fetchData(URL);
 };
 
+export const companyCreate = (payload: FormData, token: string) => {
+  const URL = `${CONFIG.apiUrl}company/create`;
+  return Axios.post(URL, payload, {
+    headers: {
+      'content-type': `multipart/form-data`,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getCompanyLogo = (companyId: string, token: string) => {
+  const URL = `${CONFIG.apiUrl}company/get-logo/${companyId}`;
+  return Axios.get(URL, {
+    headers: {
+      'Content-Type': 'image/jpeg',
+      Authorization: `Bearer ${token}`,
+    },
+    responseType: 'blob',
+  });
+};
+
 export const profileUploadPhoto = (payload: FormData, token: string) => {
   const URL = `${CONFIG.apiUrl}profile/upload-photo`;
   return Axios.post(URL, payload, {

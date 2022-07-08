@@ -70,10 +70,6 @@ export const DATE_FORMATS = [
 
 export const USER_ROLES = [
   {
-    value: 'owner',
-    label: 'Owner',
-  },
-  {
     value: 'admin',
     label: 'Admin',
   },

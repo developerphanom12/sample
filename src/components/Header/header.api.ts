@@ -1,6 +1,6 @@
 import { apiServices } from 'services/api-service';
 
-export const getCompanyMembers = () => {
+export const getUserCompanies = () => {
   const URL = `company-member/get-all`;
   return apiServices.fetchData(URL);
 };

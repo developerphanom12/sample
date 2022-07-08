@@ -8,7 +8,7 @@ import { IState } from 'services/redux/reducer';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
 import { IuseCompanyListState } from './types/companyList.types';
-import { getAllCompanies } from '../settings.api';
+import { companyCreate, getAllCompanies } from '../settings.api';
 import { setCompanies } from '../reducer/settings.reducer';
 
 export const useCompanyListState = () => {
@@ -18,6 +18,12 @@ export const useCompanyListState = () => {
   const [state, setState] = useState<IuseCompanyListState>(initialState);
   const [isEdit, setIsEdit] = useState(false);
   const {
+    user: {
+      token,
+      userInfo: {
+        company: { currency, date_format },
+      },
+    },
     settings: { companies },
   } = useSelector((state: IState) => state);
 
@@ -26,7 +32,7 @@ export const useCompanyListState = () => {
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
-    value: string | boolean | number | SingleValue<IOption>
+    value: string | boolean | number | SingleValue<IOption> | File
   ) => {
     setState((prevState) => ({
       ...prevState,
@@ -157,6 +163,39 @@ export const useCompanyListState = () => {
       URL.createObjectURL(event.target?.files[0])
     );
     onChangeStateFieldHandler('logoName', event.target?.files[0]?.name);
+    onChangeStateFieldHandler('companyLogo', event.target?.files[0]);
+  };
+
+  const onCreateCompanyHandler = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('currency', currency.id);
+      formData.append('name', state.companyName);
+      formData.append('date_format', date_format);
+      if (state.companyLogo?.name) {
+        formData.append('logo', state.companyLogo);
+      }
+      await companyCreate(formData, token);
+      onGetAllCompaniesHandler();
+      setState((prevState) => ({
+        ...prevState,
+        companyName: '',
+        companyLogo: null,
+        logoName: '',
+        logoSrc: '',
+      }));
+      onModalWindowToggle();
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        companyName: '',
+        companyLogo: null,
+        logoName: '',
+        logoSrc: '',
+      }));
+      onModalWindowToggle();
+      console.log(error);
+    }
   };
 
   const onDeleteLogoHandler = () =>
@@ -193,6 +232,7 @@ export const useCompanyListState = () => {
     ...state,
     isEdit,
     companies,
+    onCreateCompanyHandler,
     onGetAllCompaniesHandler,
     debouncedValue,
     onDeleteIconClickHandler,

@@ -6,8 +6,8 @@ import { CompanySwitcherMenuItemStyles as Styled } from './CompanySwitcherMenuIt
 
 export interface ICompanySwitcherMenuItem {
   isLoading?: boolean;
+  companyLogoSrc?: string | null;
   isActive: boolean;
-  companyLogoSrc: string;
   companyName: string;
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   companyId: string;

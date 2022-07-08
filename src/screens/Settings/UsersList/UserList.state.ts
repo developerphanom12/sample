@@ -105,7 +105,6 @@ export const useUserListState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       const { data } = await getCompanyMembers(params);
-
       isSearching && state.isFocus
         ? onChangeStateFieldHandler('searchedUsers', data.data)
         : dispatch(setMembers({ count: data.count, members: data.data }));
@@ -253,7 +252,7 @@ export const useUserListState = () => {
   const onEditIconClickHandler = (itemId: string) => {
     const selectedUser = getSelectedUser(members, itemId);
     formik.setValues({
-      email: selectedUser?.email || '',
+      email: selectedUser?.user.email || '',
       fullName: selectedUser?.name || '',
     });
     setIsEdit(true);

@@ -17,16 +17,18 @@ export const CompanySwitcherMenu: FC<ICompanySwitcherMenu> = (props) => {
   return (
     <Styled.Wrapper>
       <Styled.Title>Company(s)</Styled.Title>
-      {companies.map((company) => (
-        <CompanySwitcherMenuItem
-          key={company.id}
-          isActive={company.id === activeAccountId}
-          companyId={company.id}
-          companyName={company.company.name}
-          onClick={onSwitchCompanyHandler}
-          companyLogoSrc={company.company.logo}
-        />
-      ))}
+      <Styled.CompaniesWrapper>
+        {companies.map((company) => (
+          <CompanySwitcherMenuItem
+            key={company.id}
+            isActive={company.id === activeAccountId}
+            companyId={company.id}
+            companyName={company.company.name}
+            onClick={onSwitchCompanyHandler}
+            companyLogoSrc={company.company?.logo}
+          />
+        ))}
+      </Styled.CompaniesWrapper>
     </Styled.Wrapper>
   );
 };

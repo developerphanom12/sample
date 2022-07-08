@@ -29,6 +29,7 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
       </Styled.Head>
       {companies?.map((company) => (
         <TableSettingsCompanyItem
+          isCompanyTable
           key={company.id}
           companyName={company.name}
           userRole={userRole}

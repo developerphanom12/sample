@@ -2,7 +2,10 @@ import { styled } from 'app/theme';
 
 export const TableSettingsStyles = {
   Head: styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns:
+      minmax(40px, 150px) minmax(110px, 200px)
+      minmax(110px, 170px) minmax(110px, 170px);
     background-color: ${(props) => props.theme.colors.lightGray};
     border-top-left-radius: ${(props) => props.theme.size.borderRadius};
     border-top-right-radius: ${(props) => props.theme.size.borderRadius};
@@ -14,7 +17,6 @@ export const TableSettingsStyles = {
   Actions: styled.div`
     display: flex;
     align-items: center;
-    max-width: 140px;
     width: 100%;
     font-size: ${(props) => props.theme.size.default};
   `,
@@ -22,7 +24,6 @@ export const TableSettingsStyles = {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 180px;
   `,
   EmptyContentWrapper: styled.div`
     display: flex;

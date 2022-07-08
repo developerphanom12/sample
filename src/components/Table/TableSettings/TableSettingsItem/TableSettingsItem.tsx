@@ -46,7 +46,7 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
         <Styled.TextWrapper>{memberName}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>
-        <Styled.TextWrapper>Smith@gmail.com</Styled.TextWrapper>
+        <Styled.TextWrapper>{memberEmail}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
       <Styled.Column>Created On</Styled.Column>

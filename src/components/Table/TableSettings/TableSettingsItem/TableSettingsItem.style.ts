@@ -1,8 +1,19 @@
 import { styled } from 'app/theme';
 
 export const TableSettingsItemStyles = {
-  Item: styled.div`
-    display: flex;
+  Item: styled.div<{ isCompanyTable?: boolean }>`
+    display: grid;
+    grid-template-columns: ${({ isCompanyTable }) =>
+      isCompanyTable
+        ? `minmax(43px, 150px) minmax(111px, 200px) minmax(111px, 170px) minmax(
+        111px,
+        170px
+      )`
+        : `minmax(43px, 150px) minmax(111px, 200px) minmax(111px, 230px) minmax(
+        110px,
+        150px
+      )
+      minmax(110px, 170px) minmax(110px, 170px)`};
     background-color: ${(props) => props.theme.colors.white};
     border-left: solid 1px ${(props) => props.theme.colors.gray};
     border-right: solid 1px ${(props) => props.theme.colors.gray};
@@ -15,7 +26,6 @@ export const TableSettingsItemStyles = {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 140px;
   `,
   ActionButton: styled.div`
     display: flex;
@@ -30,11 +40,9 @@ export const TableSettingsItemStyles = {
     font-size: ${(props) => props.theme.size.default};
     display: flex;
     align-items: center;
-    max-width: 180px;
     width: 100%;
   `,
   TextWrapper: styled.span`
-    max-width: 109px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

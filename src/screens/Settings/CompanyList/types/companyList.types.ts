@@ -10,4 +10,6 @@ export interface IuseCompanyListState extends IPaginationState {
   selectedItemId: string;
   searchedCompnies: ICompanySettings[];
   isFetchingData: boolean;
+
+  companyLogo: null | File;
 }
