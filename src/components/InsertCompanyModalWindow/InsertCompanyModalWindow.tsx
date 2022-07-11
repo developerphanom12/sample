@@ -18,6 +18,7 @@ interface IInsertCompanyModalWindowProps extends IMasterModalWindowProps {
   onDeleteLogoHandler: () => void;
   logoSrc: string;
   logoName: string;
+  isCompanyLogoLoading: boolean;
 }
 
 export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
@@ -29,6 +30,7 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
     isLoading,
     isModalWindowOpen,
     logoName,
+    isCompanyLogoLoading,
     onDeleteLogoHandler,
     onChangeInputValueHandler,
     onCloseModalWindowHandler,
@@ -59,6 +61,7 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
         <UploadLogoButton
           id="insertLogo"
           name="insertLogo"
+          isCompanyLogoLoading={isCompanyLogoLoading}
           logoSrc={logoSrc}
           logoName={logoName}
           onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}

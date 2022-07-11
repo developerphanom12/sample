@@ -266,6 +266,8 @@ export const useUserListState = () => {
         label: getFirstLetterUppercase(selectedUser?.role || ''),
         value: selectedUser?.role || '',
       },
+      prevName: selectedUser?.name || '',
+      prevEmail: selectedUser?.user.email || '',
       selectedItemId: itemId,
       selectedUserName: selectedUser?.name || '',
     }));
@@ -349,8 +351,14 @@ export const useUserListState = () => {
   });
 
   const isDisableButton = isEdit
-    ? state.prevRole?.value === state.role?.value && !formik.isValid
-    : !formik.isValid && !formik.dirty;
+    ? (state.prevRole?.value === state.role?.value &&
+        state.prevEmail === formik.values.email &&
+        state.prevName === formik.values.fullName) ||
+      !formik.isValid
+    : !formik.values.email ||
+      !formik.values.fullName ||
+      !formik.dirty ||
+      !state.role?.value;
 
   return {
     ...state,

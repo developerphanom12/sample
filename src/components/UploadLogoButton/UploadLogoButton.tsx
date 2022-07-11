@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { Icon } from '../Icons';
+import { LoaderComponent } from '../Loader';
 import { UploadInput } from '../UploadInput';
 import { UploadLogoButtonStyles as Styled } from './UploadLogoButton.style';
 
@@ -13,6 +14,7 @@ interface IUploadLogoButtonProps {
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
   onDeleteLogoHandler: () => void;
+  isCompanyLogoLoading?: boolean;
 }
 export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
   const {
@@ -22,6 +24,7 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
     name,
     logoName,
     logoSrc,
+    isCompanyLogoLoading,
   } = props;
   return (
     <Styled.Wrapper>
@@ -29,7 +32,9 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
         Logo
         <Styled.Size> (Size: 100 x 100 px)</Styled.Size>
       </Styled.LogoTextWrapper>
-      {!!logoName ? (
+      {isCompanyLogoLoading ? (
+        <LoaderComponent theme="preview" />
+      ) : !!logoSrc ? (
         <Styled.Logo>
           <Styled.IconWrapper onClick={onDeleteLogoHandler}>
             <Icon type="deletePhotoIcon" />

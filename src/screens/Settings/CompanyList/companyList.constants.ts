@@ -20,4 +20,8 @@ export const COMPANY_LIST_INITIAL_STATE = {
   searchedCompnies: [],
   isFetchingData: true,
   companyLogo: null,
+  selectedCompany: null,
+  isCompanyLogoLoading: true,
+  prevCompanyName: '',
+  prevLogoSrc: '',
 };

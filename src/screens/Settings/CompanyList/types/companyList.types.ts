@@ -1,3 +1,9 @@
+export interface ISelectedCompany {
+  name: string;
+  logo: string | null;
+  id: string;
+}
+
 export interface IuseCompanyListState extends IPaginationState {
   searchValue: string;
   isLoading: boolean;
@@ -10,6 +16,9 @@ export interface IuseCompanyListState extends IPaginationState {
   selectedItemId: string;
   searchedCompnies: ICompanySettings[];
   isFetchingData: boolean;
-
+  selectedCompany: ISelectedCompany | null;
   companyLogo: null | File;
+  isCompanyLogoLoading: boolean;
+  prevCompanyName: string;
+  prevLogoSrc: string;
 }

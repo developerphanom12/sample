@@ -1,11 +1,16 @@
 import { styled } from 'app/theme';
 
 export const TableSettingsStyles = {
-  Head: styled.div`
+  Head: styled.div<{ isCompanyTable?: boolean }>`
     display: grid;
-    grid-template-columns:
-      minmax(40px, 150px) minmax(110px, 200px)
-      minmax(110px, 170px) minmax(110px, 170px);
+    grid-template-columns: ${({ isCompanyTable }) =>
+      isCompanyTable
+        ? ` minmax(40px, 150px) minmax(110px, 200px)
+        minmax(110px, 170px) minmax(110px, 170px);
+)`
+        : ` minmax(40px, 151px) minmax(110px, 201px) minmax(110px, 230px)
+        minmax(110px, 150px) minmax(110px, 170px) minmax(110px, 170px);`};
+
     background-color: ${(props) => props.theme.colors.lightGray};
     border-top-left-radius: ${(props) => props.theme.size.borderRadius};
     border-top-right-radius: ${(props) => props.theme.size.borderRadius};

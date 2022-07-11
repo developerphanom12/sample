@@ -201,9 +201,11 @@ declare global {
     date_format: string;
     id: string;
     name: string;
+    logo: null | string;
   }
   interface TableSettingsProps {
     companies?: ICompanySettings[];
+    isCompanyTable?: boolean;
     userRole: TRoles;
     onDeleteIconClickHandler: (itemId: string) => void;
     onEditIconClickHandler: (itemId: string) => void;
@@ -217,6 +219,7 @@ declare global {
   interface TableCompanySettingsItemProps extends TableSettingsItemProps {
     companyName: string;
     isCompanyTable: boolean;
+    companyId: string;
   }
 
   interface IMasterModalWindowProps {

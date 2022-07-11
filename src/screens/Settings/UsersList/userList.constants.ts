@@ -23,6 +23,8 @@ export const USERS_LIST_INITIAL_STATE = {
   company: null,
   prevRole: null,
   selectedUserName: '',
+  prevName: '',
+  prevEmail: '',
 };
 
 export const formikInitialValues = {

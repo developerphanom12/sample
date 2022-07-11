@@ -36,12 +36,20 @@ export const CompanyList: FC = () => {
     onChangeItemsPerPage,
     onGoToClick,
     onCreateCompanyHandler,
+    onDeleteCompanyHandler,
+    onCloseEditModalWindow,
+    onChangeCompanyLogoHandler,
+    isCompanyLogoLoading,
+    userRole,
     itemsPerPage,
     inputPaginationValue,
     pages,
     currentPage,
     companies,
     isFetchingData,
+    selectedCompany,
+    prevCompanyName,
+    prevLogoSrc,
     onGetAllCompaniesHandler,
   } = useCompanyListState();
 
@@ -52,26 +60,34 @@ export const CompanyList: FC = () => {
   return (
     <Styled.Section>
       <InsertCompanyModalWindow
+        isCompanyLogoLoading={isCompanyLogoLoading}
         headerText={isEdit ? 'Edit Company' : 'Insert Company'}
         isModalWindowOpen={isModalWindowOpen}
         isLoading={isLoading}
-        onCloseModalWindowHandler={onModalWindowToggle}
+        onCloseModalWindowHandler={
+          isEdit ? onCloseEditModalWindow : onModalWindowToggle
+        }
         onChangeInputValueHandler={onChangeCompanyNameHandler}
-        onSaveButtonCLickHandler={onCreateCompanyHandler}
+        onSaveButtonCLickHandler={
+          isEdit ? onChangeCompanyLogoHandler : onCreateCompanyHandler
+        }
         onEnterCreateItemClick={onEnterInsertUser}
         onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}
         inputValue={companyName}
         logoSrc={logoSrc}
         logoName={logoName}
-        isDisableButton={!companyName.length}
+        isDisableButton={
+          (companyName === prevCompanyName && prevLogoSrc === logoSrc) ||
+          isCompanyLogoLoading
+        }
         onDeleteLogoHandler={onDeleteLogoHandler}
       />
       <DeleteModalWindow
         isLoading={isLoading}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
-        onDeleteButtonClickHandler={async () => {}}
+        onDeleteButtonClickHandler={onDeleteCompanyHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`company ${'Company 1'}`}
+        deleteItemName={`company ${selectedCompany?.name}`}
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
@@ -80,7 +96,7 @@ export const CompanyList: FC = () => {
       ) : (
         <SettingsItemPageContent
           isFetchingData={false}
-          userRole="owner"
+          userRole={userRole as TRoles}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
           onEditIconClickHandler={onEditIconClickHandler}
           pages={pages}

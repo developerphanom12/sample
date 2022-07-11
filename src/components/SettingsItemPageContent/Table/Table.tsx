@@ -35,6 +35,7 @@ export const Table = (props: ITableProps) => {
         />
       ) : (
         <TableSettingsCompany
+          isCompanyTable={true}
           companies={companies}
           userRole={userRole}
           onDeleteIconClickHandler={onDeleteIconClickHandler}

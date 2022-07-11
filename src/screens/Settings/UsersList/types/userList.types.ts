@@ -11,6 +11,8 @@ export interface IuseUserListState extends IPaginationState {
   company: IOption | null;
   isFetchingData: boolean;
   selectedUserName: string;
+  prevName: string;
+  prevEmail: string;
 }
 export interface IgetInputFieldsProps {
   options: IOption[][];

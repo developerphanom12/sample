@@ -5,10 +5,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { IState } from 'services/redux/reducer';
+import { getUserRole } from 'services/utils';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
-import { IuseCompanyListState } from './types/companyList.types';
-import { companyCreate, getAllCompanies } from '../settings.api';
+import {
+  ISelectedCompany,
+  IuseCompanyListState,
+} from './types/companyList.types';
+import {
+  changeCompanyLogo,
+  companyCreate,
+  companyDelete,
+  getAllCompanies,
+  getCompanyLogo,
+  getOneCompany,
+} from '../settings.api';
 import { setCompanies } from '../reducer/settings.reducer';
 
 export const useCompanyListState = () => {
@@ -20,6 +31,7 @@ export const useCompanyListState = () => {
   const {
     user: {
       token,
+      user: { active_account, accounts },
       userInfo: {
         company: { currency, date_format },
       },
@@ -27,12 +39,20 @@ export const useCompanyListState = () => {
     settings: { companies },
   } = useSelector((state: IState) => state);
 
+  const userRole = getUserRole(accounts || [], active_account || '');
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
   const [isDeleteModalWindowOpen, onDeleteModalWindowToggle] = useToggle();
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
-    value: string | boolean | number | SingleValue<IOption> | File
+    value:
+      | string
+      | boolean
+      | number
+      | SingleValue<IOption>
+      | File
+      | ISelectedCompany
+      | null
   ) => {
     setState((prevState) => ({
       ...prevState,
@@ -168,6 +188,7 @@ export const useCompanyListState = () => {
 
   const onCreateCompanyHandler = async () => {
     try {
+      onChangeStateFieldHandler('isLoading', true);
       const formData = new FormData();
       formData.append('currency', currency.id);
       formData.append('name', state.companyName);
@@ -183,6 +204,7 @@ export const useCompanyListState = () => {
         companyLogo: null,
         logoName: '',
         logoSrc: '',
+        isLoading: false,
       }));
       onModalWindowToggle();
     } catch (error) {
@@ -192,6 +214,7 @@ export const useCompanyListState = () => {
         companyLogo: null,
         logoName: '',
         logoSrc: '',
+        isLoading: false,
       }));
       onModalWindowToggle();
       console.log(error);
@@ -205,13 +228,106 @@ export const useCompanyListState = () => {
       logoSrc: '',
     }));
 
-  const onDeleteIconClickHandler = (itemId: string) => {
-    onDeleteModalWindowToggle();
+  const onDeleteIconClickHandler = async (itemId: string) => {
+    try {
+      onDeleteModalWindowToggle();
+      const { data } = await getOneCompany(itemId);
+      onChangeStateFieldHandler('selectedCompany', {
+        name: data.name,
+        logo: data.logo,
+        id: data.id,
+      });
+    } catch (error) {
+      onDeleteModalWindowToggle();
+      console.log(error);
+    }
   };
 
-  const onEditIconClickHandler = (itemId: string) => {
+  const onDeleteCompanyHandler = async () => {
+    try {
+      onChangeStateFieldHandler('isLoading', true);
+      await companyDelete(state.selectedCompany?.id || '');
+      const { data } = await getAllCompanies();
+      dispatch(setCompanies(data));
+      onChangePage({ selected: state.currentPage });
+
+      onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('searchValue', '');
+      onDeleteModalWindowToggle();
+    } catch (error) {
+      onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('searchValue', '');
+      onDeleteModalWindowToggle();
+      console.log(error);
+    }
+  };
+
+  const onCloseEditModalWindow = () => {
+    setState((prevState) => ({
+      ...prevState,
+      companyName: '',
+      selectedCompany: null,
+      logoSrc: '',
+    }));
+    setIsEdit(false);
     onModalWindowToggle();
-    setIsEdit(true);
+  };
+
+  const onGetCompanyLogoHandler = async (companyId: string) => {
+    try {
+      const { data } = await getCompanyLogo(companyId, token);
+      const logo = URL.createObjectURL(data);
+      setState((prevState) => ({
+        ...prevState,
+        logoSrc: logo,
+        prevLogoSrc: logo,
+      }));
+      onChangeStateFieldHandler('isCompanyLogoLoading', false);
+    } catch (error) {
+      onChangeStateFieldHandler('isCompanyLogoLoading', false);
+      console.log(error);
+    }
+  };
+
+  const onChangeCompanyLogoHandler = async () => {
+    try {
+      onChangeStateFieldHandler('isLoading', true);
+      const formData = new FormData();
+      formData.append('logo', state?.companyLogo || '');
+      await changeCompanyLogo(formData, token);
+      const { data } = await getAllCompanies();
+      dispatch(setCompanies(data));
+      onChangeStateFieldHandler('isLoading', false);
+      onCloseEditModalWindow();
+    } catch (error) {
+      onCloseEditModalWindow();
+      onChangeStateFieldHandler('isLoading', false);
+      console.log(error);
+    }
+  };
+
+  const onEditIconClickHandler = async (itemId: string) => {
+    try {
+      setIsEdit(true);
+      const { data } = await getOneCompany(itemId);
+      onModalWindowToggle();
+
+      onChangeStateFieldHandler('selectedCompany', {
+        name: data.name,
+        logo: data.logo,
+        id: data.id,
+      });
+      onChangeStateFieldHandler('companyName', data.name);
+      onChangeStateFieldHandler('prevCompanyName', data.name);
+      !data.logo && onChangeStateFieldHandler('isCompanyLogoLoading', false);
+      data.logo && onGetCompanyLogoHandler(itemId);
+    } catch (error) {
+      onChangeStateFieldHandler('isCompanyLogoLoading', false);
+      onModalWindowToggle();
+      setIsEdit(false);
+      onChangeStateFieldHandler('isLoading', true);
+      console.log(error);
+    }
   };
 
   const onEnterInsertUser = (event: React.KeyboardEvent) => {
@@ -232,6 +348,9 @@ export const useCompanyListState = () => {
     ...state,
     isEdit,
     companies,
+    userRole,
+    onCloseEditModalWindow,
+    onDeleteCompanyHandler,
     onCreateCompanyHandler,
     onGetAllCompaniesHandler,
     debouncedValue,
@@ -252,5 +371,6 @@ export const useCompanyListState = () => {
     onEnterGoToClick,
     onChangeItemsPerPage,
     onGoToClick,
+    onChangeCompanyLogoHandler,
   };
 };

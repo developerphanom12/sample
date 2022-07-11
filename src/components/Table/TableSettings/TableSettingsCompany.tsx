@@ -10,10 +10,11 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
     onEditIconClickHandler,
     userRole,
     companies,
+    isCompanyTable,
   } = props;
   return (
     <>
-      <Styled.Head>
+      <Styled.Head isCompanyTable={isCompanyTable}>
         {(userRole === 'owner' || userRole === 'admin') && (
           <Styled.Actions>Actions</Styled.Actions>
         )}
@@ -31,6 +32,7 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
         <TableSettingsCompanyItem
           isCompanyTable
           key={company.id}
+          companyId={company.id}
           companyName={company.name}
           userRole={userRole}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
