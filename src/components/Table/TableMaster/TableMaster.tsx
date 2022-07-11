@@ -35,7 +35,7 @@ export const TableMaster: React.FC<TableMasterProps> = (props) => {
           </Styled.Column>
         </Styled.Column>
       </Styled.Head>
-      {searchedItems?.length ? (
+      {searchedItems?.length && searchValue ? (
         searchedItems?.map((category) => (
           <MasterItem
             key={category.id}

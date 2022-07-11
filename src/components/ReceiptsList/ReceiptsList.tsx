@@ -10,6 +10,10 @@ import { ReceiptsSelects } from './ReceiptsSelects/ReceiptsSelects';
 interface IReceiptsListProps {
   lastReceipts?: IReceipt[];
   countPerTimeFilter?: number;
+  timeFilterValue: {
+    value: string;
+    label: string;
+  };
   timeFilterOptions: {
     value: string;
     label: string;
@@ -27,6 +31,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
     timeFilterOptions,
     countPerTimeFilter,
     dateFormat,
+    timeFilterValue,
     onChangeCategoryFieldHandler,
   } = props;
 
@@ -35,6 +40,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
       <Styled.HeaderWrapper>
         <Styled.Title>Receipts List</Styled.Title>
         <ReceiptsSelects
+          timeFilterValue={timeFilterValue}
           timeFilterOptions={timeFilterOptions}
           onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
         />

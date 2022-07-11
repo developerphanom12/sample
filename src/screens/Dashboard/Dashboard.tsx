@@ -23,6 +23,8 @@ export const Dashboard: FC = () => {
     user,
     isLoading,
     isContentLoading,
+    companySwitcher,
+    timeFilterValue,
   } = useDashboardState();
 
   useEffect(() => {
@@ -33,7 +35,10 @@ export const Dashboard: FC = () => {
     <Styled.LayoutWrapper>
       <Styled.MainWrapper>
         <Styled.MetricWrapper>
-          <DocumentMetric userName={user.fullName} />
+          <DocumentMetric
+            userName={user.fullName}
+            companies={companySwitcher}
+          />
         </Styled.MetricWrapper>
         <Styled.RightSideContentWrapper>
           {!totalReceiptCount && !isLoading ? (
@@ -51,6 +56,7 @@ export const Dashboard: FC = () => {
             </Styled.LoaderWrapper>
           ) : (
             <ReceiptsList
+              timeFilterValue={timeFilterValue}
               lastReceipts={lastReceipts}
               timeFilterOptions={timeFilterOptions}
               countPerTimeFilter={receipts?.count}

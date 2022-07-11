@@ -344,11 +344,18 @@ export const useCompanyListState = () => {
     }));
   };
 
+  const isDisabledButton = isEdit
+    ? (state.companyName === state.prevCompanyName &&
+        state.prevLogoSrc === state.logoSrc) ||
+      state.isCompanyLogoLoading
+    : !state.companyName.length;
+
   return {
     ...state,
     isEdit,
     companies,
     userRole,
+    isDisabledButton,
     onCloseEditModalWindow,
     onDeleteCompanyHandler,
     onCreateCompanyHandler,

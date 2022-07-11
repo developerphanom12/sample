@@ -24,11 +24,11 @@ export const DocumentMetricItemStyles = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 130px;
+    min-height: 80px;
     height: 100%;
     box-shadow: ${({ theme }) => theme.colors.metricBoxShadow};
     border-radius: ${(props) => props.theme.size.borderRadius};
-    padding: 20px;
+    padding: 15px;
     ${(props) => props.statuses && STATUSES[props.statuses]};
     margin-bottom: 23px;
     &:nth-last-child(-n + 2) {
@@ -44,6 +44,7 @@ export const DocumentMetricItemStyles = {
     max-height: 40px;
   `,
   Status: styled.p`
+    margin-top: 2px;
     font-weight: 600;
     font-size: 14px;
   `,

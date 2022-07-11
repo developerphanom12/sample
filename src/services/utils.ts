@@ -33,7 +33,7 @@ export const setAndFormatDateToISO = (
 
 export const returnDateRange = (
   date: Date,
-  fieldName: 'days' | 'month',
+  fieldName: 'days' | 'months',
   dateCount: number
 ) => {
   date.setHours(0, 0, 0, 0);
@@ -64,7 +64,7 @@ export const getLastMonthDateRange = () => {
   const date = new Date();
   date.setDate(1);
   date.setMonth(date.getMonth() - 1);
-  return returnDateRange(date, 'month', 1);
+  return returnDateRange(date, 'months', 1);
 };
 
 export const getFirstLetterUppercase = (text: string) =>

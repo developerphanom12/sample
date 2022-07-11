@@ -50,4 +50,12 @@ export const UploadLogoButtonStyles = {
     right: -6px;
     z-index: ${({ theme }) => theme.zIndex.s};
   `,
+  DeletePhoto: styled.span`
+    font-size: ${({ theme }) => theme.size.default};
+    font-weight: ${({ theme }) => theme.fontWeight.normal};
+    color: ${({ theme }) => theme.colors.black};
+    text-decoration: underline;
+    margin-left: 8px;
+    cursor: pointer;
+  `,
 };

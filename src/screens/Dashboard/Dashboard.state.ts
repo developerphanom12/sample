@@ -38,6 +38,7 @@ export const useDashboardState = () => {
       userInfo: { company },
       user,
     },
+    settings: { companySwitcher },
   } = useSelector((state: IState) => state);
 
   const timeFilterOptions = getTimeFilterOptions();
@@ -123,9 +124,7 @@ export const useDashboardState = () => {
     actionMeta: ActionMeta<unknown>
   ) => {
     if (state.timeFilterValue.value === newValue.value) return;
-
     onChangeStateFieldHandler('timeFilterValue', newValue);
-
     getReceiptsStatisticHandler(dateHashMapping[newValue.value], true);
   };
 
@@ -134,6 +133,7 @@ export const useDashboardState = () => {
     onSelectFilesHandler,
     getReceiptsStatisticHandler,
     onChangeCategoryFieldHandler,
+    companySwitcher,
     totalReceiptCount,
     timeFilterOptions,
     lastReceipts,

@@ -5,6 +5,10 @@ import { CustomSelect } from '../../CustomSelect';
 import { ActionMeta } from 'react-select';
 
 interface IReceiptsSelectsProps {
+  timeFilterValue: {
+    value: string;
+    label: string;
+  };
   timeFilterOptions: {
     value: string;
     label: string;
@@ -16,7 +20,8 @@ interface IReceiptsSelectsProps {
 }
 
 export const ReceiptsSelects: React.FC<IReceiptsSelectsProps> = (props) => {
-  const { timeFilterOptions, onChangeCategoryFieldHandler } = props;
+  const { timeFilterOptions, timeFilterValue, onChangeCategoryFieldHandler } =
+    props;
   return (
     <ReceiptsSelectsStyles.SelectorWrapper>
       <ReceiptsSelectsStyles.SelectorBox>
@@ -26,6 +31,7 @@ export const ReceiptsSelects: React.FC<IReceiptsSelectsProps> = (props) => {
         <CustomSelect
           defaultOption={timeFilterOptions[0]}
           options={timeFilterOptions}
+          value={timeFilterValue}
           onChangeValueHandler={onChangeCategoryFieldHandler}
           marginBottom="0"
           height="45"

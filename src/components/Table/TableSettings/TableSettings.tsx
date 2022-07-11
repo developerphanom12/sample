@@ -35,7 +35,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
           <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
-      {searchedUsers?.length ? (
+      {searchedUsers?.length && searchValue ? (
         searchedUsers?.map((member) => (
           <TableSettingsItem
             key={member.id}

@@ -48,8 +48,7 @@ export const CompanyList: FC = () => {
     companies,
     isFetchingData,
     selectedCompany,
-    prevCompanyName,
-    prevLogoSrc,
+    isDisabledButton,
     onGetAllCompaniesHandler,
   } = useCompanyListState();
 
@@ -76,10 +75,7 @@ export const CompanyList: FC = () => {
         inputValue={companyName}
         logoSrc={logoSrc}
         logoName={logoName}
-        isDisableButton={
-          (companyName === prevCompanyName && prevLogoSrc === logoSrc) ||
-          isCompanyLogoLoading
-        }
+        isDisableButton={isDisabledButton}
         onDeleteLogoHandler={onDeleteLogoHandler}
       />
       <DeleteModalWindow
