@@ -15,7 +15,7 @@ export const ReceiptsItemStyles = {
   `,
   PaymentBlock: styled.div``,
   StatusBlock: styled.div``,
-  SupplierItem: styled.p`
+  SupplierItem: styled.div`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};

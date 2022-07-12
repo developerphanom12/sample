@@ -4,6 +4,7 @@ import { TableSettingsCompany } from '../../Table/TableSettings/TableSettingsCom
 interface ITableProps {
   isMemeberList?: boolean;
   members?: IMember[];
+  searchedCompanies?: ICompanySettings[];
   searchedUsers?: IMember[];
   companies?: ICompanySettings[];
   searchValue: string;
@@ -19,6 +20,7 @@ export const Table = (props: ITableProps) => {
     members,
     searchedUsers,
     companies,
+    searchedCompanies,
     onDeleteIconClickHandler,
     onEditIconClickHandler,
   } = props;
@@ -35,6 +37,8 @@ export const Table = (props: ITableProps) => {
         />
       ) : (
         <TableSettingsCompany
+          searchedCompanies={searchedCompanies}
+          searchValue={searchValue}
           isCompanyTable={true}
           companies={companies}
           userRole={userRole}

@@ -16,8 +16,9 @@ import {
   changeCompanyLogo,
   companyCreate,
   companyDelete,
-  getAllCompanies,
+  companyDeleteLogo,
   getCompanyLogo,
+  getManyCompanies,
   getOneCompany,
 } from '../settings.api';
 import { setCompanies } from '../reducer/settings.reducer';
@@ -36,7 +37,9 @@ export const useCompanyListState = () => {
         company: { currency, date_format },
       },
     },
-    settings: { companies },
+    settings: {
+      companies: { companies, count },
+    },
   } = useSelector((state: IState) => state);
 
   const userRole = getUserRole(accounts || [], active_account || '');
@@ -60,17 +63,13 @@ export const useCompanyListState = () => {
     }));
   };
 
-  const count = 0;
-
-  const onGetAllCompaniesHandler = async (
-    params?: ISearchParams,
-    isSearching?: boolean
-  ) => {
+  const onGetAllCompaniesHandler = async (params?: ISearchParams) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const { data } = await getAllCompanies();
-      dispatch(setCompanies(data));
-
+      const { data } = await getManyCompanies(params);
+      state.isSearching && state.isFocus
+        ? onChangeStateFieldHandler('searchedCompanies', data.data)
+        : dispatch(setCompanies({ companies: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
@@ -89,23 +88,29 @@ export const useCompanyListState = () => {
       console.log(error);
     }
   };
+
   const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
     onChangeStateFieldHandler('itemsPerPage', newValue);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler('isFocus', true);
+    onGetAllCompaniesHandler({ take: Number(newValue?.value) });
     onChangeStateFieldHandler('currentPage', initialState.currentPage);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
   };
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
+  const onChangePage = ({ selected }: IPaginationData) => {
     setState((prevState) => ({
       ...prevState,
       currentPage: selected,
       skipReceipts: selected * Number(state.itemsPerPage.value),
       isContentLoading: true,
     }));
+    onGetAllCompaniesHandler({
+      take: Number(state.itemsPerPage.value),
+      skip: selected * Number(state.itemsPerPage.value),
+    });
   };
 
   const onChangePagesAmount = (itemsCount: number, count: number) => {
@@ -245,10 +250,12 @@ export const useCompanyListState = () => {
 
   const onDeleteCompanyHandler = async () => {
     try {
+      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
+
       await companyDelete(state.selectedCompany?.id || '');
-      const { data } = await getAllCompanies();
-      dispatch(setCompanies(data));
+      const { data } = await getManyCompanies();
+      dispatch(setCompanies({ companies: data.data, count: data.count }));
       onChangePage({ selected: state.currentPage });
 
       onChangeStateFieldHandler('isLoading', false);
@@ -295,13 +302,31 @@ export const useCompanyListState = () => {
       const formData = new FormData();
       formData.append('logo', state?.companyLogo || '');
       await changeCompanyLogo(formData, token);
-      const { data } = await getAllCompanies();
-      dispatch(setCompanies(data));
+      const { data } = await getManyCompanies();
+      dispatch(setCompanies({ companies: data.data, count: data.count }));
       onChangeStateFieldHandler('isLoading', false);
       onCloseEditModalWindow();
     } catch (error) {
       onCloseEditModalWindow();
       onChangeStateFieldHandler('isLoading', false);
+      console.log(error);
+    }
+  };
+
+  const onDeleteCompanyLogo = async () => {
+    try {
+      onChangeStateFieldHandler('isCompanyLogoLoading', true);
+      await companyDeleteLogo(state.selectedCompany?.id || '');
+      const { data } = await getManyCompanies();
+      dispatch(setCompanies({ companies: data.data, count: data.count }));
+      setState((prevState) => ({
+        ...prevState,
+        logoSrc: '',
+        prevLogoSrc: '',
+      }));
+      onChangeStateFieldHandler('isCompanyLogoLoading', false);
+    } catch (error) {
+      onChangeStateFieldHandler('isCompanyLogoLoading', false);
       console.log(error);
     }
   };
@@ -312,6 +337,7 @@ export const useCompanyListState = () => {
       const { data } = await getOneCompany(itemId);
       onModalWindowToggle();
 
+      onChangeStateFieldHandler('isCompanyLogoLoading', true);
       onChangeStateFieldHandler('selectedCompany', {
         name: data.name,
         logo: data.logo,
@@ -325,24 +351,29 @@ export const useCompanyListState = () => {
       onChangeStateFieldHandler('isCompanyLogoLoading', false);
       onModalWindowToggle();
       setIsEdit(false);
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isLoading', false);
       console.log(error);
     }
   };
 
-  const onEnterInsertUser = (event: React.KeyboardEvent) => {
+  const onEnterCreateCompany = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
+    onCreateCompanyHandler();
   };
 
-  const onChangeSearchValueHandler = async (
+  const onChangeSearchValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setState((prevState) => ({
       ...prevState,
+      isSearching: true,
       searchValue: event.target.value,
       isContentLoading: true,
     }));
   };
+
+  const onFocusSearchHandler = () => onChangeStateFieldHandler('isFocus', true);
+  const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);
 
   const isDisabledButton = isEdit
     ? (state.companyName === state.prevCompanyName &&
@@ -356,6 +387,10 @@ export const useCompanyListState = () => {
     companies,
     userRole,
     isDisabledButton,
+    count,
+    onChangePage,
+    onFocusSearchHandler,
+    onBlurHandler,
     onCloseEditModalWindow,
     onDeleteCompanyHandler,
     onCreateCompanyHandler,
@@ -370,7 +405,7 @@ export const useCompanyListState = () => {
     isModalWindowOpen,
     isDeleteModalWindowOpen,
     onChangeSearchValueHandler,
-    onEnterInsertUser,
+    onEnterCreateCompany,
     onEditIconClickHandler,
     onChangeInputValue,
     onForwardClick,
@@ -378,6 +413,8 @@ export const useCompanyListState = () => {
     onEnterGoToClick,
     onChangeItemsPerPage,
     onGoToClick,
+    onDeleteCompanyLogo,
     onChangeCompanyLogoHandler,
+    onChangePagesAmount,
   };
 };

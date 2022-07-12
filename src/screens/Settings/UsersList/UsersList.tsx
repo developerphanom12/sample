@@ -38,11 +38,11 @@ export const UsersList: FC = () => {
     isContentLoading,
     isFocus,
     searchedUsers,
-    isSearching,
     modalFields,
     count,
     isFetchingData,
     isDisableButton,
+    onChangePage,
     onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
     onModalWindowToggleHandler,
@@ -56,8 +56,7 @@ export const UsersList: FC = () => {
   }, [searchValue]);
 
   useEffect(() => {
-    debouncedValue &&
-      onGetAllCompanyMembersHandler({ search: debouncedValue }, isSearching);
+    debouncedValue && onGetAllCompanyMembersHandler({ search: debouncedValue });
   }, [debouncedValue]);
 
   useEffect(() => {
@@ -113,6 +112,7 @@ export const UsersList: FC = () => {
           onChangeSearchValueHandler={onChangeSearchValueHandler}
           searchValue={searchValue}
           onAddClickButtonHandler={onModalWindowToggleHandler}
+          onChangePage={onChangePage}
           isGuard
         />
       )}

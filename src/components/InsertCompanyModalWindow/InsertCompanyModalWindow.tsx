@@ -19,6 +19,8 @@ interface IInsertCompanyModalWindowProps extends IMasterModalWindowProps {
   logoSrc: string;
   logoName: string;
   isCompanyLogoLoading: boolean;
+  isEdit: boolean;
+  onDeleteCompanyLogo: () => Promise<void>;
 }
 
 export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
@@ -31,15 +33,18 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
     isModalWindowOpen,
     logoName,
     isCompanyLogoLoading,
+    isEdit,
     onDeleteLogoHandler,
     onChangeInputValueHandler,
     onCloseModalWindowHandler,
     onEnterCreateItemClick,
     onSaveButtonCLickHandler,
     onUploadCompanyLogoHandler,
+    onDeleteCompanyLogo,
     isDisableButton,
     logoSrc,
   } = props;
+
   return (
     <ReactModal
       isOpen={isModalWindowOpen}
@@ -61,9 +66,11 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
         <UploadLogoButton
           id="insertLogo"
           name="insertLogo"
+          isEdit={isEdit}
           isCompanyLogoLoading={isCompanyLogoLoading}
           logoSrc={logoSrc}
           logoName={logoName}
+          onDeleteCompanyLogo={onDeleteCompanyLogo}
           onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}
           onDeleteLogoHandler={onDeleteLogoHandler}
         />

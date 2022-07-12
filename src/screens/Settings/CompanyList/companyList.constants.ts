@@ -17,11 +17,11 @@ export const COMPANY_LIST_INITIAL_STATE = {
   isSearching: false,
   isFocus: false,
   selectedItemId: '',
-  searchedCompnies: [],
+  searchedCompanies: [],
   isFetchingData: true,
   companyLogo: null,
   selectedCompany: null,
-  isCompanyLogoLoading: true,
+  isCompanyLogoLoading: false,
   prevCompanyName: '',
   prevLogoSrc: '',
 };

@@ -8,22 +8,26 @@ import { UploadLogoButtonStyles as Styled } from './UploadLogoButton.style';
 interface IUploadLogoButtonProps {
   id?: string;
   name?: string;
+  isCompanyLogoLoading?: boolean;
+  isEdit: boolean;
   logoName: string;
   logoSrc: string;
+  onDeleteCompanyLogo: () => Promise<void>;
   onUploadCompanyLogoHandler: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
   onDeleteLogoHandler: () => void;
-  isCompanyLogoLoading?: boolean;
 }
 export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
   const {
     onUploadCompanyLogoHandler,
     onDeleteLogoHandler,
+    onDeleteCompanyLogo,
     id,
     name,
     logoName,
     logoSrc,
+    isEdit,
     isCompanyLogoLoading,
   } = props;
   return (
@@ -44,7 +48,11 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
               <Styled.Image src={logoSrc} alt={logoName} />
             </Styled.ImageWrapper>
           </Styled.Logo>
-          <Styled.DeletePhoto>Delete photo</Styled.DeletePhoto>
+          {isEdit && (
+            <Styled.DeletePhoto onClick={onDeleteCompanyLogo}>
+              Delete photo
+            </Styled.DeletePhoto>
+          )}
         </>
       ) : (
         <>

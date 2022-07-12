@@ -42,6 +42,11 @@ export const getAllCompanies = () => {
   return apiServices.fetchData(URL);
 };
 
+export const getManyCompanies = (params?: ISearchParams) => {
+  const URL = `company/get-many`;
+  return apiServices.fetchData(URL, params);
+};
+
 export const getOneCompany = (companyId: string) => {
   const URL = `company/get/${companyId}`;
   return apiServices.fetchData(URL);
@@ -49,6 +54,11 @@ export const getOneCompany = (companyId: string) => {
 
 export const companyDelete = (companyId: string) => {
   const URL = `company/delete/${companyId}`;
+  return apiServices.deleteData(URL);
+};
+
+export const companyDeleteLogo = (companyId: string) => {
+  const URL = `company/delete-logo/${companyId}`;
   return apiServices.deleteData(URL);
 };
 

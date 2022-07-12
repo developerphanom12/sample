@@ -40,7 +40,7 @@ export const DocumentMetricStyles = {
     text-overflow: ellipsis;
   `,
   CompaniesWrapper: styled.div`
-    max-height: 170px;
+    max-height: 175px;
     height: 100%;
     overflow-y: scroll;
     padding-right: 5px;

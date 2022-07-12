@@ -2,6 +2,7 @@ export interface ISettingsItemPageContentProps
   extends TableSettingsProps,
     IPaginationPanel {
   companies?: ICompanySettings[];
+  searchedCompanies?: ICompanySettings[];
   members?: IMember[];
   isFocus?: boolean;
   searchedUsers?: IMember[];

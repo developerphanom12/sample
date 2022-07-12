@@ -205,7 +205,9 @@ declare global {
   }
   interface TableSettingsProps {
     companies?: ICompanySettings[];
+    searchedCompanies?: ICompanySettings[];
     isCompanyTable?: boolean;
+    searchValue: srting;
     userRole: TRoles;
     onDeleteIconClickHandler: (itemId: string) => void;
     onEditIconClickHandler: (itemId: string) => void;

@@ -45,7 +45,7 @@ export const useUserListState = () => {
 
   const userRole = getUserRole(accounts || [], active_account || '');
 
-  const formattedCompanies = companies.map((item) => ({
+  const formattedCompanies = companies.companies.map((item) => ({
     value: item.id,
     label: item.name,
   }));
@@ -66,16 +66,6 @@ export const useUserListState = () => {
 
   const onModalWindowToggleHandler = () => {
     onModalWindowToggle();
-    onGetCompaniesHandler();
-  };
-
-  const onGetCompaniesHandler = async () => {
-    try {
-      const { data: companiesData } = await getAllCompanies();
-      dispatch(setCompanies(companiesData));
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const onChangeStateFieldHandler = (
@@ -98,17 +88,13 @@ export const useUserListState = () => {
     actionMeta: ActionMeta<IOption> | unknown
   ) => onChangeStateFieldHandler('company', newValue);
 
-  const onGetAllCompanyMembersHandler = async (
-    params?: ISearchParams,
-    isSearching?: boolean
-  ) => {
+  const onGetAllCompanyMembersHandler = async (params?: ISearchParams) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       const { data } = await getCompanyMembers(params);
-      isSearching && state.isFocus
+      state.isSearching && state.isFocus
         ? onChangeStateFieldHandler('searchedUsers', data.data)
         : dispatch(setMembers({ count: data.count, members: data.data }));
-
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
@@ -372,6 +358,7 @@ export const useUserListState = () => {
     isModalWindowOpen,
     isDeleteModalWindowOpen,
     isDisableButton,
+    onChangePage,
     onEditUserHandler,
     onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,

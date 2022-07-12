@@ -1,5 +1,5 @@
 export interface ISETTINGS_INITIAL_STATE {
   companyMembers: { members: IMember[]; count: number | null };
-  companies: ICompanySettings[];
+  companies: { companies: ICompanySettings[]; count: number };
   companySwitcher: ICompaniesSwitcher[];
 }

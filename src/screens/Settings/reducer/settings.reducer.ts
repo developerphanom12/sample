@@ -4,7 +4,7 @@ import { ISETTINGS_INITIAL_STATE } from '../types/settings.types';
 
 export const SETTINGS_INITIAL_STATE: ISETTINGS_INITIAL_STATE = {
   companyMembers: { members: [], count: null },
-  companies: [],
+  companies: { companies: [], count: 0 },
   companySwitcher: [],
 };
 
@@ -23,7 +23,7 @@ export const SettingsSlice = createSlice({
     },
     setCompanies: (
       state: ISETTINGS_INITIAL_STATE,
-      action: PayloadAction<ICompanySettings[]>
+      action: PayloadAction<{ companies: ICompanySettings[]; count: number }>
     ) => {
       state.companies = action.payload;
     },

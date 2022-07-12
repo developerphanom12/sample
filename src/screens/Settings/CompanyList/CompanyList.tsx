@@ -25,7 +25,7 @@ export const CompanyList: FC = () => {
     onDeleteIconClickHandler,
     onChangeCompanyNameHandler,
     onUploadCompanyLogoHandler,
-    onEnterInsertUser,
+    onEnterCreateCompany,
     onModalWindowToggle,
     onChangeSearchValueHandler,
     onDeleteLogoHandler,
@@ -39,6 +39,11 @@ export const CompanyList: FC = () => {
     onDeleteCompanyHandler,
     onCloseEditModalWindow,
     onChangeCompanyLogoHandler,
+    onDeleteCompanyLogo,
+    onChangePagesAmount,
+    onFocusSearchHandler,
+    onBlurHandler,
+    isFocus,
     isCompanyLogoLoading,
     userRole,
     itemsPerPage,
@@ -49,16 +54,29 @@ export const CompanyList: FC = () => {
     isFetchingData,
     selectedCompany,
     isDisabledButton,
+    searchedCompanies,
+    count,
+    onChangePage,
     onGetAllCompaniesHandler,
   } = useCompanyListState();
 
   useEffect(() => {
-    onGetAllCompaniesHandler();
-  }, []);
+    !searchValue && onGetAllCompaniesHandler();
+  }, [searchValue]);
+
+  useEffect(() => {
+    debouncedValue && onGetAllCompaniesHandler({ search: debouncedValue });
+  }, [debouncedValue]);
+
+  useEffect(() => {
+    if (!count) return;
+    onChangePagesAmount(Number(itemsPerPage.value), count);
+  }, [count, itemsPerPage]);
 
   return (
     <Styled.Section>
       <InsertCompanyModalWindow
+        onDeleteCompanyLogo={onDeleteCompanyLogo}
         isCompanyLogoLoading={isCompanyLogoLoading}
         headerText={isEdit ? 'Edit Company' : 'Insert Company'}
         isModalWindowOpen={isModalWindowOpen}
@@ -70,12 +88,13 @@ export const CompanyList: FC = () => {
         onSaveButtonCLickHandler={
           isEdit ? onChangeCompanyLogoHandler : onCreateCompanyHandler
         }
-        onEnterCreateItemClick={onEnterInsertUser}
+        onEnterCreateItemClick={onEnterCreateCompany}
         onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}
         inputValue={companyName}
         logoSrc={logoSrc}
         logoName={logoName}
         isDisableButton={isDisabledButton}
+        isEdit={isEdit}
         onDeleteLogoHandler={onDeleteLogoHandler}
       />
       <DeleteModalWindow
@@ -91,11 +110,17 @@ export const CompanyList: FC = () => {
         </Styled.LoaderWrapper>
       ) : (
         <SettingsItemPageContent
-          isFetchingData={false}
+          isFocus={isFocus}
+          isFetchingData={isFetchingData}
+          isContentLoading={isContentLoading}
+          onFocusSearchHandler={onFocusSearchHandler}
+          onBlurHandler={onBlurHandler}
+          searchedCompanies={searchedCompanies}
           userRole={userRole as TRoles}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
           onEditIconClickHandler={onEditIconClickHandler}
           pages={pages}
+          onChangePage={onChangePage}
           currentPage={currentPage}
           onChangeInputValue={onChangeInputValue}
           onForwardClick={onForwardClick}

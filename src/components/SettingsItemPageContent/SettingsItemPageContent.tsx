@@ -13,6 +13,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
   const {
     currentPage,
     inputPaginationValue,
+    searchedCompanies,
     onAddClickButtonHandler,
     onBackwardClick,
     onChangeInputValue,
@@ -25,6 +26,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
     onGoToClick,
     onBlurHandler,
     onFocusSearchHandler,
+    onChangePage,
     searchedUsers,
     isFocus,
     pages,
@@ -42,7 +44,8 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
   const isPaginationPanel = isMemeberList
     ? (searchValue && searchedUsers?.length) ||
       (!searchValue && members?.length)
-    : !searchValue && companies?.length;
+    : (searchValue && searchedCompanies?.length) ||
+      (!searchValue && companies?.length);
 
   return (
     <Styled.ContentWrapper>
@@ -62,6 +65,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
       ) : !isFetchingData && !isContentLoading ? (
         <div>
           <Table
+            searchedCompanies={searchedCompanies}
             isMemeberList={isMemeberList}
             searchValue={searchValue}
             searchedUsers={searchedUsers}
@@ -75,6 +79,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
             <PaginationPanel
               pages={pages}
               currentPage={currentPage}
+              onChangePage={onChangePage}
               onChangeInputValue={onChangeInputValue}
               onForwardClick={onForwardClick}
               onBackwardClick={onBackwardClick}

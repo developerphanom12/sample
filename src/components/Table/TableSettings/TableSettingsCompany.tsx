@@ -11,6 +11,8 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
     userRole,
     companies,
     isCompanyTable,
+    searchedCompanies,
+    searchValue,
   } = props;
   return (
     <>
@@ -28,17 +30,36 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
           <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
-      {companies?.map((company) => (
-        <TableSettingsCompanyItem
-          isCompanyTable
-          key={company.id}
-          companyId={company.id}
-          companyName={company.name}
-          userRole={userRole}
-          onDeleteIconClickHandler={onDeleteIconClickHandler}
-          onEditIconClickHandler={onEditIconClickHandler}
-        />
-      ))}
+
+      {searchedCompanies?.length && searchValue ? (
+        searchedCompanies?.map((company) => (
+          <TableSettingsCompanyItem
+            isCompanyTable
+            key={company.id}
+            companyId={company.id}
+            companyName={company.name}
+            userRole={userRole}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+          />
+        ))
+      ) : searchValue && !searchedCompanies?.length ? (
+        <Styled.EmptyContentWrapper>
+          No results found
+        </Styled.EmptyContentWrapper>
+      ) : (
+        companies?.map((company) => (
+          <TableSettingsCompanyItem
+            isCompanyTable
+            key={company.id}
+            companyId={company.id}
+            companyName={company.name}
+            userRole={userRole}
+            onDeleteIconClickHandler={onDeleteIconClickHandler}
+            onEditIconClickHandler={onEditIconClickHandler}
+          />
+        ))
+      )}
     </>
   );
 };
