@@ -7,7 +7,7 @@ import { LinksListStyles as Styled } from './LinksList.style';
 export const LinksList: FC = () => {
   const settingsLink = useLinkListState();
   return (
-    <Styled.LinksWrapper>
+    <Styled.LinksWrapper data-testid="links">
       {settingsLink.map((link) => (
         <LinkItem
           key={link.title}

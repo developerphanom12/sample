@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Icon } from '../Icons/Icons';
 import { Styled } from './InputSearch.style';
 
@@ -17,10 +18,10 @@ export const InputSearch: React.FC<InputProps> = ({
         <Styled.Input
           value={search}
           onChange={onChangeSearch}
-          placeholder='Search here...'
+          placeholder="Search here..."
         />
         <Styled.WrapperIcon>
-          <Icon type='search' />
+          <Icon type="search" />
         </Styled.WrapperIcon>
       </Styled.WrapperInput>
     </>

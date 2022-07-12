@@ -12,7 +12,7 @@ export const CloseButton: FC<ICloseButtonProps> = (props) => {
   const { onClickHandler } = props;
 
   return (
-    <Styled.Button onClick={onClickHandler}>
+    <Styled.Button data-testid="button" onClick={onClickHandler}>
       <Icon type="closeWindow" />
     </Styled.Button>
   );

@@ -15,7 +15,12 @@ export const LinkItem: FC<ILinkItemProps> = (props) => {
   const isActive = useLinkItemState({ path, exact });
 
   return (
-    <LinkItemStyles.Link onClick={onClick} to={path} active={isActive}>
+    <LinkItemStyles.Link
+      data-testid="link-item"
+      onClick={onClick}
+      to={path}
+      active={isActive}
+    >
       {title}
     </LinkItemStyles.Link>
   );
