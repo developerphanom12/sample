@@ -23,11 +23,10 @@ import { IuseUserListState } from './types/userList.types';
 import {
   createCompanyMember,
   deleteCompanyMember,
-  getAllCompanies,
   getCompanyMembers,
   updateCompanyMember,
 } from '../settings.api';
-import { setCompanies, setMembers } from '../reducer/settings.reducer';
+import { setMembers } from '../reducer/settings.reducer';
 
 import { USER_ROLES } from 'constants/strings';
 

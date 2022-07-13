@@ -26,7 +26,7 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
       ariaHideApp={false}
       style={DeleteModalWindowStyles}
     >
-      <Styled.ContentWrapper>
+      <Styled.ContentWrapper data-testid="modal-window">
         <Styled.HeaderBox>
           <Styled.Title>Delete Confirmation</Styled.Title>
           <CloseButton onClickHandler={onCloseDeleteModalWindowHandler} />
