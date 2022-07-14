@@ -22,12 +22,10 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
   const {
     onUploadCompanyLogoHandler,
     onDeleteLogoHandler,
-    onDeleteCompanyLogo,
     id,
     name,
     logoName,
     logoSrc,
-    isEdit,
     isCompanyLogoLoading,
   } = props;
   return (
@@ -39,21 +37,14 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
       {isCompanyLogoLoading ? (
         <LoaderComponent theme="preview" />
       ) : !!logoSrc ? (
-        <>
-          <Styled.Logo>
-            <Styled.IconWrapper onClick={onDeleteLogoHandler}>
-              <Icon type="deletePhotoIcon" />
-            </Styled.IconWrapper>
-            <Styled.ImageWrapper>
-              <Styled.Image src={logoSrc} alt={logoName} />
-            </Styled.ImageWrapper>
-          </Styled.Logo>
-          {isEdit && (
-            <Styled.DeletePhoto onClick={onDeleteCompanyLogo}>
-              Delete photo
-            </Styled.DeletePhoto>
-          )}
-        </>
+        <Styled.Logo>
+          <Styled.IconWrapper onClick={onDeleteLogoHandler}>
+            <Icon type="deletePhotoIcon" />
+          </Styled.IconWrapper>
+          <Styled.ImageWrapper>
+            <Styled.Image src={logoSrc} alt={logoName} />
+          </Styled.ImageWrapper>
+        </Styled.Logo>
       ) : (
         <>
           <UploadInput

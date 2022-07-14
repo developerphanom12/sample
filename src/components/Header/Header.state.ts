@@ -18,7 +18,7 @@ export const useHeaderState = () => {
       token,
       user: { active_account },
     },
-    settings: { companySwitcher },
+    settings: { companySwitcher, isFetchingData },
   } = useSelector((state: IState) => state);
 
   const activeCompany = companySwitcher?.find(
@@ -93,6 +93,7 @@ export const useHeaderState = () => {
 
   return {
     isOpenSwitcher,
+    isFetchingData,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
     switcherRef,

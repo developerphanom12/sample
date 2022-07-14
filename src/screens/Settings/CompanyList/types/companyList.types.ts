@@ -21,4 +21,5 @@ export interface IuseCompanyListState extends IPaginationState {
   isCompanyLogoLoading: boolean;
   prevCompanyName: string;
   prevLogoSrc: string;
+  isDeleteCompanyLogo: boolean;
 }

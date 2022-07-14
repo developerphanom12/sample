@@ -2,6 +2,14 @@ import { add, format } from 'date-fns';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
 
+interface IFormdataProps {
+  currency?: string;
+  date_format?: string;
+  selectedCompanyLogo?: Blob | null;
+  companyName: string;
+  companyLogo: File | null;
+}
+
 export const getInitials = (name: string) => {
   let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
 
@@ -108,4 +116,21 @@ export const getUserRole = (accounts: IAccount[], active_account: string) => {
 export const getSelectedUser = (members: IMember[], memberId: string) => {
   if (!members.length) return;
   return members.find((member) => member.id === memberId);
+};
+
+export const onCreateFormDataHandler = (
+  data: IFormdataProps,
+  isUpdate?: boolean,
+  isDeleteLogo?: boolean
+) => {
+  const formData = new FormData();
+  formData.append('name', data.companyName);
+  data.companyLogo?.name && formData.append('logo', data.companyLogo);
+  if (isUpdate) {
+    isDeleteLogo && formData.append('isDeleteLogo', 'true');
+  } else {
+    formData.append('currency', data.currency || '');
+    formData.append('date_format', data.date_format || '');
+  }
+  return formData;
 };

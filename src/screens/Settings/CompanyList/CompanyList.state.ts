@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { IState } from 'services/redux/reducer';
-import { getUserRole } from 'services/utils';
+import { getUserRole, onCreateFormDataHandler } from 'services/utils';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
 import {
@@ -17,6 +17,7 @@ import {
   companyCreate,
   companyDelete,
   companyDeleteLogo,
+  companyUpdate,
   getCompanyLogo,
   getManyCompanies,
   getOneCompany,
@@ -189,18 +190,18 @@ export const useCompanyListState = () => {
     );
     onChangeStateFieldHandler('logoName', event.target?.files[0]?.name);
     onChangeStateFieldHandler('companyLogo', event.target?.files[0]);
+    onChangeStateFieldHandler('isDeleteCompanyLogo', false);
   };
 
   const onCreateCompanyHandler = async () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const formData = new FormData();
-      formData.append('currency', currency.id);
-      formData.append('name', state.companyName);
-      formData.append('date_format', date_format);
-      if (state.companyLogo?.name) {
-        formData.append('logo', state.companyLogo);
-      }
+      const formData = onCreateFormDataHandler({
+        companyLogo: state.companyLogo,
+        companyName: state.companyName,
+        currency: currency.id,
+        date_format: date_format,
+      });
       await companyCreate(formData, token);
       onGetAllCompaniesHandler();
       setState((prevState) => ({
@@ -211,6 +212,7 @@ export const useCompanyListState = () => {
         logoSrc: '',
         isLoading: false,
       }));
+      setIsEdit(false);
       onModalWindowToggle();
     } catch (error) {
       setState((prevState) => ({
@@ -220,6 +222,49 @@ export const useCompanyListState = () => {
         logoName: '',
         logoSrc: '',
         isLoading: false,
+      }));
+      setIsEdit(false);
+      onModalWindowToggle();
+      console.log(error);
+    }
+  };
+
+  const onUpdateCompanyHandler = async () => {
+    try {
+      onChangeStateFieldHandler('isLoading', true);
+      const formData = onCreateFormDataHandler(
+        {
+          companyLogo: state.companyLogo,
+          companyName: state.companyName,
+        },
+        true,
+        !state.logoSrc && state.isDeleteCompanyLogo
+      );
+      await companyUpdate(formData, token, state.selectedCompany?.id || '');
+      onGetAllCompaniesHandler();
+      setState((prevState) => ({
+        ...prevState,
+        companyName: '',
+        companyLogo: null,
+        logoName: '',
+        logoSrc: '',
+        isLoading: false,
+        prevCompanyName: '',
+        prevLogoSrc: '',
+        isDeleteCompanyLogo: false,
+      }));
+      onModalWindowToggle();
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        companyName: '',
+        companyLogo: null,
+        logoName: '',
+        logoSrc: '',
+        isLoading: false,
+        prevCompanyName: '',
+        prevLogoSrc: '',
+        isDeleteCompanyLogo: false,
       }));
       onModalWindowToggle();
       console.log(error);
@@ -231,6 +276,7 @@ export const useCompanyListState = () => {
       ...prevState,
       logoName: '',
       logoSrc: '',
+      isDeleteCompanyLogo: true,
     }));
 
   const onDeleteIconClickHandler = async (itemId: string) => {
@@ -275,6 +321,8 @@ export const useCompanyListState = () => {
       companyName: '',
       selectedCompany: null,
       logoSrc: '',
+      prevCompanyName: '',
+      prevLogoSrc: '',
     }));
     setIsEdit(false);
     onModalWindowToggle();
@@ -358,7 +406,7 @@ export const useCompanyListState = () => {
 
   const onEnterCreateCompany = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
-    onCreateCompanyHandler();
+    isEdit ? onUpdateCompanyHandler() : onCreateCompanyHandler();
   };
 
   const onChangeSearchValueHandler = (
@@ -388,6 +436,7 @@ export const useCompanyListState = () => {
     userRole,
     isDisabledButton,
     count,
+    onUpdateCompanyHandler,
     onChangePage,
     onFocusSearchHandler,
     onBlurHandler,

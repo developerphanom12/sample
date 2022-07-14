@@ -24,4 +24,5 @@ export const COMPANY_LIST_INITIAL_STATE = {
   isCompanyLogoLoading: false,
   prevCompanyName: '',
   prevLogoSrc: '',
+  isDeleteCompanyLogo: false,
 };

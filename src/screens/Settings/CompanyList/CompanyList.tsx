@@ -56,6 +56,7 @@ export const CompanyList: FC = () => {
     isDisabledButton,
     searchedCompanies,
     count,
+    onUpdateCompanyHandler,
     onChangePage,
     onGetAllCompaniesHandler,
   } = useCompanyListState();
@@ -86,7 +87,7 @@ export const CompanyList: FC = () => {
         }
         onChangeInputValueHandler={onChangeCompanyNameHandler}
         onSaveButtonCLickHandler={
-          isEdit ? onChangeCompanyLogoHandler : onCreateCompanyHandler
+          isEdit ? onUpdateCompanyHandler : onCreateCompanyHandler
         }
         onEnterCreateItemClick={onEnterCreateCompany}
         onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}

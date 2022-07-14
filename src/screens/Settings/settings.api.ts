@@ -81,6 +81,20 @@ export const companyCreate = (payload: FormData, token: string) => {
   });
 };
 
+export const companyUpdate = (
+  payload: FormData,
+  token: string,
+  companyId: string
+) => {
+  const URL = `${CONFIG.apiUrl}company/update/${companyId}`;
+  return Axios.put(URL, payload, {
+    headers: {
+      'content-type': `multipart/form-data`,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const getCompanyLogo = (companyId: string, token: string) => {
   const URL = `${CONFIG.apiUrl}company/get-logo/${companyId}`;
   return Axios.get(URL, {
