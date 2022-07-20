@@ -48,10 +48,10 @@ export const useSettingsState = () => {
         return;
       const formData = new FormData();
       formData.append('profile_image', event.target.files[0]);
+      setIsUploadingPhoto(true);
       const { data } = await profileUploadPhoto(formData, token);
       dispatch(setUserAvatar(data.profile_image));
-      setIsUploadingPhoto(true);
-      onGetProfilePhoto(data.profile_image);
+      data.profile_image && onGetProfilePhoto(data.profile_image);
       setIsHover(false);
     } catch (error) {
       setIsHover(false);

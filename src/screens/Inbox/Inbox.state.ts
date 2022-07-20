@@ -285,7 +285,7 @@ export const useInboxState = () => {
   ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
 
   const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter') return;
+    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
     onGoToClick();
   };
 

@@ -21,11 +21,11 @@ export const CompanySwitcherMenuStyles = {
     background-color: ${(props) => props.theme.colors.white};
     z-index: ${({ theme }) => theme.zIndex.xs};
   `,
-  CompaniesWrapper: styled.div`
+  CompaniesWrapper: styled.div<{ isMargin?: boolean }>`
     flex-direction: column;
-    height: 250px;
-    overflow-y: scroll;
-    margin-right: 5px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-right: ${(props) => props.isMargin && '5px'};
     padding-bottom: 3px;
   `,
 };

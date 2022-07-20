@@ -56,7 +56,10 @@ export const UsersList: FC = () => {
   }, [searchValue]);
 
   useEffect(() => {
-    debouncedValue && onGetAllCompanyMembersHandler({ search: debouncedValue });
+    debouncedValue &&
+      onGetAllCompanyMembersHandler({
+        search: debouncedValue,
+      });
   }, [debouncedValue]);
 
   useEffect(() => {

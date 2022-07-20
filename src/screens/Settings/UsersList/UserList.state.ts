@@ -44,7 +44,7 @@ export const useUserListState = () => {
 
   const userRole = getUserRole(accounts || [], active_account || '');
 
-  const formattedCompanies = companies.companies.map((item) => ({
+  const formattedCompanies = companies?.companies?.map((item) => ({
     value: item.id,
     label: item.name,
   }));
@@ -148,7 +148,7 @@ export const useUserListState = () => {
   ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
 
   const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter') return;
+    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
     onGoToClick();
   };
 

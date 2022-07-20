@@ -17,8 +17,8 @@ export const CompanySwitcherMenu: FC<ICompanySwitcherMenu> = (props) => {
   return (
     <Styled.Wrapper>
       <Styled.Title>Company(s)</Styled.Title>
-      <Styled.CompaniesWrapper>
-        {companies.map((company) => (
+      <Styled.CompaniesWrapper isMargin={companies.length === 5}>
+        {companies?.map((company) => (
           <CompanySwitcherMenuItem
             key={company.id}
             isActive={company.id === activeAccountId}

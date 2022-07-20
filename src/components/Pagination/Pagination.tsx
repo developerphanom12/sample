@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NavigationButton } from 'components/NavigationButton';
 import { Input } from 'components/Input';
 import { Icon } from 'components/Icons';
@@ -41,7 +39,6 @@ export const Pagination = (props: IPagination) => {
             marginPagesDisplayed={2}
             forcePage={currentPage}
           />
-
           <NavigationButton
             iconBehavior="iconForward"
             isArrow
@@ -61,6 +58,7 @@ export const Pagination = (props: IPagination) => {
           <Styled.InputWrapper>
             <Input
               value={inputPaginationValue}
+              inputType="number"
               onChangeValue={onChangeInputValue}
               onKeyDown={onEnterGoToClick}
             />
