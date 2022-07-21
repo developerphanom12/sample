@@ -5,12 +5,17 @@ import { Icon } from 'components/Icons/Icons';
 import { TableSettingsItemStyles as Styled } from './TableSettingsItem.style';
 import { useTableSettingsItemState } from './TableSettingsItem.state';
 
+import { getFormattedDate } from 'services/utils';
+
 export const TableSettingsCompanyItem: React.FC<
   TableCompanySettingsItemProps
 > = (props) => {
   const {
     onEditIconClickHandler,
     onDeleteIconClickHandler,
+    dateFormat,
+    createdAt,
+    createdBy,
     userRole,
     companyId,
     companyName,
@@ -36,8 +41,8 @@ export const TableSettingsCompanyItem: React.FC<
         </Styled.Action>
       )}
       <Styled.Column>{companyName}</Styled.Column>
-      <Styled.Column>Created On</Styled.Column>
-      <Styled.Column>Created By</Styled.Column>
+      <Styled.Column>{getFormattedDate(createdAt, dateFormat)}</Styled.Column>
+      <Styled.Column>{createdBy}</Styled.Column>
     </Styled.Item>
   );
 };

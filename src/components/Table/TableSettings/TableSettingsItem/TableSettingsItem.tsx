@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getFirstLetterUppercase } from 'services/utils';
+import { getFirstLetterUppercase, getFormattedDate } from 'services/utils';
 
 import { Icon } from 'components/Icons/Icons';
 
@@ -12,16 +12,22 @@ interface ITableSettingsItemProps extends TableSettingsItemProps {
   memberId: string;
   memberName: string;
   memberRole: TRoles;
+  createdAt: string;
+  createdBy: string;
+  dateFormat: string;
 }
 export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
   const {
     onDeleteIconClickHandler,
     onEditIconClickHandler,
+    createdAt,
+    createdBy,
     userRole,
     memberEmail,
     memberRole,
     memberId,
     memberName,
+    dateFormat,
   } = props;
 
   const { onClickDeleteIconHandler, onClickEditIconHandler } =
@@ -49,8 +55,8 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
         <Styled.TextWrapper>{memberEmail}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
-      <Styled.Column>Created On</Styled.Column>
-      <Styled.Column>Created By</Styled.Column>
+      <Styled.Column>{getFormattedDate(createdAt, dateFormat)}</Styled.Column>
+      <Styled.Column>{createdBy}</Styled.Column>
     </Styled.Item>
   );
 };

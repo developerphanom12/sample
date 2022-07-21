@@ -37,6 +37,9 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
             isCompanyTable
             key={company.id}
             companyId={company.id}
+            dateFormat={company.date_format}
+            createdAt={company.created}
+            createdBy={company?.members[0].name}
             companyName={company.name}
             userRole={userRole}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
@@ -52,6 +55,9 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
           <TableSettingsCompanyItem
             isCompanyTable
             key={company.id}
+            dateFormat={company.date_format}
+            createdAt={company.created}
+            createdBy={company?.members[0].name}
             companyId={company.id}
             companyName={company.name}
             userRole={userRole}

@@ -200,6 +200,8 @@ declare global {
   interface ICompanySettings {
     date_format: string;
     id: string;
+    created: string;
+    members: IMember[];
     name: string;
     logo: null | string;
   }
@@ -222,6 +224,9 @@ declare global {
     companyName: string;
     isCompanyTable: boolean;
     companyId: string;
+    createdAt: string;
+    createdBy: string;
+    dateFormat: string;
   }
 
   interface IMasterModalWindowProps {
@@ -263,7 +268,10 @@ declare global {
     id: string;
     name: string;
     role: TRoles;
+    created: string;
+    company: { id: string; date_format: string };
     user: {
+      accounts: IAccount[];
       active_account: string;
       country: string;
       email: string;
