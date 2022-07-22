@@ -304,14 +304,16 @@ export const useCompanyListState = () => {
       onChangeStateFieldHandler('isLoading', true);
 
       await companyDelete(state.selectedCompany?.id || '');
-      const { data } = await getManyCompanies();
-      dispatch(setCompanies({ companies: data.data, count: data.count }));
-      onChangePage({ selected: state.currentPage });
-      onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('searchValue', '');
-      onDeleteModalWindowToggle();
-      if (companyId === state.selectedCompany?.id && count !== 1) {
-        dispatch(setIsSwitchCompany(true));
+      if (count !== 1) {
+        const { data } = await getManyCompanies();
+        dispatch(setCompanies({ companies: data.data, count: data.count }));
+        onChangePage({ selected: state.currentPage });
+        onChangeStateFieldHandler('isLoading', false);
+        onChangeStateFieldHandler('searchValue', '');
+        onDeleteModalWindowToggle();
+        if (companyId === state.selectedCompany?.id) {
+          dispatch(setIsSwitchCompany(true));
+        }
       }
       count === 1 && navigate(ROUTES.preference, { replace: true });
     } catch (error) {
