@@ -23,7 +23,7 @@ export const Dashboard: FC = () => {
     user,
     isLoading,
     isContentLoading,
-    companySwitcher,
+    companies,
     timeFilterValue,
   } = useDashboardState();
 
@@ -35,10 +35,7 @@ export const Dashboard: FC = () => {
     <Styled.LayoutWrapper>
       <Styled.MainWrapper>
         <Styled.MetricWrapper>
-          <DocumentMetric
-            userName={user.fullName}
-            companies={companySwitcher}
-          />
+          <DocumentMetric userName={user.fullName} companies={companies} />
         </Styled.MetricWrapper>
         <Styled.RightSideContentWrapper>
           {!totalReceiptCount && !isLoading ? (

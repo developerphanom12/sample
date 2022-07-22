@@ -7,6 +7,7 @@ export const SETTINGS_INITIAL_STATE: ISETTINGS_INITIAL_STATE = {
   companies: { companies: [], count: 0 },
   companySwitcher: [],
   isFetchingData: false,
+  isSwitchCompany: false,
 };
 
 const initialState = SETTINGS_INITIAL_STATE;
@@ -36,10 +37,20 @@ export const SettingsSlice = createSlice({
       state.companySwitcher = action.payload;
       state.isFetchingData = false;
     },
+    setIsSwitchCompany: (
+      state: ISETTINGS_INITIAL_STATE,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isSwitchCompany = action.payload;
+    },
   },
 });
 
-export const { setMembers, setCompanies, setCompanySwitcher } =
-  SettingsSlice.actions;
+export const {
+  setMembers,
+  setCompanies,
+  setCompanySwitcher,
+  setIsSwitchCompany,
+} = SettingsSlice.actions;
 
 export const SettingsReducer = SettingsSlice.reducer;

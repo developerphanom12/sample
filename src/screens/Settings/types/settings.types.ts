@@ -3,4 +3,5 @@ export interface ISETTINGS_INITIAL_STATE {
   companies: { companies: ICompanySettings[]; count: number };
   companySwitcher: ICompaniesSwitcher[];
   isFetchingData: boolean;
+  isSwitchCompany: boolean;
 }

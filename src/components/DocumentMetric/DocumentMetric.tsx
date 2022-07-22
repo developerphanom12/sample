@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { ICompanyDashboard } from 'screens/Dashboard/types';
+import { getFormattedDate } from 'services/utils';
+
 import { CompanySwitcherLogo } from '../CompanySwitcherLogo';
 
 import { DocumentMetricStyles as Styled } from './DocumentMetric.style';
@@ -8,7 +11,7 @@ import { HeaderBox } from './HeaderBox';
 
 interface IDocumentMetricProps {
   userName: string;
-  companies: ICompaniesSwitcher[];
+  companies: ICompanyDashboard[];
 }
 
 export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
@@ -21,13 +24,24 @@ export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
       <Styled.CompaniesMainWrapper>
         <Styled.CompaniesTitle>Company(s)</Styled.CompaniesTitle>
         <Styled.CompaniesWrapper>
-          {companies?.map((company) => (
+          {companies?.map(({ company, account, company_owner }) => (
             <Styled.CompanyItemWrapper key={company.id}>
-              <CompanySwitcherLogo
-                companyName={company.name}
-                companyLogoSrc={company.company.logo}
-              />
-              <Styled.CompanyName>{company.company.name}</Styled.CompanyName>
+              <Styled.CompanyInfoLeftBlock>
+                <CompanySwitcherLogo
+                  companyName={company.name}
+                  companyLogoSrc={company.logo}
+                />
+                <Styled.CompanyName>{company.name}</Styled.CompanyName>
+              </Styled.CompanyInfoLeftBlock>
+              <Styled.CompanyInfoRightBlock>
+                <Styled.CompanyInfo>
+                  {`Created on: `}
+                  {getFormattedDate(company.created, company.date_format)}
+                </Styled.CompanyInfo>
+                <Styled.CompanyInfo>
+                  Created by: {company_owner.name}
+                </Styled.CompanyInfo>
+              </Styled.CompanyInfoRightBlock>
             </Styled.CompanyItemWrapper>
           ))}
         </Styled.CompaniesWrapper>

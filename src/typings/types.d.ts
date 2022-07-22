@@ -300,6 +300,7 @@ declare global {
   interface ICompany {
     date_format: string;
     currency: ICurrency;
+    created: string;
     id: string;
     name: string;
     logo: string | null;

@@ -33,12 +33,11 @@ export const useDashboardState = () => {
   const navigate = useNavigate();
 
   const {
-    dashboard: { metric, receipts },
+    dashboard: { metric, receipts, companies },
     user: {
       userInfo: { company },
       user,
     },
-    settings: { companySwitcher },
   } = useSelector((state: IState) => state);
 
   const timeFilterOptions = getTimeFilterOptions();
@@ -133,7 +132,7 @@ export const useDashboardState = () => {
     onSelectFilesHandler,
     getReceiptsStatisticHandler,
     onChangeCategoryFieldHandler,
-    companySwitcher,
+    companies,
     totalReceiptCount,
     timeFilterOptions,
     lastReceipts,

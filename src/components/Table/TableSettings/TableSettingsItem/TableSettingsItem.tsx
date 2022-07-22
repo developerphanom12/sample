@@ -36,6 +36,9 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
       onDeleteIconClickHandler,
       onEditIconClickHandler,
     });
+
+  const isNotDeleteButton = userRole === 'owner' && memberRole === 'owner';
+
   return (
     <Styled.Item>
       {(userRole === 'owner' || userRole === 'admin') && (
@@ -43,9 +46,11 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
           <Styled.ActionButton onClick={onClickEditIconHandler}>
             <Icon type="edit" />
           </Styled.ActionButton>
-          <Styled.ActionButton onClick={onClickDeleteIconHandler}>
-            <Icon type="remove" />
-          </Styled.ActionButton>
+          {isNotDeleteButton ? null : (
+            <Styled.ActionButton onClick={onClickDeleteIconHandler}>
+              <Icon type="remove" />
+            </Styled.ActionButton>
+          )}
         </Styled.Action>
       )}
       <Styled.Column>

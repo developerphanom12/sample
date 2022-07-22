@@ -37,6 +37,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
         id: '',
         value: '',
       },
+      created: '',
       date_format: '',
       id: '',
       name: '',

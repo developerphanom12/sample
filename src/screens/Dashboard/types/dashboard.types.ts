@@ -11,16 +11,10 @@ export interface IAccountCompanyOwner {
   role: string;
 }
 
-export interface ICompany {
-  id: string;
-  date_format: string;
-  name: string;
-}
-
-export interface ICompany {
+export interface ICompanyDashboard {
   account: IAccountCompanyOwner;
   company_owner: IAccountCompanyOwner;
-  company: ICompany;
+  company: Omit<ICompany, 'currency'>;
 }
 
 export interface IReceipts {
@@ -29,7 +23,7 @@ export interface IReceipts {
 }
 
 export interface IDASHBOARD_INITIAL_STATE {
-  companies: ICompany[];
+  companies: ICompanyDashboard[];
   metric: IMetric;
   receipts: IReceipts | null;
 }

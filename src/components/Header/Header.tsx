@@ -25,6 +25,8 @@ export const Header: FC<HeaderProps> = (props) => {
     activeCompany,
     activeAccountId,
     isFetchingData,
+    isSwitchCompany,
+    onSwitchCompany,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
     onGetAllCompaniesHandler,
@@ -33,6 +35,10 @@ export const Header: FC<HeaderProps> = (props) => {
   useEffect(() => {
     onGetAllCompaniesHandler();
   }, [isFetchingData]);
+
+  useEffect(() => {
+    isSwitchCompany && onSwitchCompany();
+  }, [isSwitchCompany]);
   return (
     <Styled.Header>
       <Styled.Container>

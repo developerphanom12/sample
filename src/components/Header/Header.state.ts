@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IState } from 'services/redux/reducer';
 import { useOutsideClick } from 'hooks/useOutsideClick';
 
-import { setCompanySwitcher } from 'screens/Settings/reducer/settings.reducer';
+import {
+  setCompanySwitcher,
+  setIsSwitchCompany,
+} from 'screens/Settings/reducer/settings.reducer';
 import { switchAccount } from 'screens/SignUp/reducer/signup.reducer';
 import { getCompanyLogo } from 'screens/Settings/settings.api';
 
@@ -18,7 +21,7 @@ export const useHeaderState = () => {
       token,
       user: { active_account },
     },
-    settings: { companySwitcher, isFetchingData },
+    settings: { companySwitcher, isFetchingData, isSwitchCompany },
   } = useSelector((state: IState) => state);
 
   const activeCompany = companySwitcher?.find(
@@ -33,17 +36,19 @@ export const useHeaderState = () => {
 
   const switcherRef = useOutsideClick(onClickOutsideSwitcherHandler);
 
-  const onSwitchCompanyHandler = async (
-    event: React.MouseEvent<HTMLDivElement>
-  ) => {
+  const onSwitchCompany = async (id?: string) => {
     try {
-      setActiveAccountId(event.currentTarget.id);
-      const { data } = await selectActiveAccount(event.currentTarget.id);
+      setActiveAccountId(id || companySwitcher[0].id);
+      const { data } = await selectActiveAccount(id || companySwitcher[0].id);
       dispatch(switchAccount(data));
+      isSwitchCompany && dispatch(setIsSwitchCompany(false));
     } catch (error) {
       console.log(error);
     }
   };
+
+  const onSwitchCompanyHandler = (event: React.MouseEvent<HTMLDivElement>) =>
+    onSwitchCompany(event.currentTarget.id);
 
   const getCompaniesLogoHandler = async (data: ICompaniesSwitcher[]) => {
     try {
@@ -94,8 +99,10 @@ export const useHeaderState = () => {
   return {
     isOpenSwitcher,
     isFetchingData,
+    isSwitchCompany,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
+    onSwitchCompany,
     switcherRef,
     companySwitcher,
     activeCompany,

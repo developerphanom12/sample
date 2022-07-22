@@ -23,10 +23,11 @@ export const DocumentMetricStyles = {
   `,
   CompanyItemWrapper: styled.div`
     display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 77px;
     border-radius: 5px;
-    padding-left: 12px;
+    padding: 12px 14px 10px 12px;
     border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};
     box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
     align-items: center;
@@ -44,5 +45,21 @@ export const DocumentMetricStyles = {
     height: 100%;
     overflow-y: scroll;
     padding-right: 5px;
+  `,
+  CompanyInfoLeftBlock: styled.div`
+    display: flex;
+    align-items: center;
+  `,
+  CompanyInfoRightBlock: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  `,
+  CompanyInfo: styled.div`
+    font-size: ${(props) => props.theme.size.default};
+    font-weight: ${(props) => props.theme.fontWeight.normal};
+    color: ${(props) => props.theme.colors.black};
+    text-align: end;
   `,
 };

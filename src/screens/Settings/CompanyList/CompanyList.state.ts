@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,12 +23,15 @@ import {
   getManyCompanies,
   getOneCompany,
 } from '../settings.api';
-import { setCompanies } from '../reducer/settings.reducer';
+import { setCompanies, setIsSwitchCompany } from '../reducer/settings.reducer';
+
+import { ROUTES } from 'constants/routes';
 
 export const useCompanyListState = () => {
   const initialState = COMPANY_LIST_INITIAL_STATE;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [state, setState] = useState<IuseCompanyListState>(initialState);
   const [isEdit, setIsEdit] = useState(false);
   const {
@@ -35,7 +39,7 @@ export const useCompanyListState = () => {
       token,
       user: { active_account, accounts },
       userInfo: {
-        company: { currency, date_format },
+        company: { currency, date_format, id: companyId },
       },
     },
     settings: {
@@ -303,10 +307,13 @@ export const useCompanyListState = () => {
       const { data } = await getManyCompanies();
       dispatch(setCompanies({ companies: data.data, count: data.count }));
       onChangePage({ selected: state.currentPage });
-
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
       onDeleteModalWindowToggle();
+      if (companyId === state.selectedCompany?.id && count !== 1) {
+        dispatch(setIsSwitchCompany(true));
+      }
+      count === 1 && navigate(ROUTES.preference, { replace: true });
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
