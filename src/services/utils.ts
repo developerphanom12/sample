@@ -1,4 +1,5 @@
 import { add, format } from 'date-fns';
+import decode from 'jwt-decode';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
 
@@ -133,4 +134,16 @@ export const onCreateFormDataHandler = (
     formData.append('date_format', data.date_format || '');
   }
   return formData;
+};
+
+export const isTokenExpired = (token: string) => {
+  if (token) {
+    const decodedToken: { id: string; expiresIn: number; iat: number } =
+      decode(token);
+    if (decodedToken.expiresIn < new Date().getTime()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 };

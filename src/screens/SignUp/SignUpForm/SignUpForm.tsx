@@ -75,7 +75,7 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
 
       <DivideLine />
 
-      <Link to={ROUTES.capiumLogin}>
+      <Link to={ROUTES.capiumLogin} data-testid='capium-login'>
         <Button themedButton="capium" width="auth">
           {STRINGS.sign_in_up.continue_Capium}
         </Button>

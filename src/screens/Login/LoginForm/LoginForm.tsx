@@ -96,7 +96,7 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
       </Link>
       <Styled.SignUpLink>
         <Styled.Text>{STRINGS.sign_in_up.without_acc}</Styled.Text>
-        <Styled.SignUpText to={ROUTES.sign_up}>
+        <Styled.SignUpText data-testid="sign_up" to={ROUTES.sign_up}>
           {STRINGS.sign_in_up.sign_up}
         </Styled.SignUpText>
       </Styled.SignUpLink>

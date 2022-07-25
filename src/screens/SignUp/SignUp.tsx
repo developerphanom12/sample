@@ -18,7 +18,7 @@ export const SignUp: FC = () => {
   } = useSignUpState();
 
   return (
-    <Styled.MainWrapper>
+    <Styled.MainWrapper data-testid="sign-up-page">
       <AuthImageSection />
 
       <Styled.Section>

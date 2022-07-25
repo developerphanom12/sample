@@ -26,7 +26,7 @@ export const CapiumLogin: FC = () => {
   } = useCapiumLoginState();
 
   return (
-    <Styled.MainWrapper>
+    <Styled.MainWrapper data-testid='capium-login-page'>
       <CapiumAccountModalWindow
         isModalWindowOpen={isModalOpen}
         accounts={capiumAccounts}

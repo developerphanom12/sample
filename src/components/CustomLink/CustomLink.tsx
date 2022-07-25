@@ -20,7 +20,12 @@ export const CustomLink = (props: CustomLinkProps) => {
   });
 
   return (
-    <Styled.Link is_last={`${isLast}`} active={isActive} to={to}>
+    <Styled.Link
+      data-testid="header-link"
+      is_last={`${isLast}`}
+      active={isActive}
+      to={to}
+    >
       {children}
       <Styled.TabsWrapper>
         {isActive && tabs?.map((tab) => <TabItem key={tab} tabName={tab} />)}
