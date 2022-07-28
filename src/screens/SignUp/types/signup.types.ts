@@ -26,7 +26,6 @@ export interface ICurrency {
 }
 
 export interface IUserInfo {
-  account: IAccount;
   company: ICompany;
 }
 

@@ -29,6 +29,9 @@ export const Styled = {
       position: absolute;
       right: 0;
     }
+    &:focus {
+      border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
+    }
   `,
   Button: styled.div`
     display: flex;

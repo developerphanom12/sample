@@ -29,7 +29,6 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
     id: '',
   },
   userInfo: {
-    account: { id: '', name: '', role: '' },
     company: {
       currency: {
         country: '',
@@ -77,7 +76,6 @@ export const SignUpUserSlice = createSlice({
       state: ISIGN_UP_USER_INITIAL_STATE,
       action: PayloadAction<IUserInfo>
     ) => {
-      state.userInfo.account = action.payload.account;
       state.userInfo.company = action.payload.company;
     },
     setCompany: (

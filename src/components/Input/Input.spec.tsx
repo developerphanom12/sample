@@ -27,7 +27,6 @@ describe('Input component', () => {
   });
 
   it('onChange works well', () => {
-    const inputValue = 'React';
     const handleChange = jest.fn();
     render(
       <AppTheme>
@@ -39,11 +38,11 @@ describe('Input component', () => {
         />
       </AppTheme>
     );
-    const inputElement = screen.getByTestId('input-field') as HTMLInputElement;
+    const inputElement = screen.getByTestId('input-field');
     expect(inputElement).toBeInTheDocument();
     fireEvent.change(inputElement, {
       target: { value: 'React' },
     });
-    expect(inputElement.value).toBe(inputValue);
+    expect(handleChange).toBeCalled();
   });
 });

@@ -46,7 +46,7 @@ export const Styled = {
       right: 0;
     }
     &:focus {
-      background-color: ${({ theme }) => theme.colors.pink};
+      border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
     }
   `,
   TextArea: styled.textarea<{ inputHeight?: string }>`
@@ -61,7 +61,7 @@ export const Styled = {
     box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
     resize: none;
     &:focus {
-      background-color: ${({ theme }) => theme.colors.pink};
+      border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
     }
   `,
   InputWrapper: styled.div<{ isNoMargin?: boolean }>`

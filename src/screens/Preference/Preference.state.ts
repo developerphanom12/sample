@@ -79,8 +79,7 @@ export const usePreferenceState = () => {
         date_format: state.selectedFormatDate?.value,
       };
       const { data } = await userInfoCreate(payload);
-
-      dispatch(setUserInfo({ account: data.account, company: data.company }));
+      dispatch(setUserInfo({ company: data.company }));
       dispatch(updateUser(data.user));
       onChangeStateFieldHandler('isLoading', false);
       navigate(ROUTES.home, { replace: true });

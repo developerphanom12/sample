@@ -42,10 +42,10 @@ export const StyledReactSelect = styled(Select)<{
   .Select__control--is-focused {
     font-size: ${({ theme }) => theme.size.default};
     outline: none;
-    background: ${({ theme }) => theme.colors.pink};
+    border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
   }
   .Select__control--is-focused:hover {
-    border: ${({ theme }) => `1px solid ${theme.colors.lightGray}`};
+    border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
   }
   .Select__indicator-separator {
     display: none;

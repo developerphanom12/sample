@@ -2,8 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { Layout } from '../components/Layout/Layout';
-import { store } from '../services/redux/store';
+
+import { Layout } from 'components/Layout/Layout';
+
+import { store } from 'services/redux/store';
 
 import App from './App';
 import { AppTheme } from './theme';

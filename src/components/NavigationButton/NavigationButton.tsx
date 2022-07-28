@@ -34,6 +34,7 @@ export const NavigationButton = ({
       isWithoutArrow={isWithoutArrow}
       isArrow={isArrow}
       isDisabled={isDisabled}
+      data-testid="navigation-button"
     >
       <NavigationButtonStyles.Content
         isReverse={isReverse}

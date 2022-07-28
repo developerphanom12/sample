@@ -20,7 +20,7 @@ export const Pagination = (props: IPagination) => {
 
   return (
     <>
-      <Styled.Wrapper>
+      <Styled.Wrapper data-testid='pagination'>
         <Styled.Pages>
           <NavigationButton
             iconBehavior="iconBack"
@@ -38,6 +38,7 @@ export const Pagination = (props: IPagination) => {
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             forcePage={currentPage}
+            data-testid='page'
           />
           <NavigationButton
             iconBehavior="iconForward"
