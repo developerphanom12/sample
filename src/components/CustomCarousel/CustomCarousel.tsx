@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { CustomCarouselStyles as Styled } from './CustomCarousel.style';
 import { SliderArrow } from '../SliderArrow';
-import { settings } from './customSelect.constants';
+import { settings } from './customCarousel.constants';
 
 interface ICustomCarouselProps {
   children: React.ReactElement[];

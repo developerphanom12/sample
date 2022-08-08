@@ -18,7 +18,11 @@ export const DocumentMetricItem = (props: DocumentMetricItemProps) => {
   const upperText = getFirstLetterUppercase(status);
 
   return (
-    <DocumentMetricItemStyles.Wrapper statuses={status} onClick={onItemClick}>
+    <DocumentMetricItemStyles.Wrapper
+      data-testid="metric-item"
+      statuses={status}
+      onClick={onItemClick}
+    >
       <DocumentMetricItemStyles.Content>
         <Icon type={status} maxWidth={maxWidth} />
         <DocumentMetricItemStyles.Numerics>

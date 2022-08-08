@@ -24,8 +24,8 @@ export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
       <Styled.CompaniesMainWrapper>
         <Styled.CompaniesTitle>Company(s)</Styled.CompaniesTitle>
         <Styled.CompaniesWrapper>
-          {companies?.map(({ company, account, company_owner }) => (
-            <Styled.CompanyItemWrapper key={company.id}>
+          {companies?.map(({ company, company_owner }) => (
+            <Styled.CompanyItemWrapper data-testid='company-item' key={company.id}>
               <Styled.CompanyInfoLeftBlock>
                 <CompanySwitcherLogo
                   companyName={company.name}

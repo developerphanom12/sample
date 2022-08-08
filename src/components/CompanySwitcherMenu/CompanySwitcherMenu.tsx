@@ -15,7 +15,7 @@ export const CompanySwitcherMenu: FC<ICompanySwitcherMenu> = (props) => {
     props;
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper data-testid='switcher-list'>
       <Styled.Title>Company(s)</Styled.Title>
       <Styled.CompaniesWrapper isMargin={companies.length === 5}>
         {companies?.map((company) => (

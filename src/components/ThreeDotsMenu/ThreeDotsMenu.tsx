@@ -8,7 +8,6 @@ export interface IThreeDotsMenu {
   onDownloadExcelFileHandler: () => void;
   onEmailClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDeleteReceiptHandler: () => Promise<void>;
-  isLoading?: boolean;
 }
 
 export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
@@ -18,7 +17,6 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
     onDownloadExcelFileHandler,
     onEmailClick,
     onDeleteReceiptHandler,
-    isLoading,
   } = props;
   return (
     <Styled.Wrapper>

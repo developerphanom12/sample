@@ -25,7 +25,7 @@ export const CompanySwitcherMenuItem: FC<ICompanySwitcherMenuItem> = (
     isActive,
   } = props;
   return (
-    <Styled.Item onClick={onClick} id={companyId}>
+    <Styled.Item data-testid='company-switcher-menu-item' onClick={onClick} id={companyId}>
       <Styled.CompanyNameWrapper>
         <CompanySwitcherLogo
           companyLogoSrc={companyLogoSrc}

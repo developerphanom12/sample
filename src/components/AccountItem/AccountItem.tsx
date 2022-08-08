@@ -17,7 +17,7 @@ export const AccountItem: FC<IAccountItemProps> = (props) => {
   const { email, name, itemId, onChooseCapiumAccountHandler } = props;
 
   return (
-    <Styled.Wrapper id={itemId} onClick={onChooseCapiumAccountHandler}>
+    <Styled.Wrapper id={itemId} data-testid='click-item' onClick={onChooseCapiumAccountHandler}>
       <Styled.UserInitials>{getInitials(name)}</Styled.UserInitials>
       <Styled.UserInfoWrapper>
         <Styled.Name>{name}</Styled.Name>
