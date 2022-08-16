@@ -25,7 +25,7 @@ export const SuccessModalWindow: FC<ISuccessModalWindowProps> = (props) => {
       style={SuccessModalStyles}
       onRequestClose={onCloseModalWindowHandler}
     >
-      <Styled.ContentWrapper>
+      <Styled.ContentWrapper data-testId='success-modal'>
         {isExpiredToken ? (
           <Styled.IconWrapper>
             <Icon type="warning" />

@@ -8,22 +8,19 @@ import { IReceiptsItemsListProps } from '../types';
 import { useReceiptsItemState } from './ReceiptsItem.state';
 
 export const ReceiptsItem: React.FC<IReceiptsItemsListProps> = (props) => {
-  const {
-    dateFormat,
-    date,
-    status,
-    total,
-    currency,
-    receiptId,
-    supplier,
-  } = props;
+  const { dateFormat, date, status, total, currency, receiptId, supplier } =
+    props;
 
   const { onReceiptDetailsClickHandler } = useReceiptsItemState({
     receiptId,
   });
 
   return (
-    <Styled.Wrapper id={receiptId} onClick={onReceiptDetailsClickHandler}>
+    <Styled.Wrapper
+      data-testid="receipt-item"
+      id={receiptId}
+      onClick={onReceiptDetailsClickHandler}
+    >
       <Styled.PaymentBlock>
         <Styled.SupplierItem>
           <Styled.Item>{supplier || '---'}</Styled.Item>

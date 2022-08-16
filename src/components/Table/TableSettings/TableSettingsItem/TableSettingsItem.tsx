@@ -9,6 +9,7 @@ import { useTableSettingsItemState } from './TableSettingsItem.state';
 
 interface ITableSettingsItemProps extends TableSettingsItemProps {
   memberEmail?: string;
+  companyName?: string;
   memberId: string;
   memberName: string;
   memberRole: TRoles;
@@ -28,6 +29,7 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
     memberId,
     memberName,
     dateFormat,
+    companyName,
   } = props;
 
   const { onClickDeleteIconHandler, onClickEditIconHandler } =
@@ -60,6 +62,9 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
         <Styled.TextWrapper>{memberEmail}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
+      <Styled.Column>
+        <Styled.TextWrapper>{companyName || 'Mordor'}</Styled.TextWrapper>
+      </Styled.Column>
       <Styled.Column>{getFormattedDate(createdAt, dateFormat)}</Styled.Column>
       <Styled.Column>{createdBy}</Styled.Column>
     </Styled.Item>

@@ -29,7 +29,7 @@ export const Avatar: FC<IAvatarProps> = (props) => {
         )
       )}
       {!isUploadingPhoto && isHover && (
-        <HoverUploadLogo>
+        <HoverUploadLogo data-testid="hover-upload-logo">
           <Icon type="cloudUpload" />
         </HoverUploadLogo>
       )}

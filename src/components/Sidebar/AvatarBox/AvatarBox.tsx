@@ -38,6 +38,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
       <Styled.ContentWrapper>
         <Styled.Label>Settings</Styled.Label>
         <Styled.ProfileImageWrapper
+          data-testid="image-wrapper"
           isHover={isHover}
           isLoading={isUploadingPhoto}
         >
@@ -47,6 +48,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
             onChangeFiles={onChangeAvatarHandler}
           />
           <Styled.InputLabel
+            data-testid="input-label"
             htmlFor={id}
             onMouseEnter={onMouseEnterHandler}
             onMouseLeave={onMouseLeaveHandler}

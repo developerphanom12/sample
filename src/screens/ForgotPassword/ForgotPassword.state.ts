@@ -32,7 +32,6 @@ export const useForgotPasswordState = () => {
       email: '',
     },
     onSubmit: (value) => onSubmitForgotPasswordHandler(value),
-
     validationSchema: Yup.object().shape({
       email: emailValidation,
     }),

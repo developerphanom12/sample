@@ -63,7 +63,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
             ))}
           </Styled.ItemWrapper>
         ) : (
-          <Styled.EmptyDataWrapper>
+          <Styled.EmptyDataWrapper data-testid='no-receipts'>
             <Styled.Image src={emptyDataSrc} />
             <Styled.Title>No receipts for this time</Styled.Title>
           </Styled.EmptyDataWrapper>

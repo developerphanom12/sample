@@ -29,6 +29,9 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
           <TableButton>Role</TableButton>
         </Styled.Column>
         <Styled.Column>
+          <TableButton>Company</TableButton>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Created On</TableButton>
         </Styled.Column>
         <Styled.Column>
@@ -48,6 +51,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
             memberRole={member.role}
+            companyName={member.company?.name}
             userRole={userRole}
           />
         ))

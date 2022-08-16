@@ -14,7 +14,7 @@ export const ForgotPassword: FC = () => {
   const { formik, isSuccess, onCloseModalHandler } = useForgotPasswordState();
 
   return (
-    <Styled.MainWrapper>
+    <Styled.MainWrapper data-testid="forgot-password-screen">
       <AuthImageSection />
       <SuccessModalWindow
         text="Instructions has been sent"

@@ -222,7 +222,6 @@ export const useInboxState = () => {
       onEmailModalWindowToggle();
     } catch (error: any) {
       const { data } = error.response;
-
       data.message &&
         actions.setErrors({
           to: ' ',

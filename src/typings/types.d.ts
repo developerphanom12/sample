@@ -269,7 +269,7 @@ declare global {
     name: string;
     role: TRoles;
     created: string;
-    company: { id: string; date_format: string };
+    company: { id: string; date_format: string; name: string };
     user: {
       accounts: IAccount[];
       active_account: string;

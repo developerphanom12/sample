@@ -13,6 +13,7 @@ export const TableSettingsItemStyles = {
         110px,
         150px
       )
+      minmax(110px, 150px)
       minmax(110px, 170px) minmax(110px, 170px)`};
     background-color: ${(props) => props.theme.colors.white};
     border-left: solid 1px ${(props) => props.theme.colors.gray};
