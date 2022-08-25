@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { ActionMeta, SingleValue, OnChangeValue } from 'react-select';
+import {
+  ActionMeta,
+  SingleValue,
+  OnChangeValue,
+  MultiValue,
+} from 'react-select';
 
 import { DropdownIndicator } from './DropdownIndicator';
 import { StyledReactSelect, SelectWrapper } from './CustomSelect.style';
@@ -13,7 +18,7 @@ interface ICustomSelectProps {
     actionMeta: ActionMeta<IOption | unknown>
   ) => void;
   marginBottom?: string;
-  value?: SingleValue<IOption>;
+  value?: SingleValue<IOption> | MultiValue<IOption>;
   height?: string;
   defaultOption?: IOption;
   options?: IOption[];

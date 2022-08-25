@@ -22,6 +22,7 @@ import { Support } from 'screens/Support';
 import { MyAccount } from 'screens/Settings/MyAccount';
 import { UsersList } from 'screens/Settings/UsersList';
 import { CompanyList } from 'screens/Settings/CompanyList';
+import { SignUpNewMember } from 'screens/SignUpNewMember';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -58,6 +59,7 @@ export const AppRouter: FC = () => (
       <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
       <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
       <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
+      <Route path={ROUTES.signUpNewMember} element={<SignUpNewMember />} />
     </Routes>
   </BrowserRouter>
 );

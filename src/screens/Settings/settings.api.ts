@@ -4,6 +4,7 @@ import { apiServices } from 'services/api-service';
 
 import { CONFIG } from 'constants/config';
 interface ICreateCompanyMemberPayload {
+  companiesIds?: string[];
   name: string;
   role: string;
   email: string;

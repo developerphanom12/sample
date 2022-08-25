@@ -20,7 +20,7 @@ export const USERS_LIST_INITIAL_STATE = {
   searchedUsers: [],
   isFetchingData: true,
   role: null,
-  company: null,
+  companies: [],
   prevRole: null,
   selectedUserName: '',
   prevName: '',
@@ -47,20 +47,20 @@ export const getInputFields = (props: IgetInputFieldsProps) => {
     },
     {
       type: 'select',
-      name: 'company',
-      label: 'Company',
-      value: state.company,
-      isMulti: true,
-      options: options[1],
-      onChangeSelect: funcArray[1],
-    },
-    {
-      type: 'select',
       name: 'select',
       label: 'Role',
       value: state.role,
       options: options[0],
       onChangeSelect: funcArray[0],
+    },
+    {
+      type: 'select',
+      name: 'company',
+      label: 'Company',
+      value: state?.companies || undefined,
+      isMulti: true,
+      options: options[1],
+      onChangeSelect: funcArray[1],
     },
   ];
 };

@@ -57,6 +57,7 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
                 label={input.label}
                 key={input.name}
                 inputName={input.name}
+                isMulti={input.isMulti}
                 inputType={input.type}
                 formikMeta={formikMeta}
                 formikProps={formikProps}

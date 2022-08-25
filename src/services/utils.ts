@@ -2,6 +2,7 @@ import { add, format } from 'date-fns';
 import decode from 'jwt-decode';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
+import { getCompanyLogo } from '../screens/Settings/settings.api';
 
 interface IFormdataProps {
   currency?: string;
@@ -10,6 +11,44 @@ interface IFormdataProps {
   companyName: string;
   companyLogo: File | null;
 }
+
+export const setCompanyLogoHandler = (
+  data: ICompaniesSwitcher[],
+  companiesLogo?: (string | null)[]
+) => {
+  return data.map((item: ICompaniesSwitcher, index: number) => {
+    if (companiesLogo?.length && companiesLogo[index] === null) {
+      return item;
+    }
+    if (companiesLogo?.length && companiesLogo[index] !== null) {
+      return {
+        ...item,
+        company: { ...item.company, logo: companiesLogo[index] },
+      };
+    }
+    return item;
+  });
+};
+
+export const getCompaniesLogoHandler = async (
+  data: ICompaniesSwitcher[],
+  token: string
+) => {
+  try {
+    const promiss = data.map(async (item) => {
+      if (item.company.logo) {
+        const { data } = await getCompanyLogo(item.company.id, token);
+        return URL.createObjectURL(data);
+      } else {
+        return null;
+      }
+    });
+    const companiesLogo = await Promise.all(promiss);
+    return companiesLogo;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getInitials = (name: string) => {
   let rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');

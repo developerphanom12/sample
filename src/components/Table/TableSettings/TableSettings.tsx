@@ -46,7 +46,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberEmail={member?.user.email}
             dateFormat={member.company.date_format}
             createdAt={member.created}
-            createdBy={member.user.fullName}
+            createdBy={member?.user.fullName}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
@@ -66,8 +66,8 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberId={member.id}
             dateFormat={member.company.date_format}
             createdAt={member.created}
-            createdBy={member.user.fullName}
-            memberEmail={member?.user.email}
+            createdBy={member?.user?.fullName}
+            memberEmail={member?.user?.email}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}

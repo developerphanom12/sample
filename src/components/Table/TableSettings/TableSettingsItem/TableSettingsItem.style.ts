@@ -9,7 +9,7 @@ export const TableSettingsItemStyles = {
         111px,
         170px
       )`
-        : `minmax(43px, 150px) minmax(111px, 200px) minmax(111px, 230px) minmax(
+        : `minmax(53px, 150px) minmax(111px, 200px) minmax(111px, 230px) minmax(
         110px,
         150px
       )

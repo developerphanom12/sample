@@ -2,6 +2,7 @@ import { ActionMeta } from 'react-select';
 
 export type TInputFields = (
   | {
+      isMulti?: false;
       type: string;
       label: string;
       name: string;

@@ -8,7 +8,7 @@ export const TableSettingsStyles = {
         ? ` minmax(40px, 150px) minmax(110px, 200px)
         minmax(110px, 170px) minmax(110px, 170px);
 )`
-        : ` minmax(40px, 151px) minmax(110px, 201px) minmax(110px, 230px)
+        : ` minmax(53px, 151px) minmax(110px, 201px) minmax(110px, 230px)
         minmax(110px, 150px) minmax(110px, 150px) minmax(110px, 170px) minmax(110px, 170px);`};
 
     background-color: ${(props) => props.theme.colors.lightGray};

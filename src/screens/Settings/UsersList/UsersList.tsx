@@ -66,7 +66,7 @@ export const UsersList: FC = () => {
     if (!count) return;
     onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage]);
-
+  
   return (
     <Styled.Section>
       <ModalBox

@@ -24,9 +24,10 @@ import {
   createCompanyMember,
   deleteCompanyMember,
   getCompanyMembers,
+  getManyCompanies,
   updateCompanyMember,
 } from '../settings.api';
-import { setMembers } from '../reducer/settings.reducer';
+import { setCompanies, setMembers } from '../reducer/settings.reducer';
 
 import { USER_ROLES } from 'constants/strings';
 
@@ -64,6 +65,7 @@ export const useUserListState = () => {
   };
 
   const onModalWindowToggleHandler = () => {
+    onGetCompaniesHandler();
     onModalWindowToggle();
   };
 
@@ -85,7 +87,21 @@ export const useUserListState = () => {
   const onChangeCompanyValueHandler = (
     newValue: IOption,
     actionMeta: ActionMeta<IOption> | unknown
-  ) => onChangeStateFieldHandler('company', newValue);
+  ) => onChangeStateFieldHandler('companies', newValue);
+
+  const onGetCompaniesHandler = async () => {
+    try {
+      const { data: companiesData } = await getManyCompanies({});
+      dispatch(
+        setCompanies({
+          companies: companiesData.data,
+          count: companiesData.count,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onGetAllCompanyMembersHandler = async (params?: ISearchParams) => {
     try {
@@ -312,6 +328,7 @@ export const useUserListState = () => {
         email: values.email || '',
         name: values.fullName || '',
         role: state.role?.value || '',
+        companiesIds: state.companies?.map((item) => item.value) || [],
       };
       await createCompanyMember(payload);
       onGetAllCompanyMembersHandler();
@@ -331,7 +348,7 @@ export const useUserListState = () => {
 
   const modalFields = getInputFields({
     options: [USER_ROLES, formattedCompanies],
-    state: { role: state.role, company: state.company },
+    state: { role: state.role, companies: state.companies },
     funcArray: [onChangeRoleValueHandler, onChangeCompanyValueHandler],
   });
 
@@ -379,5 +396,6 @@ export const useUserListState = () => {
     onEnterGoToClick,
     onChangeItemsPerPage,
     onGoToClick,
+    onGetCompaniesHandler,
   };
 };

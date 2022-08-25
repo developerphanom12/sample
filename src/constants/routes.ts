@@ -15,6 +15,8 @@ export enum ROUTES {
   preference = '/preference',
   forgotPassword = '/forgot-password',
   resetPassword = '/reset-password/:token',
+  signUpNewMember = '/signup-new-member/:token',
+  chooseCompany = '/choose-company',
   capiumLogin = '/capium-login',
   notFound = '*',
 }

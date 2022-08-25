@@ -16,8 +16,8 @@ import {
   getResetPasswordInputFields,
   resetPasswordFormikInitialValues,
 } from './MyAccount.constants';
-
 import { getProfile, resetPassword, updateProfile } from './myAccount.api';
+
 import { updateUserProfile } from '../../SignUp/reducer/signup.reducer';
 
 import { DATE_FORMATS } from 'constants/strings';

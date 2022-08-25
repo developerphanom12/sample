@@ -8,7 +8,7 @@ export interface IuseUserListState extends IPaginationState {
   searchedUsers: IMember[];
   role: IOption | null;
   prevRole: IOption | null;
-  company: IOption | null;
+  companies: IOption[];
   isFetchingData: boolean;
   selectedUserName: string;
   prevName: string;
@@ -18,7 +18,7 @@ export interface IgetInputFieldsProps {
   options: IOption[][];
   funcArray: ((newValue: IOption, actionMeta: unknown) => void)[];
   state: {
-    company: IOption | null;
+    companies: IOption[];
     role: IOption | null;
   };
 }
