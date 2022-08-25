@@ -6,6 +6,7 @@ import { CompanySwitcherMenuItemStyles as Styled } from './CompanySwitcherMenuIt
 
 export interface ICompanySwitcherMenuItem {
   isLoading?: boolean;
+  isCompanyPicker?: boolean;
   companyLogoSrc?: string | null;
   isActive: boolean;
   companyName: string;
@@ -17,15 +18,20 @@ export const CompanySwitcherMenuItem: FC<ICompanySwitcherMenuItem> = (
   props: ICompanySwitcherMenuItem
 ) => {
   const {
-    isLoading,
     onClick,
     companyId,
     companyLogoSrc,
     companyName,
     isActive,
+    isCompanyPicker,
   } = props;
   return (
-    <Styled.Item data-testid='company-switcher-menu-item' onClick={onClick} id={companyId}>
+    <Styled.Item
+      data-testid="company-switcher-menu-item"
+      onClick={onClick}
+      id={companyId}
+      isCompanyPicker={isCompanyPicker}
+    >
       <Styled.CompanyNameWrapper>
         <CompanySwitcherLogo
           companyLogoSrc={companyLogoSrc}

@@ -11,11 +11,10 @@ export interface ICompanySwitcherMenu {
 }
 
 export const CompanySwitcherMenu: FC<ICompanySwitcherMenu> = (props) => {
-  const { isLoading, companies, activeAccountId, onSwitchCompanyHandler } =
-    props;
+  const { companies, activeAccountId, onSwitchCompanyHandler } = props;
 
   return (
-    <Styled.Wrapper data-testid='switcher-list'>
+    <Styled.Wrapper data-testid="switcher-list">
       <Styled.Title>Company(s)</Styled.Title>
       <Styled.CompaniesWrapper isMargin={companies.length === 5}>
         {companies?.map((company) => (

@@ -20,6 +20,7 @@ export const CompanySwitcherStyles = {
     font-size: ${(props) => props.theme.size.xnormal};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     margin-left: -5px;
+    width: 118px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

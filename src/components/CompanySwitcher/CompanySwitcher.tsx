@@ -19,7 +19,6 @@ export interface ICompanySwitcher {
 
 export const CompanySwitcher: FC<ICompanySwitcher> = (props) => {
   const {
-    isLoading,
     isOpenSwitcher,
     switcherRef,
     companies,
