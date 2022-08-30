@@ -13,7 +13,7 @@ interface ICreateCompanyMemberPayload {
 interface IUpdateCompanyMember {
   name?: string;
   email?: string;
-  token?: string;
+  isInviteCompanyMember?: boolean;
   role: string;
 }
 
@@ -40,8 +40,8 @@ export const updateCompanyMember = (
   return apiServices.changeData(URL, payload);
 };
 
-export const resendInvitation = (token: string) => {
-  const URL = `company-member/resend-invitation/${token}`;
+export const resendInvitation = (invitationId: string) => {
+  const URL = `company-member/resend-invitation/${invitationId}`;
   return apiServices.postData(URL, {});
 };
 

@@ -279,9 +279,6 @@ export const useUserListState = () => {
       selectedItemId: itemId,
       selectedUserName: selectedUser?.name || '',
       isInvitation: selectedUser?.memberInvite ? true : false,
-      inviteToken: selectedUser?.memberInvite
-        ? selectedUser?.memberInvite?.token
-        : '',
     }));
     onModalWindowToggle();
   };
@@ -317,19 +314,17 @@ export const useUserListState = () => {
               role: state.role?.value || '',
               name: values.fullName,
               email: values.email,
-              token: state.inviteToken,
+              isInviteCompanyMember: state.isInvitation,
             };
       await updateCompanyMember(payload, state.selectedItemId);
       const { data } = await getCompanyMembers();
       dispatch(setMembers({ count: data.count, members: data.data }));
       onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('isInvitation', state.isInvitation && false);
-      onChangeStateFieldHandler('inviteToken', '');
+      state.isInvitation && onChangeStateFieldHandler('isInvitation', false);
       setIsEdit(false);
       formik.resetForm();
       onModalWindowToggle();
     } catch (error) {
-      onChangeStateFieldHandler('inviteToken', '');
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('isInvitation', false);
       setIsEdit(false);

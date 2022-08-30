@@ -28,7 +28,6 @@ export const USERS_LIST_INITIAL_STATE = {
   selectedUserName: '',
   prevName: '',
   prevEmail: '',
-  inviteToken: '',
   isInvitation: false,
 };
 

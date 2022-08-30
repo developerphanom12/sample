@@ -1,5 +1,5 @@
 interface IuseTableSettingsItemStateProps {
-  token?: string;
+  invitationId?: string;
   onResendInvitationHandler?: (token: string) => void;
   onDeleteIconClickHandler: (itemId: string) => void;
   onEditIconClickHandler: (itemId: string) => void;
@@ -13,13 +13,13 @@ export const useTableSettingsItemState = (
     onDeleteIconClickHandler,
     onEditIconClickHandler,
     onResendInvitationHandler,
-    token,
+    invitationId,
   } = props;
 
   const onClickDeleteIconHandler = () => onDeleteIconClickHandler(itemId);
   const onClickEditIconHandler = () => onEditIconClickHandler(itemId);
   const onClickResendInviteHandler = () =>
-    onResendInvitationHandler && onResendInvitationHandler(token || '');
+    onResendInvitationHandler && onResendInvitationHandler(invitationId || '');
 
   return {
     onClickEditIconHandler,

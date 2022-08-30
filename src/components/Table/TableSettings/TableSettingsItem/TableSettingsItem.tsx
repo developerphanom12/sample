@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { isToday } from 'date-fns';
-import decode from 'jwt-decode';
 
 import {
   dateDiffInDays,
@@ -51,21 +50,17 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
     onDeleteIconClickHandler,
     onEditIconClickHandler,
     onResendInvitationHandler,
-    token: memberInvitation?.token,
+    invitationId: memberInvitation?.id,
   });
 
   const isNotDeleteButton = userRole === 'owner' && memberRole === 'owner';
 
-  const decodedToken: {
-    exp: number;
-  } | null = memberInvitation && decode(memberInvitation?.token);
-
   const isTodayDate =
-    decodedToken && isToday(new Date(decodedToken?.exp * 1000));
+    memberInvitation && isToday(new Date(memberInvitation?.created));
 
   const diffInDays =
-    decodedToken &&
-    dateDiffInDays(new Date(), new Date(decodedToken?.exp * 1000));
+    memberInvitation &&
+    dateDiffInDays(new Date(), new Date(memberInvitation?.created));
 
   const invitationStatus = !memberInvitation
     ? 'Accepted'

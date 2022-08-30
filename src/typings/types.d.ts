@@ -268,7 +268,6 @@ declare global {
   interface IMemberInvite {
     id: string;
     email: string;
-    token: string;
     created: string;
     updated: string;
   }

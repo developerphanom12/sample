@@ -13,7 +13,6 @@ export interface IuseUserListState extends IPaginationState {
   selectedUserName: string;
   prevName: string;
   prevEmail: string;
-  inviteToken: string;
   isInvitation: boolean;
 }
 export interface IgetInputFieldsProps {

@@ -90,10 +90,10 @@ export const usePreferenceState = () => {
   };
 
   const isDisabledButton =
-    !formik.values.companyName ||
+    !formik.values?.companyName ||
     !formik.isValid ||
-    !state.selectedCurrencyValue.value ||
-    !state.selectedFormatDate.value ||
+    !state.selectedCurrencyValue?.value ||
+    !state.selectedFormatDate?.value ||
     state.isLoading;
 
   return {
