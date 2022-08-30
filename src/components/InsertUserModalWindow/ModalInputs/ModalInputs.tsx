@@ -33,8 +33,11 @@ export const ModalInputs: FC<IModalFormProps> = (props) => {
     onEnterCreateItemClick,
   } = props;
 
-  const { touched, error } = formikMeta(inputName);
-  const { value, onBlur, onChange, name } = formikProps(inputName);
+  const { touched, error } = formikMeta(inputType === 'input' ? inputName : '');
+  const { value, onBlur, onChange, name } = formikProps(
+    inputType === 'input' ? inputName : ''
+  );
+
   return (
     <>
       {inputType === 'input' ? (

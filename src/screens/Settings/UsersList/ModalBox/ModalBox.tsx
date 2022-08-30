@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import { FieldInputProps, FieldMetaProps } from 'formik';
 
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
 import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
 
 import { TInputFields } from '../../MyAccount/types/MyAccount.types';
-import { FieldInputProps, FieldMetaProps } from 'formik';
 
 interface IUserListModalBoxProps
   extends Omit<
@@ -17,6 +17,8 @@ interface IUserListModalBoxProps
   formikMeta: (name: string) => FieldMetaProps<string>;
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
   modalFields: TInputFields;
+  isEdit: boolean;
+  isInvitation: boolean;
 }
 export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
   const {
@@ -34,6 +36,8 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
     onSaveButtonCLickHandler,
     onEnterCreateItemClick,
     onCloseDeleteModalWindowHandler,
+    isEdit,
+    isInvitation,
   } = props;
 
   return (
@@ -49,6 +53,8 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
         headerText={headerText}
         formikMeta={formikMeta}
         formikProps={formikProps}
+        isEdit={isEdit}
+        isInvitation={isInvitation}
       />
       <DeleteModalWindow
         isLoading={isLoading}

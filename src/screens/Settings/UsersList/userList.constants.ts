@@ -1,6 +1,9 @@
 import { PAGINATION_ARRAY } from 'constants/pagination-array';
 
-import { IgetInputFieldsProps } from './types/userList.types';
+import {
+  IgetInputFieldsProps,
+  IuseUserListState,
+} from './types/userList.types';
 
 export const USERS_LIST_INITIAL_STATE = {
   searchValue: '',
@@ -25,6 +28,8 @@ export const USERS_LIST_INITIAL_STATE = {
   selectedUserName: '',
   prevName: '',
   prevEmail: '',
+  inviteToken: '',
+  isInvitation: false,
 };
 
 export const formikInitialValues = {

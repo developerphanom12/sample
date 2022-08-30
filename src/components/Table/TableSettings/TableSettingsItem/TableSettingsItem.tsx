@@ -1,6 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
+import { isToday } from 'date-fns';
+import decode from 'jwt-decode';
 
-import { getFirstLetterUppercase, getFormattedDate } from 'services/utils';
+import {
+  dateDiffInDays,
+  getFirstLetterUppercase,
+  getFormattedDate,
+} from 'services/utils';
 
 import { Icon } from 'components/Icons/Icons';
 
@@ -8,19 +14,22 @@ import { TableSettingsItemStyles as Styled } from './TableSettingsItem.style';
 import { useTableSettingsItemState } from './TableSettingsItem.state';
 
 interface ITableSettingsItemProps extends TableSettingsItemProps {
+  onResendInvitationHandler?: (token: string) => void;
   memberEmail?: string;
   companyName?: string;
+  memberInvitation: IMemberInvite | null;
+  createdBy?: string;
   memberId: string;
   memberName: string;
   memberRole: TRoles;
   createdAt: string;
-  createdBy: string;
   dateFormat: string;
 }
-export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
+export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
   const {
     onDeleteIconClickHandler,
     onEditIconClickHandler,
+    onResendInvitationHandler,
     createdAt,
     createdBy,
     userRole,
@@ -30,16 +39,45 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
     memberName,
     dateFormat,
     companyName,
+    memberInvitation,
   } = props;
 
-  const { onClickDeleteIconHandler, onClickEditIconHandler } =
-    useTableSettingsItemState({
-      itemId: memberId,
-      onDeleteIconClickHandler,
-      onEditIconClickHandler,
-    });
+  const {
+    onClickDeleteIconHandler,
+    onClickEditIconHandler,
+    onClickResendInviteHandler,
+  } = useTableSettingsItemState({
+    itemId: memberId,
+    onDeleteIconClickHandler,
+    onEditIconClickHandler,
+    onResendInvitationHandler,
+    token: memberInvitation?.token,
+  });
 
   const isNotDeleteButton = userRole === 'owner' && memberRole === 'owner';
+
+  const decodedToken: {
+    exp: number;
+  } | null = memberInvitation && decode(memberInvitation?.token);
+
+  const isTodayDate =
+    decodedToken && isToday(new Date(decodedToken?.exp * 1000));
+
+  const diffInDays =
+    decodedToken &&
+    dateDiffInDays(new Date(), new Date(decodedToken?.exp * 1000));
+
+  const invitationStatus = !memberInvitation
+    ? 'Accepted'
+    : isTodayDate || (diffInDays && diffInDays >= 1) || diffInDays === 0
+    ? 'Resend invitation'
+    : diffInDays && diffInDays === -1
+    ? 'Active since (1 day)'
+    : diffInDays && diffInDays === -2
+    ? 'Active since (2 days)'
+    : 'Waiting for approval';
+
+  const isExpired = invitationStatus === 'Resend invitation';
 
   return (
     <Styled.Item>
@@ -59,11 +97,25 @@ export const TableSettingsItem: React.FC<ITableSettingsItemProps> = (props) => {
         <Styled.TextWrapper>{memberName}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>
-        <Styled.TextWrapper>{memberEmail}</Styled.TextWrapper>
+        <Styled.TextWrapper>
+          {memberInvitation ? memberInvitation.email : memberEmail}
+        </Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
       <Styled.Column>
-        <Styled.TextWrapper>{companyName || 'Mordor'}</Styled.TextWrapper>
+        <Styled.TextWrapper>{companyName}</Styled.TextWrapper>
+      </Styled.Column>
+      <Styled.Column>
+        {isExpired ? (
+          <Styled.TextWrapper
+            isExpired={isExpired}
+            onClick={onClickResendInviteHandler}
+          >
+            Resend invitation
+          </Styled.TextWrapper>
+        ) : (
+          <Styled.TextWrapper>{invitationStatus}</Styled.TextWrapper>
+        )}
       </Styled.Column>
       <Styled.Column>{getFormattedDate(createdAt, dateFormat)}</Styled.Column>
       <Styled.Column>{createdBy}</Styled.Column>

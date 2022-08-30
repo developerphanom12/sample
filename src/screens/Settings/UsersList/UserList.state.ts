@@ -25,6 +25,7 @@ import {
   deleteCompanyMember,
   getCompanyMembers,
   getManyCompanies,
+  resendInvitation,
   updateCompanyMember,
 } from '../settings.api';
 import { setCompanies, setMembers } from '../reducer/settings.reducer';
@@ -56,11 +57,14 @@ export const useUserListState = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
   const [isDeleteModalWindowOpen, onDeleteModalWindowToggle] = useToggle();
+  const [isSentSuccessPopup, setIsSentSuccessPopup] = useToggle();
+  const [isResentSuccessPopup, setIsResendSuccessPopup] = useToggle();
 
   const onModalWindowCancelClickButtonHandler = () => {
     onModalWindowToggle();
     setIsEdit(false);
     onChangeStateFieldHandler('role', null);
+    onChangeStateFieldHandler('isInvitation', false);
     formik.resetForm();
   };
 
@@ -253,9 +257,11 @@ export const useUserListState = () => {
   const onEditIconClickHandler = (itemId: string) => {
     const selectedUser = getSelectedUser(members, itemId);
     formik.setValues({
-      email: selectedUser?.user.email || '',
+      email:
+        selectedUser?.memberInvite?.email || selectedUser?.user?.email || '',
       fullName: selectedUser?.name || '',
     });
+
     setIsEdit(true);
     setState((prevState) => ({
       ...prevState,
@@ -268,9 +274,14 @@ export const useUserListState = () => {
         value: selectedUser?.role || '',
       },
       prevName: selectedUser?.name || '',
-      prevEmail: selectedUser?.user.email || '',
+      prevEmail:
+        selectedUser?.user?.email || selectedUser?.memberInvite?.email || '',
       selectedItemId: itemId,
       selectedUserName: selectedUser?.name || '',
+      isInvitation: selectedUser?.memberInvite ? true : false,
+      inviteToken: selectedUser?.memberInvite
+        ? selectedUser?.memberInvite?.token
+        : '',
     }));
     onModalWindowToggle();
   };
@@ -297,21 +308,30 @@ export const useUserListState = () => {
   const onEditUserHandler = async (values: typeof formikInitialValues) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      await updateCompanyMember(
-        {
-          name: values.fullName || '',
-          role: state.role?.value || '',
-        },
-        state.selectedItemId
-      );
+      const payload =
+        isEdit && !state.isInvitation
+          ? {
+              role: state.role?.value || '',
+            }
+          : {
+              role: state.role?.value || '',
+              name: values.fullName,
+              email: values.email,
+              token: state.inviteToken,
+            };
+      await updateCompanyMember(payload, state.selectedItemId);
       const { data } = await getCompanyMembers();
       dispatch(setMembers({ count: data.count, members: data.data }));
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('isInvitation', state.isInvitation && false);
+      onChangeStateFieldHandler('inviteToken', '');
       setIsEdit(false);
       formik.resetForm();
       onModalWindowToggle();
     } catch (error) {
+      onChangeStateFieldHandler('inviteToken', '');
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('isInvitation', false);
       setIsEdit(false);
       formik.resetForm();
       onModalWindowToggle();
@@ -334,11 +354,21 @@ export const useUserListState = () => {
       onGetAllCompanyMembersHandler();
       onModalWindowToggle();
       onChangeStateFieldHandler('isLoading', false);
+      setIsSentSuccessPopup();
       formik.resetForm();
     } catch (error) {
       onModalWindowToggle();
       formik.resetForm();
       onChangeStateFieldHandler('isLoading', false);
+      console.log(error);
+    }
+  };
+
+  const onResendInvitationHandler = async (token: string) => {
+    try {
+      await resendInvitation(token);
+      setIsResendSuccessPopup();
+    } catch (error) {
       console.log(error);
     }
   };
@@ -352,15 +382,19 @@ export const useUserListState = () => {
     funcArray: [onChangeRoleValueHandler, onChangeCompanyValueHandler],
   });
 
-  const isDisableButton = isEdit
-    ? (state.prevRole?.value === state.role?.value &&
-        state.prevEmail === formik.values.email &&
-        state.prevName === formik.values.fullName) ||
-      !formik.isValid
-    : !formik.values.email ||
-      !formik.values.fullName ||
-      !formik.dirty ||
-      !state.role?.value;
+  const isDisableButton =
+    isEdit && !state.isInvitation
+      ? state.prevRole?.value === state.role?.value
+      : isEdit && state.isInvitation
+      ? state.prevEmail === formik.values.email &&
+        state.prevName === formik.values.fullName &&
+        state.prevRole?.value === state.role?.value
+      : !formik.isValid ||
+        !formik.values.email ||
+        !formik.values.fullName ||
+        !formik.dirty ||
+        !state.role?.value ||
+        !state.companies.length;
 
   return {
     ...state,
@@ -374,6 +408,7 @@ export const useUserListState = () => {
     isModalWindowOpen,
     isDeleteModalWindowOpen,
     isDisableButton,
+    onResendInvitationHandler,
     onChangePage,
     onEditUserHandler,
     onChangePagesAmount,
@@ -397,5 +432,9 @@ export const useUserListState = () => {
     onChangeItemsPerPage,
     onGoToClick,
     onGetCompaniesHandler,
+    isSentSuccessPopup,
+    setIsSentSuccessPopup,
+    isResentSuccessPopup,
+    setIsResendSuccessPopup,
   };
 };

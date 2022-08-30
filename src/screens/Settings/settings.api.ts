@@ -10,6 +10,13 @@ interface ICreateCompanyMemberPayload {
   email: string;
 }
 
+interface IUpdateCompanyMember {
+  name?: string;
+  email?: string;
+  token?: string;
+  role: string;
+}
+
 export const logOut = () => {
   const URL = `auth/log-out`;
   return apiServices.changeData(URL, {});
@@ -26,11 +33,16 @@ export const createCompanyMember = (payload: ICreateCompanyMemberPayload) => {
 };
 
 export const updateCompanyMember = (
-  payload: Omit<ICreateCompanyMemberPayload, 'email'>,
+  payload: IUpdateCompanyMember,
   memberId: string
 ) => {
   const URL = `company-member/update/${memberId}`;
   return apiServices.changeData(URL, payload);
+};
+
+export const resendInvitation = (token: string) => {
+  const URL = `company-member/resend-invitation/${token}`;
+  return apiServices.postData(URL, {});
 };
 
 export const deleteCompanyMember = (memberId: string) => {

@@ -27,6 +27,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
     onBlurHandler,
     onFocusSearchHandler,
     onChangePage,
+    onResendInvitationHandler,
     searchedUsers,
     isFocus,
     pages,
@@ -65,6 +66,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
       ) : !isFetchingData && !isContentLoading ? (
         <div>
           <Table
+            onResendInvitationHandler={onResendInvitationHandler}
             searchedCompanies={searchedCompanies}
             isMemeberList={isMemeberList}
             searchValue={searchValue}

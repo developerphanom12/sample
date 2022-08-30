@@ -8,6 +8,7 @@ export const UserListStyles = {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: relative;
   `,
   TableWrapper: styled.div`
     width: 100%;
@@ -17,5 +18,11 @@ export const UserListStyles = {
     align-items: center;
     justify-content: center;
     flex: 1;
+  `,
+  SuccessPopupWrapper: styled.div`
+    position: absolute;
+    right: 0;
+    max-width: 290px;
+    width: 100%;
   `,
 };

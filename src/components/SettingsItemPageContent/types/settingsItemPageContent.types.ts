@@ -16,5 +16,6 @@ export interface ISettingsItemPageContentProps
   searchValue: string;
   onAddClickButtonHandler: () => void;
   onFocusSearchHandler?: () => void;
+  onResendInvitationHandler?: (token: string) => void;
   isFetchingData: boolean;
 }

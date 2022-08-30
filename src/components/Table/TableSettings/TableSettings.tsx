@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getFilteredMembers } from 'services/utils';
+
 import { TableSettingsStyles as Styled } from './TableSettings.style';
 import { TableSettingsItem } from './TableSettingsItem/TableSettingsItem';
 import { TableButton } from '../TableButton/TableButton';
@@ -8,11 +10,23 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
   const {
     onDeleteIconClickHandler,
     onEditIconClickHandler,
+    onResendInvitationHandler,
     userRole,
     members,
     searchedUsers,
     searchValue,
   } = props;
+
+  const isRegularUser = userRole === 'user';
+
+  const filteredSearchedUsers = isRegularUser
+    ? getFilteredMembers(searchedUsers || [])
+    : searchedUsers;
+
+  const filteredMembersUsers = isRegularUser
+    ? getFilteredMembers(members || [])
+    : members;
+
   return (
     <>
       <Styled.Head>
@@ -32,35 +46,40 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
           <TableButton>Company</TableButton>
         </Styled.Column>
         <Styled.Column>
+          <TableButton>Status</TableButton>
+        </Styled.Column>
+        <Styled.Column>
           <TableButton>Created On</TableButton>
         </Styled.Column>
         <Styled.Column>
           <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
-      {searchedUsers?.length && searchValue ? (
-        searchedUsers?.map((member) => (
+      {filteredSearchedUsers?.length && searchValue ? (
+        filteredSearchedUsers?.map((member) => (
           <TableSettingsItem
             key={member.id}
             memberId={member.id}
-            memberEmail={member?.user.email}
+            memberEmail={member?.user?.email}
             dateFormat={member.company.date_format}
             createdAt={member.created}
-            createdBy={member?.user.fullName}
+            createdBy={member?.user?.fullName}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
             memberRole={member.role}
             companyName={member.company?.name}
+            memberInvitation={member?.memberInvite}
+            onResendInvitationHandler={onResendInvitationHandler}
             userRole={userRole}
           />
         ))
-      ) : searchValue && !searchedUsers?.length ? (
+      ) : searchValue && !filteredSearchedUsers?.length ? (
         <Styled.EmptyContentWrapper>
           No results found
         </Styled.EmptyContentWrapper>
       ) : (
-        members?.map((member) => (
+        filteredMembersUsers?.map((member) => (
           <TableSettingsItem
             key={member.id}
             memberId={member.id}
@@ -71,7 +90,10 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
+            onResendInvitationHandler={onResendInvitationHandler}
             memberRole={member.role}
+            companyName={member.company?.name}
+            memberInvitation={member?.memberInvite}
             userRole={userRole}
           />
         ))

@@ -13,7 +13,7 @@ export const TableSettingsItemStyles = {
         110px,
         150px
       )
-      minmax(110px, 150px)
+      minmax(110px, 150px) minmax(130px, 135px)
       minmax(110px, 170px) minmax(110px, 170px)`};
     background-color: ${(props) => props.theme.colors.white};
     border-left: solid 1px ${(props) => props.theme.colors.gray};
@@ -43,10 +43,12 @@ export const TableSettingsItemStyles = {
     align-items: center;
     width: 100%;
   `,
-  TextWrapper: styled.span`
+  TextWrapper: styled.span<{ isExpired?: boolean }>`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    ${({ isExpired, theme }) =>
+      isExpired && `cursor: pointer; color: ${theme.colors.blue};`}
   `,
 };

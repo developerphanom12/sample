@@ -9,6 +9,7 @@ interface ITableProps {
   companies?: ICompanySettings[];
   searchValue: string;
   userRole: TRoles;
+  onResendInvitationHandler?: (token: string) => void;
   onDeleteIconClickHandler: (itemId: string) => void;
   onEditIconClickHandler: (itemId: string) => void;
 }
@@ -21,6 +22,7 @@ export const Table = (props: ITableProps) => {
     searchedUsers,
     companies,
     searchedCompanies,
+    onResendInvitationHandler,
     onDeleteIconClickHandler,
     onEditIconClickHandler,
   } = props;
@@ -28,6 +30,7 @@ export const Table = (props: ITableProps) => {
     <>
       {isMemeberList ? (
         <TableSettings
+          onResendInvitationHandler={onResendInvitationHandler}
           searchValue={searchValue}
           searchedUsers={searchedUsers}
           members={members}

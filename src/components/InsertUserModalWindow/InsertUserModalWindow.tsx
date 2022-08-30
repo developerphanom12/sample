@@ -20,6 +20,8 @@ interface InsertUserModalWindowProps
   formikMeta: (name: string) => FieldMetaProps<string>;
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
   modalFields: TInputFields;
+  isEdit: boolean;
+  isInvitation: boolean;
 }
 
 export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
@@ -36,13 +38,36 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
     formikMeta,
     formikProps,
     modalFields,
+    isEdit,
+    isInvitation,
   } = props;
+
+  const modalStyles =
+    isEdit && isInvitation
+      ? {
+          content: { ...UserModalWindowStyles.content, maxHeight: '450px' },
+          overlay: UserModalWindowStyles.overlay,
+        }
+      : isEdit && !isInvitation
+      ? {
+          content: { ...UserModalWindowStyles.content, maxHeight: '300px' },
+          overlay: UserModalWindowStyles.overlay,
+        }
+      : UserModalWindowStyles;
+
+  const fields =
+    isEdit && isInvitation
+      ? modalFields.slice(0, 3)
+      : isEdit && !isInvitation
+      ? modalFields.slice(2, 3)
+      : modalFields;
+
   return (
     <ReactModal
       isOpen={isModalWindowOpen}
       onRequestClose={onCloseModalWindowHandler}
       ariaHideApp={false}
-      style={UserModalWindowStyles}
+      style={modalStyles}
     >
       <ModalWindowHeader
         headerTitle={headerText}
@@ -51,7 +76,7 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
       <Styled.Content>
         <Styled.Form onSubmit={onSaveButtonCLickHandler}>
           <Styled.InputsWrapper>
-            {modalFields.map((input) => (
+            {fields.map((input) => (
               <ModalInputs
                 selectValue={input.value}
                 label={input.label}

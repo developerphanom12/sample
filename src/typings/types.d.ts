@@ -264,12 +264,21 @@ declare global {
     forwardDisabled: boolean;
     backwardDisabled: boolean;
   }
+
+  interface IMemberInvite {
+    id: string;
+    email: string;
+    token: string;
+    created: string;
+    updated: string;
+  }
   interface IMember {
     id: string;
     name: string;
     role: TRoles;
     created: string;
     company: { id: string; date_format: string; name: string };
+    memberInvite: IMemberInvite | null;
     user: {
       accounts: IAccount[];
       active_account: string;
@@ -278,11 +287,12 @@ declare global {
       fullName: string;
       id: string;
       profile_image: null | string;
-    };
+    } | null;
   }
   interface IMemberTableProps extends TableSettingsProps {
     members?: IMember[];
     searchedUsers?: IMember[];
+    onResendInvitationHandler?: (token: string) => void;
     searchValue: string;
   }
   interface ISearchParams {

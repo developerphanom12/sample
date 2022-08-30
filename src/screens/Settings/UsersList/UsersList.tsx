@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
 import { LoaderComponent } from 'components/Loader';
+import { SuccessPopup } from 'components/SuccessPopup';
 
 import { UserListStyles as Styled } from './UserList.styles';
 import { useUserListState } from './UserList.state';
@@ -42,6 +43,11 @@ export const UsersList: FC = () => {
     count,
     isFetchingData,
     isDisableButton,
+    isInvitation,
+    isSentSuccessPopup,
+    isResentSuccessPopup,
+    setIsSentSuccessPopup,
+    setIsResendSuccessPopup,
     onChangePage,
     onChangePagesAmount,
     onModalWindowCancelClickButtonHandler,
@@ -49,6 +55,7 @@ export const UsersList: FC = () => {
     onFocusSearchHandler,
     onBlurHandler,
     onGetAllCompanyMembersHandler,
+    onResendInvitationHandler,
   } = useUserListState();
 
   useEffect(() => {
@@ -66,7 +73,12 @@ export const UsersList: FC = () => {
     if (!count) return;
     onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage]);
-  
+
+  useEffect(() => {
+    if (isSentSuccessPopup) setTimeout(setIsSentSuccessPopup, 3000);
+    if (isResentSuccessPopup) setTimeout(setIsResendSuccessPopup, 3000);
+  }, [isSentSuccessPopup, isResentSuccessPopup]);
+
   return (
     <Styled.Section>
       <ModalBox
@@ -84,13 +96,27 @@ export const UsersList: FC = () => {
         onDeleteButtonClickHandler={onClickDeleteUserButton}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={`user ${selectedUserName}`}
+        isEdit={isEdit}
+        isInvitation={isInvitation}
       />
+      {(isResentSuccessPopup || isSentSuccessPopup) && (
+        <Styled.SuccessPopupWrapper>
+          <SuccessPopup
+            titleText={
+              isResentSuccessPopup
+                ? 'Invitation resent successfully'
+                : 'Invitation sent successfully'
+            }
+          />
+        </Styled.SuccessPopupWrapper>
+      )}
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
       ) : (
         <SettingsItemPageContent
+          onResendInvitationHandler={onResendInvitationHandler}
           isFetchingData={isFetchingData}
           isContentLoading={isContentLoading}
           isFocus={isFocus}
