@@ -384,6 +384,12 @@ export const useUserListState = () => {
       ? state.prevEmail === formik.values.email &&
         state.prevName === formik.values.fullName &&
         state.prevRole?.value === state.role?.value
+      : state.role?.value === 'owner'
+      ? !formik.isValid ||
+        !formik.values.email ||
+        !formik.values.fullName ||
+        !formik.dirty ||
+        !state.role?.value
       : !formik.isValid ||
         !formik.values.email ||
         !formik.values.fullName ||

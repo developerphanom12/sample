@@ -15,9 +15,13 @@ interface IFormdataProps {
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 export const dateDiffInDays = (a: Date, b: Date) => {
-  add(b, { days: 2 });
+  const expiredDate = add(b, { days: 2 });
   const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+  const utc2 = Date.UTC(
+    expiredDate.getFullYear(),
+    expiredDate.getMonth(),
+    expiredDate.getDate()
+  );
 
   return Math.floor((utc1 - utc2) / _MS_PER_DAY);
 };
@@ -163,7 +167,7 @@ export const getCompanyInitials = (companyName: string) => {
 
 export const getUserRole = (accounts: IAccount[], active_account: string) => {
   if (!accounts.length || !active_account) return;
-  return accounts?.find((account) => account.id === active_account)?.role;
+  return accounts?.find((account) => account.id === active_account);
 };
 
 export const getSelectedUser = (members: IMember[], memberId: string) => {

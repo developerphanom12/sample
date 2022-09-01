@@ -27,7 +27,9 @@ export const useSignUpNewMemberState = () => {
   const dispatch = useDispatch();
 
   const { token } = useParams();
-  const decodedToken: { email: string } = decode(token || '');
+  const decodedToken: { email: string; isCompanyOwner?: boolean } = decode(
+    token || ''
+  );
 
   const initialState = {
     isShowPassword: false,
@@ -65,7 +67,9 @@ export const useSignUpNewMemberState = () => {
 
       dispatch(setUser(data));
       dispatch(setCurrencies(data.currencies));
-      navigate(ROUTES.chooseCompany);
+      decodedToken?.isCompanyOwner
+        ? navigate(ROUTES.preference, { state: { withAccountant: true } })
+        : navigate(ROUTES.chooseCompany);
     } catch (error: any) {
       const { data } = error.response;
       data.message === 'WRONG EMAIL' &&

@@ -17,7 +17,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
     searchValue,
   } = props;
 
-  const isRegularUser = userRole === 'user';
+  const isRegularUser = userRole?.role === 'user';
 
   const filteredSearchedUsers = isRegularUser
     ? getFilteredMembers(searchedUsers || [])
@@ -30,7 +30,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
   return (
     <>
       <Styled.Head>
-        {(userRole === 'owner' || userRole === 'admin') && (
+        {userRole?.role === 'user' ? null : (
           <Styled.Actions>Actions</Styled.Actions>
         )}
         <Styled.Column>
@@ -63,7 +63,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberEmail={member?.user?.email}
             dateFormat={member.company.date_format}
             createdAt={member.created}
-            createdBy={member?.user?.fullName}
+            createdBy={member?.userInvitorName}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
@@ -85,7 +85,7 @@ export const TableSettings: React.FC<IMemberTableProps> = (props) => {
             memberId={member.id}
             dateFormat={member.company.date_format}
             createdAt={member.created}
-            createdBy={member?.user?.fullName}
+            createdBy={member?.userInvitorName}
             memberEmail={member?.user?.email}
             memberName={member.name}
             onDeleteIconClickHandler={onDeleteIconClickHandler}

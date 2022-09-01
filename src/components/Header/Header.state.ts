@@ -73,6 +73,7 @@ export const useHeaderState = () => {
     companySwitcher,
     activeCompany,
     activeAccountId,
+    active_account,
     onGetAllCompaniesHandler,
   };
 };

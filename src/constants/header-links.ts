@@ -18,3 +18,5 @@ export const CUSTOMER_LINKS = [
   { title: 'Dashboard', route: ROUTES.home },
   { title: 'Inbox', route: ROUTES.home },
 ];
+
+export const ACCOUNTANT_LINKS = [{ title: 'Invites', route: ROUTES.invites }];

@@ -74,7 +74,15 @@ export const USER_ROLES = [
     label: 'Admin',
   },
   {
-    value: 'regular user',
+    value: 'user',
     label: 'Regular User',
+  },
+  {
+    value: 'accountant',
+    label: 'Accountant',
+  },
+  {
+    value: 'owner',
+    label: 'Company Owner',
   },
 ];

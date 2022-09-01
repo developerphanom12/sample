@@ -192,8 +192,9 @@ declare global {
 
   enum Roles {
     owner = 'owner',
-    user = 'regular user',
+    user = 'user',
     admin = 'admin',
+    accountant = 'accountant',
   }
   type TRoles = keyof typeof Roles;
 
@@ -210,18 +211,20 @@ declare global {
     searchedCompanies?: ICompanySettings[];
     isCompanyTable?: boolean;
     searchValue: srting;
-    userRole: TRoles;
+    userRole?: IAccount;
     onDeleteIconClickHandler: (itemId: string) => void;
     onEditIconClickHandler: (itemId: string) => void;
   }
   interface TableSettingsItemProps {
-    userRole: TRoles;
+    userRole?: IAccount;
     onDeleteIconClickHandler: (itemId: string) => void;
     onEditIconClickHandler: (itemId: string) => void;
   }
 
   interface TableCompanySettingsItemProps extends TableSettingsItemProps {
     companyName: string;
+    creatorId: string;
+    creatorRole: string;
     isCompanyTable: boolean;
     companyId: string;
     createdAt: string;
@@ -275,6 +278,7 @@ declare global {
     id: string;
     name: string;
     role: TRoles;
+    userInvitorName: string;
     created: string;
     company: { id: string; date_format: string; name: string };
     memberInvite: IMemberInvite | null;

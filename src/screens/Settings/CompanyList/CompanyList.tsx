@@ -117,7 +117,7 @@ export const CompanyList: FC = () => {
           onFocusSearchHandler={onFocusSearchHandler}
           onBlurHandler={onBlurHandler}
           searchedCompanies={searchedCompanies}
-          userRole={userRole as TRoles}
+          userRole={userRole}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
           onEditIconClickHandler={onEditIconClickHandler}
           pages={pages}

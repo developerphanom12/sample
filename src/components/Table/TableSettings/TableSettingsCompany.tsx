@@ -17,7 +17,7 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
   return (
     <>
       <Styled.Head isCompanyTable={isCompanyTable}>
-        {(userRole === 'owner' || userRole === 'admin') && (
+        {userRole?.role === 'user' ? null : (
           <Styled.Actions>Actions</Styled.Actions>
         )}
         <Styled.Column>
@@ -39,7 +39,9 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
             companyId={company.id}
             dateFormat={company.date_format}
             createdAt={company.created}
-            createdBy={company?.members[0].name}
+            createdBy={company?.members[0]?.name}
+            creatorRole={company?.members[0]?.role}
+            creatorId={company?.members[0]?.id}
             companyName={company.name}
             userRole={userRole}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
@@ -57,7 +59,9 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
             key={company.id}
             dateFormat={company.date_format}
             createdAt={company.created}
-            createdBy={company?.members[0].name}
+            createdBy={company?.members[0]?.name}
+            creatorRole={company?.members[0]?.role}
+            creatorId={company?.members[0]?.id}
             companyId={company.id}
             companyName={company.name}
             userRole={userRole}

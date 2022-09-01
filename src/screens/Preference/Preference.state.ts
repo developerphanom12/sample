@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ActionMeta, OnChangeValue, SingleValue } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -20,6 +20,7 @@ interface IusePreferenceState {
   selectedCurrencyValue: SingleValue<IOption> | any;
   selectedFormatDate: SingleValue<IOption> | any;
   isLoading: boolean;
+  isChecked: boolean;
 }
 
 export const usePreferenceState = () => {
@@ -37,9 +38,12 @@ export const usePreferenceState = () => {
     selectedCurrencyValue: formatedCurrencies[0],
     selectedFormatDate: DATE_FORMATS[0],
     isLoading: false,
+    isChecked: false,
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const locationState = location?.state as { withAccountant: boolean };
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
@@ -64,8 +68,11 @@ export const usePreferenceState = () => {
 
   const formik = useFormik({
     initialValues: formikInitialValues,
-    onSubmit: (values) => onContinueButtonClickHandler(values),
-    validationSchema: companyNameValidationScheme,
+    onSubmit: (values) =>
+      state.isChecked
+        ? navigate(ROUTES.invites, { replace: true })
+        : onContinueButtonClickHandler(values),
+    validationSchema: state.isChecked ? null : companyNameValidationScheme,
   });
 
   const onContinueButtonClickHandler = async (
@@ -77,6 +84,7 @@ export const usePreferenceState = () => {
         name: values.companyName || '',
         currency: state.selectedCurrencyValue?.id,
         date_format: state.selectedFormatDate?.value,
+        withAccountant: locationState?.withAccountant ? true : false,
       };
       const { data } = await userInfoCreate(payload);
       dispatch(setUserInfo({ company: data.company }));
@@ -89,18 +97,25 @@ export const usePreferenceState = () => {
     }
   };
 
-  const isDisabledButton =
-    !formik.values?.companyName ||
-    !formik.isValid ||
-    !state.selectedCurrencyValue?.value ||
-    !state.selectedFormatDate?.value ||
-    state.isLoading;
+  const onChangeIamAccountantHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => onChangeStateFieldHandler('isChecked', event.target.checked);
+
+  const isDisabledButton = state.isChecked
+    ? false
+    : !formik.values?.companyName ||
+      !formik.isValid ||
+      !state.selectedCurrencyValue?.value ||
+      !state.selectedFormatDate?.value ||
+      state.isLoading;
 
   return {
     ...state,
     formik,
     formatedCurrencies,
     isDisabledButton,
+    locationState,
+    onChangeIamAccountantHandler,
     onContinueButtonClickHandler,
     onChangeCurrencyHandler,
     onChangeDateFormatHandler,

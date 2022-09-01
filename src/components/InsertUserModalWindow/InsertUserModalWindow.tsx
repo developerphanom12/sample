@@ -43,7 +43,7 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
   } = props;
 
   const modalStyles =
-    isEdit && isInvitation
+    (isEdit && isInvitation) || modalFields.length === 3
       ? {
           content: { ...UserModalWindowStyles.content, maxHeight: '450px' },
           overlay: UserModalWindowStyles.overlay,

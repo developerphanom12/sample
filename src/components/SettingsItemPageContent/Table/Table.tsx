@@ -8,7 +8,7 @@ interface ITableProps {
   searchedUsers?: IMember[];
   companies?: ICompanySettings[];
   searchValue: string;
-  userRole: TRoles;
+  userRole?: IAccount;
   onResendInvitationHandler?: (token: string) => void;
   onDeleteIconClickHandler: (itemId: string) => void;
   onEditIconClickHandler: (itemId: string) => void;

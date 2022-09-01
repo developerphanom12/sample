@@ -4,6 +4,7 @@ import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { CustomSelect } from 'components/CustomSelect';
 import { Button } from 'components/Button/Button';
 import { Input } from 'components/Input';
+import { CheckboxItem } from 'components/Checkbox';
 
 import { PreferenceStyles as Styled } from './Preference.style';
 import { usePreferenceState } from './Preference.state';
@@ -15,13 +16,17 @@ export const Preference: FC = () => {
   const {
     onChangeCurrencyHandler,
     onChangeDateFormatHandler,
+    onChangeIamAccountantHandler,
+    isChecked,
     isLoading,
     isDisabledButton,
     formik,
     formatedCurrencies,
     selectedCurrencyValue,
     selectedFormatDate,
+    locationState,
   } = usePreferenceState();
+
 
   return (
     <Styled.MainWrapper>
@@ -54,6 +59,15 @@ export const Preference: FC = () => {
               onChangeValueHandler={onChangeDateFormatHandler}
               value={selectedFormatDate}
             />
+            {!locationState?.withAccountant && (
+              <Styled.CheckBoxWrapper>
+                <CheckboxItem
+                  isChecked={isChecked}
+                  labelText="I am an accountant"
+                  onChange={onChangeIamAccountantHandler}
+                />
+              </Styled.CheckBoxWrapper>
+            )}
             <Button
               themedButton="primary"
               width="auth"
@@ -61,7 +75,7 @@ export const Preference: FC = () => {
               isDisabled={isDisabledButton}
               isLoading={isLoading}
             >
-              {STRINGS.buttonText}
+              {isChecked ? STRINGS.buttonTextInbox : STRINGS.buttonText}
             </Button>
           </Styled.Form>
           <Styled.EmptyDiv />

@@ -18,5 +18,6 @@ export enum ROUTES {
   signUpNewMember = '/signup-new-member/:token',
   chooseCompany = '/choose-company',
   capiumLogin = '/capium-login',
+  invites = '/invites',
   notFound = '*',
 }

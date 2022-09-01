@@ -28,6 +28,7 @@ import { WorkSpacePicker } from 'screens/WorkSpacePicker';
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
+import { Invites } from '../screens/Invites';
 
 export const AppRouter: FC = () => (
   <BrowserRouter>
@@ -35,6 +36,7 @@ export const AppRouter: FC = () => (
       <Route path={ROUTES.home} element={<Layout />}>
         <Route element={<PrivateRouter />}>
           <Route index element={<Dashboard />} />
+          <Route path={ROUTES.invites} element={<Invites />} />
           <Route path={ROUTES.inbox} element={<Inbox />}>
             <Route path={ROUTES.receiptDetails} element={<ReceiptDetails />} />
             <Route

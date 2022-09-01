@@ -37,8 +37,9 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
           </Styled.IconWrapper>
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
-      {(isGuard && userRole === 'admin') ||
-      (isGuard && userRole === 'owner') ||
+      {(isGuard && userRole?.role === 'admin') ||
+      (isGuard && userRole?.role === 'owner') ||
+      (isGuard && userRole?.role === 'accountant') ||
       isButton ? (
         <Styled.ButtonWrapper>
           <Button

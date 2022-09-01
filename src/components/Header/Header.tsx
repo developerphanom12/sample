@@ -9,7 +9,11 @@ import { Icon } from '../Icons';
 
 import { useHeaderState } from './Header.state';
 
-import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
+import {
+  ACCOUNTANT_LINKS,
+  ADMIN_LINKS,
+  CUSTOMER_LINKS,
+} from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
 
 export interface HeaderProps {
@@ -26,6 +30,7 @@ export const Header: FC<HeaderProps> = (props) => {
     activeAccountId,
     isFetchingData,
     isSwitchCompany,
+    active_account,
     onSwitchCompany,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
@@ -33,7 +38,7 @@ export const Header: FC<HeaderProps> = (props) => {
   } = useHeaderState();
 
   useEffect(() => {
-    onGetAllCompaniesHandler();
+    active_account && onGetAllCompaniesHandler();
   }, [isFetchingData]);
 
   useEffect(() => {
@@ -53,7 +58,13 @@ export const Header: FC<HeaderProps> = (props) => {
         <Styled.BlocksWrapper>
           <Styled.Links>
             <Styled.LinkWrapper>
-              {role === 'admin'
+              {!active_account
+                ? ACCOUNTANT_LINKS.map((link) => (
+                    <CustomLink key={link.title} to={link.route}>
+                      {link.title}
+                    </CustomLink>
+                  ))
+                : role === 'admin'
                 ? ADMIN_LINKS.map((link) => (
                     <CustomLink
                       key={link.title}
@@ -72,16 +83,18 @@ export const Header: FC<HeaderProps> = (props) => {
             </Styled.LinkWrapper>
           </Styled.Links>
           <Styled.Notifications>
-            <CompanySwitcher
-              activeAccountId={activeAccountId}
-              activeCompany={activeCompany}
-              companies={companySwitcher}
-              isOpenSwitcher={isOpenSwitcher}
-              onClickSwitcherHandler={onClickSwitcherHandler}
-              switcherRef={switcherRef}
-              onSwitchCompanyHandler={onSwitchCompanyHandler}
-            />
-            <Styled.Link to={ROUTES.settings}>
+            {active_account ? (
+              <CompanySwitcher
+                activeAccountId={activeAccountId}
+                activeCompany={activeCompany}
+                companies={companySwitcher}
+                isOpenSwitcher={isOpenSwitcher}
+                onClickSwitcherHandler={onClickSwitcherHandler}
+                switcherRef={switcherRef}
+                onSwitchCompanyHandler={onSwitchCompanyHandler}
+              />
+            ) : null}
+            <Styled.Link to={active_account ? ROUTES.settings : ''}>
               <Avatar />
             </Styled.Link>
           </Styled.Notifications>

@@ -2,7 +2,6 @@ import { PAGINATION_ARRAY } from 'constants/pagination-array';
 
 import {
   IgetInputFieldsProps,
-  IuseUserListState,
 } from './types/userList.types';
 
 export const USERS_LIST_INITIAL_STATE = {

@@ -66,4 +66,7 @@ export const PreferenceStyles = {
     max-width: 500px;
     width: 100%;
   `,
+  CheckBoxWrapper: styled.div`
+    margin: 10px 0 15px 0;
+  `,
 };

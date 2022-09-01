@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { isToday } from 'date-fns';
 
 import {
   dateDiffInDays,
@@ -53,10 +52,11 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
     invitationId: memberInvitation?.id,
   });
 
-  const isNotDeleteButton = userRole === 'owner' && memberRole === 'owner';
-
-  const isTodayDate =
-    memberInvitation && isToday(new Date(memberInvitation?.created));
+  const isHideEditButton =
+    memberRole === 'owner' ? true : userRole?.role !== 'owner' && false;
+  const isHideDeleteButton =
+    memberRole === 'owner' ||
+    (memberRole === userRole?.role && userRole.id === memberId);
 
   const diffInDays =
     memberInvitation &&
@@ -64,7 +64,7 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
 
   const invitationStatus = !memberInvitation
     ? 'Accepted'
-    : isTodayDate || (diffInDays && diffInDays >= 1) || diffInDays === 0
+    : (diffInDays && diffInDays >= 1) || diffInDays === 0
     ? 'Resend invitation'
     : diffInDays && diffInDays === -1
     ? 'Active since (1 day)'
@@ -76,12 +76,14 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
 
   return (
     <Styled.Item>
-      {(userRole === 'owner' || userRole === 'admin') && (
+      {userRole?.role === 'user' ? null : (
         <Styled.Action>
-          <Styled.ActionButton onClick={onClickEditIconHandler}>
-            <Icon type="edit" />
-          </Styled.ActionButton>
-          {isNotDeleteButton ? null : (
+          {isHideEditButton ? null : (
+            <Styled.ActionButton onClick={onClickEditIconHandler}>
+              <Icon type="edit" />
+            </Styled.ActionButton>
+          )}
+          {isHideDeleteButton ? null : (
             <Styled.ActionButton onClick={onClickDeleteIconHandler}>
               <Icon type="remove" />
             </Styled.ActionButton>

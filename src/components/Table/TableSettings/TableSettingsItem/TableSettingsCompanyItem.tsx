@@ -20,6 +20,8 @@ export const TableSettingsCompanyItem: React.FC<
     companyId,
     companyName,
     isCompanyTable,
+    creatorRole,
+    creatorId,
   } = props;
 
   const { onClickDeleteIconHandler, onClickEditIconHandler } =
@@ -28,16 +30,20 @@ export const TableSettingsCompanyItem: React.FC<
       onDeleteIconClickHandler,
       onEditIconClickHandler,
     });
+  const isHideDeleteButton =
+    userRole?.id === creatorId && creatorRole === 'owner';
   return (
     <Styled.Item isCompanyTable={isCompanyTable}>
-      {(userRole === 'owner' || userRole === 'admin') && (
+      {userRole?.role === 'user' ? null : (
         <Styled.Action>
           <Styled.ActionButton onClick={onClickEditIconHandler}>
             <Icon type="edit" />
           </Styled.ActionButton>
-          <Styled.ActionButton onClick={onClickDeleteIconHandler}>
-            <Icon type="remove" />
-          </Styled.ActionButton>
+          {isHideDeleteButton ? null : (
+            <Styled.ActionButton onClick={onClickDeleteIconHandler}>
+              <Icon type="remove" />
+            </Styled.ActionButton>
+          )}
         </Styled.Action>
       )}
       <Styled.Column>{companyName}</Styled.Column>

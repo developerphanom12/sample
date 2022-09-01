@@ -46,6 +46,7 @@ export const UsersList: FC = () => {
     isInvitation,
     isSentSuccessPopup,
     isResentSuccessPopup,
+    role,
     setIsSentSuccessPopup,
     setIsResendSuccessPopup,
     onChangePage,
@@ -82,7 +83,9 @@ export const UsersList: FC = () => {
   return (
     <Styled.Section>
       <ModalBox
-        modalFields={modalFields}
+        modalFields={
+          role?.value === 'owner' ? modalFields.slice(0, 3) : modalFields
+        }
         isLoading={isLoading}
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
@@ -125,7 +128,7 @@ export const UsersList: FC = () => {
           onBlurHandler={onBlurHandler}
           members={members}
           isMemeberList
-          userRole={userRole as TRoles}
+          userRole={userRole}
           onDeleteIconClickHandler={onDeleteIconClickHandler}
           onEditIconClickHandler={onEditIconClickHandler}
           pages={pages}
