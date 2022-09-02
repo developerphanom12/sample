@@ -1,15 +1,15 @@
-import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
-import { InvitesStyles as Styled } from './Invites.style';
-import { useInvitesState } from './Invites.state';
+import { useEffect } from 'react';
 
 import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
 import { TableInvites } from 'components/Table/TableInvites';
 import { PaginationPanel } from 'components/PaginationPanel';
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
 import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
-import { useEffect } from 'react';
-import { LoaderComponent } from '../../components/Loader';
-import { EmptyData } from '../../components/EmptyData';
+import { LoaderComponent } from 'components/Loader';
+import { EmptyData } from 'components/EmptyData';
+
+import { InvitesStyles as Styled } from './Invites.style';
+import { useInvitesState } from './Invites.state';
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 
@@ -35,7 +35,6 @@ export const Invites = () => {
     onSendInviteToCreateCompanyHandler,
     onEditInviteHandler,
     onClickDeleteInviteButton,
-
     selectedEmail,
     itemsPerPage,
     inputPaginationValue,
@@ -47,12 +46,10 @@ export const Invites = () => {
     debouncedValue,
     isContentLoading,
     isFocus,
-
     modalFields,
     count,
     isFetchingData,
     isDisableButton,
-    // isInvitation,
     isEmptyData,
     isSentSuccessPopup,
     isResentSuccessPopup,
@@ -93,6 +90,7 @@ export const Invites = () => {
   const isPaginationPanel =
     (searchValue && searchedInvites?.length) ||
     (!searchValue && result?.length);
+
   return (
     <Styled.Section>
       <DeleteModalWindow

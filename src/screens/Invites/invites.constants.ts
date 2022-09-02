@@ -1,8 +1,6 @@
 import { PAGINATION_ARRAY } from 'constants/pagination-array';
 import { IgetInputFieldsProps } from './types/invites.types';
 
-// import { IgetInputFieldsProps } from './types/userList.types';
-
 export const INVITES_INITIAL_STATE = {
   searchValue: '',
   isLoading: false,
@@ -27,11 +25,9 @@ export const INVITES_INITIAL_STATE = {
   prevName: '',
   prevEmail: '',
   isEmptyData: true,
-  // isInvitation: false,
 };
 
 export const formikInitialValues = {
-  // fullName: '',
   email: '',
 };
 

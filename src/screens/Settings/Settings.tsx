@@ -15,13 +15,14 @@ export const Settings: FC = () => {
     isHover,
     userProfilePhoto,
     active_account,
+    profile_image,
     onGetProfilePhoto,
     onMouseEnterHandler,
     onMouseLeaveHandler,
   } = useSettingsState();
 
   useEffect(() => {
-    onGetProfilePhoto();
+    onGetProfilePhoto(profile_image);
   }, []);
   return (
     <SettingsStyles.Wrapper>

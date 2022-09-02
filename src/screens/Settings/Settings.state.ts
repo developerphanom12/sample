@@ -24,13 +24,13 @@ export const useSettingsState = () => {
 
   const onGetProfilePhoto = async (profileImage?: string) => {
     try {
-      if (!profile_image) return;
+      if (!profileImage) return;
       const { data } = await getProfilePhoto(
         profileImage || profile_image,
         token
       );
-      setUserProfilePhoto(URL.createObjectURL(data));
       setIsUploadingPhoto(false);
+      setUserProfilePhoto(URL.createObjectURL(data));
     } catch (error) {
       setIsUploadingPhoto(false);
       console.log(error);
@@ -52,7 +52,7 @@ export const useSettingsState = () => {
       setIsUploadingPhoto(true);
       const { data } = await profileUploadPhoto(formData, token);
       dispatch(setUserAvatar(data.profile_image));
-      data.profile_image && onGetProfilePhoto(data.profile_image);
+      onGetProfilePhoto(data.profile_image);
     } catch (error) {
       setIsHover(false);
       setIsUploadingPhoto(false);
@@ -71,6 +71,7 @@ export const useSettingsState = () => {
     isHover,
     userProfilePhoto,
     active_account,
+    profile_image,
     onGetProfilePhoto,
     onMouseEnterHandler,
     onUploadProfilePhotoHandler,
