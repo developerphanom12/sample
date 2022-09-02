@@ -69,6 +69,7 @@ export const AccountFields: FC<IAccountFieldsProps> = (props) => {
                 inputType={item.type}
                 labelText={item.label}
                 selectOptions={item.options}
+                isDisabled={item.isDisabled}
                 formikMeta={formikMeta}
                 formikProps={formikProps}
               />

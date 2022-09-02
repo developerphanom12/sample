@@ -8,10 +8,11 @@ interface ILinkItemProps {
   onClick?: () => void;
   title: string;
   path: string;
+  isDisabled: boolean;
 }
 
 export const LinkItem: FC<ILinkItemProps> = (props) => {
-  const { path, title, exact, onClick } = props;
+  const { path, title, exact, isDisabled, onClick } = props;
   const isActive = useLinkItemState({ path, exact });
 
   return (
@@ -20,6 +21,7 @@ export const LinkItem: FC<ILinkItemProps> = (props) => {
       onClick={onClick}
       to={path}
       active={isActive}
+      is_disabled={isDisabled ? `${isDisabled}` : ''}
     >
       {title}
     </LinkItemStyles.Link>

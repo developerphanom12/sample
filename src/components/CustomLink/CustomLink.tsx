@@ -7,12 +7,13 @@ import { CustomLinkStyles as Styled } from './CustomLink.style';
 export interface CustomLinkProps {
   isLast?: boolean;
   tabs?: string[];
+  isDisabled?: boolean;
   children: React.ReactNode;
   to: string;
 }
 
 export const CustomLink = (props: CustomLinkProps) => {
-  const { children, to, isLast, tabs } = props;
+  const { children, to, isLast, tabs, isDisabled } = props;
 
   const isActive = useMatch({
     path: to,
@@ -25,6 +26,7 @@ export const CustomLink = (props: CustomLinkProps) => {
       is_last={`${isLast}`}
       active={isActive}
       to={to}
+      is_disabled={isDisabled ? `${isDisabled}` : ''}
     >
       {children}
       <Styled.TabsWrapper>

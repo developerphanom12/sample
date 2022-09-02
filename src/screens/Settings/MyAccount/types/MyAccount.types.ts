@@ -1,6 +1,7 @@
 import { ActionMeta, SingleValue } from 'react-select';
 
 export interface IGetInputFieldsProps {
+  isDisabledSelect?: boolean;
   funcArray: any[];
   state: {
     currency: SingleValue<IOption> | any;
@@ -29,9 +30,11 @@ export type TInputFields = (
       value?: undefined;
       options?: undefined;
       onChangeSelect?: undefined;
+      isDisabled?: undefined;
     }
   | {
       isMulti?: boolean;
+      isDisabled?: boolean;
       type: string;
       name: string;
       label: string;

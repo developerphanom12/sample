@@ -1,10 +1,15 @@
 import { FC } from 'react';
+import { ROUTES } from '../../../constants/routes';
 
 import { LinkItem } from '../LinkItem';
 import { useLinkListState } from './LinkList.state';
 import { LinksListStyles as Styled } from './LinksList.style';
 
-export const LinksList: FC = () => {
+interface ILinksList {
+  isActiveAccount: boolean;
+}
+export const LinksList: FC<ILinksList> = (props) => {
+  const { isActiveAccount } = props;
   const settingsLink = useLinkListState();
   return (
     <Styled.LinksWrapper data-testid="links">
@@ -15,6 +20,12 @@ export const LinksList: FC = () => {
           title={link.title}
           onClick={link.onClick}
           exact={link.route === '/settings'}
+          isDisabled={
+            !isActiveAccount &&
+            link.route !== ROUTES.settings &&
+            !isActiveAccount &&
+            link.route !== ROUTES.login
+          }
         />
       ))}
     </Styled.LinksWrapper>

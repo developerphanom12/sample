@@ -14,6 +14,7 @@ export const Settings: FC = () => {
     isUploadingPhoto,
     isHover,
     userProfilePhoto,
+    active_account,
     onGetProfilePhoto,
     onMouseEnterHandler,
     onMouseLeaveHandler,
@@ -32,6 +33,7 @@ export const Settings: FC = () => {
         avatatSrc={userProfilePhoto}
         userFullName={fullName}
         userRole={activeAccount?.role as TRoles}
+        isActiveAccount={!!active_account}
         onUploadProfilePhotoHandler={onUploadProfilePhotoHandler}
       />
       <Outlet />

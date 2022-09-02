@@ -10,8 +10,14 @@ export const resetPasswordFormikInitialValues = {
 };
 
 export const getInputFields = (props: IGetInputFieldsProps) => {
-  const { countries, dateFormats, formatedCurrencies, funcArray, state } =
-    props;
+  const {
+    countries,
+    dateFormats,
+    formatedCurrencies,
+    funcArray,
+    state,
+    isDisabledSelect,
+  } = props;
   return [
     {
       type: 'input',
@@ -35,6 +41,7 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       type: 'select',
       name: 'select',
       label: 'Currency',
+      isDisabled: isDisabledSelect,
       value: state.currency,
       options: formatedCurrencies,
       onChangeSelect: funcArray[0],
@@ -43,6 +50,7 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       type: 'select',
       name: 'dateFormat',
       label: 'Date Format',
+      isDisabled: isDisabledSelect,
       value: state.dateFormat,
       options: dateFormats,
       onChangeSelect: funcArray[1],

@@ -1,11 +1,11 @@
 import { apiServices } from 'services/api-service';
 
 interface IUpdateUserProfile {
-  fullName: string;
-  email: string;
-  country: string;
-  currency: string;
-  date_format: string;
+  fullName?: string;
+  email?: string;
+  country?: string;
+  currency?: string;
+  date_format?: string;
 }
 
 interface IChangePassword {

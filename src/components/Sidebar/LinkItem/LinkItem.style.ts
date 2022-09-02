@@ -5,6 +5,7 @@ export const LinkItemStyles = {
   Link: styled(Link)<{
     active?: PathMatch<string> | null | string;
     is_last?: string;
+    is_disabled?: string;
   }>`
     width: 100%;
     height: 100%;
@@ -30,5 +31,7 @@ export const LinkItemStyles = {
       background: ${(props) => props.theme.colors.orange};
       color: ${(props) => props.theme.colors.white};
     }
+    pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
+    color: ${({ is_disabled, theme }) => is_disabled && theme.colors.gray};
   `,
 };

@@ -45,7 +45,7 @@ export const useMyAccountState = () => {
 
   const formatedCurrencies = getFormatedCurrencies(currencies);
   const currentCurrency = formatedCurrencies?.find(
-    (item) => item.id === currency.id
+    (item) => item?.id === currency?.id
   );
   const currentDate = DATE_FORMATS.find((item) => item.value === date_format);
   const currentCountry = countries.find((item) => item.value === user.country);
@@ -184,13 +184,20 @@ export const useMyAccountState = () => {
   ) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const payload = {
-        fullName: formikValues.fullName,
-        email: formikValues.email,
-        country: state.country.value,
-        currency: state.currency.id,
-        date_format: state.dateFormat.value,
-      };
+
+      const payload = !user.active_account
+        ? {
+            fullName: formikValues.fullName,
+            email: formikValues.email,
+            country: state.country.value,
+          }
+        : {
+            fullName: formikValues.fullName,
+            email: formikValues.email,
+            country: state.country.value,
+            currency: state.currency.id,
+            date_format: state.dateFormat.value,
+          };
       const { data } = await updateProfile(payload);
       dispatch(updateUserProfile(data));
       setIsShowSuccesPopup();
@@ -215,6 +222,7 @@ export const useMyAccountState = () => {
   });
 
   const accountsFields = getInputFields({
+    isDisabledSelect: !user.active_account ? true : false,
     countries,
     formatedCurrencies,
     dateFormats: DATE_FORMATS,
@@ -263,6 +271,7 @@ export const useMyAccountState = () => {
     isResetPassword,
     accountsFields,
     resetPasswordFields,
+    user,
     isDisableUpdateUserProfileButton,
   };
 };

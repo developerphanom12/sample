@@ -10,6 +10,7 @@ import { FieldItemStyles as Styled } from './FieldItem.style';
 
 interface IFieldItemProps {
   showPassword?: boolean;
+  isDisabled?: boolean;
   onClickShowPassword?: () => void;
   selectOptions?: IOption[];
   selectValue?: IOption | any;
@@ -32,6 +33,7 @@ export const FieldItem: FC<IFieldItemProps> = (props) => {
     selectOptions,
     selectValue,
     showPassword,
+    isDisabled,
     onClickShowPassword,
     formikMeta,
     formikProps,
@@ -61,6 +63,7 @@ export const FieldItem: FC<IFieldItemProps> = (props) => {
         <Styled.FieldWrapper>
           <Styled.Label>{labelText}</Styled.Label>
           <CustomSelect
+            isDisabled={isDisabled}
             value={selectValue}
             options={selectOptions}
             onChangeValueHandler={onChangeSelectHandler}

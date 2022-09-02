@@ -70,6 +70,7 @@ export const useSettingsState = () => {
     isUploadingPhoto,
     isHover,
     userProfilePhoto,
+    active_account,
     onGetProfilePhoto,
     onMouseEnterHandler,
     onUploadProfilePhotoHandler,

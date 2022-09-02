@@ -24,11 +24,13 @@ export const Styled = {
     isError?: boolean;
     inputHeight?: string;
     inputTheme?: string;
+    isDisabled?: boolean;
   }>`
     line-height: 1.3;
     font-size: ${(props) => props.theme.size.default};
     padding: 10px;
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.colors.lightGray : theme.colors.white};
     max-height: ${(props) => props.inputHeight || '45px'};
     min-height: 35px;
     width: 100%;

@@ -3,7 +3,7 @@ export const STRINGS = {
   dateFormat: 'Date Format',
   preferenceTitle: 'Tailor your preference ',
   buttonText: 'Continue',
-  buttonTextInbox: 'Go to inbox',
+  buttonTextInbox: 'Go to the application',
 };
 
 export const formikInitialValues = {

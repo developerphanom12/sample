@@ -26,7 +26,7 @@ const renderComponentFc = () =>
     <Provider store={store}>
       <AppTheme>
         <BrowserRouter>
-          <LinksList />
+          <LinksList isActiveAccount />
         </BrowserRouter>
       </AppTheme>
     </Provider>

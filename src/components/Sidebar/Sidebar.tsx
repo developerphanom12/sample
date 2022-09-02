@@ -15,6 +15,7 @@ interface ISideBar {
   isHover: boolean;
   onMouseEnterHandler: () => void;
   onMouseLeaveHandler: () => void;
+  isActiveAccount: boolean;
 }
 
 export const Sidebar: FC<ISideBar> = (props) => {
@@ -24,6 +25,7 @@ export const Sidebar: FC<ISideBar> = (props) => {
     avatatSrc,
     isUploadingPhoto,
     isHover,
+    isActiveAccount,
     onMouseEnterHandler,
     onMouseLeaveHandler,
     onUploadProfilePhotoHandler,
@@ -33,6 +35,7 @@ export const Sidebar: FC<ISideBar> = (props) => {
       <AvatarBox
         id="avatar"
         name="avatar"
+        isActiveAccount={isActiveAccount}
         isUploadingPhoto={isUploadingPhoto}
         userRole={userRole}
         avatarSrc={avatatSrc}
@@ -42,7 +45,7 @@ export const Sidebar: FC<ISideBar> = (props) => {
         onMouseEnterHandler={onMouseEnterHandler}
         onMouseLeaveHandler={onMouseLeaveHandler}
       />
-      <LinksList />
+      <LinksList isActiveAccount={isActiveAccount}/>
     </Styled.MainWrapper>
   );
 };

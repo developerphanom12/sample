@@ -2,6 +2,7 @@ import { add, format } from 'date-fns';
 import decode from 'jwt-decode';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
+import { IInvites } from '../screens/Invites/types/invites.types';
 import { getCompanyLogo } from '../screens/Settings/settings.api';
 
 interface IFormdataProps {
@@ -172,7 +173,12 @@ export const getUserRole = (accounts: IAccount[], active_account: string) => {
 
 export const getSelectedUser = (members: IMember[], memberId: string) => {
   if (!members.length) return;
-  return members.find((member) => member.id === memberId);
+  return members.find((member: { id: string }) => member.id === memberId);
+};
+
+export const getSelectedItems = (items: IInvites[], itemId: string) => {
+  if (!items.length) return;
+  return items?.find((el: { id: string }) => el.id === itemId);
 };
 
 export const onCreateFormDataHandler = (

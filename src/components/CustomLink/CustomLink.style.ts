@@ -3,7 +3,11 @@ import { styled } from 'app/theme';
 import { Link, PathMatch } from 'react-router-dom';
 
 export const CustomLinkStyles = {
-  Link: styled(Link)<{ active: PathMatch<string> | null; is_last?: string }>`
+  Link: styled(Link)<{
+    active: PathMatch<string> | null;
+    is_last?: string;
+    is_disabled?: string;
+  }>`
     position: relative;
     max-width: 110px;
     min-width: 80px;
@@ -27,6 +31,8 @@ export const CustomLinkStyles = {
       props.active ? props.theme.colors.white : ''};
     color: ${(props) =>
       props.active ? props.theme.colors.orange : props.theme.colors.white};
+    pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
+    color: ${({ is_disabled, theme }) => is_disabled && theme.colors.gray};
   `,
   TabsWrapper: styled.ul`
     display: flex;

@@ -24,6 +24,7 @@ interface InputProps {
   isInputDate?: boolean;
   inputType?: string;
   onFocus?: () => void;
+  isDisabled?: boolean;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
@@ -41,6 +42,7 @@ export const Input: React.FC<InputProps> = (props) => {
     placeHolder,
     isInputDate,
     inputType,
+    isDisabled,
     onChangeValue,
     onKeyDown,
     onBlur,
@@ -77,6 +79,8 @@ export const Input: React.FC<InputProps> = (props) => {
               onChange={onChangeValue}
               onKeyDown={onKeyDown}
               placeholder={placeHolder}
+              disabled={isDisabled}
+              isDisabled={isDisabled}
             />
           )}
         </>

@@ -9,11 +9,7 @@ import { Icon } from '../Icons';
 
 import { useHeaderState } from './Header.state';
 
-import {
-  ACCOUNTANT_LINKS,
-  ADMIN_LINKS,
-  CUSTOMER_LINKS,
-} from 'constants/header-links';
+import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
 
 export interface HeaderProps {
@@ -44,6 +40,7 @@ export const Header: FC<HeaderProps> = (props) => {
   useEffect(() => {
     isSwitchCompany && onSwitchCompany();
   }, [isSwitchCompany]);
+
   return (
     <Styled.Header>
       <Styled.Container>
@@ -58,23 +55,27 @@ export const Header: FC<HeaderProps> = (props) => {
         <Styled.BlocksWrapper>
           <Styled.Links>
             <Styled.LinkWrapper>
-              {!active_account
-                ? ACCOUNTANT_LINKS.map((link) => (
-                    <CustomLink key={link.title} to={link.route}>
-                      {link.title}
-                    </CustomLink>
-                  ))
-                : role === 'admin'
-                ? ADMIN_LINKS.map((link) => (
-                    <CustomLink
-                      key={link.title}
-                      to={link.route}
-                      isLast={link.isLast}
-                      tabs={link.tabs}
-                    >
-                      {link.title}
-                    </CustomLink>
-                  ))
+              {role === 'admin'
+                ? ADMIN_LINKS.map((link) => {
+                    return (
+                      <CustomLink
+                        key={link.title}
+                        to={link.route}
+                        isLast={link.isLast}
+                        tabs={link.tabs}
+                        isDisabled={
+                          !active_account &&
+                          link.route !== ROUTES.invites &&
+                          !active_account &&
+                          link.route !== ROUTES.settings
+                            ? true
+                            : false
+                        }
+                      >
+                        {link.title}
+                      </CustomLink>
+                    );
+                  })
                 : CUSTOMER_LINKS.map((link) => (
                     <CustomLink key={link.title} to={link.route}>
                       {link.title}

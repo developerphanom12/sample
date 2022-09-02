@@ -58,7 +58,7 @@ export const Dashboard: FC = () => {
               timeFilterOptions={timeFilterOptions}
               countPerTimeFilter={receipts?.count}
               onChangeCategoryFieldHandler={onChangeCategoryFieldHandler}
-              dateFormat={company.date_format}
+              dateFormat={company?.date_format}
             />
           )}
         </Styled.RightSideContentWrapper>

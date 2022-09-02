@@ -53,6 +53,11 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
           content: { ...UserModalWindowStyles.content, maxHeight: '300px' },
           overlay: UserModalWindowStyles.overlay,
         }
+      : modalFields.length === 2
+      ? {
+          content: { ...UserModalWindowStyles.content, maxHeight: '370px' },
+          overlay: UserModalWindowStyles.overlay,
+        }
       : UserModalWindowStyles;
 
   const fields =

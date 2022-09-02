@@ -39,6 +39,8 @@ import {
   SETTINGS_INITIAL_STATE,
 } from 'screens/Settings/reducer/settings.reducer';
 import { ISETTINGS_INITIAL_STATE } from 'screens/Settings/types/settings.types';
+import { IINVITES_INITIAL_STATE } from 'screens/Invites/types/invites.types';
+import { InvitesReducer } from 'screens/Invites/reducer/invites.reducer';
 
 export const persistConfig = {
   key: 'root',
@@ -64,6 +66,7 @@ export interface IState {
   master: IMASTER_INITIAL_STATE;
   receiptDetails: IRECEIPT_DETAILS_INITIAL_STATE;
   settings: ISETTINGS_INITIAL_STATE;
+  invites: IINVITES_INITIAL_STATE;
 }
 
 const combineReducer = combineReducers<IState>({
@@ -75,6 +78,7 @@ const combineReducer = combineReducers<IState>({
   master: MasterReducer,
   receiptDetails: ReceiptDetailsReducer,
   settings: SettingsReducer,
+  invites: InvitesReducer,
 });
 
 export type combineReducerType = ReturnType<typeof combineReducer>;

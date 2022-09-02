@@ -14,6 +14,7 @@ const setupFc = () => {
   const { getByRole, getByText, getByTestId, queryByTestId } = render(
     <AppTheme>
       <AvatarBox
+        isActiveAccount
         onMouseEnterHandler={onMouseEnterHandler}
         userFullName="Test User"
         id="avatar"

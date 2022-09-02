@@ -16,8 +16,8 @@ export const HeaderStyles = {
   LogoIconWrapper: styled.div`
     display: flex;
     align-items: center;
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
     margin-top: 8px;
     margin-right: 5px;
     overflow: hidden;
@@ -38,6 +38,12 @@ export const HeaderStyles = {
     display: flex;
     justify-content: space-between;
     width: 75%;
+    @media (max-width: 1278px) {
+      width: 80%;
+    }
+    @media (max-width: 1200px) {
+      width: 85%;
+    }
     @media (max-width: 810px) {
       width: 100%;
     }

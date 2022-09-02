@@ -27,7 +27,6 @@ export const Preference: FC = () => {
     locationState,
   } = usePreferenceState();
 
-
   return (
     <Styled.MainWrapper>
       <AuthImageSection />
@@ -46,15 +45,18 @@ export const Preference: FC = () => {
               text="Company Name"
               onChangeValue={formik.handleChange}
               onBlur={formik.handleBlur}
+              isDisabled={isChecked}
             />
             <Styled.SubTitle>{STRINGS.currency}</Styled.SubTitle>
             <CustomSelect
+              isDisabled={isChecked}
               options={formatedCurrencies}
               onChangeValueHandler={onChangeCurrencyHandler}
               value={selectedCurrencyValue}
             />
             <Styled.SubTitle>{STRINGS.dateFormat}</Styled.SubTitle>
             <CustomSelect
+              isDisabled={isChecked}
               options={DATE_FORMATS}
               onChangeValueHandler={onChangeDateFormatHandler}
               value={selectedFormatDate}
@@ -63,7 +65,7 @@ export const Preference: FC = () => {
               <Styled.CheckBoxWrapper>
                 <CheckboxItem
                   isChecked={isChecked}
-                  labelText="I am an accountant"
+                  labelText="Skip onboarding"
                   onChange={onChangeIamAccountantHandler}
                 />
               </Styled.CheckBoxWrapper>

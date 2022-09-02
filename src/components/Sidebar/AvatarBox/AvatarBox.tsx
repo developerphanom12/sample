@@ -15,6 +15,7 @@ interface IAvatarBoxProps {
   userRole: TRoles;
   isUploadingPhoto: boolean;
   isHover: boolean;
+  isActiveAccount: boolean;
   onMouseEnterHandler: () => void;
   onMouseLeaveHandler: () => void;
 }
@@ -28,6 +29,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
     avatarSrc,
     userRole,
     isHover,
+    isActiveAccount,
     onMouseEnterHandler,
     onMouseLeaveHandler,
     onChangeAvatarHandler,
@@ -62,9 +64,11 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
       </Styled.ContentWrapper>
       <Styled.UserInfoWrapper>
         <Styled.NameAndStatus>{userFullName}</Styled.NameAndStatus>
-        <Styled.NameAndStatus isStatus>
-          {getFirstLetterUppercase(userRole)}
-        </Styled.NameAndStatus>
+        {isActiveAccount && (
+          <Styled.NameAndStatus isStatus>
+            {getFirstLetterUppercase(userRole)}
+          </Styled.NameAndStatus>
+        )}
       </Styled.UserInfoWrapper>
     </Styled.MainWrapper>
   );

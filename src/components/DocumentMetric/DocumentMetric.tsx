@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ICompanyDashboard } from 'screens/Dashboard/types';
 import { getFormattedDate } from 'services/utils';
+import { DATE_FORMATS } from '../../constants/strings';
 
 import { CompanySwitcherLogo } from '../CompanySwitcherLogo';
 
@@ -25,21 +26,27 @@ export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
         <Styled.CompaniesTitle>Company(s)</Styled.CompaniesTitle>
         <Styled.CompaniesWrapper>
           {companies?.map(({ company, company_owner }) => (
-            <Styled.CompanyItemWrapper data-testid='company-item' key={company.id}>
+            <Styled.CompanyItemWrapper
+              data-testid="company-item"
+              key={company.id}
+            >
               <Styled.CompanyInfoLeftBlock>
                 <CompanySwitcherLogo
-                  companyName={company.name}
-                  companyLogoSrc={company.logo}
+                  companyName={company?.name}
+                  companyLogoSrc={company?.logo}
                 />
-                <Styled.CompanyName>{company.name}</Styled.CompanyName>
+                <Styled.CompanyName>{company?.name}</Styled.CompanyName>
               </Styled.CompanyInfoLeftBlock>
               <Styled.CompanyInfoRightBlock>
                 <Styled.CompanyInfo>
                   {`Created on: `}
-                  {getFormattedDate(company.created, company.date_format)}
+                  {getFormattedDate(
+                    company?.created,
+                    company?.date_format || DATE_FORMATS[3].value
+                  )}
                 </Styled.CompanyInfo>
                 <Styled.CompanyInfo>
-                  Created by: {company_owner.name}
+                  Created by: {company_owner?.name}
                 </Styled.CompanyInfo>
               </Styled.CompanyInfoRightBlock>
             </Styled.CompanyItemWrapper>
