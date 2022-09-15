@@ -6,25 +6,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'hooks/useDebounce';
 import { useToggle } from 'hooks/useToggle';
 
-import { myAccountValidationScheme } from 'services/validation';
+import { createCompanyInvitationScheme } from 'services/validation';
 import { IState } from 'services/redux/reducer';
 import {
   getFirstLetterUppercase,
   getSelectedItems,
-  getSelectedUser,
   getUserRole,
 } from 'services/utils';
 
-import { USER_ROLES } from 'constants/strings';
 import {
   formikInitialValues,
-  getInputFields,
   INVITES_INITIAL_STATE,
 } from './invites.constants';
 import { IInvitesState } from './types/invites.types';
-import { getCompanyInvitation } from './invites.api';
+import {
+  deleteCompanyInvitation,
+  getCompanyInvitation,
+  updateCompanyInvitation,
+} from './invites.api';
 import { setInvites } from './reducer/invites.reducer';
-import { createCompanyMember } from '../Settings/settings.api';
+import {
+  createCompanyMember,
+  resendInvitation,
+} from '../Settings/settings.api';
 
 export const useInvitesState = () => {
   const dispatch = useDispatch();
@@ -52,6 +56,7 @@ export const useInvitesState = () => {
     onModalWindowToggle();
     setIsEdit(false);
     onChangeStateFieldHandler('role', null);
+    state.isChecked && onChangeStateFieldHandler('isChecked', false);
     formik.resetForm();
   };
 
@@ -78,16 +83,18 @@ export const useInvitesState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       const { data } = await getCompanyInvitation(params);
-      state.isSearching && state.isFocus
+
+      state.isContentLoading && state.isFocus
         ? onChangeStateFieldHandler('searchedInvites', data.data)
         : dispatch(setInvites({ count: data.count, invites: data.data }));
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
         isLoading: false,
-        isFetchingData: false,
         isContentLoading: false,
+        isHeaderPanel: true,
         isEmptyData: data.count ? false : true,
+        isFetchingData: false,
       }));
     } catch (error) {
       setState((prevState) => ({
@@ -197,7 +204,6 @@ export const useInvitesState = () => {
       ...prevState,
       searchValue: event.target.value,
       isContentLoading: true,
-      isSearching: true,
     }));
   };
 
@@ -207,7 +213,7 @@ export const useInvitesState = () => {
       isEdit
         ? onEditInviteHandler(values)
         : onSendInviteToCreateCompanyHandler(values),
-    validationSchema: myAccountValidationScheme.fields.email,
+    validationSchema: createCompanyInvitationScheme,
     validateOnBlur: true,
   });
 
@@ -226,9 +232,20 @@ export const useInvitesState = () => {
     formik.setValues({
       email: selectedInvite?.email || '',
     });
-
     setIsEdit(true);
-
+    setState((prevState) => ({
+      ...prevState,
+      role: {
+        label: getFirstLetterUppercase(selectedInvite?.members[0].role || ''),
+        value: selectedInvite?.members[0].role || '',
+      },
+      prevRole: {
+        label: getFirstLetterUppercase(selectedInvite?.members[0].role || ''),
+        value: selectedInvite?.members[0].role || '',
+      },
+      prevEmail: selectedInvite?.email || '',
+      selectedItemId: itemId,
+    }));
     onModalWindowToggle();
   };
 
@@ -236,7 +253,8 @@ export const useInvitesState = () => {
     try {
       count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
-
+      await deleteCompanyInvitation(state.selectedItemId);
+      await onGetAllCompanyInvitationsHandler();
       onChangePage({ selected: state.currentPage });
       onChangeStateFieldHandler('isLoading', false);
       onDeleteModalWindowToggle();
@@ -253,14 +271,20 @@ export const useInvitesState = () => {
       const payload = {
         role: state.role?.value || '',
         email: values.email,
+        isResendEmail: state.isChecked ? true : false,
       };
+      await updateCompanyInvitation(payload, state.selectedItemId);
+      await onGetAllCompanyInvitationsHandler();
       onChangeStateFieldHandler('isLoading', false);
+      state.isChecked && onChangeStateFieldHandler('isChecked', false);
       setIsEdit(false);
       formik.resetForm();
       onModalWindowToggle();
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);
+      state.isChecked && onChangeStateFieldHandler('isChecked', false);
       setIsEdit(false);
+      onChangeStateFieldHandler('role', { label: '', value: '' });
       formik.resetForm();
       onModalWindowToggle();
       console.log(error);
@@ -281,43 +305,58 @@ export const useInvitesState = () => {
       onGetAllCompanyInvitationsHandler();
       onModalWindowToggle();
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('role', null);
       setIsSentSuccessPopup();
       formik.resetForm();
     } catch (error) {
-      console.log('aaa');
-
       onModalWindowToggle();
       formik.resetForm();
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('role', null);
       console.log(error);
     }
   };
 
-  const onResendInvitationHandler = async (token: string) => {};
+  const onResendInvitationHandler = async (inviteId: string) => {
+    try {
+      await resendInvitation(inviteId);
+      const { data } = await getCompanyInvitation();
+      dispatch(setInvites({ count: data.count, invites: data.data }));
+      setIsResendSuccessPopup();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onFocusSearchHandler = () => onChangeStateFieldHandler('isFocus', true);
   const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);
 
-  const modalFields = getInputFields({
-    options: [USER_ROLES.slice(0, 3)],
-    state: { role: state.role },
-    onChangeSelectHandler: onChangeRoleValueHandler,
-  });
+  const onChangeCheckBoxHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => onChangeStateFieldHandler('isChecked', event.target.checked);
 
-  const isDisableButton = false;
+  const isDisableButton = isEdit
+    ? (state.prevRole?.value === state.role?.value &&
+        state.prevEmail === formik.values.email) ||
+      !formik.isValid
+    : !formik.isValid ||
+      !formik.values.email ||
+      !formik.dirty ||
+      !state.role?.value;
 
   return {
     ...state,
     userRole,
     isEdit,
     count,
-    modalFields,
     formik,
     result,
     debouncedValue,
     isModalWindowOpen,
     isDeleteModalWindowOpen,
     isDisableButton,
+    onChangeRoleValueHandler,
+    onChangeCheckBoxHandler,
     onResendInvitationHandler,
     onChangePage,
     onEditInviteHandler,

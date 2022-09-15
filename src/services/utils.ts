@@ -2,8 +2,8 @@ import { add, format } from 'date-fns';
 import decode from 'jwt-decode';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
-import { IInvites } from '../screens/Invites/types/invites.types';
-import { getCompanyLogo } from '../screens/Settings/settings.api';
+import { IInvites } from 'screens/Invites/types/invites.types';
+import { getCompanyLogo } from 'screens/Settings/settings.api';
 
 interface IFormdataProps {
   currency?: string;
@@ -26,6 +26,15 @@ export const dateDiffInDays = (a: Date, b: Date) => {
 
   return Math.floor((utc1 - utc2) / _MS_PER_DAY);
 };
+
+export const getInvitationStatus = (diffInDays: number | null) =>
+  (diffInDays && diffInDays >= 1) || diffInDays === 0
+    ? 'Resend invitation'
+    : diffInDays && diffInDays === -1
+    ? 'Active since (1 day)'
+    : diffInDays && diffInDays === -2
+    ? 'Active since (2 days)'
+    : 'Waiting for approval';
 
 export const getFilteredMembers = (members: IMember[]) =>
   members?.filter((member) => !member.memberInvite);

@@ -88,6 +88,10 @@ export const myAccountValidationScheme = Yup.object().shape({
   email: emailValidation,
 });
 
+export const createCompanyInvitationScheme = Yup.object().shape({
+  email: emailValidation,
+});
+
 export const resetPasswordValidationScheme = Yup.object().shape({
   currentPassword: resetCurrentPasswordValidation,
   newPassword: passwordValidation,

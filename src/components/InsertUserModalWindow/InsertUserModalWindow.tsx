@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { FieldInputProps, FieldMetaProps } from 'formik';
 import ReactModal from 'react-modal';
 
@@ -21,92 +21,94 @@ interface InsertUserModalWindowProps
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
   modalFields: TInputFields;
   isEdit: boolean;
+  isUserList: boolean;
   isInvitation: boolean;
 }
 
-export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
-  props
-) => {
-  const {
-    headerText,
-    isLoading,
-    isModalWindowOpen,
-    onCloseModalWindowHandler,
-    onEnterCreateItemClick,
-    onSaveButtonCLickHandler,
-    isDisableButton,
-    formikMeta,
-    formikProps,
-    modalFields,
-    isEdit,
-    isInvitation,
-  } = props;
+export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = memo(
+  (props) => {
+    const {
+      headerText,
+      isUserList,
+      isLoading,
+      isModalWindowOpen,
+      onCloseModalWindowHandler,
+      onEnterCreateItemClick,
+      onSaveButtonCLickHandler,
+      isDisableButton,
+      formikMeta,
+      formikProps,
+      modalFields,
+      isEdit,
+      isInvitation,
+    } = props;
 
-  const modalStyles =
-    (isEdit && isInvitation) || modalFields.length === 3
-      ? {
-          content: { ...UserModalWindowStyles.content, maxHeight: '450px' },
-          overlay: UserModalWindowStyles.overlay,
-        }
-      : isEdit && !isInvitation
-      ? {
-          content: { ...UserModalWindowStyles.content, maxHeight: '300px' },
-          overlay: UserModalWindowStyles.overlay,
-        }
-      : modalFields.length === 2
-      ? {
-          content: { ...UserModalWindowStyles.content, maxHeight: '370px' },
-          overlay: UserModalWindowStyles.overlay,
-        }
-      : UserModalWindowStyles;
+    const modalStyles =
+      (isEdit && isInvitation && isUserList) || modalFields.length === 3
+        ? {
+            content: { ...UserModalWindowStyles.content, maxHeight: '450px' },
+            overlay: UserModalWindowStyles.overlay,
+          }
+        : isEdit && !isInvitation && isUserList
+        ? {
+            content: { ...UserModalWindowStyles.content, maxHeight: '300px' },
+            overlay: UserModalWindowStyles.overlay,
+          }
+        : modalFields.length === 2
+        ? {
+            content: { ...UserModalWindowStyles.content, maxHeight: '370px' },
+            overlay: UserModalWindowStyles.overlay,
+          }
+        : UserModalWindowStyles;
 
-  const fields =
-    isEdit && isInvitation
-      ? modalFields.slice(0, 3)
-      : isEdit && !isInvitation
-      ? modalFields.slice(2, 3)
-      : modalFields;
+    const fields =
+      isEdit && isInvitation && isUserList
+        ? modalFields.slice(0, 3)
+        : isEdit && !isInvitation && isUserList
+        ? modalFields.slice(2, 3)
+        : modalFields;
 
-  return (
-    <ReactModal
-      isOpen={isModalWindowOpen}
-      onRequestClose={onCloseModalWindowHandler}
-      ariaHideApp={false}
-      style={modalStyles}
-    >
-      <ModalWindowHeader
-        headerTitle={headerText}
-        onCloseButtonHandler={onCloseModalWindowHandler}
-      />
-      <Styled.Content>
-        <Styled.Form onSubmit={onSaveButtonCLickHandler}>
-          <Styled.InputsWrapper>
-            {fields.map((input) => (
-              <ModalInputs
-                selectValue={input.value}
-                label={input.label}
-                key={input.name}
-                inputName={input.name}
-                isMulti={input.isMulti}
-                inputType={input.type}
-                formikMeta={formikMeta}
-                formikProps={formikProps}
-                onEnterCreateItemClick={onEnterCreateItemClick}
-                options={input.options}
-                onChangeSelectHandler={input.onChangeSelect}
-              />
-            ))}
-          </Styled.InputsWrapper>
-          <ModalButtonsBox
-            isLoading={isLoading}
-            onCancelClickHandler={onCloseModalWindowHandler}
-            onSaveButtonCLickHandler={onSaveButtonCLickHandler}
-            isSaveButton
-            isNoPadding
-            isDisableButton={isDisableButton}
-          />
-        </Styled.Form>
-      </Styled.Content>
-    </ReactModal>
-  );
-};
+    return (
+      <ReactModal
+        isOpen={isModalWindowOpen}
+        onRequestClose={onCloseModalWindowHandler}
+        ariaHideApp={false}
+        style={modalStyles}
+      >
+        <ModalWindowHeader
+          headerTitle={headerText}
+          onCloseButtonHandler={onCloseModalWindowHandler}
+        />
+        <Styled.Content>
+          <Styled.Form onSubmit={onSaveButtonCLickHandler}>
+            <Styled.InputsWrapper>
+              {fields.map((input) => (
+                <ModalInputs
+                  selectValue={input.value}
+                  label={input.label}
+                  key={input.name}
+                  inputName={input.name}
+                  isMulti={input.isMulti}
+                  inputType={input.type}
+                  formikMeta={formikMeta}
+                  formikProps={formikProps}
+                  onEnterCreateItemClick={onEnterCreateItemClick}
+                  options={input.options}
+                  onChangeSelectHandler={input.onChangeSelect}
+                />
+              ))}
+            </Styled.InputsWrapper>
+            <ModalButtonsBox
+              isLoading={isLoading}
+              onCancelClickHandler={onCloseModalWindowHandler}
+              onSaveButtonCLickHandler={onSaveButtonCLickHandler}
+              isSaveButton
+              isNoPadding
+              isDisableButton={isDisableButton}
+            />
+          </Styled.Form>
+        </Styled.Content>
+      </ReactModal>
+    );
+  }
+);

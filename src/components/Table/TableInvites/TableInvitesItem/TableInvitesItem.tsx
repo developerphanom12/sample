@@ -1,12 +1,18 @@
 import { FC } from 'react';
 
-import { getFirstLetterUppercase, getFormattedDate } from 'services/utils';
+import {
+  dateDiffInDays,
+  getFirstLetterUppercase,
+  getFormattedDate,
+  getInvitationStatus,
+} from 'services/utils';
 
 import { Icon } from '../../../Icons';
 
 import { TableInvitesItemStyles as Styled } from './TableInvitesItem.style';
 
 import { DATE_FORMATS } from 'constants/strings';
+import { useTableInvitesItemState } from './useTableInvitesItem.state';
 
 interface ITableInviteItem {
   createdAt: string;
@@ -15,29 +21,44 @@ interface ITableInviteItem {
   creatorRole: string;
   creatorId: string;
   inviteEmail: string;
-  userRole: any;
-  onDeleteIconClickHandler: (itemId: string) => void;
-  onEditIconClickHandler: (itemId: string) => void;
+  onDeleteIconClickHandler: (inviteId: string) => void;
+  onEditIconClickHandler: (inviteId: string) => void;
+  onResendInvitationHandler: (inviteId: string) => void;
 }
 export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
   const {
     createdAt,
     createdBy,
     creatorId,
+    onResendInvitationHandler,
     creatorRole,
     inviteId,
     inviteEmail,
-    userRole,
     onDeleteIconClickHandler,
     onEditIconClickHandler,
   } = props;
+
+  const {
+    onClickDeleteIconHandler,
+    onClickEditIconHandler,
+    onClickResendInviteHandler,
+  } = useTableInvitesItemState({
+    inviteId,
+    onDeleteIconClickHandler,
+    onResendInvitationHandler,
+    onEditIconClickHandler,
+  });
+
+  const diffInDays = dateDiffInDays(new Date(), new Date(createdAt));
+  const invitationStatus = getInvitationStatus(diffInDays);
+  const isExpired = invitationStatus === 'Resend invitation';
   return (
     <Styled.Item>
       <Styled.Action>
-        <Styled.ActionButton onClick={() => onEditIconClickHandler(inviteId)}>
+        <Styled.ActionButton onClick={onClickEditIconHandler}>
           <Icon type="edit" />
         </Styled.ActionButton>
-        <Styled.ActionButton onClick={() => onDeleteIconClickHandler(inviteId)}>
+        <Styled.ActionButton onClick={onClickDeleteIconHandler}>
           <Icon type="remove" />
         </Styled.ActionButton>
       </Styled.Action>
@@ -47,7 +68,18 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
       <Styled.Column>
         {getFirstLetterUppercase(creatorRole || '')}
       </Styled.Column>
-      <Styled.Column>{'Active since (2 days)'}</Styled.Column>
+      <Styled.Column>
+        {isExpired ? (
+          <Styled.TextWrapper
+            isExpired={isExpired}
+            onClick={onClickResendInviteHandler}
+          >
+            Resend invitation
+          </Styled.TextWrapper>
+        ) : (
+          <Styled.TextWrapper>{invitationStatus}</Styled.TextWrapper>
+        )}
+      </Styled.Column>
       <Styled.Column>
         {getFormattedDate(createdAt, DATE_FORMATS[0].value)}
       </Styled.Column>

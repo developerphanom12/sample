@@ -63,7 +63,8 @@ export const useUserListState = () => {
   const onModalWindowCancelClickButtonHandler = () => {
     onModalWindowToggle();
     setIsEdit(false);
-    onChangeStateFieldHandler('role', null);
+    onChangeStateFieldHandler('role', { value: '', label: '' });
+    onChangeStateFieldHandler('companies', null);
     onChangeStateFieldHandler('isInvitation', false);
     formik.resetForm();
   };
@@ -349,19 +350,25 @@ export const useUserListState = () => {
       onGetAllCompanyMembersHandler();
       onModalWindowToggle();
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('role', { value: '', label: '' });
+      onChangeStateFieldHandler('companies', null);
       setIsSentSuccessPopup();
       formik.resetForm();
     } catch (error) {
       onModalWindowToggle();
       formik.resetForm();
+      onChangeStateFieldHandler('role', { value: '', label: '' });
+      onChangeStateFieldHandler('companies', null);
       onChangeStateFieldHandler('isLoading', false);
       console.log(error);
     }
   };
 
-  const onResendInvitationHandler = async (token: string) => {
+  const onResendInvitationHandler = async (inviteId: string) => {
     try {
-      await resendInvitation(token);
+      await resendInvitation(inviteId);
+      const { data } = await getCompanyMembers();
+      dispatch(setMembers({ count: data.count, members: data.data }));
       setIsResendSuccessPopup();
     } catch (error) {
       console.log(error);
@@ -395,7 +402,7 @@ export const useUserListState = () => {
         !formik.values.fullName ||
         !formik.dirty ||
         !state.role?.value ||
-        !state.companies.length;
+        !state.companies?.length;
 
   return {
     ...state,

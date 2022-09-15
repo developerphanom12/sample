@@ -101,6 +101,7 @@ export const UsersList: FC = () => {
         deleteItemName={`user ${selectedUserName}`}
         isEdit={isEdit}
         isInvitation={isInvitation}
+        isUserList
       />
       {(isResentSuccessPopup || isSentSuccessPopup) && (
         <Styled.SuccessPopupWrapper>

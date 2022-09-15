@@ -19,6 +19,7 @@ interface IUserListModalBoxProps
   modalFields: TInputFields;
   isEdit: boolean;
   isInvitation: boolean;
+  isUserList: boolean;
 }
 export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
   const {
@@ -28,6 +29,7 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
     isLoading,
     isModalWindowOpen,
     isDisableButton,
+    isUserList,
     onCloseModalWindowHandler,
     onDeleteButtonClickHandler,
     formikMeta,
@@ -55,6 +57,7 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
         formikProps={formikProps}
         isEdit={isEdit}
         isInvitation={isInvitation}
+        isUserList={isUserList}
       />
       <DeleteModalWindow
         isLoading={isLoading}

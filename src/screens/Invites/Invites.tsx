@@ -4,9 +4,10 @@ import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
 import { TableInvites } from 'components/Table/TableInvites';
 import { PaginationPanel } from 'components/PaginationPanel';
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
-import { InsertUserModalWindow } from 'components/InsertUserModalWindow';
 import { LoaderComponent } from 'components/Loader';
 import { EmptyData } from 'components/EmptyData';
+import { InviteCompanyOwnerModalWindow } from 'components/InviteCompanyOwnerModalWindow';
+import { SuccessPopup } from 'components/SuccessPopup';
 
 import { InvitesStyles as Styled } from './Invites.style';
 import { useInvitesState } from './Invites.state';
@@ -32,8 +33,6 @@ export const Invites = () => {
     onChangeItemsPerPage,
     onGoToClick,
     userRole,
-    onSendInviteToCreateCompanyHandler,
-    onEditInviteHandler,
     onClickDeleteInviteButton,
     selectedEmail,
     itemsPerPage,
@@ -46,14 +45,18 @@ export const Invites = () => {
     debouncedValue,
     isContentLoading,
     isFocus,
-    modalFields,
     count,
     isFetchingData,
     isDisableButton,
     isEmptyData,
     isSentSuccessPopup,
     isResentSuccessPopup,
+    isHeaderPanel,
+    isChecked,
     role,
+    prevEmail,
+    onChangeRoleValueHandler,
+    onChangeCheckBoxHandler,
     setIsSentSuccessPopup,
     setIsResendSuccessPopup,
     onChangePage,
@@ -98,27 +101,45 @@ export const Invites = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onClickDeleteInviteButton}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`invite ${selectedEmail}`}
+        deleteItemName={`invite to ${selectedEmail}`}
       />
-      <InsertUserModalWindow
-        modalFields={modalFields}
+      <InviteCompanyOwnerModalWindow
         isLoading={isLoading}
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onSaveButtonCLickHandler={formik.handleSubmit}
         onEnterCreateItemClick={onEnterCreatetInvite}
         isModalWindowOpen={isModalWindowOpen}
-        headerText="Create invitation"
+        headerText={isEdit ? 'Edit invitation' : 'Create invitation'}
         formikMeta={formik.getFieldMeta}
         formikProps={formik.getFieldProps}
         isEdit={isEdit}
-        isInvitation={false}
+        handleChange={formik.handleChange}
+        onChangeCheckBoxHandler={onChangeCheckBoxHandler}
+        onChangeRoleValueHandler={onChangeRoleValueHandler}
+        isChecked={isChecked}
+        selectValue={role}
+        isCheckboxField={isEdit && formik.values.email !== prevEmail}
       />
-      {!result?.length &&
-      !searchValue &&
-      !isFetchingData &&
-      !isContentLoading &&
-      isEmptyData ? (
+      {(isResentSuccessPopup || isSentSuccessPopup) && (
+        <Styled.SuccessPopupWrapper>
+          <SuccessPopup
+            titleText={
+              isResentSuccessPopup
+                ? 'Invitation resent successfully'
+                : 'Invitation sent successfully'
+            }
+          />
+        </Styled.SuccessPopupWrapper>
+      )}
+      {isFetchingData ? (
+        <Styled.LoaderWrapper>
+          <LoaderComponent theme="preview" />
+        </Styled.LoaderWrapper>
+      ) : !searchValue &&
+        !isFetchingData &&
+        !isContentLoading &&
+        isEmptyData ? (
         <EmptyData
           isUploadFile={false}
           buttonText="Create your invitation"
@@ -128,50 +149,53 @@ export const Invites = () => {
           onClick={onModalWindowToggleHandler}
         />
       ) : (
-        <Styled.ContentWrapper>
-          <HeaderPanelMaster
-            onBlurHandler={onBlurHandler}
-            onFocusSearchHandler={onFocusSearchHandler}
-            onChangeSearchValueHandler={onChangeSearchValueHandler}
-            searchValue={searchValue}
-            onAddClickButtonHandler={onModalWindowToggleHandler}
-            isGuard={false}
-            isButton
-            userRole={userRole}
-          />
-          {isContentLoading && isFocus ? (
-            <Styled.LoaderWrapper>
-              <LoaderComponent theme="preview" />
-            </Styled.LoaderWrapper>
-          ) : !isFetchingData && !isContentLoading ? (
-            <>
-              <TableInvites
-                onResendInvitationHandler={onResendInvitationHandler}
-                searchValue={searchValue}
-                searchedInvites={searchedInvites}
-                invites={result}
-                userRole={userRole}
-                onEditIconClickHandler={onEditIconClickHandler}
-                onDeleteIconClickHandler={onDeleteIconClickHandler}
-              />
-              {isPaginationPanel ? (
-                <PaginationPanel
-                  pages={pages}
-                  currentPage={currentPage}
-                  onChangePage={onChangePage}
-                  onChangeInputValue={onChangeInputValue}
-                  onForwardClick={onForwardClick}
-                  onBackwardClick={onBackwardClick}
-                  onEnterGoToClick={onEnterGoToClick}
-                  onChangeReceiptsPerPage={onChangeItemsPerPage}
-                  receiptsPerPage={itemsPerPage}
-                  inputPaginationValue={inputPaginationValue}
-                  onGoToClick={onGoToClick}
+        !isFetchingData &&
+        isHeaderPanel && (
+          <Styled.ContentWrapper>
+            <HeaderPanelMaster
+              onBlurHandler={onBlurHandler}
+              onFocusSearchHandler={onFocusSearchHandler}
+              onChangeSearchValueHandler={onChangeSearchValueHandler}
+              searchValue={searchValue}
+              onAddClickButtonHandler={onModalWindowToggleHandler}
+              isGuard={false}
+              isButton
+              userRole={userRole}
+            />
+            {isContentLoading && isFocus ? (
+              <Styled.LoaderWrapper>
+                <LoaderComponent theme="preview" />
+              </Styled.LoaderWrapper>
+            ) : !isFetchingData && !isContentLoading ? (
+              <>
+                <TableInvites
+                  onResendInvitationHandler={onResendInvitationHandler}
+                  searchValue={searchValue}
+                  searchedInvites={searchedInvites}
+                  invites={result}
+                  userRole={userRole}
+                  onEditIconClickHandler={onEditIconClickHandler}
+                  onDeleteIconClickHandler={onDeleteIconClickHandler}
                 />
-              ) : null}
-            </>
-          ) : null}
-        </Styled.ContentWrapper>
+                {isPaginationPanel ? (
+                  <PaginationPanel
+                    pages={pages}
+                    currentPage={currentPage}
+                    onChangePage={onChangePage}
+                    onChangeInputValue={onChangeInputValue}
+                    onForwardClick={onForwardClick}
+                    onBackwardClick={onBackwardClick}
+                    onEnterGoToClick={onEnterGoToClick}
+                    onChangeReceiptsPerPage={onChangeItemsPerPage}
+                    receiptsPerPage={itemsPerPage}
+                    inputPaginationValue={inputPaginationValue}
+                    onGoToClick={onGoToClick}
+                  />
+                ) : null}
+              </>
+            ) : null}
+          </Styled.ContentWrapper>
+        )
       )}
     </Styled.Section>
   );

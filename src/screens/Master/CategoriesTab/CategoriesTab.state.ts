@@ -239,6 +239,7 @@ export const useCategoriesTabState = () => {
       skipReceipts: selected * Number(state.itemsPerPage.value),
       isContentLoading: true,
     }));
+
     onGetAllCategoriesHandler({
       take: Number(state.itemsPerPage.value),
       skip: selected * Number(state.itemsPerPage.value),

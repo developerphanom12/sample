@@ -8,12 +8,13 @@ export interface IInvitesState extends IPaginationState {
   searchedInvites: IInvites[];
   role: IOption | null;
   prevRole: IOption | null;
-  companies: IOption[];
   isFetchingData: boolean;
   selectedEmail: string;
   prevName: string;
   prevEmail: string;
   isEmptyData: boolean;
+  isHeaderPanel: boolean;
+  isChecked: boolean;
 }
 export interface IgetInputFieldsProps {
   options: IOption[][];

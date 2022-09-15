@@ -19,33 +19,15 @@ export const INVITES_INITIAL_STATE = {
   searchedInvites: [],
   isFetchingData: true,
   role: null,
-  companies: [],
   prevRole: null,
   selectedEmail: '',
   prevName: '',
   prevEmail: '',
   isEmptyData: true,
+  isHeaderPanel: false,
+  isChecked: false,
 };
 
 export const formikInitialValues = {
   email: '',
-};
-
-export const getInputFields = (props: IgetInputFieldsProps) => {
-  const { options, onChangeSelectHandler, state } = props;
-  return [
-    {
-      type: 'input',
-      label: 'Email',
-      name: 'email',
-    },
-    {
-      type: 'select',
-      name: 'select',
-      label: 'Your role in company',
-      value: state.role,
-      options: options[0],
-      onChangeSelect: onChangeSelectHandler,
-    },
-  ];
 };

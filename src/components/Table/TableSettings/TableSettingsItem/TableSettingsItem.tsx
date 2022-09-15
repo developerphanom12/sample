@@ -4,6 +4,7 @@ import {
   dateDiffInDays,
   getFirstLetterUppercase,
   getFormattedDate,
+  getInvitationStatus,
 } from 'services/utils';
 
 import { Icon } from 'components/Icons/Icons';
@@ -64,13 +65,7 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
 
   const invitationStatus = !memberInvitation
     ? 'Accepted'
-    : (diffInDays && diffInDays >= 1) || diffInDays === 0
-    ? 'Resend invitation'
-    : diffInDays && diffInDays === -1
-    ? 'Active since (1 day)'
-    : diffInDays && diffInDays === -2
-    ? 'Active since (2 days)'
-    : 'Waiting for approval';
+    : getInvitationStatus(diffInDays);
 
   const isExpired = invitationStatus === 'Resend invitation';
 

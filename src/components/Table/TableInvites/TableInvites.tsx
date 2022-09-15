@@ -23,7 +23,6 @@ export const TableInvites: FC<ITableInvites> = (props) => {
     onResendInvitationHandler,
     searchValue,
     searchedInvites,
-    userRole,
   } = props;
   return (
     <>
@@ -55,7 +54,7 @@ export const TableInvites: FC<ITableInvites> = (props) => {
             creatorRole={invite?.members[0]?.role}
             creatorId={invite?.members[0]?.id}
             inviteEmail={invite.email}
-            userRole={userRole}
+            onResendInvitationHandler={onResendInvitationHandler}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
           />
@@ -74,7 +73,7 @@ export const TableInvites: FC<ITableInvites> = (props) => {
             creatorRole={invite?.members[0]?.role}
             creatorId={invite?.members[0]?.id}
             inviteEmail={invite.email}
-            userRole={userRole}
+            onResendInvitationHandler={onResendInvitationHandler}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
           />
