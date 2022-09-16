@@ -15,7 +15,6 @@ export const Inbox: FC = () => {
   const {
     onSelectFilesHandler,
     onFetchReceiptsHandler,
-    onChangeIsVisitedHandler,
     onChangeStatusValueHandler,
     onChangeSearchValueHandler,
     onChangeDate,
@@ -71,6 +70,7 @@ export const Inbox: FC = () => {
     count,
     datePickerRef,
     active_account,
+    onCloseModalWindowHandler,
     onClickOutsideDatePickerHandler,
     onChangePagesAmount,
     onDownloadExcelFileHandler,
@@ -101,7 +101,7 @@ export const Inbox: FC = () => {
         csvData={csvData}
         excelRef={excelRef}
         excelUrl={excelUrl}
-        onCloseModalWindowHandler={onEmailModalWindowToggle}
+        onCloseModalWindowHandler={onCloseModalWindowHandler}
         isModalWindowOpen={isEmailModalWindowOpen}
         onFormHandleSubmit={formik.handleSubmit}
         formikProps={formik.getFieldProps}

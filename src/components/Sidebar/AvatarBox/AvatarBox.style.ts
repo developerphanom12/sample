@@ -1,4 +1,4 @@
-import { styled, Z_INDEX } from 'app/theme';
+import { styled, Z_INDEX } from 'styles/theme';
 
 export const HoverUploadLogo = styled.div`
   display: block;

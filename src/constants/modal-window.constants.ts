@@ -1,4 +1,4 @@
-import { COLORS, Z_INDEX } from 'app/theme';
+import { COLORS, Z_INDEX } from 'styles/theme';
 
 export const overlay = {
   background: COLORS.overlay,

@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 
 import { SliderArrow } from './SliderArrow';
 

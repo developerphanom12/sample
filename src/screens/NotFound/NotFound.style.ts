@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const NotFoundStyles = {
   MainWrapper: styled.div`

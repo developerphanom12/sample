@@ -1,4 +1,4 @@
-import { Z_INDEX, COLORS, styled } from 'app/theme';
+import { Z_INDEX, COLORS, styled } from 'styles/theme';
 
 export const MasterModalStyles = {
   content: {

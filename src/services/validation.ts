@@ -72,7 +72,7 @@ export const companyNameValidation = Yup.string()
 export const subjectValidation = Yup.string()
   .trim()
   .matches(
-    /^[A-Z][a-z0-9.,_-\s]*$/,
+    /[a-z0-9.,_-\s]*$/,
     'Subject must contains at least 3 characters, begins with capital character'
   )
   .max(40)

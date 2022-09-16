@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
-import { COLORS } from 'app/theme';
+import { COLORS } from 'styles/theme';
 
 import { LoaderComponentStyles } from './LoaderComponent.style';
 

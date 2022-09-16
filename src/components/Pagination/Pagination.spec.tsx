@@ -1,7 +1,7 @@
 import { screen, render, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 import { Pagination } from './Pagination';
 
 const onChangeInputValue = jest.fn();

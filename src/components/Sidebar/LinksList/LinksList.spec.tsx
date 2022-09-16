@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 import { store } from 'services/redux/store';
 
 import { useLinkListState } from './LinkList.state';

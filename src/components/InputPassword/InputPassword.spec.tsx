@@ -1,6 +1,6 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 
 import { InputPassword } from './InputPassword';
 

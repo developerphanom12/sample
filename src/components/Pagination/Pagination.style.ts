@@ -1,6 +1,6 @@
 import ReactPaginate from 'react-paginate';
 
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const PaginationStyles = {
   MyPaginate: styled(ReactPaginate).attrs({

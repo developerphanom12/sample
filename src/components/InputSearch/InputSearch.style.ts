@@ -1,8 +1,7 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const Styled = {
   Input: styled.input`
-    font-family: ${(props) => props.theme.font.openSans};
     font-size: ${(props) => props.theme.size.default};
     background-color: ${(props) => props.theme.colors.lightGray};
     height: 45px;

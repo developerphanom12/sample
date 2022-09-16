@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 import { RadioButton } from './RadioButton';
 
 const onChange = jest.fn();

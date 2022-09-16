@@ -1,7 +1,7 @@
 import { NavigationButton } from 'components/NavigationButton';
 import { Input } from 'components/Input';
 import { Icon } from 'components/Icons';
-import { theme } from 'app/theme';
+import { theme } from 'styles/theme';
 
 import { PaginationStyles as Styled } from './Pagination.style';
 

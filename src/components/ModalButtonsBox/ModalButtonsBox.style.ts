@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const ModalButtonsBoxStyles = {
   ButtonsBox: styled.div<{ isNoPadding?: boolean }>`

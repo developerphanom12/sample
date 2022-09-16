@@ -8,7 +8,7 @@ import { Layout } from 'components/Layout/Layout';
 import { store } from 'services/redux/store';
 
 import App from './App';
-import { AppTheme } from './theme';
+import { AppTheme } from '../styles/theme';
 
 const SettingsComponent = () => <div data-testid="settings">Settings</div>;
 const DashboradComponent = () => <div>Dashboard</div>;

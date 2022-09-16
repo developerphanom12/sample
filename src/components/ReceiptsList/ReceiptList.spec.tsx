@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 
 import { store } from 'services/redux/store';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 
 import { ReceiptsList } from './ReceiptsList';
 

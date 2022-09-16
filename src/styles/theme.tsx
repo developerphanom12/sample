@@ -6,8 +6,6 @@ import baseStyled, {
 } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-import OpenSans from 'assets/fonts/OpenSans.ttf';
-
 interface Props {
   children: React.ReactNode;
 }
@@ -77,7 +75,7 @@ export const theme = {
     big: '32px',
   },
   font: {
-    openSans: 'Open Sans',
+    fontName: 'Open Sans',
   },
   zIndex: {
     ...Z_INDEX,
@@ -88,11 +86,6 @@ export type Theme = typeof theme;
 export const styled = baseStyled as ThemedStyledInterface<Theme>;
 
 const GlobalStyle = createGlobalStyle`
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url(${OpenSans});
-}
 ${styledNormalize}
 
   body,
@@ -163,7 +156,7 @@ ${styledNormalize}
     margin: 0 auto;
     line-height: 1.2;
     background-color: #fff;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

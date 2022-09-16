@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 
 import { CompanySwitcher } from './CompanySwitcher';
 

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 

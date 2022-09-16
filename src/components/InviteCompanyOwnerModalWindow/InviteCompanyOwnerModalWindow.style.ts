@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 import { modalContentStyles, overlay } from 'constants/modal-window.constants';
 

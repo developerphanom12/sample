@@ -1,8 +1,7 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const Styled = {
   Label: styled.p`
-    font-family: ${(props) => props.theme.font.openSans};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.black};
@@ -10,7 +9,6 @@ export const Styled = {
   `,
 
   Input: styled.input<{ isError?: boolean }>`
-    font-family: ${(props) => props.theme.font.openSans};
     background-color: ${(props) => props.theme.colors.white};
     font-size: ${(props) => props.theme.size.normal};
     padding: 10px 40px 10px 10px;

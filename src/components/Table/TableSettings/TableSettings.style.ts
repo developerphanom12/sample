@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const TableSettingsStyles = {
   Head: styled.div<{ isCompanyTable?: boolean }>`

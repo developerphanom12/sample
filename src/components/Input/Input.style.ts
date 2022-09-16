@@ -1,6 +1,6 @@
 import { css, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 const INPUT_THEME: Record<string, FlattenInterpolation<ThemeProps<any>>> = {
   search: css`
@@ -14,7 +14,6 @@ const INPUT_THEME: Record<string, FlattenInterpolation<ThemeProps<any>>> = {
 
 export const Styled = {
   Label: styled.p`
-    font-family: ${(props) => props.theme.font.openSans};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.black};
@@ -52,7 +51,6 @@ export const Styled = {
     }
   `,
   TextArea: styled.textarea<{ inputHeight?: string }>`
-    font-family: ${(props) => props.theme.font.openSans};
     font-size: ${(props) => props.theme.size.default};
     padding: 10px;
     background-color: ${(props) => props.theme.colors.white};

@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const CustomDatePickerStyles = {
   Container: styled.div`
@@ -9,7 +9,6 @@ export const CustomDatePickerStyles = {
   `,
   Wrapper: styled.div<{ isInputDate?: boolean; isFormattedDate?: boolean }>`
     .react-datepicker {
-      font-family: ${(props) => props.theme.font.openSans};
       font-size: ${(props) => props.theme.size.default};
       color: ${(props) => props.theme.colors.black};
       position: absolute;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { theme } from 'app/theme';
+import { theme } from 'styles/theme';
 import { Icon } from 'components/Icons/Icons';
 
 import { TableButtonStyles } from './TableButton.style';

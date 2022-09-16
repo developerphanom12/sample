@@ -1,11 +1,10 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const CompanySwitcherMenuStyles = {
   Title: styled.span`
     display: flex;
     font-size: ${({ theme }) => theme.size.default};
     color: ${({ theme }) => theme.colors.black};
-    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     font-size: 14px;
     padding: 17px 21px 10px;
   `,

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 import { NavigationButtonProps } from './NavigationButton';
 

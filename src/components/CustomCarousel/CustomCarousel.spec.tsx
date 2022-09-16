@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { AppTheme } from 'app/theme';
+import { AppTheme } from 'styles/theme';
 
 import { CustomCarousel } from './CustomCarousel';
 

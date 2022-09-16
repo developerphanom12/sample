@@ -1,4 +1,4 @@
-import { Z_INDEX, COLORS } from 'app/theme';
+import { Z_INDEX, COLORS } from 'styles/theme';
 
 export const BulkModalStyles = {
   content: {

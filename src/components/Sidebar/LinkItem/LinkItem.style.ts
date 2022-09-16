@@ -1,5 +1,5 @@
 import { Link, PathMatch } from 'react-router-dom';
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const LinkItemStyles = {
   Link: styled(Link)<{
@@ -17,7 +17,7 @@ export const LinkItemStyles = {
     font-weight: ${(props) =>
       props.active
         ? props.theme.fontWeight.semiBold
-        : props.theme.fontWeight.medium};
+        : props.theme.fontWeight.normal};
     color: ${(props) =>
       props.active ? props.theme.colors.orange : props.theme.colors.black};
     border-bottom: ${({ theme }) =>

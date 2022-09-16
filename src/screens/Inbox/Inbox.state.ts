@@ -203,6 +203,11 @@ export const useInboxState = () => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
   const [isEmailModalWindowOpen, onEmailModalWindowToggle] = useToggle();
 
+  const onCloseModalWindowHandler = () => {
+    onEmailModalWindowToggle();
+    formik.resetForm();
+  };
+
   const onEmailClick = () => {
     onEmailModalWindowToggle();
     onActionsClose();
@@ -250,14 +255,14 @@ export const useInboxState = () => {
       receiptsPerPage: newValue,
     }));
     onFetchReceiptsHandler({
-      take: Number(newValue.value),
+      take: +newValue.value,
       search: debouncedValue,
       date_end: dateEnd || '',
       date_start: dateStart || '',
       status: state.statusValue.value === 'all' ? '' : state.statusValue.value,
     });
     if (!count) return;
-    onChangePagesAmount(Number(newValue.value), count);
+    onChangePagesAmount(+newValue.value, count);
     onChangeStateFieldHandler('currentPage', initialState.currentPage);
   };
 
@@ -266,11 +271,11 @@ export const useInboxState = () => {
     setState((prevState) => ({
       ...prevState,
       currentPage: selected,
-      skipReceipts: selected * Number(state.receiptsPerPage.value),
+      skipReceipts: selected * +state.receiptsPerPage.value,
     }));
     onFetchReceiptsHandler({
-      take: Number(state.receiptsPerPage.value),
-      skip: selected * Number(state.receiptsPerPage.value),
+      take: +state.receiptsPerPage.value,
+      skip: selected * +state.receiptsPerPage.value,
     });
   };
 
@@ -289,20 +294,17 @@ export const useInboxState = () => {
   };
 
   const onGoToClick = () => {
-    if (Number(state.inputPaginationValue) === state.currentPage + 1) {
+    if (+state.inputPaginationValue === state.currentPage + 1) {
       onChangeStateFieldHandler(
         'inputPaginationValue',
         initialState.inputPaginationValue
       );
       return;
     }
-    if (Number(state.inputPaginationValue) <= state.pages) {
-      const goTo = Number(state.inputPaginationValue);
+    if (+state.inputPaginationValue <= state.pages) {
+      const goTo = +state.inputPaginationValue;
       onChangePage({ selected: goTo - 1 });
-      onChangeStateFieldHandler(
-        'currentPage',
-        Number(state.inputPaginationValue) - 1
-      );
+      onChangeStateFieldHandler('currentPage', +state.inputPaginationValue - 1);
     }
     onChangeStateFieldHandler(
       'inputPaginationValue',
@@ -481,6 +483,7 @@ export const useInboxState = () => {
     receipts,
     isFetchingData,
     company,
+    onCloseModalWindowHandler,
     onChangeDate,
     onChangeSearchValueHandler,
     onSelectFilesHandler,

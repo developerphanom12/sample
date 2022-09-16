@@ -1,6 +1,6 @@
 import Select from 'react-select';
 
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const IconWrapper = styled.div<{ isOpen: boolean }>`
   display: flex;

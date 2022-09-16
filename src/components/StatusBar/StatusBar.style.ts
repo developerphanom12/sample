@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 import { STATUS_COLORS } from 'constants/status-colors';
 

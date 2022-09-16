@@ -1,6 +1,6 @@
 import { css, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 const STATUSES: Record<string, FlattenInterpolation<ThemeProps<any>>> = {
   processing: css`

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { AppTheme, COLORS } from 'app/theme';
+import { AppTheme, COLORS } from 'styles/theme';
 
 import { Button } from './Button';
 

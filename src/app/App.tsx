@@ -5,7 +5,7 @@ import { persisterStore, store } from 'services/redux/store';
 import { injectStore } from 'services/api-service';
 
 import { AppRouter } from './app.router';
-import { AppTheme } from './theme';
+import { AppTheme } from '../styles/theme';
 
 injectStore(store);
 

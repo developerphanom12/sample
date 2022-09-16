@@ -1,4 +1,4 @@
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 import { Link, PathMatch } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ export const CustomLinkStyles = {
     font-weight: ${(props) =>
       props.active
         ? props.theme.fontWeight.semiBold
-        : props.theme.fontWeight.medium};
+        : props.theme.fontWeight.normal};
     background-color: ${(props) =>
       props.active ? props.theme.colors.white : ''};
     color: ${(props) =>

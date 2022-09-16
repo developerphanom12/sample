@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
-
-import { styled } from 'app/theme';
+import { styled } from 'styles/theme';
 
 export const SignUpFormStyles = {
   Form: styled.form`
@@ -14,7 +12,6 @@ export const SignUpFormStyles = {
     }
   `,
   Label: styled.p`
-    font-family: ${(props) => props.theme.font.openSans};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.black};
