@@ -7,10 +7,10 @@ export const HeaderStyles = {
   Container: styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: ${(props) => props.theme.colors.orange};
+    background-color: ${(props) => props.theme.colors.darkRed};
     width: 100%;
-    max-height: 75px;
-    min-height: 60px;
+    max-height: 56px;
+    min-height: 53px;
     height: 100%;
   `,
   LogoIconWrapper: styled.div`
@@ -30,7 +30,7 @@ export const HeaderStyles = {
     height: 100%;
   `,
   Title: styled.h1`
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.lightGray};
     font-size: ${(props) => props.theme.size.xnormal};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
   `,

@@ -47,10 +47,12 @@ export const DocumentMetricItemStyles = {
     margin-top: 2px;
     font-weight: 600;
     font-size: 14px;
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
   Numerics: styled.p`
     font-weight: 600;
     font-size: 14px;
     margin-left: 20px;
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
 };

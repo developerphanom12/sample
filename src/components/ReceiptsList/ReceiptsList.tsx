@@ -38,7 +38,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
   return (
     <>
       <Styled.HeaderWrapper>
-        <Styled.Title>Receipts List</Styled.Title>
+        <Styled.Title>Receipts</Styled.Title>
         <ReceiptsSelects
           timeFilterValue={timeFilterValue}
           timeFilterOptions={timeFilterOptions}
@@ -63,7 +63,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
             ))}
           </Styled.ItemWrapper>
         ) : (
-          <Styled.EmptyDataWrapper data-testid='no-receipts'>
+          <Styled.EmptyDataWrapper data-testid="no-receipts">
             <Styled.Image src={emptyDataSrc} />
             <Styled.Title>No receipts for this time</Styled.Title>
           </Styled.EmptyDataWrapper>

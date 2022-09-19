@@ -17,7 +17,7 @@ export const DocumentMetricStyles = {
   `,
   CompaniesTitle: styled.h3`
     font-size: ${({ theme }) => theme.size.xnormal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     margin-bottom: 15px;
   `,
@@ -36,6 +36,7 @@ export const DocumentMetricStyles = {
   CompanyName: styled.div`
     font-size: ${(props) => props.theme.size.default};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
+    color: ${(props) => props.theme.colors.lightBlack};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,7 +60,7 @@ export const DocumentMetricStyles = {
   CompanyInfo: styled.div`
     font-size: ${(props) => props.theme.size.default};
     font-weight: ${(props) => props.theme.fontWeight.normal};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     text-align: end;
   `,
 };

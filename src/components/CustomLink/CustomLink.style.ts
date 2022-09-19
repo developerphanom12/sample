@@ -14,7 +14,7 @@ export const CustomLinkStyles = {
     &:first-child {
       padding: 0 10px;
     }
-    min-width: ${({ is_last }) => is_last === 'true' && '140px'};
+    min-width: ${({ is_last }) => is_last === 'true' && '120px'};
     width: 100%;
     height: 100%;
     display: flex;
@@ -22,7 +22,7 @@ export const CustomLinkStyles = {
     justify-content: center;
     margin: 0 10px;
     padding: ${(props) => props.active && '0 10px'};
-    font-size: ${(props) => props.theme.size.xnormal};
+    font-size: ${(props) => props.theme.size.default};
     font-weight: ${(props) =>
       props.active
         ? props.theme.fontWeight.semiBold
@@ -30,9 +30,10 @@ export const CustomLinkStyles = {
     background-color: ${(props) =>
       props.active ? props.theme.colors.white : ''};
     color: ${(props) =>
-      props.active ? props.theme.colors.orange : props.theme.colors.white};
+      props.active ? props.theme.colors.darkRed : props.theme.colors.lightGray};
     pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
     color: ${({ is_disabled, theme }) => is_disabled && theme.colors.gray};
+    border-radius: 6px;
   `,
   TabsWrapper: styled.ul`
     display: flex;

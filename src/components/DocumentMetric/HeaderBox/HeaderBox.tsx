@@ -4,14 +4,12 @@ import { HeaderBoxStyles } from './HeaderBox.style';
 import { Icon } from '../../Icons';
 
 interface IHeaderBoxProps {
-  userName: string;
+  userName?: string;
 }
 export const HeaderBox: FC<IHeaderBoxProps> = (props) => {
-  const { userName } = props;
   return (
     <HeaderBoxStyles.HeaderBlock>
       <HeaderBoxStyles.TitleBlock>
-        <HeaderBoxStyles.Title>{`Welcome ${userName}!`}</HeaderBoxStyles.Title>
         <HeaderBoxStyles.MetricBlock>
           <Icon type="shadowedMetric" />
           <HeaderBoxStyles.MetricTitle>

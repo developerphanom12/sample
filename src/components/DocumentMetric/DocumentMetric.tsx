@@ -2,13 +2,14 @@ import React from 'react';
 
 import { ICompanyDashboard } from 'screens/Dashboard/types';
 import { getFormattedDate } from 'services/utils';
-import { DATE_FORMATS } from '../../constants/strings';
 
 import { CompanySwitcherLogo } from '../CompanySwitcherLogo';
 
 import { DocumentMetricStyles as Styled } from './DocumentMetric.style';
 import { DocumentMetricItemList } from './DocumentMetricItemList';
 import { HeaderBox } from './HeaderBox';
+
+import { DATE_FORMATS } from 'constants/strings';
 
 interface IDocumentMetricProps {
   userName: string;
@@ -19,7 +20,6 @@ export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
   const { userName, companies } = props;
   return (
     <Styled.Container>
-      <Styled.Head>Dashboard</Styled.Head>
       <HeaderBox userName={userName} />
       <DocumentMetricItemList />
       <Styled.CompaniesMainWrapper>
@@ -34,6 +34,7 @@ export const DocumentMetric: React.FC<IDocumentMetricProps> = (props) => {
                 <CompanySwitcherLogo
                   companyName={company?.name}
                   companyLogoSrc={company?.logo}
+                  isBigLogo
                 />
                 <Styled.CompanyName>{company?.name}</Styled.CompanyName>
               </Styled.CompanyInfoLeftBlock>

@@ -56,6 +56,7 @@ export const StyledReactSelect = styled(Select)<{
   .Select__menu {
     width: 100%;
     max-width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '500px')};
+    color: ${({ theme }) => theme.colors.lightBlack};
     padding: 3px 5px;
     font-size: ${({ theme }) => theme.size.default};
     margin-top: 1px;
@@ -68,7 +69,7 @@ export const StyledReactSelect = styled(Select)<{
   }
   .Select__option--is-selected {
     background: ${({ theme }) => theme.colors.pink};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
   }
   .Select__option:hover {
     background: ${({ theme }) => theme.colors.pink};
@@ -78,6 +79,7 @@ export const StyledReactSelect = styled(Select)<{
   }
   .Select__single-value {
     font-size: ${({ theme }) => theme.size.default};
+    color: ${({ theme }) => theme.colors.lightBlack};
   }
   .css-b62m3t-container {
     height: 100% !important;

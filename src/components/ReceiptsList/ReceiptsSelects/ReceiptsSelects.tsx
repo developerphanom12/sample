@@ -1,8 +1,8 @@
 import React from 'react';
+import { ActionMeta } from 'react-select';
 
 import { ReceiptsSelectsStyles } from './ReceiptsSelects.style';
 import { CustomSelect } from '../../CustomSelect';
-import { ActionMeta } from 'react-select';
 
 interface IReceiptsSelectsProps {
   timeFilterValue: {
@@ -23,11 +23,7 @@ export const ReceiptsSelects: React.FC<IReceiptsSelectsProps> = (props) => {
   const { timeFilterOptions, timeFilterValue, onChangeCategoryFieldHandler } =
     props;
   return (
-    <ReceiptsSelectsStyles.SelectorWrapper>
       <ReceiptsSelectsStyles.SelectorBox>
-        <ReceiptsSelectsStyles.SelectorTitle>
-          Time
-        </ReceiptsSelectsStyles.SelectorTitle>
         <CustomSelect
           defaultOption={timeFilterOptions[0]}
           options={timeFilterOptions}
@@ -37,6 +33,5 @@ export const ReceiptsSelects: React.FC<IReceiptsSelectsProps> = (props) => {
           height="45"
         />
       </ReceiptsSelectsStyles.SelectorBox>
-    </ReceiptsSelectsStyles.SelectorWrapper>
   );
 };

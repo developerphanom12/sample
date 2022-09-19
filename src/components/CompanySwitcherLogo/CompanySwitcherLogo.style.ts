@@ -1,25 +1,25 @@
 import { styled } from 'styles/theme';
 
 export const CompanySwitcherLogoStyles = {
-  Wrapper: styled.div`
-    min-width: 40px;
-    height: 40px;
+  Wrapper: styled.div<{ isBigLogo?: boolean }>`
+    min-width: ${({ isBigLogo }) => (isBigLogo ? '40px' : '35px')};
+    height: ${({ isBigLogo }) => (isBigLogo ? '40px' : '35px')};
     border-radius: 50%;
-    background: ${({ theme }) => theme.colors.orange};
+    background: ${({ theme }) => theme.colors.darkRed};
     display: flex;
     justify-content: center;
-    margin-right: 20px;
+    margin-right: 17px;
   `,
   Text: styled.p`
     display: flex;
     align-items: center;
     font-size: ${({ theme }) => theme.size.default};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.lightGray};
   `,
-  LogoImage: styled.img`
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
+  LogoImage: styled.img<{ isBigLogo?: boolean }>`
+    width: ${({ isBigLogo }) => (isBigLogo ? '40px' : '35px')};
+    height: ${({ isBigLogo }) => (isBigLogo ? '40px' : '35px')};
+    margin-right: 17px;
     border-radius: 50%;
   `,
 };

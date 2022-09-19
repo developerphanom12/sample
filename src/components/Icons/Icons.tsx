@@ -33,8 +33,10 @@ import { ReactComponent as receiptHubLogo } from 'assets/icons/receiptHub-logo.s
 import { ReactComponent as active } from 'assets/icons/active.svg';
 import { ReactComponent as insertLogo } from 'assets/icons/insert-logo.svg';
 import { ReactComponent as cloudUpload } from 'assets/icons/cloud-upload.svg';
+import { ReactComponent as dropDownArrow } from 'assets/icons/dropdown-arrow.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
+  dropDownArrow,
   cloudUpload,
   insertLogo,
   receiptHubLogo,

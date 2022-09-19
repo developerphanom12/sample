@@ -10,7 +10,7 @@ export const DropdownIndicator = (
   return (
     <components.DropdownIndicator {...props}>
       <IconWrapper isOpen={props.selectProps.menuIsOpen}>
-        <Icon type='arrowDown' />
+        <Icon type='dropDownArrow' />
       </IconWrapper>
     </components.DropdownIndicator>
   );

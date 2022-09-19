@@ -15,6 +15,7 @@ export const COLORS = {
   lighterBlue: '#0092DB1A',
   lightBlue: '#DFECFF',
   lightRed: '#FF525233',
+  darkRed: '#DF1C29',
   lemon: '#A3BD424D',
   yellow: '#FAA94D4D',
   blue: '#0092DB',
@@ -31,6 +32,7 @@ export const COLORS = {
   orange: '#FF5252',
   white: '#ffffff',
   black: '#222B38',
+  lightBlack: '#404A5F',
   transparentOrange: 'rgba(255, 82, 82, 0.6)',
   opacityBlack: 'rgba(34, 43, 56, 0.1)',
   boxShadowPureBlack: 'rgba(0, 0, 0, 0.25)',
@@ -75,7 +77,7 @@ export const theme = {
     big: '32px',
   },
   font: {
-    fontName: 'Open Sans',
+    fontName: 'Source Sans Pro',
   },
   zIndex: {
     ...Z_INDEX,
@@ -156,7 +158,7 @@ ${styledNormalize}
     margin: 0 auto;
     line-height: 1.2;
     background-color: #fff;
-    font-family: 'Open Sans';
+    font-family: 'Source Sans Pro';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

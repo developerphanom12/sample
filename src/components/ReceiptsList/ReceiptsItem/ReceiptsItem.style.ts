@@ -18,13 +18,13 @@ export const ReceiptsItemStyles = {
   SupplierItem: styled.div`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     padding-top: 6px;
     padding-bottom: 6px;
   `,
   Item: styled.p`
     font-size: ${({ theme }) => theme.size.default};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     padding-top: 10px;
   `,
 };

@@ -5,7 +5,8 @@ export const ReceiptsSelectsStyles = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 300px;
+    max-width: 300px;
+    min-width: 100px;
   `,
   SelectorWrapper: styled.div`
     width: 55%;

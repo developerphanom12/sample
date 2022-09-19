@@ -26,7 +26,7 @@ export const ReceiptsListStyles = {
   Title: styled.h2`
     font-size: ${({ theme }) => theme.size.xnormal};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
   ItemWrapper: styled.div``,
   EmptyDataWrapper: styled.div`

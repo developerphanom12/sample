@@ -3,14 +3,14 @@ import { styled } from 'styles/theme';
 export const CompanySwitcherStyles = {
   Wrapper: styled.div`
     position: relative;
-    width: 194px;
-    height: 50px;
+    width: 188px;
+    height: 40px;
     border: 1px solid ${(props) => props.theme.colors.opacityBlack};
     border-radius: ${(props) => props.theme.size.borderRadius};
     background-color: ${(props) => props.theme.colors.white};
     display: flex;
     align-items: center;
-    padding-left: 18px;
+    padding-left: 12px;
     margin-right: 15px;
     &:hover {
       cursor: pointer;
@@ -19,6 +19,7 @@ export const CompanySwitcherStyles = {
   Content: styled.div`
     font-size: ${(props) => props.theme.size.xnormal};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-left: -5px;
     width: 118px;
     white-space: nowrap;
