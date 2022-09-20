@@ -98,10 +98,11 @@ export const UsersList: FC = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onClickDeleteUserButton}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`user ${selectedUserName}`}
+        deleteItemName={`‘${selectedUserName}’`}
         isEdit={isEdit}
         isInvitation={isInvitation}
         isUserList
+        categoryName="user"
       />
       {(isResentSuccessPopup || isSentSuccessPopup) && (
         <Styled.SuccessPopupWrapper>

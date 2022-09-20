@@ -18,6 +18,7 @@ export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
     isDeleteModalWindowOpen,
     onCloseDeleteModalWindowHandler,
     isDisableButton,
+    categoryName,
   } = props;
   return (
     <>
@@ -38,6 +39,7 @@ export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={deleteItemName}
         isLoading={isLoading}
+        categoryName={categoryName}
       />
     </>
   );

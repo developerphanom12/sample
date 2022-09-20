@@ -38,7 +38,7 @@ export const COLORS = {
   boxShadowPureBlack: 'rgba(0, 0, 0, 0.25)',
   boxShadowBlack: 'rgba(34, 43, 56, 0.25)',
   halfTranparentBlack: 'rgba(34, 43, 56, 0.5)',
-  overlay: 'rgba(196, 196, 196, 0.5)',
+  overlay: 'rgba(64, 74, 95, 0.5)',
   metricBoxShadow: '0px 0px 5px rgb(0 0 0 / 30%)',
 };
 

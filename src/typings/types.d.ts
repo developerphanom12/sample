@@ -252,6 +252,7 @@ declare global {
     onDeleteButtonClickHandler: () => Promise<void>;
     isDeleteModalWindowOpen: boolean;
     deleteItemName: string;
+    categoryName: string;
   }
 
   interface IModalWindowsBox

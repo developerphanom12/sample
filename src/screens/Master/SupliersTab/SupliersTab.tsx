@@ -90,8 +90,9 @@ export const SupliersTab: FC = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`supplier “${selectedCategory?.name}”`}
+        deleteItemName={`‘${selectedCategory?.name}’`}
         isDisableButton={isDisableButton}
+        categoryName="supplier"
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>

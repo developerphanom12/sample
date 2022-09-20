@@ -9,13 +9,6 @@ export const MasterStyles = {
     flex-direction: column;
     justify-content: flex-start;
   `,
-  TabHeader: styled.div`
-    width: 100%;
-    min-height: 55px;
-    margin-bottom: 15px;
-    background: ${({ theme }) => theme.colors.white};
-    margin-bottom: 15px;
-  `,
   ContentWrapper: styled.div`
     background: ${({ theme }) => theme.colors.white};
     display: flex;

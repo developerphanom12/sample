@@ -16,7 +16,8 @@ describe('Delete modal window component', () => {
           onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler}
           onDeleteButtonClickHandler={onDeleteButtonClickHandler}
           isDeleteModalWindowOpen={false}
-          deleteItemName={''}
+          deleteItemName=""
+          categoryName=""
         />
       </AppTheme>
     );
@@ -31,7 +32,8 @@ describe('Delete modal window component', () => {
           onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler}
           onDeleteButtonClickHandler={onDeleteButtonClickHandler}
           isDeleteModalWindowOpen={true}
-          deleteItemName={''}
+          deleteItemName=""
+          categoryName=""
         />
       </AppTheme>
     );
@@ -47,6 +49,7 @@ describe('Delete modal window component', () => {
           onDeleteButtonClickHandler={onDeleteButtonClickHandler}
           isDeleteModalWindowOpen={true}
           deleteItemName=""
+          categoryName=""
         />
       </AppTheme>
     );
@@ -64,6 +67,7 @@ describe('Delete modal window component', () => {
           onDeleteButtonClickHandler={onDeleteButtonClickHandler}
           isDeleteModalWindowOpen={true}
           deleteItemName=""
+          categoryName=""
         />
       </AppTheme>
     );

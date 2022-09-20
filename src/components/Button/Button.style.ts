@@ -21,6 +21,23 @@ const THEME = {
     color: ${(props) => props.theme.colors.black};
     border: 1px solid rgba(34, 43, 56, 0.2);
   `,
+  roundedRed: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${(props) => props.theme.colors.darkRed};
+    color: ${(props) => props.theme.colors.white};
+    border-radius: 50px;
+  `,
+  roundedWhite: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.darkRed};
+    border: ${(props) => `1px solid ${props.theme.colors.darkRed}`};
+    border-radius: 50px;
+  `,
 };
 
 const WIDTH = {
@@ -36,6 +53,10 @@ const WIDTH = {
   actions: css`
     width: 42px;
     height: 45px;
+  `,
+  rounded: css`
+    width: 80px;
+    height: 40px;
   `,
 };
 

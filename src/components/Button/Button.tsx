@@ -11,8 +11,13 @@ export type ButtonStyleProps = {
   isDisabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
-  themedButton: 'primary' | 'secondary' | 'capium';
-  width: 'auth' | 'primary' | 'secondary' | 'actions';
+  themedButton:
+    | 'primary'
+    | 'secondary'
+    | 'capium'
+    | 'roundedRed'
+    | 'roundedWhite';
+  width: 'auth' | 'primary' | 'secondary' | 'actions' | 'rounded';
 };
 
 export const Button = ({
@@ -32,9 +37,11 @@ export const Button = ({
       onClick={onClick}
       disabled={isDisabled}
     >
-      <ButtonStyles.Content>
-        {themedButton === 'capium' && <Icon type="capiumLogo" />}
-      </ButtonStyles.Content>
+      {themedButton === 'capium' && (
+        <ButtonStyles.Content>
+          <Icon type="capiumLogo" />
+        </ButtonStyles.Content>
+      )}
       {width === 'actions' && <Icon type="threeDots" />}
       <ButtonStyles.Content>
         {isLoading ? <LoaderComponent /> : children}

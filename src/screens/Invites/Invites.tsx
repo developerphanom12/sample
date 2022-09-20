@@ -101,7 +101,8 @@ export const Invites = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onClickDeleteInviteButton}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`invite to ${selectedEmail}`}
+        deleteItemName={`${selectedEmail}`}
+        categoryName="invite to"
       />
       <InviteCompanyOwnerModalWindow
         isLoading={isLoading}

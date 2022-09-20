@@ -94,7 +94,8 @@ export const TypesTab: FC = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`type “${selectedCategory?.name}”`}
+        deleteItemName={`‘${selectedCategory?.name}’`}
+        categoryName="type"
         isLoading={isLoading}
       />
       {isFetchingData ? (

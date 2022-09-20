@@ -77,7 +77,10 @@ export const Header: FC<HeaderProps> = (props) => {
                     );
                   })
                 : CUSTOMER_LINKS.map((link) => (
-                    <CustomLink key={link.title} to={link.route}>
+                    <CustomLink
+                      key={link.title}
+                      to={link.route}
+                    >
                       {link.title}
                     </CustomLink>
                   ))}

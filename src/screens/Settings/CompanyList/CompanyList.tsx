@@ -103,7 +103,8 @@ export const CompanyList: FC = () => {
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteCompanyHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`company ${selectedCompany?.name}`}
+        deleteItemName={`‘${selectedCompany?.name}’`}
+        categoryName="company"
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>

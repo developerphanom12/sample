@@ -40,6 +40,7 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
     onCloseDeleteModalWindowHandler,
     isEdit,
     isInvitation,
+    categoryName,
   } = props;
 
   return (
@@ -64,7 +65,8 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
         onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={`user ${deleteItemName}`}
+        deleteItemName={`‘${deleteItemName}’`}
+        categoryName={categoryName}
       />
     </>
   );

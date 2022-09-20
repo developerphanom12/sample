@@ -88,7 +88,8 @@ export const CategoriesTab: FC = () => {
         headerText={isEdit ? 'Edit Category' : 'Insert Category'}
         inputValue={modalInputValue}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
-        deleteItemName={`category “${selectedCategory?.name}”`}
+        deleteItemName={`‘${selectedCategory?.name}’`}
+        categoryName="category"
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         isDisableButton={isDisableButton}

@@ -13,7 +13,6 @@ export const Master: React.FC = () => {
 
   return (
     <Styled.Section>
-      <Styled.TabHeader />
       <Styled.ContentWrapper>
         <Styled.TabContent active={activeTabName === MASTER_TABS[0]}>
           <CategoriesTab />

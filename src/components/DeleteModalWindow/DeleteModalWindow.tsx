@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import Modal from 'react-modal';
 
-import { Icon } from '../Icons/Icons';
 import { Button } from '../Button/Button';
-import { CloseButton } from '../CloseButton';
 
 import {
   DeleteModalWindowStyles,
@@ -15,6 +13,7 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
     isDeleteModalWindowOpen,
     deleteItemName,
     isLoading,
+    categoryName,
     onDeleteButtonClickHandler,
     onCloseDeleteModalWindowHandler,
   } = props;
@@ -27,31 +26,29 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
       style={DeleteModalWindowStyles}
     >
       <Styled.ContentWrapper data-testid="modal-window">
-        <Styled.HeaderBox>
-          <Styled.Title>Delete Confirmation</Styled.Title>
-          <CloseButton onClickHandler={onCloseDeleteModalWindowHandler} />
-        </Styled.HeaderBox>
+        <Styled.Title>Confirm delete</Styled.Title>
         <Styled.MainContentWrapper>
-          <Icon type="warning" />
           <Styled.SubTitle>
-            {`Sure, you want to delete ${deleteItemName} ?`}
+            {`Please confirm you want to delete ${categoryName} `}
+            <Styled.Highlighter>{deleteItemName}.</Styled.Highlighter> Deleting
+            cannot be undone
           </Styled.SubTitle>
           <Styled.ButtonsBox>
             <Styled.ButtonsWrapper>
               <Button
-                onClick={onCloseDeleteModalWindowHandler}
-                themedButton="secondary"
-                width="secondary"
-              >
-                No
-              </Button>
-              <Button
                 onClick={onDeleteButtonClickHandler}
-                themedButton="primary"
-                width="primary"
+                themedButton="roundedRed"
+                width="rounded"
                 isLoading={isLoading}
               >
-                Yes
+                Delete
+              </Button>
+              <Button
+                onClick={onCloseDeleteModalWindowHandler}
+                themedButton="roundedWhite"
+                width="rounded"
+              >
+                Cancel
               </Button>
             </Styled.ButtonsWrapper>
           </Styled.ButtonsBox>
