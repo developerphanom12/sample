@@ -26,7 +26,6 @@ export const EmailModalWindow: FC<IEmailModalWindowProps> = (props) => {
     >
       <ModalWindowHeader
         headerTitle="Email"
-        onCloseButtonHandler={onCloseModalWindowHandler}
       />
       <Styles.Form onSubmit={onFormHandleSubmit}>
         <EmailModalForm

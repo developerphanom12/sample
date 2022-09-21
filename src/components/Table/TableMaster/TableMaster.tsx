@@ -21,18 +21,14 @@ export const TableMaster: React.FC<TableMasterProps> = (props) => {
     <>
       <Styled.Head>
         <Styled.Actions>Actions</Styled.Actions>
-        <Styled.Column>
+        <Styled.Column width="200">
           <TableButton>{tabName}</TableButton>
         </Styled.Column>
         <Styled.Column>
-          <Styled.Column>
-            <TableButton>Created On</TableButton>
-          </Styled.Column>
+          <TableButton>Created On</TableButton>
         </Styled.Column>
-        <Styled.Column>
-          <Styled.Column>
-            <TableButton>Created By</TableButton>
-          </Styled.Column>
+        <Styled.Column width='200'>
+          <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
       {searchedItems?.length && searchValue ? (

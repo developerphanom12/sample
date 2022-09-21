@@ -8,23 +8,23 @@ export const HeaderPanelStyles = {
     width: 100%;
   `,
   ButtonWrapper: styled.div`
-    height: 45px;
+    height: 40px;
   `,
   SearchWrapper: styled.div`
     width: 100%;
-    height: 45px;
+    height: 40px;
   `,
   SearchInputWrapper: styled.div`
     display: flex;
     position: relative;
-    max-width: 300px;
+    max-width: 200px;
     width: 100%;
   `,
   IconWrapper: styled.div`
     display: flex;
     position: absolute;
     top: 50%;
-    right: 14px;
+    left: 9px;
     transform: translateY(-50%);
   `,
 };

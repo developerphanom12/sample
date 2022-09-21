@@ -34,7 +34,7 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
           <Icon type="remove" />
         </TableMasterItemStyles.ActionButton>
       </TableMasterItemStyles.Action>
-      <TableMasterItemStyles.Column>
+      <TableMasterItemStyles.Column width='200'>
         <TableMasterItemStyles.NameWrapper>
           {categoryName}
         </TableMasterItemStyles.NameWrapper>
@@ -42,7 +42,7 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
       <TableMasterItemStyles.Column>
         {format(new Date(createdDate), dateFormat)}
       </TableMasterItemStyles.Column>
-      <TableMasterItemStyles.Column>
+      <TableMasterItemStyles.Column width='200'>
         {categoryCreator}
       </TableMasterItemStyles.Column>
     </TableMasterItemStyles.Item>

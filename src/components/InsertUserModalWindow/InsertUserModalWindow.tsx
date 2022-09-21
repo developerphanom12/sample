@@ -77,7 +77,6 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = memo(
       >
         <ModalWindowHeader
           headerTitle={headerText}
-          onCloseButtonHandler={onCloseModalWindowHandler}
         />
         <Styled.Content>
           <Styled.Form onSubmit={onSaveButtonCLickHandler}>

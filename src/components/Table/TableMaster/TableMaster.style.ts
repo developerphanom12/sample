@@ -3,33 +3,40 @@ import { styled } from 'styles/theme';
 export const TableMasterStyles = {
   Head: styled.div`
     display: flex;
-    background-color: ${(props) => props.theme.colors.lightGray};
-    border-top-left-radius: ${(props) => props.theme.size.borderRadius};
-    border-top-right-radius: ${(props) => props.theme.size.borderRadius};
-    border: solid 1px ${(props) => props.theme.colors.gray};
-    height: 50px;
+    border-top: solid 1px ${(props) => props.theme.colors.borderWhite};
+    border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
+    height: 49px;
     width: 100%;
     padding-left: 22px;
   `,
   Actions: styled.div`
     display: flex;
     align-items: center;
-    width: 160px;
+    max-width: 80px;
+    min-width: 70px;
+    width: 100%;
     font-size: ${(props) => props.theme.size.default};
+    color: ${(props) => props.theme.colors.lightBlack};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
+    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
   `,
-  Column: styled.div`
+  Column: styled.div<{ width?: string }>`
     display: flex;
     align-items: center;
-    width: 180px;
+    width: ${(props) => (props.width ? `${props.width}px` : '180px')};
+    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    padding-left: 13px;
+    &:last-child {
+      border-right: none;
+    }
   `,
   EmptyContentWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.theme.colors.white};
-    border-left: solid 1px ${(props) => props.theme.colors.gray};
-    border-right: solid 1px ${(props) => props.theme.colors.gray};
-    border-bottom: solid 1px ${(props) => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.lightBlack};
+    border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
     min-height: 50px;
     width: 100%;
   `,

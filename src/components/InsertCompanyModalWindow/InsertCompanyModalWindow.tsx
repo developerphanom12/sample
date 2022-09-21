@@ -52,10 +52,7 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
       ariaHideApp={false}
       style={CompanyModalWindowStyles}
     >
-      <ModalWindowHeader
-        headerTitle={headerText}
-        onCloseButtonHandler={onCloseModalWindowHandler}
-      />
+      <ModalWindowHeader headerTitle={headerText} />
       <Styled.Content>
         <Input
           value={inputValue}

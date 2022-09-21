@@ -4,10 +4,8 @@ export const TableMasterItemStyles = {
   Item: styled.div`
     display: flex;
     background-color: ${(props) => props.theme.colors.white};
-    border-left: solid 1px ${(props) => props.theme.colors.gray};
-    border-right: solid 1px ${(props) => props.theme.colors.gray};
-    border-bottom: solid 1px ${(props) => props.theme.colors.gray};
-    min-height: 50px;
+    border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
+    min-height: 30px;
     max-height: fit-content;
     width: 100%;
     padding-left: 22px;
@@ -15,7 +13,10 @@ export const TableMasterItemStyles = {
   Action: styled.div`
     display: flex;
     align-items: center;
-    width: 160px;
+    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    max-width: 80px;
+    min-width: 70px;
+    width: 100%;
   `,
   ActionButton: styled.div`
     display: flex;
@@ -26,12 +27,17 @@ export const TableMasterItemStyles = {
       margin-right: 9px;
     }
   `,
-  Column: styled.div`
+  Column: styled.div<{ width?: string }>`
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.black};
+    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    padding-left: 13px;
     display: flex;
     align-items: center;
-    width: 180px;
+    width: ${(props) => (props.width ? `${props.width}px` : '180px')};
+    &:last-child {
+      border-right: none;
+    }
   `,
   NameWrapper: styled.span`
     white-space: nowrap;

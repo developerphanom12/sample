@@ -28,16 +28,14 @@ export const MasterModalWindow: FC<IMasterModalWindowProps> = (props) => {
       ariaHideApp={false}
       style={MasterModalStyles}
     >
-      <ModalWindowHeader
-        headerTitle={headerText}
-        onCloseButtonHandler={onCloseModalWindowHandler}
-      />
+      <ModalWindowHeader headerTitle={headerText} />
       <Styled.MainContentWrapper>
         <Input
           onChangeValue={onChangeInputValueHandler}
           value={inputValue}
           text="Name"
           onKeyDown={onEnterCreateItemClick}
+          isRemoveBorder
         />
       </Styled.MainContentWrapper>
       <ModalButtonsBox

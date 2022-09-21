@@ -28,6 +28,7 @@ export interface IHeaderPanelMasterProps {
   isButton?: boolean;
   isGuard?: boolean;
   userRole?: IAccount;
+  buttonText: string;
   onChangeSearchValueHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -49,7 +50,7 @@ export interface TableMasterProps {
 
 export interface ITabContentProps
   extends TableMasterProps,
-    Omit<IHeaderPanelMasterProps, 'isButton'>,
+    Omit<IHeaderPanelMasterProps, 'isButton' | 'buttonText'>,
     IPaginationPanel {
   isFetchingData?: boolean;
   isFocus?: boolean;

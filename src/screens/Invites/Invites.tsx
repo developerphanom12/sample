@@ -159,6 +159,7 @@ export const Invites = () => {
               onChangeSearchValueHandler={onChangeSearchValueHandler}
               searchValue={searchValue}
               onAddClickButtonHandler={onModalWindowToggleHandler}
+              buttonText="Create Invitation"
               isGuard={false}
               isButton
               userRole={userRole}

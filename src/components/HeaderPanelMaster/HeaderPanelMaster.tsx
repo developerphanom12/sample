@@ -17,6 +17,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
     isGuard,
     userRole,
     isButton,
+    buttonText,
   } = props;
   return (
     <Styled.HeaderPanelWrapper>
@@ -30,10 +31,10 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             isHiddenLabel
             isNoMargin
             inputTheme="search"
-            placeHolder="Search here..."
+            placeHolder="Search"
           />
           <Styled.IconWrapper>
-            <Icon type="searchIcon" />
+            <Icon type="smallSearchIcon" />
           </Styled.IconWrapper>
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
@@ -47,7 +48,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             themedButton="primary"
             width="primary"
           >
-            Add
+            {buttonText}
           </Button>
         </Styled.ButtonWrapper>
       ) : null}

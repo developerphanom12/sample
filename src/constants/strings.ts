@@ -30,22 +30,22 @@ export const EMPTY_DATA_STRINGS_MASTER = {
     title: 'Categories will be shown here...',
     firstSubtitle:
       'We have created everything for you, please add your categories to start.',
-    secondSubtitle: 'You can do that by using Add button below',
-    buttonText: 'Add',
+    secondSubtitle: 'You can do that by using Create Category button below',
+    buttonText: 'Create Category',
   },
   suppliers: {
     title: 'Suppliers will be shown here...',
     firstSubtitle:
       'We have created everything for you, please add your suppliers to start.',
-    secondSubtitle: 'You can do that by using Add button below',
-    buttonText: 'Add',
+    secondSubtitle: 'You can do that by using Create Supplier button below',
+    buttonText: 'Create Supplier',
   },
   type: {
     title: 'Types will be shown here...',
     firstSubtitle:
       'We have created everything for you, please add your type to start.',
-    secondSubtitle: 'You can do that by using Add button below',
-    buttonText: 'Add',
+    secondSubtitle: 'You can do that by using Create Type button below',
+    buttonText: 'Create Type',
   },
   invites: {
     title: 'Invites will be shown here...',

@@ -32,6 +32,7 @@ export const TableInboxAdminStyles = {
     display: flex;
     align-items: center;
     color: ${(props) => props.theme.colors.lightBlack};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     margin-right: 3px;
     padding-left: 9px;
@@ -46,9 +47,8 @@ export const TableInboxAdminStyles = {
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.theme.colors.white};
-    border-left: solid 1px ${(props) => props.theme.colors.gray};
-    border-right: solid 1px ${(props) => props.theme.colors.gray};
-    border-bottom: solid 1px ${(props) => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.lightBlack};
+    border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
     min-height: 50px;
     width: 100%;
   `,

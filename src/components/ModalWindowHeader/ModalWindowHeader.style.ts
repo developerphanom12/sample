@@ -2,18 +2,15 @@ import { styled } from 'styles/theme';
 
 export const ModalWindowHeaderStyles = {
   HeaderBox: styled.div`
-    padding: 21px 33px 16px 33px;
+    padding: 28px 33px 25px 33px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-height: 62px;
-    height: 100%;
+    justify-content: center;
     width: 100%;
-    border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray}`};
   `,
   Title: styled.p`
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    font-size: ${({ theme }) => theme.size.medium};
-    color: ${({ theme }) => theme.colors.black};
+    font-size: ${({ theme }) => theme.size.title};
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
 };

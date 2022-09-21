@@ -1,26 +1,13 @@
-import { Z_INDEX, COLORS, styled } from 'styles/theme';
+import { styled } from 'styles/theme';
+import { modalContentStyles, overlay } from 'constants/modal-window.constants';
 
 export const MasterModalStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    width: '100%',
-    maxWidth: '703px',
-    maxHeight: '292px',
-    height: '100%',
-    overflow: 'none',
-    padding: 0,
-    borderRadius: 0,
-    boxShadow: '0px 2px 4px 1px rgba(0, 0, 0, 0.05)',
+    ...modalContentStyles,
+    width: '420px',
+    height: '240px',
   },
-  overlay: {
-    background: COLORS.overlay,
-    zIndex: Z_INDEX.l,
-  },
+  overlay,
 };
 
 export const MasterModalWindowStyles = {
@@ -31,7 +18,7 @@ export const MasterModalWindowStyles = {
   MainContentWrapper: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 37px 33px 10px 33px;
+    padding: 0 33px 2px 33px;
     width: 100%;
     flex: 1;
   `,

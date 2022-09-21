@@ -5,6 +5,7 @@ import { ErrorText } from '../ErrorText';
 import { CustomDatePicker } from '../CustomDatePicker';
 
 interface InputProps {
+  isRemoveBorder?: boolean;
   inputHeight?: string;
   isTextArea?: boolean;
   isNoMargin?: boolean;
@@ -13,7 +14,7 @@ interface InputProps {
   placeHolder?: string;
   inputTheme?: 'search';
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isRemoveBoxShadow?: boolean
+  isRemoveBoxShadow?: boolean;
   touched?: boolean;
   isHiddenLabel?: boolean;
   text?: string;
@@ -45,6 +46,7 @@ export const Input: React.FC<InputProps> = (props) => {
     inputType,
     isDisabled,
     isRemoveBoxShadow,
+    isRemoveBorder,
     onChangeValue,
     onKeyDown,
     onBlur,
@@ -84,6 +86,7 @@ export const Input: React.FC<InputProps> = (props) => {
               disabled={isDisabled}
               isDisabled={isDisabled}
               isRemoveBoxShadow={isRemoveBoxShadow}
+              isRemoveBorder={isRemoveBorder}
             />
           )}
         </>

@@ -48,7 +48,7 @@ export const TableInboxAdminItemStyles = {
   Selector: styled.div`
     display: flex;
     align-items: center;
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     font-size: ${(props) => props.theme.size.default};
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
     padding-left: 9px;

@@ -26,6 +26,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
     title,
     isNoResults,
     isUploadFile,
+    buttonText,
     onAddReceiptHandler,
     onClick,
   } = props;
@@ -47,8 +48,12 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
             <FileUploadButton onChangeFiles={onAddReceiptHandler} />
           ) : (
             <Styled.ButtonWrapper>
-              <Button width="primary" themedButton="primary" onClick={onClick}>
-                Add
+              <Button
+                width="primary"
+                themedButton="roundedRed"
+                onClick={onClick}
+              >
+                {buttonText || 'Add'}
               </Button>
             </Styled.ButtonWrapper>
           )}

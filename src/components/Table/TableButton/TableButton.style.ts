@@ -12,6 +12,7 @@ export const TableButtonStyles = {
     color: ${(props) => props.theme.colors.lightBlack};
     background-color: transparent;
     font-size: ${(props) => props.theme.size.default};
+    font-weight: ${(props) => props.theme.fontWeight.semiBold};
     cursor: default;
   `,
   Content: styled.div`

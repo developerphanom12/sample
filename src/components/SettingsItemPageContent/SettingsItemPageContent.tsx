@@ -58,6 +58,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
         onAddClickButtonHandler={onAddClickButtonHandler}
         isGuard={isGuard}
         userRole={userRole}
+        buttonText={isMemeberList ? 'Create Member' : 'Create Company'}
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>

@@ -36,7 +36,7 @@ export const EmptyDataStyles = {
     justify-content: center;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.xnormal};
     text-align: center;
     margin-bottom: 15px;
@@ -46,7 +46,7 @@ export const EmptyDataStyles = {
     display: flex;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.default};
     text-align: center;
     margin-bottom: 12px;

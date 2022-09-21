@@ -46,6 +46,7 @@ export const SupplierContent: FC<ITabContentProps> = (props) => {
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
+        buttonText="Create Supplier"
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>

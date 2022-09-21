@@ -14,7 +14,7 @@ export const LoaderComponent: FC<ILoaderComponentProps> = (props) => {
   return (
     <LoaderComponentStyles.Wrapper data-testid="loader">
       <TailSpin
-        color={theme === 'preview' ? COLORS.orange : COLORS.white}
+        color={theme === 'preview' ? COLORS.darkRed : COLORS.white}
         height={theme ? 40 : 20}
         width={theme ? 40 : 20}
       />

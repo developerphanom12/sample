@@ -46,6 +46,7 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
+        buttonText="Create Category"
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>

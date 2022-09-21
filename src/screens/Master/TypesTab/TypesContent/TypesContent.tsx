@@ -46,6 +46,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
+        buttonText="Create Type"
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>

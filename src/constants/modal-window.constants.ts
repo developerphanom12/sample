@@ -17,5 +17,6 @@ export const modalContentStyles = {
   overflow: 'none',
   padding: 0,
   borderRadius: '6px',
-  boxShadow: '0px 2px 4px 1px rgba(0, 0, 0, 0.05)',
+  boxShadow: `0px 2px 2px ${COLORS.white}`,
+  border: 'none',
 };
