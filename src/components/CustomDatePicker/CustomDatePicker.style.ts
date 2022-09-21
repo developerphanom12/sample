@@ -12,7 +12,7 @@ export const CustomDatePickerStyles = {
       font-size: ${(props) => props.theme.size.default};
       color: ${(props) => props.theme.colors.black};
       position: absolute;
-      top: ${({ isFormattedDate }) => (isFormattedDate ? '45px' : '40px')};
+      top: ${({ isFormattedDate }) => (isFormattedDate ? '40px' : '35px')};
       right: 0;
       z-index: ${(props) => props.theme.zIndex.m};
       @media (min-width: 1300px) {
@@ -35,7 +35,7 @@ export const CustomDatePickerStyles = {
     }
 
     .react-datepicker__day.react-datepicker__day--selected.react-datepicker__day--today {
-      background-color: ${(props) => props.theme.colors.orange};
+      background-color: ${(props) => props.theme.colors.darkRed};
     }
 
     .react-datepicker__day--selected,
@@ -50,10 +50,10 @@ export const CustomDatePickerStyles = {
     .react-datepicker__year-text--selected,
     .react-datepicker__year-text--in-selecting-range,
     .react-datepicker__year-text--in-range {
-      background-color: ${(props) => props.theme.colors.orange};
+      background-color: ${(props) => props.theme.colors.darkRed};
     }
     .react-datepicker__day--keyboard-selected {
-      background-color: ${(props) => props.theme.colors.orange};
+      background-color: ${(props) => props.theme.colors.darkRed};
     }
   `,
 };

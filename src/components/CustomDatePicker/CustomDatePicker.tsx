@@ -50,6 +50,7 @@ export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
         datePickerRef={datePickerRef}
         onClick={onDatePickerClickHandler}
         isInputDate={isInputDate}
+        isOpen={isDatePickerOpen}
       >
         {dateLabelCondition}
       </DateButton>

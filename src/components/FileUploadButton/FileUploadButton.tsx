@@ -13,7 +13,7 @@ export const FileUploadButton: FC<IFileUploadButtonProps> = (props) => {
   return (
     <Styled.ButtonWrapper>
       <UploadInput onChangeFiles={onChangeFiles} />
-      <Styled.Label htmlFor="uploadFile">Add</Styled.Label>
+      <Styled.Label htmlFor="uploadFile">Upload Receipt</Styled.Label>
     </Styled.ButtonWrapper>
   );
 };

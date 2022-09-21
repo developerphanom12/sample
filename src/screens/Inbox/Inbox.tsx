@@ -28,7 +28,6 @@ export const Inbox: FC = () => {
     setIsDatePickerOpen,
     receipts,
     isEmailModalWindowOpen,
-    onEmailModalWindowToggle,
     onEmailClick,
     formik,
     onChangeReceiptsPerPage,

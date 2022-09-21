@@ -4,24 +4,21 @@ export const TableInboxAdminStyles = {
   Head: styled.div`
     display: grid;
     grid-template-columns:
-      minmax(25px, 94px) minmax(40px, 96px) minmax(67px, 141px) minmax(
-        81px,
-        148px
+      minmax(33px, 43px) minmax(65px, 75px) minmax(95px, 105px) minmax(
+        130px,
+        155px
       )
-      minmax(140px, 229px) minmax(80px, 229px) minmax(80px, 147px) minmax(
-        50px,
-        102px
+      minmax(150px, 162px) minmax(110px, 125px) minmax(94px, 106px) minmax(
+        73px,
+        85px
       )
-      minmax(47px, 98px) minmax(48px, 104px) minmax(55px, 110px) minmax(
-        70px,
-        120px
-      )
-      minmax(50px, 90px) minmax(99px, 140px);
-    background-color: ${(props) => props.theme.colors.lightGray};
-    border-top-left-radius: ${(props) => props.theme.size.borderRadius};
-    border-top-right-radius: ${(props) => props.theme.size.borderRadius};
-    border: solid 1px ${(props) => props.theme.colors.gray};
-    height: 50px;
+      minmax(73px, 85px)
+      minmax(73px, 85px)
+      minmax(83px, 95px) minmax(80px, 92px)
+      minmax(73px, 85px) minmax(118px, 130px);
+    border-top: solid 1px ${(props) => props.theme.colors.borderWhite};
+    border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
+    height: 49px;
     width: 100%;
     padding-left: 19px;
     padding-right: 9px;
@@ -29,18 +26,20 @@ export const TableInboxAdminStyles = {
   Checkbox: styled.div`
     display: flex;
     align-items: center;
-    padding-left: 15%;
     margin-right: 3px;
   `,
   Text: styled.div`
     display: flex;
     align-items: center;
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     font-size: ${(props) => props.theme.size.default};
     margin-right: 3px;
+    padding-left: 9px;
   `,
   Selector: styled.div`
     margin-right: 3px;
+    padding-left: 10px;
+    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
   `,
   EmptyContentWrapper: styled.div`
     display: flex;

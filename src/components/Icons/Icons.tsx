@@ -34,8 +34,12 @@ import { ReactComponent as active } from 'assets/icons/active.svg';
 import { ReactComponent as insertLogo } from 'assets/icons/insert-logo.svg';
 import { ReactComponent as cloudUpload } from 'assets/icons/cloud-upload.svg';
 import { ReactComponent as dropDownArrow } from 'assets/icons/dropdown-arrow.svg';
+import { ReactComponent as tableArrow } from 'assets/icons/table-arrow.svg';
+import { ReactComponent as smallSearchIcon } from 'assets/icons/small-search-icon.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
+  smallSearchIcon,
+  tableArrow,
   dropDownArrow,
   cloudUpload,
   insertLogo,

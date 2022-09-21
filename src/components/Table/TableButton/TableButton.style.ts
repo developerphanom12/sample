@@ -9,7 +9,7 @@ export const TableButtonStyles = {
     height: 100%;
     width: 100%;
     padding: 0;
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     background-color: transparent;
     font-size: ${(props) => props.theme.size.default};
     cursor: default;

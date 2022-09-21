@@ -34,7 +34,7 @@ export const PaginationStyles = {
     }
 
     li.active a {
-      background-color: ${(props) => props.theme.colors.orange};
+      background-color: ${(props) => props.theme.colors.darkRed};
       border-color: transparent;
       color: white;
       min-width: 100px !important;

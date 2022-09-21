@@ -11,12 +11,7 @@ export type ButtonStyleProps = {
   isDisabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
-  themedButton:
-    | 'primary'
-    | 'secondary'
-    | 'capium'
-    | 'roundedRed'
-    | 'roundedWhite';
+  themedButton: TButtonTheme;
   width: 'auth' | 'primary' | 'secondary' | 'actions' | 'rounded';
 };
 
@@ -42,7 +37,7 @@ export const Button = ({
           <Icon type="capiumLogo" />
         </ButtonStyles.Content>
       )}
-      {width === 'actions' && <Icon type="threeDots" />}
+      {width === 'actions' && <Icon type="threeDots" fill="red" />}
       <ButtonStyles.Content>
         {isLoading ? <LoaderComponent /> : children}
       </ButtonStyles.Content>

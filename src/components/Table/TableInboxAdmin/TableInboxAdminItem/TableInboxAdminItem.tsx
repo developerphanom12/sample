@@ -106,14 +106,14 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
       <Styled.Selector>
         <Styled.ValueWrapper>{total || '---'}</Styled.ValueWrapper>
       </Styled.Selector>
-      <Styled.Checkbox>
+      <Styled.Checkbox isBorder>
         <CheckboxItem
           isChecked={publishStatus}
           onChange={onCheckedPublishMockFuncHandler}
           name={receiptId}
         />
       </Styled.Checkbox>
-      <Styled.Checkbox>
+      <Styled.Checkbox isBorder>
         <CheckboxItem
           isChecked={paymentStatus}
           onChange={onCheckedPaidHandler}

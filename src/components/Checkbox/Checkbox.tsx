@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Icon } from 'components/Icons/Icons';
 
-import { Checkbox } from './Checkbox.style';
+import { Checkbox, CheckboxContainer } from './Checkbox.style';
 
 export interface CheckboxProps {
   children?: React.ReactNode;
@@ -17,7 +17,7 @@ export const CheckboxItem = (props: CheckboxProps) => {
 
   return (
     <Checkbox.Label>
-      <Checkbox.CheckboxContainer>
+      <CheckboxContainer>
         <Checkbox.HiddenCheckbox
           type="checkbox"
           id={name}
@@ -26,10 +26,10 @@ export const CheckboxItem = (props: CheckboxProps) => {
           checked={isChecked}
         />
         <Checkbox.StyledCheckbox isChecked={isChecked}>
-          {!!isChecked && <Icon type="checkbox" />}
+          {!!isChecked && <Icon type="checkmark" />}
         </Checkbox.StyledCheckbox>
-      </Checkbox.CheckboxContainer>
-      <Checkbox.LabelText>{labelText}</Checkbox.LabelText>
+      </CheckboxContainer>
+      {labelText && <Checkbox.LabelText>{labelText}</Checkbox.LabelText>}
     </Checkbox.Label>
   );
 };

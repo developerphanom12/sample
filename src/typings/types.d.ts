@@ -175,6 +175,17 @@ declare global {
     rejected = 'rejected',
   }
 
+  enum ButtonTheme {
+    primary = 'primary',
+    secondary = 'secondary',
+    capium = 'capium',
+    roundedRed = 'roundedRed',
+    roundedWhite = 'roundedWhite',
+    threeDots = 'threeDots',
+  }
+
+  type TButtonTheme = keyof typeof ButtonTheme;
+
   interface IEmailModalWindowProps {
     onCloseModalWindowHandler: () => void;
     isModalWindowOpen: boolean;
@@ -329,6 +340,7 @@ declare global {
 }
 
 export {
+  TButtonTheme,
   ICompaniesSwitcher,
   ICompany,
   IAccount,

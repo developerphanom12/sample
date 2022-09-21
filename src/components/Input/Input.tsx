@@ -13,6 +13,7 @@ interface InputProps {
   placeHolder?: string;
   inputTheme?: 'search';
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isRemoveBoxShadow?: boolean
   touched?: boolean;
   isHiddenLabel?: boolean;
   text?: string;
@@ -43,6 +44,7 @@ export const Input: React.FC<InputProps> = (props) => {
     isInputDate,
     inputType,
     isDisabled,
+    isRemoveBoxShadow,
     onChangeValue,
     onKeyDown,
     onBlur,
@@ -81,6 +83,7 @@ export const Input: React.FC<InputProps> = (props) => {
               placeholder={placeHolder}
               disabled={isDisabled}
               isDisabled={isDisabled}
+              isRemoveBoxShadow={isRemoveBoxShadow}
             />
           )}
         </>

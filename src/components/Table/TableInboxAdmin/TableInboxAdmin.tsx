@@ -20,7 +20,7 @@ export const TableInboxAdmin: React.FC<TableInboxAdminProps> = (props) => {
   } = props;
 
   return (
-    <div>
+    <>
       <Styled.Head>
         <Styled.Checkbox>
           <CheckboxItem
@@ -97,6 +97,6 @@ export const TableInboxAdmin: React.FC<TableInboxAdminProps> = (props) => {
           No records found
         </Styled.EmptyContentWrapper>
       )}
-    </div>
+    </>
   );
 };

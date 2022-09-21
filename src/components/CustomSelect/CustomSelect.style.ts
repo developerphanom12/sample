@@ -19,20 +19,17 @@ export const StyledReactSelect = styled(Select)<{
   .Select__control {
     font-size: ${({ theme }) => theme.size.default};
     background: ${(props) => props.theme.colors.white};
-    border: ${(props) =>
-      `1px solid ${
-        props.paginate
-          ? props.theme.colors.gray
-          : props.theme.colors.opacityBlack
-      }`};
+    border: ${(props) => `1px solid ${props.theme.colors.checkboxBorder}`};
     box-sizing: border-box;
     box-shadow: ${(props) =>
-      props.paginate ? '' : `0px 1px 1px ${props.theme.colors.boxShadowBlack}`};
-    border-radius: 5px;
+      props.paginate
+        ? 'none'
+        : `0px 1px 1px ${props.theme.colors.boxShadowBlack}`};
+    border-radius: 6px;
     width: 100%;
     max-width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '500px')};
-    max-height: ${({ isMulti }) => (isMulti ? '100%' : '45px')};
-    min-height: ${({ isMulti }) => (isMulti ? '45px' : '41.2px')};
+    max-height: ${({ isMulti }) => (isMulti ? '100%' : '40px')};
+    min-height: ${({ isMulti }) => (isMulti ? '40px' : '39.2px')};
     height: ${({ height, isMulti }) =>
       isMulti ? 'auto' : height ? `${height}px` : '100%'};
     cursor: pointer;
@@ -42,10 +39,10 @@ export const StyledReactSelect = styled(Select)<{
   .Select__control--is-focused {
     font-size: ${({ theme }) => theme.size.default};
     outline: none;
-    border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
+    border: ${({ theme }) => `1px solid ${theme.colors.darkRed}`};
   }
   .Select__control--is-focused:hover {
-    border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
+    border: ${({ theme }) => `1px solid ${theme.colors.darkRed}`};
   }
   .Select__indicator-separator {
     display: none;

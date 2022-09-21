@@ -62,6 +62,7 @@ export const Pagination = (props: IPagination) => {
               inputType="number"
               onChangeValue={onChangeInputValue}
               onKeyDown={onEnterGoToClick}
+              isRemoveBoxShadow
             />
           </Styled.InputWrapper>
         </Styled.GoToWrapper>

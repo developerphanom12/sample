@@ -5,9 +5,11 @@ import { styled } from 'styles/theme';
 const INPUT_THEME: Record<string, FlattenInterpolation<ThemeProps<any>>> = {
   search: css`
     background-color: ${(props) => props.theme.colors.white};
-    border: 1px solid ${(props) => props.theme.colors.gray};
-    padding-right: 18px;
-    height: 45px;
+    border: 1px solid ${(props) => props.theme.colors.checkboxBorder};
+    padding-left: 28px;
+    padding-right: 4px;
+    height: 40px;
+    width: 200px;
     box-shadow: none;
   `,
 };
@@ -24,21 +26,26 @@ export const Styled = {
     inputHeight?: string;
     inputTheme?: string;
     isDisabled?: boolean;
+    isRemoveBoxShadow?: boolean;
   }>`
     line-height: 1.3;
     font-size: ${(props) => props.theme.size.default};
     padding: 10px;
     background-color: ${({ theme, isDisabled }) =>
       isDisabled ? theme.colors.lightGray : theme.colors.white};
-    max-height: ${(props) => props.inputHeight || '45px'};
+    max-height: ${(props) => props.inputHeight || '40px'};
     min-height: 35px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 6px;
+    color: ${(props) => props.theme.colors.lightBlack};
     border: ${({ isError, theme }) =>
       isError
         ? `1px solid ${theme.colors.red}`
-        : `1px solid ${theme.colors.opacityBlack}`};
-    box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
+        : `1px solid ${theme.colors.checkboxBorder}`};
+    box-shadow: ${({ theme, isRemoveBoxShadow }) =>
+      isRemoveBoxShadow
+        ? 'none'
+        : `0px 1px 1px ${theme.colors.boxShadowBlack}`};
     ${(props) => props.inputTheme && INPUT_THEME[props.inputTheme]}
     &::-webkit-contacts-auto-fill-button,
     ::-webkit-credentials-auto-fill-button {
@@ -46,8 +53,11 @@ export const Styled = {
       position: absolute;
       right: 0;
     }
+    ::placeholder {
+      color: ${(props) => props.theme.colors.lightBlack};
+    }
     &:focus {
-      border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
+      border: ${({ theme }) => `1px solid ${theme.colors.darkRed}`};
     }
   `,
   TextArea: styled.textarea<{ inputHeight?: string }>`
@@ -56,12 +66,12 @@ export const Styled = {
     background-color: ${(props) => props.theme.colors.white};
     height: ${(props) => props.inputHeight || '45px'};
     width: 100%;
-    border-radius: 5px;
-    border: ${({ theme }) => `1px solid ${theme.colors.opacityBlack}`};
+    border-radius: 6px;
+    border: ${({ theme }) => `1px solid ${theme.colors.checkboxBorder}`};
     box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
     resize: none;
     &:focus {
-      border: ${({ theme }) => `1px solid ${theme.colors.orange}`};
+      border: ${({ theme }) => `1px solid ${theme.colors.darkRed}`};
     }
   `,
   InputWrapper: styled.div<{ isNoMargin?: boolean }>`

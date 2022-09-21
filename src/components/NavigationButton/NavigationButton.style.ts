@@ -49,6 +49,7 @@ export const NavigationButtonStyles = {
   }>`
     margin: ${({ isDisabled }) => isDisabled && '0 4px 0 0'};
     padding: ${({ isDisabled }) => isDisabled && '0 2px 0 2px'};
+    color: ${({ theme }) => theme.colors.lightBlack};
     &:not(:last-child) {
       margin: ${({ isWithoutArrow }) => (isWithoutArrow ? '0' : '0 14px 0 0')};
       margin: ${({ isArrow }) => isArrow && '0 6px 0 6px'};

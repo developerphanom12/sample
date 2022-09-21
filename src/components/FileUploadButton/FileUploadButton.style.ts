@@ -11,12 +11,13 @@ export const FileUploadButtonStyles = {
     align-items: center;
     width: 110px;
     font-size: ${(props) => props.theme.size.default};
-    max-height: 45px;
+    max-height: 40px;
     min-height: 35px;
-    border-radius: 5px;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-    background-color: ${(props) => props.theme.colors.orange};
-    color: ${(props) => props.theme.colors.lightGray};
+    border-radius: 6px;
+    box-shadow: ${(props) =>
+      `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`} ;
+    background-color: ${(props) => props.theme.colors.darkRed};
+    color: ${(props) => props.theme.colors.white};
     cursor: pointer;
   `,
 };

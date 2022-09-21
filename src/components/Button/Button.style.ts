@@ -13,6 +13,11 @@ const THEME = {
     background-color: ${(props) => props.theme.colors.lightGray};
     color: ${(props) => props.theme.colors.black};
   `,
+  threeDots: css`
+    background-color: ${(props) => props.theme.colors.white};
+    border: 1px solid ${(props) => props.theme.colors.checkboxBorder};
+    box-shadow: none;
+  `,
   capium: css`
     display: flex;
     align-items: center;
@@ -51,8 +56,8 @@ const WIDTH = {
     width: 100px;
   `,
   actions: css`
-    width: 42px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   `,
   rounded: css`
     width: 80px;
@@ -63,8 +68,8 @@ const WIDTH = {
 export const ButtonStyles = {
   Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
-    max-height: 45px;
-    min-height: 42px;
+    max-height: 40px;
+    min-height: 39px;
     border-radius: 5px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
     background-color: ${(props) => props.theme.colors.lightGray};

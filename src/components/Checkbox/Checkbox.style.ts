@@ -1,10 +1,18 @@
 import { styled } from 'styles/theme';
 
+export const CheckboxContainer = styled.div`
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
 export const Checkbox = {
   CheckboxContainer: styled.div`
-    display: flex;
-    width: 18px;
-    height: 18px;
+    border-radius: 50%;
   `,
   HiddenCheckbox: styled.input`
     border: 0;
@@ -18,19 +26,26 @@ export const Checkbox = {
     width: 1px;
   `,
   StyledCheckbox: styled.div<{ isChecked: boolean }>`
-    width: 100%;
-    height: 100%;
+    width: 16px;
+    height: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: ${(props) =>
-      props.isChecked ? props.theme.colors.orange : 'transparent'};
-    border-radius: 3px;
+      props.isChecked
+        ? props.theme.colors.darkRed
+        : props.theme.colors.checkboxBackground};
+    border-radius: 5px;
     border: solid 2px
       ${(props) =>
-        props.isChecked ? props.theme.colors.orange : props.theme.colors.black};
+        props.isChecked
+          ? props.theme.colors.darkRed
+          : props.theme.colors.checkboxBorder};
     transition: all 50ms;
     cursor: pointer;
+    :hover {
+      border: solid 2px ${(props) => props.theme.colors.darkRed};
+    }
   `,
   LabelText: styled.span`
     margin-left: 13px;
@@ -43,5 +58,14 @@ export const Checkbox = {
     display: flex;
     align-items: center;
     position: relative;
+    border-radius: 50%;
+    :hover {
+      ${CheckboxContainer} {
+        background-color: ${(props) => props.theme.colors.hoveredCheckbox};
+      }
+      div > div {
+        border: solid 2px ${(props) => props.theme.colors.darkRed};
+      }
+    }
   `,
 };

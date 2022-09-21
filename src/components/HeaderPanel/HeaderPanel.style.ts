@@ -18,13 +18,13 @@ export const HeaderPanelStyles = {
   SearchWrapper: styled.div`
     display: flex;
     width: 100%;
-    height: 45px;
+    height: 40px;
   `,
   FilterWrapper: styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 450px;
+    max-width: 355px;
   `,
   SelectWrapper: styled.div`
     display: flex;
@@ -38,14 +38,14 @@ export const HeaderPanelStyles = {
   SearchInputWrapper: styled.div`
     display: flex;
     position: relative;
-    max-width: 300px;
+    max-width: 220px;
     width: 100%;
   `,
   IconWrapper: styled.div`
     display: flex;
     position: absolute;
     top: 50%;
-    right: 14px;
+    left: 9px;
     transform: translateY(-50%);
   `,
 };

@@ -17,7 +17,7 @@ export const ThreeDotsMenuStyles = {
     background-color: ${({ theme }) => theme.colors.white};
     text-align: start;
     &:hover {
-      background-color: ${({ theme }) => theme.colors.orange};
+      background-color: ${({ theme }) => theme.colors.darkRed};
       color: ${({ theme }) => theme.colors.white};
     }
     &:last-child {

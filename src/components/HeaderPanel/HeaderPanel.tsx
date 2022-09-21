@@ -50,10 +50,10 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
               isHiddenLabel
               isNoMargin
               inputTheme="search"
-              placeHolder="Search here..."
+              placeHolder="Search"
             />
             <Styled.IconWrapper>
-              <Icon type="searchIcon" />
+              <Icon type="smallSearchIcon" />
             </Styled.IconWrapper>
           </Styled.SearchInputWrapper>
           <Styled.DatePickerWrapper>
@@ -75,6 +75,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
             onChangeValueHandler={onChangeStatusValueHandler}
             options={statusFilterOptions}
             value={statusValue}
+            paginate
           />
         </Styled.SelectWrapper>
       </Styled.SearchWrapper>
@@ -82,7 +83,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
         <Styled.ButtonActionsWrapper ref={ref}>
           <Button
             width="actions"
-            themedButton="secondary"
+            themedButton="threeDots"
             onClick={onActionsClick}
             isDisabled={isDownloadButtonDisabled}
           />
