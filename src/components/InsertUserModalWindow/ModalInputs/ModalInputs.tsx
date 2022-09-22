@@ -51,6 +51,7 @@ export const ModalInputs: FC<IModalFormProps> = (props) => {
             onChangeValue={onChange}
             touched={touched}
             isNoMargin
+            isRemoveBorder
             onKeyDown={onEnterCreateItemClick}
           />
         </Styled.InputWrapper>
@@ -62,6 +63,7 @@ export const ModalInputs: FC<IModalFormProps> = (props) => {
             options={options}
             isFullWidth
             isMulti={isMulti}
+            isRemoveBorder
             value={selectValue}
           />
         </>

@@ -21,16 +21,16 @@ export const ButtonsBox: FC<IButtonBoxProps> = (props) => {
       <Styled.ButtonsWrapper>
         <Button
           onClick={onCancelButtonClickHandler}
-          themedButton="secondary"
-          width="primary"
+          themedButton="roundedWhite"
+          width="rounded"
           isDisabled={isLoading}
         >
           Cancel
         </Button>
         <Button
           onClick={onUploadButtonClickHandler}
-          themedButton="primary"
-          width="primary"
+          themedButton="roundedRed"
+          width="rounded"
           isLoading={isLoading}
           isDisabled={isLoading}
         >

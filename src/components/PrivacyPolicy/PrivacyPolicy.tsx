@@ -11,7 +11,6 @@ export const PrivacyPolicy: FC = () => {
   return (
     <Styles.Wrappper>
       <Styles.ContentWrapper>
-        <Styles.Title>{PRIVACY_POLICY_TITLE.title}</Styles.Title>
         <Styles.Paragraph>{PRIVACY_POLICY_TITLE.text}</Styles.Paragraph>
         {PRIVACY_POLICY.map((item) => (
           <div key={item.title}>

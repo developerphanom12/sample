@@ -65,8 +65,10 @@ const WIDTH = {
     height: 40px;
   `,
   roundedBig: css`
+    max-width: 160px;
     width: 100%;
     height: 40px;
+    box-shadow: none;
   `,
 };
 

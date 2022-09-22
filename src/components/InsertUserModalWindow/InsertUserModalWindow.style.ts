@@ -5,8 +5,8 @@ import { modalContentStyles, overlay } from 'constants/modal-window.constants';
 export const UserModalWindowStyles = {
   content: {
     ...modalContentStyles,
-    maxWidth: '703px',
-    maxHeight: '569px',
+    width: '420px',
+    height: '540px',
   },
   overlay,
 };
@@ -15,7 +15,7 @@ export const InsertUserModalWindowStyles = {
   Content: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 37px 33px 54px 33px;
+    padding: 5px 33px 0 33px;
     width: 100%;
     flex: 1;
   `,

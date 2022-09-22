@@ -32,7 +32,7 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
     <Styled.Wrapper>
       <Styled.LogoTextWrapper>
         Logo
-        <Styled.Size> (Size: 100 x 100 px)</Styled.Size>
+        <Styled.Size> (Size: 75 x 75 px)</Styled.Size>
       </Styled.LogoTextWrapper>
       {isCompanyLogoLoading ? (
         <LoaderComponent theme="preview" />
@@ -53,7 +53,7 @@ export const UploadLogoButton: FC<IUploadLogoButtonProps> = (props) => {
             onChangeFiles={onUploadCompanyLogoHandler}
           />
           <Styled.Label htmlFor={id}>
-            <Icon type="insertLogo" />
+            <Icon type="insertLogo" width={65} height={55} />
           </Styled.Label>
         </>
       )}

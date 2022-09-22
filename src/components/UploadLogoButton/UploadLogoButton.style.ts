@@ -10,18 +10,18 @@ export const UploadLogoButtonStyles = {
   Wrapper: styled.div`
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 75px;
   `,
   LogoTextWrapper: styled.p`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
-    margin-right: 50px;
+    color: ${({ theme }) => theme.colors.lightBlack};
+    margin-right: 35px;
   `,
   Size: styled.span`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
   Image: styled.img`
     height: 100%;
@@ -31,10 +31,10 @@ export const UploadLogoButtonStyles = {
   ImageWrapper: styled.div`
     position: relative;
     border-radius: 5px;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     overflow: hidden;
-    border: ${({ theme }) => `1px solid ${theme.colors.gray}`};
+    outline: ${({ theme }) => `1px solid ${theme.colors.gray}`};
   `,
   Logo: styled.div`
     display: flex;

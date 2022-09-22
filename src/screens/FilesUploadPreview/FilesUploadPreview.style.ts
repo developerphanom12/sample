@@ -51,12 +51,22 @@ export const FilesUploadPreviewStyles = {
   ButtonsBox: styled.div`
     display: flex;
     justify-content: space-between;
-    width: 220px;
+    width: 255px;
   `,
   ButtonsBoxWrapper: styled.div`
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
     display: flex;
     padding: 0;
+  `,
+  BoxWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 125px;
+  `,
+  ButtonText: styled.span`
+    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+    font-size: ${({ theme }) => theme.size.normal};
+    color: ${({ theme }) => theme.colors.halfTranparentBlack};
   `,
 };

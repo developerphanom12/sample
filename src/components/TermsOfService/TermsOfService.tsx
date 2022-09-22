@@ -1,6 +1,6 @@
 import { TermsOfServiceStyles as Styles } from './TermsOfService.style';
 
-import { TERMS_TITLE, TERMS } from './constants/termsOfService.constants';
+import { TERMS } from './constants/termsOfService.constants';
 import {
   USER_LICENSE_TITLE,
   USER_LICENSE,
@@ -10,7 +10,6 @@ export const TermsOfService = () => {
   return (
     <Styles.Wrappper>
       <Styles.ContentWrapper>
-        <Styles.Title>{TERMS_TITLE}</Styles.Title>
         {TERMS.map((item) => (
           <div key={item.title}>
             <Styles.SubTitle>{item.title}</Styles.SubTitle>

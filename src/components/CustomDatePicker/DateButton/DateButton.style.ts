@@ -5,20 +5,19 @@ export const DateButtonStyles = {
     font-size: ${(props) => props.theme.size.default};
     background-color: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.lightBlack};
-    max-height: 40px;
-    min-height: 39px;
+    height: 40px;
     width: ${(props) => (props.isInputDate ? '100%' : '140px')};
-    border-radius: 5px;
+    border-radius: 6px;
     border: 1px solid
       ${(props) =>
         props.isInputDate
-          ? props.theme.colors.boxShadowBlack
+          ? 'none'
           : props.isOpen
           ? props.theme.colors.darkRed
           : props.theme.colors.checkboxBorder};
     box-shadow: ${(props) =>
       props.isInputDate
-        ? `0px 1px 1px ${props.theme.colors.boxShadowBlack}`
+        ? `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`
         : ''};
     cursor: 'pointer';
     display: flex;

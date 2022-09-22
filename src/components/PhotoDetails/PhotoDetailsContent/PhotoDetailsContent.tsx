@@ -82,6 +82,7 @@ export const PhotoDetailsContent: FC = () => {
                 onChangeValueHandler={item.onChangeSelect}
                 marginBottom="0px"
                 isDisabled={item.isDisabled}
+                isRemoveBorder
               />
             ) : item.inputType === 'number' ? (
               <Input
@@ -91,6 +92,7 @@ export const PhotoDetailsContent: FC = () => {
                 isTextArea={item.isTextArea}
                 isHiddenLabel
                 isNoMargin
+                isRemoveBorder
                 onKeyDown={onForbiddenCharacterClick}
               />
             ) : item.type === 'input' ? (
@@ -100,6 +102,7 @@ export const PhotoDetailsContent: FC = () => {
                 onChangeValue={item.onChange}
                 isTextArea={item.isTextArea}
                 isHiddenLabel
+                isRemoveBorder
                 isNoMargin
               />
             ) : (

@@ -11,7 +11,7 @@ export const ButtonsBoxStyles = {
   ButtonsWrapper: styled.div`
     display: flex;
     justify-content: space-between;
-    max-width: 231px;
+    max-width: 175px;
     width: 100%;
   `,
 };

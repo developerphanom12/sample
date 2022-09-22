@@ -16,7 +16,7 @@ export const NotFound: FC = () => (
       <Styled.Title>{Strings.title}</Styled.Title>
       <Styled.SubTitle>{Strings.subTitle}</Styled.SubTitle>
       <Styled.Link to={ROUTES.login}>
-        <Button themedButton="primary" width="auth">
+        <Button themedButton="roundedRed" width="rounded">
           {Strings.buttonText}
         </Button>
       </Styled.Link>

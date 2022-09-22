@@ -34,6 +34,6 @@ export const ReceiptDetailsHeaderStyles = {
     display: flex;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     font-size: ${({ theme }) => theme.size.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
 };

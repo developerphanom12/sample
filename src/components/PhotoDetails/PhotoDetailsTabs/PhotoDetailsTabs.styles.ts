@@ -21,7 +21,7 @@ export const PhotoDetailsTabsStyles = {
     font-weight: ${({ isActive, theme }) =>
       isActive ? theme.fontWeight.semiBold : theme.fontWeight.normal};
     color: ${({ isActive, theme }) =>
-      isActive ? theme.colors.orange : theme.colors.black};
+      isActive ? theme.colors.darkRed : theme.colors.black};
     font-size: ${({ theme }) => theme.size.default};
     cursor: ${({ isActive }) => !isActive && 'pointer'};
     padding-bottom: 7px;
@@ -31,7 +31,7 @@ export const PhotoDetailsTabsStyles = {
       width: 100%;
       bottom: 0;
       height: 2px;
-      background: ${({ theme }) => theme.colors.orange};
+      background: ${({ theme }) => theme.colors.darkRed};
       border-radius: 10px;
     }
   `,

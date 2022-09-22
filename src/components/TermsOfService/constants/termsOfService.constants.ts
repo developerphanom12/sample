@@ -1,5 +1,3 @@
-export const TERMS_TITLE = `Terms & Conditions`;
-
 export const TERMS = [
   {
     title: 'General Terms',

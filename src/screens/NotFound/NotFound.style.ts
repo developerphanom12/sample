@@ -37,7 +37,7 @@ export const NotFoundStyles = {
     justify-content: center;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.xnormal};
     margin-bottom: 15px;
   `,
@@ -46,7 +46,7 @@ export const NotFoundStyles = {
     display: flex;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.default};
     margin-bottom: 23px;
   `,

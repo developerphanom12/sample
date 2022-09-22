@@ -12,7 +12,7 @@ export const CustomDatePickerStyles = {
       font-size: ${(props) => props.theme.size.default};
       color: ${(props) => props.theme.colors.black};
       position: absolute;
-      top: ${({ isFormattedDate }) => (isFormattedDate ? '40px' : '35px')};
+      top: 40px;
       right: 0;
       z-index: ${(props) => props.theme.zIndex.m};
       @media (min-width: 1300px) {

@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 
 import { Button } from 'components/Button';
-import { ReceiptDetailsHeader } from 'components/ReceiptDetailsHeader';
 import { ReceiptPreviewItem } from 'components/ReceiptPreviewItem';
 import { CustomCarousel } from 'components/CustomCarousel';
+import { NavigationButton } from 'components/NavigationButton';
 
 import { useFilesUploadPreviewState } from './FilesUploadPreview.state';
 import { FilesUploadPreviewStyles as Styled } from './FilesUploadPreview.style';
@@ -28,26 +28,29 @@ export const FilesUploadPreview: FC = () => {
 
   return (
     <Styled.LayoutWrapper>
-      <ReceiptDetailsHeader
-        backButtonText="Back to list"
-        isBackButton
-        onGoBackHandler={onGoBackHandler}
-      />
       <Styled.MainWrapper>
         <Styled.Wrapper>
           <Styled.ButtonsBoxWrapper>
+            <Styled.BoxWrapper onClick={onGoBackHandler}>
+              <NavigationButton
+                themedButton="navigation"
+                iconBehavior="iconPrevious"
+              >
+                <Styled.ButtonText>Back to list</Styled.ButtonText>
+              </NavigationButton>
+            </Styled.BoxWrapper>
             <Styled.ButtonsBox>
               <Button
                 onClick={onCancelClickHandler}
-                themedButton="secondary"
-                width="secondary"
+                themedButton="roundedWhite"
+                width="rounded"
               >
                 Cancel
               </Button>
               <Button
                 isLoading={isLoading}
-                themedButton="primary"
-                width="secondary"
+                themedButton="roundedRed"
+                width="roundedBig"
                 onClick={onSaveClickHandler}
               >
                 {`Upload receipt (${previewFiles.length})`}

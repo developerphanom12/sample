@@ -13,10 +13,12 @@ export const PrivacyPolicyStyles = {
   SubTitle: styled.h2`
     margin-bottom: 5px;
     font-size: ${(props) => props.theme.size.default};
+    color: ${(props) => props.theme.colors.lightBlack};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
   `,
   Paragraph: styled.p`
     font-size: ${(props) => props.theme.size.default};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-bottom: 5px;
   `,
   ContentWrapper: styled.div`

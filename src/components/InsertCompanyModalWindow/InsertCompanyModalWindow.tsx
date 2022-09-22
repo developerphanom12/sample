@@ -59,6 +59,7 @@ export const InsertCompanyModalWindow: FC<IInsertCompanyModalWindowProps> = (
           text="Company"
           onChangeValue={onChangeInputValueHandler}
           onKeyDown={onEnterCreateItemClick}
+          isRemoveBorder
         />
         <UploadLogoButton
           id="insertLogo"

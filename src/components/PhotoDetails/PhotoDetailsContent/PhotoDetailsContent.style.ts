@@ -38,7 +38,7 @@ export const PhotoDetailsContentStyles = {
   `,
 
   ChildrenWrapper: styled.div`
-    max-width: 381px;
+    max-width: 248px;
     width: 100%;
   `,
   CheckBoxWrapper: styled.div`
@@ -56,7 +56,7 @@ export const PhotoDetailsContentStyles = {
   Label: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     min-width: 85px;
     width: 100%;
   `,

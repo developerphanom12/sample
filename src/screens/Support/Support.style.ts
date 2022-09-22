@@ -38,7 +38,7 @@ export const SupportStyles = {
     justify-content: center;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.xnormal};
     margin-bottom: 15px;
   `,
@@ -47,12 +47,12 @@ export const SupportStyles = {
     display: flex;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.default};
     margin-bottom: 23px;
   `,
   Link: styled(Link)`
-    max-width: 250px;
+    max-width: 160px;
     width: 100%;
   `,
 };
