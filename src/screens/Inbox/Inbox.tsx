@@ -175,6 +175,7 @@ export const Inbox: FC = () => {
           firstSubtitle={Strings.firstSubtitle}
           secondSubtitle={Strings.secondSubtitle}
           title={Strings.title}
+          isRoundedButton
           onAddReceiptHandler={onSelectFilesHandler}
         />
       ) : null}

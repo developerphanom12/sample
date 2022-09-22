@@ -24,13 +24,13 @@ export const Avatar: FC<IAvatarProps> = (props) => {
         !isUploadingPhoto &&
         !avatarSrc && (
           <Styled.ImageWrapper>
-            <Icon type="settingsAvatar" />
+            <Icon type="settingsAvatar" height={55} width={75} />
           </Styled.ImageWrapper>
         )
       )}
       {!isUploadingPhoto && isHover && (
         <HoverUploadLogo data-testid="hover-upload-logo">
-          <Icon type="cloudUpload" />
+          <Icon type="cloudUpload" width={50} height={55} />
         </HoverUploadLogo>
       )}
     </>

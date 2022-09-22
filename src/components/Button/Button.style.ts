@@ -42,6 +42,7 @@ const THEME = {
     color: ${(props) => props.theme.colors.darkRed};
     border: ${(props) => `1px solid ${props.theme.colors.darkRed}`};
     border-radius: 50px;
+    box-shadow: none;
   `,
 };
 
@@ -63,6 +64,10 @@ const WIDTH = {
     width: 80px;
     height: 40px;
   `,
+  roundedBig: css`
+    width: 100%;
+    height: 40px;
+  `,
 };
 
 export const ButtonStyles = {
@@ -72,7 +77,7 @@ export const ButtonStyles = {
     min-height: 39px;
     border-radius: 6px;
     box-shadow: ${(props) =>
-      `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`} ;
+      `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};
     background-color: ${(props) => props.theme.colors.lightGray};
     ${(props) => props.themedButton && THEME[props.themedButton]};
     ${(props) => props.width && WIDTH[props.width]};

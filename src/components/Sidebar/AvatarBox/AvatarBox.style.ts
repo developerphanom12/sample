@@ -10,11 +10,14 @@ export const HoverUploadLogo = styled.div`
   top: 50%;
   left: 50%;
   opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const AvatarBoxStyles = {
   MainWrapper: styled.div`
-    padding: 30px 10px 0;
+    padding: 20px 10px 0;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -39,8 +42,8 @@ export const AvatarBoxStyles = {
   `,
   InputLabel: styled.label`
     overflow: hidden;
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
     border-radius: 100px;
     position: absolute;
     z-index: ${Z_INDEX.m};
@@ -71,7 +74,7 @@ export const AvatarBoxStyles = {
     font-size: ${({ theme }) => theme.size.xnormal};
     font-weight: ${({ theme, isStatus }) =>
       isStatus ? theme.fontWeight.normal : theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     margin-top: ${({ isStatus }) => isStatus && '5px'}; ;
   `,
 };

@@ -12,7 +12,7 @@ export type ButtonStyleProps = {
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
   themedButton: TButtonTheme;
-  width: 'auth' | 'primary' | 'secondary' | 'actions' | 'rounded';
+  width: 'auth' | 'primary' | 'secondary' | 'actions' | 'rounded' | 'roundedBig';
 };
 
 export const Button = ({

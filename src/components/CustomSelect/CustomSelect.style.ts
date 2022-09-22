@@ -15,16 +15,16 @@ export const StyledReactSelect = styled(Select)<{
   height?: string;
   paginate?: boolean;
   isFullWidth?: boolean;
+  isRemoveBorder?: boolean;
 }>`
   .Select__control {
     font-size: ${({ theme }) => theme.size.default};
     background: ${(props) => props.theme.colors.white};
-    border: ${(props) => `1px solid ${props.theme.colors.checkboxBorder}`};
+    border: ${({ theme, isRemoveBorder }) =>
+      isRemoveBorder ? 'none' : `1px solid ${theme.colors.checkboxBorder}`};
     box-sizing: border-box;
-    box-shadow: ${(props) =>
-      props.paginate
-        ? 'none'
-        : `0px 1px 1px ${props.theme.colors.boxShadowBlack}`};
+    box-shadow: ${({ theme, paginate }) =>
+      paginate ? 'none' : `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
     border-radius: 6px;
     width: 100%;
     max-width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '500px')};

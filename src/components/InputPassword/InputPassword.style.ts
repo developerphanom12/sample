@@ -7,20 +7,18 @@ export const Styled = {
     color: ${(props) => props.theme.colors.black};
     margin-bottom: ${(props) => props.theme.size.small};
   `,
-
   Input: styled.input<{ isError?: boolean }>`
     background-color: ${(props) => props.theme.colors.white};
     font-size: ${(props) => props.theme.size.normal};
     padding: 10px 40px 10px 10px;
-    max-height: 45px;
-    min-height: 35px;
+    height: 40px;
+    color: ${(props) => props.theme.colors.lightBlack};
     width: 100%;
-    border-radius: 5px;
+    border-radius: 6px;
     border: ${({ isError, theme }) =>
-      isError
-        ? `1px solid ${theme.colors.red}`
-        : `1px solid ${theme.colors.opacityBlack}`};
-    box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
+      isError ? `1px solid ${theme.colors.red}` : `none`};
+    box-shadow: ${({ theme }) =>
+      `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
     &::-webkit-contacts-auto-fill-button,
     ::-webkit-credentials-auto-fill-button {
       visibility: hidden;
@@ -35,7 +33,8 @@ export const Styled = {
     display: flex;
     background-color: transparent;
     position: absolute;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 13px;
     cursor: pointer;
   `,

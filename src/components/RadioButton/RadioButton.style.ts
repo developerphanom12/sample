@@ -1,34 +1,72 @@
-import { styled } from 'styles/theme';
+import { styled, Z_INDEX } from 'styles/theme';
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+`;
+
+export const RadioButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  ::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5.5px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+  }
+`;
 
 export const RadioButtonStyles = {
-  RadioButtonWrapper: styled.div<{ isChecked: boolean }>`
-    display: flex;
-    align-items: center;
-    height: 18px;
-    width: 18px;
-    border-radius: 50%;
-    border: solid 2px
-      ${(props) =>
-        props.isChecked ? props.theme.colors.orange : props.theme.colors.black};
-  `,
   StyledRadioButton: styled.div<{ isChecked: boolean }>`
-    width: 100%;
-    height: 100%;
+    width: 16px;
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: ${Z_INDEX.xs};
+    background-clip: border-box;
     background: ${(props) =>
-      props.isChecked ? props.theme.colors.orange : 'transparent'};
+      props.isChecked ? props.theme.colors.white : 'transparent'};
     border-radius: 50%;
-    border: solid 3px ${(props) => props.theme.colors.white};
+    border: ${({ theme, isChecked }) =>
+      isChecked
+        ? `solid 4px ${theme.colors.darkRed}`
+        : `solid 1px ${theme.colors.checkboxBorder}`};
     transition: all 50ms;
     cursor: pointer;
+    :hover {
+      border: solid 1px ${(props) => props.theme.colors.darkRed};
+    }
   `,
-  RadioButtonLabel: styled.label`
+  RadioButtonLabel: styled.label<{ isChecked: boolean }>`
     display: flex;
     align-items: center;
     margin-right: 8px;
     margin-bottom: 2px;
+    :hover {
+      ${RadioButtonWrapper} {
+        ::before {
+          background-color: ${(props) => props.theme.colors.hoveredCheckbox};
+        }
+      }
+      div > div {
+        border: ${({ theme, isChecked }) =>
+          isChecked
+            ? `solid 4px ${theme.colors.darkRed}`
+            : `solid 1px ${theme.colors.darkRed}`};
+      }
+    }
   `,
   HiddenRadioButtonInput: styled.input`
     border: 0;
@@ -43,7 +81,7 @@ export const RadioButtonStyles = {
   `,
   LabelText: styled.span`
     margin-left: 13px;
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     font-weight: ${(props) => props.theme.fontWeight.normal};
     font-size: ${(props) => props.theme.size.default};
     cursor: pointer;

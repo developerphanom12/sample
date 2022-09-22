@@ -19,7 +19,7 @@ export const LinkItemStyles = {
         ? props.theme.fontWeight.semiBold
         : props.theme.fontWeight.normal};
     color: ${(props) =>
-      props.active ? props.theme.colors.orange : props.theme.colors.black};
+      props.active ? props.theme.colors.darkRed : props.theme.colors.lightBlack};
     border-bottom: ${({ theme }) =>
       ` 1px solid ${theme.colors.boxShadowBlack}`};
     padding-left: 50px;
@@ -28,7 +28,7 @@ export const LinkItemStyles = {
       border-bottom: none;
     }
     &:hover {
-      background: ${(props) => props.theme.colors.orange};
+      background: ${(props) => props.theme.colors.darkRed};
       color: ${(props) => props.theme.colors.white};
     }
     pointer-events: ${({ is_disabled }) => is_disabled && 'none'};

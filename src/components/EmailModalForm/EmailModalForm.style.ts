@@ -4,14 +4,14 @@ export const EmailModalFormStyles = {
   MainContentWrapper: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 21px 33px 0 33px;
+    padding: 5px 33px 0 33px;
     width: 100%;
     flex: 1;
   `,
   Label: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-bottom: 10px;
   `,
   AttachmentsWrapper: styled.div`
@@ -37,7 +37,7 @@ export const EmailModalFormStyles = {
     align-items: center;
   `,
   Text: styled.p`
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     font-size: ${({ theme }) => theme.size.default};
   `,

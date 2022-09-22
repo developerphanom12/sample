@@ -6,8 +6,8 @@ export const AvatarStyles = {
     justify-content: center;
     align-self: center;
     background: ${({ theme }) => theme.colors.lighterGrey};
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
     border: ${({ theme }) => `1px solid ${theme.colors.boxShadowBlack}`};
     box-sizing: border-box;
     box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
@@ -17,8 +17,8 @@ export const AvatarStyles = {
     align-items: center;
   `,
   Image: styled.div<{ imageSrc?: string }>`
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -31,8 +31,8 @@ export const AvatarStyles = {
     border: ${({ theme }) => `1px solid ${theme.colors.boxShadowBlack}`};
   `,
   ImageWrapper: styled.div`
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
     border: ${({ theme }) => `1px solid ${theme.colors.boxShadowBlack}`};
     box-sizing: border-box;
     box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);

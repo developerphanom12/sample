@@ -70,8 +70,9 @@ export const Styled = {
     height: ${(props) => props.inputHeight || '45px'};
     width: 100%;
     border-radius: 6px;
-    border: ${({ theme }) => `1px solid ${theme.colors.checkboxBorder}`};
-    box-shadow: ${({ theme }) => `0px 1px 1px ${theme.colors.boxShadowBlack}`};
+    border: none;
+    box-shadow: ${({ theme }) =>
+      `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
     resize: none;
     &:focus {
       border: ${({ theme }) => `1px solid ${theme.colors.darkRed}`};

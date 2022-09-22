@@ -57,6 +57,7 @@ export const FieldItem: FC<IFieldItemProps> = (props) => {
             errorText={error}
             touched={touched}
             onBlur={onBlur}
+            isRemoveBorder
           />
         </Styled.FieldWrapper>
       ) : inputType === 'select' ? (
@@ -68,6 +69,7 @@ export const FieldItem: FC<IFieldItemProps> = (props) => {
             options={selectOptions}
             onChangeValueHandler={onChangeSelectHandler}
             marginBottom="0px"
+            isRemoveBorder
           />
         </Styled.FieldWrapper>
       ) : inputType === 'password' ? (

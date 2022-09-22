@@ -38,6 +38,7 @@ export const EmailInputItem: FC<IEmailInputItemProps> = (props) => {
         isHiddenLabel
         isTextArea={isTextArea}
         inputHeight={inputHeight}
+        isRemoveBorder
       />
     </>
   );

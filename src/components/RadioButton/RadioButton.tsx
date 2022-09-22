@@ -1,6 +1,9 @@
 import { FC } from 'react';
 
-import { RadioButtonStyles as Styled } from './RadioButton.style';
+import {
+  RadioButtonStyles as Styled,
+  RadioButtonWrapper,
+} from './RadioButton.style';
 
 interface IRadioButtonProps {
   labelText?: string;
@@ -11,8 +14,8 @@ interface IRadioButtonProps {
 export const RadioButton: FC<IRadioButtonProps> = (props) => {
   const { labelText, isChecked, value, onChange } = props;
   return (
-    <Styled.RadioButtonLabel>
-      <Styled.RadioButtonWrapper isChecked={isChecked}>
+    <Styled.RadioButtonLabel isChecked={isChecked}>
+      <RadioButtonWrapper>
         <Styled.HiddenRadioButtonInput
           onChange={onChange}
           value={value}
@@ -20,7 +23,7 @@ export const RadioButton: FC<IRadioButtonProps> = (props) => {
           checked={isChecked}
         />
         <Styled.StyledRadioButton isChecked={isChecked} />
-      </Styled.RadioButtonWrapper>
+      </RadioButtonWrapper>
       <Styled.LabelText>{labelText}</Styled.LabelText>
     </Styled.RadioButtonLabel>
   );

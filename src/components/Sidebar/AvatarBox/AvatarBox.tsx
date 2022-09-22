@@ -38,7 +38,6 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
   return (
     <Styled.MainWrapper>
       <Styled.ContentWrapper>
-        <Styled.Label>Settings</Styled.Label>
         <Styled.ProfileImageWrapper
           data-testid="image-wrapper"
           isHover={isHover}

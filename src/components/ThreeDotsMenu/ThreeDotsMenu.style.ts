@@ -11,9 +11,10 @@ export const ThreeDotsMenuStyles = {
   `,
   Item: styled.button`
     font-size: ${({ theme }) => theme.size.default};
+    color: ${({ theme }) => theme.colors.lightBlack};
     width: 100%;
     height: 38px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderWhite};
     background-color: ${({ theme }) => theme.colors.white};
     text-align: start;
     &:hover {

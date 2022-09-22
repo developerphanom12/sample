@@ -46,7 +46,9 @@ export const InputPassword: React.FC<InputProps> = (props) => {
           onChange={onChangePassword}
         />
         <Styled.Button onClick={onClick} data-testid="button">
-          <Icon type={showPassword ? 'hidePassword' : 'showPassword'} />
+          <Icon
+            type={showPassword ? 'hidePassword' : 'showPassword'}
+          />
         </Styled.Button>
         {touched && !!errorText && <ErrorText errorText={errorText} />}
       </Styled.WrapperInput>

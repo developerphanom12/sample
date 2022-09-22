@@ -16,7 +16,7 @@ export const MyAccountStyles = {
     width: 100%;
   `,
   Title: styled.h2`
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.xnormal};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     margin-bottom: 35px;

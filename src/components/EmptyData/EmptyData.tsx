@@ -17,6 +17,7 @@ interface IEmptyDataProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isNoResults?: boolean;
   isUploadFile?: boolean;
+  isRoundedButton?: boolean
 }
 export const EmptyData: FC<IEmptyDataProps> = (props) => {
   const {
@@ -27,6 +28,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
     isNoResults,
     isUploadFile,
     buttonText,
+    isRoundedButton,
     onAddReceiptHandler,
     onClick,
   } = props;
@@ -45,7 +47,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
           <Styled.SubTitle>{firstSubtitle}</Styled.SubTitle>
           <Styled.SubTitle>{secondSubtitle}</Styled.SubTitle>
           {isUploadFile ? (
-            <FileUploadButton onChangeFiles={onAddReceiptHandler} />
+            <FileUploadButton onChangeFiles={onAddReceiptHandler} isRoundedButton={isRoundedButton}/>
           ) : (
             <Styled.ButtonWrapper>
               <Button

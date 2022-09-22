@@ -9,7 +9,8 @@ interface IModalButtonsBox {
   isNoPadding?: boolean;
   isCancelButton?: boolean;
   isSaveButton?: boolean;
-  type?: 'submit' | 'reset' | 'button' | undefined;
+  buttonPosition?: 'flex-end' | 'flex-start';
+  type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
   isDisableButton?: boolean;
   onSaveButtonCLickHandler?: () => void;
@@ -20,6 +21,7 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
   const {
     onSaveButtonCLickHandler,
     onCancelClickHandler,
+    buttonPosition,
     saveButtonText,
     isSaveButton,
     isDisableButton,
@@ -29,27 +31,30 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
     type,
   } = props;
   return (
-    <Styled.ButtonsBox isNoPadding={isNoPadding}>
+    <Styled.ButtonsBox
+      isNoPadding={isNoPadding}
+      buttonPosition={buttonPosition}
+    >
       <Styled.ButtonsWrapper isCancelButton={isCancelButton}>
+        <Button
+          onClick={onSaveButtonCLickHandler}
+          themedButton="roundedRed"
+          width="rounded"
+          isDisabled={isDisableButton}
+          isLoading={isLoading}
+          type={type}
+        >
+          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Save' : 'Send'}
+        </Button>
         {!isCancelButton && (
           <Button
-            onClick={onSaveButtonCLickHandler}
-            themedButton="roundedRed"
+            onClick={onCancelClickHandler}
+            themedButton="roundedWhite"
             width="rounded"
-            isDisabled={isDisableButton}
-            isLoading={isLoading}
-            type={type}
           >
-            {!!saveButtonText ? saveButtonText : isSaveButton ? 'Save' : 'Send'}
+            Cancel
           </Button>
         )}
-        <Button
-          onClick={onCancelClickHandler}
-          themedButton="roundedWhite"
-          width="rounded"
-        >
-          Cancel
-        </Button>
       </Styled.ButtonsWrapper>
     </Styled.ButtonsBox>
   );

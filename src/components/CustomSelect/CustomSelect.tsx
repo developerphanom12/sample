@@ -26,6 +26,7 @@ interface ICustomSelectProps {
   isDisabled?: boolean;
   isMulti?: boolean;
   isFullWidth?: boolean;
+  isRemoveBorder?: boolean;
 }
 
 export const CustomSelect: FC<ICustomSelectProps> = (props) => {
@@ -41,11 +42,13 @@ export const CustomSelect: FC<ICustomSelectProps> = (props) => {
     isDisabled,
     isMulti,
     isFullWidth,
+    isRemoveBorder,
   } = props;
 
   return (
     <SelectWrapper>
       <StyledReactSelect
+        isRemoveBorder={isRemoveBorder}
         height={height}
         marginBottom={marginBottom}
         components={{ DropdownIndicator }}

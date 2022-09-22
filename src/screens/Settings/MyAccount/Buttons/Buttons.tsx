@@ -28,13 +28,14 @@ export const Buttons: FC<IButtons> = (props) => {
       <Styled.ResetPasswordButtonWrapper>
         <Button
           onClick={onClickSettingsButtonHandler}
-          themedButton="secondary"
-          width="auth"
+          themedButton="roundedWhite"
+          width="roundedBig"
         >
           {settingsButtonText}
         </Button>
       </Styled.ResetPasswordButtonWrapper>
       <ModalButtonsBox
+        buttonPosition="flex-end"
         onCancelClickHandler={onCancelbuttonClickHandler}
         isNoPadding
         isSaveButton

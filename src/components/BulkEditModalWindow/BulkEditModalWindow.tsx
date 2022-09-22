@@ -19,7 +19,7 @@ export const BulkEditModalWindow: FC<IEmailModalWindowProps> = (props) => {
       ariaHideApp={false}
       style={BulkModalStyles}
     >
-      <ModalWindowHeader headerTitle={'Bulk Edit'} />
+      <ModalWindowHeader headerTitle="Bulk Edit" />
       <BulkEditContent />
     </ReactModal>
   );
