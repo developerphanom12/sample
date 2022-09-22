@@ -23,12 +23,11 @@ export const CapiumModalWindowContentStyles = {
     justify-content: center;
     height: 62px;
     width: 100%;
-    border-bottom: ${({ theme }) => `1px solid ${theme.colors.gray}`};
   `,
   Title: styled.p`
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     font-size: ${({ theme }) => theme.size.mediumLarge};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
   `,
   MainContentWrapper: styled.div`
     display: flex;
@@ -41,7 +40,7 @@ export const CapiumModalWindowContentStyles = {
     justify-content: center;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     font-size: ${({ theme }) => theme.size.default};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     line-height: 19px;
     margin-bottom: 25px;
   `,
@@ -82,7 +81,7 @@ export const CapiumModalWindowContentStyles = {
     display: flex;
     font-weight: ${({ theme }) => theme.fontWeight.medium};
     font-size: ${({ theme }) => theme.size.default};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     margin-left: 5px;
   `,
 };

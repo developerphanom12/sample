@@ -2,9 +2,9 @@ import { styled } from 'styles/theme';
 
 export const AvatarStyles = {
   Wrapper: styled.div`
-    border-left: solid 1px ${(props) => props.theme.colors.white};
-    width: 60px;
-    height: 75px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;

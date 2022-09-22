@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { ROUTES } from '../../../constants/routes';
 
 import { LinkItem } from '../LinkItem';
 import { useLinkListState } from './LinkList.state';
 import { LinksListStyles as Styled } from './LinksList.style';
+
+import { ROUTES } from 'constants/routes';
 
 interface ILinksList {
   isActiveAccount: boolean;

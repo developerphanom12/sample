@@ -30,7 +30,7 @@ export const ReceiptsSelects: React.FC<IReceiptsSelectsProps> = (props) => {
           value={timeFilterValue}
           onChangeValueHandler={onChangeCategoryFieldHandler}
           marginBottom="0"
-          height="45"
+          isRemoveBorder
         />
       </ReceiptsSelectsStyles.SelectorBox>
   );

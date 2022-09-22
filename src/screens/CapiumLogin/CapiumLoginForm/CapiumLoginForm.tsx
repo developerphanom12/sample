@@ -77,6 +77,7 @@ export const CapiumLoginForm: FC<ICapiumLoginForm> = (props) => {
         inputName={emailName}
         errorText={emailError}
         touched={emailTouched}
+        isRemoveBorder
       />
 
       <InputPassword

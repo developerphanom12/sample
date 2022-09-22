@@ -49,7 +49,7 @@ export const Checkbox = {
   `,
   LabelText: styled.span`
     margin-left: 13px;
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     font-weight: ${(props) => props.theme.fontWeight.normal};
     font-size: ${(props) => props.theme.size.default};
     cursor: pointer;

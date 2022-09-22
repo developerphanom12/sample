@@ -28,9 +28,6 @@ export const AvatarBoxStyles = {
     align-items: center;
     margin-bottom: 30px;
   `,
-  UserInfoWrapper: styled.div`
-    margin-left: 40px;
-  `,
   Label: styled.p`
     display: flex;
     justify-content: center;
@@ -71,6 +68,7 @@ export const AvatarBoxStyles = {
   `,
   NameAndStatus: styled.p<{ isStatus?: boolean }>`
     display: flex;
+    justify-content: center;
     font-size: ${({ theme }) => theme.size.xnormal};
     font-weight: ${({ theme, isStatus }) =>
       isStatus ? theme.fontWeight.normal : theme.fontWeight.semiBold};

@@ -11,6 +11,7 @@ import { useHeaderState } from './Header.state';
 
 import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
+import { AvatarSubmenu } from './AvatarSubmenu';
 
 export interface HeaderProps {
   role: 'admin' | 'customer';
@@ -27,6 +28,10 @@ export const Header: FC<HeaderProps> = (props) => {
     isFetchingData,
     isSwitchCompany,
     active_account,
+    isAvatarHover,
+    avatarLinks,
+    onMouseEnterHandler,
+    onMouseLeaveHandler,
     onSwitchCompany,
     onClickSwitcherHandler,
     onSwitchCompanyHandler,
@@ -77,10 +82,7 @@ export const Header: FC<HeaderProps> = (props) => {
                     );
                   })
                 : CUSTOMER_LINKS.map((link) => (
-                    <CustomLink
-                      key={link.title}
-                      to={link.route}
-                    >
+                    <CustomLink key={link.title} to={link.route}>
                       {link.title}
                     </CustomLink>
                   ))}
@@ -98,8 +100,14 @@ export const Header: FC<HeaderProps> = (props) => {
                 onSwitchCompanyHandler={onSwitchCompanyHandler}
               />
             ) : null}
-            <Styled.Link to={active_account ? ROUTES.settings : ''}>
+            <Styled.Link
+              to={active_account ? ROUTES.settings : ''}
+              avatar="true"
+              onMouseEnter={onMouseEnterHandler}
+              onMouseLeave={onMouseLeaveHandler}
+            >
               <Avatar />
+              {isAvatarHover && <AvatarSubmenu menuItems={avatarLinks} />}
             </Styled.Link>
           </Styled.Notifications>
         </Styled.BlocksWrapper>

@@ -16,7 +16,7 @@ export const SignUpFormStyles = {
   ForgotPassword: styled(Link)`
     display: flex;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.orange};
+    color: ${({ theme }) => theme.colors.darkRed};
     font-size: ${({ theme }) => theme.size.default};
     cursor: pointer;
     text-decoration: underline;
@@ -25,7 +25,7 @@ export const SignUpFormStyles = {
   Label: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-bottom: 10px;
   `,
 };

@@ -29,7 +29,7 @@ export const InfoPopupStyles = {
   Text: styled.p`
     font-weight: ${({ theme }) => theme.fontWeight.normal};
     font-size: ${({ theme }) => theme.size.biggerSmall};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     padding: 0 5px;
     overflow-y: scroll;
     height: 100%;

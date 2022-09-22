@@ -9,17 +9,19 @@ export const LinkItemStyles = {
   }>`
     width: 100%;
     height: 100%;
-    max-height: 60px;
-    min-height: 55px;
+    max-height: 55px;
+    min-height: 50px;
     display: flex;
     align-items: center;
-    font-size: ${(props) => props.theme.size.xnormal};
+    font-size: ${(props) => props.theme.size.default};
     font-weight: ${(props) =>
       props.active
         ? props.theme.fontWeight.semiBold
         : props.theme.fontWeight.normal};
     color: ${(props) =>
-      props.active ? props.theme.colors.darkRed : props.theme.colors.lightBlack};
+      props.active
+        ? props.theme.colors.darkRed
+        : props.theme.colors.lightBlack};
     border-bottom: ${({ theme }) =>
       ` 1px solid ${theme.colors.boxShadowBlack}`};
     padding-left: 50px;
@@ -28,8 +30,8 @@ export const LinkItemStyles = {
       border-bottom: none;
     }
     &:hover {
-      background: ${(props) => props.theme.colors.darkRed};
-      color: ${(props) => props.theme.colors.white};
+      background: ${(props) => props.theme.colors.pink};
+      color: ${(props) => props.theme.colors.lightBlack};
     }
     pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
     color: ${({ is_disabled, theme }) => is_disabled && theme.colors.gray};

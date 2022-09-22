@@ -62,6 +62,7 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
         onBlur={onBlurEmail}
         touched={emailTouched}
         isHiddenLabel
+        isRemoveBorder
       />
       <Styled.Label>{STRINGS.sign_in_up.password_input}</Styled.Label>
       <InputPassword

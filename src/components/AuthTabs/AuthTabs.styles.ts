@@ -17,7 +17,7 @@ export const AuthTabsStyles = {
   `,
   ActiveLine: styled.div`
     height: 2px;
-    background: ${({ theme }) => theme.colors.orange};
+    background: ${({ theme }) => theme.colors.darkRed};
     border-radius: 10px;
   `,
   Tab: styled.div<{ isActive?: boolean }>`
@@ -25,7 +25,7 @@ export const AuthTabsStyles = {
     font-weight: ${({ isActive, theme }) =>
       isActive ? theme.fontWeight.semiBold : theme.fontWeight.normal};
     color: ${({ isActive, theme }) =>
-      isActive ? theme.colors.orange : theme.colors.black};
+      isActive ? theme.colors.darkRed : theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.title};
     cursor: ${({ isActive }) => !isActive && 'pointer'};
     white-space: nowrap;
@@ -42,7 +42,7 @@ export const AuthTabsStyles = {
         bottom: 0;
         width: 100%;
         height: 3px;
-        background: ${theme.colors.orange};
+        background: ${theme.colors.darkRed};
         border-radius: 10px;`}
     }
   `,

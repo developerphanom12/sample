@@ -62,5 +62,16 @@ export const HeaderStyles = {
     display: flex;
     align-items: center;
   `,
-  Link: styled(Link)``,
+  Link: styled(Link)<{ avatar?: string }>`
+    ${(props) =>
+      props.avatar &&
+      `
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 20px;
+      background-color: ${props.theme.colors.white};
+  `}
+  `,
 };

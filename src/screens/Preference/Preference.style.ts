@@ -35,7 +35,7 @@ export const PreferenceStyles = {
   SubTitle: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-bottom: ${(props) => props.theme.size.small};
   `,
   TitleWrapper: styled.div`
@@ -46,7 +46,7 @@ export const PreferenceStyles = {
   Title: styled.h1`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.title};
-    color: ${(props) => props.theme.colors.orange};
+    color: ${(props) => props.theme.colors.darkRed};
     padding-bottom: 7px;
     position: relative;
     margin-bottom: 38px;

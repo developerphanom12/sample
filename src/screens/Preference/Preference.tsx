@@ -46,6 +46,7 @@ export const Preference: FC = () => {
               onChangeValue={formik.handleChange}
               onBlur={formik.handleBlur}
               isDisabled={isChecked}
+              isRemoveBorder
             />
             <Styled.SubTitle>{STRINGS.currency}</Styled.SubTitle>
             <CustomSelect
@@ -53,6 +54,7 @@ export const Preference: FC = () => {
               options={formatedCurrencies}
               onChangeValueHandler={onChangeCurrencyHandler}
               value={selectedCurrencyValue}
+              isRemoveBorder
             />
             <Styled.SubTitle>{STRINGS.dateFormat}</Styled.SubTitle>
             <CustomSelect
@@ -60,6 +62,7 @@ export const Preference: FC = () => {
               options={DATE_FORMATS}
               onChangeValueHandler={onChangeDateFormatHandler}
               value={selectedFormatDate}
+              isRemoveBorder
             />
             {!locationState?.withAccountant && (
               <Styled.CheckBoxWrapper>

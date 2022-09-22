@@ -23,11 +23,6 @@ export const CapiumLoginStyle = {
       align-items: center;
     }
   `,
-  IconWrapper: styled.div`
-    display: flex;
-    margin-right: 10px;
-    margin-top: 10px;
-  `,
   TabWrapper: styled.div`
     display: flex;
     width: 100%;

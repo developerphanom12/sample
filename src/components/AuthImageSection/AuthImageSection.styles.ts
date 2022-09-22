@@ -31,18 +31,18 @@ export const AuthImageSectionStyles = {
     justify-content: flex-start;
     width: 100%;
     font-weight: ${({ theme }) => theme.fontWeight.normal};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.title};
   `,
   BoldText: styled.span`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.title};
   `,
   SubTitle: styled.h2`
     display: flex;
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.lightBlack};
     font-size: ${({ theme }) => theme.size.big};
     max-width: 409px;
     width: 100%;

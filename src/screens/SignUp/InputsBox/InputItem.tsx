@@ -71,6 +71,7 @@ export const InputItem: FC<IInputItemProps> = (props) => {
             onChangeValueHandler={onChangeCountryValueHandler}
             name={name}
             options={countries}
+            isRemoveBorder
           />
         </>
       ) : (
@@ -85,6 +86,7 @@ export const InputItem: FC<IInputItemProps> = (props) => {
             onChangeValue={onChange}
             value={value}
             isHiddenLabel
+            isRemoveBorder
           />
         </>
       )}

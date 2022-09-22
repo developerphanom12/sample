@@ -36,8 +36,12 @@ import { ReactComponent as cloudUpload } from 'assets/icons/cloud-upload.svg';
 import { ReactComponent as dropDownArrow } from 'assets/icons/dropdown-arrow.svg';
 import { ReactComponent as tableArrow } from 'assets/icons/table-arrow.svg';
 import { ReactComponent as smallSearchIcon } from 'assets/icons/small-search-icon.svg';
+import { ReactComponent as profileIcon } from 'assets/icons/profile-icon.svg';
+import { ReactComponent as logoutIcon } from 'assets/icons/logout-icon.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
+  profileIcon,
+  logoutIcon,
   smallSearchIcon,
   tableArrow,
   dropDownArrow,

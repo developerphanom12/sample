@@ -61,14 +61,12 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
           />
         </Styled.ProfileImageWrapper>
       </Styled.ContentWrapper>
-      <Styled.UserInfoWrapper>
-        <Styled.NameAndStatus>{userFullName}</Styled.NameAndStatus>
-        {isActiveAccount && (
-          <Styled.NameAndStatus isStatus>
-            {getFirstLetterUppercase(userRole)}
-          </Styled.NameAndStatus>
-        )}
-      </Styled.UserInfoWrapper>
+      <Styled.NameAndStatus>{userFullName}</Styled.NameAndStatus>
+      {isActiveAccount && (
+        <Styled.NameAndStatus isStatus>
+          {getFirstLetterUppercase(userRole)}
+        </Styled.NameAndStatus>
+      )}
     </Styled.MainWrapper>
   );
 };

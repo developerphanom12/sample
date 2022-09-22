@@ -23,7 +23,7 @@ const THEME = {
     align-items: center;
     justify-content: center;
     background-color: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     border: 1px solid rgba(34, 43, 56, 0.2);
   `,
   roundedRed: css`

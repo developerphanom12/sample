@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { AuthImageSection } from 'components/AuthImageSection/AuthImageSection';
 import { AuthTabs } from 'components/AuthTabs/AuthTabs';
-import { Icon } from 'components/Icons/Icons';
 import { CapiumAccountModalWindow } from 'components/CapiumAccountModalWindow';
 
 import { CapiumLoginStyle as Styled } from './CapiumLogin.style';
@@ -26,7 +25,7 @@ export const CapiumLogin: FC = () => {
   } = useCapiumLoginState();
 
   return (
-    <Styled.MainWrapper data-testid='capium-login-page'>
+    <Styled.MainWrapper data-testid="capium-login-page">
       <CapiumAccountModalWindow
         isModalWindowOpen={isModalOpen}
         accounts={capiumAccounts}
@@ -38,9 +37,6 @@ export const CapiumLogin: FC = () => {
       <Styled.Section>
         <Styled.RightSideContentWrapper>
           <Styled.TabWrapper>
-            <Styled.IconWrapper>
-              <Icon type="capiumLogo" />
-            </Styled.IconWrapper>
             <AuthTabs tabText={CAPIUM_LOGIN_STRINGS.continueCapium} />
           </Styled.TabWrapper>
           <CapiumLoginForm

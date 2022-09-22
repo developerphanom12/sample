@@ -10,8 +10,11 @@ import {
   setIsSwitchCompany,
 } from 'screens/Settings/reducer/settings.reducer';
 import { switchAccount } from 'screens/SignUp/reducer/signup.reducer';
+import { logOut } from 'screens/Settings/settings.api';
 
 import { getUserCompanies, selectActiveAccount } from './header.api';
+
+import { getAvatarLinks } from 'constants/header-links';
 
 export const useHeaderState = () => {
   const dispatch = useDispatch();
@@ -28,13 +31,30 @@ export const useHeaderState = () => {
     (account) => account.id === active_account
   );
 
+  const [isAvatarHover, setIsAvatarHover] = useState(false);
   const [isOpenSwitcher, setIsOpenSwitcher] = useState(false);
   const [activeAccountId, setActiveAccountId] = useState(active_account || '');
 
+  const onMouseEnterHandler = () => setIsAvatarHover(true);
+  const onMouseLeaveHandler = () => setIsAvatarHover(false);
   const onClickSwitcherHandler = () => setIsOpenSwitcher(!isOpenSwitcher);
   const onClickOutsideSwitcherHandler = () => setIsOpenSwitcher(false);
 
   const switcherRef = useOutsideClick(onClickOutsideSwitcherHandler);
+
+  const onLogOut = async () => {
+    try {
+      const { data } = await logOut();
+      data.message === 'Success' &&
+        dispatch({
+          type: 'LOGOUT',
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const avatarLinks = getAvatarLinks(onLogOut);
 
   const onSwitchCompany = async (id?: string) => {
     try {
@@ -74,6 +94,10 @@ export const useHeaderState = () => {
     activeCompany,
     activeAccountId,
     active_account,
+    isAvatarHover,
+    avatarLinks,
     onGetAllCompaniesHandler,
+    onMouseEnterHandler,
+    onMouseLeaveHandler,
   };
 };
