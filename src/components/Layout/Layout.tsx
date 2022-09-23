@@ -6,7 +6,7 @@ import { LayoutStyles } from './Layout.style';
 
 export const Layout: FC = () => (
   <LayoutStyles.Wrapper>
-    <Header role="admin" />
+    <Header />
     <Outlet />
   </LayoutStyles.Wrapper>
 );

@@ -10,6 +10,7 @@ import {
   getTodayDateRange,
   getYesterdayDateRange,
 } from 'services/utils';
+import { useGetCompanyLogo } from '../../hooks/useGetCompanyLogo';
 
 import { setFiles } from '../FilesUploadPreview/reducer';
 import { getReceiptStatistic } from './dashboard.api';
@@ -31,12 +32,14 @@ export const useDashboardState = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const getCompanyLogo = useGetCompanyLogo();
 
   const {
     dashboard: { metric, receipts, companies },
     user: {
       userInfo: { company },
       user,
+      token,
     },
   } = useSelector((state: IState) => state);
 
@@ -88,7 +91,8 @@ export const useDashboardState = () => {
         isContentLoading: isTimeFilter ? true : false,
       }));
       const { data } = await getReceiptStatistic(timeFrames);
-      dispatch(setStatistic(data));
+      const companiesWithLogo = await getCompanyLogo(data.companies, token);
+      dispatch(setStatistic({ ...data, companies: companiesWithLogo }));
       setState((prevState) => ({
         ...prevState,
         isLoading: false,

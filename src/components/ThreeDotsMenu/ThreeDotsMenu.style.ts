@@ -8,6 +8,7 @@ export const ThreeDotsMenuStyles = {
     width: 130px;
     box-shadow: 0px 1px 1px ${(props) => props.theme.colors.boxShadowBlack};
     z-index: ${({ theme }) => theme.zIndex.xs};
+    background-color: ${({ theme }) => theme.colors.white};
   `,
   Item: styled.button`
     font-size: ${({ theme }) => theme.size.default};
@@ -18,8 +19,8 @@ export const ThreeDotsMenuStyles = {
     background-color: ${({ theme }) => theme.colors.white};
     text-align: start;
     &:hover {
-      background-color: ${({ theme }) => theme.colors.darkRed};
-      color: ${({ theme }) => theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.pink};
+      color: ${({ theme }) => theme.colors.lightBlack};
     }
     &:last-child {
       border-bottom: none;

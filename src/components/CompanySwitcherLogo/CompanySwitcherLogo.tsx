@@ -15,7 +15,11 @@ export const CompanySwitcherLogo: FC<ICompanySwitcherLogoProps> = (props) => {
   const companyInitials = getCompanyInitials(companyName);
 
   return !!companyLogoSrc ? (
-    <Styled.LogoImage src={companyLogoSrc} alt={companyName} isBigLogo={isBigLogo}/>
+    <Styled.LogoImage
+      src={companyLogoSrc}
+      alt={companyName}
+      isBigLogo={isBigLogo}
+    />
   ) : (
     <Styled.Wrapper isBigLogo={isBigLogo}>
       <Styled.Text>{companyInitials}</Styled.Text>

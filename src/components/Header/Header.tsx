@@ -1,24 +1,17 @@
 import { FC, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import { CustomLink } from 'components/CustomLink/CustomLink';
-import { Avatar } from 'components/Avatar/Avatar';
-
-import { HeaderStyles as Styled } from './Header.style';
 import { CompanySwitcher } from '../CompanySwitcher/CompanySwitcher';
 import { Icon } from '../Icons';
 
+import { AvatarBox } from './AvatarBox';
+import { HeaderStyles as Styled } from './Header.style';
 import { useHeaderState } from './Header.state';
+import { LinksBox } from './LinksBox';
 
-import { ADMIN_LINKS, CUSTOMER_LINKS } from 'constants/header-links';
 import { ROUTES } from 'constants/routes';
-import { AvatarSubmenu } from './AvatarSubmenu';
 
-export interface HeaderProps {
-  role: 'admin' | 'customer';
-}
-
-export const Header: FC<HeaderProps> = (props) => {
-  const { role } = props;
+export const Header: FC = () => {
   const {
     isOpenSwitcher,
     switcherRef,
@@ -30,6 +23,8 @@ export const Header: FC<HeaderProps> = (props) => {
     active_account,
     isAvatarHover,
     avatarLinks,
+    userProfilePhoto,
+    isUploadingPhoto,
     onMouseEnterHandler,
     onMouseLeaveHandler,
     onSwitchCompany,
@@ -49,45 +44,16 @@ export const Header: FC<HeaderProps> = (props) => {
   return (
     <Styled.Header>
       <Styled.Container>
-        <Styled.Link to={ROUTES.home}>
+        <Link to={ROUTES.home}>
           <Styled.LogoWrapper>
             <Styled.LogoIconWrapper>
               <Icon type="receiptHubLogo" />
             </Styled.LogoIconWrapper>
             <Styled.Title>ReceiptHub</Styled.Title>
           </Styled.LogoWrapper>
-        </Styled.Link>
+        </Link>
         <Styled.BlocksWrapper>
-          <Styled.Links>
-            <Styled.LinkWrapper>
-              {role === 'admin'
-                ? ADMIN_LINKS.map((link) => {
-                    return (
-                      <CustomLink
-                        key={link.title}
-                        to={link.route}
-                        isLast={link.isLast}
-                        tabs={link.tabs}
-                        isDisabled={
-                          !active_account &&
-                          link.route !== ROUTES.invites &&
-                          !active_account &&
-                          link.route !== ROUTES.settings
-                            ? true
-                            : false
-                        }
-                      >
-                        {link.title}
-                      </CustomLink>
-                    );
-                  })
-                : CUSTOMER_LINKS.map((link) => (
-                    <CustomLink key={link.title} to={link.route}>
-                      {link.title}
-                    </CustomLink>
-                  ))}
-            </Styled.LinkWrapper>
-          </Styled.Links>
+          <LinksBox active_account={active_account} />
           <Styled.Notifications>
             {active_account ? (
               <CompanySwitcher
@@ -100,15 +66,15 @@ export const Header: FC<HeaderProps> = (props) => {
                 onSwitchCompanyHandler={onSwitchCompanyHandler}
               />
             ) : null}
-            <Styled.Link
-              to={active_account ? ROUTES.settings : ''}
-              avatar="true"
-              onMouseEnter={onMouseEnterHandler}
-              onMouseLeave={onMouseLeaveHandler}
-            >
-              <Avatar />
-              {isAvatarHover && <AvatarSubmenu menuItems={avatarLinks} />}
-            </Styled.Link>
+            <AvatarBox
+              active_account={active_account}
+              onMouseEnterHandler={onMouseEnterHandler}
+              onMouseLeaveHandler={onMouseLeaveHandler}
+              userProfilePhoto={userProfilePhoto}
+              isUploadingPhoto={isUploadingPhoto}
+              isAvatarHover={isAvatarHover}
+              menuItems={avatarLinks}
+            />
           </Styled.Notifications>
         </Styled.BlocksWrapper>
       </Styled.Container>

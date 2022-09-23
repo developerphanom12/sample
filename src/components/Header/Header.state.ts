@@ -2,15 +2,16 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IState } from 'services/redux/reducer';
-import { getCompaniesLogoHandler, setCompanyLogoHandler } from 'services/utils';
 import { useOutsideClick } from 'hooks/useOutsideClick';
+import { useUploadAvatar } from 'hooks/useUploadAvatar';
+import { useLogout } from 'hooks/useLogout';
+import { useGetCompanyLogo } from 'hooks/useGetCompanyLogo';
 
 import {
   setCompanySwitcher,
   setIsSwitchCompany,
 } from 'screens/Settings/reducer/settings.reducer';
 import { switchAccount } from 'screens/SignUp/reducer/signup.reducer';
-import { logOut } from 'screens/Settings/settings.api';
 
 import { getUserCompanies, selectActiveAccount } from './header.api';
 
@@ -22,13 +23,18 @@ export const useHeaderState = () => {
   const {
     user: {
       token,
-      user: { active_account },
+      user: { active_account, profile_image },
     },
     settings: { companySwitcher, isFetchingData, isSwitchCompany },
   } = useSelector((state: IState) => state);
 
   const activeCompany = companySwitcher?.find(
     (account) => account.id === active_account
+  );
+
+  const { userProfilePhoto, isUploadingPhoto } = useUploadAvatar(
+    profile_image,
+    token
   );
 
   const [isAvatarHover, setIsAvatarHover] = useState(false);
@@ -42,17 +48,9 @@ export const useHeaderState = () => {
 
   const switcherRef = useOutsideClick(onClickOutsideSwitcherHandler);
 
-  const onLogOut = async () => {
-    try {
-      const { data } = await logOut();
-      data.message === 'Success' &&
-        dispatch({
-          type: 'LOGOUT',
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const logoutHandler = useLogout();
+  const onLogOut = () => logoutHandler();
+  const getCompanyLogo = useGetCompanyLogo();
 
   const avatarLinks = getAvatarLinks(onLogOut);
 
@@ -73,10 +71,8 @@ export const useHeaderState = () => {
   const onGetAllCompaniesHandler = async () => {
     try {
       const { data } = await getUserCompanies();
-      const companiesLogo = await getCompaniesLogoHandler(data, token);
-      const companiesWithLogo = setCompanyLogoHandler(data, companiesLogo);
-
-      dispatch(setCompanySwitcher(companiesWithLogo));
+      const companiesWithLogo = await getCompanyLogo(data, token);
+      dispatch(setCompanySwitcher(companiesWithLogo || []));
     } catch (error) {
       console.log(error);
     }
@@ -96,6 +92,9 @@ export const useHeaderState = () => {
     active_account,
     isAvatarHover,
     avatarLinks,
+    userProfilePhoto,
+    isUploadingPhoto,
+    useUploadAvatar,
     onGetAllCompaniesHandler,
     onMouseEnterHandler,
     onMouseLeaveHandler,

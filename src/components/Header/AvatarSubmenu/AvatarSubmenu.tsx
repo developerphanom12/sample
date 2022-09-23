@@ -1,19 +1,10 @@
 import { FC } from 'react';
 
-import { AvatarSubmenuStyles as Styled } from './AvatarSubmenu.style';
 import { Icon } from '../../Icons';
 
-import { ROUTES } from 'constants/routes';
+import { AvatarSubmenuStyles as Styled } from './AvatarSubmenu.style';
 
-interface ISubmenuProps {
-  menuItems?: {
-    title: string;
-    route: ROUTES;
-    iconName: string;
-    onClick?: () => void;
-  }[];
-}
-export const AvatarSubmenu: FC<ISubmenuProps> = (props) => {
+export const AvatarSubmenu: FC<IAvatarSubmenuLinks> = (props) => {
   const { menuItems } = props;
 
   return (

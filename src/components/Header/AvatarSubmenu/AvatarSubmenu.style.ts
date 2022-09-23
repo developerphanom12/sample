@@ -25,6 +25,7 @@ export const AvatarSubmenuStyles = {
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
+      cursor: pointer;
       border-bottom: ${({ theme }) => `14px solid  ${theme.colors.white}`};
     }
   `,

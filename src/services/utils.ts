@@ -4,6 +4,7 @@ import decode from 'jwt-decode';
 import { ICurrency } from 'screens/SignUp/types/signup.types';
 import { IInvites } from 'screens/Invites/types/invites.types';
 import { getCompanyLogo } from 'screens/Settings/settings.api';
+import { ROUTES } from '../constants/routes';
 
 interface IFormdataProps {
   currency?: string;
@@ -27,6 +28,18 @@ export const dateDiffInDays = (a: Date, b: Date) => {
   return Math.floor((utc1 - utc2) / _MS_PER_DAY);
 };
 
+export const getIsDisabledLink = (
+  linkRoute: string,
+  active_account?: string | null
+) => {
+  return !active_account &&
+    linkRoute !== ROUTES.invites &&
+    !active_account &&
+    linkRoute !== ROUTES.settings
+    ? true
+    : false;
+};
+
 export const getInvitationStatus = (diffInDays: number | null) =>
   (diffInDays && diffInDays >= 1) || diffInDays === 0
     ? 'Resend invitation'
@@ -43,7 +56,7 @@ export const setCompanyLogoHandler = (
   data: ICompaniesSwitcher[],
   companiesLogo?: (string | null)[]
 ) => {
-  return data.map((item: ICompaniesSwitcher, index: number) => {
+  return data?.map((item: ICompaniesSwitcher, index: number) => {
     if (companiesLogo?.length && companiesLogo[index] === null) {
       return item;
     }

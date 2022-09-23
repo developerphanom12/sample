@@ -23,7 +23,6 @@ declare global {
     formattedDate: string;
     imageSrc: any;
   }
-
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteReceiptHandler: () => Promise<void>;
@@ -337,9 +336,19 @@ declare global {
     name: string;
     role: string;
   }
+
+  interface IAvatarSubmenuLinks {
+    menuItems: {
+      title: string;
+      route: ROUTES;
+      iconName: string;
+      onClick?: () => void;
+    }[];
+  }
 }
 
 export {
+  IAvatarSubmenuLinks,
   TButtonTheme,
   ICompaniesSwitcher,
   ICompany,

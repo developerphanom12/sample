@@ -13,7 +13,7 @@ const setup = () => {
     <Provider store={store}>
       <AppTheme>
         <BrowserRouter>
-          <Header role="admin" />
+          <Header />
         </BrowserRouter>
       </AppTheme>
     </Provider>

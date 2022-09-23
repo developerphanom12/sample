@@ -6,7 +6,7 @@ import { COLORS } from 'styles/theme';
 import { LoaderComponentStyles } from './LoaderComponent.style';
 
 interface ILoaderComponentProps {
-  theme?: 'preview';
+  theme?: 'preview' | 'avatarMin';
 }
 export const LoaderComponent: FC<ILoaderComponentProps> = (props) => {
   const { theme } = props;
@@ -14,9 +14,13 @@ export const LoaderComponent: FC<ILoaderComponentProps> = (props) => {
   return (
     <LoaderComponentStyles.Wrapper data-testid="loader">
       <TailSpin
-        color={theme === 'preview' ? COLORS.darkRed : COLORS.white}
-        height={theme ? 40 : 20}
-        width={theme ? 40 : 20}
+        color={
+          theme === 'preview' || theme === 'avatarMin'
+            ? COLORS.darkRed
+            : COLORS.white
+        }
+        height={theme === 'preview' ? 40 : 20}
+        width={theme === 'preview' ? 40 : 20}
       />
     </LoaderComponentStyles.Wrapper>
   );

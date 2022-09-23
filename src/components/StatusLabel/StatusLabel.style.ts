@@ -8,7 +8,6 @@ export const StatusLabelStyles = {
   Label: styled.div<{ color: keyof typeof Statuses }>`
     width: 100%;
     display: flex;
-    padding-left: 9px;
     padding-right: 9px;
     font-size: ${(props) => props.theme.size.default};
     ${(props) => props.color && COLORS[props.color]};

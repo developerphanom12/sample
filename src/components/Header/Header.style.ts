@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { styled } from 'styles/theme';
 
 export const HeaderStyles = {
@@ -48,30 +46,8 @@ export const HeaderStyles = {
       width: 100%;
     }
   `,
-  LinkWrapper: styled.nav`
-    width: 100%;
-    display: flex;
-    &:not(:last-child) {
-      margin-right: 30px;
-    }
-  `,
-  Links: styled.div`
-    display: flex;
-  `,
   Notifications: styled.div`
     display: flex;
     align-items: center;
-  `,
-  Link: styled(Link)<{ avatar?: string }>`
-    ${(props) =>
-      props.avatar &&
-      `
-      position: relative;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      margin-right: 20px;
-      background-color: ${props.theme.colors.white};
-  `}
   `,
 };

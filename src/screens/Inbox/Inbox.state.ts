@@ -197,9 +197,6 @@ export const useInboxState = () => {
     });
   };
 
-  const onChangeIsVisitedHandler = () =>
-    onChangeStateFieldHandler('isVisited', true);
-
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
   const [isEmailModalWindowOpen, onEmailModalWindowToggle] = useToggle();
 
@@ -488,7 +485,6 @@ export const useInboxState = () => {
     onChangeSearchValueHandler,
     onSelectFilesHandler,
     onFetchReceiptsHandler,
-    onChangeIsVisitedHandler,
     onChangeStatusValueHandler,
     onChangeReceiptsPerPage,
     onChangeInputValue,

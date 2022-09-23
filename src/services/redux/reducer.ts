@@ -40,7 +40,10 @@ import {
 } from 'screens/Settings/reducer/settings.reducer';
 import { ISETTINGS_INITIAL_STATE } from 'screens/Settings/types/settings.types';
 import { IINVITES_INITIAL_STATE } from 'screens/Invites/types/invites.types';
-import { InvitesReducer } from 'screens/Invites/reducer/invites.reducer';
+import {
+  InvitesReducer,
+  INVITES_INITIAL_STATE,
+} from 'screens/Invites/reducer/invites.reducer';
 
 export const persistConfig = {
   key: 'root',
@@ -95,6 +98,7 @@ const reducer = (state: combineReducerType | undefined, action: AnyAction) => {
         filesUpload: FILES_UPLOAD_PREVIEW_INITIAL_STATE,
         receiptDetails: RECEIPT_DETAILS_INITIAL_STATE,
         settings: SETTINGS_INITIAL_STATE,
+        invites: INVITES_INITIAL_STATE,
       };
     }
   }

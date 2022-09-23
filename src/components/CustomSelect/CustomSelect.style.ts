@@ -82,15 +82,17 @@ export const StyledReactSelect = styled(Select)<{
     height: 100% !important;
   }
   .Select__multi-value {
-    width: 110px;
+    width: 90px;
     height: 31px;
-    background: ${({ theme }) => theme.colors.orange};
+    background: ${({ theme }) => theme.colors.darkRed};
     box-shadow: ${({ theme }) =>
       `0px 1px 1px ${theme.colors.halfTranparentBlack}`};
-    border-radius: 5px;
+    border-radius: 6px;
     color: ${({ theme }) => theme.colors.white};
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.normal};
+    display: flex;
+    justify-content: space-between;
   }
   .Select__multi-value__label {
     color: ${({ theme }) => theme.colors.white};
