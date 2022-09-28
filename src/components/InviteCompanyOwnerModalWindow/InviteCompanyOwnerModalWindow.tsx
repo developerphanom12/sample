@@ -50,23 +50,27 @@ export const InviteCompanyOwnerModalWindow: FC<InsertUserModalWindowProps> =
       onChangeCheckBoxHandler,
       onChangeRoleValueHandler,
       selectValue,
-      handleChange,
       isChecked,
       isCheckboxField,
     } = props;
 
     const { touched, error } = formikMeta('email');
-    const { value, onBlur, name, onChange } = formikProps('email');
+    const { value, onBlur, onChange } = formikProps('email');
+    const modalStyles = {
+      content: {
+        ...CompanyOwnerModalWindowStyles.content,
+        maxHeight: isCheckboxField ? '375px' : '335px',
+      },
+      overlay: CompanyOwnerModalWindowStyles.overlay,
+    };
     return (
       <ReactModal
         isOpen={isModalWindowOpen}
         onRequestClose={onCloseModalWindowHandler}
         ariaHideApp={false}
-        style={CompanyOwnerModalWindowStyles}
+        style={modalStyles}
       >
-        <ModalWindowHeader
-          headerTitle={headerText}
-        />
+        <ModalWindowHeader headerTitle={headerText} />
         <Styled.Content>
           <Styled.Form onSubmit={onSaveButtonCLickHandler}>
             <Styled.InputsWrapper>
@@ -79,13 +83,14 @@ export const InviteCompanyOwnerModalWindow: FC<InsertUserModalWindowProps> =
                 onChangeValue={onChange}
                 touched={touched}
                 onKeyDown={onEnterCreateItemClick}
+                isRemoveBorder
               />
-
               <Styled.Label>Your role in company</Styled.Label>
               <CustomSelect
                 options={USER_ROLES.slice(0, 3)}
                 onChangeValueHandler={onChangeRoleValueHandler}
                 value={selectValue}
+                isRemoveBorder
                 isFullWidth
               />
               {isCheckboxField && (

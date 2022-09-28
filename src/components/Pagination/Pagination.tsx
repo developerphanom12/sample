@@ -20,7 +20,7 @@ export const Pagination = (props: IPagination) => {
 
   return (
     <>
-      <Styled.Wrapper data-testid='pagination'>
+      <Styled.Wrapper data-testid="pagination">
         <Styled.Pages>
           <NavigationButton
             iconBehavior="iconBack"
@@ -32,13 +32,17 @@ export const Pagination = (props: IPagination) => {
           <Styled.MyPaginate
             pageCount={pages}
             onPageChange={onChangePage}
-            previousLabel={<Icon type="arrowLeft" fill={theme.colors.black} />}
-            nextLabel={<Icon type="arrowRight" fill={theme.colors.black} />}
-            breakLabel={'....'}
+            previousLabel={
+              <Icon type="arrowLeft" fill={theme.colors.lightBlack} />
+            }
+            nextLabel={
+              <Icon type="arrowRight" fill={theme.colors.lightBlack} />
+            }
+            breakLabel="...."
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             forcePage={currentPage}
-            data-testid='page'
+            data-testid="page"
           />
           <NavigationButton
             iconBehavior="iconForward"

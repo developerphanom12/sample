@@ -15,7 +15,8 @@ export interface ICapiumAuthPayload {
   password: string;
 }
 
-const capiumBaseURL = 'https://identity.diyboox.com/api/Auth/AuthenticateUser';
+const capiumBaseURL =
+  'https://dev-identity.capium.co.uk/api/Auth/AuthenticateUser';
 
 const getInstance = () => {
   const instance = axios.create({

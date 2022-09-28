@@ -5,8 +5,7 @@ import { modalContentStyles, overlay } from 'constants/modal-window.constants';
 export const CompanyOwnerModalWindowStyles = {
   content: {
     ...modalContentStyles,
-    maxWidth: '703px',
-    maxHeight: '400px',
+    maxWidth: '420px',
   },
   overlay,
 };
@@ -15,7 +14,7 @@ export const InviteCompanyOwnerModalWindowStyles = {
   Content: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 37px 33px 54px 33px;
+    padding: 5px 33px 10px 33px;
     width: 100%;
     flex: 1;
   `,

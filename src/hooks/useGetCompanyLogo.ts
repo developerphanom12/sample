@@ -8,8 +8,6 @@ export const useGetCompanyLogo = () => {
     try {
       const companiesLogo = await getCompaniesLogoHandler(data, token);
       const companiesWithLogo = setCompanyLogoHandler(data, companiesLogo);
-      console.log(companiesWithLogo);
-      
       return companiesWithLogo;
     } catch (error) {
       console.log(error);

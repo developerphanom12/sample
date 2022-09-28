@@ -111,7 +111,7 @@ export const Invites = () => {
         onSaveButtonCLickHandler={formik.handleSubmit}
         onEnterCreateItemClick={onEnterCreatetInvite}
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? 'Edit invitation' : 'Create invitation'}
+        headerText={isEdit ? 'Edit Invitation' : 'Create Invitation'}
         formikMeta={formik.getFieldMeta}
         formikProps={formik.getFieldProps}
         isEdit={isEdit}

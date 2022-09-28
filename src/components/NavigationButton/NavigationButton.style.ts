@@ -10,7 +10,7 @@ const THEME = {
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    color: ${(props) => props.theme.colors.halfTranparentBlack};
+    color: ${(props) => props.theme.colors.lightBlack};
   `,
   pagination: css`
     background-color: transparent;

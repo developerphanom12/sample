@@ -57,14 +57,14 @@ export const NavigationButton = ({
           )}
           {iconBehavior === 'iconPrevious' && themedButton === 'pagination' && (
             <NavigationButtonStyles.IconWrapper>
-              <Icon type="arrowLeft" fill={theme.colors.black} />
+              <Icon type="arrowLeft" fill={theme.colors.lightBlack} />
             </NavigationButtonStyles.IconWrapper>
           )}
 
           {iconBehavior === 'iconBack' && !isDisabled && (
             <NavigationButtonStyles.IconWrapper>
-              <Icon type="arrowLeft" fill={theme.colors.black} />
-              <Icon type="arrowLeft" fill={theme.colors.black} />
+              <Icon type="arrowLeft" fill={theme.colors.lightBlack} />
+              <Icon type="arrowLeft" fill={theme.colors.lightBlack} />
             </NavigationButtonStyles.IconWrapper>
           )}
           {iconBehavior === 'iconNext' && themedButton === 'navigation' && (
@@ -80,13 +80,13 @@ export const NavigationButton = ({
           )}
           {iconBehavior === 'iconNext' && themedButton === 'pagination' && (
             <NavigationButtonStyles.IconWrapper>
-              <Icon type="arrowRight" fill={theme.colors.black} />
+              <Icon type="arrowRight" fill={theme.colors.lightBlack} />
             </NavigationButtonStyles.IconWrapper>
           )}
           {iconBehavior === 'iconForward' && !isDisabled && (
             <NavigationButtonStyles.IconWrapper>
-              <Icon type="arrowRight" fill={theme.colors.black} />
-              <Icon type="arrowRight" fill={theme.colors.black} />
+              <Icon type="arrowRight" fill={theme.colors.lightBlack} />
+              <Icon type="arrowRight" fill={theme.colors.lightBlack} />
             </NavigationButtonStyles.IconWrapper>
           )}
         </>

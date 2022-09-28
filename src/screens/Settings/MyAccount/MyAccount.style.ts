@@ -15,12 +15,6 @@ export const MyAccountStyles = {
       isResetPassword ? '500px' : '1050px'};
     width: 100%;
   `,
-  Title: styled.h2`
-    color: ${({ theme }) => theme.colors.lightBlack};
-    font-size: ${({ theme }) => theme.size.xnormal};
-    font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-    margin-bottom: 35px;
-  `,
   Form: styled.form`
     width: 100%;
     display: flex;

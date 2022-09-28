@@ -9,9 +9,10 @@ interface ISubmenuProps {
 export const Submenu: FC<ISubmenuProps> = (props) => {
   const { menuItems } = props;
 
-  const { activeTabName, onClickTabHandler } = useSubMenuState();
+  
+  const { activeTabName, isTooltip, onClickTabHandler } = useSubMenuState();
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper isTooltip={isTooltip}>
       {menuItems?.map((item) => (
         <Styled.Item
           key={item}

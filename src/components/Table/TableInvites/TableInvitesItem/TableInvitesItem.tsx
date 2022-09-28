@@ -19,7 +19,6 @@ interface ITableInviteItem {
   createdBy: string;
   inviteId: string;
   creatorRole: string;
-  creatorId: string;
   inviteEmail: string;
   onDeleteIconClickHandler: (inviteId: string) => void;
   onEditIconClickHandler: (inviteId: string) => void;
@@ -29,7 +28,6 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
   const {
     createdAt,
     createdBy,
-    creatorId,
     onResendInvitationHandler,
     creatorRole,
     inviteId,

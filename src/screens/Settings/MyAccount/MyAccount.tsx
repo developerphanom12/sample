@@ -54,7 +54,6 @@ export const MyAccount: FC = () => {
         </Styled.LoaderWrapper>
       ) : (
         <Styled.ContentWrapper isResetPassword={isResetPassword}>
-          <Styled.Title>My Account</Styled.Title>
           <Styled.Form onSubmit={onSubmitHandler}>
             <AccountFields
               isResetPassword={isResetPassword}

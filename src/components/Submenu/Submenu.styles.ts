@@ -1,7 +1,7 @@
 import { styled } from 'styles/theme';
 
 export const SubmenuStyles = {
-  Wrapper: styled.ul`
+  Wrapper: styled.ul<{ isTooltip: boolean }>`
     display: flex;
     flex-direction: column;
     border-radius: 6px;
@@ -15,6 +15,21 @@ export const SubmenuStyles = {
     margin: 0;
     padding: 0;
     justify-content: center;
+    ${({ theme, isTooltip }) =>
+      !isTooltip &&
+      `
+      ::before {
+        content: '';
+        position: absolute;
+        top: -14px;
+        left: 15px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        cursor: pointer;
+        border-bottom:  14px solid  ${theme.colors.white};
+      }`}
   `,
   Item: styled.li<{ isActive: boolean }>`
     padding: 10px 12px;

@@ -9,6 +9,7 @@ export const StatusLabelStyles = {
     width: 100%;
     display: flex;
     padding-right: 9px;
+    padding-left: 9px;
     font-size: ${(props) => props.theme.size.default};
     ${(props) => props.color && COLORS[props.color]};
   `,
