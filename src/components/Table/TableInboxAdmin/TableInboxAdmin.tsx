@@ -82,8 +82,8 @@ export const TableInboxAdmin: React.FC<TableInboxAdminProps> = (props) => {
             vatCode={receipt.vat_code}
             tax={receipt.tax}
             status={receipt.status}
-            supplier={receipt.supplier?.name}
-            supplierAccount={receipt.supplier_account}
+            supplier={receipt.supplier}
+            supplierAccount={receipt.supplier_account?.name}
             isChecked={receipt.isChecked}
             isVisited={isVisited}
             onCheckedItemHandler={onCheckedItemHandler}

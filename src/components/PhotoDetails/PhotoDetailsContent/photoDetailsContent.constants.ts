@@ -3,7 +3,8 @@ import { IOption } from '../../CustomSelect/types';
 export const photoDetailsContentInitialState = {
   statusValue: '',
   dateValue: null,
-  supplierAccountValue: '',
+  supplierAccountValue: null,
+  supplierValue: '',
   currencyValueId: '',
   taxValue: null,
   totalValue: null,
@@ -34,18 +35,18 @@ export const getInputFields = (
     onChangeDate: funcArray[0],
   },
   {
-    type: 'select',
+    type: 'input',
     label: 'Supplier',
-    isDisabled: disabledOption.suppliers,
     value: state.supplierValue,
     options: suppliersForSelect,
-    onChangeSelect: funcArray[1],
+    onChange: funcArray[1],
   },
   {
     type: 'select',
     label: 'Supplier Account',
-    isDisabled: true,
+    isDisabled: disabledOption.suppliers,
     value: state.supplierAccountValue,
+    options: suppliersForSelect,
     onChangeSelect: funcArray[2],
   },
   {

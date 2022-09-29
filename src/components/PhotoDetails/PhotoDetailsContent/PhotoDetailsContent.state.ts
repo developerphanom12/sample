@@ -57,9 +57,9 @@ export const usePhotoDetailsContentState = () => {
     selectedReceipt?.category?.id || ''
   );
 
-  const currentSupplier = getReceiptDetailsCurrentSelectItem(
+  const currentSupplierAccount = getReceiptDetailsCurrentSelectItem(
     suppliersForSelect,
-    selectedReceipt?.supplier?.id || ''
+    selectedReceipt?.supplier_account?.id || ''
   );
 
   const initialState = {
@@ -67,7 +67,7 @@ export const usePhotoDetailsContentState = () => {
     currencyValue: currentCurrency,
     typeValue: currentType,
     categoryValue: currentCategory,
-    supplierValue: currentSupplier,
+    supplierAccountValue: currentSupplierAccount,
     publishStatus: selectedReceipt?.publish_status || false,
     paymentStatus: selectedReceipt?.payment_status || false,
     imageSrc: '',
@@ -80,8 +80,8 @@ export const usePhotoDetailsContentState = () => {
       categoryValue: currentCategory || null,
       typeValue: currentType || null,
       dateValue: selectedReceipt?.receipt_date || null,
-      supplierValue: currentSupplier || null,
-      supplierAccountValue: selectedReceipt?.supplier_account || '',
+      supplierValue: selectedReceipt?.supplier || '',
+      supplierAccountValue: currentSupplierAccount || null,
       currencyValue: currentCurrency,
       currencyValueId: selectedReceipt?.currency.id || '',
       taxValue: selectedReceipt?.tax || null,
@@ -164,10 +164,9 @@ export const usePhotoDetailsContentState = () => {
   ) => onChangeStateFieldHandler('categoryValue', newValue);
 
   const onChangeSupplierFieldHandler = (
-    newValue: unknown,
-    actionMeta: ActionMeta<unknown>
-  ) => onChangeStateFieldHandler('supplierValue', newValue);
-
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('supplierValue', event.target.value);
+  
   const onChangeSupplierAccountHandler = (
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
@@ -247,9 +246,9 @@ export const usePhotoDetailsContentState = () => {
         publish_status: state.publishStatus,
         receipt_date: state.dateValue || selectedReceipt?.receipt_date,
         status: state.radioButtonValue || selectedReceipt?.status,
-        supplier: state.supplierValue?.id || selectedReceipt?.supplier,
+        supplier: state.supplierValue || selectedReceipt?.supplier,
         supplier_account:
-          state.supplierAccountValue || selectedReceipt?.supplier_account,
+          state.supplierAccountValue?.id || selectedReceipt?.supplier_account,
         tax: state.taxValue || selectedReceipt?.tax,
         total: state.totalValue || selectedReceipt?.total,
         payment_type: state.typeValue?.id || selectedReceipt?.payment_type,

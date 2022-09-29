@@ -53,7 +53,7 @@ export const ReceiptsList: React.FC<IReceiptsListProps> = (props) => {
                 key={receipt.id}
                 date={receipt.receipt_date}
                 status={receipt.status as Statuses}
-                supplier={receipt.supplier?.name}
+                supplier={receipt.supplier}
                 total={receipt.total}
                 currency={receipt.currency?.value}
                 dateFormat={dateFormat}

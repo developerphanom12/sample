@@ -21,8 +21,8 @@ interface TableInboxAdminProps {
   isVisited: boolean;
   tax: number | null;
   date: Date;
-  supplier?: string | null;
-  supplierAccount: string | null;
+  supplier: string | null;
+  supplierAccount?: string | null;
   category?: string | null;
   vatCode: string | null;
   currency: string | null;

@@ -35,7 +35,6 @@ export const FilesUploadPreviewStyles = {
     max-width: 254px;
     max-height: 358px;
     min-width: 250px;
-    max-height: 310px;
     width: 100%;
     height: 100%;
   `,

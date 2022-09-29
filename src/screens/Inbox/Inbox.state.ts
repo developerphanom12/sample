@@ -220,6 +220,7 @@ export const useInboxState = () => {
         ...postEmailValues,
         receipts: state.checkedIds,
       });
+      formik.resetForm();
       onChangeStateFieldHandler('isLoading', false);
       onEmailModalWindowToggle();
     } catch (error: any) {

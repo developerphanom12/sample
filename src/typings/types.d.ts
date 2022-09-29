@@ -6,11 +6,11 @@ declare global {
     categoryValue: IOption | any;
     typeValue: SingleValue<IOption> | any;
     dateValue: Date | null;
-    supplierValue: IOption | any;
+    supplierValue: string | null;
+    supplierAccountValue: IOption | any;
     currencyValue: SingleValue<IOption> | any;
     currencyValueId: string;
     taxValue: number | null;
-    supplierAccountValue: string;
     totalValue: number | null;
     descriptionValue: string;
     vatCodeValue: string;
@@ -137,8 +137,8 @@ declare global {
     photos: string[];
     receipt_date: Date;
     status: string;
-    supplier: ISelectItem | null;
-    supplier_account: string | null;
+    supplier: string | null;
+    supplier_account: ISelectItem | null;
     tax: number | null;
     total: number | null;
     payment_type: ISelectItem | null;
