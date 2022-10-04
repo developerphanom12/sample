@@ -1,10 +1,10 @@
 import { ROUTES } from './routes';
 
 const CATEGORIES = 'Categories';
-const SUPPLIERS = 'Suppliers';
+const SUPPLIER_ACCOUNTS = 'Supplier Accounts';
 const TYPES = 'Types';
 
-export const MASTER_TABS = [CATEGORIES, SUPPLIERS, TYPES];
+export const MASTER_TABS = [CATEGORIES, SUPPLIER_ACCOUNTS, TYPES];
 
 export const ADMIN_LINKS = [
   { title: 'Dashboard', route: ROUTES.home },

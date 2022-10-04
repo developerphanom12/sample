@@ -34,11 +34,11 @@ export const EMPTY_DATA_STRINGS_MASTER = {
     buttonText: 'Create Category',
   },
   suppliers: {
-    title: 'Suppliers will be shown here...',
+    title: 'Supplier accounts will be shown here...',
     firstSubtitle:
-      'We have created everything for you, please add your suppliers to start.',
-    secondSubtitle: 'You can do that by using Create Supplier button below',
-    buttonText: 'Create Supplier',
+      'We have created everything for you, please add your supplier account to start.',
+    secondSubtitle: 'You can do that by using Create Supplier Account button below',
+    buttonText: 'Create Supplier Account',
   },
   type: {
     title: 'Types will be shown here...',

@@ -51,7 +51,9 @@ const WIDTH = {
     width: 100%;
   `,
   primary: css`
-    width: 110px;
+    min-width: 110px;
+    max-width: 153px;
+    width: auto;
   `,
   secondary: css`
     width: 100px;
@@ -75,8 +77,7 @@ const WIDTH = {
 export const ButtonStyles = {
   Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
-    max-height: 40px;
-    min-height: 39px;
+    height: 40px;
     border-radius: 6px;
     box-shadow: ${(props) =>
       `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};

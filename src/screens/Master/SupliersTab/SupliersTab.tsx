@@ -85,14 +85,14 @@ export const SupliersTab: FC = () => {
         }
         isModalWindowOpen={isModalWindowOpen}
         onEnterCreateItemClick={onEnterCreateSupplierClick}
-        headerText={isEdit ? 'Edit Supplier' : 'Insert Supplier'}
+        headerText={isEdit ? 'Edit Supplier Account' : 'Insert Supplier Account'}
         inputValue={modalInputValue}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={`‘${selectedCategory?.name}’`}
         isDisableButton={isDisableButton}
-        categoryName="supplier"
+        categoryName="supplier account"
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
@@ -134,7 +134,7 @@ export const SupliersTab: FC = () => {
           pages={pages}
           receiptsPerPage={itemsPerPage}
           searchValue={searchValue}
-          tabName="Supplier"
+          tabName="Supplier Account"
           onBlurHandler={onBlurHandler}
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}

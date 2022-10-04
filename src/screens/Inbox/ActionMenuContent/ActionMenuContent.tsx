@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { CSVLink } from 'react-csv';
 
 import { EmailModalWindow } from 'components/EmailModalWindow';
+import { SuccessPopup } from 'components/SuccessPopup';
 
 import { ActionMenuContentStyles as Styled } from './ActionMenuContent.style';
 
@@ -15,6 +16,7 @@ interface IActionMenuContentProps extends IEmailModalWindowProps {
   csvData: string;
   excelRef: React.RefObject<HTMLAnchorElement>;
   excelUrl: string;
+  isSentSuccessPopup: boolean;
 }
 
 export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
@@ -31,6 +33,7 @@ export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
     csvData,
     excelRef,
     excelUrl,
+    isSentSuccessPopup,
   } = props;
   return (
     <>
@@ -53,6 +56,11 @@ export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
         isLoading={isLoading}
       />
       <Styled.ExcelLink href={excelUrl} ref={excelRef} />
+      {isSentSuccessPopup && (
+        <Styled.SuccessPopupWrapper>
+          <SuccessPopup titleText="Email sent successfully" />
+        </Styled.SuccessPopupWrapper>
+      )}
     </>
   );
 };

@@ -11,7 +11,6 @@ export const HeaderPanelStyles = {
     height: 40px;
   `,
   SearchWrapper: styled.div`
-    width: 100%;
     height: 40px;
   `,
   SearchInputWrapper: styled.div`

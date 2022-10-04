@@ -68,7 +68,7 @@ export interface IUpdateCategory extends ICreateCategory {
 
 export interface IMASTER_INITIAL_STATE {
   categories: { data: ITabItem[]; count: number | null };
-  suppliers: { data: ITabItem[]; count: number | null };
+  supplierAccounts: { data: ITabItem[]; count: number | null };
   types: { data: ITabItem[]; count: number | null };
   activeTabName: string;
   selectedCategory: ITabItem | null;

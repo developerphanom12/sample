@@ -14,7 +14,7 @@ import {
   deleteTabItem,
 } from '../master.api';
 
-import { setSuppliers, setTabItem } from '../reducer/master.reducer';
+import { setSupplierAccounts, setTabItem } from '../reducer/master.reducer';
 import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
@@ -26,7 +26,7 @@ export const useSuppliersTabState = () => {
 
   const {
     master: {
-      suppliers: { data: suppliersList, count },
+      supplierAccounts: { data: suppliersList, count },
       selectedCategory,
     },
     user: {
@@ -80,7 +80,7 @@ export const useSuppliersTabState = () => {
       const { data } = await getAllTabItems('supplier', params);
       isSearching
         ? onChangeStateFieldHandler('searchedItems', data.data)
-        : dispatch(setSuppliers({ data: data.data, count: data.count }));
+        : dispatch(setSupplierAccounts({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
@@ -155,7 +155,7 @@ export const useSuppliersTabState = () => {
 
       await deleteTabItem(selectedCategory?.id || '', 'supplier');
       const { data } = await getAllTabItems('supplier');
-      dispatch(setSuppliers({ count: data.count, data: data.data }));
+      dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
       onChangePage({ selected: state.currentPage });
 
       onChangeStateFieldHandler('isLoading', false);
@@ -202,7 +202,7 @@ export const useSuppliersTabState = () => {
         'supplier'
       );
       const { data } = await getAllTabItems('supplier');
-      dispatch(setSuppliers({ count: data.count, data: data.data }));
+      dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
         isLoading: false,

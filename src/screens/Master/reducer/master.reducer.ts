@@ -4,7 +4,7 @@ import { IMASTER_INITIAL_STATE } from '../types/master.types';
 
 export const MASTER_INITIAL_STATE: IMASTER_INITIAL_STATE = {
   categories: { data: [], count: null },
-  suppliers: { data: [], count: null },
+  supplierAccounts: { data: [], count: null },
   types: { data: [], count: null },
   selectedCategory: null,
   activeTabName: 'Categories',
@@ -23,12 +23,12 @@ export const MasterSlice = createSlice({
       state.categories.data = action.payload.data;
       state.categories.count = action.payload.count;
     },
-    setSuppliers: (
+    setSupplierAccounts: (
       state: IMASTER_INITIAL_STATE,
       action: PayloadAction<{ data: ITabItem[]; count: number }>
     ) => {
-      state.suppliers.data = action.payload.data;
-      state.suppliers.count = action.payload.count;
+      state.supplierAccounts.data = action.payload.data;
+      state.supplierAccounts.count = action.payload.count;
     },
     setTypes: (
       state: IMASTER_INITIAL_STATE,
@@ -54,7 +54,7 @@ export const MasterSlice = createSlice({
 
 export const {
   setCategories,
-  setSuppliers,
+  setSupplierAccounts,
   setTypes,
   setTabItem,
   setActiveTab,

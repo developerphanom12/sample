@@ -67,6 +67,7 @@ export const useInboxState = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isSentSuccessPopup, setIsSentSuccessPopup] = useToggle();
 
   const totalReceiptCount =
     Number(metric?.accepted) +
@@ -222,6 +223,7 @@ export const useInboxState = () => {
       });
       formik.resetForm();
       onChangeStateFieldHandler('isLoading', false);
+      setIsSentSuccessPopup();
       onEmailModalWindowToggle();
     } catch (error: any) {
       const { data } = error.response;
@@ -481,6 +483,8 @@ export const useInboxState = () => {
     receipts,
     isFetchingData,
     company,
+    isSentSuccessPopup,
+    setIsSentSuccessPopup,
     onCloseModalWindowHandler,
     onChangeDate,
     onChangeSearchValueHandler,

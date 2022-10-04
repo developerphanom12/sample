@@ -5,7 +5,7 @@ export const SubmenuStyles = {
     display: flex;
     flex-direction: column;
     border-radius: 6px;
-    width: 98px;
+    width: 120px;
     position: absolute;
     top: 50px;
     left: 0;

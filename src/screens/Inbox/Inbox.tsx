@@ -69,6 +69,8 @@ export const Inbox: FC = () => {
     count,
     datePickerRef,
     active_account,
+    isSentSuccessPopup,
+    setIsSentSuccessPopup,
     onCloseModalWindowHandler,
     onClickOutsideDatePickerHandler,
     onChangePagesAmount,
@@ -93,9 +95,14 @@ export const Inbox: FC = () => {
     onChangePagesAmount(Number(receiptsPerPage.value), count);
   }, [receiptsPerPage, count, isFetchingData]);
 
+  useEffect(() => {
+    isSentSuccessPopup && setTimeout(setIsSentSuccessPopup, 3000);
+  }, [isSentSuccessPopup]);
+
   return (
     <>
       <ActionMenuContent
+        isSentSuccessPopup={isSentSuccessPopup}
         csvLink={csvLink}
         csvData={csvData}
         excelRef={excelRef}
