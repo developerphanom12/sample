@@ -39,14 +39,20 @@ export const useFilesUploadPreviewState = () => {
       ...prevState,
       currentFileName: previewFiles[activeIndex]?.fileName,
       currentFileSrc: previewFiles[activeIndex]?.fileSrc,
+      curretFileType: previewFiles[activeIndex]?.fileType,
     }));
   }, [previewFiles]);
 
-  const onChooseReceiptHandler = (fileName: string, fileSrc: string) => {
+  const onChooseReceiptHandler = (
+    fileName: string,
+    fileSrc: string,
+    fileType: string
+  ) => {
     setState((prevState) => ({
       ...prevState,
       currentFileName: fileName,
       currentFileSrc: fileSrc,
+      curretFileType: fileType,
     }));
     dispatch(setActiveIndex(fileName));
   };

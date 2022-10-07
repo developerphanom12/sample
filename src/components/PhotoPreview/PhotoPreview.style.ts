@@ -14,6 +14,7 @@ export const PhotoPreviewStyles = {
   Content: styled.div<{ imageSrc: string }>`
     width: 254px;
     height: 100%;
+    padding: 10px 0;
     justify-content: center;
     display: flex;
     align-items: center;

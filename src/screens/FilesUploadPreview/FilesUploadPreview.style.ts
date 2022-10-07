@@ -38,10 +38,6 @@ export const FilesUploadPreviewStyles = {
     width: 100%;
     height: 100%;
   `,
-  TestImage: styled.img`
-    width: 100px;
-    height: 100px;
-  `,
   CenterWrapper: styled.div`
     display: flex;
     justify-content: center;
@@ -67,5 +63,15 @@ export const FilesUploadPreviewStyles = {
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     font-size: ${({ theme }) => theme.size.normal};
     color: ${({ theme }) => theme.colors.halfTranparentBlack};
+  `,
+  PdfWrapper: styled.div<{ src?: string }>`
+    max-width: 254px;
+    max-height: 358px;
+    min-width: 250px;
+    width: 100%;
+    height: 100%;
+    .react-pdf__Page__canvas {
+      max-height: 358px !important;
+    }
   `,
 };

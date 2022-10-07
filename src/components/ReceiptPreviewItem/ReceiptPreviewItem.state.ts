@@ -5,19 +5,30 @@ import { deleteFile } from 'screens/FilesUploadPreview/reducer';
 
 interface IuseReceiptPreviewItemStateProps {
   isLastReceipt: boolean;
-  onChooseReceiptHandler: (fileName: string, fileSrc: string) => void;
+  onChooseReceiptHandler: (
+    fileName: string,
+    fileSrc: string,
+    fileType: string
+  ) => void;
   fileName: string;
   imageSrc: string;
+  fileType: string;
 }
 export const useReceiptPreviewItemState = (
   props: IuseReceiptPreviewItemStateProps
 ) => {
-  const { fileName, imageSrc, isLastReceipt, onChooseReceiptHandler } = props;
+  const {
+    fileName,
+    imageSrc,
+    isLastReceipt,
+    fileType,
+    onChooseReceiptHandler,
+  } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onReceiptClickHandler = () =>
-    onChooseReceiptHandler(fileName, imageSrc);
+    onChooseReceiptHandler(fileName, imageSrc, fileType);
 
   const onDeleteReceiptFile = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

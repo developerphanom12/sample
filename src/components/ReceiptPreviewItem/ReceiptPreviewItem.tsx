@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
 import { Icon } from '../Icons';
+import { PdfViewer } from '../PdfViewer';
+
 import { useReceiptPreviewItemState } from './ReceiptPreviewItem.state';
 import { ReceiptPreviewItemStyles as Styled } from './ReceiptPreviewItem.style';
 
@@ -9,7 +11,12 @@ interface IReceiptPreviewItemProps {
   imageSrc: string;
   isActive: boolean;
   fileName: string;
-  onChooseReceiptHandler: (fileName: string, fileSrc: string) => void;
+  fileType: string;
+  onChooseReceiptHandler: (
+    fileName: string,
+    fileSrc: string,
+    fileType: string
+  ) => void;
 }
 export const ReceiptPreviewItem: FC<IReceiptPreviewItemProps> = (props) => {
   const {
@@ -17,12 +24,14 @@ export const ReceiptPreviewItem: FC<IReceiptPreviewItemProps> = (props) => {
     fileName,
     isActive,
     isLastReceipt,
+    fileType,
     onChooseReceiptHandler,
   } = props;
 
   const { onDeleteReceiptFile, onReceiptClickHandler } =
     useReceiptPreviewItemState({
       onChooseReceiptHandler,
+      fileType,
       fileName,
       imageSrc,
       isLastReceipt,
@@ -31,7 +40,18 @@ export const ReceiptPreviewItem: FC<IReceiptPreviewItemProps> = (props) => {
   return (
     <Styled.ItemWrapper isActive={isActive}>
       <Styled.ImageWrapper onClick={onReceiptClickHandler}>
-        <Styled.Image isActive={isActive} src={imageSrc} alt={fileName} />
+        {fileType === 'application/pdf' ? (
+          <Styled.PdfWrapper>
+            <PdfViewer
+              currentFileSrc={imageSrc}
+              loaderStyle="small"
+              isLoader
+              pageWidth={92}
+            />
+          </Styled.PdfWrapper>
+        ) : (
+          <Styled.Image isActive={isActive} src={imageSrc} alt={fileName} />
+        )}
         <Styled.IconWrapper id={fileName} onClick={onDeleteReceiptFile}>
           <Icon type="deletePhotoIcon" />
         </Styled.IconWrapper>

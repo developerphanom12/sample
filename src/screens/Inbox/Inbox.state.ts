@@ -79,14 +79,17 @@ export const useInboxState = () => {
     if (!event.target.files?.length) return;
     const selectedFilesArray = Array.from(event.target.files);
 
-    let imagesArray: { fileSrc: string; fileName: string }[] = [];
+    let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
+      [];
     selectedFilesArray?.forEach((file) => {
-      if (!file.type.match('image')) {
+
+      if (!file.type.match(/image|application\/pdf/g)) {
         return;
       }
       imagesArray.push({
         fileSrc: URL.createObjectURL(file),
         fileName: file.name,
+        fileType: file.type,
       });
     });
     if (imagesArray.length) {

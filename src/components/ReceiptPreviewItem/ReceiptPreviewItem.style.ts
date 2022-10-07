@@ -35,4 +35,15 @@ export const ReceiptPreviewItemStyles = {
     top: -6px;
     right: -6px;
   `,
+  PdfWrapper: styled.div<{ isActive?: boolean }>`
+    max-width: 254px;
+    width: 92px;
+    height: 130px;
+    box-shadow: ${({ theme, isActive }) =>
+      !isActive && `0px 4px 4px 1px ${theme.colors.halfTranparentBlack}`};
+    canvas,
+    .react-pdf__Page__textContent {
+      height: 130px !important;
+    }
+  `,
 };

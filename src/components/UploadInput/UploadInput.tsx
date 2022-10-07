@@ -15,9 +15,9 @@ export const UploadInput: FC<IUploadInputProps> = (props) => {
       type="file"
       id={id || 'uploadFile'}
       name={name || 'uploadFile'}
-      accept="image/jpeg, image/jpg, image/png"
+      accept="image/jpeg, image/jpg, image/png, .pdf"
       multiple
-      data-testid='upload-file'
+      data-testid="upload-file"
     />
   );
 };

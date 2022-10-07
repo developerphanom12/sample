@@ -4,6 +4,7 @@ import { Button } from 'components/Button';
 import { ReceiptPreviewItem } from 'components/ReceiptPreviewItem';
 import { CustomCarousel } from 'components/CustomCarousel';
 import { NavigationButton } from 'components/NavigationButton';
+import { PdfViewer } from 'components/PdfViewer';
 
 import { useFilesUploadPreviewState } from './FilesUploadPreview.state';
 import { FilesUploadPreviewStyles as Styled } from './FilesUploadPreview.style';
@@ -15,6 +16,7 @@ export const FilesUploadPreview: FC = () => {
     isLoading,
     currentFileName,
     currentFileSrc,
+    curretFileType,
     onChooseReceiptHandler,
     onNavigateToInboxPage,
     onGoBackHandler,
@@ -58,13 +60,25 @@ export const FilesUploadPreview: FC = () => {
             </Styled.ButtonsBox>
           </Styled.ButtonsBoxWrapper>
           <Styled.ImageWrapper>
-            <Styled.ReceiptImage src={currentFileSrc} alt={currentFileName} />
+            {curretFileType === 'application/pdf' ? (
+              <Styled.PdfWrapper>
+                <PdfViewer
+                  currentFileSrc={currentFileSrc}
+                  loaderStyle="big"
+                  pageWidth={254}
+                  isLoader
+                />
+              </Styled.PdfWrapper>
+            ) : (
+              <Styled.ReceiptImage src={currentFileSrc} alt={currentFileName} />
+            )}
           </Styled.ImageWrapper>
           <CustomCarousel>
             {previewFiles?.map((file) => {
               return (
                 <ReceiptPreviewItem
                   key={file.fileName}
+                  fileType={file.fileType}
                   imageSrc={file.fileSrc}
                   fileName={file.fileName}
                   isActive={currentFileName === file.fileName}

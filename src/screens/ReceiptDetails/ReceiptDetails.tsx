@@ -18,6 +18,7 @@ export const ReceiptDetails: FC = () => {
     receipts,
     selectedReceiptIndex,
     isImageLoading,
+    isPDF,
   } = useReceiptDetailsState();
 
   useEffect(() => {
@@ -35,7 +36,11 @@ export const ReceiptDetails: FC = () => {
         customId={selectedReceipt?.custom_id}
       />
       <Styled.Wrapper>
-        <PhotoPreview imageSrc={imageSrc} isImageLoading={isImageLoading} />
+        <PhotoPreview
+          imageSrc={imageSrc}
+          isImageLoading={isImageLoading}
+          isPDF={isPDF}
+        />
         <PhotoDetails />
       </Styled.Wrapper>
     </Styled.Section>

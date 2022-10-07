@@ -12,6 +12,7 @@ export const useReceiptDetailsState = () => {
   const dispatch = useDispatch();
 
   const [imageSrc, setImageSrc] = useState('');
+  const [isPDF, setIsPDF] = useState(false);
   const [isImageLoading, setImageLoading] = useState(false);
 
   const {
@@ -35,6 +36,10 @@ export const useReceiptDetailsState = () => {
   const onGetReceiptImageHandler = async () => {
     try {
       setImageLoading(true);
+      selectedReceipt?.photos[0].match(/.pdf/g)
+        ? setIsPDF(true)
+        : setIsPDF(false);
+
       const { data } = await getReceiptImage(
         selectedReceipt?.photos[0] || '',
         token
@@ -56,6 +61,7 @@ export const useReceiptDetailsState = () => {
     receipts,
     selectedReceiptIndex,
     isImageLoading,
+    isPDF,
     onGetReceiptImageHandler,
     onGoBackHandler,
     onClickGetNextReceiptHandler,
