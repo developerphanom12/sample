@@ -37,7 +37,8 @@ export const EMPTY_DATA_STRINGS_MASTER = {
     title: 'Supplier accounts will be shown here...',
     firstSubtitle:
       'We have created everything for you, please add your supplier account to start.',
-    secondSubtitle: 'You can do that by using Create Supplier Account button below',
+    secondSubtitle:
+      'You can do that by using Create Supplier Account button below',
     buttonText: 'Create Supplier Account',
   },
   type: {
@@ -93,3 +94,5 @@ export const USER_ROLES = [
     label: 'Company Owner',
   },
 ];
+
+export const MAX_FILE_SIZE = 13053968;

@@ -7,9 +7,8 @@ import { injectStore } from 'services/api-service';
 import { AppRouter } from './app.router';
 import { AppTheme } from '../styles/theme';
 
-injectStore(store);
-
 const App = () => {
+  injectStore(store);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persisterStore}>

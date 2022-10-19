@@ -33,6 +33,7 @@ export interface IUserInfo {
 export interface ISIGN_UP_USER_INITIAL_STATE {
   user: IUser;
   token: string;
+  refreshToken: string;
   socialAccount: ISocialAccount;
   userInfo: IUserInfo;
   currencies: ICurrency[];

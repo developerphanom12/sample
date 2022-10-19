@@ -10,12 +10,14 @@ import {
   getTodayDateRange,
   getYesterdayDateRange,
 } from 'services/utils';
-import { useGetCompanyLogo } from '../../hooks/useGetCompanyLogo';
+import { useGetCompanyLogo } from 'hooks/useGetCompanyLogo';
 
 import { setFiles } from '../FilesUploadPreview/reducer';
 import { getReceiptStatistic } from './dashboard.api';
 import { getTimeFilterOptions } from './dashboard.constants';
 import { setStatistic } from './reducer/dashboard.reducer';
+
+import { MAX_FILE_SIZE } from 'constants/strings';
 
 interface IuseDashboardState {
   timeFilterValue: {
@@ -63,16 +65,20 @@ export const useDashboardState = () => {
     if (!event.target.files?.length) return;
     const selectedFilesArray = Array.from(event.target.files);
 
-    let imagesArray: { fileSrc: string; fileName: string, fileType: string }[] = [];
+    let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
+      [];
 
     selectedFilesArray?.forEach((file) => {
-      if (!file.type.match('image')) {
+      if (
+        !file.type.match(/image|application\/pdf/g) ||
+        file.size >= MAX_FILE_SIZE
+      ) {
         return;
       }
       imagesArray.push({
         fileSrc: URL.createObjectURL(file),
         fileName: file.name,
-        fileType: file.type
+        fileType: file.type,
       });
     });
     dispatch(

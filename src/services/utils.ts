@@ -221,13 +221,17 @@ export const onCreateFormDataHandler = (
 };
 
 export const isTokenExpired = (token: string) => {
-  if (token) {
-    const decodedToken: { id: string; expiresIn: number; iat: number } =
-      decode(token);
-    if (decodedToken.expiresIn < new Date().getTime()) {
-      return true;
-    } else {
-      return false;
-    }
+  if (!token) return;
+  const decodedToken: {
+    id: string;
+    expiresIn: number;
+    iat: number;
+    exp: number;
+  } = decode(token);
+
+  if (decodedToken.exp * 1000 < new Date().getTime()) {
+    return true;
+  } else {
+    return false;
   }
 };

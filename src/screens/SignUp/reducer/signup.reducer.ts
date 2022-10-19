@@ -23,6 +23,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
     profile_image: '',
   },
   token: '',
+  refreshToken: '',
   socialAccount: {
     capiumEmail: '',
     capiumId: '',
@@ -65,6 +66,14 @@ export const SignUpUserSlice = createSlice({
     ) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.refreshToken = action.payload.refreshToken;
+    },
+    setTokens: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<{ accessToken: string; refreshToken: string }>
+    ) => {
+      state.token = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
     updateUser: (
       state: ISIGN_UP_USER_INITIAL_STATE,
@@ -134,6 +143,7 @@ export const {
   updateUserProfile,
   setUserAvatar,
   switchAccount,
+  setTokens,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

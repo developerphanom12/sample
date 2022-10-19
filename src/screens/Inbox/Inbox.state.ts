@@ -38,6 +38,7 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { MAX_FILE_SIZE } from 'constants/strings';
 
 export const useInboxState = () => {
   const {
@@ -82,8 +83,10 @@ export const useInboxState = () => {
     let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
       [];
     selectedFilesArray?.forEach((file) => {
-
-      if (!file.type.match(/image|application\/pdf/g)) {
+      if (
+        !file.type.match(/image|application\/pdf/g) ||
+        file.size >= MAX_FILE_SIZE
+      ) {
         return;
       }
       imagesArray.push({
@@ -121,13 +124,14 @@ export const useInboxState = () => {
       }));
       isFetchingData && dispatch(setIsFetchingDate(false));
     } catch (error) {
+      dispatch(setIsFetchingDate(false));
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
         isFetchingReceipts: false,
         isEmptyData: false,
         isContentLoading: false,
-        isContentVisible: false,
+        isContentVisible: true,
         checkedIds: [],
       }));
       console.log(error);

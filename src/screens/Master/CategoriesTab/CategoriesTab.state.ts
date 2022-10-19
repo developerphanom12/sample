@@ -91,7 +91,8 @@ export const useCategoriesTabState = () => {
         ...prevState,
         isContentLoading: false,
         isFetchingData: false,
-        isEmptyData: false,
+        isHeaderPanel: true,
+        isEmptyData: !count ? true : false,
         isLoading: false,
         isSearching: false,
         searchedItems: [],
@@ -107,7 +108,6 @@ export const useCategoriesTabState = () => {
       await createTabItem({ name: state.modalInputValue }, 'category');
       onGetAllCategoriesHandler();
       onChangePage({ selected: 0 });
-
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
@@ -117,6 +117,7 @@ export const useCategoriesTabState = () => {
       onModalWindowToggle();
     } catch (error) {
       console.log(error);
+      onModalWindowToggle();
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
@@ -159,6 +160,7 @@ export const useCategoriesTabState = () => {
       onChangeStateFieldHandler('searchValue', '');
       onDeleteModalWindowToggle();
     } catch (error) {
+      onChangeStateFieldHandler('isFetchingData', false);
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
       onDeleteModalWindowToggle();

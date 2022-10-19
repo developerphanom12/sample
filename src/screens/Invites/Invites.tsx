@@ -133,6 +133,10 @@ export const Invites = () => {
           />
         </Styled.SuccessPopupWrapper>
       )}
+      {/* !isFetchingReceipts &&
+        !isFetchingData &&
+        !totalReceiptCount &&
+        !receipts.length ? ( */}
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />

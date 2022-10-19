@@ -17,6 +17,7 @@ export const FilesUploadPreview: FC = () => {
     currentFileName,
     currentFileSrc,
     curretFileType,
+    isDisableButton,
     onChooseReceiptHandler,
     onNavigateToInboxPage,
     onGoBackHandler,
@@ -51,11 +52,14 @@ export const FilesUploadPreview: FC = () => {
               </Button>
               <Button
                 isLoading={isLoading}
+                isDisabled={isDisableButton}
                 themedButton="roundedRed"
                 width="roundedBig"
                 onClick={onSaveClickHandler}
               >
-                {`Upload receipt (${previewFiles.length})`}
+                {isDisableButton
+                  ? 'Choose only 10 receipts'
+                  : `Upload receipt (${previewFiles.length})`}
               </Button>
             </Styled.ButtonsBox>
           </Styled.ButtonsBoxWrapper>

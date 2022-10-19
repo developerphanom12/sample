@@ -102,7 +102,8 @@ export const useInvitesState = () => {
         isSearching: false,
         isLoading: false,
         isFetchingData: false,
-        isEmptyData: false,
+        isHeaderPanel: true,
+        isEmptyData: !count ? true : false,
         isContentLoading: false,
       }));
       console.log(error);

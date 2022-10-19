@@ -95,7 +95,8 @@ export const useSuppliersTabState = () => {
         ...prevState,
         isContentLoading: false,
         isFetchingData: false,
-        isEmptyData: false,
+        isHeaderPanel: true,
+        isEmptyData: !count ? true : false,
         isLoading: false,
         isSearching: false,
       }));

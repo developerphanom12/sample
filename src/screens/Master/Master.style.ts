@@ -17,11 +17,9 @@ export const MasterStyles = {
     flex-wrap: wrap;
     height: 100%;
   `,
-  TabContent: styled.div<{ active: boolean }>`
-    ${(props) =>
-      props.active
-        ? 'display: flex; flex-flow: column nowrap'
-        : 'display: none'};
+  TabContent: styled.div`
+    display: flex;
+    flex-flow: column nowrap;
     height: 100%;
     flex: 1;
   `,

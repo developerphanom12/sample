@@ -40,6 +40,8 @@ export const mockedState = {
     profile_image: '',
   },
   token: 'tjgidojandie',
+  refreshToken: 'tgted4gg',
+  isUpdateTokens: false,
   socialAccount: {
     capiumEmail: '',
     capiumId: '',

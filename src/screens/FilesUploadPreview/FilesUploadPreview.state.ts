@@ -87,11 +87,14 @@ export const useFilesUploadPreviewState = () => {
     }
   };
 
+  const isDisableButton = previewFiles.length > 10;
+
   return {
     ...state,
     previewFiles,
     filesArray,
     isLoading,
+    isDisableButton,
     onChooseReceiptHandler,
     onNavigateToInboxPage,
     onGoBackHandler,

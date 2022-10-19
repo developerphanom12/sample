@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
+import { setInterseptors } from 'services/api-service';
+
 import { Layout } from 'components/Layout/Layout';
 
 import { Login } from 'screens/Login/Login';
@@ -24,46 +26,55 @@ import { UsersList } from 'screens/Settings/UsersList';
 import { CompanyList } from 'screens/Settings/CompanyList';
 import { SignUpNewMember } from 'screens/SignUpNewMember';
 import { WorkSpacePicker } from 'screens/WorkSpacePicker';
+import { Invites } from 'screens/Invites';
 
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
-import { Invites } from '../screens/Invites';
 
-export const AppRouter: FC = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path={ROUTES.home} element={<Layout />}>
-        <Route element={<PrivateRouter />}>
-          <Route index element={<Dashboard />} />
-          <Route path={ROUTES.invites} element={<Invites />} />
-          <Route path={ROUTES.inbox} element={<Inbox />}>
-            <Route path={ROUTES.receiptDetails} element={<ReceiptDetails />} />
-            <Route
-              path={ROUTES.filesUploadPreview}
-              element={<FilesUploadPreview />}
-            />
+export const AppRouter: FC = () => {
+  setInterseptors();
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.home} element={<Layout />}>
+          <Route element={<PrivateRouter />}>
+            <Route index element={<Dashboard />} />
+            <Route path={ROUTES.invites} element={<Invites />} />
+            <Route path={ROUTES.inbox} element={<Inbox />}>
+              <Route
+                path={ROUTES.receiptDetails}
+                element={<ReceiptDetails />}
+              />
+              <Route
+                path={ROUTES.filesUploadPreview}
+                element={<FilesUploadPreview />}
+              />
+            </Route>
+            <Route path={ROUTES.settings} element={<Settings />}>
+              <Route index element={<MyAccount />} />
+              <Route path={ROUTES.usersList} element={<UsersList />} />
+              <Route path={ROUTES.companiesList} element={<CompanyList />} />
+              <Route
+                path={ROUTES.termsOfService}
+                element={<TermsOfService />}
+              />
+              <Route path={ROUTES.privacyPolicy} element={<PrivacyPolicy />} />
+            </Route>
+            <Route path={ROUTES.support} element={<Support />} />
+            <Route path={ROUTES.notFound} element={<NotFound />} />
+            <Route path={ROUTES.master} element={<Master />} />
           </Route>
-          <Route path={ROUTES.settings} element={<Settings />}>
-            <Route index element={<MyAccount />} />
-            <Route path={ROUTES.usersList} element={<UsersList />} />
-            <Route path={ROUTES.companiesList} element={<CompanyList />} />
-            <Route path={ROUTES.termsOfService} element={<TermsOfService />} />
-            <Route path={ROUTES.privacyPolicy} element={<PrivacyPolicy />} />
-          </Route>
-          <Route path={ROUTES.support} element={<Support />} />
-          <Route path={ROUTES.notFound} element={<NotFound />} />
-          <Route path={ROUTES.master} element={<Master />} />
         </Route>
-      </Route>
-      <Route path={ROUTES.preference} element={<Preference />} />
-      <Route path={ROUTES.login} element={<Login />} />
-      <Route path={ROUTES.sign_up} element={<SignUp />} />
-      <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
-      <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
-      <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
-      <Route path={ROUTES.signUpNewMember} element={<SignUpNewMember />} />
-      <Route path={ROUTES.chooseCompany} element={<WorkSpacePicker />} />
-    </Routes>
-  </BrowserRouter>
-);
+        <Route path={ROUTES.preference} element={<Preference />} />
+        <Route path={ROUTES.login} element={<Login />} />
+        <Route path={ROUTES.sign_up} element={<SignUp />} />
+        <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+        <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
+        <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
+        <Route path={ROUTES.signUpNewMember} element={<SignUpNewMember />} />
+        <Route path={ROUTES.chooseCompany} element={<WorkSpacePicker />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
