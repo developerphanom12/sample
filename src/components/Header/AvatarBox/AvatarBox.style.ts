@@ -22,7 +22,7 @@ export const AvatarBoxStyles = {
     margin-right: 20px;
     border-radius: 50%;
   `,
-  Link: styled(Link)`
+  IconWrapper: styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;

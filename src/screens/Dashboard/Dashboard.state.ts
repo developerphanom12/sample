@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ActionMeta } from 'react-select';
 
+import { getUserCompanies } from 'components/Header/header.api';
+
 import { IState } from 'services/redux/reducer';
 import {
   getLastMonthDateRange,
@@ -13,21 +15,15 @@ import {
 import { useGetCompanyLogo } from 'hooks/useGetCompanyLogo';
 
 import { setFiles } from '../FilesUploadPreview/reducer';
+import { updateUserData } from '../SignUp/reducer/signup.reducer';
+import { setCompanySwitcher } from '../Settings/reducer/settings.reducer';
+
 import { getReceiptStatistic } from './dashboard.api';
 import { getTimeFilterOptions } from './dashboard.constants';
 import { setStatistic } from './reducer/dashboard.reducer';
+import { IuseDashboardState, IUserInfoData } from './types';
 
 import { MAX_FILE_SIZE } from 'constants/strings';
-
-interface IuseDashboardState {
-  timeFilterValue: {
-    value: string;
-    label: string;
-  };
-  isLoading: boolean;
-  isContentLoading: boolean;
-  isVisited: boolean;
-}
 
 export const useDashboardState = () => {
   const dispatch = useDispatch();
@@ -43,6 +39,7 @@ export const useDashboardState = () => {
       user,
       token,
     },
+    settings: { companySwitcher },
   } = useSelector((state: IState) => state);
 
   const timeFilterOptions = getTimeFilterOptions();
@@ -68,11 +65,12 @@ export const useDashboardState = () => {
     let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
       [];
 
-    selectedFilesArray?.forEach((file) => {
+    selectedFilesArray?.forEach((file, ind) => {
       if (
         !file.type.match(/image|application\/pdf/g) ||
         file.size >= MAX_FILE_SIZE
       ) {
+        selectedFilesArray.splice(ind, 1);
         return;
       }
       imagesArray.push({
@@ -100,6 +98,10 @@ export const useDashboardState = () => {
       const { data } = await getReceiptStatistic(timeFrames);
       const companiesWithLogo = await getCompanyLogo(data.companies, token);
       dispatch(setStatistic({ ...data, companies: companiesWithLogo }));
+      if (!user.accounts?.length && !user.active_account && !company.name) {
+        const { account, company } = data.companies[0];
+        setUserInfo({ active_account: account.id, account, company });
+      }
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
@@ -136,6 +138,19 @@ export const useDashboardState = () => {
     if (state.timeFilterValue.value === newValue.value) return;
     onChangeStateFieldHandler('timeFilterValue', newValue);
     getReceiptsStatisticHandler(dateHashMapping[newValue.value], true);
+  };
+
+  const setUserInfo = async (userData: IUserInfoData) => {
+    try {
+      if (!companySwitcher.length) {
+        const { data } = await getUserCompanies();
+        dispatch(setCompanySwitcher(data || []));
+      }
+      const { company, active_account, account } = userData;
+      dispatch(updateUserData({ company, account, active_account }));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return {

@@ -33,9 +33,9 @@ const setupFc = () => {
 };
 describe('SlideArrow component', () => {
   it('render component', () => {
-    const { getByText } = setupFc();
+    const { getByTestId } = setupFc();
 
-    expect(getByText(/settings/i)).toBeInTheDocument();
+    expect(getByTestId(/avatarBox/i)).toBeInTheDocument();
   });
 
   it('onMouseEnterHandler and onMouseLeaveHandler works well', () => {

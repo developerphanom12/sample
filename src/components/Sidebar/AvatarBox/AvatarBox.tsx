@@ -36,7 +36,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
   } = props;
 
   return (
-    <Styled.MainWrapper>
+    <Styled.MainWrapper data-testid='avatarBox'>
       <Styled.ContentWrapper>
         <Styled.ProfileImageWrapper
           data-testid="image-wrapper"

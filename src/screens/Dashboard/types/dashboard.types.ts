@@ -14,7 +14,7 @@ export interface IAccountCompanyOwner {
 export interface ICompanyDashboard {
   account: IAccountCompanyOwner;
   company_owner: IAccountCompanyOwner;
-  company: Omit<ICompany, 'currency'>;
+  company: ICompany;
 }
 
 export interface IReceipts {
@@ -26,4 +26,20 @@ export interface IDASHBOARD_INITIAL_STATE {
   companies: ICompanyDashboard[];
   metric: IMetric;
   receipts: IReceipts | null;
+}
+
+export interface IuseDashboardState {
+  timeFilterValue: {
+    value: string;
+    label: string;
+  };
+  isLoading: boolean;
+  isContentLoading: boolean;
+  isVisited: boolean;
+}
+
+export interface IUserInfoData {
+  company: ICompany;
+  active_account: string;
+  account: IAccount;
 }

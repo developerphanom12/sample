@@ -6,19 +6,18 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { CustomCarouselStyles as Styled } from './CustomCarousel.style';
 import { SliderArrow } from '../SliderArrow';
-import { settings } from './customCarousel.constants';
+import { settingsSlider } from './customCarousel.constants';
 
 interface ICustomCarouselProps {
   children: React.ReactElement[];
 }
 export const CustomCarousel: FC<ICustomCarouselProps> = (props) => {
   const { children } = props;
-
   return (
     <Styled.Container>
       <Styled.SliderWrapper>
         <Slider
-          {...settings}
+          {...settingsSlider}
           nextArrow={<SliderArrow isForwardButton />}
           prevArrow={<SliderArrow />}
         >

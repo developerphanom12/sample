@@ -41,7 +41,6 @@ export const mockedState = {
   },
   token: 'tjgidojandie',
   refreshToken: 'tgted4gg',
-  isUpdateTokens: false,
   socialAccount: {
     capiumEmail: '',
     capiumId: '',

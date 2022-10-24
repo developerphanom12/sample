@@ -75,6 +75,18 @@ export const SignUpUserSlice = createSlice({
       state.token = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
+    updateUserData: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<{
+        company: ICompany;
+        active_account: string;
+        account: IAccount;
+      }>
+    ) => {
+      state.user.active_account = action.payload.active_account;
+      state.userInfo.company = action.payload.company;
+      state.user.accounts = [action.payload.account];
+    },
     updateUser: (
       state: ISIGN_UP_USER_INITIAL_STATE,
       action: PayloadAction<IUser>
@@ -144,6 +156,7 @@ export const {
   setUserAvatar,
   switchAccount,
   setTokens,
+  updateUserData,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

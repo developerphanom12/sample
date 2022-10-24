@@ -6,10 +6,7 @@ import { Avatar } from '../../Avatar/Avatar';
 
 import { AvatarBoxStyles as Styled } from './AvatarBox.style';
 
-import { ROUTES } from 'constants/routes';
-
 interface IAvatarBoxProps extends IAvatarSubmenuLinks {
-  active_account: string | null;
   onMouseEnterHandler: () => void;
   onMouseLeaveHandler: () => void;
   userProfilePhoto: string;
@@ -21,7 +18,6 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
     onMouseEnterHandler,
     onMouseLeaveHandler,
     userProfilePhoto,
-    active_account,
     isUploadingPhoto,
     isAvatarHover,
     menuItems,
@@ -31,7 +27,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
-      <Styled.Link to={active_account ? ROUTES.settings : ''}>
+      <Styled.IconWrapper>
         {isUploadingPhoto ? (
           <Styled.LoaderWrapper>
             <LoaderComponent theme="avatarMin" />
@@ -41,7 +37,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
         ) : (
           <Avatar />
         )}
-      </Styled.Link>
+      </Styled.IconWrapper>
       {isAvatarHover && <AvatarSubmenu menuItems={menuItems} />}
     </Styled.AvatarWrapper>
   );

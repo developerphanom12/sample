@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { styled } from 'styles/theme';
 
 export const HeaderStyles = {
@@ -49,5 +51,8 @@ export const HeaderStyles = {
   Notifications: styled.div`
     display: flex;
     align-items: center;
+  `,
+  Link: styled(Link)<{ is_disabled?: string }>`
+    pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
   `,
 };

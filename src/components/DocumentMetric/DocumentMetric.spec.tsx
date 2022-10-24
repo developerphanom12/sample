@@ -12,6 +12,12 @@ const companies = [
     account: { id: 'adc1', name: 'Test User', role: 'Owner' },
     company_owner: { id: 'gt13', name: 'Test User', role: 'Owner' },
     company: {
+      currency: {
+        country: 'United Kingdom',
+        description: 'GPB',
+        id: 'asdfr',
+        value: 'UK',
+      },
       date_format: 'dd/MM/yyyy',
       created: '10.20.2222',
       id: 'dcbg2',
@@ -71,7 +77,7 @@ const setupFunction = () => {
 describe('Document metric component', () => {
   it('Render component', () => {
     const { getByText } = setupFunction();
-    expect(getByText(/welcome test user/i)).toBeInTheDocument();
+    expect(getByText(/receipt metric/i)).toBeInTheDocument();
   });
 
   it('Render companies', () => {

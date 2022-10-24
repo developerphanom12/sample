@@ -319,6 +319,8 @@ declare global {
     id: string;
     name: string;
     role: string;
+    created: string;
+    userInvitorName: string;
   }
 
   interface ICompany {

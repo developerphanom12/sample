@@ -29,6 +29,7 @@ export const FilesUploadPreviewStyles = {
     justify-content: center;
     align-items: center;
     margin: 15px 0 25px 0;
+    min-height: 358px;
     flex: 1;
   `,
   ReceiptImage: styled.img`

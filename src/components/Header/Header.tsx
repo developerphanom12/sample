@@ -1,5 +1,4 @@
 import { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import { CompanySwitcher } from '../CompanySwitcher/CompanySwitcher';
 import { Icon } from '../Icons';
@@ -44,14 +43,14 @@ export const Header: FC = () => {
   return (
     <Styled.Header>
       <Styled.Container>
-        <Link to={ROUTES.home}>
+        <Styled.Link to={ROUTES.home} is_disabled={!active_account ? 'true' : ''}>
           <Styled.LogoWrapper>
             <Styled.LogoIconWrapper>
               <Icon type="receiptHubLogo" />
             </Styled.LogoIconWrapper>
             <Styled.Title>ReceiptHub</Styled.Title>
           </Styled.LogoWrapper>
-        </Link>
+        </Styled.Link>
         <Styled.BlocksWrapper>
           <LinksBox active_account={active_account} />
           <Styled.Notifications>
@@ -67,7 +66,6 @@ export const Header: FC = () => {
               />
             ) : null}
             <AvatarBox
-              active_account={active_account}
               onMouseEnterHandler={onMouseEnterHandler}
               onMouseLeaveHandler={onMouseLeaveHandler}
               userProfilePhoto={userProfilePhoto}

@@ -31,6 +31,6 @@ describe('Header component', () => {
   it('Render links', () => {
     setup();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
-    expect(screen.getAllByTestId('header-link')).toHaveLength(5);
+    expect(screen.getAllByTestId('header-link')).toHaveLength(6);
   });
 });

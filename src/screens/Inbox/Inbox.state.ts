@@ -79,14 +79,15 @@ export const useInboxState = () => {
   const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files?.length) return;
     const selectedFilesArray = Array.from(event.target.files);
-
     let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
       [];
-    selectedFilesArray?.forEach((file) => {
+
+    selectedFilesArray?.forEach((file, ind) => {
       if (
         !file.type.match(/image|application\/pdf/g) ||
         file.size >= MAX_FILE_SIZE
       ) {
+        selectedFilesArray.splice(ind, 1);
         return;
       }
       imagesArray.push({
@@ -95,6 +96,7 @@ export const useInboxState = () => {
         fileType: file.type,
       });
     });
+
     if (imagesArray.length) {
       dispatch(
         setFiles({ filesArray: selectedFilesArray, previewFiles: imagesArray })
@@ -426,13 +428,19 @@ export const useInboxState = () => {
       await receiptDelete({ receipts: state.checkedIds }, token);
       setState((prevState) => ({
         ...prevState,
+        searchValue:
+          receipts.length === 1 && prevState.searchValue
+            ? ''
+            : prevState.searchValue,
         isContentLoading: receipts.length !== 1 ? true : false,
+        isContentVisible: receipts.length === 1 ? false : true,
         isFetchingReceipts:
           receipts.length === 1 ||
           receipts.length === prevState.checkedIds.length
             ? true
             : false,
       }));
+      state.searchValue && onChangeStateFieldHandler('searchValue', '');
       onFetchReceiptsHandler({});
       onGetStatisticHandler();
       onActionsClick();

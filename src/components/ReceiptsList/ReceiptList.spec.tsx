@@ -65,7 +65,7 @@ const setupFunction = (counter: number) => {
 describe('Receipt list component', () => {
   it('Render component', () => {
     const { getByText } = setupFunction(mockedReceipts.length);
-    expect(getByText(/receipts list/i)).toBeInTheDocument();
+    expect(getByText(/receipts/i)).toBeInTheDocument();
   });
 
   it('Render receits list', () => {

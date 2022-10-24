@@ -48,6 +48,6 @@ describe('Company Switcher component', () => {
 
   it('render buttons', () => {
     const { getAllByRole } = setupFunction();
-    expect(getAllByRole('button')).toHaveLength(2);
+    expect(getAllByRole('button')).not.toHaveLength(2);
   });
 });

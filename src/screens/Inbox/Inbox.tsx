@@ -81,7 +81,7 @@ export const Inbox: FC = () => {
 
   useEffect(() => {
     onFetchReceiptsHandler({
-      search: debouncedValue.toLowerCase().trim().replace(/\s+/g, ''),
+      search: debouncedValue,
       skip: 0,
       take: Number(receiptsPerPage.value),
       date_start: dateStart || '',
