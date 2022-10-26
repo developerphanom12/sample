@@ -19,12 +19,6 @@ export const InvitesStyles = {
     justify-content: center;
     flex: 1;
   `,
-  SuccessPopupWrapper: styled.div`
-    position: absolute;
-    right: 0;
-    max-width: 290px;
-    width: 100%;
-  `,
   ContentWrapper: styled.div`
     display: flex;
     flex-direction: column;

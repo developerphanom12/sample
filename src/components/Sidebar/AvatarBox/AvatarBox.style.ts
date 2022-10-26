@@ -37,7 +37,7 @@ export const AvatarBoxStyles = {
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};
     color: ${({ theme }) => theme.colors.black};
   `,
-  InputLabel: styled.label`
+  InputLabel: styled.label<{ isLoading: boolean }>`
     overflow: hidden;
     width: 75px;
     height: 75px;
@@ -45,6 +45,7 @@ export const AvatarBoxStyles = {
     position: absolute;
     z-index: ${Z_INDEX.m};
     cursor: pointer;
+    ${({ isLoading }) => isLoading && `pointer-events:none;`}
   `,
   UploadIconWrapper: styled.div`
     display: flex;

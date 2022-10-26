@@ -13,6 +13,10 @@ import {
   setUser,
 } from '../SignUp/reducer/signup.reducer';
 import { capiumFetchUser, capiumLogin } from './capiumLogin.api';
+import {
+  CAPIUM_LOGIN_INITIAL_STATE,
+  FORMIK_INITIAL_VALUES,
+} from './capiumLogin.contants';
 
 import { ROUTES } from 'constants/routes';
 
@@ -23,13 +27,9 @@ interface IuseCapiumLoginState {
   isModalOpen: boolean;
 }
 export const useCapiumLoginState = () => {
-  const initialState = {
-    isHoverInfo: false,
-    errorMessage: '',
-    isShowPassword: false,
-    isModalOpen: false,
-  };
-  const [state, setState] = useState<IuseCapiumLoginState>(initialState);
+  const [state, setState] = useState<IuseCapiumLoginState>(
+    CAPIUM_LOGIN_INITIAL_STATE
+  );
 
   const {
     capiumLoginAccount: { capiumAccounts },
@@ -51,23 +51,18 @@ export const useCapiumLoginState = () => {
     onChangeStateField('isModalOpen', !state.isModalOpen);
   };
 
-  const onChangeStateField = (optionName: string, value: any) =>
+  const onChangeStateField = (
+    optionName: keyof typeof CAPIUM_LOGIN_INITIAL_STATE,
+    value: boolean | string
+  ) =>
     setState((prevState) => ({
       ...prevState,
       [optionName]: value,
     }));
 
-  const onMouseEnterHandler = () =>
-    setState((prevState) => ({
-      ...prevState,
-      isHoverInfo: true,
-    }));
+  const onMouseEnterHandler = () => onChangeStateField('isHoverInfo', true);
 
-  const onMouseLeaveHandler = () =>
-    setState((prevState) => ({
-      ...prevState,
-      isHoverInfo: false,
-    }));
+  const onMouseLeaveHandler = () => onChangeStateField('isHoverInfo', false);
 
   const onChooseCapiumAccountHandler = (
     event: React.MouseEvent<HTMLDivElement>
@@ -83,10 +78,7 @@ export const useCapiumLoginState = () => {
   };
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
+    initialValues: FORMIK_INITIAL_VALUES,
     onSubmit: (values, actions) => onSubmitFormHandler(values, actions),
     validationSchema: capiumValidationSchema,
   });

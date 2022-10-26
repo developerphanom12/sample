@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ActionMeta } from 'react-select';
 
 import { getUserCompanies } from 'components/Header/header.api';
@@ -13,8 +13,8 @@ import {
   getYesterdayDateRange,
 } from 'services/utils';
 import { useGetCompanyLogo } from 'hooks/useGetCompanyLogo';
+import { useSelectFiles } from 'hooks/useSelectFiles';
 
-import { setFiles } from '../FilesUploadPreview/reducer';
 import { updateUserData } from '../SignUp/reducer/signup.reducer';
 import { setCompanySwitcher } from '../Settings/reducer/settings.reducer';
 
@@ -23,13 +23,10 @@ import { getTimeFilterOptions } from './dashboard.constants';
 import { setStatistic } from './reducer/dashboard.reducer';
 import { IuseDashboardState, IUserInfoData } from './types';
 
-import { MAX_FILE_SIZE } from 'constants/strings';
 
 export const useDashboardState = () => {
   const dispatch = useDispatch();
-
   const location = useLocation();
-  const navigate = useNavigate();
   const getCompanyLogo = useGetCompanyLogo();
 
   const {
@@ -57,33 +54,14 @@ export const useDashboardState = () => {
     Number(metric?.review);
 
   const [state, setState] = useState<IuseDashboardState>(initialState);
+  const onSelectFiles = useSelectFiles();
 
-  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files?.length) return;
-    const selectedFilesArray = Array.from(event.target.files);
-
-    let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
-      [];
-
-    selectedFilesArray?.forEach((file, ind) => {
-      if (
-        !file.type.match(/image|application\/pdf/g) ||
-        file.size >= MAX_FILE_SIZE
-      ) {
-        selectedFilesArray.splice(ind, 1);
-        return;
-      }
-      imagesArray.push({
-        fileSrc: URL.createObjectURL(file),
-        fileName: file.name,
-        fileType: file.type,
-      });
+  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+    onSelectFiles({
+      files: event.target.files,
+      location,
+      route: 'inbox/files-upload-preview',
     });
-    dispatch(
-      setFiles({ filesArray: selectedFilesArray, previewFiles: imagesArray })
-    );
-    navigate('inbox/files-upload-preview', { state: { from: location } });
-  };
 
   const getReceiptsStatisticHandler = async (
     timeFrames?: { date_start: string; date_end: string },

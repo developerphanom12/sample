@@ -95,14 +95,11 @@ export const Inbox: FC = () => {
     onChangePagesAmount(Number(receiptsPerPage.value), count);
   }, [receiptsPerPage, count, isFetchingData]);
 
-  useEffect(() => {
-    isSentSuccessPopup && setTimeout(setIsSentSuccessPopup, 3000);
-  }, [isSentSuccessPopup]);
-
   return (
     <>
       <ActionMenuContent
         isSentSuccessPopup={isSentSuccessPopup}
+        closeSuccesPopupHandler={setIsSentSuccessPopup}
         csvLink={csvLink}
         csvData={csvData}
         excelRef={excelRef}

@@ -31,23 +31,18 @@ export const MyAccount: FC = () => {
     getProfileHandler();
   }, []);
 
-  useEffect(() => {
-    isShowSuccesPopup && setTimeout(setIsShowSuccesPopup, 3000);
-  }, [isShowSuccesPopup]);
-
   return (
     <Styled.LayoutWrapper>
-      {isShowSuccesPopup && (
-        <Styled.SuccessPopupWrapper>
-          <SuccessPopup
-            titleText={
-              isResetPassword
-                ? 'The password has been successfully changed'
-                : 'User profile has been successfully changed'
-            }
-          />
-        </Styled.SuccessPopupWrapper>
-      )}
+      <SuccessPopup
+        positionTop="0"
+        isShowPopup={isShowSuccesPopup}
+        closePopupFc={setIsShowSuccesPopup}
+        titleText={
+          isResetPassword
+            ? 'The password has been successfully changed'
+            : 'User profile has been successfully changed'
+        }
+      />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />

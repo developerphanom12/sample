@@ -27,9 +27,13 @@ export const CompanySwitcher: FC<ICompanySwitcher> = (props) => {
     onSwitchCompanyHandler,
     onClickSwitcherHandler,
   } = props;
-  
+
   return (
-    <Styled.Wrapper data-testid='company-switcher' ref={switcherRef} onClick={onClickSwitcherHandler}>
+    <Styled.Wrapper
+      data-testid="company-switcher"
+      ref={switcherRef}
+      onClick={onClickSwitcherHandler}
+    >
       <CompanySwitcherLogo
         companyLogoSrc={activeCompany?.company.logo || ''}
         companyName={activeCompany?.company.name || ''}

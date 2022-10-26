@@ -24,7 +24,7 @@ export const CompanySwitcherMenuStyles = {
     flex-direction: column;
     max-height: 250px;
     overflow-y: auto;
+    margin-top: 1px;
     margin-right: ${(props) => props.isMargin && '5px'};
-    padding-bottom: 3px;
   `,
 };

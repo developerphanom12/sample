@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ActionMeta, SingleValue } from 'react-select';
 import { FormikHelpers, useFormik } from 'formik';
 import { format } from 'date-fns';
@@ -11,8 +11,8 @@ import { emailSendValidationSchema } from 'services/validation';
 import { IState } from 'services/redux/reducer';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
+import { useSelectFiles } from 'hooks/useSelectFiles';
 
-import { setFiles } from '../FilesUploadPreview/reducer';
 import {
   downloadCSV,
   downloadXLXS,
@@ -38,7 +38,6 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
-import { MAX_FILE_SIZE } from 'constants/strings';
 
 export const useInboxState = () => {
   const {
@@ -67,7 +66,6 @@ export const useInboxState = () => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [isSentSuccessPopup, setIsSentSuccessPopup] = useToggle();
 
   const totalReceiptCount =
@@ -76,34 +74,14 @@ export const useInboxState = () => {
     Number(metric?.processing) +
     Number(metric?.review);
 
-  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files?.length) return;
-    const selectedFilesArray = Array.from(event.target.files);
-    let imagesArray: { fileSrc: string; fileName: string; fileType: string }[] =
-      [];
+  const onSelectFiles = useSelectFiles();
 
-    selectedFilesArray?.forEach((file, ind) => {
-      if (
-        !file.type.match(/image|application\/pdf/g) ||
-        file.size >= MAX_FILE_SIZE
-      ) {
-        selectedFilesArray.splice(ind, 1);
-        return;
-      }
-      imagesArray.push({
-        fileSrc: URL.createObjectURL(file),
-        fileName: file.name,
-        fileType: file.type,
-      });
+  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+    onSelectFiles({
+      files: event.target.files,
+      location,
+      route: ROUTES.filesUploadPreview,
     });
-
-    if (imagesArray.length) {
-      dispatch(
-        setFiles({ filesArray: selectedFilesArray, previewFiles: imagesArray })
-      );
-      navigate(ROUTES.filesUploadPreview, { state: { from: location } });
-    }
-  };
 
   const onFetchReceiptsHandler = async (params?: IGetReceiptsParams) => {
     try {

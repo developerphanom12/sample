@@ -75,11 +75,6 @@ export const UsersList: FC = () => {
     onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage]);
 
-  useEffect(() => {
-    if (isSentSuccessPopup) setTimeout(setIsSentSuccessPopup, 3000);
-    if (isResentSuccessPopup) setTimeout(setIsResendSuccessPopup, 3000);
-  }, [isSentSuccessPopup, isResentSuccessPopup]);
-
   return (
     <Styled.Section>
       <ModalBox
@@ -104,17 +99,18 @@ export const UsersList: FC = () => {
         isUserList
         categoryName="user"
       />
-      {(isResentSuccessPopup || isSentSuccessPopup) && (
-        <Styled.SuccessPopupWrapper>
-          <SuccessPopup
-            titleText={
-              isResentSuccessPopup
-                ? 'Invitation resent successfully'
-                : 'Invitation sent successfully'
-            }
-          />
-        </Styled.SuccessPopupWrapper>
-      )}
+      <SuccessPopup
+        positionTop="0"
+        isShowPopup={isResentSuccessPopup || isSentSuccessPopup}
+        closePopupFc={
+          isResentSuccessPopup ? setIsResendSuccessPopup : setIsSentSuccessPopup
+        }
+        titleText={
+          isResentSuccessPopup
+            ? 'Invitation resent successfully'
+            : 'Invitation sent successfully'
+        }
+      />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />

@@ -261,6 +261,7 @@ export const useInvitesState = () => {
       onDeleteModalWindowToggle();
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('isFetchingData', false);
       onDeleteModalWindowToggle();
       console.log(error);
     }

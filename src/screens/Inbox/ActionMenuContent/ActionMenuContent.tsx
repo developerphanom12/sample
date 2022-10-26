@@ -17,6 +17,7 @@ interface IActionMenuContentProps extends IEmailModalWindowProps {
   excelRef: React.RefObject<HTMLAnchorElement>;
   excelUrl: string;
   isSentSuccessPopup: boolean;
+  closeSuccesPopupHandler: () => void;
 }
 
 export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
@@ -29,6 +30,7 @@ export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
     isLoading,
     onCloseModalWindowHandler,
     onFormHandleSubmit,
+    closeSuccesPopupHandler,
     csvLink,
     csvData,
     excelRef,
@@ -56,11 +58,11 @@ export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
         isLoading={isLoading}
       />
       <Styled.ExcelLink href={excelUrl} ref={excelRef} />
-      {isSentSuccessPopup && (
-        <Styled.SuccessPopupWrapper>
-          <SuccessPopup titleText="Email sent successfully" />
-        </Styled.SuccessPopupWrapper>
-      )}
+      <SuccessPopup
+        titleText="Email sent successfully"
+        closePopupFc={closeSuccesPopupHandler}
+        isShowPopup={isSentSuccessPopup}
+      />
     </>
   );
 };

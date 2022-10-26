@@ -51,6 +51,7 @@ export const AvatarBox: FC<IAvatarBoxProps> = (props) => {
           <Styled.InputLabel
             data-testid="input-label"
             htmlFor={id}
+            isLoading={isUploadingPhoto}
             onMouseEnter={onMouseEnterHandler}
             onMouseLeave={onMouseLeaveHandler}
           />

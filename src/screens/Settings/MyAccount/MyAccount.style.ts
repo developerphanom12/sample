@@ -47,11 +47,4 @@ export const MyAccountStyles = {
     justify-content: center;
     height: 100%;
   `,
-  SuccessPopupWrapper: styled.div`
-    position: absolute;
-    right: 0;
-    top: 10px;
-    max-width: 290px;
-    width: 100%;
-  `,
 };

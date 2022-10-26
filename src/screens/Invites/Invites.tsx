@@ -85,11 +85,6 @@ export const Invites = () => {
     onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage]);
 
-  useEffect(() => {
-    if (isSentSuccessPopup) setTimeout(setIsSentSuccessPopup, 3000);
-    if (isResentSuccessPopup) setTimeout(setIsResendSuccessPopup, 3000);
-  }, [isSentSuccessPopup, isResentSuccessPopup]);
-
   const isPaginationPanel =
     (searchValue && searchedInvites?.length) ||
     (!searchValue && result?.length);
@@ -122,21 +117,19 @@ export const Invites = () => {
         selectValue={role}
         isCheckboxField={isEdit && formik.values.email !== prevEmail}
       />
-      {(isResentSuccessPopup || isSentSuccessPopup) && (
-        <Styled.SuccessPopupWrapper>
-          <SuccessPopup
-            titleText={
-              isResentSuccessPopup
-                ? 'Invitation resent successfully'
-                : 'Invitation sent successfully'
-            }
-          />
-        </Styled.SuccessPopupWrapper>
-      )}
-      {/* !isFetchingReceipts &&
-        !isFetchingData &&
-        !totalReceiptCount &&
-        !receipts.length ? ( */}
+      <SuccessPopup
+        titleText={
+          isResentSuccessPopup
+            ? 'Invitation resent successfully'
+            : 'Invitation sent successfully'
+        }
+        closePopupFc={
+          isResentSuccessPopup ? setIsResendSuccessPopup : setIsSentSuccessPopup
+        }
+        positionTop={'0'}
+        isShowPopup={isResentSuccessPopup || isSentSuccessPopup}
+      />
+
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
