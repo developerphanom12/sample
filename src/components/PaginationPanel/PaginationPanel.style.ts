@@ -8,7 +8,6 @@ export const PaginationPanelStyles = {
   `,
   PagesWrapper: styled.div`
     width: 550px;
-    text-align: start;
   `,
   SelectorWrapper: styled.div`
     display: flex;

@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { Button } from 'components/Button';
 import { ReceiptPreviewItem } from 'components/ReceiptPreviewItem';

@@ -153,7 +153,7 @@ declare global {
       TableInboxAdminProps,
       IPagination {
     isContentLoading: boolean;
-    onChangeReceiptsPerPage: (newValue: unknown) => void;
+    onChangeReceiptsPerPage: (newValue: IOption) => void;
     receiptsPerPage: { value: string; label: string };
     receipts: IReceipt[];
     isFetchingReceipts: boolean;

@@ -1,20 +1,9 @@
-import { SingleValue } from 'react-select';
-
-import { IOption } from 'components/CustomSelect/types';
-
 export interface IuseMasterState {
   isEdit?: boolean;
   searchValue: string;
   modalInputValue: string;
   prevInputValue: string;
   isLoading: boolean;
-  itemsPerPage: SingleValue<IOption> | any;
-  skipReceipts: number;
-  currentPage: number;
-  inputPaginationValue: string;
-  pages: number;
-  forwardDisabled: boolean;
-  backwardDisabled: boolean;
   isEmptyData?: boolean;
   isFetchingData?: boolean;
   isContentLoading?: boolean;
@@ -22,6 +11,7 @@ export interface IuseMasterState {
   isHeaderPanel?: boolean;
   searchedItems: ITabItem[];
   isSearching: boolean;
+  selected?: number;
 }
 
 export interface IHeaderPanelMasterProps {

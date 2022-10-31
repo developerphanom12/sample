@@ -41,8 +41,9 @@ export const ReceiptPreviewItemStyles = {
     height: 130px;
     box-shadow: ${({ theme, isActive }) =>
       !isActive && `0px 4px 4px 1px ${theme.colors.halfTranparentBlack}`};
-    canvas,
-    .react-pdf__Page__textContent {
+    .react-pdf__Document,
+    .react-pdf__Page,
+    .react-pdf__Page__svg {
       height: 130px !important;
     }
   `,

@@ -39,7 +39,6 @@ export const NavigationButtonStyles = {
     ${(props) => props.themedButton && THEME[props.themedButton]};
     flex-direction: ${(props) => props.isReverse && 'row-reverse'};
     cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
-    padding-bottom: 2px;
   `,
   Content: styled.div<{
     isReverse?: boolean;

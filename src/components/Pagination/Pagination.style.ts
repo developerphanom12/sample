@@ -10,11 +10,17 @@ export const PaginationStyles = {
     flex-direction: row;
     justify-content: space-between;
     list-style-type: none;
+    li {
+      display: flex;
+    }
 
     li a {
       border-radius: 5px;
       padding: 3px 8px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     li.previous a,
@@ -37,10 +43,13 @@ export const PaginationStyles = {
       background-color: ${(props) => props.theme.colors.darkRed};
       border-color: transparent;
       color: white;
-      min-width: 100px !important;
-      min-height: 25px;
+      width: 25px;
+      height: 25px;
     }
-
+    li.active {
+      display: flex;
+      align-items: center;
+    }
     li.disabled a {
       color: grey;
     }

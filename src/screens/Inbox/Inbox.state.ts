@@ -12,6 +12,7 @@ import { IState } from 'services/redux/reducer';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { useSelectFiles } from 'hooks/useSelectFiles';
+import { usePagination } from 'hooks/usePagination';
 
 import {
   downloadCSV,
@@ -38,6 +39,7 @@ import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
+import { PAGINATION_ARRAY } from 'constants/pagination-array';
 
 export const useInboxState = () => {
   const {
@@ -235,12 +237,9 @@ export const useInboxState = () => {
     onChangeStateFieldHandler('showActions', !state.showActions);
   const onActionsClose = () => onChangeStateFieldHandler('showActions', false);
 
-  const onChangeReceiptsPerPage = (newValue: any) => {
-    setState((prevState) => ({
-      ...prevState,
-      isContentLoading: true,
-      receiptsPerPage: newValue,
-    }));
+  const onChangeReceiptsPerPage = (newValue: IOption) => {
+    setItemsPerPage(newValue);
+    onChangeStateFieldHandler('isContentLoading', true);
     onFetchReceiptsHandler({
       take: +newValue.value,
       search: debouncedValue,
@@ -250,74 +249,35 @@ export const useInboxState = () => {
     });
     if (!count) return;
     onChangePagesAmount(+newValue.value, count);
-    onChangeStateFieldHandler('currentPage', initialState.currentPage);
+    setCurrentPage(0);
   };
 
   const onChangePage = (data: IPaginationData) => {
     const selected = data.selected;
-    setState((prevState) => ({
-      ...prevState,
-      currentPage: selected,
-      skipReceipts: selected * +state.receiptsPerPage.value,
-    }));
+    onChangePageHandler(selected);
+    onChangeStateFieldHandler('isContentLoading', true);
+
     onFetchReceiptsHandler({
-      take: +state.receiptsPerPage.value,
-      skip: selected * +state.receiptsPerPage.value,
+      take: +receiptsPerPage.value,
+      skip: selected * +receiptsPerPage.value,
     });
   };
 
-  const onChangePagesAmount = (itemsCount: number, count: number) => {
-    if (!count) return;
-    onChangeStateFieldHandler('pages', Math.ceil(count / itemsCount));
-  };
-
-  const onChangeInputValue = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
-
-  const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
-    onGoToClick();
-  };
-
-  const onGoToClick = () => {
-    if (+state.inputPaginationValue === state.currentPage + 1) {
-      onChangeStateFieldHandler(
-        'inputPaginationValue',
-        initialState.inputPaginationValue
-      );
-      return;
-    }
-    if (+state.inputPaginationValue <= state.pages) {
-      const goTo = +state.inputPaginationValue;
-      onChangePage({ selected: goTo - 1 });
-      onChangeStateFieldHandler('currentPage', +state.inputPaginationValue - 1);
-    }
-    onChangeStateFieldHandler(
-      'inputPaginationValue',
-      initialState.inputPaginationValue
-    );
-  };
-
-  const onForwardClick = () => {
-    if (state.currentPage === state.pages - 1) return;
-    const forward = state.currentPage + 5;
-    if (forward < state.pages) {
-      onChangePage({ selected: forward });
-    } else {
-      onChangePage({ selected: state.pages - 1 });
-    }
-  };
-
-  const onBackwardClick = () => {
-    if (state.currentPage === 0) return;
-    const backward = state.currentPage - 5;
-    if (backward < 0) {
-      onChangePage({ selected: 0 });
-    } else {
-      onChangePage({ selected: backward });
-    }
-  };
+  const {
+    onBackwardClick,
+    onForwardClick,
+    onGoToClick,
+    onEnterGoToClick,
+    onChangeInputValue,
+    onChangePagesAmount,
+    onChangePageHandler,
+    setItemsPerPage,
+    setCurrentPage,
+    itemsPerPage: receiptsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
+  } = usePagination({ onChangePage });
 
   const onCheckedItemHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setCheckedItem(event.target.id));
@@ -404,6 +364,8 @@ export const useInboxState = () => {
   const onDeleteReceiptHandler = async () => {
     try {
       await receiptDelete({ receipts: state.checkedIds }, token);
+      count === 1 && setItemsPerPage(PAGINATION_ARRAY[1]);
+
       setState((prevState) => ({
         ...prevState,
         searchValue:
@@ -452,6 +414,10 @@ export const useInboxState = () => {
 
   return {
     ...state,
+    receiptsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
     active_account,
     datePickerRef,
     count,

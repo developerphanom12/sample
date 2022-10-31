@@ -27,7 +27,7 @@ export const PdfViewer: FC<IPdfViewerProps> = (props) => {
   );
   return (
     <Document file={currentFileSrc} loading={loader}>
-      <Page pageNumber={1} loading="" width={pageWidth} renderMode="canvas" />
+      <Page pageNumber={1} loading="" width={pageWidth} renderMode="svg" />
     </Document>
   );
 };

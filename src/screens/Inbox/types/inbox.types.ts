@@ -45,11 +45,6 @@ export interface IuseInboxState {
   dateValue: Date | null;
   formattedDate: string;
   showActions: boolean;
-  receiptsPerPage: SingleValue<IOption> | any;
-  skipReceipts: number;
-  currentPage: number;
-  inputPaginationValue: string;
-  pages: number;
   checkedIds: string[];
   isLoading: boolean;
   csvData: string;

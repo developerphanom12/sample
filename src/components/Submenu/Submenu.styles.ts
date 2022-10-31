@@ -7,7 +7,7 @@ export const SubmenuStyles = {
     border-radius: 6px;
     width: 120px;
     position: absolute;
-    top: 50px;
+    top: 55px;
     left: 0;
     background-color: ${({ theme }) => theme.colors.white};
     z-index: ${({ theme }) => theme.zIndex.xs};

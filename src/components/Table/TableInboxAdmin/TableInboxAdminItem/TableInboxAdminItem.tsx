@@ -82,7 +82,9 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
         </Styled.Link>
       </Styled.View>
       <Styled.Selector>
-        {!!date ? format(new Date(date), dateFormat) : '---'}
+        {!!date
+          ? format(new Date(date), dateFormat)
+          : format(new Date(), dateFormat)}
       </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>

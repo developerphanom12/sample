@@ -17,6 +17,8 @@ import {
 import { setTabItem, setTypes } from '../reducer/master.reducer';
 import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
+import { usePagination } from '../../../hooks/usePagination';
+import { PAGINATION_ARRAY } from '../../../constants/pagination-array';
 
 export const useTypesTabState = () => {
   const initialState = TAB_INITIAL_STATE;
@@ -149,13 +151,16 @@ export const useTypesTabState = () => {
 
   const onDeleteButtonClickHandler = async () => {
     try {
-      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
+      if (count === 1) {
+        setItemsPerPage(PAGINATION_ARRAY[1]);
+        onChangeStateFieldHandler('isFetchingData', true);
+      }
       onChangeStateFieldHandler('isLoading', true);
 
       await deleteTabItem(selectedCategory?.id || '', 'payment-type');
       const { data } = await getAllTabItems('payment-type');
       dispatch(setTypes({ count: data.count, data: data.data }));
-      onChangePage({ selected: state.currentPage });
+      onChangePage({ selected: currentPage });
 
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
@@ -233,89 +238,50 @@ export const useTypesTabState = () => {
     }));
   };
 
-  const onChangeItemsPerPage = (newValue: any) => {
-    onChangeStateFieldHandler('itemsPerPage', newValue);
+  const onChangePage = (data: IPaginationData) => {
+    const selected = data.selected;
+    onChangePageHandler(selected);
+    onChangeStateFieldHandler('isContentLoading', true);
+
+    onGetAllTypesHandler({
+      take: Number(itemsPerPage.value),
+      skip: selected * Number(itemsPerPage.value),
+    });
+  };
+
+  const {
+    onBackwardClick,
+    onForwardClick,
+    onGoToClick,
+    onEnterGoToClick,
+    onChangeInputValue,
+    onChangePagesAmount,
+    onChangePageHandler,
+    setItemsPerPage,
+    setCurrentPage,
+    itemsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
+  } = usePagination({ onChangePage });
+
+  const onChangeItemsPerPage = (newValue: IOption) => {
+    setItemsPerPage(newValue);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('isFocus', true);
     onChangeStateFieldHandler('searchValue', '');
     onGetAllTypesHandler({ take: Number(newValue.value) });
-    onChangeStateFieldHandler('currentPage', initialState.currentPage);
+    setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue.value), count);
   };
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
-    setState((prevState) => ({
-      ...prevState,
-      currentPage: selected,
-      skipReceipts: selected * Number(state.itemsPerPage.value),
-      isContentLoading: true,
-    }));
-    onGetAllTypesHandler({
-      take: Number(state.itemsPerPage.value),
-      skip: selected * Number(state.itemsPerPage.value),
-    });
-  };
-
-  const onChangePagesAmount = (itemsCount: number, count: number) => {
-    if (!count) return;
-    onChangeStateFieldHandler('pages', Math.ceil(count / itemsCount));
-  };
-
-  const onChangeInputValue = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
-
-  const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
-    onGoToClick();
-  };
-
-  const onGoToClick = () => {
-    if (Number(state.inputPaginationValue) === state.currentPage + 1) {
-      onChangeStateFieldHandler(
-        'inputPaginationValue',
-        initialState.inputPaginationValue
-      );
-      return;
-    }
-    if (Number(state.inputPaginationValue) <= state.pages) {
-      const goTo = Number(state.inputPaginationValue);
-      onChangePage({ selected: goTo - 1 });
-      onChangeStateFieldHandler(
-        'currentPage',
-        Number(state.inputPaginationValue) - 1
-      );
-    }
-    onChangeStateFieldHandler(
-      'inputPaginationValue',
-      initialState.inputPaginationValue
-    );
-  };
-
-  const onForwardClick = () => {
-    if (state.currentPage === state.pages - 1) return;
-    const forward = state.currentPage + 5;
-    if (forward < state.pages) {
-      onChangePage({ selected: forward });
-    } else {
-      onChangePage({ selected: state.pages - 1 });
-    }
-  };
-
-  const onBackwardClick = () => {
-    if (state.currentPage === 0) return;
-    const backward = state.currentPage - 5;
-    if (backward < 0) {
-      onChangePage({ selected: 0 });
-    } else {
-      onChangePage({ selected: backward });
-    }
-  };
-
   return {
     ...state,
+    currentPage,
+    pages,
+    inputPaginationValue,
+    itemsPerPage,
     active_account,
     selectedCategory,
     onChangeSearchValueHandler,
