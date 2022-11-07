@@ -18,7 +18,9 @@ interface ILoginFormProps {
   ) => void;
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
   formikMeta: (name: string) => FieldMetaProps<string>;
+  isGoogleLoading: boolean;
   onTogglePasswordVisibility: () => void;
+  onGoogleButtonClickHandler: () => void;
   isShowPassword: boolean;
   isValid: boolean;
 }
@@ -29,8 +31,10 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
     formikProps,
     onTogglePasswordVisibility,
     formikMeta,
+    onGoogleButtonClickHandler,
     isShowPassword,
     isValid,
+    isGoogleLoading,
   } = props;
 
   const {
@@ -90,11 +94,15 @@ export const LoginForm: FC<ILoginFormProps> = (props) => {
         {STRINGS.sign_in_up.sign_in}
       </Button>
       <DivideLine />
-      <Link to={ROUTES.capiumLogin}>
-        <Button themedButton="capium" width="auth">
-          {STRINGS.sign_in_up.continue_Capium}
-        </Button>
-      </Link>
+      <Button
+        onClick={onGoogleButtonClickHandler}
+        themedButton="capium"
+        width="auth"
+        iconType="google"
+        isLoading={isGoogleLoading}
+      >
+        {STRINGS.sign_in_up.continue_Google}
+      </Button>
       <Styled.SignUpLink>
         <Styled.Text>{STRINGS.sign_in_up.without_acc}</Styled.Text>
         <Styled.SignUpText data-testid="sign_up" to={ROUTES.sign_up}>

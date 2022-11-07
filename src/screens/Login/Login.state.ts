@@ -5,6 +5,7 @@ import { FormikHelpers, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { emailValidation, passwordValidation } from 'services/validation';
+import { useGoogleButton } from 'hooks/useGoogleButton';
 
 import { login } from './login.api';
 import { ILogin } from './types/login.types';
@@ -27,7 +28,6 @@ export const useLoginState = () => {
   const [state, setState] = useState<IuseLoginStateState>(initialState);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const onSignUpClickHandler = () => {
@@ -79,9 +79,12 @@ export const useLoginState = () => {
     }),
   });
 
+  const { onGoogleButtonClickHandler, isGoogleLoading } = useGoogleButton();
   return {
     ...state,
     formik,
+    isGoogleLoading,
+    onGoogleButtonClickHandler,
     onSignUpClickHandler,
     onTogglePasswordVisibility,
   };

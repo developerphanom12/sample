@@ -4,17 +4,25 @@ import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 import { useLoginState } from './Login.state';
 import { LoginForm } from './LoginForm/LoginForm';
 import { Styled } from './Login.style';
+import { LoaderComponent } from '../../components/Loader';
 
 export const Login = () => {
   const {
     isShowPassword,
     formik,
+    isGoogleLoading,
     onSignUpClickHandler,
     onTogglePasswordVisibility,
+    onGoogleButtonClickHandler,
   } = useLoginState();
 
   return (
     <Styled.MainWrapper>
+      {/* {isGoogleLoading ? (
+        <Styled.Loading>
+          <LoaderComponent theme="preview" />
+        </Styled.Loading>
+      ) : null} */}
       <AuthImageSection />
 
       <Styled.Section>
@@ -22,6 +30,8 @@ export const Login = () => {
           <Styled.RightSideContentWrapper>
             <AuthTabs isAuth onSignUpClickHandler={onSignUpClickHandler} />
             <LoginForm
+              onGoogleButtonClickHandler={onGoogleButtonClickHandler}
+              isGoogleLoading={isGoogleLoading}
               onFormHandleSubmit={formik.handleSubmit}
               formikProps={formik.getFieldProps}
               formikMeta={formik.getFieldMeta}

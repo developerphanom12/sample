@@ -53,7 +53,6 @@ export const useInboxState = () => {
   } = useSelector((state: IState) => state);
 
   const initialState = INITIAL_STATE;
-
   const [state, setState] = useState<IuseInboxState>(initialState);
 
   const onChangeStateFieldHandler = (
@@ -273,6 +272,7 @@ export const useInboxState = () => {
     onChangePageHandler,
     setItemsPerPage,
     setCurrentPage,
+    setSkipReceipts,
     itemsPerPage: receiptsPerPage,
     currentPage,
     pages,
@@ -381,8 +381,22 @@ export const useInboxState = () => {
             : false,
       }));
       state.searchValue && onChangeStateFieldHandler('searchValue', '');
-      onFetchReceiptsHandler({});
+      onFetchReceiptsHandler({
+        take: +receiptsPerPage.value,
+        skip:
+          state.checkedIds.length === count
+            ? 0
+            : (currentPage - 1) * +receiptsPerPage.value,
+      });
       onGetStatisticHandler();
+      if (receipts?.length === state.checkedIds.length) {
+        if (state.checkedIds.length === count) {
+          setCurrentPage(0);
+          setSkipReceipts(10);
+        } else {
+          onChangePageHandler(currentPage - 1);
+        }
+      }
       onActionsClick();
     } catch (error) {
       onActionsClick();

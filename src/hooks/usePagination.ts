@@ -14,6 +14,7 @@ export interface IResult {
   onChangePageHandler: (selected: number) => void;
   setItemsPerPage: React.Dispatch<React.SetStateAction<IOption>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setSkipReceipts: (value: React.SetStateAction<number>) => void;
   itemsPerPage: IOption;
   currentPage: number;
   pages: number;
@@ -94,6 +95,7 @@ export const usePagination: (props: IProps) => IResult = (props) => {
     onChangePageHandler,
     setItemsPerPage,
     setCurrentPage,
+    setSkipReceipts,
     itemsPerPage,
     currentPage,
     pages,

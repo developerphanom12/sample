@@ -44,6 +44,7 @@ export const COLORS = {
   boxShadowBlackButton: 'rgba(0, 0, 0, 0.2)',
   halfTranparentBlack: 'rgba(34, 43, 56, 0.5)',
   overlay: 'rgba(64, 74, 95, 0.5)',
+  googleOverlay: 'rgba(64, 74, 95, 0.05)',
   metricBoxShadow: '0px 0px 5px rgb(0 0 0 / 30%)',
 };
 

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { ActionMeta } from 'react-select';
 
 import { signUpValidationSchema } from 'services/validation';
+import { useGoogleButton } from 'hooks/useGoogleButton';
 
 import { IOption } from 'components/CustomSelect/types';
 
@@ -84,9 +85,13 @@ export const useSignUpState = () => {
     validationSchema: signUpValidationSchema,
   });
 
+  const { onGoogleButtonClickHandler, isGoogleLoading } = useGoogleButton();
+
   return {
     ...state,
     formik,
+    isGoogleLoading,
+    onGoogleButtonClickHandler,
     onTogglePasswordVisibility,
     onLoginClickHandler,
     onChangeCountryValueHandler,

@@ -31,7 +31,6 @@ export const useSelectFiles = () => {
         !file.type.match(/image|application\/pdf/g) ||
         file.size >= MAX_FILE_SIZE
       ) {
-        selectedFilesArray.splice(ind, 1);
         return;
       }
       imagesArray.push({

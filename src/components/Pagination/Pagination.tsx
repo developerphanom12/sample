@@ -38,6 +38,7 @@ export const Pagination = (props: IPagination) => {
         marginPagesDisplayed={2}
         forcePage={currentPage}
         data-testid="page"
+        
       />
       <NavigationButton
         iconBehavior="iconForward"

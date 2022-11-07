@@ -7,16 +7,24 @@ import { LoaderComponent } from '../Loader';
 
 export type ButtonStyleProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  iconType?: 'google';
   children?: React.ReactNode;
   isDisabled?: boolean;
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
   themedButton: TButtonTheme;
-  width: 'auth' | 'primary' | 'secondary' | 'actions' | 'rounded' | 'roundedBig';
+  width:
+    | 'auth'
+    | 'primary'
+    | 'secondary'
+    | 'actions'
+    | 'rounded'
+    | 'roundedBig';
 };
 
 export const Button = ({
   themedButton,
+  iconType,
   width,
   children,
   onClick,
@@ -34,12 +42,18 @@ export const Button = ({
     >
       {themedButton === 'capium' && (
         <ButtonStyles.Content>
-          <Icon type="capiumLogo" />
+          {!isLoading && <Icon type={iconType ? 'googleIcon' : 'capiumLogo'} />}
         </ButtonStyles.Content>
       )}
       {width === 'actions' && <Icon type="threeDots" fill="red" />}
       <ButtonStyles.Content>
-        {isLoading ? <LoaderComponent /> : children}
+        {isLoading ? (
+          <LoaderComponent
+            theme={themedButton === 'capium' ? 'avatarMin' : ''}
+          />
+        ) : (
+          children
+        )}
       </ButtonStyles.Content>
     </ButtonStyles.Button>
   );

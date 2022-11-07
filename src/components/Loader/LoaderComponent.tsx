@@ -6,7 +6,7 @@ import { COLORS } from 'styles/theme';
 import { LoaderComponentStyles } from './LoaderComponent.style';
 
 interface ILoaderComponentProps {
-  theme?: 'preview' | 'avatarMin';
+  theme?: 'preview' | 'avatarMin' | '';
 }
 export const LoaderComponent: FC<ILoaderComponentProps> = (props) => {
   const { theme } = props;

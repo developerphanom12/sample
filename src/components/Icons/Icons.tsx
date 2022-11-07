@@ -38,9 +38,11 @@ import { ReactComponent as tableArrow } from 'assets/icons/table-arrow.svg';
 import { ReactComponent as smallSearchIcon } from 'assets/icons/small-search-icon.svg';
 import { ReactComponent as profileIcon } from 'assets/icons/profile-icon.svg';
 import { ReactComponent as logoutIcon } from 'assets/icons/logout-icon.svg';
+import { ReactComponent as googleIcon } from 'assets/icons/google-icon.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   profileIcon,
+  googleIcon,
   logoutIcon,
   smallSearchIcon,
   tableArrow,

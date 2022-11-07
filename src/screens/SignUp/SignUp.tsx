@@ -12,6 +12,8 @@ export const SignUp: FC = () => {
     onLoginClickHandler,
     onTogglePasswordVisibility,
     onChangeCountryValueHandler,
+    onGoogleButtonClickHandler,
+    isGoogleLoading,
     isShowPassword,
     formik,
     countryValue,
@@ -37,6 +39,8 @@ export const SignUp: FC = () => {
             isValid={formik.isValid && formik.dirty}
             countryValue={countryValue}
             onChangeCountryValueHandler={onChangeCountryValueHandler}
+            onGoogleButtonClickHandler={onGoogleButtonClickHandler}
+            isGoogleLoading={isGoogleLoading}
           />
         </Styled.RightSideContentWrapper>
       </Styled.Section>

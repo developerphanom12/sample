@@ -88,6 +88,8 @@ export const ButtonStyles = {
     opacity: ${(props) => (props.disabled ? 0.8 : 1)};
   `,
   Content: styled.div`
+    display: flex;
+    justify-content: center;
     &:not(:last-child) {
       margin-right: 14px;
     }

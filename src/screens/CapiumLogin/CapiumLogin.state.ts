@@ -84,18 +84,14 @@ export const useCapiumLoginState = () => {
   });
 
   const onCapiumLoginHandler = async (
-    payload: {
-      email: string;
-      fullName: string;
-      type: string;
-    },
+    payload: IOAuthLogin,
     isFirstLogin?: boolean
   ) => {
     try {
       const { data } = await capiumLogin(payload);
 
       dispatch(setUser(data));
-      !data.user.isOnboardingDone && dispatch(setCurrencies(data.currencies));
+      dispatch(setCurrencies(data.currencies));
       dispatch(
         setSocialAccount({
           capiumEmail: data.socialAccount.email,
@@ -113,7 +109,11 @@ export const useCapiumLoginState = () => {
           })
         );
 
-      navigate(data.user.isOnboardingDone ? ROUTES.home : ROUTES.preference);
+      navigate(
+        !data.user.active_account || !data.user?.accounts.length
+          ? ROUTES.preference
+          : ROUTES.home
+      );
     } catch (error) {
       console.log(error);
     }
@@ -139,10 +139,10 @@ export const useCapiumLoginState = () => {
             password: 'Invalid email or password',
           });
       } else {
-        const payload = {
-          socialAccountId: data.id,
-          email: data.email,
-          fullName: data.name,
+        const payload: IOAuthLogin = {
+          socialAccountId: data.id as string,
+          email: data.email as string,
+          fullName: data.name as string,
           type: 'capium',
         };
         onCapiumLoginHandler(payload, true);

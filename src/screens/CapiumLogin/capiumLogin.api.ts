@@ -1,15 +1,9 @@
 import { apiServices, ICapiumAuthPayload } from 'services/api-service';
 
-interface ICapiumLogin {
-  email: string;
-  fullName: string;
-  type: string;
-}
-
 export const capiumFetchUser = (payload: ICapiumAuthPayload) =>
   apiServices.capiumFetchData(payload);
 
-export const capiumLogin = (payload: ICapiumLogin) => {
+export const capiumLogin = (payload: IOAuthLogin) => {
   const URL = '/auth/o-auth';
   return apiServices.postData(URL, payload);
 };

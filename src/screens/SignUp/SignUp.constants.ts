@@ -42,9 +42,16 @@ export const mockedState = {
   token: 'tjgidojandie',
   refreshToken: 'tgted4gg',
   socialAccount: {
-    capiumEmail: '',
-    capiumId: '',
-    id: '',
+    capium: {
+      capiumEmail: '',
+      capiumId: '',
+      id: '',
+    },
+    google: {
+      googleEmail: '',
+      googleId: '',
+      id: '',
+    },
   },
   userInfo: {
     company: {

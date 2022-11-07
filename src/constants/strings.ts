@@ -13,6 +13,7 @@ export const STRINGS = {
     show_password_icon: 'showPassword',
     forgot_password: 'Forgot Password?',
     continue_Capium: 'Continue with Capium',
+    continue_Google: 'Continue with Google',
     without_acc: 'Don’t have an account?',
   },
 };

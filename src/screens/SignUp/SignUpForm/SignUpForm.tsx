@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { FieldInputProps, FieldMetaProps } from 'formik';
+import { ActionMeta } from 'react-select';
 
 import { Button } from 'components/Button/Button';
 import { DivideLine } from 'components/DivideLine/DivideLine';
@@ -11,7 +11,6 @@ import { inputs } from '../SignUp.constants';
 
 import { STRINGS } from 'constants/strings';
 import { ROUTES } from 'constants/routes';
-import { ActionMeta } from 'react-select';
 
 interface ISignUpFormProps {
   onTogglePasswordVisibility: () => void;
@@ -30,6 +29,8 @@ interface ISignUpFormProps {
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
   ) => void;
+  isGoogleLoading: boolean;
+  onGoogleButtonClickHandler: () => void;
 }
 
 export const SignUpForm: FC<ISignUpFormProps> = (props) => {
@@ -37,6 +38,8 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
     isShowPassword,
     isValid,
     countryValue,
+    isGoogleLoading,
+    onGoogleButtonClickHandler,
     onTogglePasswordVisibility,
     onFormHandleSubmit,
     formikMeta,
@@ -72,14 +75,16 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
       >
         {STRINGS.sign_in_up.sign_up}
       </Button>
-
       <DivideLine />
-
-      <Link to={ROUTES.capiumLogin} data-testid='capium-login'>
-        <Button themedButton="capium" width="auth">
-          {STRINGS.sign_in_up.continue_Capium}
-        </Button>
-      </Link>
+      <Button
+        onClick={onGoogleButtonClickHandler}
+        themedButton="capium"
+        width="auth"
+        iconType="google"
+        isLoading={isGoogleLoading}
+      >
+        {STRINGS.sign_in_up.continue_Google}
+      </Button>
     </Styled.Form>
   );
 };

@@ -31,10 +31,9 @@ export interface ICapiumAuthPayload {
   email: string;
   password: string;
 }
-
 const capiumBaseURL =
   'https://dev-identity.capium.co.uk/api/Auth/AuthenticateUser';
-
+const googleUserInfoURL = 'https://www.googleapis.com/oauth2/v3/userinfo';
 const refreshTokensURL = 'auth/refresh-tokens';
 
 const fetchTokens = (refreshToken: string) => {
@@ -137,6 +136,12 @@ export const apiServices = {
   },
   capiumFetchData: async (payload: ICapiumAuthPayload) => {
     const data = axios.post(capiumBaseURL, payload);
+    return data;
+  },
+  getGoogleUserInfo: async (token: string) => {
+    const data = await axios.get(googleUserInfoURL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return data;
   },
 };

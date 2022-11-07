@@ -1,6 +1,12 @@
 import React from 'react';
 
 declare global {
+  interface IOAuthLogin {
+    socialAccountId?: string;
+    email: string;
+    fullName: string;
+    type: 'capium' | 'google';
+  }
   interface IusePhotoDetailsContentState {
     statusValue: string;
     categoryValue: IOption | any;
@@ -350,6 +356,7 @@ declare global {
 }
 
 export {
+  IOAuthLogin,
   IAvatarSubmenuLinks,
   TButtonTheme,
   ICompaniesSwitcher,

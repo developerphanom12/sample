@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   ICurrency,
   ISIGN_UP_USER_INITIAL_STATE,
-  ISocialAccount,
+  ICapiumSocialAccount,
+  IGoogleSocialAccount,
   ISwitchAccount,
   IUpdateUserProfile,
   IUser,
@@ -25,9 +26,8 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
   token: '',
   refreshToken: '',
   socialAccount: {
-    capiumEmail: '',
-    capiumId: '',
-    id: '',
+    capium: { capiumEmail: '', capiumId: '', id: '' },
+    google: { googleEmail: '', googleId: '', id: '' },
   },
   userInfo: {
     company: {
@@ -107,8 +107,16 @@ export const SignUpUserSlice = createSlice({
     },
     setSocialAccount: (
       state: ISIGN_UP_USER_INITIAL_STATE,
-      action: PayloadAction<ISocialAccount>
-    ) => (state = { ...state, ...action.payload }),
+      action: PayloadAction<ICapiumSocialAccount>
+    ) => {
+      state.socialAccount.capium = action.payload;
+    },
+    setGoogleSocialAccount: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<IGoogleSocialAccount>
+    ) => {
+      state.socialAccount.google = action.payload;
+    },
     setCurrencies: (
       state: ISIGN_UP_USER_INITIAL_STATE,
       action: PayloadAction<ICurrency[]>
@@ -157,6 +165,7 @@ export const {
   switchAccount,
   setTokens,
   updateUserData,
+  setGoogleSocialAccount,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

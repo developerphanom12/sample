@@ -92,6 +92,8 @@ export const Inbox: FC = () => {
 
   useEffect(() => {
     if (!count) return;
+    console.log('hello');
+
     onChangePagesAmount(Number(receiptsPerPage.value), count);
   }, [receiptsPerPage, count, isFetchingData]);
 
