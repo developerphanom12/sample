@@ -37,8 +37,7 @@ export const CompanyList: FC = () => {
     onGoToClick,
     onCreateCompanyHandler,
     onDeleteCompanyHandler,
-    onCloseEditModalWindow,
-    onChangeCompanyLogoHandler,
+    onCloseModalWindowHandler,
     onDeleteCompanyLogo,
     onChangePagesAmount,
     onFocusSearchHandler,
@@ -82,9 +81,7 @@ export const CompanyList: FC = () => {
         headerText={isEdit ? 'Edit Company' : 'Insert Company'}
         isModalWindowOpen={isModalWindowOpen}
         isLoading={isLoading}
-        onCloseModalWindowHandler={
-          isEdit ? onCloseEditModalWindow : onModalWindowToggle
-        }
+        onCloseModalWindowHandler={onCloseModalWindowHandler}
         onChangeInputValueHandler={onChangeCompanyNameHandler}
         onSaveButtonCLickHandler={
           isEdit ? onUpdateCompanyHandler : onCreateCompanyHandler

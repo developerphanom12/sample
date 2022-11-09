@@ -15,6 +15,7 @@ export interface IResult {
   setItemsPerPage: React.Dispatch<React.SetStateAction<IOption>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   setSkipReceipts: (value: React.SetStateAction<number>) => void;
+  onDeleteItem: (count: number | null, isLastElementOnPage: boolean) => void;
   itemsPerPage: IOption;
   currentPage: number;
   pages: number;
@@ -85,7 +86,19 @@ export const usePagination: (props: IProps) => IResult = (props) => {
     }
   };
 
+  const onDeleteItem = (count: number | null, isLastElementOnPage: boolean) => {
+    if (count === 1) {
+      setItemsPerPage(PAGINATION_ARRAY[1]);
+      setCurrentPage(0);
+      setSkipReceipts(0);
+    }
+    if (isLastElementOnPage && count !== 1) {
+      onChangePageHandler(currentPage - 1);
+    }
+  };
+
   return {
+    onDeleteItem,
     onBackwardClick,
     onForwardClick,
     onGoToClick,

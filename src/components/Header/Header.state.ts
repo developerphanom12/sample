@@ -19,7 +19,6 @@ import { getAvatarLinks } from 'constants/header-links';
 
 export const useHeaderState = () => {
   const dispatch = useDispatch();
-
   const {
     user: {
       token,

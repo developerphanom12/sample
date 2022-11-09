@@ -18,8 +18,6 @@ import { setCategories, setTabItem } from '../reducer/master.reducer';
 import { IuseMasterState } from '../types/master.types';
 import { TAB_INITIAL_STATE } from '../master.constants';
 
-import { PAGINATION_ARRAY } from 'constants/pagination-array';
-
 export const useCategoriesTabState = () => {
   const initialState = TAB_INITIAL_STATE;
 
@@ -150,20 +148,35 @@ export const useCategoriesTabState = () => {
 
   const onDeleteButtonClickHandler = async () => {
     try {
-      if (count === 1) {
-        setItemsPerPage(PAGINATION_ARRAY[1]);
-        onChangeStateFieldHandler('isFetchingData', true);
-      }
+      const isLastElementOnPage = categoriesList.length === 1;
+      onDeleteItem(count, isLastElementOnPage);
+      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
+      count !== 1 && onChangeStateFieldHandler('isContentLoading', true);
       onChangeStateFieldHandler('isLoading', true);
-      await deleteTabItem(selectedCategory?.id || '', 'category');
-      const { data } = await getAllTabItems('category');
-      dispatch(setCategories({ count: data.count, data: data.data }));
-      onChangePage({ selected: currentPage });
 
+      const skip =
+        currentPage === 0
+          ? 0
+          : isLastElementOnPage && count !== 1
+          ? (currentPage - 1) * +itemsPerPage.value
+          : currentPage * +itemsPerPage.value;
+
+      await deleteTabItem(selectedCategory?.id || '', 'category');
+      const { data } = await getAllTabItems('category', {
+        take: +itemsPerPage.value,
+        skip,
+      });
+
+      dispatch(setCategories({ count: data.count, data: data.data }));
+      onChangeStateFieldHandler('isContentLoading', false);
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
+      onChangeStateFieldHandler('isEmptyData', data.count ? false : true);
+      count === 1 && onChangeStateFieldHandler('isFetchingData', false);
       onDeleteModalWindowToggle();
     } catch (error) {
+      onChangeStateFieldHandler('isEmptyData', !count ? true : false);
+      onChangeStateFieldHandler('isContentLoading', false);
       onChangeStateFieldHandler('isFetchingData', false);
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
@@ -232,7 +245,8 @@ export const useCategoriesTabState = () => {
 
     onGetAllCategoriesHandler({
       take: Number(itemsPerPage.value),
-      skip: selected * Number(itemsPerPage.value),
+      skip:
+        categoriesList.length === 1 ? 0 : selected * Number(itemsPerPage.value),
     });
   };
 
@@ -246,6 +260,7 @@ export const useCategoriesTabState = () => {
     onChangePageHandler,
     setItemsPerPage,
     setCurrentPage,
+    onDeleteItem,
     itemsPerPage,
     currentPage,
     pages,

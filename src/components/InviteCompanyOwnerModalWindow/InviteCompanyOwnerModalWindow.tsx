@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { FieldInputProps, FieldMetaProps } from 'formik';
 import ReactModal from 'react-modal';
 
@@ -35,84 +35,85 @@ interface InsertUserModalWindowProps
   isCheckboxField: boolean;
 }
 
-export const InviteCompanyOwnerModalWindow: FC<InsertUserModalWindowProps> =
-  memo((props) => {
-    const {
-      headerText,
-      isLoading,
-      isModalWindowOpen,
-      onCloseModalWindowHandler,
-      onEnterCreateItemClick,
-      onSaveButtonCLickHandler,
-      isDisableButton,
-      formikMeta,
-      formikProps,
-      onChangeCheckBoxHandler,
-      onChangeRoleValueHandler,
-      selectValue,
-      isChecked,
-      isCheckboxField,
-    } = props;
+export const InviteCompanyOwnerModalWindow: FC<InsertUserModalWindowProps> = (
+  props
+) => {
+  const {
+    headerText,
+    isLoading,
+    isModalWindowOpen,
+    onCloseModalWindowHandler,
+    onEnterCreateItemClick,
+    onSaveButtonCLickHandler,
+    isDisableButton,
+    formikMeta,
+    formikProps,
+    onChangeCheckBoxHandler,
+    onChangeRoleValueHandler,
+    selectValue,
+    isChecked,
+    isCheckboxField,
+  } = props;
 
-    const { touched, error } = formikMeta('email');
-    const { value, onBlur, onChange } = formikProps('email');
-    const modalStyles = {
-      content: {
-        ...CompanyOwnerModalWindowStyles.content,
-        maxHeight: isCheckboxField ? '375px' : '335px',
-      },
-      overlay: CompanyOwnerModalWindowStyles.overlay,
-    };
-    return (
-      <ReactModal
-        isOpen={isModalWindowOpen}
-        onRequestClose={onCloseModalWindowHandler}
-        ariaHideApp={false}
-        style={modalStyles}
-      >
-        <ModalWindowHeader headerTitle={headerText} />
-        <Styled.Content>
-          <Styled.Form onSubmit={onSaveButtonCLickHandler}>
-            <Styled.InputsWrapper>
-              <Input
-                text="Email"
-                value={value}
-                errorText={error}
-                inputName="email"
-                onBlur={onBlur}
-                onChangeValue={onChange}
-                touched={touched}
-                onKeyDown={onEnterCreateItemClick}
-                isRemoveBorder
-              />
-              <Styled.Label>Your role in company</Styled.Label>
-              <CustomSelect
-                options={USER_ROLES.slice(0, 3)}
-                onChangeValueHandler={onChangeRoleValueHandler}
-                value={selectValue}
-                isRemoveBorder
-                isFullWidth
-              />
-              {isCheckboxField && (
-                <Styled.CheckBoxWrapper>
-                  <CheckboxItem
-                    isChecked={isChecked}
-                    labelText="Resend invitation to a new email"
-                    onChange={onChangeCheckBoxHandler}
-                  />
-                </Styled.CheckBoxWrapper>
-              )}
-            </Styled.InputsWrapper>
-            <ModalButtonsBox
-              isLoading={isLoading}
-              onCancelClickHandler={onCloseModalWindowHandler}
-              onSaveButtonCLickHandler={onSaveButtonCLickHandler}
-              isSaveButton
-              isNoPadding
-              isDisableButton={isDisableButton}
+  const { touched, error } = formikMeta('email');
+  const { value, onBlur, onChange } = formikProps('email');
+  const modalStyles = {
+    content: {
+      ...CompanyOwnerModalWindowStyles.content,
+      maxHeight: isCheckboxField ? '375px' : '335px',
+    },
+    overlay: CompanyOwnerModalWindowStyles.overlay,
+  };
+  return (
+    <ReactModal
+      isOpen={isModalWindowOpen}
+      onRequestClose={onCloseModalWindowHandler}
+      ariaHideApp={false}
+      style={modalStyles}
+    >
+      <ModalWindowHeader headerTitle={headerText} />
+      <Styled.Content>
+        <Styled.Form onSubmit={onSaveButtonCLickHandler}>
+          <Styled.InputsWrapper>
+            <Input
+              text="Email"
+              value={value}
+              errorText={error}
+              inputName="email"
+              onBlur={onBlur}
+              onChangeValue={onChange}
+              touched={touched}
+              onKeyDown={onEnterCreateItemClick}
+              isRemoveBorder
             />
-          </Styled.Form>
-        </Styled.Content>
-      </ReactModal>
-    );
-  });
+            <Styled.Label>Your role in company</Styled.Label>
+            <CustomSelect
+              options={USER_ROLES.slice(0, 3)}
+              onChangeValueHandler={onChangeRoleValueHandler}
+              value={selectValue}
+              isRemoveBorder
+              isFullWidth
+            />
+            {isCheckboxField && (
+              <Styled.CheckBoxWrapper>
+                <CheckboxItem
+                  isChecked={isChecked}
+                  labelText="Resend invitation to a new email"
+                  onChange={onChangeCheckBoxHandler}
+                />
+              </Styled.CheckBoxWrapper>
+            )}
+          </Styled.InputsWrapper>
+          <ModalButtonsBox
+            isLoading={isLoading}
+            onCancelClickHandler={onCloseModalWindowHandler}
+            onSaveButtonCLickHandler={onSaveButtonCLickHandler}
+            isSaveButton
+            isNoPadding
+            isDisableButton={isDisableButton}
+          />
+        </Styled.Form>
+      </Styled.Content>
+    </ReactModal>
+  );
+};

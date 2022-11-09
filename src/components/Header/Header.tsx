@@ -43,7 +43,10 @@ export const Header: FC = () => {
   return (
     <Styled.Header>
       <Styled.Container>
-        <Styled.Link to={ROUTES.home} is_disabled={!active_account ? 'true' : ''}>
+        <Styled.Link
+          to={ROUTES.home}
+          is_disabled={!active_account ? 'true' : ''}
+        >
           <Styled.LogoWrapper>
             <Styled.LogoIconWrapper>
               <Icon type="receiptHubLogo" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { MasterItem } from 'screens/Master/MasterItem';
 import { TableMasterProps } from 'screens/Master/types/master.types';
@@ -6,7 +6,7 @@ import { TableMasterProps } from 'screens/Master/types/master.types';
 import { TableButton } from '../TableButton/TableButton';
 import { TableMasterStyles as Styled } from './TableMaster.style';
 
-export const TableMaster: React.FC<TableMasterProps> = (props) => {
+export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
   const {
     categories,
     dateFormat,
@@ -27,7 +27,7 @@ export const TableMaster: React.FC<TableMasterProps> = (props) => {
         <Styled.Column>
           <TableButton>Created On</TableButton>
         </Styled.Column>
-        <Styled.Column width='200'>
+        <Styled.Column width="200">
           <TableButton>Created By</TableButton>
         </Styled.Column>
       </Styled.Head>
@@ -64,4 +64,4 @@ export const TableMaster: React.FC<TableMasterProps> = (props) => {
       )}
     </>
   );
-};
+});

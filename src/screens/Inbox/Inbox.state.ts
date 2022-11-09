@@ -364,8 +364,7 @@ export const useInboxState = () => {
   const onDeleteReceiptHandler = async () => {
     try {
       await receiptDelete({ receipts: state.checkedIds }, token);
-      count === 1 && setItemsPerPage(PAGINATION_ARRAY[1]);
-
+      count === state.checkedIds.length && setItemsPerPage(PAGINATION_ARRAY[1]);
       setState((prevState) => ({
         ...prevState,
         searchValue:
@@ -381,18 +380,23 @@ export const useInboxState = () => {
             : false,
       }));
       state.searchValue && onChangeStateFieldHandler('searchValue', '');
+      const isEqualAmount = receipts.length === state.checkedIds.length;
+      const skip =
+        currentPage === 0
+          ? 0
+          : isEqualAmount && count !== 1
+          ? (currentPage - 1) * +receiptsPerPage.value
+          : currentPage * +receiptsPerPage.value;
+
       onFetchReceiptsHandler({
         take: +receiptsPerPage.value,
-        skip:
-          state.checkedIds.length === count
-            ? 0
-            : (currentPage - 1) * +receiptsPerPage.value,
+        skip,
       });
       onGetStatisticHandler();
-      if (receipts?.length === state.checkedIds.length) {
-        if (state.checkedIds.length === count) {
+      if (isEqualAmount) {
+        if (state.checkedIds.length === count || currentPage === 0) {
           setCurrentPage(0);
-          setSkipReceipts(10);
+          setSkipReceipts(0);
         } else {
           onChangePageHandler(currentPage - 1);
         }

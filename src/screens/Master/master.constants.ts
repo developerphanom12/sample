@@ -18,7 +18,6 @@ export const TAB_INITIAL_STATE = {
   isSearching: false,
   searchedItems: [],
   isContentLoading: false,
-
   selected: 0,
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
 
@@ -6,7 +6,7 @@ import { TableButton } from '../TableButton/TableButton';
 import { TableInboxAdminItem } from './TableInboxAdminItem/TableInboxAdminItem';
 import { TableInboxAdminStyles as Styled } from './TableInboxAdmin.style';
 
-export const TableInboxAdmin: React.FC<TableInboxAdminProps> = (props) => {
+export const TableInboxAdmin: FC<TableInboxAdminProps> = (props) => {
   const {
     onCheckedItemHandler,
     onCheckedPublishMockFuncHandler,

@@ -324,7 +324,7 @@ export const useCompanyListState = () => {
     }
   };
 
-  const onCloseEditModalWindow = () => {
+  const onCloseModalWindowHandler = () => {
     setState((prevState) => ({
       ...prevState,
       companyName: '',
@@ -333,7 +333,7 @@ export const useCompanyListState = () => {
       prevCompanyName: '',
       prevLogoSrc: '',
     }));
-    setIsEdit(false);
+    isEdit && setIsEdit(false);
     onModalWindowToggle();
   };
 
@@ -362,9 +362,9 @@ export const useCompanyListState = () => {
       const { data } = await getManyCompanies();
       dispatch(setCompanies({ companies: data.data, count: data.count }));
       onChangeStateFieldHandler('isLoading', false);
-      onCloseEditModalWindow();
+      onCloseModalWindowHandler();
     } catch (error) {
-      onCloseEditModalWindow();
+      onCloseModalWindowHandler();
       onChangeStateFieldHandler('isLoading', false);
       console.log(error);
     }
@@ -449,7 +449,7 @@ export const useCompanyListState = () => {
     onChangePage,
     onFocusSearchHandler,
     onBlurHandler,
-    onCloseEditModalWindow,
+    onCloseModalWindowHandler,
     onDeleteCompanyHandler,
     onCreateCompanyHandler,
     onGetAllCompaniesHandler,
