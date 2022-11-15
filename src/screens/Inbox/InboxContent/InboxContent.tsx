@@ -48,9 +48,9 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     pages,
     receiptsPerPage,
     onChangePage,
-    receipts,
     isFetchingReceipts,
     datePickerRef,
+    receiptList,
   } = props;
 
   return (
@@ -84,7 +84,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !isContentLoading && !isFetchingReceipts ? (
+      ) : (
         <>
           <TableInboxAdmin
             onCheckedItemHandler={onCheckedItemHandler}
@@ -92,12 +92,11 @@ export const InboxContent: FC<IInboxContent> = (props) => {
             onCheckedPaidHandler={onCheckedPaidHandler}
             onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
             isVisited={isVisited}
-            receiptList={receipts}
+            receiptList={receiptList}
             isAllChecked={isAllChecked}
             dateFormat={dateFormat}
-            isReceipts={!!receipts?.length}
           />
-          {receipts.length ? (
+          {receiptList.length ? (
             <PaginationPanel
               pages={pages}
               currentPage={currentPage}
@@ -113,7 +112,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
             />
           ) : null}
         </>
-      ) : null}
+      )}
     </Styled.Wrapper>
   );
 };

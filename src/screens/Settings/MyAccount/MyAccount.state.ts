@@ -27,8 +27,6 @@ interface IuseMyAccountState {
   currency: SingleValue<IOption> | any;
   dateFormat: SingleValue<IOption> | any;
   country: SingleValue<IOption> | any;
-  isLoading: boolean;
-  isFetchingData: boolean;
 }
 
 export const useMyAccountState = () => {
@@ -62,9 +60,9 @@ export const useMyAccountState = () => {
     currency: currentCurrency,
     dateFormat: currentDate,
     country: currentCountry,
-    isLoading: false,
-    isFetchingData: false,
   };
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingData, setIsFetchingData] = useState(false);
 
   const formikInitialValues = {
     fullName: user.fullName,
@@ -122,12 +120,12 @@ export const useMyAccountState = () => {
 
   const getProfileHandler = async () => {
     try {
-      onChangeStateFieldHandler('isFetchingData', true);
+      setIsFetchingData(true);
       const { data } = await getProfile();
       dispatch(updateUserProfile(data));
-      onChangeStateFieldHandler('isFetchingData', false);
+      setIsFetchingData(false);
     } catch (error) {
-      onChangeStateFieldHandler('isFetchingData', false);
+      setIsFetchingData(false);
       console.log(error);
     }
   };
@@ -136,7 +134,7 @@ export const useMyAccountState = () => {
     resetPasswordValues: typeof resetPasswordFormikInitialValues
   ) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      setIsLoading(true);
       const payload = {
         old_password: resetPasswordValues.currentPassword
           ? resetPasswordValues.currentPassword
@@ -148,7 +146,7 @@ export const useMyAccountState = () => {
         setIsShowSuccesPopup();
       }
       resetPasswordFormik.resetForm();
-      onChangeStateFieldHandler('isLoading', false);
+      setIsLoading(false);
     } catch (error: any) {
       console.log(error);
       const { data } = error.response;
@@ -160,12 +158,20 @@ export const useMyAccountState = () => {
         resetPasswordFormik.setErrors({
           currentPassword: 'Please enter correct password',
         });
-      onChangeStateFieldHandler('isLoading', false);
+      setIsLoading(false);
     }
   };
-
+  const isEqualFields =
+    resetPasswordFormikInitialValues.confirmPassword ===
+      resetPasswordFormik.values.confirmPassword &&
+    resetPasswordFormikInitialValues.currentPassword ===
+      resetPasswordFormik.values.currentPassword &&
+    resetPasswordFormikInitialValues.newPassword ===
+      resetPasswordFormik.values.newPassword;
   const onSettingsClickButtonHandler = () => {
-    resetPasswordFormik.setValues(resetPasswordFormikInitialValues);
+    if (!isEqualFields) {
+      resetPasswordFormik.setValues(resetPasswordFormikInitialValues);
+    }
     setIsResetPassword();
   };
 
@@ -183,7 +189,7 @@ export const useMyAccountState = () => {
     formikValues: typeof formikInitialValues
   ) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      setIsLoading(true);
 
       const payload = !user.active_account
         ? {
@@ -201,9 +207,9 @@ export const useMyAccountState = () => {
       const { data } = await updateProfile(payload);
       dispatch(updateUserProfile(data));
       setIsShowSuccesPopup();
-      onChangeStateFieldHandler('isLoading', false);
+      setIsLoading(false);
     } catch (error) {
-      onChangeStateFieldHandler('isLoading', false);
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -251,13 +257,13 @@ export const useMyAccountState = () => {
     !resetPasswordFormik.values.newPassword;
 
   const isDisabledButton = isResetPassword
-    ? !resetPasswordFormik.isValid ||
-      isEmptyResetPasswordFields ||
-      state.isLoading
-    : !formik.isValid || isDisableUpdateUserProfileButton || state.isLoading;
+    ? !resetPasswordFormik.isValid || isEmptyResetPasswordFields || isLoading
+    : !formik.isValid || isDisableUpdateUserProfileButton || isLoading;
 
   return {
     ...state,
+    isFetchingData,
+    isLoading,
     onSubmitHandler,
     setIsResetPassword,
     getProfileHandler,

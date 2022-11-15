@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ActionMeta } from 'react-select';
+import { ActionMeta, SingleValue } from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -68,9 +68,6 @@ export const usePhotoDetailsContentState = () => {
     typeValue: currentType,
     categoryValue: currentCategory,
     supplierAccountValue: currentSupplierAccount,
-    publishStatus: selectedReceipt?.publish_status || false,
-    paymentStatus: selectedReceipt?.payment_status || false,
-    imageSrc: '',
   };
 
   useEffect(() => {
@@ -89,8 +86,6 @@ export const usePhotoDetailsContentState = () => {
       descriptionValue: selectedReceipt?.description || '',
       vatCodeValue: selectedReceipt?.vat_code || '',
       netValue: selectedReceipt?.net || null,
-      publishStatus: selectedReceipt?.publish_status || false,
-      paymentStatus: selectedReceipt?.payment_status || false,
       formattedDate: selectedReceipt?.receipt_date
         ? format(new Date(selectedReceipt?.receipt_date), company.date_format)
         : '',
@@ -99,23 +94,33 @@ export const usePhotoDetailsContentState = () => {
 
   const [state, setState] =
     useState<IusePhotoDetailsContentState>(initialState);
+  const [radioButtonValue, setRadioButtonValue] = useState('');
+  const [isPublishStatus, setIsPublishStatus] = useState(
+    selectedReceipt?.publish_status || false
+  );
+  const [isPaymentStatus, setIsPaymentStatus] = useState(
+    selectedReceipt?.payment_status || false
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onCancelButtonClickHandler = () => navigate(-1);
 
   const onDatePickerClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
     datePickerRef.current &&
       datePickerRef?.current.contains(e.target as Node) &&
-      setState((prevState) => ({ ...prevState, isOpen: !prevState.isOpen }));
+      setIsOpen(!isOpen);
   };
 
-  const onChangeStateFieldHandler = (optionName: string, value: any) => {
+  const onChangeStateFieldHandler = (
+    optionName: keyof typeof initialState,
+    value: string | boolean | number | null | Date | SingleValue<IOption> | any
+  ) =>
     setState((prevState) => ({
       ...prevState,
       [optionName]: value,
     }));
-  };
 
   const onGetAllMasterItemsHandler = async () => {
     try {
@@ -148,9 +153,7 @@ export const usePhotoDetailsContentState = () => {
 
   const onChangeRadioButtonHandler = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    onChangeStateFieldHandler('radioButtonValue', event.target.value);
-  };
+  ) => setRadioButtonValue(event.target.value);
 
   const onForbiddenCharacterClick = (event: React.KeyboardEvent) => {
     if (event.key === '-' || event.key === 'e' || event.key === '+') {
@@ -166,7 +169,7 @@ export const usePhotoDetailsContentState = () => {
   const onChangeSupplierFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('supplierValue', event.target.value);
-  
+
   const onChangeSupplierAccountHandler = (
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
@@ -209,10 +212,10 @@ export const usePhotoDetailsContentState = () => {
   ) => onChangeStateFieldHandler('descriptionValue', event.target.value);
 
   const onChangeDate = (date: Date) => {
+    setIsOpen(!isOpen);
     setState((prevState) => ({
       ...prevState,
       dateValue: date,
-      isOpen: !prevState.isOpen,
       formattedDate: format(date, company.date_format || DATE_FORMATS[0].value),
     }));
   };
@@ -222,17 +225,14 @@ export const usePhotoDetailsContentState = () => {
   ) => {
     datePickerRef.current &&
       !datePickerRef?.current.contains(event.target as Node) &&
-      setState((prevState) => ({
-        ...prevState,
-        isOpen: false,
-      }));
+      setIsOpen(false);
   };
 
   const onChangePublishStatus = (event: React.ChangeEvent<HTMLInputElement>) =>
-    onChangeStateFieldHandler('publishStatus', event.target.checked);
+    setIsPublishStatus(event.target.checked);
 
   const onChangePaymentStatus = (event: React.ChangeEvent<HTMLInputElement>) =>
-    onChangeStateFieldHandler('paymentStatus', event.target.checked);
+    setIsPaymentStatus(event.target.checked);
 
   const onSaveButtonClickHandler = async () => {
     try {
@@ -242,10 +242,10 @@ export const usePhotoDetailsContentState = () => {
         category: state.categoryValue?.id || selectedReceipt?.category,
         currency: state.currencyValueId || selectedReceipt?.currency.id,
         net: state.netValue || selectedReceipt?.net,
-        payment_status: state.paymentStatus,
-        publish_status: state.publishStatus,
+        payment_status: isPaymentStatus,
+        publish_status: isPublishStatus,
         receipt_date: state.dateValue || selectedReceipt?.receipt_date,
-        status: state.radioButtonValue || selectedReceipt?.status,
+        status: radioButtonValue || selectedReceipt?.status,
         supplier: state.supplierValue || selectedReceipt?.supplier,
         supplier_account:
           state.supplierAccountValue?.id || selectedReceipt?.supplier_account,
@@ -255,28 +255,18 @@ export const usePhotoDetailsContentState = () => {
         vat_code: state.vatCodeValue || selectedReceipt?.vat_code,
       };
 
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: true,
-      }));
+      setIsLoading(true);
 
       const { data } = await updateReceiptItem(payload);
 
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: false,
-      }));
+      setIsLoading(false);
       dispatch(updateReceipt(data));
       dispatch(setIsFetchingDate(true));
 
       navigate(ROUTES.inbox);
     } catch (error) {
       console.log(error);
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: false,
-      }));
-
+      setIsLoading(false);
       dispatch(setIsFetchingDate(false));
     }
   };
@@ -297,15 +287,19 @@ export const usePhotoDetailsContentState = () => {
       onChangePublishStatus,
       onChangePaymentStatus,
     ],
-    state,
-    formatedCurrencies,
-    categoriesForSelect,
-    suppliersForSelect,
-    typesForSelect,
     {
-      category: !categoriesForSelect?.length,
-      suppliers: !suppliersForSelect?.length,
-      types: !typesForSelect?.length,
+      state,
+      formatedCurrencies,
+      categoriesForSelect,
+      suppliersForSelect,
+      typesForSelect,
+      disabledOption: {
+        category: !categoriesForSelect?.length,
+        suppliers: !suppliersForSelect?.length,
+        types: !typesForSelect?.length,
+      },
+      paymentStatus: isPaymentStatus,
+      publishStatus: isPublishStatus,
     }
   );
 
@@ -313,8 +307,12 @@ export const usePhotoDetailsContentState = () => {
 
   return {
     ...state,
+    isOpen,
+    isLoading,
     inputFields,
     datePickerRef,
+    radioButtonValue,
+    selectedReceipt,
     onClickOutsideDatePickerHandler,
     onDatePickerClickHandler,
     onChangePaymentStatus,

@@ -21,13 +21,7 @@ declare global {
     descriptionValue: string;
     vatCodeValue: string;
     netValue: number | null;
-    publishStatus: boolean;
-    paymentStatus: boolean;
-    radioButtonValue: string | null;
-    isOpen: boolean;
-    isLoading: boolean;
     formattedDate: string;
-    imageSrc: any;
   }
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
@@ -116,7 +110,6 @@ declare global {
   }
 
   interface TableInboxAdminProps {
-    isReceipts?: boolean;
     onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onCheckedAllItemsHandler?: (
       event: React.ChangeEvent<HTMLInputElement>
@@ -161,7 +154,6 @@ declare global {
     isContentLoading: boolean;
     onChangeReceiptsPerPage: (newValue: IOption) => void;
     receiptsPerPage: { value: string; label: string };
-    receipts: IReceipt[];
     isFetchingReceipts: boolean;
     datePickerRef: React.RefObject<HTMLButtonElement>;
   }

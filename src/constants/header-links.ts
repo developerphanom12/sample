@@ -12,7 +12,6 @@ export const ADMIN_LINKS = [
   { title: 'Master', route: ROUTES.master, tabs: MASTER_TABS },
   { title: 'Invites', route: ROUTES.invites },
   { title: 'Settings', route: ROUTES.settings },
-  { title: 'Help & Support', route: ROUTES.support, isLast: true },
 ];
 
 export const CUSTOMER_LINKS = [
@@ -29,3 +28,5 @@ export const getAvatarLinks = (logout: () => void) => [
     onClick: logout,
   },
 ];
+
+export const SUPPORT_CENTER_ROUTE = 'https://support.google.com/';

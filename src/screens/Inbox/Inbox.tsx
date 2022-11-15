@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { EmptyData } from 'components/EmptyData';
@@ -11,7 +11,7 @@ import { ActionMenuContent } from './ActionMenuContent';
 
 import { EMPTY_DATA_STRINGS as Strings } from 'constants/strings';
 
-export const Inbox: FC = () => {
+export const Inbox: FC = memo(() => {
   const {
     onSelectFilesHandler,
     onFetchReceiptsHandler,
@@ -95,6 +95,14 @@ export const Inbox: FC = () => {
     onChangePagesAmount(Number(receiptsPerPage.value), count);
   }, [receiptsPerPage, count, isFetchingData]);
 
+  const isInboxContent =
+    !isFetchingReceipts && isContentVisible && !isFetchingData;
+
+  const isEmptyScreen =
+    !isFetchingReceipts &&
+    !isFetchingData &&
+    !totalReceiptCount &&
+    !receipts.length;
   return (
     <>
       <ActionMenuContent
@@ -119,9 +127,9 @@ export const Inbox: FC = () => {
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : location.pathname === '/inbox' && totalReceiptCount ? (
+      ) : totalReceiptCount ? (
         <>
-          {!isFetchingReceipts && isContentVisible && !isFetchingData ? (
+          {isInboxContent ? (
             <InboxContent
               datePickerRef={datePickerRef}
               pages={pages}
@@ -164,15 +172,11 @@ export const Inbox: FC = () => {
               receiptList={receipts}
               isAllChecked={isAllChecked}
               dateFormat={company.date_format}
-              receipts={receipts}
               isFetchingReceipts={isFetchingReceipts}
             />
           ) : null}
         </>
-      ) : !isFetchingReceipts &&
-        !isFetchingData &&
-        !totalReceiptCount &&
-        !receipts.length ? (
+      ) : isEmptyScreen ? (
         <EmptyData
           isUploadFile={true}
           buttonText={Strings.buttonText}
@@ -185,4 +189,4 @@ export const Inbox: FC = () => {
       ) : null}
     </>
   );
-};
+});

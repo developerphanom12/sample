@@ -10,13 +10,6 @@ export const PhotoDetailsContentStyles = {
     padding: 10px 10px 10px 0;
     height: 100%;
   `,
-  RadioButtonWrapper: styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 80%;
-    height: 45px;
-  `,
   FieldWrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -41,11 +34,7 @@ export const PhotoDetailsContentStyles = {
     max-width: 248px;
     width: 100%;
   `,
-  CheckBoxWrapper: styled.div`
-    height: 45px;
-    display: flex;
-    align-items: center;
-  `,
+ 
   ItemWrapper: styled.div`
     display: flex;
     justify-content: space-between;

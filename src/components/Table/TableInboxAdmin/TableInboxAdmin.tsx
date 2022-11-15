@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
 
@@ -6,7 +6,7 @@ import { TableButton } from '../TableButton/TableButton';
 import { TableInboxAdminItem } from './TableInboxAdminItem/TableInboxAdminItem';
 import { TableInboxAdminStyles as Styled } from './TableInboxAdmin.style';
 
-export const TableInboxAdmin: FC<TableInboxAdminProps> = (props) => {
+export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
   const {
     onCheckedItemHandler,
     onCheckedPublishMockFuncHandler,
@@ -16,7 +16,6 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = (props) => {
     receiptList,
     isAllChecked,
     dateFormat,
-    isReceipts,
   } = props;
 
   return (
@@ -65,8 +64,8 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = (props) => {
         </Styled.Selector>
         <Styled.Text>Status</Styled.Text>
       </Styled.Head>
-      {isReceipts ? (
-        receiptList?.map((receipt, index) => (
+      {receiptList.length ? (
+        receiptList.map((receipt, index) => (
           <TableInboxAdminItem
             publishStatus={receipt.publish_status}
             paymentStatus={receipt.payment_status}
@@ -99,4 +98,4 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = (props) => {
       )}
     </>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ActionMeta, SingleValue } from 'react-select';
@@ -259,6 +259,8 @@ export const useInboxState = () => {
     onFetchReceiptsHandler({
       take: +receiptsPerPage.value,
       skip: selected * +receiptsPerPage.value,
+      date_start: dateStart || '',
+      date_end: dateEnd || '',
     });
   };
 
@@ -279,52 +281,55 @@ export const useInboxState = () => {
     inputPaginationValue,
   } = usePagination({ onChangePage });
 
-  const onCheckedItemHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCheckedItem(event.target.id));
-    setState((prevState) => ({
-      ...prevState,
-      checkedIds: prevState.checkedIds.includes(event.target.id)
-        ? prevState.checkedIds.filter(
-            (item: string) => item !== event.target.id
-          )
-        : [...prevState.checkedIds, event.target.id],
-    }));
-  };
+  const onCheckedItemHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(setCheckedItem(event.target.id));
+      setState((prevState) => ({
+        ...prevState,
+        checkedIds: prevState.checkedIds.includes(event.target.id)
+          ? prevState.checkedIds.filter(
+              (item: string) => item !== event.target.id
+            )
+          : [...prevState.checkedIds, event.target.id],
+      }));
+    },
+    []
+  );
 
-  const onCheckedPaidHandler = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    try {
+  const onCheckedPaidHandler = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        if (!event.target.id) return;
+        onChangeStateFieldHandler('isContentLoading', true);
+        const selectedReceipt = receipts?.find(
+          (receipt: { id: string }) => receipt.id === event.target.id
+        );
+        await updateReceiptItem({
+          id: event.target.id,
+          payment_status: !selectedReceipt?.payment_status,
+        });
+        onFetchReceiptsHandler();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    []
+  );
+
+  const onCheckedPublishMockFuncHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       if (!event.target.id) return;
-      onChangeStateFieldHandler('isContentLoading', true);
-      const selectedReceipt = receipts?.find(
-        (receipt: { id: string }) => receipt.id === event.target.id
-      );
-      await updateReceiptItem({
-        id: event.target.id,
-        payment_status: !selectedReceipt?.payment_status,
-      });
-      onFetchReceiptsHandler();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    },
+    []
+  );
 
-  const onCheckedPublishMockFuncHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (!event.target.id) return;
-  };
-
-  const onCheckedAllItemsHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onCheckedAllItemsHandler = useCallback(() => {
     dispatch(setCheckedAllItems(!isAllChecked));
     setState((prevState) => ({
       ...prevState,
       checkedIds: !isAllChecked ? receipts?.map((receipt) => receipt.id) : [],
     }));
-  };
+  }, [dispatch, isAllChecked, receipts]);
 
   const csvLink = useRef<
     CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }
@@ -372,12 +377,10 @@ export const useInboxState = () => {
             ? ''
             : prevState.searchValue,
         isContentLoading: receipts.length !== 1 ? true : false,
-        isContentVisible: receipts.length === 1 ? false : true,
+        isContentVisible:
+          receipts.length === state.checkedIds.length ? false : true,
         isFetchingReceipts:
-          receipts.length === 1 ||
-          receipts.length === prevState.checkedIds.length
-            ? true
-            : false,
+          receipts.length === prevState.checkedIds.length ? true : false,
       }));
       state.searchValue && onChangeStateFieldHandler('searchValue', '');
       const isEqualAmount = receipts.length === state.checkedIds.length;
