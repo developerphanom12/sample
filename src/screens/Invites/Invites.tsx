@@ -140,7 +140,7 @@ export const Invites = () => {
         isEmptyData ? (
         <EmptyData
           isUploadFile={false}
-          buttonText="Create your invitation"
+          buttonText={Strings.invites.buttonText}
           firstSubtitle={Strings.invites.firstSubtitle}
           secondSubtitle={Strings.invites.secondSubtitle}
           title={Strings.invites.title}

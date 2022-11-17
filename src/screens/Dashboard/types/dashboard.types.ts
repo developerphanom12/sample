@@ -28,14 +28,9 @@ export interface IDASHBOARD_INITIAL_STATE {
   receipts: IReceipts | null;
 }
 
-export interface IuseDashboardState {
-  timeFilterValue: {
-    value: string;
-    label: string;
-  };
-  isLoading: boolean;
-  isContentLoading: boolean;
-  isVisited: boolean;
+export interface ITimeFIlterValue {
+  value: string;
+  label: string;
 }
 
 export interface IUserInfoData {

@@ -5,7 +5,7 @@ export const ReceiptsItemStyles = {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding: 10px 19px 7px 21px;
+    padding: 3px 19px 7px 21px;
     border: 1px solid ${({ theme }) => theme.colors.opacityBlack};
     box-shadow: 0px 1px 1px ${({ theme }) => theme.colors.boxShadowBlack};
     border-radius: ${({ theme }) => theme.size.borderRadius};
@@ -14,7 +14,9 @@ export const ReceiptsItemStyles = {
     }
   `,
   PaymentBlock: styled.div``,
-  StatusBlock: styled.div``,
+  StatusBlock: styled.div`
+    text-align: end;
+  `,
   SupplierItem: styled.div`
     font-size: ${({ theme }) => theme.size.default};
     font-weight: ${({ theme }) => theme.fontWeight.semiBold};

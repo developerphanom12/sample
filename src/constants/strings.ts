@@ -51,10 +51,9 @@ export const EMPTY_DATA_STRINGS_MASTER = {
   },
   invites: {
     title: 'Invites will be shown here...',
-    firstSubtitle:
-      'We have created everything for you, please add your invite to start.',
-    secondSubtitle: 'You can do that by using Add button below',
-    buttonText: 'Add',
+    firstSubtitle: 'We have created everything for you',
+    secondSubtitle: 'You can send invitations using the button below',
+    buttonText: 'Create User',
   },
 };
 

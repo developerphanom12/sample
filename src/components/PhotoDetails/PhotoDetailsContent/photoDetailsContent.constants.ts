@@ -124,7 +124,7 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     {
       type: 'checkbox',
       label: 'Payment status',
-      labelText: 'Mark as paid',
+      labelText: 'Paid',
       value: paymentStatus,
       onChangeCheckbox: funcArray[12],
     },

@@ -6,7 +6,7 @@ import { CustomLink } from '../../CustomLink/CustomLink';
 
 import { LinksBoxStyles as Styled } from './LinksBox.style';
 
-import { ADMIN_LINKS, SUPPORT_CENTER_ROUTE } from 'constants/header-links';
+import { ADMIN_LINKS } from 'constants/header-links';
 
 interface ILinksBox {
   active_account: string | null;
@@ -21,18 +21,12 @@ export const LinksBox: FC<ILinksBox> = (props) => {
             key={link.title}
             to={link.route}
             tabs={link.tabs}
+            isLast={link.isLast}
             isDisabled={getIsDisabledLink(link.route, active_account)}
           >
             {link.title}
           </CustomLink>
         ))}
-        <Styled.SupportCenter
-          target="_blank"
-          href={SUPPORT_CENTER_ROUTE}
-          rel="noreferrer"
-        >
-          Help & Support
-        </Styled.SupportCenter>
       </Styled.LinkWrapper>
     </Styled.Links>
   );

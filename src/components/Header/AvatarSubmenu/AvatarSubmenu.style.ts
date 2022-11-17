@@ -33,7 +33,7 @@ export const AvatarSubmenuStyles = {
     padding: 10px 12px;
     display: flex;
     color: ${({ theme }) => theme.colors.lightBlack};
-    font-size: ${({ theme }) => theme.size.biggerSmall};
+    font-size: ${({ theme }) => theme.size.default};
     width: 100%;
     :hover {
       background-color: ${({ theme }) => theme.colors.pink};

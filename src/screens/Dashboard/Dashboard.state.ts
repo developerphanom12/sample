@@ -21,8 +21,7 @@ import { setCompanySwitcher } from '../Settings/reducer/settings.reducer';
 import { getReceiptStatistic } from './dashboard.api';
 import { getTimeFilterOptions } from './dashboard.constants';
 import { setStatistic } from './reducer/dashboard.reducer';
-import { IuseDashboardState, IUserInfoData } from './types';
-
+import { ITimeFIlterValue, IUserInfoData } from './types';
 
 export const useDashboardState = () => {
   const dispatch = useDispatch();
@@ -41,19 +40,18 @@ export const useDashboardState = () => {
 
   const timeFilterOptions = getTimeFilterOptions();
 
-  const initialState = {
-    timeFilterValue: timeFilterOptions[0],
-    isLoading: false,
-    isContentLoading: false,
-    isVisited: false,
-  };
   const totalReceiptCount =
     Number(metric?.accepted) +
     Number(metric?.rejected) +
     Number(metric?.processing) +
     Number(metric?.review);
 
-  const [state, setState] = useState<IuseDashboardState>(initialState);
+  const [timeFilterValue, setTimeFilterValue] = useState<ITimeFIlterValue>(
+    timeFilterOptions[0]
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isContentLoading, setIsContentLoading] = useState(false);
+
   const onSelectFiles = useSelectFiles();
 
   const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -68,11 +66,12 @@ export const useDashboardState = () => {
     isTimeFilter?: boolean
   ) => {
     try {
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: isTimeFilter ? false : true,
-        isContentLoading: isTimeFilter ? true : false,
-      }));
+      if (isTimeFilter) {
+        setIsContentLoading(true);
+      } else {
+        setIsLoading(true);
+      }
+
       const { data } = await getReceiptStatistic(timeFrames);
       const companiesWithLogo = await getCompanyLogo(data.companies, token);
       dispatch(setStatistic({ ...data, companies: companiesWithLogo }));
@@ -80,24 +79,20 @@ export const useDashboardState = () => {
         const { account, company } = data.companies[0];
         setUserInfo({ active_account: account.id, account, company });
       }
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: false,
-        isContentLoading: false,
-      }));
+
+      if (isTimeFilter) {
+        setIsContentLoading(false);
+      } else {
+        setIsLoading(false);
+      }
     } catch (error) {
-      onChangeStateFieldHandler('isLoading', false);
+      setIsContentLoading(false);
+      setIsLoading(false);
       console.log(error);
     }
   };
 
   const lastReceipts = receipts?.data.slice(-5);
-
-  const onChangeStateFieldHandler = (optionName: string, value: any) =>
-    setState((prevState) => ({
-      ...prevState,
-      [optionName]: value,
-    }));
 
   const dateHashMapping: Record<
     string,
@@ -113,8 +108,8 @@ export const useDashboardState = () => {
     newValue: any,
     actionMeta: ActionMeta<unknown>
   ) => {
-    if (state.timeFilterValue.value === newValue.value) return;
-    onChangeStateFieldHandler('timeFilterValue', newValue);
+    if (timeFilterValue.value === newValue.value) return;
+    setTimeFilterValue(newValue);
     getReceiptsStatisticHandler(dateHashMapping[newValue.value], true);
   };
 
@@ -132,10 +127,12 @@ export const useDashboardState = () => {
   };
 
   return {
-    ...state,
+    timeFilterValue,
     onSelectFilesHandler,
     getReceiptsStatisticHandler,
     onChangeCategoryFieldHandler,
+    isLoading,
+    isContentLoading,
     companies,
     totalReceiptCount,
     timeFilterOptions,

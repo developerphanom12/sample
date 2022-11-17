@@ -4,7 +4,6 @@ import { AuthTabs } from 'components/AuthTabs/AuthTabs';
 import { useLoginState } from './Login.state';
 import { LoginForm } from './LoginForm/LoginForm';
 import { Styled } from './Login.style';
-import { LoaderComponent } from '../../components/Loader';
 
 export const Login = () => {
   const {
@@ -18,11 +17,6 @@ export const Login = () => {
 
   return (
     <Styled.MainWrapper>
-      {/* {isGoogleLoading ? (
-        <Styled.Loading>
-          <LoaderComponent theme="preview" />
-        </Styled.Loading>
-      ) : null} */}
       <AuthImageSection />
 
       <Styled.Section>

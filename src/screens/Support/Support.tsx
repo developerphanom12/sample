@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import errorPage from 'assets/icons/error-page.png';
+import emptyDataSrc from 'assets/icons/empty-receipts.png';
 
 import { Button } from 'components/Button';
 
@@ -12,7 +12,7 @@ import { ROUTES } from 'constants/routes';
 export const Support: FC = () => (
   <Styled.MainWrapper>
     <Styled.ContentWrapper>
-      <Styled.Image src={errorPage} />
+      <Styled.Image src={emptyDataSrc} />
       <Styled.Title>{Strings.title}</Styled.Title>
       <Styled.SubTitle>{Strings.subTitle}</Styled.SubTitle>
       <Styled.Link to={ROUTES.home}>
