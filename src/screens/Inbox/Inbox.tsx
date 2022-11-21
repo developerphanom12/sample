@@ -96,7 +96,7 @@ export const Inbox: FC = memo(() => {
   }, [receiptsPerPage, count, isFetchingData]);
 
   const isInboxContent =
-    !isFetchingReceipts && isContentVisible && !isFetchingData;
+    !isFetchingReceipts && isContentVisible && !isFetchingData && count;
 
   const isEmptyScreen =
     !isFetchingReceipts &&

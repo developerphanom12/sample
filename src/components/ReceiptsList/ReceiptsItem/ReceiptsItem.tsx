@@ -28,7 +28,7 @@ export const ReceiptsItem: React.FC<IReceiptsItemsListProps> = (props) => {
         <Styled.Item>{`${currency || '---'} ${total || '---'}`}</Styled.Item>
       </Styled.PaymentBlock>
       <Styled.StatusBlock>
-        <StatusLabel status={status} />
+        <StatusLabel status={status} isDashboard={true} />
         <Styled.Item>
           {date ? getFormattedDate(date, dateFormat) : '---'}
         </Styled.Item>

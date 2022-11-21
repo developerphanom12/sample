@@ -16,6 +16,7 @@ export const ReceiptsItemStyles = {
   PaymentBlock: styled.div``,
   StatusBlock: styled.div`
     text-align: end;
+    padding-top: 16px;
   `,
   SupplierItem: styled.div`
     font-size: ${({ theme }) => theme.size.default};

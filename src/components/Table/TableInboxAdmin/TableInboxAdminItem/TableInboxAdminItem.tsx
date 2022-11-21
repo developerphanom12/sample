@@ -100,13 +100,13 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
       </Styled.Selector>
       <Styled.Selector>{currency || '---'}</Styled.Selector>
       <Styled.Selector>
-        <Styled.ValueWrapper>{net || '---'}</Styled.ValueWrapper>
+        <Styled.ValueWrapper>{net || '00.00'}</Styled.ValueWrapper>
       </Styled.Selector>
       <Styled.Selector>
-        <Styled.ValueWrapper>{tax || '---'}</Styled.ValueWrapper>
+        <Styled.ValueWrapper>{tax || '00.00'}</Styled.ValueWrapper>
       </Styled.Selector>
       <Styled.Selector>
-        <Styled.ValueWrapper>{total || '---'}</Styled.ValueWrapper>
+        <Styled.ValueWrapper>{total || '00.00'}</Styled.ValueWrapper>
       </Styled.Selector>
       <Styled.Checkbox isBorder>
         <CheckboxItem

@@ -19,6 +19,11 @@ export const Styled = {
       isError ? `1px solid ${theme.colors.red}` : `none`};
     box-shadow: ${({ theme }) =>
       `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
+    -moz-box-shadow: ${({ theme }) =>
+      `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
+    -webkit-box-shadow: ${({ theme }) =>
+      `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
+    -webkit-appearance: none;
     &::-webkit-contacts-auto-fill-button,
     ::-webkit-credentials-auto-fill-button {
       visibility: hidden;
