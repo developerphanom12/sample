@@ -50,6 +50,7 @@ export const Styled = {
         ? 'none'
         : `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
     ${(props) => props.inputTheme && INPUT_THEME[props.inputTheme]}
+    -webkit-appearance: none;
     &::-webkit-contacts-auto-fill-button,
     ::-webkit-credentials-auto-fill-button {
       visibility: hidden;
