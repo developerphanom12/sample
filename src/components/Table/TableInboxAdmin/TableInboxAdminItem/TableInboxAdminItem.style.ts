@@ -1,21 +1,11 @@
 import { styled } from 'styles/theme';
 
+import { TABLE_GRID_MARKUP } from '../TableInboxAdmin.constants';
+
 export const TableInboxAdminItemStyles = {
   Item: styled.div`
     display: grid;
-    grid-template-columns:
-      minmax(33px, 43px) minmax(65px, 75px) minmax(95px, 105px) minmax(
-        130px,
-        155px
-      )
-      minmax(150px, 162px) minmax(110px, 125px) minmax(94px, 106px) minmax(
-        73px,
-        85px
-      )
-      minmax(73px, 85px)
-      minmax(73px, 85px)
-      minmax(83px, 95px) minmax(80px, 92px)
-      minmax(73px, 85px) minmax(118px, 130px);
+    grid-template-columns: ${TABLE_GRID_MARKUP};
     background-color: ${(props) => props.theme.colors.white};
     border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
     min-height: 30px;
@@ -28,8 +18,8 @@ export const TableInboxAdminItemStyles = {
     color: ${(props) => (props.isVisited ? 'violet' : props.theme.colors.blue)};
     margin-right: 3px;
   `,
-  Checkbox: styled.div<{ isBorder?: boolean }>`
-    display: flex;
+  Checkbox: styled.div<{ isBorder?: boolean; isHidden?: boolean }>`
+    display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
     align-items: center;
     padding-left: ${({ theme, isBorder }) => (isBorder ? '5px' : 0)};
     margin-right: 3px;

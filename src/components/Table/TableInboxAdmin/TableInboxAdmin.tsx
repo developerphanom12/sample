@@ -57,9 +57,6 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
           <TableButton>Total</TableButton>
         </Styled.Selector>
         <Styled.Selector>
-          <TableButton>Publish</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
           <TableButton>Paid</TableButton>
         </Styled.Selector>
         <Styled.Text>Status</Styled.Text>

@@ -108,7 +108,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
       <Styled.Selector>
         <Styled.ValueWrapper>{total || '00.00'}</Styled.ValueWrapper>
       </Styled.Selector>
-      <Styled.Checkbox isBorder>
+      <Styled.Checkbox isBorder isHidden={true}>
         <CheckboxItem
           isChecked={publishStatus}
           onChange={onCheckedPublishMockFuncHandler}

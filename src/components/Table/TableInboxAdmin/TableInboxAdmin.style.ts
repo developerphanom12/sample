@@ -1,21 +1,11 @@
 import { styled } from 'styles/theme';
 
+import { TABLE_GRID_MARKUP } from './TableInboxAdmin.constants';
+
 export const TableInboxAdminStyles = {
   Head: styled.div`
     display: grid;
-    grid-template-columns:
-      minmax(33px, 43px) minmax(65px, 75px) minmax(95px, 105px) minmax(
-        130px,
-        155px
-      )
-      minmax(150px, 162px) minmax(110px, 125px) minmax(94px, 106px) minmax(
-        73px,
-        85px
-      )
-      minmax(73px, 85px)
-      minmax(73px, 85px)
-      minmax(83px, 95px) minmax(80px, 92px)
-      minmax(73px, 85px) minmax(118px, 130px);
+    grid-template-columns: ${TABLE_GRID_MARKUP};
     border-top: solid 1px ${(props) => props.theme.colors.borderWhite};
     border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
     height: 49px;
