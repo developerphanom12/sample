@@ -3,6 +3,7 @@
   "rules": {
     "no-console": "warn",
     "no-inline-comments": "warn",
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": "error",
+    "no-const-assign": "error"
   }
 }
