@@ -1,4 +1,4 @@
-import { styled } from 'styles/theme';
+import { styled, Z_INDEX } from 'styles/theme';
 
 export const InboxContentStyles = {
   Wrapper: styled.div`
@@ -12,6 +12,12 @@ export const InboxContentStyles = {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    width: 100%;
     height: 100%;
+    z-index: ${Z_INDEX.xs};
+  `,
+  TableWrapper: styled.div`
+    position: relative;
   `,
 };

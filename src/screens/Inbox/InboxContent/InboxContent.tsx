@@ -32,7 +32,6 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     isContentLoading,
     dateFormat,
     isAllChecked,
-    isVisited,
     onCheckedPaidHandler,
     onCheckedPublishMockFuncHandler,
     onCheckedAllItemsHandler,
@@ -51,6 +50,9 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     isFetchingReceipts,
     datePickerRef,
     receiptList,
+    sortField,
+    sortOrder,
+    requestSortHandler,
   } = props;
 
   return (
@@ -80,39 +82,40 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
         />
       )}
-      {isContentLoading ? (
-        <Styled.LoaderWrapper>
-          <LoaderComponent theme="preview" />
-        </Styled.LoaderWrapper>
-      ) : (
-        <>
-          <TableInboxAdmin
-            onCheckedItemHandler={onCheckedItemHandler}
-            onCheckedAllItemsHandler={onCheckedAllItemsHandler}
-            onCheckedPaidHandler={onCheckedPaidHandler}
-            onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-            isVisited={isVisited}
-            receiptList={receiptList}
-            isAllChecked={isAllChecked}
-            dateFormat={dateFormat}
+      <Styled.TableWrapper>
+        {isContentLoading && (
+          <Styled.LoaderWrapper>
+            <LoaderComponent theme="preview" />
+          </Styled.LoaderWrapper>
+        )}
+        <TableInboxAdmin
+          onCheckedItemHandler={onCheckedItemHandler}
+          onCheckedAllItemsHandler={onCheckedAllItemsHandler}
+          onCheckedPaidHandler={onCheckedPaidHandler}
+          onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
+          requestSortHandler={requestSortHandler}
+          receiptList={receiptList}
+          isAllChecked={isAllChecked}
+          dateFormat={dateFormat}
+          sortField={sortField}
+          sortOrder={sortOrder}
+        />
+        {receiptList.length && (
+          <PaginationPanel
+            pages={pages}
+            currentPage={currentPage}
+            onChangeReceiptsPerPage={onChangeReceiptsPerPage}
+            onChangeInputValue={onChangeInputValue}
+            inputPaginationValue={inputPaginationValue}
+            receiptsPerPage={receiptsPerPage}
+            onChangePage={onChangePage}
+            onEnterGoToClick={onEnterGoToClick}
+            onGoToClick={onGoToClick}
+            onForwardClick={onForwardClick}
+            onBackwardClick={onBackwardClick}
           />
-          {receiptList.length ? (
-            <PaginationPanel
-              pages={pages}
-              currentPage={currentPage}
-              onChangeReceiptsPerPage={onChangeReceiptsPerPage}
-              onChangeInputValue={onChangeInputValue}
-              inputPaginationValue={inputPaginationValue}
-              receiptsPerPage={receiptsPerPage}
-              onChangePage={onChangePage}
-              onEnterGoToClick={onEnterGoToClick}
-              onGoToClick={onGoToClick}
-              onForwardClick={onForwardClick}
-              onBackwardClick={onBackwardClick}
-            />
-          ) : null}
-        </>
-      )}
+        )}
+      </Styled.TableWrapper>
     </Styled.Wrapper>
   );
 };

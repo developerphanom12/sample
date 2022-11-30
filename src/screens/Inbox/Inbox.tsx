@@ -22,7 +22,6 @@ export const Inbox: FC = memo(() => {
     dateValue,
     searchValue,
     totalReceiptCount,
-    isVisited,
     statusValue,
     formattedDate,
     setIsDatePickerOpen,
@@ -77,13 +76,16 @@ export const Inbox: FC = memo(() => {
     onDownloadExcelFileHandler,
     onDeleteReceiptHandler,
     onMarkAsPaidButtonHandler,
+    sortField,
+    sortOrder,
+    requestSortHandler,
   } = useInboxState();
 
   useEffect(() => {
     onFetchReceiptsHandler({
       search: debouncedValue,
       skip: 0,
-      take: Number(receiptsPerPage.value),
+      take: +receiptsPerPage.value,
       date_start: dateStart || '',
       date_end: dateEnd || '',
       status: statusValue.value === 'all' ? '' : statusValue.value,
@@ -96,7 +98,7 @@ export const Inbox: FC = memo(() => {
   }, [receiptsPerPage, count, isFetchingData]);
 
   const isInboxContent =
-    !isFetchingReceipts && isContentVisible && !isFetchingData && count;
+    !isFetchingReceipts && isContentVisible && !isFetchingData;
 
   const isEmptyScreen =
     !isFetchingReceipts &&
@@ -131,6 +133,7 @@ export const Inbox: FC = memo(() => {
         <>
           {isInboxContent ? (
             <InboxContent
+              requestSortHandler={requestSortHandler}
               datePickerRef={datePickerRef}
               pages={pages}
               currentPage={currentPage}
@@ -168,11 +171,12 @@ export const Inbox: FC = memo(() => {
               onCheckedAllItemsHandler={onCheckedAllItemsHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-              isVisited={isVisited}
               receiptList={receipts}
               isAllChecked={isAllChecked}
               dateFormat={company.date_format}
               isFetchingReceipts={isFetchingReceipts}
+              sortField={sortField}
+              sortOrder={sortOrder}
             />
           ) : null}
         </>

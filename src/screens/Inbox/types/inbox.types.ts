@@ -23,6 +23,8 @@ export interface IGetReceiptsParams {
   date_end?: string;
   take?: number;
   skip?: number;
+  sortField?: string;
+  sortOrder?: 'ASC' | 'DESC';
 }
 
 export interface IPostEmail {

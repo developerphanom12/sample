@@ -24,11 +24,12 @@ export const TableInboxAdminStyles = {
     color: ${(props) => props.theme.colors.lightBlack};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    margin-right: 3px;
     padding-left: 9px;
   `,
-  Selector: styled.div`
-    margin-right: 3px;
+  Selector: styled.div<{ isSorted?: boolean }>`
+    :hover {
+      cursor: pointer;
+    }
     padding-left: 10px;
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
   `,

@@ -109,6 +109,8 @@ declare global {
     creator: ICreator;
   }
 
+  type TSorterOrder = 'ASC' | 'DESC';
+
   interface TableInboxAdminProps {
     onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onCheckedAllItemsHandler?: (
@@ -117,13 +119,17 @@ declare global {
     onCheckedPublishMockFuncHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => void;
-    isVisited: boolean;
     receiptList: IReceipt[];
     isAllChecked: boolean;
     onCheckedPaidHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => Promise<void>;
     dateFormat: string;
+    requestSortHandler: (
+      event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => void;
+    sortField: string;
+    sortOrder: TSorterOrder;
   }
 
   interface IReceipt {
@@ -156,6 +162,9 @@ declare global {
     receiptsPerPage: { value: string; label: string };
     isFetchingReceipts: boolean;
     datePickerRef: React.RefObject<HTMLButtonElement>;
+    sortField: string;
+    sortOrder: TSorterOrder;
+    requestSortHandler: (event: React.MouseEvent<HTMLDivElement>) => void;
   }
 
   interface IOption {
@@ -348,6 +357,7 @@ declare global {
 }
 
 export {
+  TSorterOrder,
   IOAuthLogin,
   IAvatarSubmenuLinks,
   TButtonTheme,

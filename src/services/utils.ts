@@ -235,3 +235,9 @@ export const isTokenExpired = (token: string) => {
     return false;
   }
 };
+
+export const setIsSorted = (
+  sortField: string,
+  sortOrder: 'ASC' | 'DESC',
+  columnName: string
+) => sortField === columnName && sortOrder === 'ASC';

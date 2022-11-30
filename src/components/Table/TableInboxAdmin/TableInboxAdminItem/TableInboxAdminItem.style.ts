@@ -14,15 +14,14 @@ export const TableInboxAdminItemStyles = {
     padding-left: 19px;
     padding-right: 9px;
   `,
-  Link: styled.a<{ isVisited: boolean }>`
-    color: ${(props) => (props.isVisited ? 'violet' : props.theme.colors.blue)};
+  Link: styled.a`
+    color: ${(props) => props.theme.colors.blue};
     margin-right: 3px;
   `,
   Checkbox: styled.div<{ isBorder?: boolean; isHidden?: boolean }>`
     display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
     align-items: center;
-    padding-left: ${({ theme, isBorder }) => (isBorder ? '5px' : 0)};
-    margin-right: 3px;
+    padding-left: ${({ isBorder }) => (isBorder ? '5px' : 0)};
     border-right: ${({ theme, isBorder }) =>
       isBorder ? `solid 1px ${theme.colors.borderWhite}` : ''};
   `,
@@ -42,7 +41,6 @@ export const TableInboxAdminItemStyles = {
     font-size: ${(props) => props.theme.size.default};
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
     padding-left: 9px;
-    margin-right: 3px;
   `,
   Status: styled.div`
     display: flex;

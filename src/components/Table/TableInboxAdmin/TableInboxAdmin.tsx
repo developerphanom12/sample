@@ -2,9 +2,12 @@ import { FC, memo } from 'react';
 
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
 
+import { setIsSorted } from 'services/utils';
+
 import { TableButton } from '../TableButton/TableButton';
 import { TableInboxAdminItem } from './TableInboxAdminItem/TableInboxAdminItem';
 import { TableInboxAdminStyles as Styled } from './TableInboxAdmin.style';
+import { TABLE_COLUMN_NAMES } from './TableInboxAdmin.constants';
 
 export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
   const {
@@ -12,10 +15,12 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
     onCheckedPublishMockFuncHandler,
     onCheckedAllItemsHandler,
     onCheckedPaidHandler,
-    isVisited,
     receiptList,
     isAllChecked,
     dateFormat,
+    sortField,
+    sortOrder,
+    requestSortHandler,
   } = props;
 
   return (
@@ -29,36 +34,18 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
           />
         </Styled.Checkbox>
         <Styled.Text>ID</Styled.Text>
-        <Styled.Selector>
-          <TableButton>Date</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Supplier</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Supplier Account</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Category</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>VAT Code</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>CUR</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Net</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Tax</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Total</TableButton>
-        </Styled.Selector>
-        <Styled.Selector>
-          <TableButton>Paid</TableButton>
-        </Styled.Selector>
+        {TABLE_COLUMN_NAMES.map((item) => {
+          const isSorted = setIsSorted(sortField, sortOrder, item.id);
+          return (
+            <Styled.Selector
+              key={item.id}
+              id={item.id}
+              onClick={requestSortHandler}
+            >
+              <TableButton isSorted={isSorted}>{item.name}</TableButton>
+            </Styled.Selector>
+          );
+        })}
         <Styled.Text>Status</Styled.Text>
       </Styled.Head>
       {receiptList.length ? (
@@ -81,7 +68,6 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
             supplier={receipt.supplier}
             supplierAccount={receipt.supplier_account?.name}
             isChecked={receipt.isChecked}
-            isVisited={isVisited}
             onCheckedItemHandler={onCheckedItemHandler}
             onCheckedPaidHandler={onCheckedPaidHandler}
             onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}

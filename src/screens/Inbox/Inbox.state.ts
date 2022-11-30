@@ -13,6 +13,7 @@ import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { useSelectFiles } from 'hooks/useSelectFiles';
 import { usePagination } from 'hooks/usePagination';
+import { useSortTable } from 'hooks/useSortTable';
 
 import {
   downloadCSV,
@@ -433,8 +434,36 @@ export const useInboxState = () => {
 
   const datePickerRef = useRef<HTMLButtonElement>(null);
 
+  const { setSortData, sortField, sortOrder } = useSortTable();
+
+  const requestSortHandler = useCallback(
+    async (event: React.MouseEvent<HTMLDivElement>) => {
+      const sortDirection = setSortData(event.currentTarget.id);
+      try {
+        onChangeStateFieldHandler('isContentLoading', true);
+        await onFetchReceiptsHandler({
+          sortField: event.currentTarget.id,
+          sortOrder: sortDirection,
+          search: debouncedValue,
+          status:
+            state.statusValue.value === 'all' ? '' : state.statusValue.value,
+          take: +receiptsPerPage.value,
+          skip: currentPage * +receiptsPerPage.value,
+          date_start: dateStart || '',
+          date_end: dateEnd || '',
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [sortOrder, sortField]
+  );
+
   return {
     ...state,
+    requestSortHandler,
+    sortField,
+    sortOrder,
     receiptsPerPage,
     currentPage,
     pages,

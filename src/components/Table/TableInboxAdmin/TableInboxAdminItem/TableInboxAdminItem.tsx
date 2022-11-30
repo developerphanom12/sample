@@ -10,6 +10,7 @@ import { TableInboxAdminItemStyles as Styled } from './TableInboxAdminItem.style
 import { useTableInboxAdminItemState } from './TableInboxAdminItem.state';
 
 interface TableInboxAdminProps {
+  isVisited?: boolean;
   onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onCheckedPaidHandler: (
     event: React.ChangeEvent<HTMLInputElement>
@@ -18,7 +19,6 @@ interface TableInboxAdminProps {
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
   isChecked: boolean;
-  isVisited: boolean;
   tax: number | null;
   date: Date;
   supplier: string | null;
@@ -40,7 +40,6 @@ interface TableInboxAdminProps {
 export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
   const {
     isChecked,
-    isVisited,
     category,
     currency,
     date,
@@ -77,9 +76,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
         />
       </Styled.Checkbox>
       <Styled.View id={receiptId} onClick={onReceiptDetailsClickHandler}>
-        <Styled.Link isVisited={isVisited}>
-          {getCorrectCustomId(customId)}
-        </Styled.Link>
+        <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
       <Styled.Selector>
         {!!date
