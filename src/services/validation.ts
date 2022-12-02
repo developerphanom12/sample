@@ -79,6 +79,12 @@ export const subjectValidation = Yup.string()
   .min(3, 'subject must be at least 3 characters')
   .required('Subject is a required field');
 
+export const bindSocialAccdValidationSchema = Yup.object().shape({
+  email: emailValidation,
+  newPassword: passwordValidation,
+  confirmPassword: confirmPasswordValidation,
+});
+
 export const companyNameValidationScheme = Yup.object().shape({
   companyName: companyNameValidation,
 });

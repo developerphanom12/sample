@@ -4,7 +4,7 @@ export const Styled = {
   Label: styled.p`
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.lightBlack};
     margin-bottom: ${(props) => props.theme.size.small};
   `,
   Input: styled.input<{ isError?: boolean }>`

@@ -100,7 +100,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           sortField={sortField}
           sortOrder={sortOrder}
         />
-        {receiptList.length && (
+        {receiptList.length ? (
           <PaginationPanel
             pages={pages}
             currentPage={currentPage}
@@ -114,7 +114,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
             onForwardClick={onForwardClick}
             onBackwardClick={onBackwardClick}
           />
-        )}
+        ) : null}
       </Styled.TableWrapper>
     </Styled.Wrapper>
   );

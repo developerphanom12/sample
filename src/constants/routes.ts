@@ -16,6 +16,7 @@ export enum ROUTES {
   forgotPassword = '/forgot-password',
   resetPassword = '/reset-password/:token',
   signUpNewMember = '/signup-new-member/:token',
+  bindSocialAccount = '/bind-social-account/:token',
   chooseCompany = '/choose-company',
   capiumLogin = '/capium-login',
   invites = '/invites',

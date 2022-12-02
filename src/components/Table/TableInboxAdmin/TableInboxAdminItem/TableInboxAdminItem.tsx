@@ -60,6 +60,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
     onCheckedItemHandler,
     onCheckedPublishMockFuncHandler,
   } = props;
+  console.log(!!dateFormat, 'dateFormat');
 
   const { onReceiptDetailsClickHandler } = useTableInboxAdminItemState({
     receiptId,

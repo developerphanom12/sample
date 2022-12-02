@@ -27,6 +27,7 @@ import { CompanyList } from 'screens/Settings/CompanyList';
 import { SignUpNewMember } from 'screens/SignUpNewMember';
 import { WorkSpacePicker } from 'screens/WorkSpacePicker';
 import { Invites } from 'screens/Invites';
+import { BindSocialAccount } from 'screens/BindSocialAccount';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -74,6 +75,10 @@ export const AppRouter: FC = () => {
         <Route path={ROUTES.capiumLogin} element={<CapiumLogin />} />
         <Route path={ROUTES.signUpNewMember} element={<SignUpNewMember />} />
         <Route path={ROUTES.chooseCompany} element={<WorkSpacePicker />} />
+        <Route
+          path={ROUTES.bindSocialAccount}
+          element={<BindSocialAccount />}
+        />
       </Routes>
     </BrowserRouter>
   );
