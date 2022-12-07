@@ -56,6 +56,7 @@ declare global {
 
   interface IUpdateReceiptItemPayload {
     id: string;
+    active_account?: string;
     category?: string | null;
     currency?: string | null;
     description?: string | null;
@@ -320,6 +321,7 @@ declare global {
     search?: string;
     take?: number;
     skip?: number;
+    active_account?: string | null;
   }
 
   interface IAccount {

@@ -6,6 +6,7 @@ interface IUpdateUserProfile {
   country?: string;
   currency?: string;
   date_format?: string;
+  active_account?: string;
 }
 
 interface IChangePassword {
@@ -13,9 +14,9 @@ interface IChangePassword {
   new_password: string;
 }
 
-export const getProfile = () => {
+export const getProfile = (active_account?: string) => {
   const URL = `profile/get`;
-  return apiServices.fetchData(URL);
+  return apiServices.fetchData(URL, { active_account });
 };
 
 export const resetPassword = (payload: IChangePassword) => {

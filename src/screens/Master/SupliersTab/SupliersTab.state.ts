@@ -78,7 +78,10 @@ export const useSuppliersTabState = () => {
   ) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const { data } = await getAllTabItems('supplier', params);
+      const { data } = await getAllTabItems('supplier', {
+        ...params,
+        active_account,
+      });
       isSearching
         ? onChangeStateFieldHandler('searchedItems', data.data)
         : dispatch(setSupplierAccounts({ data: data.data, count: data.count }));
@@ -109,7 +112,10 @@ export const useSuppliersTabState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       !count && onChangeStateFieldHandler('isFetchingData', true);
-      await createTabItem({ name: state.modalInputValue }, 'supplier');
+      await createTabItem(
+        { name: state.modalInputValue, active_account },
+        'supplier'
+      );
       onGetAllSuppliersHandler();
       onChangePage({ selected: 0 });
 
@@ -134,7 +140,7 @@ export const useSuppliersTabState = () => {
 
   const onEnterCreateSupplierClick = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
-    onCreateSupplierHandler();
+    state.isEdit ? onSaveButtonClickHandler() : onCreateSupplierHandler();
   };
 
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -142,7 +148,7 @@ export const useSuppliersTabState = () => {
 
   const onDeleteItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier');
+      const { data } = await getTabItemById(itemId, 'supplier', active_account);
       dispatch(setTabItem(data));
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -170,6 +176,7 @@ export const useSuppliersTabState = () => {
       const { data } = await getAllTabItems('supplier', {
         take: +itemsPerPage.value,
         skip,
+        active_account,
       });
       dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
 
@@ -192,7 +199,7 @@ export const useSuppliersTabState = () => {
 
   const onEditItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier');
+      const { data } = await getTabItemById(itemId, 'supplier', active_account);
       dispatch(setTabItem(data));
       onModalWindowToggle();
       setState((prevState) => ({
@@ -219,10 +226,11 @@ export const useSuppliersTabState = () => {
         {
           id: selectedCategory?.id || '',
           name: state.modalInputValue,
+          active_account,
         },
         'supplier'
       );
-      const { data } = await getAllTabItems('supplier');
+      const { data } = await getAllTabItems('supplier', { active_account });
       dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -262,6 +270,7 @@ export const useSuppliersTabState = () => {
     onGetAllSuppliersHandler({
       take: Number(itemsPerPage.value),
       skip: selected * Number(itemsPerPage.value),
+      active_account,
     });
   };
 

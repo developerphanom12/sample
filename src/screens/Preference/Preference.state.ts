@@ -25,7 +25,7 @@ interface IusePreferenceState {
 
 export const usePreferenceState = () => {
   const {
-    user: { currencies },
+    user: { currencies, user },
   } = useSelector((state: IState) => state);
 
   const formatedCurrencies = currencies?.map((currency) => ({
@@ -85,6 +85,7 @@ export const usePreferenceState = () => {
         currency: state.selectedCurrencyValue?.id,
         date_format: state.selectedFormatDate?.value,
         withAccountant: locationState?.withAccountant ? true : false,
+        active_account: user.active_account || '',
       };
       const { data } = await userInfoCreate(payload);
       dispatch(setUserInfo({ company: data.company }));

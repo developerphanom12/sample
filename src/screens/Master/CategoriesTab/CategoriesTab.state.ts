@@ -73,7 +73,10 @@ export const useCategoriesTabState = () => {
   ) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const { data } = await getAllTabItems('category', params);
+      const { data } = await getAllTabItems('category', {
+        ...params,
+        active_account,
+      });
       isSearching && state.isFocus
         ? onChangeStateFieldHandler('searchedItems', data.data)
         : dispatch(setCategories({ data: data.data, count: data.count }));
@@ -105,7 +108,10 @@ export const useCategoriesTabState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       !count && onChangeStateFieldHandler('isFetchingData', true);
-      await createTabItem({ name: state.modalInputValue }, 'category');
+      await createTabItem(
+        { name: state.modalInputValue, active_account },
+        'category'
+      );
       onGetAllCategoriesHandler();
       onChangePage({ selected: 0 });
       setState((prevState) => ({
@@ -130,7 +136,7 @@ export const useCategoriesTabState = () => {
 
   const onEnterCreateCategoryClick = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
-    onCreateCategoryHandler();
+    state.isEdit ? onSaveButtonClickHandler() : onCreateCategoryHandler();
   };
 
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -138,7 +144,7 @@ export const useCategoriesTabState = () => {
 
   const onDeleteItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'category');
+      const { data } = await getTabItemById(itemId, 'category', active_account);
       dispatch(setTabItem(data));
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -161,7 +167,11 @@ export const useCategoriesTabState = () => {
           ? (currentPage - 1) * +itemsPerPage.value
           : currentPage * +itemsPerPage.value;
 
-      await deleteTabItem(selectedCategory?.id || '', 'category');
+      await deleteTabItem(
+        selectedCategory?.id || '',
+        'category',
+        active_account
+      );
       const { data } = await getAllTabItems('category', {
         take: +itemsPerPage.value,
         skip,
@@ -187,7 +197,7 @@ export const useCategoriesTabState = () => {
 
   const onEditItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'category');
+      const { data } = await getTabItemById(itemId, 'category', active_account);
       dispatch(setTabItem(data));
       onModalWindowToggle();
       setState((prevState) => ({
@@ -214,10 +224,11 @@ export const useCategoriesTabState = () => {
         {
           id: selectedCategory?.id || '',
           name: state.modalInputValue,
+          active_account,
         },
         'category'
       );
-      const { data } = await getAllTabItems('category');
+      const { data } = await getAllTabItems('category', { active_account });
       dispatch(setCategories({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -244,6 +255,7 @@ export const useCategoriesTabState = () => {
     onChangeStateFieldHandler('isContentLoading', true);
 
     onGetAllCategoriesHandler({
+      active_account,
       take: Number(itemsPerPage.value),
       skip:
         categoriesList.length === 1 ? 0 : selected * Number(itemsPerPage.value),
@@ -274,7 +286,10 @@ export const useCategoriesTabState = () => {
     onChangeStateFieldHandler('isFocus', true);
     onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllCategoriesHandler({ take: Number(newValue?.value) });
+    onGetAllCategoriesHandler({
+      take: Number(newValue?.value),
+      active_account,
+    });
     setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);

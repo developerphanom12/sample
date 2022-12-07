@@ -1,8 +1,5 @@
 import { apiServices } from 'services/api-service';
-import {
-  IUpdateCategory,
-  ICreateCategory,
-} from './types/master.types';
+import { IUpdateCategory, ICreateCategory } from './types/master.types';
 
 type Direction = 'category' | 'supplier' | 'payment-type';
 
@@ -28,11 +25,19 @@ export const getAllTabItems = (
   return apiServices.fetchData(URL, params);
 };
 
-export const getTabItemById = (categoryId: string, urlDirection: Direction) => {
+export const getTabItemById = (
+  categoryId: string,
+  urlDirection: Direction,
+  active_account?: string | null
+) => {
   const URL = `${urlDirection}/get/${categoryId}`;
-  return apiServices.fetchData(URL);
+  return apiServices.fetchData(URL, { active_account });
 };
-export const deleteTabItem = (categoryId: string, urlDirection: Direction) => {
+export const deleteTabItem = (
+  categoryId: string,
+  urlDirection: Direction,
+  active_account?: string | null
+) => {
   const URL = `${urlDirection}/delete/${categoryId}`;
-  return apiServices.deleteData(URL);
+  return apiServices.deleteData(URL, { active_account });
 };

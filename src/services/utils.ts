@@ -7,6 +7,7 @@ import { getCompanyLogo } from 'screens/Settings/settings.api';
 import { ROUTES } from '../constants/routes';
 
 interface IFormdataProps {
+  active_account?: string | null;
   currency?: string;
   date_format?: string;
   selectedCompanyLogo?: Blob | null;
@@ -210,6 +211,8 @@ export const onCreateFormDataHandler = (
 ) => {
   const formData = new FormData();
   formData.append('name', data.companyName);
+  data?.active_account &&
+    formData.append('active_account', data?.active_account || '');
   data.companyLogo?.name && formData.append('logo', data.companyLogo);
   if (isUpdate) {
     isDeleteLogo && formData.append('isDeleteLogo', 'true');

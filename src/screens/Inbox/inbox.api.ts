@@ -7,6 +7,7 @@ import { IGetReceiptsParams, IPostEmail } from './types/inbox.types';
 
 interface IReceiptsIds {
   receipts: string[];
+  active_account?: string;
 }
 
 export const getReceipts = (params?: IGetReceiptsParams) => {

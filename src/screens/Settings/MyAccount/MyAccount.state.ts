@@ -121,7 +121,7 @@ export const useMyAccountState = () => {
   const getProfileHandler = async () => {
     try {
       setIsFetchingData(true);
-      const { data } = await getProfile();
+      const { data } = await getProfile(user.active_account || '');
       dispatch(updateUserProfile(data));
       setIsFetchingData(false);
     } catch (error) {
@@ -203,6 +203,7 @@ export const useMyAccountState = () => {
             country: state.country.value,
             currency: state.currency.id,
             date_format: state.dateFormat.value,
+            active_account: user.active_account,
           };
       const { data } = await updateProfile(payload);
       dispatch(updateUserProfile(data));

@@ -2,6 +2,7 @@ import { apiServices } from 'services/api-service';
 
 export const userInfoCreate = (payload: {
   withAccountant?: boolean;
+  active_account?: string;
   name: string;
   currency: string;
   date_format: string;

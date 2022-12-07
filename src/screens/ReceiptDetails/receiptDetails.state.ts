@@ -17,7 +17,10 @@ export const useReceiptDetailsState = () => {
 
   const {
     inbox: { selectedReceipt, receipts, selectedReceiptIndex },
-    user: { token },
+    user: {
+      token,
+      user: { active_account },
+    },
   } = useSelector((state: IState) => state);
 
   const onGoBackHandler = () => navigate(-1);
@@ -42,7 +45,8 @@ export const useReceiptDetailsState = () => {
 
       const { data } = await getReceiptImage(
         selectedReceipt?.photos[0] || '',
-        token
+        token,
+        active_account || ''
       );
 
       setImageSrc(URL.createObjectURL(data) || '');

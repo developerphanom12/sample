@@ -50,6 +50,7 @@ export interface ITabContentProps
 
 export interface ICreateCategory {
   name: string;
+  active_account?: string | null;
 }
 
 export interface IUpdateCategory extends ICreateCategory {

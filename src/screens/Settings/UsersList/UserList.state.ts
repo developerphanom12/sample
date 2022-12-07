@@ -111,7 +111,10 @@ export const useUserListState = () => {
   const onGetAllCompanyMembersHandler = async (params?: ISearchParams) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const { data } = await getCompanyMembers(params);
+      const { data } = await getCompanyMembers({
+        ...params,
+        active_account: active_account || '',
+      });
       state.isSearching && state.isFocus
         ? onChangeStateFieldHandler('searchedUsers', data.data)
         : dispatch(setMembers({ count: data.count, members: data.data }));
@@ -289,8 +292,13 @@ export const useUserListState = () => {
       count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
 
-      await deleteCompanyMember(state.selectedItemId || '');
-      const { data } = await getCompanyMembers();
+      await deleteCompanyMember(
+        state.selectedItemId || '',
+        active_account || ''
+      );
+      const { data } = await getCompanyMembers({
+        active_account: active_account || '',
+      });
       dispatch(setMembers({ count: data.count, members: data.data }));
 
       onChangePage({ selected: state.currentPage });
@@ -310,15 +318,19 @@ export const useUserListState = () => {
         isEdit && !state.isInvitation
           ? {
               role: state.role?.value || '',
+              active_account: active_account || '',
             }
           : {
               role: state.role?.value || '',
               name: values.fullName,
               email: values.email,
               isInviteCompanyMember: state.isInvitation,
+              active_account: active_account || '',
             };
       await updateCompanyMember(payload, state.selectedItemId);
-      const { data } = await getCompanyMembers();
+      const { data } = await getCompanyMembers({
+        active_account: active_account || '',
+      });
       dispatch(setMembers({ count: data.count, members: data.data }));
       onChangeStateFieldHandler('isLoading', false);
       state.isInvitation && onChangeStateFieldHandler('isInvitation', false);
@@ -367,7 +379,9 @@ export const useUserListState = () => {
   const onResendInvitationHandler = async (inviteId: string) => {
     try {
       await resendInvitation(inviteId);
-      const { data } = await getCompanyMembers();
+      const { data } = await getCompanyMembers({
+        active_account: active_account || '',
+      });
       dispatch(setMembers({ count: data.count, members: data.data }));
       setIsResendSuccessPopup();
     } catch (error) {

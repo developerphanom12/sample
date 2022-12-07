@@ -35,6 +35,7 @@ export const usePhotoDetailsContentState = () => {
   const {
     inbox: { selectedReceipt },
     user: {
+      user: { active_account },
       currencies,
       userInfo: { company },
     },
@@ -124,9 +125,18 @@ export const usePhotoDetailsContentState = () => {
 
   const onGetAllMasterItemsHandler = async () => {
     try {
-      const categoriesData = await getAllMasterItems('category');
-      const supplierData = await getAllMasterItems('supplier');
-      const typesData = await getAllMasterItems('payment-type');
+      const categoriesData = await getAllMasterItems(
+        'category',
+        active_account || ''
+      );
+      const supplierData = await getAllMasterItems(
+        'supplier',
+        active_account || ''
+      );
+      const typesData = await getAllMasterItems(
+        'payment-type',
+        active_account || ''
+      );
 
       dispatch(
         setItemsForSelect({
@@ -256,6 +266,7 @@ export const usePhotoDetailsContentState = () => {
         total: state.totalValue || selectedReceipt?.total,
         payment_type: state.typeValue?.id || selectedReceipt?.payment_type,
         vat_code: state.vatCodeValue || selectedReceipt?.vat_code,
+        active_account: active_account || '',
       };
 
       setIsLoading(true);

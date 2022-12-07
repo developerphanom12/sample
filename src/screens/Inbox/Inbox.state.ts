@@ -92,7 +92,10 @@ export const useInboxState = () => {
         isLoading: true,
         checkedIds: [],
       }));
-      const { data } = await getReceipts(params);
+      const { data } = await getReceipts({
+        ...params,
+        active_account: active_account || '',
+      });
       !totalReceiptCount && onGetStatisticHandler();
 
       dispatch(setReceipts({ count: data.count, data: data.data }));
@@ -201,7 +204,7 @@ export const useInboxState = () => {
   };
 
   const onPostEmailHandler = async (
-    postEmailValues: Omit<IPostEmail, 'receipts'>,
+    postEmailValues: Omit<IPostEmail, 'receipts' | 'active_account'>,
     actions: FormikHelpers<typeof formikInitialValues>
   ) => {
     try {
@@ -209,6 +212,7 @@ export const useInboxState = () => {
       await postEmail({
         ...postEmailValues,
         receipts: state.checkedIds,
+        active_account: active_account || '',
       });
       formik.resetForm();
       onChangeStateFieldHandler('isLoading', false);
@@ -308,9 +312,11 @@ export const useInboxState = () => {
         await updateReceiptItem({
           id: event.target.id,
           payment_status: !selectedReceipt?.payment_status,
+          active_account: active_account || '',
         });
         onFetchReceiptsHandler();
       } catch (error) {
+        onChangeStateFieldHandler('isContentLoading', false);
         console.log(error);
       }
     },
@@ -342,7 +348,7 @@ export const useInboxState = () => {
     try {
       if (!state.checkedIds.length) return;
       const { data } = await downloadXLXS(
-        { receipts: state.checkedIds },
+        { receipts: state.checkedIds, active_account: active_account || '' },
         token
       );
       const url = URL.createObjectURL(new Blob([data]));
@@ -357,7 +363,10 @@ export const useInboxState = () => {
 
   const onClickDownloadCSVButtonHandler = async () => {
     try {
-      const { data } = await downloadCSV({ receipts: state.checkedIds });
+      const { data } = await downloadCSV({
+        receipts: state.checkedIds,
+        active_account: active_account || '',
+      });
       onChangeStateFieldHandler('csvData', data);
       csvLink.current && csvLink.current.link.click();
     } catch (error) {
@@ -369,7 +378,10 @@ export const useInboxState = () => {
 
   const onDeleteReceiptHandler = async () => {
     try {
-      await receiptDelete({ receipts: state.checkedIds }, token);
+      await receiptDelete(
+        { receipts: state.checkedIds, active_account: active_account || '' },
+        token
+      );
       count === state.checkedIds.length && setItemsPerPage(PAGINATION_ARRAY[1]);
       setState((prevState) => ({
         ...prevState,
@@ -415,7 +427,10 @@ export const useInboxState = () => {
   const onMarkAsPaidButtonHandler = async () => {
     try {
       onChangeStateFieldHandler('isContentLoading', true);
-      await markAsPaid({ receipts: state.checkedIds });
+      await markAsPaid({
+        receipts: state.checkedIds,
+        active_account: active_account || '',
+      });
       onFetchReceiptsHandler();
       onActionsClick();
     } catch (error) {

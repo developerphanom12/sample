@@ -77,7 +77,10 @@ export const useTypesTabState = () => {
   ) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
-      const { data } = await getAllTabItems('payment-type', params);
+      const { data } = await getAllTabItems('payment-type', {
+        ...params,
+        active_account,
+      });
       isSearching
         ? onChangeStateFieldHandler('searchedItems', data.data)
         : dispatch(setTypes({ data: data.data, count: data.count }));
@@ -108,8 +111,11 @@ export const useTypesTabState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       !count && onChangeStateFieldHandler('isFetchingData', true);
-      await createTabItem({ name: state.modalInputValue }, 'payment-type');
-      onGetAllTypesHandler();
+      await createTabItem(
+        { name: state.modalInputValue, active_account },
+        'payment-type'
+      );
+      onGetAllTypesHandler({ active_account });
       onChangePage({ selected: 0 });
       setState((prevState) => ({
         ...prevState,
@@ -132,7 +138,7 @@ export const useTypesTabState = () => {
 
   const onEnterCreateTypeClick = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
-    onCreateTypeHandler();
+    state.isEdit ? onSaveButtonClickHandler() : onCreateTypeHandler();
   };
 
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -140,7 +146,11 @@ export const useTypesTabState = () => {
 
   const onDeleteItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'payment-type');
+      const { data } = await getTabItemById(
+        itemId,
+        'payment-type',
+        active_account
+      );
       dispatch(setTabItem(data));
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -167,6 +177,7 @@ export const useTypesTabState = () => {
       const { data } = await getAllTabItems('payment-type', {
         take: +itemsPerPage.value,
         skip,
+        active_account,
       });
       dispatch(setTypes({ count: data.count, data: data.data }));
 
@@ -189,7 +200,11 @@ export const useTypesTabState = () => {
 
   const onEditItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'payment-type');
+      const { data } = await getTabItemById(
+        itemId,
+        'payment-type',
+        active_account
+      );
       dispatch(setTabItem(data));
       onModalWindowToggle();
       setState((prevState) => ({
@@ -216,10 +231,11 @@ export const useTypesTabState = () => {
         {
           id: selectedCategory?.id || '',
           name: state.modalInputValue,
+          active_account,
         },
         'payment-type'
       );
-      const { data } = await getAllTabItems('payment-type');
+      const { data } = await getAllTabItems('payment-type', { active_account });
       dispatch(setTypes({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -260,6 +276,7 @@ export const useTypesTabState = () => {
     onGetAllTypesHandler({
       take: Number(itemsPerPage.value),
       skip: selected * Number(itemsPerPage.value),
+      active_account,
     });
   };
 

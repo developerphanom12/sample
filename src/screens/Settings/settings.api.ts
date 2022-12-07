@@ -15,6 +15,7 @@ interface IUpdateCompanyMember {
   name?: string;
   email?: string;
   isInviteCompanyMember?: boolean;
+  active_account?: string;
   role: string;
 }
 
@@ -46,9 +47,12 @@ export const resendInvitation = (invitationId: string) => {
   return apiServices.postData(URL, {});
 };
 
-export const deleteCompanyMember = (memberId: string) => {
+export const deleteCompanyMember = (
+  memberId: string,
+  active_account?: string
+) => {
   const URL = `company-member/delete/${memberId}`;
-  return apiServices.deleteData(URL);
+  return apiServices.deleteData(URL, { active_account });
 };
 
 export const getAllCompanies = () => {

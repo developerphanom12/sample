@@ -72,7 +72,12 @@ export const useDashboardState = () => {
         setIsLoading(true);
       }
 
-      const { data } = await getReceiptStatistic(timeFrames);
+      const payload = {
+        date_start: timeFrames?.date_start || '',
+        date_end: timeFrames?.date_end || '',
+        active_account: user?.active_account || '',
+      };
+      const { data } = await getReceiptStatistic(payload);
       const companiesWithLogo = await getCompanyLogo(data.companies, token);
       dispatch(setStatistic({ ...data, companies: companiesWithLogo }));
       if (!user.accounts?.length && !user.active_account && !company.name) {

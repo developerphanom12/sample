@@ -205,6 +205,7 @@ export const useCompanyListState = () => {
         companyName: state.companyName,
         currency: currency.id,
         date_format: date_format,
+        active_account: active_account,
       });
       await companyCreate(formData, token);
       onGetAllCompaniesHandler();
@@ -358,6 +359,7 @@ export const useCompanyListState = () => {
       onChangeStateFieldHandler('isLoading', true);
       const formData = new FormData();
       formData.append('logo', state?.companyLogo || '');
+      formData.append('active_account', active_account || '');
       await changeCompanyLogo(formData, token);
       const { data } = await getManyCompanies();
       dispatch(setCompanies({ companies: data.data, count: data.count }));

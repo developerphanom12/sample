@@ -17,6 +17,7 @@ export interface IINBOX_INITIAL_STATE {
 }
 
 export interface IGetReceiptsParams {
+  active_account?: string;
   status?: string;
   search?: string;
   date_start?: string;
@@ -28,10 +29,11 @@ export interface IGetReceiptsParams {
 }
 
 export interface IPostEmail {
+  active_account: string;
+  message?: string;
   receipts: string[];
   to: string;
   subject: string;
-  message?: string;
 }
 
 export interface IuseInboxState {
