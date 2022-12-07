@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
+
+import { signInWithGoogle } from 'services/firebase';
 
 import { loginWithGoogle } from 'screens/Login/login.api';
 import {
@@ -11,31 +12,24 @@ import {
   setUserInfo,
 } from 'screens/SignUp/reducer/signup.reducer';
 
-import { apiServices } from 'services/api-service';
-
 import { ROUTES } from 'constants/routes';
 
 export const useGoogleButton = () => {
-  const [isError, setIsError] = useState(false);
-  const [, setGoogleError] = useState({});
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onResponseGoogle = async (
-    response: Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>
-  ) => {
+  const onGoogleButtonClickHandler = async () => {
     try {
+      const userData = await signInWithGoogle();
       setIsGoogleLoading(true);
-      const { data: googleData } = await apiServices.getGoogleUserInfo(
-        response.access_token
-      );
       const payload: IOAuthLogin = {
-        socialAccountId: googleData.sub as string,
-        email: googleData.email as string,
-        fullName: googleData.name as string,
+        socialAccountId: userData?.id || '',
+        email: userData?.email || '',
+        fullName: userData?.name || '',
         type: 'google',
       };
+
       const { data } = await loginWithGoogle(payload);
       dispatch(setUser(data));
       dispatch(setUserInfo({ company: data.company }));
@@ -60,27 +54,7 @@ export const useGoogleButton = () => {
     }
   };
 
-  const onErrorGoogle = (
-    response: Pick<TokenResponse, 'error' | 'error_description' | 'error_uri'>
-  ) => {
-    const { error, error_description, error_uri } = response;
-    setIsError(true);
-    setGoogleError({
-      error,
-      error_description,
-      error_uri,
-    });
-  };
-
-  const googleLogin = useGoogleLogin({
-    onSuccess: onResponseGoogle,
-    onError: onErrorGoogle,
-  });
-
-  const onGoogleButtonClickHandler = () => googleLogin();
-
   return {
-    isError,
     isGoogleLoading,
     onGoogleButtonClickHandler,
   };

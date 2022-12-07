@@ -11,6 +11,7 @@ import { Styled } from './LoginForm.styles';
 
 import { STRINGS } from 'constants/strings';
 import { ROUTES } from 'constants/routes';
+import { signInWithGoogle } from '../../../services/firebase';
 
 interface ILoginFormProps {
   onFormHandleSubmit: (
