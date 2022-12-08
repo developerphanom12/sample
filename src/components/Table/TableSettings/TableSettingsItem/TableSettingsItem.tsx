@@ -1,11 +1,6 @@
 import { FC } from 'react';
 
-import {
-  dateDiffInDays,
-  getFirstLetterUppercase,
-  getFormattedDate,
-  getInvitationStatus,
-} from 'services/utils';
+import { getFirstLetterUppercase, getFormattedDate } from 'services/utils';
 
 import { Icon } from 'components/Icons/Icons';
 
@@ -59,15 +54,7 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
     memberRole === 'owner' ||
     (memberRole === userRole?.role && userRole.id === memberId);
 
-  const diffInDays =
-    memberInvitation &&
-    dateDiffInDays(new Date(), new Date(memberInvitation?.created));
-
-  const invitationStatus = !memberInvitation
-    ? 'Accepted'
-    : getInvitationStatus(diffInDays);
-
-  const isExpired = invitationStatus === 'Resend invitation';
+  const invitationStatus = !memberInvitation ? 'Active' : 'Resend invitation';
 
   return (
     <Styled.Item>
@@ -98,9 +85,9 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
         <Styled.TextWrapper>{companyName}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>
-        {isExpired ? (
+        {invitationStatus === 'Resend invitation' ? (
           <Styled.TextWrapper
-            isExpired={isExpired}
+            isExpired={true}
             onClick={onClickResendInviteHandler}
           >
             Resend invitation

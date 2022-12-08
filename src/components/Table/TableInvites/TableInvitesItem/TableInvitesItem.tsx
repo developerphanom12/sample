@@ -1,11 +1,6 @@
 import { FC } from 'react';
 
-import {
-  dateDiffInDays,
-  getFirstLetterUppercase,
-  getFormattedDate,
-  getInvitationStatus,
-} from 'services/utils';
+import { getFirstLetterUppercase, getFormattedDate } from 'services/utils';
 
 import { Icon } from '../../../Icons';
 
@@ -47,9 +42,6 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
     onEditIconClickHandler,
   });
 
-  const diffInDays = dateDiffInDays(new Date(), new Date(createdAt));
-  const invitationStatus = getInvitationStatus(diffInDays);
-  const isExpired = invitationStatus === 'Resend invitation';
   return (
     <Styled.Item>
       <Styled.Action>
@@ -67,16 +59,14 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
         {getFirstLetterUppercase(creatorRole || '')}
       </Styled.Column>
       <Styled.Column>
-        {isExpired ? (
+        {
           <Styled.TextWrapper
-            isExpired={isExpired}
+            isExpired={true}
             onClick={onClickResendInviteHandler}
           >
             Resend invitation
           </Styled.TextWrapper>
-        ) : (
-          <Styled.TextWrapper>{invitationStatus}</Styled.TextWrapper>
-        )}
+        }
       </Styled.Column>
       <Styled.Column>
         {getFormattedDate(createdAt, DATE_FORMATS[0].value)}
