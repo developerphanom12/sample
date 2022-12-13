@@ -109,8 +109,9 @@ declare global {
     name: string;
     creator: ICreator;
   }
-
-  type TSorterOrder = 'ASC' | 'DESC';
+ 
+  type TReceiptKeys = keyof IReceipt;
+  type TSorterOrder = 'asc' | 'desc' | '';
 
   interface TableInboxAdminProps {
     onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -126,11 +127,9 @@ declare global {
       event: React.ChangeEvent<HTMLInputElement>
     ) => Promise<void>;
     dateFormat: string;
-    requestSortHandler: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => void;
     sortField: string;
     sortOrder: TSorterOrder;
+    requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }
 
   interface IReceipt {
@@ -165,7 +164,7 @@ declare global {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     sortField: string;
     sortOrder: TSorterOrder;
-    requestSortHandler: (event: React.MouseEvent<HTMLDivElement>) => void;
+    requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }
 
   interface IOption {
@@ -390,4 +389,5 @@ export {
   IReceipt,
   IPaginationPanel,
   IOption,
+  TReceiptKeys,
 };

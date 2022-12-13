@@ -1,6 +1,3 @@
-import { SingleValue } from 'react-select';
-import { IOption } from 'components/CustomSelect/types';
-
 export interface ISelectItem {
   id: string;
   created: string;
@@ -24,8 +21,6 @@ export interface IGetReceiptsParams {
   date_end?: string;
   take?: number;
   skip?: number;
-  sortField?: string;
-  sortOrder?: 'ASC' | 'DESC';
 }
 
 export interface IPostEmail {

@@ -20,7 +20,7 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
     dateFormat,
     sortField,
     sortOrder,
-    requestSortHandler,
+    requestSort,
   } = props;
 
   return (
@@ -40,7 +40,8 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
             <Styled.Selector
               key={item.id}
               id={item.id}
-              onClick={requestSortHandler}
+              onClick={requestSort}
+              isSorted={sortField === item.id}
             >
               <TableButton isSorted={isSorted}>{item.name}</TableButton>
             </Styled.Selector>

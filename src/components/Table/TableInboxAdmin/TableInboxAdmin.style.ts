@@ -32,6 +32,8 @@ export const TableInboxAdminStyles = {
     }
     padding-left: 10px;
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    background-color: ${({ isSorted, theme }) =>
+      isSorted && `${theme.colors.checkboxBackground}`};
   `,
   EmptyContentWrapper: styled.div`
     display: flex;

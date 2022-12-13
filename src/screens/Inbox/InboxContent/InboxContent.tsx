@@ -52,7 +52,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     receiptList,
     sortField,
     sortOrder,
-    requestSortHandler,
+    requestSort,
   } = props;
 
   return (
@@ -93,12 +93,12 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           onCheckedAllItemsHandler={onCheckedAllItemsHandler}
           onCheckedPaidHandler={onCheckedPaidHandler}
           onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-          requestSortHandler={requestSortHandler}
           receiptList={receiptList}
           isAllChecked={isAllChecked}
           dateFormat={dateFormat}
           sortField={sortField}
           sortOrder={sortOrder}
+          requestSort={requestSort}
         />
         {receiptList.length ? (
           <PaginationPanel

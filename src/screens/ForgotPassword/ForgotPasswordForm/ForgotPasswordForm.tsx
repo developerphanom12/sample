@@ -24,7 +24,7 @@ export const ForgotPasswordForm: FC<IForgotPasswordFormProps> = (props) => {
 
   const { touched, error } = formikMeta('email');
   return (
-    <Styled.Form onSubmit={onFormHandleSubmit}>
+    <Styled.Form onSubmit={onFormHandleSubmit} name="form">
       <Styled.InputWrapper>
         <Input
           inputName={name}

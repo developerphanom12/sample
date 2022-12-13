@@ -13,7 +13,7 @@ import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { useSelectFiles } from 'hooks/useSelectFiles';
 import { usePagination } from 'hooks/usePagination';
-import { useSortTable } from 'hooks/useSortTable';
+import { useSortableData } from 'hooks/useSortTableData';
 
 import {
   downloadCSV,
@@ -69,6 +69,52 @@ export const useInboxState = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [isSentSuccessPopup, setIsSentSuccessPopup] = useToggle();
+  const debouncedValue = useDebounce(state.searchValue, 250);
+
+  const dateStart =
+    state.dateValue && setAndFormatDateToISO(state.dateValue.toISOString());
+  const dateEnd =
+    state.dateValue &&
+    setAndFormatDateToISO(state?.dateValue.toISOString(), true);
+
+  const onChangePage = (data: IPaginationData) => {
+    const selected = data.selected;
+    onChangePageHandler(selected);
+    onChangeStateFieldHandler('isContentLoading', true);
+
+    onFetchReceiptsHandler({
+      ...fetchParams,
+      take: +receiptsPerPage.value,
+      skip: selected * +receiptsPerPage.value,
+    });
+  };
+
+  const {
+    onBackwardClick,
+    onForwardClick,
+    onGoToClick,
+    onEnterGoToClick,
+    onChangeInputValue,
+    onChangePagesAmount,
+    onChangePageHandler,
+    setItemsPerPage,
+    setCurrentPage,
+    setSkipReceipts,
+    itemsPerPage: receiptsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
+  } = usePagination({ onChangePage });
+
+  const fetchParams = {
+    search: debouncedValue,
+    status: state.statusValue.value === 'all' ? '' : state.statusValue.value,
+    take: +receiptsPerPage.value,
+    skip: currentPage * +receiptsPerPage.value,
+    date_start: dateStart || '',
+    date_end: dateEnd || '',
+    active_account: active_account || '',
+  };
 
   const totalReceiptCount =
     Number(metric?.accepted) +
@@ -78,12 +124,13 @@ export const useInboxState = () => {
 
   const onSelectFiles = useSelectFiles();
 
-  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSelectFiles({
       files: event.target.files,
       location,
       route: ROUTES.filesUploadPreview,
     });
+  };
 
   const onFetchReceiptsHandler = async (params?: IGetReceiptsParams) => {
     try {
@@ -132,8 +179,6 @@ export const useInboxState = () => {
     }
   };
 
-  const debouncedValue = useDebounce(state.searchValue, 250);
-
   const onChangeSearchValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -157,18 +202,11 @@ export const useInboxState = () => {
     const dateEnd = setAndFormatDateToISO(date.toISOString(), true);
 
     onFetchReceiptsHandler({
+      ...fetchParams,
       date_start: isEqual ? '' : dateStart,
       date_end: isEqual ? '' : dateEnd,
-      search: debouncedValue,
-      status: state.statusValue.value === 'all' ? '' : state.statusValue.value,
     });
   };
-
-  const dateStart =
-    state.dateValue && setAndFormatDateToISO(state.dateValue.toISOString());
-  const dateEnd =
-    state.dateValue &&
-    setAndFormatDateToISO(state?.dateValue.toISOString(), true);
 
   const onChangeStatusValueHandler = (
     newValue: any,
@@ -183,10 +221,8 @@ export const useInboxState = () => {
       },
     }));
     onFetchReceiptsHandler({
+      ...fetchParams,
       status: newValue.value === 'all' ? '' : newValue.value,
-      date_end: dateEnd || '',
-      date_start: dateStart || '',
-      search: debouncedValue,
     });
   };
 
@@ -244,47 +280,16 @@ export const useInboxState = () => {
   const onChangeReceiptsPerPage = (newValue: IOption) => {
     setItemsPerPage(newValue);
     onChangeStateFieldHandler('isContentLoading', true);
+
     onFetchReceiptsHandler({
+      ...fetchParams,
       take: +newValue.value,
-      search: debouncedValue,
-      date_end: dateEnd || '',
-      date_start: dateStart || '',
-      status: state.statusValue.value === 'all' ? '' : state.statusValue.value,
+      skip: undefined,
     });
     if (!count) return;
     onChangePagesAmount(+newValue.value, count);
     setCurrentPage(0);
   };
-
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
-    onChangePageHandler(selected);
-    onChangeStateFieldHandler('isContentLoading', true);
-
-    onFetchReceiptsHandler({
-      take: +receiptsPerPage.value,
-      skip: selected * +receiptsPerPage.value,
-      date_start: dateStart || '',
-      date_end: dateEnd || '',
-    });
-  };
-
-  const {
-    onBackwardClick,
-    onForwardClick,
-    onGoToClick,
-    onEnterGoToClick,
-    onChangeInputValue,
-    onChangePagesAmount,
-    onChangePageHandler,
-    setItemsPerPage,
-    setCurrentPage,
-    setSkipReceipts,
-    itemsPerPage: receiptsPerPage,
-    currentPage,
-    pages,
-    inputPaginationValue,
-  } = usePagination({ onChangePage });
 
   const onCheckedItemHandler = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -314,13 +319,13 @@ export const useInboxState = () => {
           payment_status: !selectedReceipt?.payment_status,
           active_account: active_account || '',
         });
-        onFetchReceiptsHandler();
+        await onFetchReceiptsHandler(fetchParams);
       } catch (error) {
         onChangeStateFieldHandler('isContentLoading', false);
         console.log(error);
       }
     },
-    []
+    [active_account, fetchParams, receipts]
   );
 
   const onCheckedPublishMockFuncHandler = useCallback(
@@ -405,6 +410,7 @@ export const useInboxState = () => {
           : currentPage * +receiptsPerPage.value;
 
       onFetchReceiptsHandler({
+        ...fetchParams,
         take: +receiptsPerPage.value,
         skip,
       });
@@ -431,7 +437,7 @@ export const useInboxState = () => {
         receipts: state.checkedIds,
         active_account: active_account || '',
       });
-      onFetchReceiptsHandler();
+      onFetchReceiptsHandler(fetchParams);
       onActionsClick();
     } catch (error) {
       onActionsClick();
@@ -449,34 +455,19 @@ export const useInboxState = () => {
 
   const datePickerRef = useRef<HTMLButtonElement>(null);
 
-  const { setSortData, sortField, sortOrder } = useSortTable();
-
-  const requestSortHandler = useCallback(
-    async (event: React.MouseEvent<HTMLDivElement>) => {
-      const sortDirection = setSortData(event.currentTarget.id);
-      try {
-        onChangeStateFieldHandler('isContentLoading', true);
-        await onFetchReceiptsHandler({
-          sortField: event.currentTarget.id,
-          sortOrder: sortDirection,
-          search: debouncedValue,
-          status:
-            state.statusValue.value === 'all' ? '' : state.statusValue.value,
-          take: +receiptsPerPage.value,
-          skip: currentPage * +receiptsPerPage.value,
-          date_start: dateStart || '',
-          date_end: dateEnd || '',
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    [sortOrder, sortField]
-  );
+  const {
+    items: sortedReceipts,
+    requestSort,
+    sortField,
+    sortOrder,
+  } = useSortableData({
+    items: receipts,
+  });
 
   return {
     ...state,
-    requestSortHandler,
+    sortedReceipts,
+    requestSort,
     sortField,
     sortOrder,
     receiptsPerPage,

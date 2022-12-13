@@ -78,7 +78,8 @@ export const Inbox: FC = memo(() => {
     onMarkAsPaidButtonHandler,
     sortField,
     sortOrder,
-    requestSortHandler,
+    sortedReceipts,
+    requestSort,
   } = useInboxState();
 
   useEffect(() => {
@@ -133,7 +134,6 @@ export const Inbox: FC = memo(() => {
         <>
           {isInboxContent ? (
             <InboxContent
-              requestSortHandler={requestSortHandler}
               datePickerRef={datePickerRef}
               pages={pages}
               currentPage={currentPage}
@@ -171,7 +171,8 @@ export const Inbox: FC = memo(() => {
               onCheckedAllItemsHandler={onCheckedAllItemsHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-              receiptList={receipts}
+              receiptList={sortedReceipts}
+              requestSort={requestSort}
               isAllChecked={isAllChecked}
               dateFormat={company.date_format}
               isFetchingReceipts={isFetchingReceipts}

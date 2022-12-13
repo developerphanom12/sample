@@ -18,7 +18,7 @@ export const TABLE_ID = {
 
 export const TABLE_COLUMN_NAMES = [
   {
-    id: 'created',
+    id: 'receipt_date',
     name: 'Date',
   },
   {

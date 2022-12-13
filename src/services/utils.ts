@@ -4,7 +4,8 @@ import decode from 'jwt-decode';
 import { ICurrency } from 'screens/SignUp/types/signup.types';
 import { IInvites } from 'screens/Invites/types/invites.types';
 import { getCompanyLogo } from 'screens/Settings/settings.api';
-import { ROUTES } from '../constants/routes';
+
+import { ROUTES } from 'constants/routes';
 
 interface IFormdataProps {
   active_account?: string | null;
@@ -13,6 +14,14 @@ interface IFormdataProps {
   selectedCompanyLogo?: Blob | null;
   companyName: string;
   companyLogo: File | null;
+}
+
+interface ISortProps {
+  sortValue?: string;
+  sortType?: 'date' | 'fieldName';
+  sortableItems: IReceipt[];
+  sortField: TReceiptKeys;
+  sortOrder: string;
 }
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -241,6 +250,40 @@ export const isTokenExpired = (token: string) => {
 
 export const setIsSorted = (
   sortField: string,
-  sortOrder: 'ASC' | 'DESC',
+  sortOrder: TSorterOrder,
   columnName: string
-) => sortField === columnName && sortOrder === 'ASC';
+) => sortField === columnName && sortOrder === 'asc';
+
+export const getSortedItems = (props: ISortProps) => {
+  const { sortField, sortOrder, sortableItems, sortValue, sortType } = props;
+  const descOrder = sortOrder === 'asc' ? 1 : -1;
+  const ascOrder = sortOrder === 'asc' ? -1 : 1;
+  return sortableItems.sort((a, b) => {
+    if (sortType === 'fieldName' && sortValue) {
+      if (a[sortField]?.[sortValue] < b[sortField]?.[sortValue]) {
+        return ascOrder;
+      }
+      if (a[sortField]?.[sortValue] > b[sortField]?.[sortValue]) {
+        return descOrder;
+      }
+      return 0;
+    }
+    if (sortType === 'date') {
+      if (Date.parse(a[sortField]) < Date.parse(b[sortField])) {
+        return ascOrder;
+      }
+      if (Date.parse(a[sortField]) > Date.parse(b[sortField])) {
+        return descOrder;
+      }
+      return 0;
+    }
+
+    if (a[sortField] < b[sortField]) {
+      return ascOrder;
+    }
+    if (a[sortField] > b[sortField]) {
+      return descOrder;
+    }
+    return 0;
+  });
+};
