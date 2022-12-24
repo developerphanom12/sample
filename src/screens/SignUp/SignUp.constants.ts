@@ -76,6 +76,7 @@ export const mockedState = {
       value: '',
     },
   ],
+  isSkipOnboarding: false,
 };
 
 export const currencies = [

@@ -49,7 +49,7 @@ export const useLoginState = () => {
       const { data } = await login(loginValues);
       dispatch(setCurrencies(data.currencies));
       dispatch(setUser(data));
-      dispatch(setCompany(data.company));
+      data.company && dispatch(setCompany(data.company));
       navigate(
         !data.user.active_account || !data.user.accounts.length
           ? ROUTES.preference

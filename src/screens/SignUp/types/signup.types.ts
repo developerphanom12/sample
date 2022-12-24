@@ -47,6 +47,7 @@ export interface ISIGN_UP_USER_INITIAL_STATE {
   socialAccount: ISocialAccounts;
   userInfo: IUserInfo;
   currencies: ICurrency[];
+  isSkipOnboarding: boolean;
 }
 
 export interface IUpdateUserProfile {

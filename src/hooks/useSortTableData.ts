@@ -25,26 +25,22 @@ export const useSortableData = (props: IProps) => {
       ? items.filter((item) => item[sortField as TReceiptKeys])
       : items;
 
+    const { sortByDate, sortByObjValue, sortByValue, sortItemsHandler } =
+      getSortedItems({
+        sortableItems,
+        sortField: sortField || 'receipt_date',
+        sortOrder,
+        sortValue: sortField === 'currency' ? 'value' : 'name',
+      });
+
     if (sortField && sortOrder) {
       if (isSortNameType) {
-        getSortedItems({
-          sortOrder,
-          sortField,
-          sortableItems,
-          sortType: 'fieldName',
-          sortValue: sortField === 'currency' ? 'value' : 'name',
-        });
+        sortItemsHandler(sortByObjValue);
       }
       if (sortField === 'receipt_date') {
-        getSortedItems({
-          sortOrder,
-          sortField,
-          sortableItems,
-          sortType: 'date',
-        });
+        sortItemsHandler(sortByDate);
       }
-
-      getSortedItems({ sortableItems, sortField, sortOrder });
+      sortItemsHandler(sortByValue);
     }
 
     if (nullItems.length) {
@@ -78,6 +74,3 @@ export const useSortableData = (props: IProps) => {
 
   return { items: sortedItems, requestSort, sortOrder, sortField };
 };
-function sortByFiledName() {
-  throw new Error('Function not implemented.');
-}

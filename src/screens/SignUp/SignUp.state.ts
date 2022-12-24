@@ -61,6 +61,7 @@ export const useSignUpState = () => {
         ...signUpValues,
         country: state.countryValue.value,
       });
+console.log(data, 'data sign up');
 
       dispatch(setUser(data));
       dispatch(setCurrencies(data.currencies));

@@ -1,8 +1,6 @@
 import { PAGINATION_ARRAY } from 'constants/pagination-array';
 
-import {
-  IgetInputFieldsProps,
-} from './types/userList.types';
+import { IgetInputFieldsProps } from './types/userList.types';
 
 export const USERS_LIST_INITIAL_STATE = {
   searchValue: '',
@@ -54,6 +52,7 @@ export const getInputFields = (props: IgetInputFieldsProps) => {
       label: 'Role',
       value: state.role,
       options: options[0],
+      isDisabled: false,
       onChangeSelect: funcArray[0],
     },
     {
@@ -63,6 +62,7 @@ export const getInputFields = (props: IgetInputFieldsProps) => {
       value: state?.companies || undefined,
       isMulti: true,
       options: options[1],
+      isDisabled: false,
       onChangeSelect: funcArray[1],
     },
   ];

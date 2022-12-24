@@ -14,9 +14,12 @@ interface IChangePassword {
   new_password: string;
 }
 
-export const getProfile = (active_account?: string) => {
+export const getProfile = (
+  active_account?: string,
+  isSkipOnboarding?: boolean
+) => {
   const URL = `profile/get`;
-  return apiServices.fetchData(URL, { active_account });
+  return apiServices.fetchData(URL, { active_account, isSkipOnboarding });
 };
 
 export const resetPassword = (payload: IChangePassword) => {

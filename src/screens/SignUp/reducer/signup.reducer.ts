@@ -52,6 +52,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
       value: '',
     },
   ],
+  isSkipOnboarding: false,
 };
 
 const initialState = SIGN_UP_USER_INITIAL_STATE;
@@ -131,8 +132,10 @@ export const SignUpUserSlice = createSlice({
       state.user.email = user.email;
       state.user.country = user.country;
       state.user.fullName = user.fullName;
-      state.userInfo.company.currency = company.currency;
-      state.userInfo.company.date_format = company.date_format;
+      if (company) {
+        state.userInfo.company.currency = company.currency;
+        state.userInfo.company.date_format = company.date_format;
+      }
     },
     setUserAvatar: (
       state: ISIGN_UP_USER_INITIAL_STATE,
@@ -150,6 +153,12 @@ export const SignUpUserSlice = createSlice({
         ...action.payload.company,
       };
     },
+    setIsSkipOnboarding: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isSkipOnboarding = action.payload;
+    },
   },
 });
 
@@ -166,6 +175,7 @@ export const {
   setTokens,
   updateUserData,
   setGoogleSocialAccount,
+  setIsSkipOnboarding,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

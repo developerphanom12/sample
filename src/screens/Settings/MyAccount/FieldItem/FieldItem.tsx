@@ -42,6 +42,7 @@ export const FieldItem: FC<IFieldItemProps> = (props) => {
 
   const { value, onChange, onBlur, name } = formikProps(inputName);
   const { touched, error } = formikMeta(inputName);
+  console.log(isDisabled, 'dis');
 
   return (
     <>

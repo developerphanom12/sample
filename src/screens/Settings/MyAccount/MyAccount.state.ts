@@ -37,6 +37,7 @@ export const useMyAccountState = () => {
         company: { currency, date_format },
       },
       user,
+      isSkipOnboarding,
     },
   } = useSelector((state: IState) => state);
   const dispatch = useDispatch();
@@ -121,7 +122,10 @@ export const useMyAccountState = () => {
   const getProfileHandler = async () => {
     try {
       setIsFetchingData(true);
-      const { data } = await getProfile(user.active_account || '');
+      const { data } = await getProfile(
+        user.active_account || '',
+        isSkipOnboarding
+      );
       dispatch(updateUserProfile(data));
       setIsFetchingData(false);
     } catch (error) {
@@ -228,7 +232,10 @@ export const useMyAccountState = () => {
     ],
   });
 
+  console.log(user.country.length, 'lenght');
+
   const accountsFields = getInputFields({
+    isDisabledCountry: !user.country.length ? true : false,
     isDisabledSelect: !user.active_account ? true : false,
     countries,
     formatedCurrencies,

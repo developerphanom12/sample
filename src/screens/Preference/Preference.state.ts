@@ -10,7 +10,11 @@ import { IOption, IsMulti } from 'components/CustomSelect/types';
 import { IState } from 'services/redux/reducer';
 
 import { userInfoCreate } from './preference.api';
-import { setUserInfo, updateUser } from '../SignUp/reducer/signup.reducer';
+import {
+  setIsSkipOnboarding,
+  setUserInfo,
+  updateUser,
+} from '../SignUp/reducer/signup.reducer';
 import { formikInitialValues } from './constants';
 
 import { ROUTES } from 'constants/routes';
@@ -100,7 +104,10 @@ export const usePreferenceState = () => {
 
   const onChangeIamAccountantHandler = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => onChangeStateFieldHandler('isChecked', event.target.checked);
+  ) => {
+    onChangeStateFieldHandler('isChecked', event.target.checked);
+    dispatch(setIsSkipOnboarding(!user.active_account));
+  };
 
   const isDisabledButton = state.isChecked
     ? false

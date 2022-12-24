@@ -17,6 +17,7 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
     funcArray,
     state,
     isDisabledSelect,
+    isDisabledCountry,
   } = props;
   return [
     {
@@ -33,6 +34,7 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       type: 'select',
       name: 'country',
       label: 'Country',
+      isDisabled: isDisabledCountry,
       value: state.country,
       options: countries,
       onChangeSelect: funcArray[2],
@@ -41,7 +43,7 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
       type: 'select',
       name: 'select',
       label: 'Currency',
-      isDisabled: isDisabledSelect,
+      isDisabled: true,
       value: state.currency,
       options: formatedCurrencies,
       onChangeSelect: funcArray[0],

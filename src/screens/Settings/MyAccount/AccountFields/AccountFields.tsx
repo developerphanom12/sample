@@ -1,7 +1,8 @@
-import { FieldInputProps, FieldMetaProps } from 'formik';
 import { FC } from 'react';
+import { FieldInputProps, FieldMetaProps } from 'formik';
 
 import { FieldItem } from '../FieldItem';
+
 import { IResetPasswordFields, TInputFields } from '../types/MyAccount.types';
 import { AccountFieldsStyle as Styled } from './AccountFields.style';
 
@@ -50,6 +51,7 @@ export const AccountFields: FC<IAccountFieldsProps> = (props) => {
                 selectValue={item?.value}
                 key={item.label}
                 onChangeSelectHandler={item.onChangeSelect}
+                isDisabled={item.isDisabled}
                 inputName={item.name}
                 inputType={item.type}
                 labelText={item.label}

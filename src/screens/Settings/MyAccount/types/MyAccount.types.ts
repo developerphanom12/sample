@@ -1,6 +1,9 @@
-import { ActionMeta, SingleValue } from 'react-select';
+import { SingleValue } from 'react-select';
+
+import { getInputFields } from '../MyAccount.constants';
 
 export interface IGetInputFieldsProps {
+  isDisabledCountry?: boolean;
   isDisabledSelect?: boolean;
   funcArray: any[];
   state: {
@@ -22,30 +25,7 @@ export interface IGetResetPasswordFields {
   funcsArray: (() => void)[];
 }
 
-export type TInputFields = (
-  | {
-      type: string;
-      label: string;
-      name: string;
-      value?: undefined;
-      options?: undefined;
-      onChangeSelect?: undefined;
-      isDisabled?: undefined;
-    }
-  | {
-      isMulti?: boolean;
-      isDisabled?: boolean;
-      type: string;
-      name: string;
-      label: string;
-      value: IOption[] | IOption | null;
-      options: IOption[];
-      onChangeSelect: (
-        newValue: IOption | any,
-        actionMeta: ActionMeta<IOption> | unknown
-      ) => void;
-    }
-)[];
+export type TInputFields = ReturnType<typeof getInputFields>;
 
 export interface IResetPasswordFields {
   onToggleVisibility: () => void;

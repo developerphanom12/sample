@@ -32,7 +32,7 @@ export const useGoogleButton = () => {
 
       const { data } = await loginWithGoogle(payload);
       dispatch(setUser(data));
-      dispatch(setUserInfo({ company: data.company }));
+      data.company && dispatch(setUserInfo({ company: data.company }));
       dispatch(setCurrencies(data.currencies));
       dispatch(
         setGoogleSocialAccount({
