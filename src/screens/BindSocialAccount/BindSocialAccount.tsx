@@ -1,11 +1,15 @@
+import { FC } from 'react';
+
 import { AuthImageSection } from 'components/AuthImageSection';
-import { SuccessModalWindow } from '../../components/SuccessModalWindow';
+import { AuthTabs } from 'components/AuthTabs';
+import { SuccessModalWindow } from 'components/SuccessModalWindow';
+
 import { useBindSocialAccountState } from './BindSocialAccount.state';
 
 import { BindSocialAccountStyles as Styled } from './BindSocialAccount.style';
 import { BindSocialAccountForm } from './BindSocialAccountForm';
 
-export const BindSocialAccount = () => {
+export const BindSocialAccount: FC = () => {
   const {
     formik,
     isShowConfirmPassword,
@@ -33,6 +37,7 @@ export const BindSocialAccount = () => {
       />
       <Styled.Section>
         <Styled.RightSideContentWrapper>
+          <AuthTabs tabText="Create ReceiptHub account" />
           <BindSocialAccountForm
             onFormHandleSubmit={formik.handleSubmit}
             isValid={formik.isValid && formik.dirty}

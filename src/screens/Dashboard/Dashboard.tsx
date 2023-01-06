@@ -15,6 +15,7 @@ export const Dashboard: FC = () => {
     onSelectFilesHandler,
     getReceiptsStatisticHandler,
     onChangeCategoryFieldHandler,
+    navigateToInvites,
     totalReceiptCount,
     lastReceipts,
     timeFilterOptions,
@@ -28,11 +29,15 @@ export const Dashboard: FC = () => {
   } = useDashboardState();
 
   useEffect(() => {
+    if (!user.active_account) {
+      navigateToInvites();
+      return;
+    }
     getReceiptsStatisticHandler();
   }, [user.active_account]);
 
   return (
-    <Styled.LayoutWrapper>
+    <Styled.LayoutWrapper data-testid='dash'>
       <Styled.MainWrapper>
         <Styled.MetricWrapper>
           <DocumentMetric userName={user.fullName} companies={companies} />

@@ -72,6 +72,14 @@ const WIDTH = {
     height: 40px;
     box-shadow: none;
   `,
+  roundedXL: css`
+    min-width: 170px;
+    max-width: 180px;
+    white-space: nowrap;
+    width: 100%;
+    height: 40px;
+    box-shadow: none;
+  `,
 };
 
 export const ButtonStyles = {

@@ -19,7 +19,8 @@ export type ButtonStyleProps = {
     | 'secondary'
     | 'actions'
     | 'rounded'
-    | 'roundedBig';
+    | 'roundedBig'
+    | 'roundedXL';
 };
 
 export const Button = ({

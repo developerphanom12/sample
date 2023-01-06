@@ -52,6 +52,7 @@ export const mockedState = {
       googleId: '',
       id: '',
     },
+    isLinkedSocAcc: false,
   },
   userInfo: {
     company: {

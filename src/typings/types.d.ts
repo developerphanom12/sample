@@ -109,7 +109,7 @@ declare global {
     name: string;
     creator: ICreator;
   }
- 
+
   type TReceiptKeys = keyof IReceipt;
   type TSorterOrder = 'asc' | 'desc' | '';
 
@@ -355,9 +355,33 @@ declare global {
       onClick?: () => void;
     }[];
   }
+
+  interface IBindSocialAccountFormProps {
+    onChangeCountryValueHandler: (
+      newValue: unknown,
+      actionMeta: ActionMeta<unknown>
+    ) => void;
+    onFormHandleSubmit: (
+      e?: React.FormEvent<HTMLFormElement> | undefined
+    ) => void;
+    setIsShowConfirmPassword: () => void;
+    setIsShowPassword: () => void;
+    onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    isValid: boolean;
+    isShowConfirmPassword: boolean;
+    isShowPassword: boolean;
+    values: IFormikValues;
+    errors: FormikErrors<IFormikValues>;
+    touched: FormikTouched<IFormikValues>;
+    countryValue: IOption;
+  }
 }
 
 export {
+  IBindSocialAccountFormProps,
   TSorterOrder,
   IOAuthLogin,
   IAvatarSubmenuLinks,

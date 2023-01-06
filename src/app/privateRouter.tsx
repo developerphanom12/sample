@@ -7,13 +7,11 @@ import { IState } from 'services/redux/reducer';
 import { ROUTES } from 'constants/routes';
 
 export const PrivateRouter: FC = () => {
-  const {
-    user: { token },
-  } = useSelector((state: IState) => state);
+  const userState = useSelector((state: IState) => state.user);
 
   const location = useLocation();
 
-  return token ? (
+  return userState.token ? (
     <Outlet />
   ) : (
     <Navigate to={ROUTES.login} state={{ from: location }} />

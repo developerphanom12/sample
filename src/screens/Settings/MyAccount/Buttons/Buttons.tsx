@@ -12,12 +12,14 @@ interface IButtons {
   isDisabledButton: boolean;
   isLoading: boolean;
   isCancelButton: boolean;
+  isLinkSocialAccButton: boolean;
 }
 
 export const Buttons: FC<IButtons> = (props) => {
   const {
     onClickSettingsButtonHandler,
     onCancelbuttonClickHandler,
+    isLinkSocialAccButton,
     isCancelButton,
     settingsButtonText,
     isDisabledButton,
@@ -25,15 +27,13 @@ export const Buttons: FC<IButtons> = (props) => {
   } = props;
   return (
     <Styled.ButtonsWrapper>
-      <Styled.ResetPasswordButtonWrapper>
-        <Button
-          onClick={onClickSettingsButtonHandler}
-          themedButton="roundedWhite"
-          width="roundedBig"
-        >
-          {settingsButtonText}
-        </Button>
-      </Styled.ResetPasswordButtonWrapper>
+      <Button
+        onClick={onClickSettingsButtonHandler}
+        themedButton="roundedWhite"
+        width={isLinkSocialAccButton ? 'roundedXL' : 'roundedBig'}
+      >
+        {settingsButtonText}
+      </Button>
       <ModalButtonsBox
         buttonPosition="flex-end"
         onCancelClickHandler={onCancelbuttonClickHandler}

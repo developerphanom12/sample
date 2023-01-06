@@ -28,6 +28,7 @@ export const SIGN_UP_USER_INITIAL_STATE: ISIGN_UP_USER_INITIAL_STATE = {
   socialAccount: {
     capium: { capiumEmail: '', capiumId: '', id: '' },
     google: { googleEmail: '', googleId: '', id: '' },
+    isLinkedSocAcc: false,
   },
   userInfo: {
     company: {
@@ -114,9 +115,13 @@ export const SignUpUserSlice = createSlice({
     },
     setGoogleSocialAccount: (
       state: ISIGN_UP_USER_INITIAL_STATE,
-      action: PayloadAction<IGoogleSocialAccount>
+      action: PayloadAction<{
+        accData: IGoogleSocialAccount;
+        isLinkedSocAcc: boolean;
+      }>
     ) => {
-      state.socialAccount.google = action.payload;
+      state.socialAccount.google = action.payload.accData;
+      state.socialAccount.isLinkedSocAcc = action.payload.isLinkedSocAcc;
     },
     setCurrencies: (
       state: ISIGN_UP_USER_INITIAL_STATE,

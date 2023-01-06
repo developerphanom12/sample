@@ -22,6 +22,8 @@ export const useGoogleButton = () => {
   const onGoogleButtonClickHandler = async () => {
     try {
       const userData = await signInWithGoogle();
+      if (!userData) return;
+
       setIsGoogleLoading(true);
       const payload: IOAuthLogin = {
         socialAccountId: userData?.id || '',
@@ -36,9 +38,12 @@ export const useGoogleButton = () => {
       dispatch(setCurrencies(data.currencies));
       dispatch(
         setGoogleSocialAccount({
-          googleEmail: data.socialAccount.googleEmail,
-          googleId: data.socialAccount.googleId,
-          id: data.socialAccount.id,
+          accData: {
+            googleEmail: data.socialAccount.googleEmail,
+            googleId: data.socialAccount.googleId,
+            id: data.socialAccount.id,
+          },
+          isLinkedSocAcc: data.isLinkedSocAcc,
         })
       );
 

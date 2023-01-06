@@ -27,6 +27,7 @@ export interface IGoogleSocialAccount {
 export interface ISocialAccounts {
   capium: ICapiumSocialAccount;
   google: IGoogleSocialAccount;
+  isLinkedSocAcc: boolean;
 }
 
 export interface ICurrency {

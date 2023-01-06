@@ -8,6 +8,7 @@ export const SETTINGS_INITIAL_STATE: ISETTINGS_INITIAL_STATE = {
   companySwitcher: [],
   isFetchingData: false,
   isSwitchCompany: false,
+  isLinkedSocAcc: false,
 };
 
 const initialState = SETTINGS_INITIAL_STATE;
@@ -43,6 +44,12 @@ export const SettingsSlice = createSlice({
     ) => {
       state.isSwitchCompany = action.payload;
     },
+    setIsLinkedSocAcc: (
+      state: ISETTINGS_INITIAL_STATE,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isLinkedSocAcc = action.payload;
+    },
   },
 });
 
@@ -51,6 +58,7 @@ export const {
   setCompanies,
   setCompanySwitcher,
   setIsSwitchCompany,
+  setIsLinkedSocAcc,
 } = SettingsSlice.actions;
 
 export const SettingsReducer = SettingsSlice.reducer;

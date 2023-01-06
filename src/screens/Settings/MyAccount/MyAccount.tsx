@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { LoaderComponent } from 'components/Loader';
 import { SuccessPopup } from 'components/SuccessPopup';
+import { LinkSocAccModalWindow } from 'components/LinkSocAccModalWindow';
 
 import { useMyAccountState } from './MyAccount.state';
 import { MyAccountStyles as Styled } from './MyAccount.style';
@@ -19,6 +20,17 @@ export const MyAccount: FC = () => {
     resetPasswordFormik,
     isDisabledButton,
     isShowSuccesPopup,
+    isShowNewPassword,
+    isShowConfirmPassword,
+    linkSocAccFormik,
+    countryValue,
+    isLinkSocialAccButton,
+    isLinkSocAccWindowOpen,
+    isCreatingAcc,
+    setLinkSocAccWindowToggle,
+    setIsShowNewPassword,
+    setIsShowConfirmPassword,
+    onChangeLinkedCountryValueHandler,
     setIsShowSuccesPopup,
     onCancelbuttonClickHandler,
     getProfileHandler,
@@ -33,12 +45,32 @@ export const MyAccount: FC = () => {
 
   return (
     <Styled.LayoutWrapper>
+      <LinkSocAccModalWindow
+        isLoading={isCreatingAcc}
+        isModalWindowOpen={isLinkSocAccWindowOpen}
+        onCloseModalWindowHandler={setLinkSocAccWindowToggle}
+        onChangeCountryValueHandler={onChangeLinkedCountryValueHandler}
+        onFormHandleSubmit={linkSocAccFormik.handleSubmit}
+        setIsShowConfirmPassword={setIsShowConfirmPassword}
+        setIsShowPassword={setIsShowNewPassword}
+        onChange={linkSocAccFormik.handleChange}
+        onBlur={linkSocAccFormik.handleBlur}
+        isValid={linkSocAccFormik.isValid && linkSocAccFormik.dirty}
+        isShowConfirmPassword={isShowConfirmPassword}
+        isShowPassword={isShowNewPassword}
+        values={linkSocAccFormik.values}
+        errors={linkSocAccFormik.errors}
+        touched={linkSocAccFormik.touched}
+        countryValue={countryValue}
+      />
       <SuccessPopup
         positionTop="0"
         isShowPopup={isShowSuccesPopup}
         closePopupFc={setIsShowSuccesPopup}
         titleText={
-          isResetPassword
+          isLinkSocialAccButton
+            ? 'sosi pisku'
+            : isResetPassword
             ? 'The password has been successfully changed'
             : 'User profile has been successfully changed'
         }
@@ -60,11 +92,18 @@ export const MyAccount: FC = () => {
               accountsFields={accountsFields}
             />
             <Buttons
+              isLinkSocialAccButton={!!isLinkSocialAccButton}
               settingsButtonText={
-                isResetPassword ? 'Settings' : 'Reset Password'
+                isLinkSocialAccButton
+                  ? 'Create ReceiptHub Account'
+                  : isResetPassword
+                  ? 'Settings'
+                  : 'Reset Password'
               }
               onClickSettingsButtonHandler={
-                isResetPassword
+                isLinkSocialAccButton
+                  ? setLinkSocAccWindowToggle
+                  : isResetPassword
                   ? onSettingsClickButtonHandler
                   : setIsResetPassword
               }

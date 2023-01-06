@@ -7,7 +7,4 @@ export const ButtonsStyles = {
     width: 100%;
     padding-bottom: 5px;
   `,
-  ResetPasswordButtonWrapper: styled.div`
-    width: 160px;
-  `,
 };

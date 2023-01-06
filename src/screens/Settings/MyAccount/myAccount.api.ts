@@ -31,3 +31,12 @@ export const updateProfile = (payload: IUpdateUserProfile) => {
   const URL = `profile/update`;
   return apiServices.changeData(URL, payload);
 };
+
+export const linkSocialAccount = (payload: {
+  email: string;
+  country: string;
+  newPassword: string;
+}) => {
+  const URL = 'auth/bind-social-account';
+  return apiServices.postData(URL, payload);
+};

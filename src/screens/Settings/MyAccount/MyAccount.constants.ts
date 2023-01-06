@@ -41,9 +41,9 @@ export const getInputFields = (props: IGetInputFieldsProps) => {
     },
     {
       type: 'select',
-      name: 'select',
+      name: 'currency',
       label: 'Currency',
-      isDisabled: true,
+      isDisabled: isDisabledSelect,
       value: state.currency,
       options: formatedCurrencies,
       onChangeSelect: funcArray[0],

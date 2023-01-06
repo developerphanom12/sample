@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { IState } from 'services/redux/reducer';
 import { getFormatedCurrencies } from 'services/utils';
 import {
+  bindSocialAccdValidationSchema,
   myAccountValidationScheme,
   resetPasswordValidationScheme,
 } from 'services/validation';
@@ -16,12 +17,21 @@ import {
   getResetPasswordInputFields,
   resetPasswordFormikInitialValues,
 } from './MyAccount.constants';
-import { getProfile, resetPassword, updateProfile } from './myAccount.api';
+import {
+  getProfile,
+  linkSocialAccount,
+  resetPassword,
+  updateProfile,
+} from './myAccount.api';
 
-import { updateUserProfile } from '../../SignUp/reducer/signup.reducer';
+import {
+  setGoogleSocialAccount,
+  updateUserProfile,
+} from '../../SignUp/reducer/signup.reducer';
 
 import { DATE_FORMATS } from 'constants/strings';
 import { countries } from 'constants/countries-array';
+import { createReceiptAccount } from '../../BindSocialAccount/bindSocialAccount.api';
 
 interface IuseMyAccountState {
   currency: SingleValue<IOption> | any;
@@ -38,6 +48,7 @@ export const useMyAccountState = () => {
       },
       user,
       isSkipOnboarding,
+      socialAccount,
     },
   } = useSelector((state: IState) => state);
   const dispatch = useDispatch();
@@ -70,12 +81,29 @@ export const useMyAccountState = () => {
     email: user.email || '',
   };
 
+  const linkSocAccFormikInitialValues = {
+    email: user.email || '',
+    newPassword: '',
+    confirmPassword: '',
+  };
+
   const [state, setState] = useState<IuseMyAccountState>(initialState);
   const [isResetPassword, setIsResetPassword] = useToggle();
   const [isShowCurrentPassword, setIsShowCurrentPassword] = useToggle();
   const [isShowNewPassword, setIsShowNewPassword] = useToggle();
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useToggle();
   const [isShowSuccesPopup, setIsShowSuccesPopup] = useToggle();
+  const [isLinkSocAccWindowOpen, setLinkSocAccWindowToggle] = useToggle();
+  const [isCreatingAcc, setIsCreatingAcc] = useState(false);
+  const [countryValue, setCountryValue] = useState({
+    value: 'United Kingdom',
+    label: 'United Kingdom',
+  });
+
+  const onChangeLinkedCountryValueHandler = (
+    newValue: IOption | any,
+    actionMeta: ActionMeta<IOption> | unknown
+  ) => setCountryValue(newValue);
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
@@ -117,6 +145,12 @@ export const useMyAccountState = () => {
     onSubmit: (values) => onSaveNewPasswordHandler(values),
     validationSchema: resetPasswordValidationScheme,
     validateOnBlur: true,
+  });
+
+  const linkSocAccFormik = useFormik({
+    initialValues: linkSocAccFormikInitialValues,
+    onSubmit: (values) => onLinkSocAccHandler(values),
+    validationSchema: bindSocialAccdValidationSchema,
   });
 
   const getProfileHandler = async () => {
@@ -172,6 +206,7 @@ export const useMyAccountState = () => {
       resetPasswordFormik.values.currentPassword &&
     resetPasswordFormikInitialValues.newPassword ===
       resetPasswordFormik.values.newPassword;
+
   const onSettingsClickButtonHandler = () => {
     if (!isEqualFields) {
       resetPasswordFormik.setValues(resetPasswordFormikInitialValues);
@@ -187,6 +222,35 @@ export const useMyAccountState = () => {
       country: currentCountry,
     }));
     formik.setValues({ email: user.email, fullName: user.fullName });
+  };
+
+  const onLinkSocAccHandler = async (
+    values: typeof linkSocAccFormikInitialValues
+  ) => {
+    try {
+      setIsCreatingAcc(true);
+      const payload = {
+        country: countryValue.value,
+        newPassword: values.newPassword,
+        email: values.email,
+      };
+
+      await linkSocialAccount(payload);
+      dispatch(
+        setGoogleSocialAccount({
+          accData: { ...socialAccount.google },
+          isLinkedSocAcc: true,
+        })
+      );
+
+      setLinkSocAccWindowToggle();
+      setIsCreatingAcc(false);
+      setIsShowSuccesPopup();
+    } catch (err) {
+      setLinkSocAccWindowToggle();
+      setIsCreatingAcc(false);
+      console.log(err);
+    }
   };
 
   const updateUserProfileHandler = async (
@@ -232,10 +296,8 @@ export const useMyAccountState = () => {
     ],
   });
 
-  console.log(user.country.length, 'lenght');
-
   const accountsFields = getInputFields({
-    isDisabledCountry: !user.country.length ? true : false,
+    isDisabledCountry: !user.country,
     isDisabledSelect: !user.active_account ? true : false,
     countries,
     formatedCurrencies,
@@ -268,16 +330,30 @@ export const useMyAccountState = () => {
     ? !resetPasswordFormik.isValid || isEmptyResetPasswordFields || isLoading
     : !formik.isValid || isDisableUpdateUserProfileButton || isLoading;
 
+  const isLinkSocialAccButton =
+    !socialAccount.isLinkedSocAcc && socialAccount.google.id;
+
   return {
     ...state,
     isFetchingData,
     isLoading,
+    isCreatingAcc,
+    countryValue,
+    isLinkSocAccWindowOpen,
+    linkSocAccFormik,
+    setLinkSocAccWindowToggle,
+    isShowNewPassword,
+    setIsShowNewPassword,
+    isShowConfirmPassword,
+    setIsShowConfirmPassword,
+    onChangeLinkedCountryValueHandler,
     onSubmitHandler,
     setIsResetPassword,
     getProfileHandler,
     onCancelbuttonClickHandler,
     onSettingsClickButtonHandler,
     setIsShowSuccesPopup,
+    isLinkSocialAccButton,
     isShowSuccesPopup,
     isDisabledButton,
     formik,

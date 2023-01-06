@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ActionMeta } from 'react-select';
 
 import { getUserCompanies } from 'components/Header/header.api';
@@ -22,9 +22,11 @@ import { getReceiptStatistic } from './dashboard.api';
 import { getTimeFilterOptions } from './dashboard.constants';
 import { setStatistic } from './reducer/dashboard.reducer';
 import { ITimeFIlterValue, IUserInfoData } from './types';
+import { ROUTES } from '../../constants/routes';
 
 export const useDashboardState = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const getCompanyLogo = useGetCompanyLogo();
 
@@ -53,6 +55,8 @@ export const useDashboardState = () => {
   const [isContentLoading, setIsContentLoading] = useState(false);
 
   const onSelectFiles = useSelectFiles();
+
+  const navigateToInvites = () => navigate(ROUTES.invites, { replace: true });
 
   const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
     onSelectFiles({
@@ -133,6 +137,7 @@ export const useDashboardState = () => {
 
   return {
     timeFilterValue,
+    navigateToInvites,
     onSelectFilesHandler,
     getReceiptsStatisticHandler,
     onChangeCategoryFieldHandler,

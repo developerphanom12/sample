@@ -4,4 +4,5 @@ export interface ISETTINGS_INITIAL_STATE {
   companySwitcher: ICompaniesSwitcher[];
   isFetchingData: boolean;
   isSwitchCompany: boolean;
+  isLinkedSocAcc: boolean;
 }
