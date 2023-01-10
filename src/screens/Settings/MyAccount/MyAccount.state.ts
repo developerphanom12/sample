@@ -26,12 +26,12 @@ import {
 
 import {
   setGoogleSocialAccount,
+  updateUser,
   updateUserProfile,
 } from '../../SignUp/reducer/signup.reducer';
 
 import { DATE_FORMATS } from 'constants/strings';
 import { countries } from 'constants/countries-array';
-import { createReceiptAccount } from '../../BindSocialAccount/bindSocialAccount.api';
 
 interface IuseMyAccountState {
   currency: SingleValue<IOption> | any;
@@ -239,13 +239,14 @@ export const useMyAccountState = () => {
       dispatch(
         setGoogleSocialAccount({
           accData: { ...socialAccount.google },
-          isLinkedSocAcc: true,
+          isLinkedSocAcc: false,
         })
       );
-
+      dispatch(updateUser({ ...user, country: countryValue.value }));
+      onChangeStateFieldHandler('country', countryValue);
       setLinkSocAccWindowToggle();
-      setIsCreatingAcc(false);
       setIsShowSuccesPopup();
+      setIsCreatingAcc(false);
     } catch (err) {
       setLinkSocAccWindowToggle();
       setIsCreatingAcc(false);

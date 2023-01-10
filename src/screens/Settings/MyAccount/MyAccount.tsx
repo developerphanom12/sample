@@ -69,7 +69,7 @@ export const MyAccount: FC = () => {
         closePopupFc={setIsShowSuccesPopup}
         titleText={
           isLinkSocialAccButton
-            ? 'sosi pisku'
+            ? 'The social account has been successfully linked'
             : isResetPassword
             ? 'The password has been successfully changed'
             : 'User profile has been successfully changed'
@@ -92,10 +92,9 @@ export const MyAccount: FC = () => {
               accountsFields={accountsFields}
             />
             <Buttons
-              isLinkSocialAccButton={!!isLinkSocialAccButton}
               settingsButtonText={
                 isLinkSocialAccButton
-                  ? 'Create ReceiptHub Account'
+                  ? 'Link Social Account'
                   : isResetPassword
                   ? 'Settings'
                   : 'Reset Password'

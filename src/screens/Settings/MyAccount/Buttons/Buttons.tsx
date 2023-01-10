@@ -12,14 +12,12 @@ interface IButtons {
   isDisabledButton: boolean;
   isLoading: boolean;
   isCancelButton: boolean;
-  isLinkSocialAccButton: boolean;
 }
 
 export const Buttons: FC<IButtons> = (props) => {
   const {
     onClickSettingsButtonHandler,
     onCancelbuttonClickHandler,
-    isLinkSocialAccButton,
     isCancelButton,
     settingsButtonText,
     isDisabledButton,
@@ -30,7 +28,7 @@ export const Buttons: FC<IButtons> = (props) => {
       <Button
         onClick={onClickSettingsButtonHandler}
         themedButton="roundedWhite"
-        width={isLinkSocialAccButton ? 'roundedXL' : 'roundedBig'}
+        width='roundedBig'
       >
         {settingsButtonText}
       </Button>
