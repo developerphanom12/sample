@@ -1,4 +1,4 @@
-import { TableSettings } from '../../Table/TableSettings';
+import { TableSettingsMember } from '../../Table/TableSettings';
 import { TableSettingsCompany } from '../../Table/TableSettings/TableSettingsCompany';
 
 interface ITableProps {
@@ -29,7 +29,7 @@ export const Table = (props: ITableProps) => {
   return (
     <>
       {isMemeberList ? (
-        <TableSettings
+        <TableSettingsMember
           onResendInvitationHandler={onResendInvitationHandler}
           searchValue={searchValue}
           searchedUsers={searchedUsers}

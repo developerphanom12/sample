@@ -6,7 +6,7 @@ import { TableSettingsStyles as Styled } from './TableSettings.style';
 import { TableSettingsItem } from './TableSettingsItem/TableSettingsItem';
 import { TableButton } from '../TableButton/TableButton';
 
-export const TableSettings: React.FC<IMemberTableProps> = (props) => {
+export const TableSettingsMember: React.FC<IMemberTableProps> = (props) => {
   const {
     onDeleteIconClickHandler,
     onEditIconClickHandler,

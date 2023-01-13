@@ -115,7 +115,6 @@ export const useTypesTabState = () => {
         { name: state.modalInputValue, active_account },
         'payment-type'
       );
-      onGetAllTypesHandler({ active_account });
       onChangePage({ selected: 0 });
       setState((prevState) => ({
         ...prevState,
@@ -173,7 +172,11 @@ export const useTypesTabState = () => {
           ? (currentPage - 1) * +itemsPerPage.value
           : currentPage * +itemsPerPage.value;
 
-      await deleteTabItem(selectedCategory?.id || '', 'payment-type');
+      await deleteTabItem(
+        selectedCategory?.id || '',
+        'payment-type',
+        active_account
+      );
       const { data } = await getAllTabItems('payment-type', {
         take: +itemsPerPage.value,
         skip,
@@ -274,8 +277,8 @@ export const useTypesTabState = () => {
     onChangeStateFieldHandler('isContentLoading', true);
 
     onGetAllTypesHandler({
-      take: Number(itemsPerPage.value),
-      skip: selected * Number(itemsPerPage.value),
+      take: +itemsPerPage.value,
+      skip: typesList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
   };

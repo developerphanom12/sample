@@ -1,4 +1,4 @@
-export interface IuseUserListState extends IPaginationState {
+export interface IuseUserListState {
   searchValue: string;
   isLoading: boolean;
   isContentLoading: boolean;

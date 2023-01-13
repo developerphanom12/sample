@@ -116,7 +116,6 @@ export const useSuppliersTabState = () => {
         { name: state.modalInputValue, active_account },
         'supplier'
       );
-      onGetAllSuppliersHandler();
       onChangePage({ selected: 0 });
 
       setState((prevState) => ({
@@ -171,7 +170,11 @@ export const useSuppliersTabState = () => {
           ? (currentPage - 1) * +itemsPerPage.value
           : currentPage * +itemsPerPage.value;
 
-      await deleteTabItem(selectedCategory?.id || '', 'supplier');
+      await deleteTabItem(
+        selectedCategory?.id || '',
+        'supplier',
+        active_account
+      );
 
       const { data } = await getAllTabItems('supplier', {
         take: +itemsPerPage.value,
@@ -268,8 +271,8 @@ export const useSuppliersTabState = () => {
     onChangeStateFieldHandler('isContentLoading', true);
 
     onGetAllSuppliersHandler({
-      take: Number(itemsPerPage.value),
-      skip: selected * Number(itemsPerPage.value),
+      take: +itemsPerPage.value,
+      skip: suppliersList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
   };

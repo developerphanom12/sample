@@ -97,7 +97,9 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
         )}
       </Styled.Column>
       <Styled.Column>{getFormattedDate(createdAt, dateFormat)}</Styled.Column>
-      <Styled.Column>{createdBy}</Styled.Column>
+      <Styled.Column>
+        <Styled.TextWrapper>{createdBy}</Styled.TextWrapper>
+      </Styled.Column>
     </Styled.Item>
   );
 };

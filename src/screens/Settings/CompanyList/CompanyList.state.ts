@@ -4,6 +4,7 @@ import { SingleValue } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useToggle } from 'hooks/useToggle';
+import { usePagination } from 'hooks/usePagination';
 import { useDebounce } from 'hooks/useDebounce';
 import { IState } from 'services/redux/reducer';
 import { getUserRole, onCreateFormDataHandler } from 'services/utils';
@@ -70,7 +71,8 @@ export const useCompanyListState = () => {
 
   const onGetAllCompaniesHandler = async (params?: ISearchParams) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isContentLoading', true);
+      onChangeStateFieldHandler('isFocus', true);
       const { data } = await getManyCompanies(params);
       state.isSearching && state.isFocus
         ? onChangeStateFieldHandler('searchedCompanies', data.data)
@@ -78,7 +80,7 @@ export const useCompanyListState = () => {
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isLoading: false,
+        isFocus: false,
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -86,7 +88,7 @@ export const useCompanyListState = () => {
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isLoading: false,
+        isFocus: false,
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -95,83 +97,26 @@ export const useCompanyListState = () => {
   };
 
   const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
-    onChangeStateFieldHandler('itemsPerPage', newValue);
+    setItemsPerPage(newValue as IOption);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
     onChangeStateFieldHandler('isFocus', true);
-    onGetAllCompaniesHandler({ take: Number(newValue?.value) });
-    onChangeStateFieldHandler('currentPage', initialState.currentPage);
+
+    onGetAllCompaniesHandler({ take: Number(newValue?.value), active_account });
+    setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
   };
 
   const onChangePage = ({ selected }: IPaginationData) => {
-    setState((prevState) => ({
-      ...prevState,
-      currentPage: selected,
-      skipReceipts: selected * Number(state.itemsPerPage.value),
-      isContentLoading: true,
-    }));
+    onChangePageHandler(selected);
+    onChangeStateFieldHandler('isContentLoading', true);
+
     onGetAllCompaniesHandler({
-      take: Number(state.itemsPerPage.value),
-      skip: selected * Number(state.itemsPerPage.value),
+      active_account,
+      take: +itemsPerPage.value,
+      skip: companies.length === 1 ? 0 : selected * +itemsPerPage.value,
     });
-  };
-
-  const onChangePagesAmount = (itemsCount: number, count: number) => {
-    if (!count) return;
-    onChangeStateFieldHandler('pages', Math.ceil(count / itemsCount));
-  };
-
-  const onChangeInputValue = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
-
-  const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
-    onGoToClick();
-  };
-
-  const onGoToClick = () => {
-    if (Number(state.inputPaginationValue) === state.currentPage + 1) {
-      onChangeStateFieldHandler(
-        'inputPaginationValue',
-        initialState.inputPaginationValue
-      );
-      return;
-    }
-    if (Number(state.inputPaginationValue) <= state.pages) {
-      const goTo = Number(state.inputPaginationValue);
-      onChangePage({ selected: goTo - 1 });
-      onChangeStateFieldHandler(
-        'currentPage',
-        Number(state.inputPaginationValue) - 1
-      );
-    }
-    onChangeStateFieldHandler(
-      'inputPaginationValue',
-      initialState.inputPaginationValue
-    );
-  };
-
-  const onForwardClick = () => {
-    if (state.currentPage === state.pages - 1) return;
-    const forward = state.currentPage + 5;
-    if (forward < state.pages) {
-      onChangePage({ selected: forward });
-    } else {
-      onChangePage({ selected: state.pages - 1 });
-    }
-  };
-
-  const onBackwardClick = () => {
-    if (state.currentPage === 0) return;
-    const backward = state.currentPage - 5;
-    if (backward < 0) {
-      onChangePage({ selected: 0 });
-    } else {
-      onChangePage({ selected: backward });
-    }
   };
 
   const debouncedValue = useDebounce(state.searchValue, 250);
@@ -208,7 +153,7 @@ export const useCompanyListState = () => {
         active_account: active_account,
       });
       await companyCreate(formData, token);
-      onGetAllCompaniesHandler();
+      onChangePage({ selected: 0 });
       setState((prevState) => ({
         ...prevState,
         companyName: '',
@@ -246,7 +191,11 @@ export const useCompanyListState = () => {
         !state.logoSrc && state.isDeleteCompanyLogo
       );
       await companyUpdate(formData, token, state.selectedCompany?.id || '');
-      onGetAllCompaniesHandler();
+      onGetAllCompaniesHandler({
+        active_account,
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
       setState((prevState) => ({
         ...prevState,
         companyName: '',
@@ -284,10 +233,27 @@ export const useCompanyListState = () => {
       isDeleteCompanyLogo: true,
     }));
 
+  const {
+    onBackwardClick,
+    onForwardClick,
+    onGoToClick,
+    onEnterGoToClick,
+    onChangeInputValue,
+    onChangePagesAmount,
+    onChangePageHandler,
+    setItemsPerPage,
+    setCurrentPage,
+    onDeleteItem,
+    itemsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
+  } = usePagination({ onChangePage });
+
   const onDeleteIconClickHandler = async (itemId: string) => {
     try {
-      onDeleteModalWindowToggle();
       const { data } = await getOneCompany(itemId);
+      onDeleteModalWindowToggle();
       onChangeStateFieldHandler('selectedCompany', {
         name: data.name,
         logo: data.logo,
@@ -301,17 +267,21 @@ export const useCompanyListState = () => {
 
   const onDeleteCompanyHandler = async () => {
     try {
-      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
+      const isLastElementOnPage = companies.length === 1;
+
+      onDeleteItem(count, isLastElementOnPage);
+      count === 1
+        ? onChangeStateFieldHandler('isFetchingData', true)
+        : onChangeStateFieldHandler('isContentLoading', true);
       onChangeStateFieldHandler('isLoading', true);
 
       await companyDelete(state.selectedCompany?.id || '');
       if (count !== 1) {
-        const { data } = await getManyCompanies();
-        dispatch(setCompanies({ companies: data.data, count: data.count }));
-        onChangePage({ selected: state.currentPage });
+        onChangePage({ selected: currentPage });
         onChangeStateFieldHandler('isLoading', false);
         onChangeStateFieldHandler('searchValue', '');
         onDeleteModalWindowToggle();
+
         if (companyId === state.selectedCompany?.id) {
           dispatch(setIsSwitchCompany(true));
         }
@@ -319,6 +289,8 @@ export const useCompanyListState = () => {
       count === 1 && navigate(ROUTES.preference, { replace: true });
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('isContentLoading', false);
+      onChangeStateFieldHandler('isFetchingData', false);
       onChangeStateFieldHandler('searchValue', '');
       onDeleteModalWindowToggle();
       console.log(error);
@@ -446,6 +418,10 @@ export const useCompanyListState = () => {
     companies,
     userRole,
     isDisabledButton,
+    currentPage,
+    pages,
+    inputPaginationValue,
+    itemsPerPage,
     count,
     onUpdateCompanyHandler,
     onChangePage,

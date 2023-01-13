@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useDebounce } from 'hooks/useDebounce';
 import { useToggle } from 'hooks/useToggle';
+import { usePagination } from 'hooks/usePagination';
 
 import { myAccountValidationScheme } from 'services/validation';
 import { IState } from 'services/redux/reducer';
@@ -111,6 +112,7 @@ export const useUserListState = () => {
   const onGetAllCompanyMembersHandler = async (params?: ISearchParams) => {
     try {
       onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isFocus', true);
       const { data } = await getCompanyMembers({
         ...params,
         active_account: active_account || '',
@@ -121,6 +123,7 @@ export const useUserListState = () => {
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
+        isFocus: false,
         isLoading: false,
         isFetchingData: false,
         isContentLoading: false,
@@ -130,6 +133,7 @@ export const useUserListState = () => {
         ...prevState,
         isSearching: false,
         isLoading: false,
+        isFocus: false,
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -138,84 +142,29 @@ export const useUserListState = () => {
   };
 
   const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
-    onChangeStateFieldHandler('itemsPerPage', newValue);
+    setItemsPerPage(newValue as IOption);
+
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
     onChangeStateFieldHandler('isFocus', true);
-    onGetAllCompanyMembersHandler({ take: Number(newValue?.value) });
-    onChangeStateFieldHandler('currentPage', initialState.currentPage);
+
+    onGetAllCompanyMembersHandler({
+      take: Number(newValue?.value),
+      active_account,
+    });
+    setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
   };
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
-    setState((prevState) => ({
-      ...prevState,
-      currentPage: selected,
-      skipReceipts: selected * Number(state.itemsPerPage.value),
-      isContentLoading: true,
-    }));
+  const onChangePage = ({ selected }: IPaginationData) => {
+    onChangePageHandler(selected);
+    onChangeStateFieldHandler('isContentLoading', true);
     onGetAllCompanyMembersHandler({
-      take: Number(state.itemsPerPage.value),
-      skip: selected * Number(state.itemsPerPage.value),
+      active_account,
+      take: +itemsPerPage.value,
+      skip: selected * +itemsPerPage.value,
     });
-  };
-
-  const onChangePagesAmount = (itemsCount: number, count: number) => {
-    if (!count) return;
-    onChangeStateFieldHandler('pages', Math.ceil(count / itemsCount));
-  };
-
-  const onChangeInputValue = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('inputPaginationValue', event.target.value);
-
-  const onEnterGoToClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter' || !state.inputPaginationValue.length) return;
-    onGoToClick();
-  };
-
-  const onGoToClick = () => {
-    if (Number(state.inputPaginationValue) === state.currentPage + 1) {
-      onChangeStateFieldHandler(
-        'inputPaginationValue',
-        initialState.inputPaginationValue
-      );
-      return;
-    }
-    if (Number(state.inputPaginationValue) <= state.pages) {
-      const goTo = Number(state.inputPaginationValue);
-      onChangePage({ selected: goTo - 1 });
-      onChangeStateFieldHandler(
-        'currentPage',
-        Number(state.inputPaginationValue) - 1
-      );
-    }
-    onChangeStateFieldHandler(
-      'inputPaginationValue',
-      initialState.inputPaginationValue
-    );
-  };
-
-  const onForwardClick = () => {
-    if (state.currentPage === state.pages - 1) return;
-    const forward = state.currentPage + 5;
-    if (forward < state.pages) {
-      onChangePage({ selected: forward });
-    } else {
-      onChangePage({ selected: state.pages - 1 });
-    }
-  };
-
-  const onBackwardClick = () => {
-    if (state.currentPage === 0) return;
-    const backward = state.currentPage - 5;
-    if (backward < 0) {
-      onChangePage({ selected: 0 });
-    } else {
-      onChangePage({ selected: backward });
-    }
   };
 
   const debouncedValue = useDebounce(state.searchValue, 250);
@@ -243,6 +192,23 @@ export const useUserListState = () => {
     validationSchema: myAccountValidationScheme,
     validateOnBlur: true,
   });
+
+  const {
+    onBackwardClick,
+    onForwardClick,
+    onGoToClick,
+    onEnterGoToClick,
+    onChangeInputValue,
+    onChangePagesAmount,
+    onChangePageHandler,
+    setItemsPerPage,
+    setCurrentPage,
+    onDeleteItem,
+    itemsPerPage,
+    currentPage,
+    pages,
+    inputPaginationValue,
+  } = usePagination({ onChangePage });
 
   const onDeleteIconClickHandler = async (itemId: string) => {
     try {
@@ -289,6 +255,8 @@ export const useUserListState = () => {
 
   const onClickDeleteUserButton = async () => {
     try {
+      const isLastElementOnPage = members.length === 1;
+      onDeleteItem(count, isLastElementOnPage);
       count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
 
@@ -296,16 +264,14 @@ export const useUserListState = () => {
         state.selectedItemId || '',
         active_account || ''
       );
-      const { data } = await getCompanyMembers({
-        active_account: active_account || '',
-      });
-      dispatch(setMembers({ count: data.count, members: data.data }));
 
-      onChangePage({ selected: state.currentPage });
+      onChangePage({ selected: currentPage });
       onChangeStateFieldHandler('isLoading', false);
       onDeleteModalWindowToggle();
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);
+      onChangeStateFieldHandler('isContentLoading', false);
+      onChangeStateFieldHandler('isFetchingData', false);
       onDeleteModalWindowToggle();
       console.log(error);
     }
@@ -330,6 +296,8 @@ export const useUserListState = () => {
       await updateCompanyMember(payload, state.selectedItemId);
       const { data } = await getCompanyMembers({
         active_account: active_account || '',
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
       });
       dispatch(setMembers({ count: data.count, members: data.data }));
       onChangeStateFieldHandler('isLoading', false);
@@ -359,7 +327,7 @@ export const useUserListState = () => {
         companiesIds: state.companies?.map((item) => item.value) || [],
       };
       await createCompanyMember(payload);
-      onGetAllCompanyMembersHandler();
+      onChangePage({ selected: 0 });
       onModalWindowToggle();
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('role', { value: '', label: '' });
@@ -402,18 +370,13 @@ export const useUserListState = () => {
     isEdit && !state.isInvitation
       ? state.prevRole?.value === state.role?.value
       : isEdit && state.isInvitation
-      ? state.prevEmail === formik.values.email &&
-        state.prevName === formik.values.fullName &&
-        state.prevRole?.value === state.role?.value
-      : state.role?.value === 'owner'
       ? !formik.isValid ||
-        !formik.values.email ||
-        !formik.values.fullName ||
-        !formik.dirty ||
-        !state.role?.value
+        (state.prevEmail === formik.values.email &&
+          state.prevName === formik.values.fullName &&
+          state.prevRole?.value === state.role?.value)
+      : state.role?.value === 'owner'
+      ? !formik.isValid || !formik.dirty || !state.role?.value
       : !formik.isValid ||
-        !formik.values.email ||
-        !formik.values.fullName ||
         !formik.dirty ||
         !state.role?.value ||
         !state.companies?.length;
@@ -422,6 +385,10 @@ export const useUserListState = () => {
     ...state,
     userRole,
     isEdit,
+    currentPage,
+    pages,
+    inputPaginationValue,
+    itemsPerPage,
     count,
     modalFields,
     formik,

@@ -4,7 +4,7 @@ export interface ISelectedCompany {
   id: string;
 }
 
-export interface IuseCompanyListState extends IPaginationState {
+export interface IuseCompanyListState {
   searchValue: string;
   isLoading: boolean;
   isContentLoading: boolean;

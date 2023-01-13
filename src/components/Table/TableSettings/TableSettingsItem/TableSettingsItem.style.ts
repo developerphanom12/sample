@@ -12,7 +12,7 @@ export const TableSettingsItemStyles = {
         : `minmax(50px, 55px) minmax(100px, 201px) minmax(175px, 240px) minmax(
           90px, 135px) minmax(110px, 150px) minmax(130px, 135px) minmax(100px, 150px) minmax(110px, 170px)`};
     border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
-    height: 50px;
+    height: 30px;
     width: 100%;
     padding-left: 18px;
   `,

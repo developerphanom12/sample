@@ -72,7 +72,8 @@ export const useCategoriesTabState = () => {
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isContentLoading', true);
+      onChangeStateFieldHandler('isFocus', true);
       const { data } = await getAllTabItems('category', {
         ...params,
         active_account,
@@ -82,7 +83,7 @@ export const useCategoriesTabState = () => {
         : dispatch(setCategories({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
-        isLoading: false,
+        isFocus: false,
         isContentLoading: false,
         isFetchingData: false,
         isEmptyData: data.count ? false : true,
@@ -96,7 +97,7 @@ export const useCategoriesTabState = () => {
         isFetchingData: false,
         isHeaderPanel: true,
         isEmptyData: !count ? true : false,
-        isLoading: false,
+        isFocus: false,
         isSearching: false,
         searchedItems: [],
       }));
@@ -112,7 +113,6 @@ export const useCategoriesTabState = () => {
         { name: state.modalInputValue, active_account },
         'category'
       );
-      onGetAllCategoriesHandler();
       onChangePage({ selected: 0 });
       setState((prevState) => ({
         ...prevState,
@@ -175,6 +175,7 @@ export const useCategoriesTabState = () => {
       const { data } = await getAllTabItems('category', {
         take: +itemsPerPage.value,
         skip,
+        active_account,
       });
 
       dispatch(setCategories({ count: data.count, data: data.data }));
@@ -256,9 +257,8 @@ export const useCategoriesTabState = () => {
 
     onGetAllCategoriesHandler({
       active_account,
-      take: Number(itemsPerPage.value),
-      skip:
-        categoriesList.length === 1 ? 0 : selected * Number(itemsPerPage.value),
+      take: +itemsPerPage.value,
+      skip: categoriesList.length === 1 ? 0 : selected * +itemsPerPage.value,
     });
   };
 
