@@ -61,7 +61,11 @@ export const SupliersTab: FC = () => {
   } = useSuppliersTabState();
 
   useEffect(() => {
-    !searchValue && onGetAllSuppliersHandler();
+    !searchValue &&
+      onGetAllSuppliersHandler({
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
   }, [searchValue, active_account]);
 
   useEffect(() => {
@@ -85,7 +89,9 @@ export const SupliersTab: FC = () => {
         }
         isModalWindowOpen={isModalWindowOpen}
         onEnterCreateItemClick={onEnterCreateSupplierClick}
-        headerText={isEdit ? 'Edit Supplier Account' : 'Insert Supplier Account'}
+        headerText={
+          isEdit ? 'Edit Supplier Account' : 'Insert Supplier Account'
+        }
         inputValue={modalInputValue}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}

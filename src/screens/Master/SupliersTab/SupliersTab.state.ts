@@ -77,7 +77,7 @@ export const useSuppliersTabState = () => {
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isContentLoading', true);
       const { data } = await getAllTabItems('supplier', {
         ...params,
         active_account,
@@ -87,7 +87,6 @@ export const useSuppliersTabState = () => {
         : dispatch(setSupplierAccounts({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
-        isLoading: false,
         isContentLoading: false,
         isFetchingData: false,
         isEmptyData: data.count ? false : true,
@@ -101,7 +100,6 @@ export const useSuppliersTabState = () => {
         isFetchingData: false,
         isHeaderPanel: true,
         isEmptyData: !count ? true : false,
-        isLoading: false,
         isSearching: false,
       }));
       console.log(error);
@@ -233,7 +231,11 @@ export const useSuppliersTabState = () => {
         },
         'supplier'
       );
-      const { data } = await getAllTabItems('supplier', { active_account });
+      const { data } = await getAllTabItems('supplier', {
+        active_account,
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
       dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -265,16 +267,18 @@ export const useSuppliersTabState = () => {
     }));
   };
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
+  const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
+    onChangeStateFieldHandler('isFocus', true);
+    state.searchValue && onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllSuppliersHandler({
+    await onGetAllSuppliersHandler({
       take: +itemsPerPage.value,
       skip: suppliersList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
+    onChangeStateFieldHandler('isFocus', false);
   };
 
   const {

@@ -62,7 +62,11 @@ export const TypesTab: FC = () => {
   } = useTypesTabState();
 
   useEffect(() => {
-    !searchValue && onGetAllTypesHandler();
+    !searchValue &&
+      onGetAllTypesHandler({
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
   }, [searchValue, active_account]);
 
   useEffect(() => {
@@ -72,7 +76,7 @@ export const TypesTab: FC = () => {
 
   useEffect(() => {
     if (!count) return;
-    onChangePagesAmount(Number(itemsPerPage.value), count);
+    onChangePagesAmount(+itemsPerPage.value, count);
   }, [count, itemsPerPage]);
 
   return (

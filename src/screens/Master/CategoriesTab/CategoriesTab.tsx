@@ -61,12 +61,23 @@ export const CategoriesTab: FC = () => {
   } = useCategoriesTabState();
 
   useEffect(() => {
-    !searchValue && onGetAllCategoriesHandler();
+    !searchValue &&
+      onGetAllCategoriesHandler({
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
   }, [searchValue, active_account]);
 
   useEffect(() => {
     debouncedValue &&
-      onGetAllCategoriesHandler({ search: debouncedValue }, isSearching);
+      onGetAllCategoriesHandler(
+        {
+          search: debouncedValue,
+          take: +itemsPerPage.value,
+          skip: currentPage * +itemsPerPage.value,
+        },
+        isSearching
+      );
   }, [debouncedValue]);
 
   useEffect(() => {

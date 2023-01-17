@@ -76,7 +76,7 @@ export const useTypesTabState = () => {
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler('isContentLoading', true);
       const { data } = await getAllTabItems('payment-type', {
         ...params,
         active_account,
@@ -86,7 +86,6 @@ export const useTypesTabState = () => {
         : dispatch(setTypes({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
-        isLoading: false,
         isContentLoading: false,
         isSearching: false,
         isFetchingData: false,
@@ -100,7 +99,6 @@ export const useTypesTabState = () => {
         isFetchingData: false,
         isHeaderPanel: true,
         isEmptyData: !count ? true : false,
-        isLoading: false,
         isSearching: false,
       }));
       console.log(error);
@@ -238,7 +236,11 @@ export const useTypesTabState = () => {
         },
         'payment-type'
       );
-      const { data } = await getAllTabItems('payment-type', { active_account });
+      const { data } = await getAllTabItems('payment-type', {
+        active_account,
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
       dispatch(setTypes({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -271,16 +273,18 @@ export const useTypesTabState = () => {
     }));
   };
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
+  const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
+    onChangeStateFieldHandler('isFocus', true);
+    state.searchValue && onChangeStateFieldHandler('searchValue', '');
 
     onGetAllTypesHandler({
       take: +itemsPerPage.value,
       skip: typesList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
+    onChangeStateFieldHandler('isFocus', false);
   };
 
   const {

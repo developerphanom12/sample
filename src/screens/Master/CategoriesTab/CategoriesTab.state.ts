@@ -73,7 +73,6 @@ export const useCategoriesTabState = () => {
   ) => {
     try {
       onChangeStateFieldHandler('isContentLoading', true);
-      onChangeStateFieldHandler('isFocus', true);
       const { data } = await getAllTabItems('category', {
         ...params,
         active_account,
@@ -83,7 +82,6 @@ export const useCategoriesTabState = () => {
         : dispatch(setCategories({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
-        isFocus: false,
         isContentLoading: false,
         isFetchingData: false,
         isEmptyData: data.count ? false : true,
@@ -97,7 +95,6 @@ export const useCategoriesTabState = () => {
         isFetchingData: false,
         isHeaderPanel: true,
         isEmptyData: !count ? true : false,
-        isFocus: false,
         isSearching: false,
         searchedItems: [],
       }));
@@ -229,7 +226,12 @@ export const useCategoriesTabState = () => {
         },
         'category'
       );
-      const { data } = await getAllTabItems('category', { active_account });
+
+      const { data } = await getAllTabItems('category', {
+        active_account,
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
       dispatch(setCategories({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
@@ -250,16 +252,18 @@ export const useCategoriesTabState = () => {
     }
   };
 
-  const onChangePage = (data: IPaginationData) => {
+  const onChangePage = async (data: IPaginationData) => {
     const selected = data.selected;
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
+    onChangeStateFieldHandler('isFocus', true);
+    state.searchValue && onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllCategoriesHandler({
-      active_account,
+    await onGetAllCategoriesHandler({
       take: +itemsPerPage.value,
       skip: categoriesList.length === 1 ? 0 : selected * +itemsPerPage.value,
     });
+    onChangeStateFieldHandler('isFocus', false);
   };
 
   const {
