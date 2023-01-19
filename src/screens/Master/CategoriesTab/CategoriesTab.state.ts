@@ -53,14 +53,14 @@ export const useCategoriesTabState = () => {
 
   const onChangeSearchValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) =>
+  ) => {
     setState((prevState) => ({
       ...prevState,
       searchValue: event.target.value,
-      isContentLoading: true,
       isSearching: true,
+      isContentLoading: true,
     }));
-
+  };
   const debouncedValue = useDebounce(state.searchValue, 250);
 
   const onChangeCategoryNameValueHandler = (
@@ -72,12 +72,11 @@ export const useCategoriesTabState = () => {
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isContentLoading', true);
       const { data } = await getAllTabItems('category', {
         ...params,
         active_account,
       });
-      isSearching && state.isFocus
+      isSearching
         ? onChangeStateFieldHandler('searchedItems', data.data)
         : dispatch(setCategories({ data: data.data, count: data.count }));
       setState((prevState) => ({
@@ -85,15 +84,13 @@ export const useCategoriesTabState = () => {
         isContentLoading: false,
         isFetchingData: false,
         isEmptyData: data.count ? false : true,
-        isHeaderPanel: true,
         isSearching: false,
       }));
     } catch (error) {
       setState((prevState) => ({
         ...prevState,
-        isContentLoading: false,
         isFetchingData: false,
-        isHeaderPanel: true,
+        isContentLoading: false,
         isEmptyData: !count ? true : false,
         isSearching: false,
         searchedItems: [],
@@ -106,11 +103,16 @@ export const useCategoriesTabState = () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       !count && onChangeStateFieldHandler('isFetchingData', true);
+
       await createTabItem(
         { name: state.modalInputValue, active_account },
         'category'
       );
-      onChangePage({ selected: 0 });
+      onChangePageHandler(0);
+      await onGetAllCategoriesHandler({
+        take: +itemsPerPage.value,
+      });
+
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
@@ -152,9 +154,7 @@ export const useCategoriesTabState = () => {
   const onDeleteButtonClickHandler = async () => {
     try {
       const isLastElementOnPage = categoriesList.length === 1;
-      onDeleteItem(count, isLastElementOnPage);
       count === 1 && onChangeStateFieldHandler('isFetchingData', true);
-      count !== 1 && onChangeStateFieldHandler('isContentLoading', true);
       onChangeStateFieldHandler('isLoading', true);
 
       const skip =
@@ -175,8 +175,8 @@ export const useCategoriesTabState = () => {
         active_account,
       });
 
+      onDeleteItem(count, isLastElementOnPage);
       dispatch(setCategories({ count: data.count, data: data.data }));
-      onChangeStateFieldHandler('isContentLoading', false);
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
       onChangeStateFieldHandler('isEmptyData', data.count ? false : true);
@@ -184,7 +184,6 @@ export const useCategoriesTabState = () => {
       onDeleteModalWindowToggle();
     } catch (error) {
       onChangeStateFieldHandler('isEmptyData', !count ? true : false);
-      onChangeStateFieldHandler('isContentLoading', false);
       onChangeStateFieldHandler('isFetchingData', false);
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('searchValue', '');
@@ -252,18 +251,16 @@ export const useCategoriesTabState = () => {
     }
   };
 
-  const onChangePage = async (data: IPaginationData) => {
-    const selected = data.selected;
+  const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
     state.searchValue && onChangeStateFieldHandler('searchValue', '');
 
     await onGetAllCategoriesHandler({
       take: +itemsPerPage.value,
-      skip: categoriesList.length === 1 ? 0 : selected * +itemsPerPage.value,
+      skip: selected * +itemsPerPage.value,
     });
-    onChangeStateFieldHandler('isFocus', false);
+    onChangeStateFieldHandler('isContentLoading', false);
   };
 
   const {
@@ -283,22 +280,20 @@ export const useCategoriesTabState = () => {
     inputPaginationValue,
   } = usePagination({ onChangePage });
 
-  const onChangeItemsPerPage = (newValue: IOption) => {
+  const onChangeItemsPerPage = async (newValue: IOption) => {
     setItemsPerPage(newValue);
-
     onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
     onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllCategoriesHandler({
-      take: Number(newValue?.value),
-      active_account,
+    await onGetAllCategoriesHandler({
+      take: +newValue?.value,
     });
+
+    onChangeStateFieldHandler('isContentLoading', false);
     setCurrentPage(0);
     if (!count) return;
-    onChangePagesAmount(Number(newValue?.value), count);
+    onChangePagesAmount(+newValue?.value, count);
   };
-
   const isDisableButton = state.modalInputValue === state.prevInputValue;
 
   const onModalWindowCancelClickButtonHandler = () => {

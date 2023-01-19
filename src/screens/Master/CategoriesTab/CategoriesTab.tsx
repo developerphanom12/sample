@@ -53,7 +53,6 @@ export const CategoriesTab: FC = () => {
     isEmptyData,
     debouncedValue,
     isFocus,
-    isHeaderPanel,
     isContentLoading,
     isSearching,
     searchedItems,
@@ -73,8 +72,6 @@ export const CategoriesTab: FC = () => {
       onGetAllCategoriesHandler(
         {
           search: debouncedValue,
-          take: +itemsPerPage.value,
-          skip: currentPage * +itemsPerPage.value,
         },
         isSearching
       );
@@ -82,7 +79,7 @@ export const CategoriesTab: FC = () => {
 
   useEffect(() => {
     if (!count) return;
-    onChangePagesAmount(Number(itemsPerPage.value), count);
+    onChangePagesAmount(+itemsPerPage.value, count);
   }, [count, itemsPerPage]);
 
   return (
@@ -109,12 +106,7 @@ export const CategoriesTab: FC = () => {
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !categoriesList?.length &&
-        !searchValue &&
-        !isSearching &&
-        !isFetchingData &&
-        !isContentLoading &&
-        isEmptyData ? (
+      ) : !isFetchingData && isEmptyData && !categoriesList?.length ? (
         <EmptyData
           isUploadFile={false}
           buttonText={Strings.categories.buttonText}
@@ -123,7 +115,7 @@ export const CategoriesTab: FC = () => {
           title={Strings.categories.title}
           onClick={onModalWindowToggle}
         />
-      ) : isHeaderPanel ? (
+      ) : (
         <CategoryContent
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}
@@ -151,7 +143,7 @@ export const CategoriesTab: FC = () => {
           onChangePage={onChangePage}
           searchedItems={searchedItems}
         />
-      ) : null}
+      )}
     </>
   );
 };

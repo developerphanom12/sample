@@ -32,8 +32,6 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
     receiptsPerPage,
     onChangePage,
     isContentLoading,
-    isFetchingData,
-    isFocus,
     searchedItems,
   } = props;
 
@@ -48,11 +46,11 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
         onFocusSearchHandler={onFocusSearchHandler}
         buttonText="Create Category"
       />
-      {isContentLoading && isFocus ? (
+      {isContentLoading ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !isFetchingData && !isContentLoading ? (
+      ) : (
         <Styled.TableWrapper>
           <TableMaster
             tabName={tabName}
@@ -80,7 +78,7 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
             />
           ) : null}
         </Styled.TableWrapper>
-      ) : null}
+      )}
     </Styled.ContentWrapper>
   );
 };

@@ -29,7 +29,6 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
     onChangePage,
     onResendInvitationHandler,
     searchedUsers,
-    isFocus,
     pages,
     receiptsPerPage,
     searchValue,
@@ -60,7 +59,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
         userRole={userRole}
         buttonText={isMemeberList ? 'Create User' : 'Create Company'}
       />
-      {isContentLoading && isFocus ? (
+      {isContentLoading ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>

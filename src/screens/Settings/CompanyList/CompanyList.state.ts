@@ -71,16 +71,13 @@ export const useCompanyListState = () => {
 
   const onGetAllCompaniesHandler = async (params?: ISearchParams) => {
     try {
-      onChangeStateFieldHandler('isContentLoading', true);
-      onChangeStateFieldHandler('isFocus', true);
-      const { data } = await getManyCompanies(params);
-      state.isSearching && state.isFocus
+      const { data } = await getManyCompanies({ ...params, active_account });
+      state.isSearching
         ? onChangeStateFieldHandler('searchedCompanies', data.data)
         : dispatch(setCompanies({ companies: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isFocus: false,
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -88,35 +85,37 @@ export const useCompanyListState = () => {
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isFocus: false,
         isFetchingData: false,
         isContentLoading: false,
+        searchedCompanies: [],
       }));
       console.log(error);
     }
   };
 
-  const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
+  const onChangeItemsPerPage = async (newValue: SingleValue<IOption>) => {
     setItemsPerPage(newValue as IOption);
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
-    onChangeStateFieldHandler('isFocus', true);
 
-    onGetAllCompaniesHandler({ take: Number(newValue?.value), active_account });
+    await onGetAllCompaniesHandler({ take: Number(newValue?.value) });
+
+    onChangeStateFieldHandler('isContentLoading', false);
     setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
   };
 
-  const onChangePage = ({ selected }: IPaginationData) => {
+  const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
+    state.searchValue && onChangeStateFieldHandler('searchValue', '');
 
-    onGetAllCompaniesHandler({
-      active_account,
+    await onGetAllCompaniesHandler({
       take: +itemsPerPage.value,
       skip: companies.length === 1 ? 0 : selected * +itemsPerPage.value,
     });
+    onChangeStateFieldHandler('isContentLoading', false);
   };
 
   const debouncedValue = useDebounce(state.searchValue, 250);
@@ -152,8 +151,13 @@ export const useCompanyListState = () => {
         date_format: date_format,
         active_account: active_account,
       });
+
       await companyCreate(formData, token);
-      onChangePage({ selected: 0 });
+      await onGetAllCompaniesHandler({
+        take: +itemsPerPage.value,
+      });
+
+      onChangePageHandler(0);
       setState((prevState) => ({
         ...prevState,
         companyName: '',
@@ -191,8 +195,7 @@ export const useCompanyListState = () => {
         !state.logoSrc && state.isDeleteCompanyLogo
       );
       await companyUpdate(formData, token, state.selectedCompany?.id || '');
-      onGetAllCompaniesHandler({
-        active_account,
+      await onGetAllCompaniesHandler({
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
       });
@@ -207,6 +210,7 @@ export const useCompanyListState = () => {
         prevLogoSrc: '',
         isDeleteCompanyLogo: false,
       }));
+      setIsEdit(false);
       onModalWindowToggle();
     } catch (error) {
       setState((prevState) => ({
@@ -220,6 +224,7 @@ export const useCompanyListState = () => {
         prevLogoSrc: '',
         isDeleteCompanyLogo: false,
       }));
+      setIsEdit(false);
       onModalWindowToggle();
       console.log(error);
     }
@@ -268,16 +273,15 @@ export const useCompanyListState = () => {
   const onDeleteCompanyHandler = async () => {
     try {
       const isLastElementOnPage = companies.length === 1;
-
-      onDeleteItem(count, isLastElementOnPage);
-      count === 1
-        ? onChangeStateFieldHandler('isFetchingData', true)
-        : onChangeStateFieldHandler('isContentLoading', true);
+      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
 
       await companyDelete(state.selectedCompany?.id || '');
       if (count !== 1) {
-        onChangePage({ selected: currentPage });
+        await onGetAllCompaniesHandler({
+          take: +itemsPerPage.value,
+          skip: currentPage * +itemsPerPage.value,
+        });
         onChangeStateFieldHandler('isLoading', false);
         onChangeStateFieldHandler('searchValue', '');
         onDeleteModalWindowToggle();
@@ -286,6 +290,7 @@ export const useCompanyListState = () => {
           dispatch(setIsSwitchCompany(true));
         }
       }
+      onDeleteItem(count, isLastElementOnPage);
       count === 1 && navigate(ROUTES.preference, { replace: true });
     } catch (error) {
       onChangeStateFieldHandler('isLoading', false);

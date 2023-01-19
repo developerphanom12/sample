@@ -111,20 +111,16 @@ export const useUserListState = () => {
 
   const onGetAllCompanyMembersHandler = async (params?: ISearchParams) => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
-      onChangeStateFieldHandler('isFocus', true);
       const { data } = await getCompanyMembers({
         ...params,
         active_account: active_account || '',
       });
-      state.isSearching && state.isFocus
+      state.isSearching
         ? onChangeStateFieldHandler('searchedUsers', data.data)
         : dispatch(setMembers({ count: data.count, members: data.data }));
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isFocus: false,
-        isLoading: false,
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -132,8 +128,7 @@ export const useUserListState = () => {
       setState((prevState) => ({
         ...prevState,
         isSearching: false,
-        isLoading: false,
-        isFocus: false,
+        searchedUsers: [],
         isFetchingData: false,
         isContentLoading: false,
       }));
@@ -141,30 +136,31 @@ export const useUserListState = () => {
     }
   };
 
-  const onChangeItemsPerPage = (newValue: SingleValue<IOption>) => {
+  const onChangeItemsPerPage = async (newValue: SingleValue<IOption>) => {
     setItemsPerPage(newValue as IOption);
-
     onChangeStateFieldHandler('isContentLoading', true);
     onChangeStateFieldHandler('searchValue', '');
-    onChangeStateFieldHandler('isFocus', true);
 
-    onGetAllCompanyMembersHandler({
+    await onGetAllCompanyMembersHandler({
       take: Number(newValue?.value),
-      active_account,
     });
+
+    onChangeStateFieldHandler('isContentLoading', false);
     setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue?.value), count);
   };
 
-  const onChangePage = ({ selected }: IPaginationData) => {
+  const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
     onChangeStateFieldHandler('isContentLoading', true);
-    onGetAllCompanyMembersHandler({
-      active_account,
+    state.searchValue && onChangeStateFieldHandler('searchValue', '');
+
+    await onGetAllCompanyMembersHandler({
       take: +itemsPerPage.value,
       skip: selected * +itemsPerPage.value,
     });
+    onChangeStateFieldHandler('isContentLoading', false);
   };
 
   const debouncedValue = useDebounce(state.searchValue, 250);
@@ -256,16 +252,21 @@ export const useUserListState = () => {
   const onClickDeleteUserButton = async () => {
     try {
       const isLastElementOnPage = members.length === 1;
-      onDeleteItem(count, isLastElementOnPage);
       count === 1 && onChangeStateFieldHandler('isFetchingData', true);
       onChangeStateFieldHandler('isLoading', true);
+      const skip =
+        currentPage === 0
+          ? 0
+          : isLastElementOnPage && count !== 1
+          ? (currentPage - 1) * +itemsPerPage.value
+          : currentPage * +itemsPerPage.value;
 
       await deleteCompanyMember(
         state.selectedItemId || '',
         active_account || ''
       );
-
-      onChangePage({ selected: currentPage });
+      await onGetAllCompanyMembersHandler({ skip, take: +itemsPerPage.value });
+      onDeleteItem(count, isLastElementOnPage);
       onChangeStateFieldHandler('isLoading', false);
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -299,6 +300,7 @@ export const useUserListState = () => {
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
       });
+
       dispatch(setMembers({ count: data.count, members: data.data }));
       onChangeStateFieldHandler('isLoading', false);
       state.isInvitation && onChangeStateFieldHandler('isInvitation', false);
@@ -326,8 +328,13 @@ export const useUserListState = () => {
         role: state.role?.value || '',
         companiesIds: state.companies?.map((item) => item.value) || [],
       };
+
       await createCompanyMember(payload);
-      onChangePage({ selected: 0 });
+      onChangePageHandler(0);
+      await onGetAllCompanyMembersHandler({
+        take: +itemsPerPage.value,
+      });
+
       onModalWindowToggle();
       onChangeStateFieldHandler('isLoading', false);
       onChangeStateFieldHandler('role', { value: '', label: '' });
