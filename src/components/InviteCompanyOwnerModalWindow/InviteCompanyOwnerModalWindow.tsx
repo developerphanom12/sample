@@ -86,7 +86,7 @@ export const InviteCompanyOwnerModalWindow: FC<InsertUserModalWindowProps> = (
               onKeyDown={onEnterCreateItemClick}
               isRemoveBorder
             />
-            <Styled.Label>Your role in company</Styled.Label>
+            <Styled.Label>Role</Styled.Label>
             <CustomSelect
               options={USER_ROLES.slice(0, 3)}
               onChangeValueHandler={onChangeRoleValueHandler}

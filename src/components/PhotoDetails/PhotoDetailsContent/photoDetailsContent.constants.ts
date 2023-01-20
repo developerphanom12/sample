@@ -21,7 +21,7 @@ interface IData {
   typesForSelect: any[] | IOption[];
   disabledOption: { category: boolean; suppliers: boolean; types: boolean };
   paymentStatus: boolean;
-  publishStatus: boolean;
+  publishStatus?: boolean;
 }
 
 export const getInputFields = (funcArray: any[], data: IData) => {
@@ -31,7 +31,6 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     disabledOption,
     formatedCurrencies,
     paymentStatus,
-    publishStatus,
     suppliersForSelect,
     typesForSelect,
   } = data;
@@ -116,17 +115,10 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     },
     {
       type: 'checkbox',
-      label: 'Publish status',
-      labelText: 'Published',
-      value: publishStatus,
-      onChangeCheckbox: funcArray[11],
-    },
-    {
-      type: 'checkbox',
       label: 'Payment status',
       labelText: 'Paid',
       value: paymentStatus,
-      onChangeCheckbox: funcArray[12],
+      onChangeCheckbox: funcArray[11],
     },
   ];
 };

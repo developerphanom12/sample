@@ -143,7 +143,6 @@ export const useInboxState = () => {
         ...params,
         active_account: active_account || '',
       });
-      !totalReceiptCount && onGetStatisticHandler();
 
       dispatch(setReceipts({ count: data.count, data: data.data }));
       setState((prevState) => ({
@@ -164,6 +163,7 @@ export const useInboxState = () => {
         isEmptyData: false,
         isContentLoading: false,
         isContentVisible: true,
+        searchedItems: [],
         checkedIds: [],
       }));
       console.log(error);

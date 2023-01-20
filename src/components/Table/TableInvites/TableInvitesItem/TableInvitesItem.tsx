@@ -42,6 +42,7 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
     onEditIconClickHandler,
   });
 
+  const userRole = creatorRole === 'user' ? 'regular user' : creatorRole;
   return (
     <Styled.Item>
       <Styled.Action>
@@ -55,9 +56,7 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
       <Styled.Column>
         <Styled.ValueWrapper>{inviteEmail}</Styled.ValueWrapper>
       </Styled.Column>
-      <Styled.Column>
-        {getFirstLetterUppercase(creatorRole || '')}
-      </Styled.Column>
+      <Styled.Column>{getFirstLetterUppercase(userRole || '')}</Styled.Column>
       <Styled.Column>
         {
           <Styled.TextWrapper

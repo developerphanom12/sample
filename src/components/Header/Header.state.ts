@@ -15,6 +15,9 @@ import { switchAccount } from 'screens/SignUp/reducer/signup.reducer';
 
 import { getUserCompanies, selectActiveAccount } from './header.api';
 
+import { getReceiptStatistic } from 'screens/Dashboard/dashboard.api';
+import { setStatistic } from 'screens/Dashboard/reducer/dashboard.reducer';
+
 import { getAvatarLinks } from 'constants/header-links';
 
 export const useHeaderState = () => {
@@ -58,6 +61,12 @@ export const useHeaderState = () => {
       setActiveAccountId(id || companySwitcher[0].id);
       const { data } = await selectActiveAccount(id || companySwitcher[0].id);
       dispatch(switchAccount(data));
+
+      const { data: statisticData } = await getReceiptStatistic({
+        active_account: id || '',
+      });
+
+      dispatch(setStatistic(statisticData));
       isSwitchCompany && dispatch(setIsSwitchCompany(false));
     } catch (error) {
       console.log(error);

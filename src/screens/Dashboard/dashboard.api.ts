@@ -1,8 +1,8 @@
 import { apiServices } from 'services/api-service';
 
 export const getReceiptStatistic = (payload?: {
-  date_start: string;
-  date_end: string;
+  date_start?: string;
+  date_end?: string;
   active_account: string | null;
 }) => {
   const URL = `dashboard/get-statistic`;

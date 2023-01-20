@@ -298,7 +298,6 @@ export const usePhotoDetailsContentState = () => {
       onChangeTotalFieldHandler,
       onChangeTypeFieldHandler,
       onChangeDescriptionFieldHandler,
-      onChangePublishStatus,
       onChangePaymentStatus,
     ],
     {
@@ -313,7 +312,6 @@ export const usePhotoDetailsContentState = () => {
         types: !typesForSelect?.length,
       },
       paymentStatus: isPaymentStatus,
-      publishStatus: isPublishStatus,
     }
   );
 
