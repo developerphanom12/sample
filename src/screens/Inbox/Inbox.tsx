@@ -21,11 +21,9 @@ export const Inbox: FC = memo(() => {
     isDatePickerOpen,
     dateValue,
     searchValue,
-    totalReceiptCount,
     statusValue,
     formattedDate,
     setIsDatePickerOpen,
-    receipts,
     isEmailModalWindowOpen,
     onEmailClick,
     formik,
@@ -49,7 +47,6 @@ export const Inbox: FC = memo(() => {
     pages,
     checkedIds,
     showActions,
-    isFetchingData,
     isAllChecked,
     csvLink,
     csvData,
@@ -61,11 +58,7 @@ export const Inbox: FC = memo(() => {
     isContentLoading,
     debouncedValue,
     isFetchingReceipts,
-    isContentVisible,
-    dateEnd,
-    dateStart,
     location,
-    count,
     datePickerRef,
     active_account,
     isSentSuccessPopup,
@@ -79,33 +72,29 @@ export const Inbox: FC = memo(() => {
     sortField,
     sortOrder,
     sortedReceipts,
+    fetchParams,
+    totalCount,
+    isCompanyChanged,
     requestSort,
+    setCurrentPage,
   } = useInboxState();
 
   useEffect(() => {
-    onFetchReceiptsHandler({
-      search: debouncedValue,
-      skip: 0,
-      take: +receiptsPerPage.value,
-      date_start: dateStart || '',
-      date_end: dateEnd || '',
-      status: statusValue.value === 'all' ? '' : statusValue.value,
-    });
-  }, [debouncedValue, isFetchingData, active_account]);
+    onFetchReceiptsHandler(fetchParams);
+    if (isCompanyChanged) {
+      setCurrentPage(0);
+    }
+  }, [debouncedValue, active_account]);
 
   useEffect(() => {
-    if (!count) return;
-    onChangePagesAmount(Number(receiptsPerPage.value), count);
-  }, [receiptsPerPage, count, isFetchingData]);
+    if (totalCount) {
+      onChangePagesAmount(Number(receiptsPerPage.value), totalCount);
+    }
+  }, [receiptsPerPage, totalCount, active_account]);
 
-  const isInboxContent =
-    !isFetchingReceipts && isContentVisible && !isFetchingData;
+  const isInboxContent = !isFetchingReceipts;
+  const isEmptyScreen = !isFetchingReceipts && !totalCount;
 
-  const isEmptyScreen =
-    !isFetchingReceipts &&
-    !isFetchingData &&
-    !totalReceiptCount &&
-    !receipts.length;
   return (
     <>
       <ActionMenuContent
@@ -126,11 +115,11 @@ export const Inbox: FC = memo(() => {
       />
       {location.pathname !== '/inbox' ? (
         <Outlet />
-      ) : isFetchingReceipts || isFetchingData ? (
+      ) : isFetchingReceipts ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : totalReceiptCount ? (
+      ) : totalCount ? (
         <>
           {isInboxContent ? (
             <InboxContent

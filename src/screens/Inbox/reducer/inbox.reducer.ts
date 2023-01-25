@@ -4,11 +4,14 @@ import { IINBOX_INITIAL_STATE } from '../types/inbox.types';
 
 export const INBOX_INITIAL_STATE: IINBOX_INITIAL_STATE = {
   count: null,
+  totalCount: null,
   receipts: [],
   selectedReceipt: null,
   selectedReceiptIndex: null,
   isFetchingData: false,
   isAllChecked: false,
+
+  isCompanyChanged: false,
 };
 
 const initialState = INBOX_INITIAL_STATE;
@@ -19,8 +22,13 @@ export const InboxSlice = createSlice({
   reducers: {
     setReceipts: (
       state: IINBOX_INITIAL_STATE,
-      action: PayloadAction<{ count: number; data: IReceipt[] }>
+      action: PayloadAction<{
+        count: number;
+        data: IReceipt[];
+        totalCount: number;
+      }>
     ) => {
+      state.totalCount = action.payload.totalCount;
       state.count = action.payload.count;
       state.receipts = action.payload.data.map((receipt) => ({
         ...receipt,
@@ -88,6 +96,12 @@ export const InboxSlice = createSlice({
     ) => {
       state.isFetchingData = action.payload;
     },
+    setIsCompanyChanged: (
+      state: IINBOX_INITIAL_STATE,
+      action: PayloadAction<boolean>
+    ) => {
+      state.isCompanyChanged = action.payload;
+    },
   },
 });
 
@@ -99,6 +113,7 @@ export const {
   updateReceipt,
   setCheckedItem,
   setCheckedAllItems,
+  setIsCompanyChanged,
 } = InboxSlice.actions;
 
 export const inboxReducer = InboxSlice.reducer;

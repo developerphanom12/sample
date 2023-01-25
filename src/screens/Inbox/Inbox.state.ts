@@ -32,20 +32,18 @@ import {
 import {
   setCheckedAllItems,
   setCheckedItem,
+  setIsCompanyChanged,
   setIsFetchingDate,
   setReceipts,
 } from './reducer/inbox.reducer';
-import { getReceiptStatistic } from '../Dashboard/dashboard.api';
-import { setStatistic } from '../Dashboard/reducer/dashboard.reducer';
+
 import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 import { ROUTES } from 'constants/routes';
-import { PAGINATION_ARRAY } from 'constants/pagination-array';
 
 export const useInboxState = () => {
   const {
-    inbox: { count, receipts, isFetchingData, isAllChecked },
-    dashboard: { metric },
+    inbox: { totalCount, count, receipts, isCompanyChanged, isAllChecked },
     user: {
       user: { active_account },
       userInfo: { company },
@@ -77,16 +75,12 @@ export const useInboxState = () => {
     state.dateValue &&
     setAndFormatDateToISO(state?.dateValue.toISOString(), true);
 
-  const onChangePage = (data: IPaginationData) => {
-    const selected = data.selected;
-    onChangePageHandler(selected);
-    onChangeStateFieldHandler('isContentLoading', true);
-
-    onFetchReceiptsHandler({
+  const onChangePage = async ({ selected }: IPaginationData) => {
+    await onFetchReceiptsHandler({
       ...fetchParams,
-      take: +receiptsPerPage.value,
       skip: selected * +receiptsPerPage.value,
     });
+    onChangePageHandler(selected);
   };
 
   const {
@@ -99,12 +93,13 @@ export const useInboxState = () => {
     onChangePageHandler,
     setItemsPerPage,
     setCurrentPage,
-    setSkipReceipts,
     itemsPerPage: receiptsPerPage,
     currentPage,
     pages,
     inputPaginationValue,
-  } = usePagination({ onChangePage });
+  } = usePagination({
+    onChangePage,
+  });
 
   const fetchParams = {
     search: debouncedValue,
@@ -115,12 +110,6 @@ export const useInboxState = () => {
     date_end: dateEnd || '',
     active_account: active_account || '',
   };
-
-  const totalReceiptCount =
-    Number(metric?.accepted) +
-    Number(metric?.rejected) +
-    Number(metric?.processing) +
-    Number(metric?.review);
 
   const onSelectFiles = useSelectFiles();
 
@@ -136,7 +125,7 @@ export const useInboxState = () => {
     try {
       setState((prevState) => ({
         ...prevState,
-        isLoading: true,
+        isContentLoading: true,
         checkedIds: [],
       }));
       const { data } = await getReceipts({
@@ -144,37 +133,29 @@ export const useInboxState = () => {
         active_account: active_account || '',
       });
 
-      dispatch(setReceipts({ count: data.count, data: data.data }));
+      isCompanyChanged && dispatch(setIsCompanyChanged(false));
+      dispatch(
+        setReceipts({
+          count: data.count,
+          data: data.data,
+          totalCount: data.totalCount,
+        })
+      );
       setState((prevState) => ({
         ...prevState,
-        isLoading: false,
-        isEmptyData: data.count ? false : true,
+        isEmptyData: data.totalCount ? false : true,
         isFetchingReceipts: false,
         isContentLoading: false,
-        isContentVisible: true,
       }));
-      isFetchingData && dispatch(setIsFetchingDate(false));
     } catch (error) {
       dispatch(setIsFetchingDate(false));
       setState((prevState) => ({
         ...prevState,
-        isLoading: false,
         isFetchingReceipts: false,
         isEmptyData: false,
         isContentLoading: false,
-        isContentVisible: true,
-        searchedItems: [],
         checkedIds: [],
       }));
-      console.log(error);
-    }
-  };
-
-  const onGetStatisticHandler = async () => {
-    try {
-      const { data } = await getReceiptStatistic();
-      dispatch(setStatistic(data));
-    } catch (error) {
       console.log(error);
     }
   };
@@ -185,15 +166,13 @@ export const useInboxState = () => {
     setState((prevState) => ({
       ...prevState,
       searchValue: event.target.value,
-      isContentLoading: true,
     }));
   };
 
-  const onChangeDate = (date: Date) => {
+  const onChangeDate = async (date: Date) => {
     const isEqual = state.dateValue?.toISOString() === date.toISOString();
     setState((prevState) => ({
       ...prevState,
-      isContentLoading: true,
       dateValue: isEqual ? null : date,
       formattedDate: isEqual ? '' : format(date, company.date_format),
     }));
@@ -201,26 +180,25 @@ export const useInboxState = () => {
     const dateStart = setAndFormatDateToISO(date.toISOString());
     const dateEnd = setAndFormatDateToISO(date.toISOString(), true);
 
-    onFetchReceiptsHandler({
+    await onFetchReceiptsHandler({
       ...fetchParams,
       date_start: isEqual ? '' : dateStart,
       date_end: isEqual ? '' : dateEnd,
     });
   };
 
-  const onChangeStatusValueHandler = (
+  const onChangeStatusValueHandler = async (
     newValue: any,
     actionMeta: ActionMeta<unknown>
   ) => {
     setState((prevState) => ({
       ...prevState,
-      isContentLoading: true,
       statusValue: {
         value: newValue.value,
         label: `Status - ${newValue.label}`,
       },
     }));
-    onFetchReceiptsHandler({
+    await onFetchReceiptsHandler({
       ...fetchParams,
       status: newValue.value === 'all' ? '' : newValue.value,
     });
@@ -277,18 +255,15 @@ export const useInboxState = () => {
     onChangeStateFieldHandler('showActions', !state.showActions);
   const onActionsClose = () => onChangeStateFieldHandler('showActions', false);
 
-  const onChangeReceiptsPerPage = (newValue: IOption) => {
+  const onChangeReceiptsPerPage = async (newValue: IOption) => {
     setItemsPerPage(newValue);
-    onChangeStateFieldHandler('isContentLoading', true);
-
-    onFetchReceiptsHandler({
+    if (!totalCount) return;
+    setCurrentPage(0);
+    await onFetchReceiptsHandler({
       ...fetchParams,
       take: +newValue.value,
-      skip: undefined,
+      skip: 0,
     });
-    if (!count) return;
-    onChangePagesAmount(+newValue.value, count);
-    setCurrentPage(0);
   };
 
   const onCheckedItemHandler = useCallback(
@@ -383,46 +358,53 @@ export const useInboxState = () => {
 
   const onDeleteReceiptHandler = async () => {
     try {
+      const isLastReceiptOnPage = totalCount === state.checkedIds.length;
+      const isEqualAmount = count === state.checkedIds.length;
+      let skipReceipts = 0;
+
       await receiptDelete(
         { receipts: state.checkedIds, active_account: active_account || '' },
         token
       );
-      count === state.checkedIds.length && setItemsPerPage(PAGINATION_ARRAY[1]);
+
       setState((prevState) => ({
         ...prevState,
         searchValue:
-          receipts.length === 1 && prevState.searchValue
+          receipts.length === 1 || state.searchValue
             ? ''
             : prevState.searchValue,
         isContentLoading: receipts.length !== 1 ? true : false,
-        isContentVisible:
-          receipts.length === state.checkedIds.length ? false : true,
-        isFetchingReceipts:
-          receipts.length === prevState.checkedIds.length ? true : false,
+        isFetchingReceipts: isLastReceiptOnPage ? true : false,
+        statusValue: isLastReceiptOnPage
+          ? INITIAL_STATE.statusValue
+          : prevState.statusValue,
+        dateValue: isLastReceiptOnPage ? null : prevState.dateValue,
+        formattedDate: isLastReceiptOnPage ? '' : prevState.formattedDate,
       }));
-      state.searchValue && onChangeStateFieldHandler('searchValue', '');
-      const isEqualAmount = receipts.length === state.checkedIds.length;
-      const skip =
-        currentPage === 0
-          ? 0
-          : isEqualAmount && count !== 1
-          ? (currentPage - 1) * +receiptsPerPage.value
-          : currentPage * +receiptsPerPage.value;
 
-      onFetchReceiptsHandler({
-        ...fetchParams,
-        take: +receiptsPerPage.value,
-        skip,
-      });
-      onGetStatisticHandler();
+      if (currentPage === 0) {
+        skipReceipts = 0;
+      } else {
+        skipReceipts = currentPage * +receiptsPerPage.value;
+      }
       if (isEqualAmount) {
-        if (state.checkedIds.length === count || currentPage === 0) {
-          setCurrentPage(0);
-          setSkipReceipts(0);
-        } else {
-          onChangePageHandler(currentPage - 1);
+        if (!!currentPage && totalCount) {
+          const numberOfItems = totalCount - count;
+          const numberOfPage = Math.ceil(numberOfItems / numberOfItems);
+
+          skipReceipts = numberOfPage * +receiptsPerPage.value;
+          const currentPage =
+            Math.ceil(numberOfItems / +receiptsPerPage.value) - 1;
+
+          onChangePageHandler(currentPage || 0);
         }
       }
+
+      !state.searchValue &&
+        (await onFetchReceiptsHandler({
+          ...fetchParams,
+          skip: skipReceipts,
+        }));
       onActionsClick();
     } catch (error) {
       onActionsClick();
@@ -466,6 +448,10 @@ export const useInboxState = () => {
 
   return {
     ...state,
+    isCompanyChanged,
+    totalCount,
+    fetchParams,
+    setCurrentPage,
     sortedReceipts,
     requestSort,
     sortField,
@@ -487,7 +473,6 @@ export const useInboxState = () => {
     isDownloadButtonDisabled,
     csvLink,
     excelRef,
-    totalReceiptCount,
     isDatePickerOpen,
     setIsDatePickerOpen,
     onCheckedPaidHandler,
@@ -496,7 +481,6 @@ export const useInboxState = () => {
     onEmailClick,
     onPostEmailHandler,
     receipts,
-    isFetchingData,
     company,
     isSentSuccessPopup,
     setIsSentSuccessPopup,

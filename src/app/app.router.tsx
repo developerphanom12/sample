@@ -47,11 +47,16 @@ export const AppRouter: FC = () => {
                 path={ROUTES.receiptDetails}
                 element={<ReceiptDetails />}
               />
-              <Route
+              {/* <Route
                 path={ROUTES.filesUploadPreview}
                 element={<FilesUploadPreview />}
-              />
+              /> */}
             </Route>
+            {/* <Route path={ROUTES.receiptDetails} element={<ReceiptDetails />} /> */}
+            <Route
+              path={ROUTES.filesUploadPreview}
+              element={<FilesUploadPreview />}
+            />
             <Route path={ROUTES.settings} element={<Settings />}>
               <Route index element={<MyAccount />} />
               <Route path={ROUTES.usersList} element={<UsersList />} />

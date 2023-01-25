@@ -39,7 +39,11 @@ describe('Ibox reducer', () => {
     expect(
       inboxReducer(
         state,
-        setReceipts({ count: mockedReceipts.length, data: mockedReceipts })
+        setReceipts({
+          totalCount: mockedReceipts.length,
+          count: mockedReceipts.length,
+          data: mockedReceipts,
+        })
       )
     ).toEqual({
       ...state,

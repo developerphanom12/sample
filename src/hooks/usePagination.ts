@@ -53,8 +53,10 @@ export const usePagination: (props: IProps) => IResult = (props) => {
   };
 
   const onGoToClick = () => {
-    if (!inputPaginationValue.length) return;
-    if (+inputPaginationValue === currentPage + 1) {
+    if (
+      +inputPaginationValue === currentPage + 1 ||
+      +inputPaginationValue - 1 === currentPage
+    ) {
       setInputPaginationValue('');
       return;
     }

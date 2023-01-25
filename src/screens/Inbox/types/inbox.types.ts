@@ -6,11 +6,13 @@ export interface ISelectItem {
 
 export interface IINBOX_INITIAL_STATE {
   count: number | null;
+  totalCount: number | null;
   receipts: IReceipt[];
   selectedReceipt: IReceipt | null;
   selectedReceiptIndex: number | null;
   isFetchingData: boolean;
   isAllChecked: boolean;
+  isCompanyChanged: boolean;
 }
 
 export interface IGetReceiptsParams {

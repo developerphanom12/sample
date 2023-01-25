@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { IState } from 'services/redux/reducer';
 
-import { setIsFetchingDate } from '../Inbox/reducer/inbox.reducer';
+import { setIsFetchingDate, setReceipts } from '../Inbox/reducer/inbox.reducer';
 import { receiptCreate } from './filesUploadPreview.api';
 import {
   resetState,
@@ -14,6 +14,7 @@ import { LocationState } from './types/filesUploadPreview.types';
 import { INITIAL_STATE } from './filesUploadPreview.constants';
 
 import { ROUTES } from 'constants/routes';
+import { getReceipts } from '../Inbox/inbox.api';
 
 export const useFilesUploadPreviewState = () => {
   const navigate = useNavigate();
@@ -73,7 +74,6 @@ export const useFilesUploadPreviewState = () => {
       });
       formData.append('active_account', user.active_account || '');
       await receiptCreate(formData, token);
-
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
       setIsLoading(false);
