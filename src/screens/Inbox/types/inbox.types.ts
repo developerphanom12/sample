@@ -35,8 +35,6 @@ export interface IPostEmail {
 
 export interface IuseInboxState {
   isFetchingReceipts: boolean;
-  isContentVisible: boolean;
-  isVisited: boolean;
   statusValue: {
     value: string;
     label: string;

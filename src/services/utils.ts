@@ -25,6 +25,14 @@ interface ISortProps {
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
+export const removeEmptyField = (params: ISearchParams) => {
+  Object.keys(params).forEach((param) => {
+    if (!params[param as keyof typeof params]) {
+      delete params[param as keyof typeof params];
+    }
+  });
+};
+
 export const dateDiffInDays = (a: Date, b: Date) => {
   const expiredDate = add(b, { days: 2 });
   const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());

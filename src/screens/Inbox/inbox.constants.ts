@@ -32,7 +32,6 @@ export const emailInputs = [
 ];
 
 export const INITIAL_STATE = {
-  isVisited: false,
   statusValue: { value: 'all', label: 'Status - All' },
   searchValue: '',
   dateValue: null,
@@ -43,7 +42,6 @@ export const INITIAL_STATE = {
   receiptsToSend: [],
   excelUrl: '',
   csvData: '',
-  isContentVisible: false,
   isFetchingReceipts: true,
   isContentLoading: false,
 };

@@ -77,22 +77,25 @@ export const Inbox: FC = memo(() => {
     isCompanyChanged,
     requestSort,
     setCurrentPage,
+    count,
   } = useInboxState();
 
   useEffect(() => {
-    onFetchReceiptsHandler(fetchParams);
-    if (isCompanyChanged) {
+    onFetchReceiptsHandler({
+      ...fetchParams,
+      skip: 0,
+    });
+    if (debouncedValue || isCompanyChanged) {
       setCurrentPage(0);
     }
   }, [debouncedValue, active_account]);
 
   useEffect(() => {
-    if (totalCount) {
-      onChangePagesAmount(Number(receiptsPerPage.value), totalCount);
+    if (count) {
+      onChangePagesAmount(Number(receiptsPerPage.value), count);
     }
-  }, [receiptsPerPage, totalCount, active_account]);
+  }, [receiptsPerPage, count, active_account]);
 
-  const isInboxContent = !isFetchingReceipts;
   const isEmptyScreen = !isFetchingReceipts && !totalCount;
 
   return (
@@ -121,7 +124,7 @@ export const Inbox: FC = memo(() => {
         </Styled.LoaderWrapper>
       ) : totalCount ? (
         <>
-          {isInboxContent ? (
+          {!isFetchingReceipts ? (
             <InboxContent
               datePickerRef={datePickerRef}
               pages={pages}

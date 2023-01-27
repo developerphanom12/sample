@@ -1,9 +1,11 @@
 import Axios from 'axios';
 
 import { apiServices } from 'services/api-service';
-import { CONFIG } from 'constants/config';
+import { removeEmptyField } from 'services/utils';
 
 import { IGetReceiptsParams, IPostEmail } from './types/inbox.types';
+
+import { CONFIG } from 'constants/config';
 
 interface IReceiptsIds {
   receipts: string[];
@@ -12,6 +14,8 @@ interface IReceiptsIds {
 
 export const getReceipts = (params?: IGetReceiptsParams) => {
   const URL = '/receipt/get-all';
+
+  params && removeEmptyField(params);
   return apiServices.fetchData(URL, params);
 };
 

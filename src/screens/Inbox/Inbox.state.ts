@@ -359,7 +359,7 @@ export const useInboxState = () => {
   const onDeleteReceiptHandler = async () => {
     try {
       const isLastReceiptOnPage = totalCount === state.checkedIds.length;
-      const isEqualAmount = count === state.checkedIds.length;
+      const isEqualAmount = receipts.length === state.checkedIds.length;
       let skipReceipts = 0;
 
       await receiptDelete(
@@ -387,17 +387,10 @@ export const useInboxState = () => {
       } else {
         skipReceipts = currentPage * +receiptsPerPage.value;
       }
-      if (isEqualAmount) {
-        if (!!currentPage && totalCount) {
-          const numberOfItems = totalCount - count;
-          const numberOfPage = Math.ceil(numberOfItems / numberOfItems);
 
-          skipReceipts = numberOfPage * +receiptsPerPage.value;
-          const currentPage =
-            Math.ceil(numberOfItems / +receiptsPerPage.value) - 1;
-
-          onChangePageHandler(currentPage || 0);
-        }
+      if (isEqualAmount && !!currentPage && count) {
+        skipReceipts = (currentPage - 1) * +receiptsPerPage.value;
+        onChangePageHandler(currentPage - 1);
       }
 
       !state.searchValue &&
@@ -449,9 +442,9 @@ export const useInboxState = () => {
   return {
     ...state,
     isCompanyChanged,
+    setCurrentPage,
     totalCount,
     fetchParams,
-    setCurrentPage,
     sortedReceipts,
     requestSort,
     sortField,
