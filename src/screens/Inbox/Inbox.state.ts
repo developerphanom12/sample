@@ -200,8 +200,10 @@ export const useInboxState = () => {
     }));
     await onFetchReceiptsHandler({
       ...fetchParams,
+      skip: 0,
       status: newValue.value === 'all' ? '' : newValue.value,
     });
+    setCurrentPage(0);
   };
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
