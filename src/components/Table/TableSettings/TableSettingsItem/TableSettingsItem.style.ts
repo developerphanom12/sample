@@ -1,16 +1,11 @@
 import { styled } from 'styles/theme';
 
+import { GRID_ROWS_STYLE, TGridRowsStyles } from '../TableSettings.style';
+
 export const TableSettingsItemStyles = {
-  Item: styled.div<{ isCompanyTable?: boolean }>`
+  Item: styled.div<{ isCompanyTable?: boolean; rowStyle?: TGridRowsStyles }>`
     display: grid;
-    grid-template-columns: ${({ isCompanyTable }) =>
-      isCompanyTable
-        ? `minmax(55px, 65px) minmax(120px, 230px) minmax(111px, 170px) minmax(
-        111px,
-        200px
-      )`
-        : `minmax(50px, 55px) minmax(100px, 201px) minmax(175px, 240px) minmax(
-          90px, 135px) minmax(110px, 150px) minmax(130px, 135px) minmax(100px, 150px) minmax(110px, 170px)`};
+    ${({ rowStyle }) => rowStyle && GRID_ROWS_STYLE[rowStyle]};
     border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
     height: 30px;
     width: 100%;

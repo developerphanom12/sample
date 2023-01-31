@@ -18,6 +18,7 @@ interface ITableSettingsItemProps extends TableSettingsItemProps {
   memberRole: TRoles;
   createdAt: string;
   dateFormat: string;
+  tableRowTheme: 'user' | 'member';
 }
 export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
   const {
@@ -34,6 +35,7 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
     dateFormat,
     companyName,
     memberInvitation,
+    tableRowTheme,
   } = props;
 
   const {
@@ -57,7 +59,7 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
   const invitationStatus = !memberInvitation ? 'Active' : 'Resend invitation';
 
   return (
-    <Styled.Item>
+    <Styled.Item rowStyle={tableRowTheme}>
       {userRole?.role === 'user' ? null : (
         <Styled.Action>
           {isHideEditButton ? null : (

@@ -27,9 +27,10 @@ export const TableSettingsMember: React.FC<IMemberTableProps> = (props) => {
     ? getFilteredMembers(members || [])
     : members;
 
+  const tableRowTheme = isRegularUser ? 'user' : 'member';
   return (
     <>
-      <Styled.Head>
+      <Styled.Head rowStyle={tableRowTheme}>
         {userRole?.role === 'user' ? null : (
           <Styled.Actions>Actions</Styled.Actions>
         )}
@@ -72,6 +73,7 @@ export const TableSettingsMember: React.FC<IMemberTableProps> = (props) => {
             memberInvitation={member?.memberInvite}
             onResendInvitationHandler={onResendInvitationHandler}
             userRole={userRole}
+            tableRowTheme={tableRowTheme}
           />
         ))
       ) : searchValue && !filteredSearchedUsers?.length ? (
@@ -95,6 +97,7 @@ export const TableSettingsMember: React.FC<IMemberTableProps> = (props) => {
             companyName={member.company?.name}
             memberInvitation={member?.memberInvite}
             userRole={userRole}
+            tableRowTheme={tableRowTheme}
           />
         ))
       )}

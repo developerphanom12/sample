@@ -10,16 +10,16 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
     onEditIconClickHandler,
     userRole,
     companies,
-    isCompanyTable,
     searchedCompanies,
     searchValue,
   } = props;
+
+  const isRegularUser = userRole?.role === 'user';
+  const tableRowTheme = isRegularUser ? 'companyUser' : 'company';
   return (
     <>
-      <Styled.Head isCompanyTable={isCompanyTable}>
-        {userRole?.role === 'user' ? null : (
-          <Styled.Actions>Actions</Styled.Actions>
-        )}
+      <Styled.Head rowStyle={tableRowTheme}>
+        {isRegularUser ? null : <Styled.Actions>Actions</Styled.Actions>}
         <Styled.Column>
           <TableButton>Company</TableButton>
         </Styled.Column>
@@ -34,7 +34,6 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
       {searchedCompanies?.length && searchValue ? (
         searchedCompanies?.map((company) => (
           <TableSettingsCompanyItem
-            isCompanyTable
             key={company.id}
             companyId={company.id}
             dateFormat={company.date_format}
@@ -46,6 +45,7 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
             userRole={userRole}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
+            tableRowTheme={tableRowTheme}
           />
         ))
       ) : searchValue && !searchedCompanies?.length ? (
@@ -55,7 +55,6 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
       ) : (
         companies?.map((company) => (
           <TableSettingsCompanyItem
-            isCompanyTable
             key={company.id}
             dateFormat={company.date_format}
             createdAt={company.created}
@@ -67,6 +66,7 @@ export const TableSettingsCompany: React.FC<TableSettingsProps> = (props) => {
             userRole={userRole}
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
+            tableRowTheme={tableRowTheme}
           />
         ))
       )}

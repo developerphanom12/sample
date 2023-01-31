@@ -19,9 +19,9 @@ export const TableSettingsCompanyItem: React.FC<
     userRole,
     companyId,
     companyName,
-    isCompanyTable,
     creatorRole,
     creatorId,
+    tableRowTheme,
   } = props;
 
   const { onClickDeleteIconHandler, onClickEditIconHandler } =
@@ -33,7 +33,7 @@ export const TableSettingsCompanyItem: React.FC<
   const isHideDeleteButton =
     userRole?.id === creatorId && creatorRole === 'owner';
   return (
-    <Styled.Item isCompanyTable={isCompanyTable}>
+    <Styled.Item rowStyle={tableRowTheme}>
       {userRole?.role === 'user' ? null : (
         <Styled.Action>
           <Styled.ActionButton onClick={onClickEditIconHandler}>

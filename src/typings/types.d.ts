@@ -226,7 +226,6 @@ declare global {
   interface TableSettingsProps {
     companies?: ICompanySettings[];
     searchedCompanies?: ICompanySettings[];
-    isCompanyTable?: boolean;
     searchValue: srting;
     userRole?: IAccount;
     onDeleteIconClickHandler: (itemId: string) => void;
@@ -242,11 +241,11 @@ declare global {
     companyName: string;
     creatorId: string;
     creatorRole: string;
-    isCompanyTable: boolean;
     companyId: string;
     createdAt: string;
     createdBy: string;
     dateFormat: string;
+    tableRowTheme: 'companyUser' | 'company';
   }
 
   interface IMasterModalWindowProps {

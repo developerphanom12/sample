@@ -390,6 +390,7 @@ export const useUserListState = () => {
 
   return {
     ...state,
+    active_account,
     userRole,
     isEdit,
     currentPage,

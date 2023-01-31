@@ -1,14 +1,41 @@
+import { css } from 'styled-components';
+
 import { styled } from 'styles/theme';
 
+export const GRID_ROWS_STYLE = {
+  member: css`
+    grid-template-columns:
+      minmax(50px, 55px) minmax(100px, 201px) minmax(175px, 240px) minmax(
+        90px,
+        135px
+      )
+      minmax(110px, 150px) minmax(130px, 135px) minmax(100px, 150px) minmax(110px, 170px);
+  `,
+  user: css`
+    grid-template-columns:
+      minmax(100px, 201px) minmax(175px, 240px) minmax(90px, 135px)
+      minmax(110px, 150px) minmax(130px, 135px) minmax(100px, 150px) minmax(110px, 170px);
+  `,
+  company: css`
+    grid-template-columns:
+      minmax(55px, 65px) minmax(120px, 230px) minmax(111px, 170px)
+      minmax(111px, 200px);
+  `,
+  companyUser: css`
+    grid-template-columns:
+      minmax(110px, 220px) minmax(111px, 170px)
+      minmax(121px, 210px);
+  `,
+};
+
+export type TGridRowsStyles = keyof typeof GRID_ROWS_STYLE;
+
 export const TableSettingsStyles = {
-  Head: styled.div<{ isCompanyTable?: boolean }>`
+  Head: styled.div<{
+    rowStyle: TGridRowsStyles;
+  }>`
     display: grid;
-    grid-template-columns: ${({ isCompanyTable }) =>
-      isCompanyTable
-        ? `minmax(55px, 65px) minmax(120px, 230px) minmax(111px, 170px) minmax(
-          111px, 200px);`
-        : `minmax(50px, 55px) minmax(100px, 201px) minmax(175px, 240px) minmax(
-          90px, 135px) minmax(110px, 150px) minmax(130px, 135px) minmax(100px, 150px) minmax(110px, 170px)`};
+    ${(props) => props.rowStyle && GRID_ROWS_STYLE[props.rowStyle]};
     border-top: solid 1px ${(props) => props.theme.colors.borderWhite};
     border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
     height: 49px;

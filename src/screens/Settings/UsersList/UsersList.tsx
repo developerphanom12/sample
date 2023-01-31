@@ -47,6 +47,7 @@ export const UsersList: FC = () => {
     isSentSuccessPopup,
     isResentSuccessPopup,
     role,
+    active_account,
     setIsSentSuccessPopup,
     setIsResendSuccessPopup,
     onChangePage,
@@ -61,19 +62,19 @@ export const UsersList: FC = () => {
 
   useEffect(() => {
     !searchValue && onGetAllCompanyMembersHandler();
-  }, [searchValue]);
+  }, [searchValue, active_account]);
 
   useEffect(() => {
     debouncedValue &&
       onGetAllCompanyMembersHandler({
         search: debouncedValue,
       });
-  }, [debouncedValue]);
+  }, [debouncedValue, active_account]);
 
   useEffect(() => {
     if (!count) return;
     onChangePagesAmount(Number(itemsPerPage.value), count);
-  }, [count, itemsPerPage]);
+  }, [count, itemsPerPage, active_account]);
 
   return (
     <Styled.Section>
