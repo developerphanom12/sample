@@ -1,5 +1,6 @@
 import { add, format } from 'date-fns';
 import decode from 'jwt-decode';
+import imageCompression from 'browser-image-compression';
 
 import { ICurrency } from 'screens/SignUp/types/signup.types';
 import { IInvites } from 'screens/Invites/types/invites.types';
@@ -24,6 +25,13 @@ interface ISortProps {
 }
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+export const getCompressedImage = async (file: File, maxSize?: number) => {
+  const compressedFile = await imageCompression(file, {
+    maxSizeMB: maxSize || 0.5,
+  });
+  return compressedFile;
+};
 
 export const removeEmptyField = (params: ISearchParams) => {
   Object.keys(params).forEach((param) => {

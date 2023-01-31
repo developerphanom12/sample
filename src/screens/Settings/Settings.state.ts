@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IState } from 'services/redux/reducer';
+import { getCompressedImage } from 'services/utils';
 
 import { getProfilePhoto, profileUploadPhoto } from './settings.api';
 import { setUserAvatar } from '../SignUp/reducer/signup.reducer';
@@ -47,10 +48,13 @@ export const useSettingsState = () => {
       )
         return;
       setIsHover(false);
-      const formData = new FormData();
-      formData.append('profile_image', event.target.files[0]);
       setIsUploadingPhoto(true);
+
+      const formData = new FormData();
+      const compressedFile = await getCompressedImage(event.target.files[0], 1);
+      formData.append('profile_image', compressedFile);
       const { data } = await profileUploadPhoto(formData, token);
+
       dispatch(setUserAvatar(data.profile_image));
       onGetProfilePhoto(data.profile_image);
     } catch (error) {

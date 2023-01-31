@@ -7,7 +7,7 @@ import { useToggle } from 'hooks/useToggle';
 import { usePagination } from 'hooks/usePagination';
 import { useDebounce } from 'hooks/useDebounce';
 import { IState } from 'services/redux/reducer';
-import { getUserRole, onCreateFormDataHandler } from 'services/utils';
+import { getCompressedImage, getUserRole, onCreateFormDataHandler } from 'services/utils';
 
 import { COMPANY_LIST_INITIAL_STATE } from './companyList.constants';
 import {
@@ -124,7 +124,7 @@ export const useCompanyListState = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('companyName', event.target.value);
 
-  const onUploadCompanyLogoHandler = (
+  const onUploadCompanyLogoHandler = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (
@@ -132,13 +132,15 @@ export const useCompanyListState = () => {
       !event.target.files[0].type.match('image')
     )
       return;
-    onChangeStateFieldHandler(
-      'logoSrc',
-      URL.createObjectURL(event.target?.files[0])
-    );
-    onChangeStateFieldHandler('logoName', event.target?.files[0]?.name);
-    onChangeStateFieldHandler('companyLogo', event.target?.files[0]);
+    onChangeStateFieldHandler('isCompanyLogoLoading', true);
+
+    const compressedFile = await getCompressedImage(event.target.files[0]);
+
+    onChangeStateFieldHandler('logoSrc', URL.createObjectURL(compressedFile));
+    onChangeStateFieldHandler('logoName', compressedFile?.name);
+    onChangeStateFieldHandler('companyLogo', compressedFile);
     onChangeStateFieldHandler('isDeleteCompanyLogo', false);
+    onChangeStateFieldHandler('isCompanyLogoLoading', false);
   };
 
   const onCreateCompanyHandler = async () => {
