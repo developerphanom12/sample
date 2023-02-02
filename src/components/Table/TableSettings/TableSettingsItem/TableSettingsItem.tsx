@@ -56,31 +56,38 @@ export const TableSettingsItem: FC<ITableSettingsItemProps> = (props) => {
     memberRole === 'owner' ||
     (memberRole === userRole?.role && userRole.id === memberId);
 
-  const invitationStatus = !memberInvitation ? 'Active' : 'Resend invitation';
+  const invitationStatus =
+    !memberInvitation || memberInvitation?.isCompanyInvite
+      ? 'Active'
+      : 'Resend invitation';
+  const email =
+    memberInvitation?.isCompanyInvite || !memberInvitation
+      ? memberEmail
+      : memberInvitation?.email;
 
   return (
     <Styled.Item rowStyle={tableRowTheme}>
       {userRole?.role === 'user' ? null : (
         <Styled.Action>
-          {isHideEditButton ? null : (
-            <Styled.ActionButton onClick={onClickEditIconHandler}>
-              <Icon type="edit" />
-            </Styled.ActionButton>
-          )}
-          {isHideDeleteButton ? null : (
-            <Styled.ActionButton onClick={onClickDeleteIconHandler}>
-              <Icon type="remove" />
-            </Styled.ActionButton>
-          )}
+          <Styled.ActionButton
+            isDisabled={isHideEditButton}
+            onClick={onClickEditIconHandler}
+          >
+            <Icon type="edit" />
+          </Styled.ActionButton>
+          <Styled.ActionButton
+            isDisabled={isHideDeleteButton}
+            onClick={onClickDeleteIconHandler}
+          >
+            <Icon type="remove" />
+          </Styled.ActionButton>
         </Styled.Action>
       )}
       <Styled.Column>
         <Styled.TextWrapper>{memberName}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>
-        <Styled.TextWrapper>
-          {memberInvitation ? memberInvitation.email : memberEmail}
-        </Styled.TextWrapper>
+        <Styled.TextWrapper>{email}</Styled.TextWrapper>
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(memberRole)}</Styled.Column>
       <Styled.Column>

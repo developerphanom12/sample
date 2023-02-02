@@ -52,7 +52,7 @@ export const InsertUserModalWindow: FC<InsertUserModalWindowProps> = (
         }
       : isEdit && !isInvitation && isUserList
       ? {
-          content: { ...UserModalWindowStyles.content, maxHeight: '300px' },
+          content: { ...UserModalWindowStyles.content, maxHeight: '250px' },
           overlay: UserModalWindowStyles.overlay,
         }
       : modalFields.length === 2

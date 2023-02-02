@@ -290,6 +290,8 @@ declare global {
     email: string;
     created: string;
     updated: string;
+    isActive: boolean;
+    isCompanyInvite: boolean;
   }
   interface IMember {
     id: string;

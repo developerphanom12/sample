@@ -17,7 +17,7 @@ export const TableSettingsItemStyles = {
     width: 100%;
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
   `,
-  ActionButton: styled.div`
+  ActionButton: styled.div<{ isDisabled?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,6 +25,14 @@ export const TableSettingsItemStyles = {
     &:not(:last-child) {
       margin-right: 9px;
     }
+    ${({ isDisabled, theme }) =>
+      isDisabled &&
+      `& path {
+        fill: ${theme.colors.borderWhite};
+      }
+      pointer-events: none;
+      cursor: default;
+    `}
   `,
   Column: styled.div`
     font-size: ${(props) => props.theme.size.default};

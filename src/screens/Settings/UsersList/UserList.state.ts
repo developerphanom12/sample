@@ -244,7 +244,11 @@ export const useUserListState = () => {
         selectedUser?.user?.email || selectedUser?.memberInvite?.email || '',
       selectedItemId: itemId,
       selectedUserName: selectedUser?.name || '',
-      isInvitation: selectedUser?.memberInvite ? true : false,
+      isInvitation:
+        selectedUser?.memberInvite &&
+        !selectedUser?.memberInvite?.isCompanyInvite
+          ? true
+          : false,
     }));
     onModalWindowToggle();
   };
