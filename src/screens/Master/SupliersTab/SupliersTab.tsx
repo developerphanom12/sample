@@ -58,6 +58,7 @@ export const SupliersTab: FC = () => {
     isSearching,
     searchedItems,
     active_account,
+    userRole,
   } = useSuppliersTabState();
 
   useEffect(() => {
@@ -116,9 +117,11 @@ export const SupliersTab: FC = () => {
           secondSubtitle={Strings.suppliers.secondSubtitle}
           title={Strings.suppliers.title}
           onClick={onModalWindowToggle}
+          userRole={userRole}
         />
       ) : !isFetchingData && isHeaderPanel ? (
         <SupplierContent
+          userRole={userRole}
           searchedItems={searchedItems}
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}

@@ -33,12 +33,14 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
     onChangePage,
     isContentLoading,
     searchedItems,
+    userRole,
   } = props;
 
   return (
     <Styled.ContentWrapper>
       <HeaderPanelMaster
-        isButton
+        isGuard
+        userRole={userRole}
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onAddClickButtonHandler={onAddClickButtonHandler}
@@ -53,6 +55,7 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
       ) : (
         <Styled.TableWrapper>
           <TableMaster
+            userRole={userRole}
             tabName={tabName}
             categories={categories}
             searchedItems={searchedItems}

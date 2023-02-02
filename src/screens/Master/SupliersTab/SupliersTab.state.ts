@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SingleValue } from 'react-select';
 
+import { getUserRole } from 'services/utils';
 import { IState } from 'services/redux/reducer';
 import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
@@ -31,12 +32,15 @@ export const useSuppliersTabState = () => {
       selectedCategory,
     },
     user: {
-      user: { active_account },
+      user: { active_account, accounts },
       userInfo: {
         company: { date_format },
       },
     },
   } = useSelector((state: IState) => state);
+
+  const userRole = getUserRole(accounts || [], active_account || '')
+    ?.role as TRoles;
 
   useEffect(() => {
     !count && onChangeStateFieldHandler('isEmptyData', true);
@@ -312,6 +316,7 @@ export const useSuppliersTabState = () => {
 
   return {
     ...state,
+    userRole,
     currentPage,
     pages,
     inputPaginationValue,

@@ -6,6 +6,7 @@ import { Icon } from 'components/Icons/Icons';
 import { TableMasterItemStyles } from './TableIMasterItem.style';
 
 interface TableMasterItemProps {
+  userRole: TRoles;
   categoryName: string;
   createdDate: string;
   categoryCreator: string;
@@ -20,21 +21,29 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
     categoryName,
     createdDate,
     dateFormat,
+    userRole,
     onDeleteIconHandler,
     onEditIconHandler,
   } = props;
 
+  const isActionDisabled = userRole === 'user';
   return (
     <TableMasterItemStyles.Item>
       <TableMasterItemStyles.Action>
-        <TableMasterItemStyles.ActionButton onClick={onEditIconHandler}>
+        <TableMasterItemStyles.ActionButton
+          isDisabled={isActionDisabled}
+          onClick={onEditIconHandler}
+        >
           <Icon type="edit" />
         </TableMasterItemStyles.ActionButton>
-        <TableMasterItemStyles.ActionButton onClick={onDeleteIconHandler}>
+        <TableMasterItemStyles.ActionButton
+          isDisabled={isActionDisabled}
+          onClick={onDeleteIconHandler}
+        >
           <Icon type="remove" />
         </TableMasterItemStyles.ActionButton>
       </TableMasterItemStyles.Action>
-      <TableMasterItemStyles.Column width='200'>
+      <TableMasterItemStyles.Column width="200">
         <TableMasterItemStyles.NameWrapper>
           {categoryName}
         </TableMasterItemStyles.NameWrapper>
@@ -42,7 +51,7 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
       <TableMasterItemStyles.Column>
         {format(new Date(createdDate), dateFormat)}
       </TableMasterItemStyles.Column>
-      <TableMasterItemStyles.Column width='200'>
+      <TableMasterItemStyles.Column width="200">
         {categoryCreator}
       </TableMasterItemStyles.Column>
     </TableMasterItemStyles.Item>

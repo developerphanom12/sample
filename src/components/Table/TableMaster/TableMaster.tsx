@@ -15,6 +15,7 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
     onEditIconClickHandler,
     searchValue,
     searchedItems,
+    userRole,
   } = props;
 
   return (
@@ -35,6 +36,7 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
         searchedItems?.map((category) => (
           <MasterItem
             key={category.id}
+            userRole={userRole}
             categoryId={category.id}
             categoryName={category.name}
             createdDate={category.created}
@@ -52,6 +54,7 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
         categories?.map((category) => (
           <MasterItem
             key={category.id}
+            userRole={userRole}
             categoryId={category.id}
             categoryName={category.name}
             createdDate={category.created}

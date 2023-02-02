@@ -59,6 +59,7 @@ export const TypesTab: FC = () => {
     searchedItems,
     isSearching,
     active_account,
+    userRole,
   } = useTypesTabState();
 
   useEffect(() => {
@@ -118,9 +119,11 @@ export const TypesTab: FC = () => {
           secondSubtitle={Strings.type.secondSubtitle}
           title={Strings.type.title}
           onClick={onModalWindowToggle}
+          userRole={userRole}
         />
       ) : !isFetchingData && isHeaderPanel ? (
         <TypesContent
+          userRole={userRole}
           searchedItems={searchedItems}
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}

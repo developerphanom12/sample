@@ -7,7 +7,6 @@ import { TableInvitesStyles as Styled } from './TableInvites.style';
 import { TableInvitesItem } from './TableInvitesItem';
 
 interface ITableInvites {
-  userRole?: IAccount;
   onResendInvitationHandler: (inviteId: string) => void;
   searchValue: string;
   searchedInvites: IInvites[];

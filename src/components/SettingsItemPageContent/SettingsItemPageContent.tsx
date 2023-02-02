@@ -56,7 +56,7 @@ export const SettingsItemPageContent: FC<ISettingsItemPageContentProps> = (
         searchValue={searchValue}
         onAddClickButtonHandler={onAddClickButtonHandler}
         isGuard={isGuard}
-        userRole={userRole}
+        userRole={userRole?.role as TRoles}
         buttonText={isMemeberList ? 'Create User' : 'Create Company'}
       />
       {isContentLoading ? (

@@ -18,7 +18,7 @@ export const TableMasterItemStyles = {
     min-width: 70px;
     width: 100%;
   `,
-  ActionButton: styled.div`
+  ActionButton: styled.div<{ isDisabled: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,6 +26,14 @@ export const TableMasterItemStyles = {
     &:not(:last-child) {
       margin-right: 9px;
     }
+    ${({ isDisabled, theme }) =>
+      isDisabled &&
+      `& path {
+        fill: ${theme.colors.borderWhite};
+      }
+      pointer-events: none;
+      cursor: default;
+    `}
   `,
   Column: styled.div<{ width?: string }>`
     font-size: ${(props) => props.theme.size.default};

@@ -17,7 +17,7 @@ export interface IuseMasterState {
 export interface IHeaderPanelMasterProps {
   isButton?: boolean;
   isGuard?: boolean;
-  userRole?: IAccount;
+  userRole?: TRoles;
   buttonText: string;
   onChangeSearchValueHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,11 +36,12 @@ export interface TableMasterProps {
   onEditIconClickHandler: (itemId: string) => Promise<void>;
   searchedItems: ITabItem[];
   searchValue: string;
+  userRole: TRoles;
 }
 
 export interface ITabContentProps
   extends TableMasterProps,
-    Omit<IHeaderPanelMasterProps, 'isButton' | 'buttonText'>,
+    Omit<IHeaderPanelMasterProps, 'isButton' | 'buttonText' | 'userRole'>,
     IPaginationPanel {
   isFetchingData?: boolean;
   isFocus?: boolean;

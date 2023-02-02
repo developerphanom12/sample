@@ -35,12 +35,14 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
     isFetchingData,
     isFocus,
     searchedItems,
+    userRole,
   } = props;
 
   return (
     <Styled.ContentWrapper>
       <HeaderPanelMaster
-        isButton
+        isGuard
+        userRole={userRole}
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onAddClickButtonHandler={onAddClickButtonHandler}
@@ -55,6 +57,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
       ) : categories?.length && !isFetchingData && !isContentLoading ? (
         <Styled.TableWrapper>
           <TableMaster
+            userRole={userRole}
             tabName={tabName}
             searchValue={searchValue}
             searchedItems={searchedItems}

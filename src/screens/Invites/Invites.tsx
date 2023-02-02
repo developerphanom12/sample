@@ -172,7 +172,6 @@ export const Invites = () => {
                   searchValue={searchValue}
                   searchedInvites={searchedInvites}
                   invites={result}
-                  userRole={userRole}
                   onEditIconClickHandler={onEditIconClickHandler}
                   onDeleteIconClickHandler={onDeleteIconClickHandler}
                 />

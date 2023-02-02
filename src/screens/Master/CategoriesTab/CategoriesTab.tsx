@@ -57,6 +57,7 @@ export const CategoriesTab: FC = () => {
     isSearching,
     searchedItems,
     active_account,
+    userRole,
   } = useCategoriesTabState();
 
   useEffect(() => {
@@ -114,9 +115,11 @@ export const CategoriesTab: FC = () => {
           secondSubtitle={Strings.categories.secondSubtitle}
           title={Strings.categories.title}
           onClick={onModalWindowToggle}
+          userRole={userRole}
         />
       ) : (
         <CategoryContent
+          userRole={userRole}
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}
           isFocus={isFocus}

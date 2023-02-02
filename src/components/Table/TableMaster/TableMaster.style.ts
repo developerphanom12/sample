@@ -29,6 +29,9 @@ export const TableMasterStyles = {
     &:last-child {
       border-right: none;
     }
+    & button {
+      cursor: default;
+    }
   `,
   EmptyContentWrapper: styled.div`
     display: flex;

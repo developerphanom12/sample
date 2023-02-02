@@ -18,6 +18,7 @@ interface IEmptyDataProps {
   isNoResults?: boolean;
   isUploadFile?: boolean;
   isRoundedButton?: boolean;
+  userRole?: string;
 }
 export const EmptyData: FC<IEmptyDataProps> = (props) => {
   const {
@@ -29,6 +30,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
     isUploadFile,
     buttonText,
     isRoundedButton,
+    userRole,
     onAddReceiptHandler,
     onClick,
   } = props;
@@ -52,15 +54,17 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
               isRoundedButton={isRoundedButton}
             />
           ) : (
-            <Styled.ButtonWrapper>
-              <Button
-                width="primary"
-                themedButton="roundedRed"
-                onClick={onClick}
-              >
-                {buttonText || 'Add'}
-              </Button>
-            </Styled.ButtonWrapper>
+            userRole !== 'user' && (
+              <Styled.ButtonWrapper>
+                <Button
+                  width="primary"
+                  themedButton="roundedRed"
+                  onClick={onClick}
+                >
+                  {buttonText || 'Add'}
+                </Button>
+              </Styled.ButtonWrapper>
+            )
           )}
         </Styled.ContentWrapper>
       )}

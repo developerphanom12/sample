@@ -5,6 +5,7 @@ import { TableMasterItem } from 'components/Table/TableMaster/TableMasterItem';
 import { useMasterItemState } from './MasterItem.state';
 
 interface MasterItemProps {
+  userRole: TRoles;
   categoryId: string;
   categoryName: string;
   createdDate: string;
@@ -21,6 +22,7 @@ export const MasterItem: FC<MasterItemProps> = (props) => {
     categoryName,
     createdDate,
     dateFormat,
+    userRole,
     onDeleteIconClickHandler,
     onEditIconClickHandler,
   } = props;
@@ -32,6 +34,7 @@ export const MasterItem: FC<MasterItemProps> = (props) => {
   });
   return (
     <TableMasterItem
+      userRole={userRole}
       categoryName={categoryName}
       createdDate={createdDate}
       categoryCreator={categoryCreator}

@@ -35,18 +35,20 @@ export const SupplierContent: FC<ITabContentProps> = (props) => {
     isFetchingData,
     isFocus,
     searchedItems,
+    userRole,
   } = props;
 
   return (
     <Styled.ContentWrapper>
       <HeaderPanelMaster
-        isButton
+        isGuard
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
         buttonText="Create Supplier Account"
+        userRole={userRole}
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>
@@ -55,6 +57,7 @@ export const SupplierContent: FC<ITabContentProps> = (props) => {
       ) : !isFetchingData && !isContentLoading ? (
         <Styled.TableWrapper>
           <TableMaster
+            userRole={userRole}
             tabName={tabName}
             searchValue={searchValue}
             searchedItems={searchedItems}

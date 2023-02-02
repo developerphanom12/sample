@@ -41,7 +41,8 @@ export const useInvitesState = () => {
     },
   } = useSelector((state: IState) => state);
 
-  const userRole = getUserRole(accounts || [], active_account || '');
+  const userRole = getUserRole(accounts || [], active_account || '')
+    ?.role as TRoles;
 
   const initialState = INVITES_INITIAL_STATE;
 

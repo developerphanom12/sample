@@ -13,7 +13,7 @@ export type TableButtonProps = {
 export const TableButton = (props: TableButtonProps) => {
   const { isSorted, children, onClick } = props;
   return (
-    <TableButtonStyles.Button onClick={onClick}>
+    <TableButtonStyles.Button onClick={onClick} isSorted={isSorted}>
       <TableButtonStyles.Content>{children}</TableButtonStyles.Content>
       <TableButtonStyles.Content isSorted={isSorted}>
         <Icon type="tableArrow" />

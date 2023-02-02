@@ -19,6 +19,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
     isButton,
     buttonText,
   } = props;
+
   return (
     <Styled.HeaderPanelWrapper>
       <Styled.SearchWrapper>
@@ -38,10 +39,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
           </Styled.IconWrapper>
         </Styled.SearchInputWrapper>
       </Styled.SearchWrapper>
-      {(isGuard && userRole?.role === 'admin') ||
-      (isGuard && userRole?.role === 'owner') ||
-      (isGuard && userRole?.role === 'accountant') ||
-      isButton ? (
+      {(isGuard && userRole !== 'user') || isButton ? (
         <Styled.ButtonWrapper>
           <Button
             onClick={onAddClickButtonHandler}
