@@ -68,7 +68,7 @@ export const useSignUpNewMemberState = () => {
       dispatch(setUser(data));
       dispatch(setCurrencies(data.currencies));
       decodedToken?.isCompanyOwner
-        ? navigate(ROUTES.preference, { state: { withAccountant: true } })
+        ? navigate(ROUTES.preference, { replace: true })
         : navigate(ROUTES.chooseCompany);
     } catch (error: any) {
       const { data } = error.response;

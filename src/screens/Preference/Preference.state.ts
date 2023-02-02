@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ActionMeta, OnChangeValue, SingleValue } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -37,6 +37,7 @@ export const usePreferenceState = () => {
     value: currency.value,
     id: currency.id,
   }));
+  const ownerAccount = user?.accounts?.find((acc) => acc.role === 'owner');
 
   const initialState = {
     selectedCurrencyValue: formatedCurrencies[0],
@@ -46,8 +47,6 @@ export const usePreferenceState = () => {
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const locationState = location?.state as { withAccountant: boolean };
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
@@ -88,7 +87,7 @@ export const usePreferenceState = () => {
         name: values.companyName || '',
         currency: state.selectedCurrencyValue?.id,
         date_format: state.selectedFormatDate?.value,
-        withAccountant: locationState?.withAccountant ? true : false,
+        withAccountant: !!ownerAccount,
         active_account: user.active_account || '',
       };
       const { data } = await userInfoCreate(payload);
@@ -122,7 +121,7 @@ export const usePreferenceState = () => {
     formik,
     formatedCurrencies,
     isDisabledButton,
-    locationState,
+    ownerAccount,
     onChangeIamAccountantHandler,
     onContinueButtonClickHandler,
     onChangeCurrencyHandler,

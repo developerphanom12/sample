@@ -181,7 +181,7 @@ export const getLastMonthDateRange = () => {
 };
 
 export const getFirstLetterUppercase = (text: string) =>
-  text.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+  text?.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 
 export const getCorrectCustomId = (text: string) => {
   if (typeof text !== 'string' || !text) return;

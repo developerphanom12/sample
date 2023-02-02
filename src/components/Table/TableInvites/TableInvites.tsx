@@ -32,7 +32,7 @@ export const TableInvites: FC<ITableInvites> = (props) => {
           <TableButton>Email</TableButton>
         </Styled.Column>
         <Styled.Column>
-          <TableButton>Your role in company</TableButton>
+          <TableButton>Role</TableButton>
         </Styled.Column>
         <Styled.Column>
           <TableButton>Status</TableButton>
@@ -49,6 +49,7 @@ export const TableInvites: FC<ITableInvites> = (props) => {
           <TableInvitesItem
             key={invite.id}
             inviteId={invite.id}
+            isActive={invite.isActive}
             createdAt={invite.created}
             createdBy={invite?.members[0]?.name}
             creatorRole={invite?.members[0]?.role}
@@ -68,6 +69,7 @@ export const TableInvites: FC<ITableInvites> = (props) => {
             key={invite.id}
             inviteId={invite.id}
             createdAt={invite.created}
+            isActive={invite.isActive}
             createdBy={invite?.members[0]?.name}
             creatorRole={invite?.members[0]?.role}
             inviteEmail={invite.email}

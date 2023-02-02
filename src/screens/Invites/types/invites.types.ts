@@ -30,6 +30,7 @@ export interface IInvites {
   updated: string;
   email: string;
   userInvitorId: string;
+  isActive: boolean;
   members: Pick<
     IMember,
     'id' | 'role' | 'name' | 'userInvitorName' | 'created'

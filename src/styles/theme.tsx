@@ -24,7 +24,7 @@ export const COLORS = {
   swampGreen: '#A3BD42',
   green: '#5FAD00',
   red: '#FD3E5B',
-  pink: 'rgba(255, 82, 82, 0.1);',
+  pink: 'rgba(255, 82, 82, 0.1)',
   lightGray: '#F2F2F2',
   whiteGray: '#E5E5E5',
   gray: '#C4C4C4',

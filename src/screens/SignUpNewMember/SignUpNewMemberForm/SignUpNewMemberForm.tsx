@@ -9,6 +9,7 @@ import { SignUpFormStyles as Styled } from './SignUpNewMemberForm.styles';
 import { inputs } from '../SignUpNewMember.constants';
 
 import { STRINGS } from 'constants/strings';
+import { Input } from '../../../components/Input';
 
 interface ISignUpFormProps {
   onTogglePasswordVisibility: () => void;
@@ -43,6 +44,12 @@ export const SignUpNewMemberForm: FC<ISignUpFormProps> = (props) => {
 
   return (
     <Styled.Form onSubmit={onFormHandleSubmit}>
+      <Input
+        value={formikMeta('email').value}
+        text="Email"
+        isDisabled
+        isRemoveBorder
+      />
       {inputs.map((input) => (
         <InputsBoxItem
           key={input.inputName}

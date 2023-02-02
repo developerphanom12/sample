@@ -24,7 +24,7 @@ export const Preference: FC = () => {
     formatedCurrencies,
     selectedCurrencyValue,
     selectedFormatDate,
-    locationState,
+    ownerAccount,
   } = usePreferenceState();
 
   return (
@@ -64,7 +64,7 @@ export const Preference: FC = () => {
               value={selectedFormatDate}
               isRemoveBorder
             />
-            {!locationState?.withAccountant && (
+            {!ownerAccount && (
               <Styled.CheckBoxWrapper>
                 <CheckboxItem
                   isChecked={isChecked}

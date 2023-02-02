@@ -15,12 +15,14 @@ interface ITableInviteItem {
   inviteId: string;
   creatorRole: string;
   inviteEmail: string;
+  isActive: boolean;
   onDeleteIconClickHandler: (inviteId: string) => void;
   onEditIconClickHandler: (inviteId: string) => void;
   onResendInvitationHandler: (inviteId: string) => void;
 }
 export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
   const {
+    isActive,
     createdAt,
     createdBy,
     onResendInvitationHandler,
@@ -46,10 +48,16 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
   return (
     <Styled.Item>
       <Styled.Action>
-        <Styled.ActionButton onClick={onClickEditIconHandler}>
+        <Styled.ActionButton
+          isDisabled={isActive}
+          onClick={onClickEditIconHandler}
+        >
           <Icon type="edit" />
         </Styled.ActionButton>
-        <Styled.ActionButton onClick={onClickDeleteIconHandler}>
+        <Styled.ActionButton
+          isDisabled={isActive}
+          onClick={onClickDeleteIconHandler}
+        >
           <Icon type="remove" />
         </Styled.ActionButton>
       </Styled.Action>
@@ -58,14 +66,16 @@ export const TableInvitesItem: FC<ITableInviteItem> = (props) => {
       </Styled.Column>
       <Styled.Column>{getFirstLetterUppercase(userRole || '')}</Styled.Column>
       <Styled.Column>
-        {
+        {isActive ? (
+          <Styled.TextWrapper>Active</Styled.TextWrapper>
+        ) : (
           <Styled.TextWrapper
-            isExpired={true}
+            isExpired={!isActive}
             onClick={onClickResendInviteHandler}
           >
             Resend invitation
           </Styled.TextWrapper>
-        }
+        )}
       </Styled.Column>
       <Styled.Column>
         {getFormattedDate(createdAt, DATE_FORMATS[0].value)}

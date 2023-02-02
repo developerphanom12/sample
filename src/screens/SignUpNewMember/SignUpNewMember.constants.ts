@@ -6,11 +6,6 @@ export const formikInitialValues = {
 
 export const inputs = [
   {
-    inputType: 'email',
-    labelText: 'Email',
-    inputName: 'email',
-  },
-  {
     inputType: 'text',
     labelText: 'Full Name',
     inputName: 'fullName',
