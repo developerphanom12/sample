@@ -39,11 +39,12 @@ export const TableSettingsCompanyItem: React.FC<
           <Styled.ActionButton onClick={onClickEditIconHandler}>
             <Icon type="edit" />
           </Styled.ActionButton>
-          {isHideDeleteButton ? null : (
-            <Styled.ActionButton onClick={onClickDeleteIconHandler}>
-              <Icon type="remove" />
-            </Styled.ActionButton>
-          )}
+          <Styled.ActionButton
+            isDisabled={isHideDeleteButton}
+            onClick={onClickDeleteIconHandler}
+          >
+            <Icon type="remove" />
+          </Styled.ActionButton>
         </Styled.Action>
       )}
       <Styled.Column>{companyName}</Styled.Column>

@@ -30,6 +30,7 @@ import {
   updateCompanyMember,
 } from '../settings.api';
 import { setCompanies, setMembers } from '../reducer/settings.reducer';
+import { updateUserAccount } from '../../SignUp/reducer/signup.reducer';
 
 import { USER_ROLES } from 'constants/strings';
 
@@ -63,7 +64,7 @@ export const useUserListState = () => {
 
   const onModalWindowCancelClickButtonHandler = () => {
     onModalWindowToggle();
-    setIsEdit(false);
+    isEdit && setIsEdit(false);
     onChangeStateFieldHandler('role', { value: '', label: '' });
     onChangeStateFieldHandler('companies', null);
     onChangeStateFieldHandler('isInvitation', false);
@@ -222,9 +223,13 @@ export const useUserListState = () => {
 
   const onEditIconClickHandler = (itemId: string) => {
     const selectedUser = getSelectedUser(members, itemId);
+    const email =
+      selectedUser?.memberInvite && !selectedUser?.memberInvite?.isCompanyInvite
+        ? selectedUser?.memberInvite?.email
+        : selectedUser?.user?.email;
+
     formik.setValues({
-      email:
-        selectedUser?.memberInvite?.email || selectedUser?.user?.email || '',
+      email: email || '',
       fullName: selectedUser?.name || '',
     });
 
@@ -289,16 +294,20 @@ export const useUserListState = () => {
         isEdit && !state.isInvitation
           ? {
               role: state.role?.value || '',
-              active_account: active_account || '',
             }
           : {
               role: state.role?.value || '',
               name: values.fullName,
               email: values.email,
               isInviteCompanyMember: state.isInvitation,
-              active_account: active_account || '',
             };
-      await updateCompanyMember(payload, state.selectedItemId);
+      const { data: updatedAcc } = await updateCompanyMember(
+        { ...payload, active_account: active_account || '' },
+        state.selectedItemId
+      );
+      if (!state.isInvitation && active_account === state.selectedItemId) {
+        dispatch(updateUserAccount(updatedAcc));
+      }
       const { data } = await getCompanyMembers({
         active_account: active_account || '',
         take: +itemsPerPage.value,

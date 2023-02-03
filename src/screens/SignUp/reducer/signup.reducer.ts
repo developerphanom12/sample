@@ -164,6 +164,16 @@ export const SignUpUserSlice = createSlice({
     ) => {
       state.isSkipOnboarding = action.payload;
     },
+    updateUserAccount: (
+      state: ISIGN_UP_USER_INITIAL_STATE,
+      action: PayloadAction<IAccount>
+    ) => {
+      state.user.accounts =
+        state.user.accounts &&
+        state.user.accounts.map((acc) =>
+          acc.id === action.payload.id ? action.payload : acc
+        );
+    },
   },
 });
 
@@ -181,6 +191,7 @@ export const {
   updateUserData,
   setGoogleSocialAccount,
   setIsSkipOnboarding,
+  updateUserAccount,
 } = SignUpUserSlice.actions;
 
 export const signUpUserReducer = SignUpUserSlice.reducer;

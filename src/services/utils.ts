@@ -75,7 +75,9 @@ export const getInvitationStatus = (diffInDays: number | null) =>
     : 'Waiting for approval';
 
 export const getFilteredMembers = (members: IMember[]) =>
-  members?.filter((member) => !member.memberInvite);
+  members?.filter(
+    (member) => !member.memberInvite || member.memberInvite.isActive
+  );
 
 export const setCompanyLogoHandler = (
   data: ICompaniesSwitcher[],

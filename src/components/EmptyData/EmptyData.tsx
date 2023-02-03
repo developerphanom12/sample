@@ -35,6 +35,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
     onClick,
   } = props;
 
+  const isUserRole = userRole === 'user';
   return (
     <Styled.MainWrapper>
       {isNoResults ? (
@@ -46,15 +47,15 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
         <Styled.ContentWrapper>
           <Styled.Image src={imageUrl || emptyDataSrc}></Styled.Image>
           <Styled.Title>{title}</Styled.Title>
-          <Styled.SubTitle>{firstSubtitle}</Styled.SubTitle>
-          <Styled.SubTitle>{secondSubtitle}</Styled.SubTitle>
+          <Styled.SubTitle>{isUserRole ? '' : firstSubtitle}</Styled.SubTitle>
+          <Styled.SubTitle>{isUserRole ? '' : secondSubtitle}</Styled.SubTitle>
           {isUploadFile ? (
             <FileUploadButton
               onChangeFiles={onAddReceiptHandler}
               isRoundedButton={isRoundedButton}
             />
           ) : (
-            userRole !== 'user' && (
+            !isUserRole && (
               <Styled.ButtonWrapper>
                 <Button
                   width="primary"

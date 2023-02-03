@@ -52,7 +52,7 @@ export const countryValidation = Yup.string()
 export const nameValidation = Yup.string()
   .trim()
   .matches(
-    /^[A-Za-z ]*$/,
+    /^[A-Za-zа-яА-Я ]*$/,
     'Name must be at least 3 characters and contains only latin letters'
   )
   .max(40)

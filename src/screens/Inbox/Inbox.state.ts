@@ -253,6 +253,8 @@ export const useInboxState = () => {
     validationSchema: emailSendValidationSchema,
   });
 
+  console.log(formik.isValid, 'formik is valid');
+
   const onActionsClick = () =>
     onChangeStateFieldHandler('showActions', !state.showActions);
   const onActionsClose = () => onChangeStateFieldHandler('showActions', false);

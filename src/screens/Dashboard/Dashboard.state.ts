@@ -101,7 +101,7 @@ export const useDashboardState = () => {
     }
   };
 
-  const lastReceipts = receipts?.data.slice(-5);
+  const lastReceipts = receipts?.data.slice(0, 5);
 
   const dateHashMapping: Record<
     string,
