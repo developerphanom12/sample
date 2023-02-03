@@ -45,7 +45,7 @@ export const capiumPasswordValidation = Yup.string()
 export const countryValidation = Yup.string()
   .required('Enter a country please')
   .matches(
-    /^[A-Za-z ]*$/,
+    /^[A-Za-z]*$/,
     'Country must be at least 2 characters and contains only latin letters'
   )
   .min(2, 'Country must be at least 2 characters');
@@ -53,7 +53,7 @@ export const countryValidation = Yup.string()
 export const nameValidation = Yup.string()
   .trim()
   .matches(
-    /^[A-Za-z ]*$/,
+    /^[A-Za-z]*$/,
     'Name must be at least 3 characters and contains only latin letters'
   )
   .max(40)
@@ -63,7 +63,7 @@ export const nameValidation = Yup.string()
 export const companyNameValidation = Yup.string()
   .trim()
   .matches(
-    /^[A-Za-z ]*$/,
+    /^[A-Za-z]*$/,
     'Company Name must be at least 3 characters and contains only latin letters'
   )
   .max(30)

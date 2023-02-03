@@ -11,10 +11,9 @@ interface IUserListModalBoxProps
     IModalWindowsBox,
     'onSaveButtonCLickHandler' | 'onChangeInputValueHandler' | 'inputValue'
   > {
-  onSaveButtonCLickHandler: any;
-  // onSaveButtonCLickHandler: (
-  //   e?: React.FormEvent<HTMLFormElement> | undefined
-  // ) => void;
+  onSaveButtonCLickHandler: (
+    e?: React.FormEvent<HTMLFormElement> | undefined
+  ) => void;
   formikMeta: (name: string) => FieldMetaProps<string>;
   formikProps: (nameOrOptions: string) => FieldInputProps<string>;
   modalFields: TInputFields;

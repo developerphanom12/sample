@@ -75,12 +75,14 @@ export const UsersList: FC = () => {
     if (!count) return;
     onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage, active_account]);
-  
+
   return (
     <Styled.Section>
       <ModalBox
         modalFields={
-          role?.value === 'owner' ? modalFields.slice(0, 3) : modalFields
+          role?.value === 'owner' && !isEdit
+            ? modalFields.slice(0, 3)
+            : modalFields
         }
         isLoading={isLoading}
         isDisableButton={isDisableButton}

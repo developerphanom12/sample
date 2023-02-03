@@ -101,4 +101,9 @@ export const StyledReactSelect = styled(Select)<{
     display: flex;
     align-items: center;
   }
+  .Select__value-container--is-multi {
+    max-height: 45px;
+    height: 100%;
+    overflow-y: scroll;
+  }
 `;
