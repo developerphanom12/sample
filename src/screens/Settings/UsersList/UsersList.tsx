@@ -58,7 +58,6 @@ export const UsersList: FC = () => {
     onBlurHandler,
     onGetAllCompanyMembersHandler,
     onResendInvitationHandler,
-    onEditUserHandler
   } = useUserListState();
 
   useEffect(() => {

@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
 import { RequiredStringSchema } from 'yup/lib/string';
 import { AnyObject } from 'yup/lib/types';
-import { REGEXPS } from '../constants/validation-regexp';
+
+import { REGEXPS } from 'constants/validation-regexp';
 
 export const VALIDATION_TYPE = {
   password: 'password',
@@ -52,7 +53,7 @@ export const countryValidation = Yup.string()
 export const nameValidation = Yup.string()
   .trim()
   .matches(
-    /^[A-Za-zа-яА-Я ]*$/,
+    /^[A-Za-z ]*$/,
     'Name must be at least 3 characters and contains only latin letters'
   )
   .max(40)
