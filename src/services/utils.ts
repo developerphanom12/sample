@@ -76,7 +76,7 @@ export const getInvitationStatus = (diffInDays: number | null) =>
 
 export const getFilteredMembers = (members: IMember[]) =>
   members?.filter(
-    (member) => !member.memberInvite || member.memberInvite.isActive
+    (member) => !member?.memberInvite || member?.memberInvite?.isActive
   );
 
 export const setCompanyLogoHandler = (
