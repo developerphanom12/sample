@@ -4,6 +4,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { setInterseptors } from 'services/api-service';
 
 import { Layout } from 'components/Layout/Layout';
+import { RedirectOAuthPage } from 'components/RedirectOAuthPage';
 
 import { Login } from 'screens/Login/Login';
 import { SignUp } from 'screens/SignUp/SignUp';
@@ -67,6 +68,7 @@ export const AppRouter: FC = () => {
             <Route path={ROUTES.master} element={<Master />} />
           </Route>
         </Route>
+        <Route path={ROUTES.callback} element={<RedirectOAuthPage />} />
         <Route path={ROUTES.preference} element={<Preference />} />
         <Route path={ROUTES.login} element={<Login />} />
         <Route path={ROUTES.sign_up} element={<SignUp />} />

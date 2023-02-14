@@ -20,5 +20,6 @@ export enum ROUTES {
   chooseCompany = '/choose-company',
   capiumLogin = '/capium-login',
   invites = '/invites',
+  callback = '/callback',
   notFound = '*',
 }
