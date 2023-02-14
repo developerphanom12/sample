@@ -44,6 +44,11 @@ import {
   InvitesReducer,
   INVITES_INITIAL_STATE,
 } from 'screens/Invites/reducer/invites.reducer';
+import {
+  salesInvoicesReducer,
+  SALES_INVOICES_INITIAL_STATE,
+} from 'screens/SalesInvoices/reducer';
+import { ISALES_INVOICES_INITIAL_STATE } from 'screens/SalesInvoices/types/salesInvoices.types';
 
 export const persistConfig = {
   key: 'root',
@@ -57,6 +62,7 @@ export const persistConfig = {
     'receiptDetails',
     'master',
     'settings',
+    'salesInvoices',
   ],
 };
 
@@ -70,6 +76,7 @@ export interface IState {
   receiptDetails: IRECEIPT_DETAILS_INITIAL_STATE;
   settings: ISETTINGS_INITIAL_STATE;
   invites: IINVITES_INITIAL_STATE;
+  salesInvoices: ISALES_INVOICES_INITIAL_STATE;
 }
 
 const combineReducer = combineReducers<IState>({
@@ -82,6 +89,7 @@ const combineReducer = combineReducers<IState>({
   receiptDetails: ReceiptDetailsReducer,
   settings: SettingsReducer,
   invites: InvitesReducer,
+  salesInvoices: salesInvoicesReducer,
 });
 
 export type combineReducerType = ReturnType<typeof combineReducer>;
@@ -99,6 +107,7 @@ const reducer = (state: combineReducerType | undefined, action: AnyAction) => {
         receiptDetails: RECEIPT_DETAILS_INITIAL_STATE,
         settings: SETTINGS_INITIAL_STATE,
         invites: INVITES_INITIAL_STATE,
+        salesInvoices: SALES_INVOICES_INITIAL_STATE,
       };
     }
   }

@@ -11,6 +11,7 @@ export const ADMIN_LINKS = [
   { title: 'Inbox', route: ROUTES.inbox },
   { title: 'Master', route: ROUTES.master, tabs: MASTER_TABS },
   { title: 'Invites', route: ROUTES.invites },
+  { title: 'Sales Invoices', route: ROUTES.salesInvoices },
   { title: 'Settings', route: ROUTES.settings },
   { title: 'Help & Support', route: ROUTES.support, isLast: true },
 ];

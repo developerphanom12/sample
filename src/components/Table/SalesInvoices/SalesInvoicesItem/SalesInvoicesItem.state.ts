@@ -8,14 +8,13 @@ import { selectReceipt } from 'screens/Inbox/reducer/inbox.reducer';
 import { ROUTES } from 'constants/routes';
 
 interface IuseTableInboxAdminItemState {
-  receiptId: string;
-  receiptIndex: number;
+  itemIndex: number;
 }
 
-export const useTableInboxAdminItemState = (
+export const useSalesInvoicesItemState = (
   props: IuseTableInboxAdminItemState
 ) => {
-  const { receiptIndex } = props;
+  const { itemIndex } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +23,7 @@ export const useTableInboxAdminItemState = (
   const onReceiptDetailsClickHandler = (
     event: React.MouseEvent<HTMLDivElement>
   ) => {
-    dispatch(selectReceipt(receiptIndex));
+    dispatch(selectReceipt(itemIndex));
     navigate(ROUTES.receiptDetails);
   };
   return { ...user.userInfo, onReceiptDetailsClickHandler };

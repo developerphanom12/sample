@@ -1,5 +1,3 @@
-import { PAGINATION_ARRAY } from 'constants/pagination-array';
-
 export const statusFilterOptions = [
   { value: 'all', label: `All` },
   { value: 'processing', label: `Processing` },

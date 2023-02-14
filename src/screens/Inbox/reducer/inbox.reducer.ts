@@ -10,7 +10,6 @@ export const INBOX_INITIAL_STATE: IINBOX_INITIAL_STATE = {
   selectedReceiptIndex: null,
   isFetchingData: false,
   isAllChecked: false,
-
   isCompanyChanged: false,
 };
 

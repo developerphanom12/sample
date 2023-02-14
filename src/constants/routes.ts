@@ -21,5 +21,6 @@ export enum ROUTES {
   capiumLogin = '/capium-login',
   invites = '/invites',
   callback = '/callback',
+  salesInvoices = '/sales-invoices',
   notFound = '*',
 }
