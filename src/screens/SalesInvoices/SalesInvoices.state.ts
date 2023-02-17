@@ -17,11 +17,9 @@ import { useSortableData } from 'hooks/useSortTableData';
 
 // import { formikInitialValues, INITIAL_STATE } from './inbox.constants';
 
-import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
-
 import { ROUTES } from 'constants/routes';
 import { IuseSalesInvoicesState } from './types/salesInvoices.types';
-import { INITIAL_STATE } from './salesInvoices.constants';
+import { formikInitialValues, INITIAL_STATE } from './salesInvoices.constants';
 
 export const useSalesInvoicesState = () => {
   const {
@@ -32,11 +30,16 @@ export const useSalesInvoicesState = () => {
       isCompanyChanged,
       isAllChecked,
     },
-    user: { user, userInfo, token },
+    user: { user, userInfo },
   } = useSelector((state: IState) => state);
 
-  // const initialState = INITIAL_STATE;
   const [state, setState] = useState<IuseSalesInvoicesState>(INITIAL_STATE);
+
+  const invoice_formik = useFormik({
+    initialValues: formikInitialValues,
+    onSubmit: async (values, actions) => values,
+    validationSchema: emailSendValidationSchema,
+  });
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof INITIAL_STATE,
@@ -257,48 +260,8 @@ export const useSalesInvoicesState = () => {
 
   const isDownloadButtonDisabled = !state.checkedIds.length;
 
-  const onDeleteReceiptHandler = async () => {
+  const onDeleteInvoiceHandler = async () => {
     try {
-      // const isLastReceiptOnPage = totalCount === state.checkedIds.length;
-      // const isEqualAmount = receipts.length === state.checkedIds.length;
-      // let skipReceipts = 0;
-
-      // await receiptDelete(
-      //   { receipts: state.checkedIds, active_account: active_account || '' },
-      //   token
-      // );
-
-      // setState((prevState) => ({
-      //   ...prevState,
-      //   searchValue:
-      //     receipts.length === 1 || state.searchValue
-      //       ? ''
-      //       : prevState.searchValue,
-      //   isContentLoading: receipts.length !== 1 ? true : false,
-      //   isFetchingReceipts: isLastReceiptOnPage ? true : false,
-      //   statusValue: isLastReceiptOnPage
-      //     ? INITIAL_STATE.statusValue
-      //     : prevState.statusValue,
-      //   dateValue: isLastReceiptOnPage ? null : prevState.dateValue,
-      //   formattedDate: isLastReceiptOnPage ? '' : prevState.formattedDate,
-      // }));
-
-      // if (currentPage === 0) {
-      //   skipReceipts = 0;
-      // } else {
-      //   skipReceipts = currentPage * +receiptsPerPage.value;
-      // }
-
-      // if (isEqualAmount && !!currentPage && count) {
-      //   skipReceipts = (currentPage - 1) * +receiptsPerPage.value;
-      //   onChangePageHandler(currentPage - 1);
-      // }
-
-      // !state.searchValue &&
-      //   (await onFetchReceiptsHandler({
-      //     ...fetchParams,
-      //     skip: skipReceipts,
-      //   }));
       onActionsClick();
     } catch (error) {
       onActionsClick();
@@ -337,6 +300,7 @@ export const useSalesInvoicesState = () => {
 
   return {
     ...state,
+    invoice_formik,
     isCompanyChanged,
     setCurrentPage,
     totalCount,
@@ -388,7 +352,7 @@ export const useSalesInvoicesState = () => {
     onCheckedAllItemsHandler,
     onClickDownloadCSVButtonHandler,
     onCheckedPublishMockFuncHandler,
-    onDeleteReceiptHandler,
+    onDeleteInvoiceHandler,
     onMarkAsPaidButtonHandler,
     onClickOutsideDatePickerHandler,
   };

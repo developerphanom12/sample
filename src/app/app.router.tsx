@@ -30,6 +30,7 @@ import { WorkSpacePicker } from 'screens/WorkSpacePicker';
 import { Invites } from 'screens/Invites';
 import { BindSocialAccount } from 'screens/BindSocialAccount';
 import { SalesInvoices } from 'screens/SalesInvoices';
+import { SalesInvoicesDetails } from 'screens/SalesInvoicesDetails';
 
 import { PrivateRouter } from './privateRouter';
 
@@ -44,7 +45,14 @@ export const AppRouter: FC = () => {
           <Route element={<PrivateRouter />}>
             <Route index element={<Dashboard />} />
             <Route path={ROUTES.invites} element={<Invites />} />
-            <Route path={ROUTES.salesInvoices} element={<SalesInvoices />} />
+            <Route
+              path={ROUTES.salesInvoices}
+              element={<SalesInvoices />}
+            ></Route>
+            <Route
+              path={ROUTES.salesInvoiceDetails}
+              element={<SalesInvoicesDetails />}
+            />
             <Route path={ROUTES.inbox} element={<Inbox />}>
               <Route
                 path={ROUTES.receiptDetails}

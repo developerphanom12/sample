@@ -78,7 +78,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           onEmailClick={onEmailClick}
           isDownloadButtonDisabled={isDownloadButtonDisabled}
           onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-          onDeleteReceiptHandler={onDeleteReceiptHandler}
+          onDeleteItemHandler={onDeleteReceiptHandler}
           onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
         />
       )}

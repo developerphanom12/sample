@@ -12,3 +12,9 @@ export const INITIAL_STATE = {
   isFetchingData: true,
   isContentLoading: false,
 };
+
+export const formikInitialValues = {
+  to: '',
+  subject: '',
+  message: '',
+};

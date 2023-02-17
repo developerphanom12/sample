@@ -2,6 +2,8 @@ import { FC } from 'react';
 
 import { CustomDatePicker } from 'components/CustomDatePicker';
 
+import { useOutsideClick } from 'hooks/useOutsideClick';
+
 import { Button } from '../Button';
 import { FileUploadButton } from '../FileUploadButton';
 import { Icon } from '../Icons/Icons';
@@ -11,8 +13,6 @@ import { CustomSelect } from '../CustomSelect';
 import { ThreeDotsMenu } from '../ThreeDotsMenu';
 
 import { statusFilterOptions } from 'screens/Inbox/inbox.constants';
-
-import { useOutsideClick } from 'hooks/useOutsideClick';
 
 export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
   const {
@@ -34,7 +34,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
     onClickDownloadCSVButtonHandler,
     isDownloadButtonDisabled,
     onDownloadExcelFileHandler,
-    onDeleteReceiptHandler,
+    onDeleteItemHandler,
     onMarkAsPaidButtonHandler,
     datePickerRef,
   } = props;
@@ -92,7 +92,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
               onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
               onEmailClick={onEmailClick}
               onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-              onDeleteReceiptHandler={onDeleteReceiptHandler}
+              onDeleteItemHandler={onDeleteItemHandler}
               onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
             />
           )}

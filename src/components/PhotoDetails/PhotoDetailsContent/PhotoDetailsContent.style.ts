@@ -29,12 +29,10 @@ export const PhotoDetailsContentStyles = {
     height: 60px;
     margin-bottom: 10px;
   `,
-
   ChildrenWrapper: styled.div`
     max-width: 248px;
     width: 100%;
   `,
- 
   ItemWrapper: styled.div`
     display: flex;
     justify-content: space-between;

@@ -22,5 +22,6 @@ export enum ROUTES {
   invites = '/invites',
   callback = '/callback',
   salesInvoices = '/sales-invoices',
+  salesInvoiceDetails = '/sales-invoices/details',
   notFound = '*',
 }

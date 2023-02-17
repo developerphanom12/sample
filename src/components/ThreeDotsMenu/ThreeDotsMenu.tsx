@@ -7,7 +7,7 @@ export interface IThreeDotsMenu {
   onClickDownloadCSVButtonHandler: () => void;
   onDownloadExcelFileHandler: () => void;
   onEmailClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onDeleteReceiptHandler: () => Promise<void>;
+  onDeleteItemHandler: () => Promise<void>;
 }
 
 export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
@@ -16,7 +16,7 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
     onClickDownloadCSVButtonHandler,
     onDownloadExcelFileHandler,
     onEmailClick,
-    onDeleteReceiptHandler,
+    onDeleteItemHandler,
   } = props;
   return (
     <Styled.Wrapper>
@@ -30,7 +30,7 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
         Export to CSV
       </Styled.Item>
       <Styled.Item onClick={onEmailClick}>Email</Styled.Item>
-      <Styled.Item onClick={onDeleteReceiptHandler}>Delete</Styled.Item>
+      <Styled.Item onClick={onDeleteItemHandler}>Delete</Styled.Item>
     </Styled.Wrapper>
   );
 };

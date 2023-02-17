@@ -6,20 +6,6 @@ import { SuccessPopup } from 'components/SuccessPopup';
 
 import { ActionMenuContentStyles as Styled } from './ActionMenuContent.style';
 
-interface IActionMenuContentProps extends IEmailModalWindowProps {
-  csvLink: React.RefObject<
-    CSVLink &
-      HTMLAnchorElement & {
-        link: HTMLAnchorElement;
-      }
-  >;
-  csvData: string;
-  excelRef: React.RefObject<HTMLAnchorElement>;
-  excelUrl: string;
-  isSentSuccessPopup: boolean;
-  closeSuccesPopupHandler: () => void;
-}
-
 export const ActionMenuContent: FC<IActionMenuContentProps> = (props) => {
   const {
     checkedIds,

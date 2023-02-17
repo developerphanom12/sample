@@ -25,7 +25,7 @@ declare global {
   }
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
-    onDeleteReceiptHandler: () => Promise<void>;
+    onDeleteItemHandler: () => Promise<void>;
     onMarkAsPaidButtonHandler: () => Promise<void>;
     onClickDownloadCSVButtonHandler: () => Promise<void>;
     onSelectFilesHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -131,7 +131,19 @@ declare global {
     sortOrder: TSorterOrder;
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }
-
+  interface IActionMenuContentProps extends IEmailModalWindowProps {
+    csvLink: React.RefObject<
+      CSVLink &
+        HTMLAnchorElement & {
+          link: HTMLAnchorElement;
+        }
+    >;
+    csvData: string;
+    excelRef: React.RefObject<HTMLAnchorElement>;
+    excelUrl: string;
+    isSentSuccessPopup: boolean;
+    closeSuccesPopupHandler: () => void;
+  }
   interface IReceipt {
     category: ISelectItem | null;
     currency: ICurrency;
@@ -154,9 +166,10 @@ declare global {
   }
 
   interface IInboxContent
-    extends IHeaderPanelProps,
+    extends Omit<IHeaderPanelProps, 'onDeleteItemHandler'>,
       TableInboxAdminProps,
       IPagination {
+    onDeleteReceiptHandler: () => Promise<void>;
     isContentLoading: boolean;
     onChangeReceiptsPerPage: (newValue: IOption) => void;
     receiptsPerPage: { value: string; label: string };
@@ -382,6 +395,7 @@ declare global {
 }
 
 export {
+  IActionMenuContentProps,
   IBindSocialAccountFormProps,
   TSorterOrder,
   IOAuthLogin,

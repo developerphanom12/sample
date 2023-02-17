@@ -1,68 +1,88 @@
-import { ChangeEvent, FormEvent, MouseEvent } from 'react';
-import { ActionMeta } from 'react-select';
+import { FC } from 'react';
 
 import { ActionsMenu } from 'components/ActionsMenu';
 import { HeaderPanel } from 'components/HeaderPanel';
 
-export const ActionsPanel = () => {
+export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
+  props
+) => {
+  const {
+    datePickerRef,
+    dateValue,
+    formattedDate,
+    isDatePickerOpen,
+    isDownloadButtonDisabled,
+    onActionsClose,
+    onChangeDate,
+    onChangeSearchValueHandler,
+    onChangeStatusValueHandler,
+    onClickDownloadCSVButtonHandler,
+    onClickOutsideDatePickerHandler,
+    onDeleteItemHandler,
+    onDownloadExcelFileHandler,
+    onEmailClick,
+    onMarkAsPaidButtonHandler,
+    onSelectFilesHandler,
+    searchValue,
+    setIsDatePickerOpen,
+    showActions,
+    statusValue,
+    onActionsClick,
+    checkedIds,
+    closeSuccesPopupHandler,
+    csvData,
+    csvLink,
+    excelRef,
+    excelUrl,
+    formikMeta,
+    formikProps,
+    isLoading,
+    isModalWindowOpen,
+    isSentSuccessPopup,
+    isValid,
+    onCloseModalWindowHandler,
+    onFormHandleSubmit,
+  } = props;
   return (
     <>
       <HeaderPanel
-        datePickerRef={undefined as any}
-        onDeleteReceiptHandler={function (): Promise<void> {
-          throw new Error('Function not implemented.');
-        }}
-        onMarkAsPaidButtonHandler={function (): Promise<void> {
-          throw new Error('Function not implemented.');
-        }}
-        onClickDownloadCSVButtonHandler={function (): Promise<void> {
-          throw new Error('Function not implemented.');
-        }}
-        onSelectFilesHandler={function (
-          event: ChangeEvent<HTMLInputElement>
-        ): void {}}
-        onChangeStatusValueHandler={function (
-          newValue: unknown,
-          actionMeta: ActionMeta<unknown>
-        ): void {}}
-        statusValue={undefined as any}
-        onChangeSearchValueHandler={function (
-          event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-        ): void {}}
-        searchValue={''}
-        onChangeDate={function (date: Date): void {}}
-        onClickOutsideDatePickerHandler={function (
-          event: MouseEvent<HTMLDivElement>
-        ): void {}}
-        isDatePickerOpen={false}
-        dateValue={null}
-        setIsDatePickerOpen={function (): void {}}
-        formattedDate={''}
-        onActionsClose={function (): void {}}
-        onEmailClick={function (): void {}}
-        showActions={false}
-        isDownloadButtonDisabled={false}
-        onDownloadExcelFileHandler={function (): Promise<void> {
-          throw new Error('Function not implemented.');
-        }}
+        datePickerRef={datePickerRef}
+        onDeleteItemHandler={onDeleteItemHandler}
+        onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+        onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
+        onSelectFilesHandler={onSelectFilesHandler}
+        onChangeStatusValueHandler={onChangeStatusValueHandler}
+        statusValue={statusValue}
+        onChangeSearchValueHandler={onChangeSearchValueHandler}
+        searchValue={searchValue}
+        onChangeDate={onChangeDate}
+        onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
+        isDatePickerOpen={isDatePickerOpen}
+        dateValue={dateValue}
+        setIsDatePickerOpen={setIsDatePickerOpen}
+        formattedDate={formattedDate}
+        onActionsClose={onActionsClose}
+        onEmailClick={onEmailClick}
+        showActions={showActions}
+        isDownloadButtonDisabled={isDownloadButtonDisabled}
+        onActionsClick={onActionsClick}
+        onDownloadExcelFileHandler={onDownloadExcelFileHandler}
       />
       <ActionsMenu
-        csvLink={undefined as any}
-        csvData={''}
-        excelRef={undefined as any}
-        excelUrl={''}
-        isSentSuccessPopup={false}
-        closeSuccesPopupHandler={function (): void {}}
-        onCloseModalWindowHandler={function (): void {}}
-        isModalWindowOpen={false}
-        onFormHandleSubmit={function (
-          e?: FormEvent<HTMLFormElement> | undefined
-        ): void {}}
-        formikProps={function (nameOrOptions: string) {}}
-        formikMeta={function (name: string) {}}
-        isValid={false}
-        isLoading={false}
-        checkedIds={[]}
+        csvLink={csvLink}
+        csvData={csvData}
+        excelRef={excelRef}
+        excelUrl={excelUrl}
+        isSentSuccessPopup={isSentSuccessPopup}
+        closeSuccesPopupHandler={closeSuccesPopupHandler}
+        onCloseModalWindowHandler={onCloseModalWindowHandler}
+        isModalWindowOpen={isModalWindowOpen}
+        onFormHandleSubmit={onFormHandleSubmit}
+        formikProps={formikProps}
+        formikMeta={formikMeta}
+        isValid={isValid}
+        isLoading={isLoading}
+        checkedIds={checkedIds}
       />
     </>
   );
