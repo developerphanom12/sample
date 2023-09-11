@@ -19,7 +19,6 @@ export const signInWithGoogle = async () => {
     const {
       user: { providerData },
     } = await signInWithPopup(auth, provider);
-
     return {
       name: providerData[0].displayName,
       email: providerData[0].email,

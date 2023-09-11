@@ -22,6 +22,7 @@ export const LinksBox: FC<ILinksBox> = (props) => {
             to={link.route}
             tabs={link.tabs}
             isLast={link.isLast}
+            is_sales={link.title === 'Sales Invoices'}
             isDisabled={getIsDisabledLink(link.route, active_account)}
           >
             {link.title}

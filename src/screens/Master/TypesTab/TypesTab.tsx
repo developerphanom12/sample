@@ -86,7 +86,7 @@ export const TypesTab: FC = () => {
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? 'Edit Type' : 'Insert Type'}
+        headerText={isEdit ? 'Edit Payment Type' : 'Insert Payment Type'}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
         onEnterCreateItemClick={onEnterCreateTypeClick}
         onSaveButtonCLickHandler={
@@ -100,7 +100,7 @@ export const TypesTab: FC = () => {
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         deleteItemName={`‘${selectedCategory?.name}’`}
-        categoryName="type"
+        categoryName="payment Type"
         isLoading={isLoading}
       />
       {isFetchingData ? (
@@ -145,7 +145,7 @@ export const TypesTab: FC = () => {
           pages={pages}
           receiptsPerPage={itemsPerPage}
           searchValue={searchValue}
-          tabName="Type"
+          tabName="Payment Type"
           onBlurHandler={onBlurHandler}
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}

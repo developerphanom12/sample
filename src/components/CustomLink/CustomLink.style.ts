@@ -6,16 +6,19 @@ export const CustomLinkStyles = {
   Link: styled(Link)<{
     active: PathMatch<string> | null;
     is_last?: string;
+    is_sales?: boolean;
     is_disabled?: string;
   }>`
     position: relative;
     max-width: 110px;
     min-width: 80px;
     min-width: ${({ is_last }) => is_last === 'true' && '120px'};
+    min-width: ${({ is_sales }) => is_sales && '110px'};
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
+    white-space: nowrap;
     justify-content: center;
     font-size: ${(props) => props.theme.size.default};
     font-weight: ${(props) =>

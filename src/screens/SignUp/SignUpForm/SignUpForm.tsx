@@ -63,10 +63,10 @@ export const SignUpForm: FC<ISignUpFormProps> = (props) => {
           onChangeCountryValueHandler={onChangeCountryValueHandler}
         />
       ))}
-
-      <Styled.ForgotPassword to={ROUTES.forgotPassword}>
+      <div style={{ marginBottom: 40 }}></div>
+      {/* <Styled.ForgotPassword to={ROUTES.forgotPassword}>
         {STRINGS.sign_in_up.forgot_password}
-      </Styled.ForgotPassword>
+      </Styled.ForgotPassword> */}
       <Button
         isDisabled={!isValid}
         type="submit"

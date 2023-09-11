@@ -48,7 +48,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
-        buttonText="Create Type"
+        buttonText="Create Payment Type"
       />
       {isContentLoading && isFocus ? (
         <Styled.LoaderWrapper>
@@ -67,7 +67,7 @@ export const TypesContent: FC<ITabContentProps> = (props) => {
             onEditIconClickHandler={onEditIconClickHandler}
           />
           {(searchValue && searchedItems?.length) ||
-          (!searchValue && categories.length) ? (
+            (!searchValue && categories.length) ? (
             <PaginationPanel
               pages={pages}
               currentPage={currentPage}

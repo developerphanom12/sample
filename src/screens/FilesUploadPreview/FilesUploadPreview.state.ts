@@ -15,6 +15,7 @@ import { INITIAL_STATE } from './filesUploadPreview.constants';
 
 import { ROUTES } from 'constants/routes';
 import { getReceipts } from '../Inbox/inbox.api';
+import { updateReceiptItem } from '../ReceiptDetails/receiptDetails.api';
 
 export const useFilesUploadPreviewState = () => {
   const navigate = useNavigate();
@@ -73,7 +74,13 @@ export const useFilesUploadPreviewState = () => {
         formData.append('receipt_photos', file);
       });
       formData.append('active_account', user.active_account || '');
-      await receiptCreate(formData, token);
+      const { data } = await receiptCreate(formData, token);
+      await Promise.all(
+        data.map((item: any) =>
+          updateReceiptItem({ id: item.id, payment_status: true })
+        )
+      );
+
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
       setIsLoading(false);

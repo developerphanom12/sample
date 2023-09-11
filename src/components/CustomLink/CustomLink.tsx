@@ -8,6 +8,7 @@ import { CustomLinkStyles as Styled } from './CustomLink.style';
 
 export interface CustomLinkProps {
   isLast?: boolean;
+  is_sales?: boolean;
   tabs?: string[];
   to: string;
   isDisabled?: boolean;
@@ -15,7 +16,7 @@ export interface CustomLinkProps {
 }
 
 export const CustomLink = (props: CustomLinkProps) => {
-  const { children, to, isLast, tabs, isDisabled } = props;
+  const { children, is_sales, to, isLast, tabs, isDisabled } = props;
 
   const { isHover, onMouseEnterHandler, onMouseLeaveHandler } =
     useCustomLinkState();
@@ -31,6 +32,7 @@ export const CustomLink = (props: CustomLinkProps) => {
       onMouseLeave={onMouseLeaveHandler}
       data-testid="header-link"
       is_last={`${isLast}`}
+      is_sales={is_sales}
       active={isActive}
       to={to}
       is_disabled={isDisabled ? `${isDisabled}` : ''}

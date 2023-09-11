@@ -2,7 +2,7 @@ import { ROUTES } from './routes';
 
 const CATEGORIES = 'Categories';
 const SUPPLIER_ACCOUNTS = 'Supplier Accounts';
-const TYPES = 'Types';
+const TYPES = 'Payment Types';
 
 export const MASTER_TABS = [CATEGORIES, SUPPLIER_ACCOUNTS, TYPES];
 
