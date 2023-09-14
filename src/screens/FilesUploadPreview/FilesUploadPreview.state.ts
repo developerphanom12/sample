@@ -74,12 +74,6 @@ export const useFilesUploadPreviewState = () => {
         formData.append('receipt_photos', file);
       });
       formData.append('active_account', user.active_account || '');
-      // const { data } = await receiptCreate(formData, token);
-      // await Promise.all(
-      //   data.map((item: any) =>
-      //     updateReceiptItem({ id: item.id, payment_status: true })
-      //   )
-      // );
 
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
