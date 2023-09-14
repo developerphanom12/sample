@@ -43,11 +43,11 @@ export const EMPTY_DATA_STRINGS_MASTER = {
     buttonText: 'Create Supplier Account',
   },
   type: {
-    title: 'Types will be shown here...',
+    title: 'Payment tdypes will be shown here...',
     firstSubtitle:
-      'We have created everything for you, please add your type to start.',
-    secondSubtitle: 'You can do that by using Create Type button below',
-    buttonText: 'Create Type',
+      'We have created everything for you, please add your payment type to start.',
+    secondSubtitle: 'You can do that by using Create Payment Type button below',
+    buttonText: 'Create Payment Type',
   },
   invites: {
     title: 'Invites will be shown here...',

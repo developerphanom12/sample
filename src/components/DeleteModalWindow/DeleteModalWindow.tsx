@@ -29,7 +29,7 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
         <Styled.Title>Confirm delete</Styled.Title>
         <Styled.MainContentWrapper>
           <Styled.SubTitle>
-            {`Please confirm you want to delete ${categoryName} `}
+            {`Sure you want to delete the selected records ${categoryName}`}
             <Styled.Highlighter>{deleteItemName}.</Styled.Highlighter> Deleting
             cannot be undone
           </Styled.SubTitle>
@@ -37,18 +37,18 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
             <Styled.ButtonsWrapper>
               <Button
                 onClick={onDeleteButtonClickHandler}
-                themedButton="roundedRed"
+                themedButton="roundedWhite"
                 width="rounded"
                 isLoading={isLoading}
               >
-                Delete
+                Yes
               </Button>
               <Button
                 onClick={onCloseDeleteModalWindowHandler}
-                themedButton="roundedWhite"
+                themedButton="roundedRed"
                 width="rounded"
               >
-                Cancel
+                No
               </Button>
             </Styled.ButtonsWrapper>
           </Styled.ButtonsBox>
