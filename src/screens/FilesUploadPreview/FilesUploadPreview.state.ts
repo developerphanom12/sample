@@ -74,6 +74,7 @@ export const useFilesUploadPreviewState = () => {
         formData.append('receipt_photos', file);
       });
       formData.append('active_account', user.active_account || '');
+      await receiptCreate(formData, token);
 
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
