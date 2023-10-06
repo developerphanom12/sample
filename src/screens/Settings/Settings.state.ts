@@ -9,7 +9,7 @@ import { setUserAvatar } from '../SignUp/reducer/signup.reducer';
 
 export const useSettingsState = () => {
   const {
-    user: { fullName, active_account, accounts, profile_image },
+    user: { fullName, active_account, accounts, profile_image, id },
     token,
   } = useSelector((state: IState) => state.user);
 
@@ -25,11 +25,8 @@ export const useSettingsState = () => {
 
   const onGetProfilePhoto = async (profileImage?: string) => {
     try {
-      if (!profileImage) return;
-      const { data } = await getProfilePhoto(
-        profileImage || profile_image,
-        token
-      );
+      if (!id) return;
+      const { data } = await getProfilePhoto(id, token);
       setIsUploadingPhoto(false);
       setUserProfilePhoto(URL.createObjectURL(data));
     } catch (error) {
@@ -52,6 +49,7 @@ export const useSettingsState = () => {
 
       const formData = new FormData();
       const compressedFile = await getCompressedImage(event.target.files[0], 1);
+      console.log('🟥  compressedFile:', compressedFile);
       formData.append('profile_image', compressedFile);
       const { data } = await profileUploadPhoto(formData, token);
 

@@ -2,7 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { getProfilePhoto } from 'screens/Settings/settings.api';
 
-export const useUploadAvatar = (profile_image: string, token: string) => {
+export const useUploadAvatar = (
+  profile_image: string,
+  token: string,
+  id: string
+) => {
   const [userProfilePhoto, setUserProfilePhoto] = useState('');
 
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(
@@ -11,9 +15,9 @@ export const useUploadAvatar = (profile_image: string, token: string) => {
 
   const onGetProfilePhoto = useCallback(async () => {
     try {
-      if (!profile_image) return;
+      if (!id) return;
       setIsUploadingPhoto(true);
-      const { data } = await getProfilePhoto(profile_image, token);
+      const { data } = await getProfilePhoto(id, token);
       setIsUploadingPhoto(false);
       setUserProfilePhoto(URL.createObjectURL(data));
     } catch (error) {

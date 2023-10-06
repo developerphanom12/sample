@@ -23,7 +23,7 @@ export const useHeaderState = () => {
   const {
     user: {
       token,
-      user: { active_account, profile_image },
+      user: { active_account, profile_image, id },
     },
     settings: { companySwitcher, isFetchingData, isSwitchCompany },
   } = useSelector((state: IState) => state);
@@ -34,7 +34,8 @@ export const useHeaderState = () => {
 
   const { userProfilePhoto, isUploadingPhoto } = useUploadAvatar(
     profile_image,
-    token
+    token,
+    id
   );
 
   const [isAvatarHover, setIsAvatarHover] = useState(false);

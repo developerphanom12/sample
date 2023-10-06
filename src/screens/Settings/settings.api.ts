@@ -133,8 +133,8 @@ export const profileUploadPhoto = (payload: FormData, token: string) => {
     },
   });
 };
-export const getProfilePhoto = (imageName: string, token: string) => {
-  const URL = `${CONFIG.apiUrl}profile/get-photo/${imageName}`;
+export const getProfilePhoto = (id: string, token: string) => {
+  const URL = `${CONFIG.apiUrl}profile/get-photo/${id}`;
   return Axios.get(URL, {
     headers: {
       'Content-Type': 'image/jpeg',
