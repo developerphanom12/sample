@@ -243,7 +243,8 @@ export const useSalesInvoicesState = () => {
       onChangeStateFieldHandler('excelUrl', url);
       excelRef.current &&
         excelRef.current.setAttribute('download', 'receipt.xlsx');
-      excelRef.current && excelRef.current.click();
+
+      setTimeout(() => excelRef.current && excelRef.current.click(), 100);
     } catch (error) {
       console.log(error);
     }
@@ -252,7 +253,7 @@ export const useSalesInvoicesState = () => {
   const onClickDownloadCSVButtonHandler = async () => {
     try {
       onChangeStateFieldHandler('csvData', '');
-      csvLink.current && csvLink.current.link.click();
+      setTimeout(() => csvLink.current && csvLink.current.link.click(), 100);
     } catch (error) {
       console.log(error);
     }
