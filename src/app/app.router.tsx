@@ -1,43 +1,75 @@
-import { FC } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { setInterseptors } from 'services/api-service';
 
 import { Layout } from 'components/Layout/Layout';
 import { RedirectOAuthPage } from 'components/RedirectOAuthPage';
 
-import { Login } from 'screens/Login/Login';
-import { SignUp } from 'screens/SignUp/SignUp';
-import { Preference } from 'screens/Preference';
-import { ForgotPassword } from 'screens/ForgotPassword';
-import { CapiumLogin } from 'screens/CapiumLogin/CapiumLogin';
-import { ResetPassword } from 'screens/ResetPassword';
-import { NotFound } from 'screens/NotFound';
-import { Inbox } from 'screens/Inbox';
-import { ReceiptDetails } from 'screens/ReceiptDetails';
-import { Dashboard } from 'screens/Dashboard';
-import { Settings } from 'screens/Settings';
-import { Master } from 'screens/Master';
-import { FilesUploadPreview } from 'screens/FilesUploadPreview';
-import { TermsOfService } from 'components/TermsOfService';
 import { PrivacyPolicy } from 'components/PrivacyPolicy';
-import { Support } from 'screens/Support';
-import { MyAccount } from 'screens/Settings/MyAccount';
-import { UsersList } from 'screens/Settings/UsersList';
-import { CompanyList } from 'screens/Settings/CompanyList';
-import { SignUpNewMember } from 'screens/SignUpNewMember';
-import { WorkSpacePicker } from 'screens/WorkSpacePicker';
-import { Invites } from 'screens/Invites';
+import { TermsOfService } from 'components/TermsOfService';
 import { BindSocialAccount } from 'screens/BindSocialAccount';
+import { CapiumLogin } from 'screens/CapiumLogin/CapiumLogin';
+import { Dashboard } from 'screens/Dashboard';
+import { FilesUploadPreview } from 'screens/FilesUploadPreview';
+import { ForgotPassword } from 'screens/ForgotPassword';
+import { Inbox } from 'screens/Inbox';
+import { Invites } from 'screens/Invites';
+import { Login } from 'screens/Login/Login';
+import { Master } from 'screens/Master';
+import { NotFound } from 'screens/NotFound';
+import { Preference } from 'screens/Preference';
+import { ReceiptDetails } from 'screens/ReceiptDetails';
+import { ResetPassword } from 'screens/ResetPassword';
 import { SalesInvoices } from 'screens/SalesInvoices';
 import { SalesInvoicesDetails } from 'screens/SalesInvoicesDetails';
+import { Settings } from 'screens/Settings';
+import { CompanyList } from 'screens/Settings/CompanyList';
+import { MyAccount } from 'screens/Settings/MyAccount';
+import { UsersList } from 'screens/Settings/UsersList';
+import { SignUp } from 'screens/SignUp/SignUp';
+import { SignUpNewMember } from 'screens/SignUpNewMember';
+import { Support } from 'screens/Support';
+import { WorkSpacePicker } from 'screens/WorkSpacePicker';
 
 import { PrivateRouter } from './privateRouter';
 
 import { ROUTES } from 'constants/routes';
+import { useSelector } from 'react-redux';
+import { getUserExist } from '../screens/Dashboard/dashboard.api';
+import { IState } from '../services/redux/reducer';
 
 export const AppRouter: FC = () => {
   setInterseptors();
+  const {
+
+    user: {
+      user,
+    },
+
+  } = useSelector((state: IState) => state);
+  const payload = {
+    date_start: '',
+    date_end: '',
+    active_account: user?.id || '',
+  };
+
+  const testUSer = async () => {
+    try {
+      const { data } = await getUserExist(payload);
+
+
+      if (data === "USER DELETED") {
+        localStorage.clear();
+        window.location.reload()
+      }
+
+    } catch (e) {
+    }
+  }
+  useEffect(() => {
+    testUSer()
+  }, [])
   return (
     <BrowserRouter>
       <Routes>

@@ -282,6 +282,7 @@ declare global {
     isDeleteModalWindowOpen: boolean;
     deleteItemName: string;
     categoryName: string;
+    account?: string;
   }
 
   interface IModalWindowsBox
