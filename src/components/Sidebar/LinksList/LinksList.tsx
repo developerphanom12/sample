@@ -52,8 +52,11 @@ export const LinksList: FC<ILinksList> = (props) => {
   const onDelete = async () => {
     const activeAccount = user?.accounts?.find((item: { id: string }) => item.id === user?.active_account)
     if (activeAccount) {
-      const URL = `company-member/delete-own/${user.id}`;
-      await apiServices.deleteData(URL, { active_account: activeAccount.id });
+      try {
+
+        const URL = `company-member/delete-own/${user.id}`;
+        await apiServices.deleteData(URL, { active_account: activeAccount.id });
+      } catch { }
     }
     onDeleteModalWindowToggle()
     localStorage.clear()
