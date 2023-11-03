@@ -1,12 +1,15 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Modal from 'react-modal';
 
 import { Button } from '../Button/Button';
 
 import {
-  DeleteModalWindowStyles,
+
   DeleteModalWindowContentStyles as Styled,
 } from './DeleteModalWindow.styles';
+import { COLORS } from '../../styles/theme';
+import { modalContentStyles, overlay } from '../../constants/modal-window.constants';
+import { Input } from '../Input';
 
 export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
   const {
@@ -18,6 +21,15 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
     onDeleteButtonClickHandler,
     onCloseDeleteModalWindowHandler,
   } = props;
+  const DeleteModalWindowStyles = {
+    content: {
+      ...modalContentStyles,
+      width: '420px',
+      height: account ? 'auto' : '232px',
+    },
+    overlay,
+  };
+  const [value, setValue] = useState('');
 
   return (
     <Modal
@@ -37,13 +49,32 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
             <Styled.Highlighter>{deleteItemName}.</Styled.Highlighter> Deleting
             cannot be undone
           </Styled.SubTitle>
+          {account &&
+            <>
+              <Styled.SubTitle style={{ color: COLORS.red, marginBottom: 10, marginTop: 10 }}>
+                All the data associated with this account will also be deleted
+              </Styled.SubTitle>
+              <Styled.SubTitle style={{ color: COLORS.red, marginBottom: 10, marginTop: 10 }}>
+                Type 'DELETE' and click on 'Yes' to confirm
+              </Styled.SubTitle>
+              <Input
+                value={value}
+                onChangeValue={(e) => setValue(e.target.value)}
+                inputName="email"
+                text="Email"
+                isRemoveBorder
+              />
+            </>
+          }
           <Styled.ButtonsBox>
             <Styled.ButtonsWrapper>
               <Button
+                isAccout={Boolean(account)}
                 onClick={onDeleteButtonClickHandler}
                 themedButton="roundedWhite"
                 width="rounded"
                 isLoading={isLoading}
+                isDisabled={account ? value !== 'DELETE' : false}
               >
                 Yes
               </Button>
@@ -57,7 +88,7 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
             </Styled.ButtonsWrapper>
           </Styled.ButtonsBox>
         </Styled.MainContentWrapper>
-      </Styled.ContentWrapper>
-    </Modal>
+      </Styled.ContentWrapper >
+    </Modal >
   );
 };

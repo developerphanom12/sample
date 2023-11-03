@@ -10,16 +10,17 @@ export type ButtonStyleProps = {
   iconType?: 'google';
   children?: React.ReactNode;
   isDisabled?: boolean;
+  isAccout?: boolean;
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
   themedButton: TButtonTheme;
   width:
-    | 'auth'
-    | 'primary'
-    | 'secondary'
-    | 'actions'
-    | 'rounded'
-    | 'roundedBig'
+  | 'auth'
+  | 'primary'
+  | 'secondary'
+  | 'actions'
+  | 'rounded'
+  | 'roundedBig'
 };
 
 export const Button = ({
@@ -31,6 +32,7 @@ export const Button = ({
   type,
   isDisabled,
   isLoading,
+  isAccout
 }: ButtonStyleProps) => {
   return (
     <ButtonStyles.Button
@@ -38,6 +40,7 @@ export const Button = ({
       themedButton={themedButton}
       width={width}
       onClick={onClick}
+      style={isAccout && isDisabled ? { opacity: 0.5 } : undefined}
       disabled={isDisabled}
     >
       {themedButton === 'capium' && (
