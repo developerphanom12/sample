@@ -60,8 +60,8 @@ export const DeleteModalWindow: FC<IDeleteModalWindowProps> = (props) => {
               <Input
                 value={value}
                 onChangeValue={(e) => setValue(e.target.value)}
-                inputName="email"
-                text="Email"
+                inputName=""
+                text=""
                 isRemoveBorder
               />
             </>
