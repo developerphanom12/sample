@@ -35,7 +35,7 @@ export const TABLE_COLUMN_NAMES = [
   },
   {
     id: 'vat_code',
-    name: 'VAT Code',
+    name: 'VAT Rate',
   },
   {
     id: 'currency',

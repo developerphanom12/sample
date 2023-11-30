@@ -73,7 +73,7 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     },
     {
       type: 'input',
-      label: 'VAT code',
+      label: 'VAT Rate',
       value: state.vatCodeValue,
       onChange: funcArray[5],
     },

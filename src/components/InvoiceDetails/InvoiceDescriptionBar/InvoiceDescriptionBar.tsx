@@ -9,7 +9,7 @@ export const InvoiceDescriptionBar: FC = () => {
       <Styled.DescriptionHead>
         <Styled.ColumnName>Description</Styled.ColumnName>
         <Styled.ColumnsDevider>
-          <Styled.ColumnName>Vat Code</Styled.ColumnName>
+          <Styled.ColumnName>VAT Rate</Styled.ColumnName>
           <Styled.ColumnName>Units</Styled.ColumnName>
           <Styled.ColumnName>Price</Styled.ColumnName>
           <Styled.ColumnName>Net</Styled.ColumnName>

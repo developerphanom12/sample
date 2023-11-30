@@ -12,7 +12,7 @@ const unitFields = [
   },
   {
     type: 'input',
-    id: 'Vat Code',
+    id: 'VAT Rate',
     value: '',
   },
   {
@@ -58,7 +58,7 @@ export const UnitFields: FC = () => {
           <div key={item.id}>
             <Input
               value={item.value as string}
-              onChangeValue={() => {}}
+              onChangeValue={() => { }}
               isHiddenLabel
               isRemoveBorder
               isNoMargin
