@@ -42,7 +42,6 @@ import { IState } from '../services/redux/reducer';
 export const AppRouter: FC = () => {
   setInterseptors();
   const {
-
     user: {
       user,
     },
@@ -85,7 +84,7 @@ export const AppRouter: FC = () => {
               path={ROUTES.salesInvoiceDetails}
               element={<SalesInvoicesDetails />}
             />
-            <Route path={ROUTES.inbox} element={<Inbox />}>
+            <Route path={ROUTES.purchases} element={<Inbox />}>
               <Route
                 path={ROUTES.receiptDetails}
                 element={<ReceiptDetails />}

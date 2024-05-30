@@ -1,6 +1,6 @@
 export enum ROUTES {
   home = '/',
-  inbox = '/inbox',
+  purchases = '/purchases',
   receiptDetails = 'receipt-details',
   filesUploadPreview = '/inbox/files-upload-preview',
   login = '/login',

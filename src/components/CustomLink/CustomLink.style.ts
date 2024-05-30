@@ -31,6 +31,6 @@ export const CustomLinkStyles = {
       props.active ? props.theme.colors.darkRed : props.theme.colors.lightGray};
     pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
     color: ${({ is_disabled, theme }) => is_disabled && theme.colors.gray};
-    border-radius: 6px;
+    border-radius: 0px;
   `,
 };

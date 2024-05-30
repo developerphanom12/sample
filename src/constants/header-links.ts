@@ -7,13 +7,13 @@ const TYPES = 'Payment Types';
 export const MASTER_TABS = [CATEGORIES, SUPPLIER_ACCOUNTS, TYPES];
 
 export const ADMIN_LINKS = [
-  { title: 'Dashboard', route: ROUTES.home },
-  { title: 'Inbox', route: ROUTES.inbox },
-  { title: 'Master', route: ROUTES.master, tabs: MASTER_TABS },
-  { title: 'Invites', route: ROUTES.invites },
-  { title: 'Sales Invoices', route: ROUTES.salesInvoices },
-  { title: 'Settings', route: ROUTES.settings },
-  { title: 'Help & Support', route: ROUTES.support, isLast: true },
+  { title: 'DASHBOARD', route: ROUTES.home },
+  { title: 'PURCHASES', route: ROUTES.purchases },
+  { title: 'MASTER', route: ROUTES.master, tabs: MASTER_TABS },
+  { title: 'INVITES', route: ROUTES.invites },
+  { title: 'SALES', route: ROUTES.salesInvoices },
+  { title: 'SETTINGS', route: ROUTES.settings },
+  { title: 'HELP & SUPPORT', route: ROUTES.support, isLast: true },
 ];
 
 export const CUSTOMER_LINKS = [

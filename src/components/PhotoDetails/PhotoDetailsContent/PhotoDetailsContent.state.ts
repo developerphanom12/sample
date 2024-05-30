@@ -277,7 +277,7 @@ export const usePhotoDetailsContentState = () => {
       dispatch(updateReceipt(data));
       dispatch(setIsFetchingDate(true));
 
-      navigate(ROUTES.inbox);
+      navigate(ROUTES.purchases);
     } catch (error) {
       console.log(error);
       setIsLoading(false);

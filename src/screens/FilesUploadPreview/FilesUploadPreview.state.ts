@@ -22,7 +22,7 @@ export const useFilesUploadPreviewState = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const onNavigateToInboxPage = () => navigate(ROUTES.inbox);
+  const onNavigateToInboxPage = () => navigate(ROUTES.purchases);
 
   const { from } = location.state as LocationState;
 
@@ -79,7 +79,7 @@ export const useFilesUploadPreviewState = () => {
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
       setIsLoading(false);
-      navigate(ROUTES.inbox, { replace: true });
+      navigate(ROUTES.purchases, { replace: true });
     } catch (error) {
       setIsLoading(false);
       dispatch(setIsFetchingDate(false));
