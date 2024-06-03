@@ -3,7 +3,7 @@ import { styled } from 'styles/theme';
 export const CompanySwitcherStyles = {
   Wrapper: styled.div`
     position: relative;
-    width: 188px;
+    width: 220px;
     height: 40px;
     border: 1px solid ${(props) => props.theme.colors.opacityBlack};
     border-radius: ${(props) => props.theme.size.borderRadius};
@@ -25,5 +25,9 @@ export const CompanySwitcherStyles = {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  `,
+  Arrow: styled.div`
+    margin-left: auto;
+    padding: 0 12px;
   `,
 };

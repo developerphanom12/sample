@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { CompanySwitcherStyles as Styled } from './CompanySwitcher.style';
 import { CompanySwitcherMenu } from '../CompanySwitcherMenu';
 import { CompanySwitcherLogo } from '../CompanySwitcherLogo';
+import { Icon } from "components/Icons/Icons";
+
 
 export interface ICompanySwitcher {
   isLoading?: boolean;
@@ -39,6 +41,7 @@ export const CompanySwitcher: FC<ICompanySwitcher> = (props) => {
         companyName={activeCompany?.company.name || ''}
       />
       <Styled.Content>{activeCompany?.company.name}</Styled.Content>
+      <Styled.Arrow><Icon type="dropDownArrow" /></Styled.Arrow>
       {isOpenSwitcher && (
         <CompanySwitcherMenu
           onSwitchCompanyHandler={onSwitchCompanyHandler}

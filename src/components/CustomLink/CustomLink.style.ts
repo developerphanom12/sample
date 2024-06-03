@@ -10,12 +10,12 @@ export const CustomLinkStyles = {
     is_disabled?: string;
   }>`
     position: relative;
-    max-width: 110px;
-    min-width: 80px;
-    min-width: ${({ is_last }) => is_last === 'true' && '120px'};
-    min-width: ${({ is_sales }) => is_sales && '110px'};
+    
+    
+    
     width: 100%;
     height: 100%;
+    padding: 0 15px;
     display: flex;
     align-items: center;
     white-space: nowrap;

@@ -13,6 +13,7 @@ import { ReactComponent as closeWindow } from 'assets/icons/close-window-icon.sv
 import { ReactComponent as avatar } from 'assets/icons/avatar.svg';
 import { ReactComponent as notification } from 'assets/icons/bell.svg';
 import { ReactComponent as checkbox } from 'assets/icons/checkbox.svg';
+import { ReactComponent as helpIcon } from 'assets/icons/help.svg';
 import { ReactComponent as infoIcon } from 'assets/icons/info-icon.svg';
 import { ReactComponent as accountIcon } from 'assets/icons/account-icon.svg';
 import { ReactComponent as edit } from 'assets/icons/edit.svg';
@@ -55,6 +56,7 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   accountIcon,
   hidePassword,
   infoIcon,
+  helpIcon,
   showPassword,
   capiumLogo,
   arrowDown,

@@ -4,6 +4,7 @@ import { CompanySwitcher } from '../CompanySwitcher/CompanySwitcher';
 import { Icon } from '../Icons';
 
 import { AvatarBox } from './AvatarBox';
+import { HelpBox } from './HelpSupport';
 import { HeaderStyles as Styled } from './Header.style';
 import { useHeaderState } from './Header.state';
 import { LinksBox } from './LinksBox';
@@ -68,6 +69,7 @@ export const Header: FC = () => {
                 onSwitchCompanyHandler={onSwitchCompanyHandler}
               />
             ) : null}
+            <HelpBox />
             <AvatarBox
               onMouseEnterHandler={onMouseEnterHandler}
               onMouseLeaveHandler={onMouseLeaveHandler}

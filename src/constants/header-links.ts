@@ -1,24 +1,32 @@
 import { ROUTES } from './routes';
 
-const CATEGORIES = 'Categories';
+const SUPPLIERS = 'Suppliers';
 const SUPPLIER_ACCOUNTS = 'Supplier Accounts';
-const TYPES = 'Payment Types';
+const CATEGORIES = 'Categories';
+const CUSTOMERS = 'Customers';
+const CUSTOMER_ACCOUNTS = 'Customer Accounts';
+const PAYMENT_METHODS = 'Payment Methods';
 
-export const MASTER_TABS = [CATEGORIES, SUPPLIER_ACCOUNTS, TYPES];
+export const MASTER_TABS = [SUPPLIERS, SUPPLIER_ACCOUNTS, CATEGORIES, CUSTOMERS, CUSTOMER_ACCOUNTS, PAYMENT_METHODS];
 
 export const ADMIN_LINKS = [
   { title: 'DASHBOARD', route: ROUTES.home },
   { title: 'PURCHASES', route: ROUTES.purchases },
-  { title: 'MASTER', route: ROUTES.master, tabs: MASTER_TABS },
-  { title: 'INVITES', route: ROUTES.invites },
   { title: 'SALES', route: ROUTES.salesInvoices },
-  { title: 'SETTINGS', route: ROUTES.settings },
-  { title: 'HELP & SUPPORT', route: ROUTES.support, isLast: true },
+  { title: 'EXPENSE REPORT', route: ROUTES.expenseReport},
+  { title: 'MANAGE', route: ROUTES.manage, tabs: MASTER_TABS },
+  { title: 'INVITES', route: ROUTES.invites },
+  { title: 'SETTINGS', route: ROUTES.settings, isLast: true },
+  // { title: 'HELP & SUPPORT', route: ROUTES.support, isLast: true },
 ];
 
 export const CUSTOMER_LINKS = [
   { title: 'Dashboard', route: ROUTES.home },
   { title: 'Inbox', route: ROUTES.home },
+];
+
+export const HELP_LINK = [
+  { title: '', route: ROUTES.support, iconName:'helpIcon' },
 ];
 
 export const getAvatarLinks = (logout: () => void) => [
