@@ -5,4 +5,4 @@ export interface IOption {
   [key: string]: string | undefined;
 }
 
-export type IsMulti = false;
+export type IsMulti = true;

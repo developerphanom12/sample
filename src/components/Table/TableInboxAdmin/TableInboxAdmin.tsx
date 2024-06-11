@@ -15,6 +15,7 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
     onCheckedPublishMockFuncHandler,
     onCheckedAllItemsHandler,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     receiptList,
     isAllChecked,
     dateFormat,
@@ -52,9 +53,10 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
       {receiptList.length ? (
         receiptList.map((receipt, index) => (
           <TableInboxAdminItem
-            publishStatus={receipt.publish_status}
-            paymentStatus={receipt.payment_status}
-            key={receipt.id}
+          paymentStatus={receipt.payment_status}
+          approveStatus={receipt.approve_status}
+          publishStatus={receipt.publish_status}
+          key={receipt.id}
             receiptIndex={index}
             customId={receipt.custom_id}
             receiptId={receipt.id}
@@ -69,9 +71,10 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
             supplier={receipt.supplier}
             supplierAccount={receipt.supplier_account?.name}
             isChecked={receipt.isChecked}
-            onCheckedItemHandler={onCheckedItemHandler}
             onCheckedPaidHandler={onCheckedPaidHandler}
+            onCheckedApproveHandler={onCheckedApproveHandler}
             onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
+            onCheckedItemHandler={onCheckedItemHandler}
             dateFormat={dateFormat}
           />
         ))

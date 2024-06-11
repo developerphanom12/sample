@@ -25,8 +25,9 @@ const mockedReceipts = [
     total: null,
     payment_type: null,
     vat_code: null,
-    publish_status: false,
     payment_status: false,
+    approve_status: false,
+    publish_status: false,
     isChecked: false,
   },
 ];

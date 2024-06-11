@@ -22,7 +22,7 @@ export const useFilesUploadPreviewState = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const onNavigateToInboxPage = () => navigate(ROUTES.purchases);
+  const onNavigateToInboxPage = () => navigate(ROUTES.purchaseInvoices);
 
   const { from } = location.state as LocationState;
 
@@ -79,7 +79,7 @@ export const useFilesUploadPreviewState = () => {
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
       setIsLoading(false);
-      navigate(ROUTES.purchases, { replace: true });
+      navigate(ROUTES.purchaseInvoices, { replace: true });
     } catch (error) {
       setIsLoading(false);
       dispatch(setIsFetchingDate(false));
@@ -87,7 +87,7 @@ export const useFilesUploadPreviewState = () => {
     }
   };
 
-  const isDisableButton = previewFiles.length > 10;
+  const isDisableButton = previewFiles.length > 50;
 
   return {
     ...state,

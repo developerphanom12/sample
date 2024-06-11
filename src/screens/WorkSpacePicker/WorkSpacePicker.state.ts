@@ -41,7 +41,7 @@ export const useWorkSpacePickerState = () => {
     try {
       const { data } = await selectActiveAccount(event.currentTarget.id);
       dispatch(switchAccount(data));
-      navigate(ROUTES.purchases, { replace: true });
+      navigate(ROUTES.purchaseInvoices, { replace: true });
     } catch (error) {
       console.log(error);
     }

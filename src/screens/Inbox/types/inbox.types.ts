@@ -39,6 +39,10 @@ export interface IuseInboxState {
     value: string;
     label: string;
   };
+  dateFilterValue: {
+    value: string;
+    label: string;
+  };
   isContentLoading: boolean;
   searchValue: string;
   dateValue: Date | null;

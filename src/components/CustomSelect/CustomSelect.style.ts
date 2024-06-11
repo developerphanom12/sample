@@ -13,6 +13,7 @@ export const SelectWrapper = styled.div`
 export const StyledReactSelect = styled(Select)<{
   marginBottom?: string;
   height?: string;
+  width?: string;
   paginate?: boolean;
   isFullWidth?: boolean;
   isRemoveBorder?: boolean;
@@ -27,6 +28,7 @@ export const StyledReactSelect = styled(Select)<{
       paginate ? 'none' : `0px 0px 5px ${theme.colors.boxShadowBlackButton}`};
     border-radius: 6px;
     width: 100%;
+    min-width: ${({ width }) => (width ? width : '50px')};
     max-width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '500px')};
     max-height: ${({ isMulti }) => (isMulti ? '100%' : '40px')};
     min-height: ${({ isMulti }) => (isMulti ? '40px' : '39.2px')};
@@ -53,10 +55,15 @@ export const StyledReactSelect = styled(Select)<{
   .Select__menu {
     width: 100%;
     max-width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '500px')};
+    cursor: pointer;
     color: ${({ theme }) => theme.colors.lightBlack};
     padding: 3px 5px;
     font-size: ${({ theme }) => theme.size.default};
     margin-top: 1px;
+  }
+  .Select__menu-list{
+    height: 100%;
+    max-height: 70vh;
   }
   .Select__option {
     border-radius: 5px;
@@ -102,8 +109,6 @@ export const StyledReactSelect = styled(Select)<{
     align-items: center;
   }
   .Select__value-container--is-multi {
-    max-height: 45px;
-    height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 `;

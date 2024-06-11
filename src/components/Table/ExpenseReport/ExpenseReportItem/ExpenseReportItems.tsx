@@ -6,16 +6,15 @@ import { getCorrectCustomId } from 'services/utils';
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
 import { StatusLabel } from 'components/StatusLabel/StatusLabel';
 
-import { TableInboxAdminItemStyles as Styled } from './TableInboxAdminItem.style';
-import { useTableInboxAdminItemState } from './TableInboxAdminItem.state';
+import { TableItemStyles as Styled } from '../../TableGlobalStyles';
+import { TABLE_GRID_MARKUP } from '../ExpenseReport.constants';
+
+import { useExpenseReportItemState } from './ExpenseReportItems.state';
 
 interface TableInboxAdminProps {
   isVisited?: boolean;
   onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onCheckedPaidHandler: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => Promise<void>;
-  onCheckedApproveHandler: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => Promise<void>;
   onCheckedPublishMockFuncHandler: (
@@ -35,13 +34,12 @@ interface TableInboxAdminProps {
   receiptId: string;
   receiptIndex: number;
   customId: string;
-  paymentStatus: boolean;
-  approveStatus: boolean;
   publishStatus: boolean;
+  paymentStatus: boolean;
   dateFormat: string;
 }
 
-export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
+export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
   const {
     isChecked,
     category,
@@ -58,22 +56,19 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
     receiptIndex,
     customId,
     paymentStatus,
-    approveStatus,
     publishStatus,
     dateFormat,
     onCheckedPaidHandler,
-    onCheckedApproveHandler,
     onCheckedItemHandler,
     onCheckedPublishMockFuncHandler,
   } = props;
 
-  const { onReceiptDetailsClickHandler } = useTableInboxAdminItemState({
-    receiptId,
-    receiptIndex,
+  const { onReceiptDetailsClickHandler } = useExpenseReportItemState({
+    itemIndex: receiptIndex,
   });
 
   return (
-    <Styled.Item>
+    <Styled.Item templateColumns={TABLE_GRID_MARKUP}>
       <Styled.Checkbox>
         <CheckboxItem
           name={receiptId}
@@ -87,7 +82,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
       <Styled.Selector>
         {!!date
           ? format(new Date(date), dateFormat)
-          : '---'}
+          : format(new Date(), dateFormat)}
       </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>
@@ -122,20 +117,6 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
         <CheckboxItem
           isChecked={paymentStatus}
           onChange={onCheckedPaidHandler}
-          name={receiptId}
-        />
-      </Styled.Checkbox>
-      <Styled.Checkbox isBorder>
-        <CheckboxItem
-          isChecked={approveStatus} //aproved
-          onChange={onCheckedApproveHandler}
-          name={receiptId}
-        />
-      </Styled.Checkbox>
-      <Styled.Checkbox isBorder>
-        <CheckboxItem
-          isChecked={publishStatus} //published
-          onChange={onCheckedPublishMockFuncHandler}
           name={receiptId}
         />
       </Styled.Checkbox>

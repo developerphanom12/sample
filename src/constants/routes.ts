@@ -1,6 +1,5 @@
 export enum ROUTES {
   home = '/',
-  purchases = '/purchases',
   receiptDetails = 'receipt-details',
   filesUploadPreview = '/inbox/files-upload-preview',
   login = '/login',
@@ -22,6 +21,7 @@ export enum ROUTES {
   capiumLogin = '/capium-login',
   invites = '/invites',
   callback = '/callback',
+  purchaseInvoices = '/purchase-invoices',
   salesInvoices = '/sales-invoices',
   salesInvoiceDetails = '/sales-invoices/details',
   notFound = '*',

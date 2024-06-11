@@ -16,6 +16,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
     onChangeDate,
     onChangeSearchValueHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onClickDownloadCSVButtonHandler,
     onClickOutsideDatePickerHandler,
     onDeleteItemHandler,
@@ -27,6 +28,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
     setIsDatePickerOpen,
     showActions,
     statusValue,
+    dateFilterValue,
     onActionsClick,
     checkedIds,
     closeSuccesPopupHandler,
@@ -52,7 +54,9 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
         onSelectFilesHandler={onSelectFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}
+        onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
         statusValue={statusValue}
+        dateFilterValue={dateFilterValue}
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onChangeDate={onChangeDate}

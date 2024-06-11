@@ -16,6 +16,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     onChangeDate,
     onChangeSearchValueHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onClickDownloadCSVButtonHandler,
     onClickOutsideDatePickerHandler,
     onDeleteReceiptHandler,
@@ -27,12 +28,14 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     setIsDatePickerOpen,
     showActions,
     statusValue,
+    dateFilterValue,
     onActionsClick,
     onActionsClose,
     isContentLoading,
     dateFormat,
     isAllChecked,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     onCheckedPublishMockFuncHandler,
     onCheckedAllItemsHandler,
     onCheckedItemHandler,
@@ -59,10 +62,13 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     <Styled.Wrapper>
       {!isFetchingReceipts && (
         <HeaderPanel
+          dot3ExpReport={true}
           datePickerRef={datePickerRef}
           statusValue={statusValue}
+          dateFilterValue={dateFilterValue}
           onSelectFilesHandler={onSelectFilesHandler}
           onChangeStatusValueHandler={onChangeStatusValueHandler}
+          onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
           onChangeSearchValueHandler={onChangeSearchValueHandler}
           searchValue={searchValue}
           onChangeDate={onChangeDate}
@@ -92,6 +98,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           onCheckedItemHandler={onCheckedItemHandler}
           onCheckedAllItemsHandler={onCheckedAllItemsHandler}
           onCheckedPaidHandler={onCheckedPaidHandler}
+          onCheckedApproveHandler={onCheckedApproveHandler}
           onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
           receiptList={receiptList}
           isAllChecked={isAllChecked}

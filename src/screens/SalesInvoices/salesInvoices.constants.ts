@@ -1,5 +1,6 @@
 export const INITIAL_STATE = {
   statusValue: { value: 'all', label: 'Status - All' },
+  dateFilterValue: { value: 'all', label: 'Date - All' },
   searchValue: '',
   dateValue: null,
   formattedDate: '',

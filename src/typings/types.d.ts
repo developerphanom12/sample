@@ -1,4 +1,5 @@
 import React from 'react';
+import { boolean } from 'yup';
 
 declare global {
   interface IOAuthLogin {
@@ -33,7 +34,12 @@ declare global {
       newValue: unknown,
       actionMeta: ActionMeta<unknown>
     ) => void;
+    onChangeDateFilterValueHandler: (
+      newValue: unknown,
+      actionMeta: ActionMeta<unknown>
+    ) => void;
     statusValue: IOption;
+    dateFilterValue: Ioption
     onChangeSearchValueHandler: (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
@@ -52,6 +58,7 @@ declare global {
     showActions: boolean;
     isDownloadButtonDisabled: boolean;
     onDownloadExcelFileHandler: () => Promise<void>;
+    dot3ExpReport?: boolean;
   }
 
   interface IUpdateReceiptItemPayload {
@@ -70,8 +77,9 @@ declare global {
     total?: number | null;
     payment_type?: string | null;
     vat_code?: string | null;
-    publish_status?: boolean;
     payment_status?: boolean;
+    approve_status?: boolean;
+    publish_status?: boolean;
   }
 
   interface IPagination {
@@ -126,6 +134,9 @@ declare global {
     onCheckedPaidHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => Promise<void>;
+    onCheckedApproveHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => Promise<void>;
     dateFormat: string;
     sortField: string;
     sortOrder: TSorterOrder;
@@ -160,8 +171,9 @@ declare global {
     total: number | null;
     payment_type: ISelectItem | null;
     vat_code: string | null;
-    publish_status: boolean;
     payment_status: boolean;
+    approve_status: boolean;
+    publish_status: boolean;
     isChecked: boolean;
   }
 
@@ -178,6 +190,7 @@ declare global {
     sortField: string;
     sortOrder: TSorterOrder;
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    dot3ExpReport?: boolean;
   }
 
   interface IOption {
@@ -192,6 +205,21 @@ declare global {
     review = 'review',
     accepted = 'accepted',
     rejected = 'rejected',
+  }
+
+  enum DateFilterOption {
+    today = 'today',
+    yesterday = 'yesterday',
+    thisweek = 'thisweek',
+    lastweek = 'lastweek',
+    thismonth = 'thismonth',
+    lastmonth = 'lastmonth',
+    thisquater = 'thisquater',
+    lastquater = 'lastquater',
+    thisyear = 'thisyear',
+    lastyear = 'lastyear',
+    cutsomrange = 'cutsom range',
+    cutsomdate = 'cutsom date'
   }
 
   enum ButtonTheme {

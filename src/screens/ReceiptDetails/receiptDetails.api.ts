@@ -5,6 +5,7 @@ import { apiServices } from 'services/api-service';
 import { CONFIG } from 'constants/config';
 
 export const updateReceiptItem = (payload: IUpdateReceiptItemPayload) => {
+  console.log('-----^%$^%&--------', payload);
   const URL = 'receipt/update';
   return apiServices.changeData(URL, payload);
 };

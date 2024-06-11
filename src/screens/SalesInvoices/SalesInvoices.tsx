@@ -13,6 +13,7 @@ export const SalesInvoices: FC = () => {
     requestSort,
     onCheckedPublishMockFuncHandler,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     checkedIds,
     onDeleteInvoiceHandler,
     datePickerRef,
@@ -48,6 +49,7 @@ export const SalesInvoices: FC = () => {
     onChangeReceiptsPerPage,
     onChangeSearchValueHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onCheckedAllItemsHandler,
     onCheckedItemHandler,
     onClickDownloadCSVButtonHandler,
@@ -71,6 +73,7 @@ export const SalesInvoices: FC = () => {
     showActions,
     sortedReceipts,
     statusValue,
+    dateFilterValue,
     totalCount,
     invoice_formik,
   } = useSalesInvoicesState();
@@ -82,7 +85,9 @@ export const SalesInvoices: FC = () => {
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
         onSelectFilesHandler={onSelectFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}
+        onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
         statusValue={statusValue}
+        dateFilterValue={dateFilterValue}
         onChangeSearchValueHandler={onChangeSearchValueHandler}
         searchValue={searchValue}
         onChangeDate={onChangeDate}
@@ -117,6 +122,7 @@ export const SalesInvoices: FC = () => {
         invoicesList={[]}
         isAllChecked={false}
         onCheckedPaidHandler={onCheckedPaidHandler}
+        onCheckedApproveHandler={onCheckedApproveHandler}
         dateFormat={''}
         sortField={sortField}
         sortOrder={sortOrder}

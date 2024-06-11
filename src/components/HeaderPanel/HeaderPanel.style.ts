@@ -15,23 +15,30 @@ export const HeaderPanelStyles = {
   ButtonActionsWrapper: styled.div`
     position: relative;
   `,
-  SearchWrapper: styled.div`
+  PannelLeftWrapper: styled.div`
     display: flex;
+    gap: 10px;
     width: 100%;
     height: 40px;
   `,
+  DateFilterBatchWrapper: styled.div`
+    display: flex;
+    gap: 10px;
+    width: max-content;
+  `,
+  DateFilterSelector: styled.div`
+  `,
   FilterWrapper: styled.div`
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    max-width: 355px;
   `,
   SelectWrapper: styled.div`
     display: flex;
     justify-content: flex-start;
+    gap: 10px;
     width: auto;
-    margin-left: 10px;
-  `,
+    `,
+    // margin-left: 10px;
   DatePickerWrapper: styled.div`
     max-width: 140px;
   `,

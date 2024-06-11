@@ -205,6 +205,25 @@ export const useInboxState = () => {
     });
     setCurrentPage(0);
   };
+  
+  const onChangeDateFilterValueHandler = async (
+    newValue: any,
+    actionMeta: ActionMeta<unknown>
+  ) => {
+    setState((prevState) => ({
+      ...prevState,
+      dateFilterValue: {
+        value: newValue.value,
+        label: `Date - ${newValue.label}`,
+      },
+    }));
+    await onFetchReceiptsHandler({
+      ...fetchParams,
+      skip: 0,
+      status: newValue.value === 'all' ? '' : newValue.value,
+    });
+    setCurrentPage(0);
+  };
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
   const [isEmailModalWindowOpen, onEmailModalWindowToggle] = useToggle();
@@ -275,8 +294,8 @@ export const useInboxState = () => {
         ...prevState,
         checkedIds: prevState.checkedIds.includes(event.target.id)
           ? prevState.checkedIds.filter(
-              (item: string) => item !== event.target.id
-            )
+            (item: string) => item !== event.target.id
+          )
           : [...prevState.checkedIds, event.target.id],
       }));
     },
@@ -285,6 +304,7 @@ export const useInboxState = () => {
 
   const onCheckedPaidHandler = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('-----paid handler');
       try {
         if (!event.target.id) return;
         onChangeStateFieldHandler('isContentLoading', true);
@@ -304,12 +324,49 @@ export const useInboxState = () => {
     },
     [active_account, fetchParams, receipts]
   );
+  const onCheckedApproveHandler = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('-----approve handler');
+      try {
+        if (!event.target.id) return;
+        onChangeStateFieldHandler('isContentLoading', true);
+        const selectedReceipt = receipts?.find(
+          (receipt: { id: string }) => receipt.id === event.target.id
+        );
+        await updateReceiptItem({
+          id: event.target.id,
+          approve_status: !selectedReceipt?.approve_status,
+          active_account: active_account || '',
+        });
+        await onFetchReceiptsHandler(fetchParams);
+      } catch (error) {
+        onChangeStateFieldHandler('isContentLoading', false);
+        console.log(error);
+      }
+    },
+    [active_account, fetchParams, receipts]
+  );
 
   const onCheckedPublishMockFuncHandler = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (!event.target.id) return;
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        if (!event.target.id) return;
+        onChangeStateFieldHandler('isContentLoading', true);
+        const selectedReceipt = receipts?.find(
+          (receipt: { id: string }) => receipt.id === event.target.id
+        );
+        await updateReceiptItem({
+          id: event.target.id,
+          publish_status: !selectedReceipt?.publish_status,
+          active_account: active_account || '',
+        });
+        await onFetchReceiptsHandler(fetchParams);
+      } catch (error) {
+        onChangeStateFieldHandler('isContentLoading', false);
+        console.log(error);
+      }
     },
-    []
+    [active_account, fetchParams, receipts]
   );
 
   const onCheckedAllItemsHandler = useCallback(() => {
@@ -471,6 +528,7 @@ export const useInboxState = () => {
     isDatePickerOpen,
     setIsDatePickerOpen,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     isEmailModalWindowOpen,
     onEmailModalWindowToggle,
     onEmailClick,
@@ -485,6 +543,7 @@ export const useInboxState = () => {
     onSelectFilesHandler,
     onFetchReceiptsHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onChangeReceiptsPerPage,
     onChangeInputValue,
     onEnterGoToClick,

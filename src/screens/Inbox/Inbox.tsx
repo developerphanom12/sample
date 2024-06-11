@@ -16,12 +16,14 @@ export const Inbox: FC = memo(() => {
     onSelectFilesHandler,
     onFetchReceiptsHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onChangeSearchValueHandler,
     onChangeDate,
     isDatePickerOpen,
     dateValue,
     searchValue,
     statusValue,
+    dateFilterValue,
     formattedDate,
     setIsDatePickerOpen,
     isEmailModalWindowOpen,
@@ -40,6 +42,7 @@ export const Inbox: FC = memo(() => {
     onCheckedAllItemsHandler,
     onClickDownloadCSVButtonHandler,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     onCheckedPublishMockFuncHandler,
     receiptsPerPage,
     inputPaginationValue,
@@ -116,7 +119,7 @@ export const Inbox: FC = memo(() => {
         isLoading={isLoading}
         checkedIds={checkedIds}
       />
-      {location.pathname !== '/inbox' ? (
+      {location.pathname !== '/purchase-invoices' ? (
         <Outlet />
       ) : isFetchingReceipts ? (
         <Styled.LoaderWrapper>
@@ -139,8 +142,10 @@ export const Inbox: FC = memo(() => {
               onForwardClick={onForwardClick}
               onBackwardClick={onBackwardClick}
               statusValue={statusValue}
+              dateFilterValue={dateFilterValue}
               onSelectFilesHandler={onSelectFilesHandler}
               onChangeStatusValueHandler={onChangeStatusValueHandler}
+              onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
               onChangeSearchValueHandler={onChangeSearchValueHandler}
               searchValue={searchValue}
               onChangeDate={onChangeDate}
@@ -162,6 +167,7 @@ export const Inbox: FC = memo(() => {
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedAllItemsHandler={onCheckedAllItemsHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
+              onCheckedApproveHandler={onCheckedApproveHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
               receiptList={sortedReceipts}
               requestSort={requestSort}

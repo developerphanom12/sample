@@ -1,11 +1,19 @@
 import { styled } from 'styles/theme';
 
 export const ThreeDotsMenuStyles = {
+  // width: 130px;
+  // border-bottom: 1px solid ${({ theme }) => theme.colors.borderWhite};
+
   Wrapper: styled.div`
     position: absolute;
     top: 75%;
     right: 18px;
-    width: 130px;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    border: 1px solid ${(props) => props.theme.colors.boxShadowBlack};
+    border-radius: 5px;
+    overflow: hidden;
     box-shadow: 0px 1px 1px ${(props) => props.theme.colors.boxShadowBlack};
     z-index: ${({ theme }) => theme.zIndex.xs};
     background-color: ${({ theme }) => theme.colors.white};
@@ -13,9 +21,8 @@ export const ThreeDotsMenuStyles = {
   Item: styled.button`
     font-size: ${({ theme }) => theme.size.default};
     color: ${({ theme }) => theme.colors.lightBlack};
-    width: 100%;
+    width: auto;
     height: 38px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.borderWhite};
     background-color: ${({ theme }) => theme.colors.white};
     text-align: start;
     &:hover {

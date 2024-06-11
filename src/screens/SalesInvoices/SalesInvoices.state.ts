@@ -154,6 +154,21 @@ export const useSalesInvoicesState = () => {
     setCurrentPage(0);
   };
 
+  const onChangeDateFilterValueHandler = async (
+    newValue: any,
+    actionMeta: ActionMeta<unknown>
+  ) => {
+    setState((prevState) => ({
+      ...prevState,
+      dateFilterValue: {
+        value: newValue.value,
+        label: `Date - ${newValue.label}`,
+      },
+    }));
+
+    setCurrentPage(0);
+  };
+
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();
   const [isEmailModalWindowOpen, onEmailModalWindowToggle] = useToggle();
 
@@ -204,6 +219,18 @@ export const useSalesInvoicesState = () => {
   );
 
   const onCheckedPaidHandler = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        if (!event.target.id) return;
+        onChangeStateFieldHandler('isContentLoading', true);
+      } catch (error) {
+        onChangeStateFieldHandler('isContentLoading', false);
+        console.log(error);
+      }
+    },
+    [user.active_account, fetchParams, salesInvoices]
+  );
+  const onCheckedApproveHandler = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       try {
         if (!event.target.id) return;
@@ -328,6 +355,7 @@ export const useSalesInvoicesState = () => {
     isDatePickerOpen,
     setIsDatePickerOpen,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     isEmailModalWindowOpen,
     onEmailModalWindowToggle,
     onEmailClick,
@@ -339,6 +367,7 @@ export const useSalesInvoicesState = () => {
     onChangeSearchValueHandler,
     onSelectFilesHandler,
     onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
     onChangeReceiptsPerPage,
     onChangeInputValue,
     onEnterGoToClick,

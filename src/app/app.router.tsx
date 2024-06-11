@@ -21,7 +21,7 @@ import { NotFound } from 'screens/NotFound';
 import { Preference } from 'screens/Preference';
 import { ReceiptDetails } from 'screens/ReceiptDetails';
 import { ResetPassword } from 'screens/ResetPassword';
-import { ExpenseReport } from 'screens/ExpenseReport/index';
+// import { ExpenseReport } from 'screens/ExpenseReport/index';
 import { SalesInvoices } from 'screens/SalesInvoices';
 import { SalesInvoicesDetails } from 'screens/SalesInvoicesDetails';
 import { Settings } from 'screens/Settings';
@@ -39,6 +39,7 @@ import { ROUTES } from 'constants/routes';
 import { useSelector } from 'react-redux';
 import { getUserExist } from '../screens/Dashboard/dashboard.api';
 import { IState } from '../services/redux/reducer';
+import { UnderDevelop } from 'screens/underDevelop';
 
 export const AppRouter: FC = () => {
   setInterseptors();
@@ -77,7 +78,7 @@ export const AppRouter: FC = () => {
           <Route element={<PrivateRouter />}>
             <Route index element={<Dashboard />} />
             <Route path={ROUTES.invites} element={<Invites />} />
-            <Route path={ROUTES.purchases} element={<Inbox />}>
+            <Route path={ROUTES.purchaseInvoices} element={<Inbox />}>
               <Route
                 path={ROUTES.receiptDetails}
                 element={<ReceiptDetails />}
@@ -93,7 +94,7 @@ export const AppRouter: FC = () => {
             />
             <Route
               path={ROUTES.expenseReport}
-              element={<ExpenseReport />}
+              element={<UnderDevelop />}
             />
             <Route
               path={ROUTES.filesUploadPreview}

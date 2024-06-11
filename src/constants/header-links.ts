@@ -11,7 +11,7 @@ export const MASTER_TABS = [SUPPLIERS, SUPPLIER_ACCOUNTS, CATEGORIES, CUSTOMERS,
 
 export const ADMIN_LINKS = [
   { title: 'DASHBOARD', route: ROUTES.home },
-  { title: 'PURCHASES', route: ROUTES.purchases },
+  { title: 'PURCHASES', route: ROUTES.purchaseInvoices },
   { title: 'SALES', route: ROUTES.salesInvoices },
   { title: 'EXPENSE REPORT', route: ROUTES.expenseReport},
   { title: 'MANAGE', route: ROUTES.manage, tabs: MASTER_TABS },

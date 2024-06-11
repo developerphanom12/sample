@@ -20,6 +20,7 @@ interface ICustomSelectProps {
   marginBottom?: string;
   value?: SingleValue<IOption> | MultiValue<IOption>;
   height?: string;
+  width?: string;
   defaultOption?: IOption;
   options?: IOption[];
   paginate?: boolean;
@@ -37,6 +38,7 @@ export const CustomSelect: FC<ICustomSelectProps> = (props) => {
     value,
     marginBottom,
     height,
+    width,
     paginate,
     name,
     isDisabled,
@@ -50,6 +52,7 @@ export const CustomSelect: FC<ICustomSelectProps> = (props) => {
       <StyledReactSelect
         isRemoveBorder={isRemoveBorder}
         height={height}
+        width={width}
         marginBottom={marginBottom}
         components={{ DropdownIndicator }}
         classNamePrefix="Select"

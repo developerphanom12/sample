@@ -3,6 +3,8 @@ import { styled } from 'styles/theme';
 import { TABLE_GRID_MARKUP } from './TableInboxAdmin.constants';
 
 export const TableInboxAdminStyles = {
+  // border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+  
   Head: styled.div`
     display: grid;
     grid-template-columns: ${TABLE_GRID_MARKUP};
@@ -16,7 +18,8 @@ export const TableInboxAdminStyles = {
   Checkbox: styled.div`
     display: flex;
     align-items: center;
-    margin-right: 3px;
+    justify-content: center;
+    padding-right: 10px;
   `,
   Text: styled.div`
     display: flex;
@@ -31,7 +34,6 @@ export const TableInboxAdminStyles = {
       cursor: pointer;
     }
     padding-left: 10px;
-    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
     background-color: ${({ isSorted, theme }) =>
       isSorted && `${theme.colors.checkboxBackground}`};
   `,

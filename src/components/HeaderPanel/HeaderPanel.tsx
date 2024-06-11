@@ -1,104 +1,93 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { CustomDatePicker } from 'components/CustomDatePicker';
+import { CustomDatePicker } from "components/CustomDatePicker";
 
-import { useOutsideClick } from 'hooks/useOutsideClick';
+import { useOutsideClick } from "hooks/useOutsideClick";
 
-import { Button } from '../Button';
-import { FileUploadButton } from '../FileUploadButton';
-import { Icon } from '../Icons/Icons';
-import { Input } from '../Input';
-import { HeaderPanelStyles as Styled } from './HeaderPanel.style';
-import { CustomSelect } from '../CustomSelect';
-import { ThreeDotsMenu } from '../ThreeDotsMenu';
+import { Button } from "../Button";
+import { FileUploadButton } from "../FileUploadButton";
+import { Icon } from "../Icons/Icons";
+import { Input } from "../Input";
+import { HeaderPanelStyles as Styled } from "./HeaderPanel.style";
+import { CustomSelect } from "../CustomSelect";
+import { ThreeDotsMenu } from "../ThreeDotsMenu";
 
-import { statusFilterOptions } from 'screens/Inbox/inbox.constants';
+import { statusFilterOptions, dateFilterOptions } from "screens/Inbox/inbox.constants";
 
 export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
-  const {
-    onSelectFilesHandler,
-    onChangeStatusValueHandler,
-    onChangeSearchValueHandler,
-    onChangeDate,
-    onClickOutsideDatePickerHandler,
-    setIsDatePickerOpen,
-    formattedDate,
-    dateValue,
-    isDatePickerOpen,
-    searchValue,
-    statusValue,
-    onActionsClick,
-    onActionsClose,
-    onEmailClick,
-    showActions,
-    onClickDownloadCSVButtonHandler,
-    isDownloadButtonDisabled,
-    onDownloadExcelFileHandler,
-    onDeleteItemHandler,
-    onMarkAsPaidButtonHandler,
-    datePickerRef,
-  } = props;
-  const ref = useOutsideClick(onActionsClose);
-  return (
-    <Styled.HeaderPanelWrapper>
-      <Styled.SearchWrapper>
-        <Styled.FilterWrapper>
-          <Styled.SearchInputWrapper>
-            <Input
-              value={searchValue}
-              onChangeValue={onChangeSearchValueHandler}
-              isHiddenLabel
-              isNoMargin
-              inputTheme="search"
-              placeHolder="Search"
-            />
-            <Styled.IconWrapper>
-              <Icon type="smallSearchIcon" />
-            </Styled.IconWrapper>
-          </Styled.SearchInputWrapper>
-          <Styled.DatePickerWrapper>
-            <CustomDatePicker
-              isInputDate={false}
-              isDatePickerOpen={isDatePickerOpen}
-              onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
-              onChange={onChangeDate}
-              onDatePickerClickHandler={setIsDatePickerOpen}
-              selectedDate={dateValue}
-              formattedDate={formattedDate}
-              datePickerRef={datePickerRef}
-            />
-          </Styled.DatePickerWrapper>
-        </Styled.FilterWrapper>
-        <Styled.SelectWrapper>
-          <CustomSelect
-            height="45"
-            onChangeValueHandler={onChangeStatusValueHandler}
-            options={statusFilterOptions}
-            value={statusValue}
-            paginate
-          />
-        </Styled.SelectWrapper>
-      </Styled.SearchWrapper>
-      <Styled.ButtonsWrapper>
-        <Styled.ButtonActionsWrapper ref={ref}>
-          <Button
-            width="actions"
-            themedButton="threeDots"
-            onClick={onActionsClick}
-            isDisabled={isDownloadButtonDisabled}
-          />
-          {!!showActions && (
-            <ThreeDotsMenu
-              onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-              onEmailClick={onEmailClick}
-              onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-              onDeleteItemHandler={onDeleteItemHandler}
-              onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
-            />
-          )}
-        </Styled.ButtonActionsWrapper>
-        <FileUploadButton onChangeFiles={onSelectFilesHandler} />
-      </Styled.ButtonsWrapper>
-    </Styled.HeaderPanelWrapper>
-  );
+	const {
+		dot3ExpReport,
+		onSelectFilesHandler,
+		onChangeStatusValueHandler,
+    onChangeDateFilterValueHandler,
+		onChangeSearchValueHandler,
+		onChangeDate,
+		onClickOutsideDatePickerHandler,
+		setIsDatePickerOpen,
+		formattedDate,
+		dateValue,
+		isDatePickerOpen,
+		searchValue,
+		statusValue,
+    dateFilterValue,
+		onActionsClick,
+		onActionsClose,
+		onEmailClick,
+		showActions,
+		onClickDownloadCSVButtonHandler,
+		isDownloadButtonDisabled,
+		onDownloadExcelFileHandler,
+		onDeleteItemHandler,
+		onMarkAsPaidButtonHandler,
+		datePickerRef,
+	} = props;
+	const ref = useOutsideClick(onActionsClose);
+	return (
+		<Styled.HeaderPanelWrapper>
+			<Styled.PannelLeftWrapper>
+				<Styled.SearchInputWrapper>
+					<Input value={searchValue} onChangeValue={onChangeSearchValueHandler} isHiddenLabel isNoMargin inputTheme="search" placeHolder="Search" />
+					<Styled.IconWrapper>
+						<Icon type="smallSearchIcon" />
+					</Styled.IconWrapper>
+				</Styled.SearchInputWrapper>
+				<Styled.DateFilterBatchWrapper>
+					<Styled.DateFilterSelector>
+						<CustomSelect height="70vh" width="210px" onChangeValueHandler={onChangeDateFilterValueHandler} options={dateFilterOptions} value={dateFilterValue} paginate />
+					</Styled.DateFilterSelector>
+					<Styled.DatePickerWrapper>
+						<CustomDatePicker
+							isInputDate={false}
+							isDatePickerOpen={isDatePickerOpen}
+							onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
+							onChange={onChangeDate}
+							onDatePickerClickHandler={setIsDatePickerOpen}
+							selectedDate={dateValue}
+							formattedDate={formattedDate}
+							datePickerRef={datePickerRef}
+						/>
+					</Styled.DatePickerWrapper>
+				</Styled.DateFilterBatchWrapper>
+				<Styled.SelectWrapper>
+					<CustomSelect height="45" onChangeValueHandler={onChangeStatusValueHandler} options={statusFilterOptions} value={statusValue} paginate />
+				</Styled.SelectWrapper>
+			</Styled.PannelLeftWrapper>
+			<Styled.ButtonsWrapper>
+				<Styled.ButtonActionsWrapper ref={ref}>
+					<Button width="actions" themedButton="threeDots" onClick={onActionsClick} isDisabled={isDownloadButtonDisabled} />
+					{!!showActions && (
+						<ThreeDotsMenu
+							dot3ExpReport={dot3ExpReport}
+							onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
+							onEmailClick={onEmailClick}
+							onDownloadExcelFileHandler={onDownloadExcelFileHandler}
+							onDeleteItemHandler={onDeleteItemHandler}
+							onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+						/>
+					)}
+				</Styled.ButtonActionsWrapper>
+				<FileUploadButton onChangeFiles={onSelectFilesHandler} />
+			</Styled.ButtonsWrapper>
+		</Styled.HeaderPanelWrapper>
+	);
 };

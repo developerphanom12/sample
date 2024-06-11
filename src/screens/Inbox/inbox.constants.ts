@@ -6,6 +6,20 @@ export const statusFilterOptions = [
   { value: 'rejected', label: `Rejected` },
 ];
 
+export const dateFilterOptions = [
+  { value: 'alldate', label: `All` },
+  { value: 'today', label: `Today` },
+  { value: 'yesterday', label: `YesterDay` },
+  { value: 'thisweek', label: `This Week` },
+  { value: 'lastweek', label: `Last Week` },
+  { value: 'thismonth', label: `This Month` },
+  { value: 'lastmonth', label: `Last Month` },
+  { value: 'thisyear', label: `This Year` },
+  { value: 'lastyear', label: `Last Year` },
+  { value: 'custom', label: `Range (From - To)` },
+  { value: 'customdate', label: `Particular Date` },
+];
+
 export const formikInitialValues = {
   to: '',
   subject: '',
@@ -31,6 +45,7 @@ export const emailInputs = [
 
 export const INITIAL_STATE = {
   statusValue: { value: 'all', label: 'Status - All' },
+  dateFilterValue: { value: 'all', label: 'Date - All' },
   searchValue: '',
   dateValue: null,
   formattedDate: '',
@@ -67,8 +82,9 @@ export const mockedReceipts = [
     total: null,
     payment_type: null,
     vat_code: null,
-    publish_status: false,
     payment_status: false,
+    approve_status: false,
+    publish_status: false,
     isChecked: false,
   },
 ];
