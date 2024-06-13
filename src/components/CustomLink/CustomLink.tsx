@@ -5,6 +5,8 @@ import { Submenu } from '../Submenu';
 
 import { useCustomLinkState } from './CustomLink.state';
 import { CustomLinkStyles as Styled } from './CustomLink.style';
+import { Icon } from ".././Icons";
+
 
 export interface CustomLinkProps {
   isLast?: boolean;
@@ -12,11 +14,13 @@ export interface CustomLinkProps {
   tabs?: string[];
   to: string;
   isDisabled?: boolean;
-  children: React.ReactNode;
+  icontype: string;
+  children: any;
 }
 
 export const CustomLink = (props: CustomLinkProps) => {
-  const { children, is_sales, to, isLast, tabs, isDisabled } = props;
+  const { children, is_sales, to, isLast, tabs, isDisabled, icontype } = props;
+  console.log('@@##$$%%^^**',icontype);
 
   const { isHover, onMouseEnterHandler, onMouseLeaveHandler } =
     useCustomLinkState();
@@ -37,6 +41,8 @@ export const CustomLink = (props: CustomLinkProps) => {
       to={to}
       is_disabled={isDisabled ? `${isDisabled}` : ''}
     >
+      {/* <Icon type={icontype} /> */}
+      {/* <Icon type={icontype} width={24} height={24} /> */}
       {children}
       {tabs && isHover && <Submenu menuItems={tabs} />}
     </Styled.Link>

@@ -11,6 +11,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
   const {
     dateValue,
     formattedDate,
+    isInputDate,
     isDatePickerOpen,
     isDownloadButtonDisabled,
     onChangeDate,
@@ -77,6 +78,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           dateValue={dateValue}
           setIsDatePickerOpen={setIsDatePickerOpen}
           formattedDate={formattedDate}
+          isInputDate={isInputDate}
           showActions={showActions}
           onActionsClick={onActionsClick}
           onActionsClose={onActionsClose}

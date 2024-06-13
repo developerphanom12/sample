@@ -41,10 +41,24 @@ import { ReactComponent as profileIcon } from 'assets/icons/profile-icon.svg';
 import { ReactComponent as logoutIcon } from 'assets/icons/logout-icon.svg';
 import { ReactComponent as googleIcon } from 'assets/icons/google-icon.svg';
 
+import { ReactComponent as dashboardIcon } from 'assets/icons/header-dashboard.svg';
+import { ReactComponent as purchasesIcon } from 'assets/icons/header-purchases.svg';
+import { ReactComponent as salesIcon } from 'assets/icons/header-sales.svg';
+import { ReactComponent as expReportIcon } from 'assets/icons/header-expReport.svg';
+import { ReactComponent as manageIcon } from 'assets/icons/header-manage.svg';
+// import { ReactComponent as invitesIcon } from 'assets/icons/header-invites.svg';
+import { ReactComponent as settingsIcon } from 'assets/icons/header-settings.svg';
+
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   profileIcon,
   googleIcon,
   logoutIcon,
+  dashboardIcon,
+  purchasesIcon,
+  salesIcon,
+  expReportIcon,
+  manageIcon,
+  settingsIcon,
   smallSearchIcon,
   tableArrow,
   dropDownArrow,

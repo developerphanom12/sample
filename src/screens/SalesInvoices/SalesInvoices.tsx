@@ -30,6 +30,7 @@ export const SalesInvoices: FC = () => {
     debouncedValue,
     fetchParams,
     formattedDate,
+    isInputDate,
     inputPaginationValue,
     isCompanyChanged,
     isContentLoading,
@@ -96,6 +97,7 @@ export const SalesInvoices: FC = () => {
         dateValue={dateValue}
         setIsDatePickerOpen={setIsDatePickerOpen}
         formattedDate={formattedDate}
+        isInputDate={isInputDate}
         onActionsClose={onActionsClose}
         onEmailClick={onEmailClick}
         showActions={showActions}

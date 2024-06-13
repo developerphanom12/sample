@@ -1,10 +1,11 @@
-import { FC, RefObject } from "react";
+import { FC, RefObject, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { CustomDatePickerStyles as Styled } from "./CustomDatePicker.style";
+import { CustomDatePickerStyles as Styled } from "./DateRangePicker.style";
 import { DateButton } from "./DateButton";
+import { boolean } from "yup";
 
 interface ICustomDatePicker {
 	onChange?: (date: Date) => void;
@@ -15,13 +16,25 @@ interface ICustomDatePicker {
 	datePickerRef?: RefObject<HTMLButtonElement>;
 	isInputDate: boolean;
 	formattedDate: string;
+
+	selectsRange?: boolean;
+	startDate?: Date | null;
+	endDate?: Date | null;
+	isClearable?: boolean;
 }
 
-export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
+export const DateRangePicker: FC<ICustomDatePicker> = (props) => {
 	const { isInputDate, selectedDate, isDatePickerOpen, formattedDate, datePickerRef, onDatePickerClickHandler, onClickOutsideDatePickerHandler, onChange } = props;
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(null);
 
-	const onChangeDateHandler = (date: Date) => {
-		onChange && onChange(date);
+	const yesChange = (dates: any): any => {
+		const [start, end] = dates;
+		setStartDate(start);
+		setEndDate(end);
+		if (start && end) {
+			onChange && onChange(dates);
+		}
 	};
 
 	const dateLabelCondition = !formattedDate && isInputDate ? "" : formattedDate ? `${formattedDate}` : "Choose Date";
@@ -33,7 +46,8 @@ export const CustomDatePicker: FC<ICustomDatePicker> = (props) => {
 			</DateButton>
 			{isDatePickerOpen && (
 				<Styled.Wrapper isFormattedDate={!!dateLabelCondition} isInputDate={isInputDate} data-testid="date-picker-menu">
-					<DatePicker data-testid="date-picker1" onClickOutside={onClickOutsideDatePickerHandler} selected={selectedDate} onChange={onChangeDateHandler} allowSameDay inline />
+					<DatePicker data-testid="date-picker1" onClickOutside={onClickOutsideDatePickerHandler} onChange={yesChange} selected={startDate} /* onChange={onChange} */ selectsRange startDate={startDate} endDate={endDate} inline />
+					{/* <DatePicker data-testid="date-picker1" onClickOutside={onClickOutsideDatePickerHandler} selected={selectedDate} onChange={onChangeDateHandler} allowSameDay inline /> */}
 				</Styled.Wrapper>
 			)}
 		</Styled.Container>

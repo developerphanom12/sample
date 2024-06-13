@@ -4,6 +4,7 @@ export const INITIAL_STATE = {
   searchValue: '',
   dateValue: null,
   formattedDate: '',
+  isInputDate: false,
   showActions: false,
   checkedIds: [],
   isLoading: false,
