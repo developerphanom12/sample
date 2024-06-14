@@ -16,10 +16,12 @@ declare global {
     supplierValue: string | null;
     supplierAccountValue: IOption | any;
     currencyValue: SingleValue<IOption> | any;
+    payment: IOption | any;
     currencyValueId: string;
     taxValue: number | null;
     totalValue: number | null;
     descriptionValue: string;
+    receiptid: string;
     vatCodeValue: string;
     netValue: number | null;
     formattedDate: string;
@@ -67,6 +69,7 @@ declare global {
     category?: string | null;
     currency?: string | null;
     description?: string | null;
+    custom_id?: string | null;
     net?: number | null;
     photos?: string[];
     receipt_date?: Date | null;

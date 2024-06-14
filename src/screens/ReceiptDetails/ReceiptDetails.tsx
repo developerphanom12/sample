@@ -41,8 +41,41 @@ export const ReceiptDetails: FC = () => {
           isImageLoading={isImageLoading}
           isPDF={isPDF}
         />
-        <PhotoDetails />
+        <div style={{ overflowY: "auto" }}>
+          <div style={{ height: "auto" }}>
+            <PhotoDetails />
+          </div>
+          <Styled.CheckboxContainer>
+            <div></div>
+            <Styled.Container>
+              <Styled.Checkbox>
+                <label>
+                  <Styled.Input type="checkbox" />
+                  Mark as Paid
+                </label>
+                <label>
+                  <Styled.Input type="checkbox" />
+                  Mark as Published
+                </label>
+              </Styled.Checkbox>
+              <Styled.Description>
+                <Styled.DescriptionInput type="text" placeholder="Description" />
+              </Styled.Description>
+            </Styled.Container>
+          </Styled.CheckboxContainer>
+        </div>
       </Styled.Wrapper>
+      <Styled.Footer>
+        <div>
+          <Styled.Button>Archive</Styled.Button>
+          <Styled.Button className="reject">Reject</Styled.Button>
+        </div>
+        <div>
+          <Styled.Button className="approve">Approve & Save</Styled.Button>
+          <Styled.Button className="save">Save</Styled.Button>
+          <Styled.Button className="cancel">Cancel</Styled.Button>
+        </div>
+      </Styled.Footer>
     </Styled.Section>
   );
 };

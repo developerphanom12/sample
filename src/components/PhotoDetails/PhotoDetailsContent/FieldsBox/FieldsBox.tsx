@@ -35,6 +35,15 @@ export const FieldsBox: FC<IFieldsBox> = (props) => {
     onClickOutsideDatePickerHandler,
     onDatePickerClickHandler,
   } = props;
+
+  const isInputField = (item: any): item is { inputType: string; value: string; isTextArea?: boolean } => {
+    return item.type === 'input' || item.type === 'number';
+  };
+
+  const isCheckboxField = (item: any): item is { value: boolean; onChangeCheckbox: (e: any) => void; labelText: string } => {
+    return item.type === 'checkbox';
+  };
+
   return (
     <>
       {inputFields.map((item) => (
@@ -59,9 +68,9 @@ export const FieldsBox: FC<IFieldsBox> = (props) => {
               isDisabled={item.isDisabled}
               isRemoveBorder
             />
-          ) : item.inputType === 'number' ? (
+          ) : isInputField(item) ? (
             <Input
-              value={item.value as string}
+              value={item.value}
               inputType={item.inputType}
               onChangeValue={item.onChange}
               isTextArea={item.isTextArea}
@@ -70,26 +79,16 @@ export const FieldsBox: FC<IFieldsBox> = (props) => {
               isRemoveBorder
               onKeyDown={onForbiddenCharacterClick}
             />
-          ) : item.type === 'input' ? (
-            <Input
-              value={item.value as string}
-              inputType={item.inputType}
-              onChangeValue={item.onChange}
-              isTextArea={item.isTextArea}
-              isHiddenLabel
-              isRemoveBorder
-              isNoMargin
-            />
-          ) : (
+          ) : isCheckboxField(item) ? (
             <Styled.CheckBoxWrapper>
               <CheckboxItem
                 name={item.label}
-                isChecked={item.value as boolean}
+                isChecked={item.value}
                 labelText={item.labelText}
                 onChange={item.onChangeCheckbox}
               />
             </Styled.CheckBoxWrapper>
-          )}
+          ) : null}
         </PhotoDetailsContentItem>
       ))}
     </>

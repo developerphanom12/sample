@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { getFirstLetterUppercase } from 'services/utils';
 
 import { StatusBarStyles } from './StatusBar.style';
+import { Icon } from 'components/Icons';
 
 interface IStatusBarProps {
   status?: TStatuses;
@@ -14,7 +15,7 @@ export const StatusBar: FC<IStatusBarProps> = (props) => {
 
   return (
     <StatusBarStyles.MainWrapper status={status}>
-      {upperText}
+      {upperText == "Accepted" ? <Icon type="approvedMark" /> : <Icon type="review" />} {<StatusBarStyles.Text>{upperText}</StatusBarStyles.Text>}
     </StatusBarStyles.MainWrapper>
   );
 };

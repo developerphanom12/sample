@@ -5,7 +5,7 @@ export const STATUS_COLORS = {
     color: ${(props) => props.theme.colors.blue};
   `,
   review: css`
-    color: ${(props) => props.theme.colors.mango};
+    color: ${(props) => props.theme.colors.darkyellow};
   `,
   accepted: css`
     color: ${(props) => props.theme.colors.green};
