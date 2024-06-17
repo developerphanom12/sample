@@ -76,8 +76,7 @@ export const PaginationStyles = {
     justify-content: space-between;
   `,
   InputWrapper: styled.div`
-    padding-top: 10px;
-    max-width: 50px;
+    max-width: 60px;
   `,
   Dots: styled.div`
     width: 100%;

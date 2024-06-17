@@ -20,6 +20,13 @@ import {
   downloadXLXS,
   getReceipts,
   markAsPaid,
+  markAsUnpaid,
+  markAsApproved,
+  markAsWithdrawlApproval,
+  markAsRejected,
+  markAsWithdrawlRejection,
+  markAsPublished,
+  markAsUnpublished,
   postEmail,
   receiptDelete,
 } from './inbox.api';
@@ -516,13 +523,50 @@ export const useInboxState = () => {
     }
   };
 
-  const onMarkAsPaidButtonHandler = async () => {
+  const onMarkAsHandler = async (mark: string) => {
     try {
       onChangeStateFieldHandler('isContentLoading', true);
-      await markAsPaid({
-        receipts: state.checkedIds,
-        active_account: active_account || '',
-      });
+      if (mark === 'paid') {
+        await markAsPaid({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'unpaid') {
+        await markAsUnpaid({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'approved') {
+        await markAsApproved({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'withdrawlapproval') {
+        await markAsWithdrawlApproval({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'rejected') {
+        await markAsRejected({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'withdrawlrejection') {
+        await markAsWithdrawlRejection({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'published') {
+        await markAsPublished({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      } else if (mark === 'unpublished') {
+        await markAsPublished({
+          receipts: state.checkedIds,
+          active_account: active_account || '',
+        });
+      }      
       onFetchReceiptsHandler(fetchParams);
       onActionsClick();
     } catch (error) {
@@ -611,7 +655,7 @@ export const useInboxState = () => {
     onClickDownloadCSVButtonHandler,
     onCheckedPublishMockFuncHandler,
     onDeleteReceiptHandler,
-    onMarkAsPaidButtonHandler,
+    onMarkAsHandler,
     onClickOutsideDatePickerHandler,
   };
 };

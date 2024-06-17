@@ -15,7 +15,7 @@ export const ADMIN_LINKS = [
   { title: 'SALES', route: ROUTES.salesInvoices, iconName: 'salesIcon' },
   { title: 'EXPENSE REPORT', route: ROUTES.expenseReport, iconName: 'expReportIcon'},
   { title: 'MANAGE', route: ROUTES.manage, tabs: MASTER_TABS, iconName: 'manageIcon' },
-  { title: 'INVITES', route: ROUTES.invites, iconName: 'manageIcon' },
+  { title: 'INVITES', route: ROUTES.invites, iconName: 'invitesIcon' },
   { title: 'SETTINGS', route: ROUTES.settings, iconName: 'settingsIcon', isLast: true },
   // { title: 'HELP & SUPPORT', route: ROUTES.support, isLast: true },
 ];

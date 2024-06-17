@@ -1,7 +1,5 @@
 import { css } from 'styled-components';
-
 import { styled } from 'styles/theme';
-
 import { NavigationButtonProps } from './NavigationButton';
 
 const THEME = {
@@ -16,7 +14,7 @@ const THEME = {
     background-color: transparent;
     color: ${(props) => props.theme.colors.black};
     padding: 0 2px 0 2px;
-    margin: 0 4px 0 0;
+    margin: 0 10px 0 0;
   `,
   current: css`
     display: flex;

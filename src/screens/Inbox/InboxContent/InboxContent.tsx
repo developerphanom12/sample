@@ -21,7 +21,8 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     onClickDownloadCSVButtonHandler,
     onClickOutsideDatePickerHandler,
     onDeleteReceiptHandler,
-    onMarkAsPaidButtonHandler,
+    // onMarkAsPaidButtonHandler,
+    onMarkAsHandler,
     onDownloadExcelFileHandler,
     onEmailClick,
     onSelectFilesHandler,
@@ -87,7 +88,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           isDownloadButtonDisabled={isDownloadButtonDisabled}
           onDownloadExcelFileHandler={onDownloadExcelFileHandler}
           onDeleteItemHandler={onDeleteReceiptHandler}
-          onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+          onMarkAsHandler={onMarkAsHandler}
         />
       )}
       <Styled.TableWrapper>

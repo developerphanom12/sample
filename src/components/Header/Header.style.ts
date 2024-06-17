@@ -37,7 +37,7 @@ export const HeaderStyles = {
   BlocksWrapper: styled.div`
     display: flex;
     justify-content: space-between;
-    width: 75%;
+    width: max-content;
     @media (max-width: 1278px) {
       width: 80%;
     }
@@ -54,5 +54,6 @@ export const HeaderStyles = {
   `,
   Link: styled(Link)<{ is_disabled?: string }>`
     pointer-events: ${({ is_disabled }) => is_disabled && 'none'};
+    width: max-content;
   `,
 };

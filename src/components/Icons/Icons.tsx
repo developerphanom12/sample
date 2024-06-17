@@ -46,7 +46,7 @@ import { ReactComponent as purchasesIcon } from 'assets/icons/header-purchases.s
 import { ReactComponent as salesIcon } from 'assets/icons/header-sales.svg';
 import { ReactComponent as expReportIcon } from 'assets/icons/header-expReport.svg';
 import { ReactComponent as manageIcon } from 'assets/icons/header-manage.svg';
-// import { ReactComponent as invitesIcon } from 'assets/icons/header-invites.svg';
+import { ReactComponent as invitesIcon } from 'assets/icons/header-invites.svg';
 import { ReactComponent as settingsIcon } from 'assets/icons/header-settings.svg';
 
 const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
@@ -55,6 +55,7 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   logoutIcon,
   dashboardIcon,
   purchasesIcon,
+  invitesIcon,
   salesIcon,
   expReportIcon,
   manageIcon,

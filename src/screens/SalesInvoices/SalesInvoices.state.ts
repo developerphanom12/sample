@@ -306,6 +306,15 @@ export const useSalesInvoicesState = () => {
       console.log(error);
     }
   };
+  const onMarkAsHandler = async () => {
+    try {
+      onChangeStateFieldHandler('isContentLoading', true);
+      onActionsClick();
+    } catch (error) {
+      onActionsClick();
+      console.log(error);
+    }
+  };
 
   const onClickOutsideDatePickerHandler = (
     event: React.MouseEvent<HTMLDivElement>
@@ -384,6 +393,7 @@ export const useSalesInvoicesState = () => {
     onCheckedPublishMockFuncHandler,
     onDeleteInvoiceHandler,
     onMarkAsPaidButtonHandler,
+    onMarkAsHandler,
     onClickOutsideDatePickerHandler,
   };
 };

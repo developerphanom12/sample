@@ -24,6 +24,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
     onDownloadExcelFileHandler,
     onEmailClick,
     onMarkAsPaidButtonHandler,
+    onMarkAsHandler,
     onSelectFilesHandler,
     searchValue,
     setIsDatePickerOpen,
@@ -52,6 +53,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
         datePickerRef={datePickerRef}
         onDeleteItemHandler={onDeleteItemHandler}
         onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+        onMarkAsHandler={onMarkAsHandler}
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
         onSelectFilesHandler={onSelectFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}

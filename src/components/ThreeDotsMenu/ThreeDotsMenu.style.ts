@@ -13,7 +13,8 @@ export const ThreeDotsMenuStyles = {
     width: max-content;
     border: 1px solid ${(props) => props.theme.colors.boxShadowBlack};
     border-radius: 5px;
-    overflow: hidden;
+    overflow-y: auto;
+    height: 70vh;
     box-shadow: 0px 1px 1px ${(props) => props.theme.colors.boxShadowBlack};
     z-index: ${({ theme }) => theme.zIndex.xs};
     background-color: ${({ theme }) => theme.colors.white};
@@ -23,6 +24,7 @@ export const ThreeDotsMenuStyles = {
     color: ${({ theme }) => theme.colors.lightBlack};
     width: auto;
     height: 38px;
+    flex-shrink: 0;
     background-color: ${({ theme }) => theme.colors.white};
     text-align: start;
     &:hover {

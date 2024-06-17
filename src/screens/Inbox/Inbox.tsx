@@ -72,7 +72,7 @@ export const Inbox: FC = memo(() => {
     onChangePagesAmount,
     onDownloadExcelFileHandler,
     onDeleteReceiptHandler,
-    onMarkAsPaidButtonHandler,
+    onMarkAsHandler,
     sortField,
     sortOrder,
     sortedReceipts,
@@ -164,7 +164,7 @@ export const Inbox: FC = memo(() => {
               isDownloadButtonDisabled={isDownloadButtonDisabled}
               onDownloadExcelFileHandler={onDownloadExcelFileHandler}
               onDeleteReceiptHandler={onDeleteReceiptHandler}
-              onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+              onMarkAsHandler={onMarkAsHandler}
               isContentLoading={isContentLoading}
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedAllItemsHandler={onCheckedAllItemsHandler}

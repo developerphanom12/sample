@@ -5,7 +5,7 @@ export const InboxContentStyles = {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 21px 30px;
+    padding: 20px 15px 60px;
     flex: 1 0 auto;
   `,
   LoaderWrapper: styled.div`
@@ -19,5 +19,6 @@ export const InboxContentStyles = {
   `,
   TableWrapper: styled.div`
     position: relative;
+    width: 100%;
   `,
 };

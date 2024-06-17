@@ -19,7 +19,6 @@ export const Styled = {
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.lightBlack};
-    margin-bottom: ${(props) => props.theme.size.small};
   `,
   Input: styled.input<{
     isError?: boolean;
@@ -80,7 +79,6 @@ export const Styled = {
     }
   `,
   InputWrapper: styled.div<{ isNoMargin?: boolean }>`
-    margin-bottom: ${({ isNoMargin }) => (isNoMargin ? '0' : '21px')};
     width: 100%;
     position: relative;
   `,

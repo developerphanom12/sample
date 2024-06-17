@@ -27,7 +27,8 @@ declare global {
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteItemHandler: () => Promise<void>;
-    onMarkAsPaidButtonHandler: () => Promise<void>;
+    onMarkAsPaidButtonHandler?: () => Promise<void>;
+    onMarkAsHandler: (mark:string) => Promise<void>;
     onClickDownloadCSVButtonHandler: () => Promise<void>;
     onSelectFilesHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onChangeStatusValueHandler: (

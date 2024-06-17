@@ -77,12 +77,14 @@ export const SalesInvoices: FC = () => {
     dateFilterValue,
     totalCount,
     invoice_formik,
+    onMarkAsHandler,
   } = useSalesInvoicesState();
   return (
     <Styled.Wrapper>
       <ActionsPanel
         datePickerRef={datePickerRef}
         onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+        onMarkAsHandler={onMarkAsHandler}
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
         onSelectFilesHandler={onSelectFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}

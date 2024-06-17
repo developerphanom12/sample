@@ -28,6 +28,34 @@ export const markAsPaid = (receiptsIds: IReceiptsIds) => {
   const URL = '/receipt/mark-paid';
   return apiServices.postData(URL, receiptsIds);
 };
+export const markAsUnpaid = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/mark-unpaid';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsApproved = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/mark-approved';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsWithdrawlApproval = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/withdrawl-approval';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsRejected = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/mark-rejected';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsWithdrawlRejection = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/withdrawl-rejection';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsPublished = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/mark-published';
+  return apiServices.postData(URL, receiptsIds);
+};
+export const markAsUnpublished = (receiptsIds: IReceiptsIds) => {
+  const URL = '/receipt/mark-unpublished';
+  return apiServices.postData(URL, receiptsIds);
+};
 
 export const postEmail = (payload?: IPostEmail) => {
   const URL = '/receipt/send-email';

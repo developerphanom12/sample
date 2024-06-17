@@ -26,7 +26,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 		onClickOutsideDatePickerHandler,
 		setIsDatePickerOpen,
 		formattedDate,
-    isInputDate,
+    	isInputDate,
 		dateValue,
 		isDatePickerOpen,
 		searchValue,
@@ -40,7 +40,8 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 		isDownloadButtonDisabled,
 		onDownloadExcelFileHandler,
 		onDeleteItemHandler,
-		onMarkAsPaidButtonHandler,
+		// onMarkAsPaidButtonHandler,
+		onMarkAsHandler,
 		datePickerRef,
 	} = props;
 	const ref = useOutsideClick(onActionsClose);
@@ -102,7 +103,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 							onEmailClick={onEmailClick}
 							onDownloadExcelFileHandler={onDownloadExcelFileHandler}
 							onDeleteItemHandler={onDeleteItemHandler}
-							onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
+							onMarkAsHandler={onMarkAsHandler}
 						/>
 					)}
 				</Styled.ButtonActionsWrapper>
