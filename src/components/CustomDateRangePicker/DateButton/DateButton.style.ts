@@ -7,7 +7,8 @@ export const DateButtonStyles = {
     background-color: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.lightBlack};
     height: 40px;
-    width: ${(props) => (props.width ? props.width : '100%')};
+    min-width: ${(props) => (props.width ? props.width : '100%')};
+    width: max-content;
     border-radius: 6px;
     border: 1px solid
       ${(props) =>
@@ -25,6 +26,7 @@ export const DateButtonStyles = {
     align-items: center;
     justify-content: space-between;
     padding: ${(props) => (props.isInputDate ? '14px 18px' : '11px')};
+    padding-right: 35px;
     position: relative;
   `,
   IconWrapper: styled.div`

@@ -14,7 +14,7 @@ export const ThreeDotsMenuStyles = {
     border: 1px solid ${(props) => props.theme.colors.boxShadowBlack};
     border-radius: 5px;
     overflow-y: auto;
-    height: 70vh;
+    max-height: 70vh;
     box-shadow: 0px 1px 1px ${(props) => props.theme.colors.boxShadowBlack};
     z-index: ${({ theme }) => theme.zIndex.xs};
     background-color: ${({ theme }) => theme.colors.white};

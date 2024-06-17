@@ -23,7 +23,7 @@ export const HeaderPanelStyles = {
   `,
   DateFilterBatchWrapper: styled.div`
     display: flex;
-    gap: 10px;
+    align-items: center;
     width: max-content;
   `,
   DateFilterSelector: styled.div`
@@ -41,6 +41,11 @@ export const HeaderPanelStyles = {
     `,
     // margin-left: 10px;
   DatePickerWrapper: styled.div`
+  `,
+  connector: styled.div`
+    width: 10px;
+    height: 1px;
+    background-color: #A5B1BE;
   `,
   SearchInputWrapper: styled.div`
     display: flex;

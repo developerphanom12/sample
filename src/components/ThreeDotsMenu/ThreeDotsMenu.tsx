@@ -16,7 +16,7 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
 	const { onMarkAsPaidButtonHandler, onMarkAsHandler, onClickDownloadCSVButtonHandler, onDownloadExcelFileHandler, onEmailClick, onDeleteItemHandler } = props;
 	return (
 		<Styled.Wrapper>
-			{props?.dot3ExpReport ? <Styled.Item onClick={() => onMarkAsHandler('paid')}>Add to Expense Report</Styled.Item> : null}
+			{props?.dot3ExpReport ? <Styled.Item onClick={() => onMarkAsHandler('')}>Add to Expense Report</Styled.Item> : null}
 			<Styled.Item onClick={() => onMarkAsHandler('paid')}>Mark as paid</Styled.Item>
 			<Styled.Item onClick={() => onMarkAsHandler('unpaid')}>Mark as Unpaid</Styled.Item>
 			<Styled.Item onClick={() => onMarkAsHandler('approved')}>Mark as Approved</Styled.Item>
@@ -25,11 +25,10 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
 			<Styled.Item onClick={() => onMarkAsHandler('unpublished')}>Mark as Unpublished</Styled.Item>
 			<Styled.Item onClick={() => onMarkAsHandler('withdrawlapproval')}>Withdrawl Approval</Styled.Item>
 			<Styled.Item onClick={() => onMarkAsHandler('withdrawlrejection')}>Withdrawl Rejection</Styled.Item>
-			<Styled.Item onClick={onMarkAsPaidButtonHandler}>Send</Styled.Item>
+			<Styled.Item onClick={onEmailClick}>Send</Styled.Item>
 			<Styled.Item onClick={onDownloadExcelFileHandler}>Delete</Styled.Item>
 			<Styled.Item onClick={onClickDownloadCSVButtonHandler}>Export to CSV</Styled.Item>
 			<Styled.Item onClick={onClickDownloadCSVButtonHandler}>Export to PDF</Styled.Item>
-			<Styled.Item onClick={onEmailClick}>Email</Styled.Item>
 			<Styled.Item onClick={onDeleteItemHandler}>Delete</Styled.Item>
 		</Styled.Wrapper>
 	);

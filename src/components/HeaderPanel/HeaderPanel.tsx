@@ -26,7 +26,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 		onClickOutsideDatePickerHandler,
 		setIsDatePickerOpen,
 		formattedDate,
-    	isInputDate,
+		isInputDate,
 		dateValue,
 		isDatePickerOpen,
 		searchValue,
@@ -58,6 +58,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 					<Styled.DateFilterSelector>
 						<CustomSelect height="70vh" width="210px" onChangeValueHandler={onChangeDateFilterValueHandler} options={dateFilterOptions} value={dateFilterValue} paginate />
 					</Styled.DateFilterSelector>
+					{dateFilterValue?.value === "range" || dateFilterValue?.value === "customdate" ? <Styled.connector></Styled.connector> : null}
 					<Styled.DatePickerWrapper>
 						{dateFilterValue?.value === "range" ? (
 							<DateRangePicker
@@ -69,11 +70,6 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 								selectedDate={dateValue}
 								formattedDate={formattedDate}
 								datePickerRef={datePickerRef}
-
-								// selectsRange={true}
-								// startDate={startDate}
-								// endDate={endDate}
-								// isClearable={true}
 							/>
 						) : dateFilterValue?.value === "customdate" ? (
 							<CustomDatePicker
@@ -97,14 +93,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 				<Styled.ButtonActionsWrapper ref={ref}>
 					<Button width="actions" themedButton="threeDots" onClick={onActionsClick} isDisabled={isDownloadButtonDisabled} />
 					{!!showActions && (
-						<ThreeDotsMenu
-							dot3ExpReport={dot3ExpReport}
-							onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-							onEmailClick={onEmailClick}
-							onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-							onDeleteItemHandler={onDeleteItemHandler}
-							onMarkAsHandler={onMarkAsHandler}
-						/>
+						<ThreeDotsMenu dot3ExpReport={dot3ExpReport} onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler} onEmailClick={onEmailClick} onDownloadExcelFileHandler={onDownloadExcelFileHandler} onDeleteItemHandler={onDeleteItemHandler} onMarkAsHandler={onMarkAsHandler} />
 					)}
 				</Styled.ButtonActionsWrapper>
 				<FileUploadButton onChangeFiles={onSelectFilesHandler} />

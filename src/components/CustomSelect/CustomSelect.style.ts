@@ -36,7 +36,7 @@ export const StyledReactSelect = styled(Select)<{
       isMulti ? 'auto' : height ? `${height}px` : '100%'};
     cursor: pointer;
     margin-bottom: ${({ marginBottom }) =>
-      marginBottom ? `${marginBottom}px` : '24px'};
+      marginBottom ? `${marginBottom}px` : ''};
   }
   .Select__control--is-focused {
     font-size: ${({ theme }) => theme.size.default};
