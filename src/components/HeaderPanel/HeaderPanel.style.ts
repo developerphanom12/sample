@@ -27,6 +27,7 @@ export const HeaderPanelStyles = {
     width: max-content;
   `,
   DateFilterSelector: styled.div`
+    width: max-content;
   `,
   FilterWrapper: styled.div`
     display: flex;
@@ -40,7 +41,6 @@ export const HeaderPanelStyles = {
     `,
     // margin-left: 10px;
   DatePickerWrapper: styled.div`
-    max-width: 140px;
   `,
   SearchInputWrapper: styled.div`
     display: flex;

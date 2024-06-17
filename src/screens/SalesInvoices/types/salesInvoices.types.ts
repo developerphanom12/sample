@@ -42,6 +42,7 @@ export interface IuseSalesInvoicesState {
   searchValue: string;
   dateValue: Date | null;
   formattedDate: string;
+  isInputDate: boolean;
   showActions: boolean;
   checkedIds: string[];
   isLoading: boolean;

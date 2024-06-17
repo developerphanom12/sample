@@ -7,7 +7,7 @@ export const statusFilterOptions = [
 ];
 
 export const dateFilterOptions = [
-  { value: 'alldate', label: `All` },
+  { value: 'all', label: `All` },
   { value: 'today', label: `Today` },
   { value: 'yesterday', label: `YesterDay` },
   { value: 'thisweek', label: `This Week` },
@@ -16,7 +16,7 @@ export const dateFilterOptions = [
   { value: 'lastmonth', label: `Last Month` },
   { value: 'thisyear', label: `This Year` },
   { value: 'lastyear', label: `Last Year` },
-  { value: 'custom', label: `Range (From - To)` },
+  { value: 'range', label: `Range (From - To)` },
   { value: 'customdate', label: `Particular Date` },
 ];
 
@@ -48,7 +48,9 @@ export const INITIAL_STATE = {
   dateFilterValue: { value: 'all', label: 'Date - All' },
   searchValue: '',
   dateValue: null,
+  dateRangeValue: null,
   formattedDate: '',
+  isInputDate: false,
   showActions: false,
   checkedIds: [],
   isLoading: false,

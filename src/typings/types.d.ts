@@ -54,6 +54,7 @@ declare global {
     dateValue: Date | null;
     setIsDatePickerOpen: () => void;
     formattedDate: string;
+    isInputDate: boolean;
     onActionsClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     onActionsClose: () => void;
     onEmailClick: () => void;

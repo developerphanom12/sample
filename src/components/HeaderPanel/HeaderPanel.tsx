@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import { CustomDatePicker } from "components/CustomDatePicker";
+import { DateRangePicker } from "components/CustomDateRangePicker";
 
 import { useOutsideClick } from "hooks/useOutsideClick";
 
@@ -19,17 +20,18 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 		dot3ExpReport,
 		onSelectFilesHandler,
 		onChangeStatusValueHandler,
-    onChangeDateFilterValueHandler,
+		onChangeDateFilterValueHandler,
 		onChangeSearchValueHandler,
 		onChangeDate,
 		onClickOutsideDatePickerHandler,
 		setIsDatePickerOpen,
 		formattedDate,
+    isInputDate,
 		dateValue,
 		isDatePickerOpen,
 		searchValue,
 		statusValue,
-    dateFilterValue,
+		dateFilterValue,
 		onActionsClick,
 		onActionsClose,
 		onEmailClick,
@@ -56,16 +58,34 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 						<CustomSelect height="70vh" width="210px" onChangeValueHandler={onChangeDateFilterValueHandler} options={dateFilterOptions} value={dateFilterValue} paginate />
 					</Styled.DateFilterSelector>
 					<Styled.DatePickerWrapper>
-						<CustomDatePicker
-							isInputDate={false}
-							isDatePickerOpen={isDatePickerOpen}
-							onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
-							onChange={onChangeDate}
-							onDatePickerClickHandler={setIsDatePickerOpen}
-							selectedDate={dateValue}
-							formattedDate={formattedDate}
-							datePickerRef={datePickerRef}
-						/>
+						{dateFilterValue?.value === "range" ? (
+							<DateRangePicker
+								isInputDate={isInputDate}
+								isDatePickerOpen={isDatePickerOpen}
+								onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
+								onChange={onChangeDate}
+								onDatePickerClickHandler={setIsDatePickerOpen}
+								selectedDate={dateValue}
+								formattedDate={formattedDate}
+								datePickerRef={datePickerRef}
+
+								// selectsRange={true}
+								// startDate={startDate}
+								// endDate={endDate}
+								// isClearable={true}
+							/>
+						) : dateFilterValue?.value === "customdate" ? (
+							<CustomDatePicker
+								isInputDate={false}
+								isDatePickerOpen={isDatePickerOpen}
+								onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
+								onChange={onChangeDate}
+								onDatePickerClickHandler={setIsDatePickerOpen}
+								selectedDate={dateValue}
+								formattedDate={formattedDate}
+								datePickerRef={datePickerRef}
+							/>
+						) : null}
 					</Styled.DatePickerWrapper>
 				</Styled.DateFilterBatchWrapper>
 				<Styled.SelectWrapper>

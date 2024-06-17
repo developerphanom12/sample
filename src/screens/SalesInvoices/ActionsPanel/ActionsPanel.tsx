@@ -10,6 +10,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
     datePickerRef,
     dateValue,
     formattedDate,
+    isInputDate,
     isDatePickerOpen,
     isDownloadButtonDisabled,
     onActionsClose,
@@ -65,6 +66,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
         dateValue={dateValue}
         setIsDatePickerOpen={setIsDatePickerOpen}
         formattedDate={formattedDate}
+        isInputDate={isInputDate}
         onActionsClose={onActionsClose}
         onEmailClick={onEmailClick}
         showActions={showActions}

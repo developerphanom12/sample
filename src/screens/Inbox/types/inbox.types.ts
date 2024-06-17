@@ -18,6 +18,7 @@ export interface IINBOX_INITIAL_STATE {
 export interface IGetReceiptsParams {
   active_account?: string;
   status?: string;
+  date_filter?: string;
   search?: string;
   date_start?: string;
   date_end?: string;
@@ -46,7 +47,9 @@ export interface IuseInboxState {
   isContentLoading: boolean;
   searchValue: string;
   dateValue: Date | null;
+  dateRangeValue: Date[] | null;
   formattedDate: string;
+  isInputDate: boolean;
   showActions: boolean;
   checkedIds: string[];
   isLoading: boolean;

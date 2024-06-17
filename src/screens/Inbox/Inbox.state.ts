@@ -104,6 +104,7 @@ export const useInboxState = () => {
   const fetchParams = {
     search: debouncedValue,
     status: state.statusValue.value === 'all' ? '' : state.statusValue.value,
+    date_filter: state.dateFilterValue.value === 'all' ? '' : state.dateFilterValue.value,
     take: +receiptsPerPage.value,
     skip: currentPage * +receiptsPerPage.value,
     date_start: dateStart || '',
@@ -170,21 +171,41 @@ export const useInboxState = () => {
   };
 
   const onChangeDate = async (date: Date) => {
-    const isEqual = state.dateValue?.toISOString() === date.toISOString();
-    setState((prevState) => ({
-      ...prevState,
-      dateValue: isEqual ? null : date,
-      formattedDate: isEqual ? '' : format(date, company.date_format),
-    }));
-    setIsDatePickerOpen();
-    const dateStart = setAndFormatDateToISO(date.toISOString());
-    const dateEnd = setAndFormatDateToISO(date.toISOString(), true);
+    if (Array.isArray(date)) {
+      const isEqual = Array.isArray(state.dateRangeValue) ? state.dateRangeValue[0]?.toISOString() === date[0].toISOString() && state.dateRangeValue[1]?.toISOString() === date[1].toISOString() : null;
+      setState((prevState) => (
+        {
+          ...prevState,
+          dateRangeValue: isEqual ? null : date,
+          formattedDate: isEqual ? '' : `${format(date[0], company.date_format)} - ${format(date[1], company.date_format)}`,
+        }));
+      setIsDatePickerOpen();
+      const dateStart = setAndFormatDateToISO(date[0].toISOString());
+      const dateEnd = setAndFormatDateToISO(date[1].toISOString(), true);
 
-    await onFetchReceiptsHandler({
-      ...fetchParams,
-      date_start: isEqual ? '' : dateStart,
-      date_end: isEqual ? '' : dateEnd,
-    });
+      await onFetchReceiptsHandler({
+        ...fetchParams,
+        date_start: isEqual ? '' : dateStart,
+        date_end: isEqual ? '' : dateEnd,
+      });
+    } else {
+      console.log(date);
+      const isEqual = state.dateValue?.toISOString() === date.toISOString();
+      setState((prevState) => ({
+        ...prevState,
+        dateValue: isEqual ? null : date,
+        formattedDate: isEqual ? '' : format(date, company.date_format),
+      }));
+      setIsDatePickerOpen();
+      const dateStart = setAndFormatDateToISO(date.toISOString());
+      const dateEnd = setAndFormatDateToISO(date.toISOString(), true);
+
+      await onFetchReceiptsHandler({
+        ...fetchParams,
+        date_start: isEqual ? '' : dateStart,
+        date_end: isEqual ? '' : dateEnd,
+      });
+    }
   };
 
   const onChangeStatusValueHandler = async (
@@ -205,24 +226,55 @@ export const useInboxState = () => {
     });
     setCurrentPage(0);
   };
-  
+
   const onChangeDateFilterValueHandler = async (
     newValue: any,
     actionMeta: ActionMeta<unknown>
   ) => {
-    setState((prevState) => ({
-      ...prevState,
-      dateFilterValue: {
-        value: newValue.value,
-        label: `Date - ${newValue.label}`,
-      },
-    }));
-    await onFetchReceiptsHandler({
-      ...fetchParams,
-      skip: 0,
-      status: newValue.value === 'all' ? '' : newValue.value,
-    });
-    setCurrentPage(0);
+    if (newValue?.value !== 'range' && newValue?.value !== 'customdate') {
+      setState((prevState) => ({
+        ...prevState,
+        dateFilterValue: {
+          value: newValue.value,
+          label: `Date - ${newValue.label}`,
+        },
+        statusValue: {
+          value: 'all',
+          label: `Status - All`,
+        },
+        formattedDate: '',
+        isInputDate: false
+      }));
+      await onFetchReceiptsHandler({
+        ...fetchParams,
+        skip: 0,
+        status: '',
+        date_filter: newValue.value === 'all' ? '' : newValue.value,
+        date_start: '',
+        date_end: ''
+      });
+      setCurrentPage(0);
+    } else if (newValue.value === 'range') {
+      setState((prevState) => ({
+        ...prevState,
+        dateFilterValue: {
+          value: newValue.value,
+          label: `Date - ${newValue.label}`,
+        },
+        formattedDate: '',
+        isInputDate: false
+      }));
+    } else if (newValue.value === 'customdate') {
+      setState((prevState) => ({
+        ...prevState,
+        dateFilterValue: {
+          value: newValue.value,
+          label: `Date - ${newValue.label}`,
+        },
+        formattedDate: '',
+        isInputDate: false
+      }));
+    }
   };
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useToggle();

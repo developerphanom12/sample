@@ -25,6 +25,7 @@ export const Inbox: FC = memo(() => {
     statusValue,
     dateFilterValue,
     formattedDate,
+    isInputDate,
     setIsDatePickerOpen,
     isEmailModalWindowOpen,
     onEmailClick,
@@ -154,6 +155,7 @@ export const Inbox: FC = memo(() => {
               dateValue={dateValue}
               setIsDatePickerOpen={setIsDatePickerOpen}
               formattedDate={formattedDate}
+              isInputDate={isInputDate}
               showActions={showActions}
               onActionsClick={onActionsClick}
               onActionsClose={onActionsClose}
