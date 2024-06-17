@@ -20,6 +20,7 @@ export const COLORS = {
   lightBlue: '#00A3FF',
   blue: '#1F8FEB',
   mango: '#FAA94D',
+  darkyellow:'#DC9F10',
   lightGreen: '#EBFFD8',
   swampGreen: '#A3BD42',
   green: '#5FAD00',

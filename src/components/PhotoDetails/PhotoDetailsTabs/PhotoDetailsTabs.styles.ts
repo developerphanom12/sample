@@ -20,19 +20,10 @@ export const PhotoDetailsTabsStyles = {
     position: relative;
     font-weight: ${({ isActive, theme }) =>
       isActive ? theme.fontWeight.semiBold : theme.fontWeight.normal};
-    color: ${({ isActive, theme }) =>
-      isActive ? theme.colors.darkRed : theme.colors.black};
+    color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.size.default};
     cursor: ${({ isActive }) => !isActive && 'pointer'};
     padding-bottom: 7px;
-    &::before {
-      position: absolute;
-      content: '';
-      width: 100%;
-      bottom: 0;
-      height: 2px;
-      background: ${({ theme }) => theme.colors.darkRed};
-      border-radius: 10px;
-    }
+    padding-top:10px
   `,
 };

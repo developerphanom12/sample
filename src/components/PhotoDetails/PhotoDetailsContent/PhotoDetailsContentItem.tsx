@@ -9,9 +9,11 @@ interface IusePhotoDetailsContentProps {
 
 export const PhotoDetailsContentItem: FC<IusePhotoDetailsContentProps> = (props) => {
   const { label, children } = props;
+  const isStatus = label === 'Status'; // Check if the label is 'status'
+
   return (
     <Styled.ItemWrapper>
-      <Styled.Label>{label}</Styled.Label>
+      <Styled.Label isStatus={isStatus}>{label}</Styled.Label>
       <Styled.ChildrenWrapper>{children}</Styled.ChildrenWrapper>
     </Styled.ItemWrapper>
   );
