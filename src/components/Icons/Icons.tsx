@@ -19,6 +19,7 @@ import { ReactComponent as accountIcon } from 'assets/icons/account-icon.svg';
 import { ReactComponent as edit } from 'assets/icons/edit.svg';
 import { ReactComponent as hidePassword } from 'assets/icons/hide-password.svg';
 import { ReactComponent as remove } from 'assets/icons/remove.svg';
+import { ReactComponent as removeCross } from 'assets/icons/remove-cross.svg';
 import { ReactComponent as accepted } from 'assets/icons/approved.svg';
 import { ReactComponent as awaitingApproval } from 'assets/icons/awaiting-approval.svg';
 import { ReactComponent as completed } from 'assets/icons/completed.svg';
@@ -40,6 +41,17 @@ import { ReactComponent as smallSearchIcon } from 'assets/icons/small-search-ico
 import { ReactComponent as profileIcon } from 'assets/icons/profile-icon.svg';
 import { ReactComponent as logoutIcon } from 'assets/icons/logout-icon.svg';
 import { ReactComponent as googleIcon } from 'assets/icons/google-icon.svg';
+import { ReactComponent as approvedMark } from 'assets/icons/approved-mark.svg';
+
+import { string } from 'yup/lib/locale';
+
+import { ReactComponent as dashboardIcon } from 'assets/icons/header-dashboard.svg';
+import { ReactComponent as purchasesIcon } from 'assets/icons/header-purchases.svg';
+import { ReactComponent as salesIcon } from 'assets/icons/header-sales.svg';
+import { ReactComponent as expReportIcon } from 'assets/icons/header-expReport.svg';
+import { ReactComponent as manageIcon } from 'assets/icons/header-manage.svg';
+// import { ReactComponent as invitesIcon } from 'assets/icons/header-invites.svg';
+import { ReactComponent as settingsIcon } from 'assets/icons/header-settings.svg';
 
 import { ReactComponent as dashboardIcon } from 'assets/icons/header-dashboard.svg';
 import { ReactComponent as purchasesIcon } from 'assets/icons/header-purchases.svg';
@@ -87,11 +99,13 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   checkbox,
   edit,
   remove,
+  removeCross,
   accepted,
   awaitingApproval,
   completed,
   rejected,
   metric,
+  approvedMark,
   processing,
   review,
   shadowedMetric,
@@ -107,6 +121,7 @@ export const Icon = (props: {
   maxWidth?: number;
   maxHeight?: number;
   borderRadius?: number | string;
+  backgroundColor?: string;
   key?: string;
   id?: string;
   type: string;
@@ -126,6 +141,7 @@ export const Icon = (props: {
         height: props.height,
         maxWidth: props.maxWidth,
         maxHeight: props.maxHeight,
+        backgroundColor: props.backgroundColor
       }}
       className={props.className}
     />

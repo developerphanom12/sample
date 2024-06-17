@@ -66,6 +66,7 @@ export const usePhotoDetailsContentState = () => {
   const initialState = {
     ...photoDetailsContentInitialState,
     currencyValue: currentCurrency,
+    payment: currentCurrency,
     typeValue: currentType,
     categoryValue: currentCategory,
     supplierAccountValue: currentSupplierAccount,
@@ -85,6 +86,7 @@ export const usePhotoDetailsContentState = () => {
       taxValue: selectedReceipt?.tax || null,
       totalValue: selectedReceipt?.total || null,
       descriptionValue: selectedReceipt?.description || '',
+      receiptid: selectedReceipt?.custom_id || '',
       vatCodeValue: selectedReceipt?.vat_code || '',
       netValue: selectedReceipt?.net || null,
       formattedDate: selectedReceipt?.receipt_date
@@ -224,6 +226,10 @@ export const usePhotoDetailsContentState = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('descriptionValue', event.target.value);
 
+  const onChangeReceiptIdFieldHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('receiptid', event.target.value);
+
   const onChangeDate = (date: Date) => {
     setIsOpen(!isOpen);
     setState((prevState) => ({
@@ -252,6 +258,7 @@ export const usePhotoDetailsContentState = () => {
       const payload: IUpdateReceiptItemPayload = {
         id: selectedReceipt?.id || '',
         description: state.descriptionValue || selectedReceipt?.description,
+        custom_id: state.receiptid || selectedReceipt?.custom_id,
         category: state.categoryValue?.id || selectedReceipt?.category,
         currency: state.currencyValueId || selectedReceipt?.currency.id,
         net: state.netValue || selectedReceipt?.net,
@@ -299,6 +306,7 @@ export const usePhotoDetailsContentState = () => {
       onChangeTypeFieldHandler,
       onChangeDescriptionFieldHandler,
       onChangePaymentStatus,
+      onChangeReceiptIdFieldHandler,
     ],
     {
       state,

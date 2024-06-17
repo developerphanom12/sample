@@ -13,4 +13,7 @@ export const StatusBarStyles = {
     display: flex;
     align-items: center;
   `,
+  Text: styled.span`
+   margin-left:10px;
+  `
 };
