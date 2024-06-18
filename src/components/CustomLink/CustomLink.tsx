@@ -9,7 +9,7 @@ import { Icon } from ".././Icons";
 
 export interface CustomLinkProps {
 	isLast?: boolean;
-	is_sales?: boolean;
+	is_sales: boolean;
 	tabs?: string[];
 	to: string;
 	isDisabled?: boolean;
@@ -19,7 +19,6 @@ export interface CustomLinkProps {
 
 export const CustomLink = (props: CustomLinkProps) => {
 	const { children, is_sales, to, isLast, tabs, isDisabled, icontype } = props;
-	console.log("@@##$$%%^^**", icontype);
 
 	const { isHover, onMouseEnterHandler, onMouseLeaveHandler } = useCustomLinkState();
 
@@ -29,7 +28,7 @@ export const CustomLink = (props: CustomLinkProps) => {
 	});
 
 	return (
-		<Styled.Link onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler} data-testid="header-link" is_last={`${isLast}`} is_sales={is_sales} active={isActive} to={to} is_disabled={isDisabled ? `${isDisabled}` : ""}>
+		<Styled.Link onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler} data-testid="header-link" is_last={`${isLast}`} /* is_sales={is_sales} */ active={isActive} to={to} is_disabled={isDisabled ? `${isDisabled}` : ""}>
 				<Icon type={icontype} />
 			{/* <Styled.svg active={isActive}>
 			</Styled.svg> */}

@@ -96,11 +96,12 @@ export const useSalesInvoicesState = () => {
 
   const onSelectFiles = useSelectFiles();
 
-  const onSelectFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onSelectSalesFilesHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSelectFiles({
       files: event.target.files,
       location,
-      route: ROUTES.filesUploadPreview,
+      route: ROUTES.filesUploadPreviewsales,
+      upload_action: 'sales-invoices'   // this will help to which api to be called. if you not passed it upload purchase receipts
     });
   };
 
@@ -374,7 +375,7 @@ export const useSalesInvoicesState = () => {
     onCloseModalWindowHandler,
     onChangeDate,
     onChangeSearchValueHandler,
-    onSelectFilesHandler,
+    onSelectSalesFilesHandler,
     onChangeStatusValueHandler,
     onChangeDateFilterValueHandler,
     onChangeReceiptsPerPage,

@@ -6,7 +6,7 @@ export const CustomLinkStyles = {
   Link: styled(Link) <{
     active: PathMatch<string> | null;
     is_last?: string;
-    is_sales?: boolean;
+    // is_sales: boolean;
     is_disabled?: string;
   }>`
     position: relative;

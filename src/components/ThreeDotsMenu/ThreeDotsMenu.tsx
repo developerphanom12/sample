@@ -26,10 +26,10 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
 			<Styled.Item onClick={() => onMarkAsHandler('withdrawlapproval')}>Withdrawl Approval</Styled.Item>
 			<Styled.Item onClick={() => onMarkAsHandler('withdrawlrejection')}>Withdrawl Rejection</Styled.Item>
 			<Styled.Item onClick={onEmailClick}>Send</Styled.Item>
-			<Styled.Item onClick={onDownloadExcelFileHandler}>Delete</Styled.Item>
+			<Styled.Item onClick={onDeleteItemHandler}>Delete</Styled.Item>
+			<Styled.Item onClick={onDownloadExcelFileHandler}>Export to Excel</Styled.Item>
 			<Styled.Item onClick={onClickDownloadCSVButtonHandler}>Export to CSV</Styled.Item>
 			<Styled.Item onClick={onClickDownloadCSVButtonHandler}>Export to PDF</Styled.Item>
-			<Styled.Item onClick={onDeleteItemHandler}>Delete</Styled.Item>
 		</Styled.Wrapper>
 	);
 };

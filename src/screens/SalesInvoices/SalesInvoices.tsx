@@ -64,7 +64,7 @@ export const SalesInvoices: FC = () => {
     onGoToClick,
     onMarkAsPaidButtonHandler,
     onPostEmailHandler,
-    onSelectFilesHandler,
+    onSelectSalesFilesHandler,
     pages,
     receiptsPerPage,
     searchValue,
@@ -86,7 +86,7 @@ export const SalesInvoices: FC = () => {
         onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
         onMarkAsHandler={onMarkAsHandler}
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-        onSelectFilesHandler={onSelectFilesHandler}
+        onSelectSalesFilesHandler={onSelectSalesFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}
         onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
         statusValue={statusValue}
@@ -120,6 +120,7 @@ export const SalesInvoices: FC = () => {
         checkedIds={checkedIds}
         onDeleteItemHandler={onDeleteInvoiceHandler}
         onFormHandleSubmit={invoice_formik.handleSubmit}
+        primaryAction="uplaod-invoice"
       />
       <SalesInvoicesTable
         onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}

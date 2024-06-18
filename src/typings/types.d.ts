@@ -29,10 +29,11 @@ declare global {
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteItemHandler: () => Promise<void>;
-    onMarkAsPaidButtonHandler?: () => Promise<void>;
-    onMarkAsHandler: (mark:string) => Promise<void>;
+    onMarkAsPaidButtonHandler?: () => Promise<void>; //depreceated
+    onMarkAsHandler: (mark:string) => Promise<void>;  // used this instead
     onClickDownloadCSVButtonHandler: () => Promise<void>;
-    onSelectFilesHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelectFilesHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelectSalesFilesHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onChangeStatusValueHandler: (
       newValue: unknown,
       actionMeta: ActionMeta<unknown>
@@ -63,6 +64,7 @@ declare global {
     isDownloadButtonDisabled: boolean;
     onDownloadExcelFileHandler: () => Promise<void>;
     dot3ExpReport?: boolean;
+    primaryAction: string | null;
   }
 
   interface IUpdateReceiptItemPayload {
@@ -196,6 +198,7 @@ declare global {
     sortOrder: TSorterOrder;
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     dot3ExpReport?: boolean;
+    primaryAction?: string | null;
   }
 
   interface IOption {

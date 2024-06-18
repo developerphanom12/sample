@@ -26,8 +26,8 @@ export const HelpBox = () => {
 	// } = props;
 	return (
 		<>
-			{HELP_LINK.map((link: any) => (
-				<ExtraLinkStyles.Link to={link.route}>
+			{HELP_LINK.map((link: any, index) => (
+				<ExtraLinkStyles.Link to={link.route} key={index}>
 					<Icon type={link.iconName} width={24} height={24} />
 				</ExtraLinkStyles.Link>
 			))}

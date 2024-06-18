@@ -6,4 +6,5 @@ export interface IFILES_UPLOAD_PREVIEW_INITIAL_STATE {
 
 export type LocationState = {
   from: Location;
+  action?: string;
 };

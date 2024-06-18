@@ -2,6 +2,7 @@ export enum ROUTES {
   home = '/',
   receiptDetails = 'receipt-details',
   filesUploadPreview = '/inbox/files-upload-preview',
+  filesUploadPreviewsales = '/sales-invoices/files-upload-preview',
   login = '/login',
   sign_up = '/sign-up',
   manage = '/manage',

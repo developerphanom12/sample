@@ -95,4 +95,4 @@ export const USER_ROLES = [
   },
 ];
 
-export const MAX_FILE_SIZE = 13053968;
+export const MAX_FILE_SIZE = 62914560; //13053968;

@@ -9,6 +9,7 @@ interface ISelectFilesProps {
   files: FileList | null;
   location: Location;
   route: string;
+  upload_action?: string;
 }
 
 export const useSelectFiles = () => {
@@ -16,7 +17,8 @@ export const useSelectFiles = () => {
   const navigate = useNavigate();
 
   const onSelectFilesHandler = (props: ISelectFilesProps) => {
-    const { files, location, route } = props;
+    const { files, location, route, upload_action } = props;
+    // console.log('---',files, '----',location, '----',route);
     if (!files?.length) return;
 
     const selectedFilesArray = Array.from(files);
@@ -42,7 +44,7 @@ export const useSelectFiles = () => {
     dispatch(
       setFiles({ filesArray: selectedFilesArray, previewFiles: imagesArray })
     );
-    navigate(route, { state: { from: location } });
+    navigate(route, { state: { from: location, action: upload_action } });
   };
 
   return onSelectFilesHandler;

@@ -18,7 +18,9 @@ import { statusFilterOptions, dateFilterOptions } from "screens/Inbox/inbox.cons
 export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 	const {
 		dot3ExpReport,
+		primaryAction,
 		onSelectFilesHandler,
+		onSelectSalesFilesHandler,
 		onChangeStatusValueHandler,
 		onChangeDateFilterValueHandler,
 		onChangeSearchValueHandler,
@@ -96,7 +98,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 						<ThreeDotsMenu dot3ExpReport={dot3ExpReport} onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler} onEmailClick={onEmailClick} onDownloadExcelFileHandler={onDownloadExcelFileHandler} onDeleteItemHandler={onDeleteItemHandler} onMarkAsHandler={onMarkAsHandler} />
 					)}
 				</Styled.ButtonActionsWrapper>
-				<FileUploadButton onChangeFiles={onSelectFilesHandler} />
+				<FileUploadButton onChangeFiles={primaryAction === "upload-receipt" ? onSelectFilesHandler : onSelectSalesFilesHandler} customButtonName={primaryAction === "upload-receipt" ? "Upload Receipt" : primaryAction === "upload-invoice" ? "Upload Invoice" : null} />
 			</Styled.ButtonsWrapper>
 		</Styled.HeaderPanelWrapper>
 	);

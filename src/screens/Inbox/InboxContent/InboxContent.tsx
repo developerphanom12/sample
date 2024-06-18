@@ -89,6 +89,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
           onDownloadExcelFileHandler={onDownloadExcelFileHandler}
           onDeleteItemHandler={onDeleteReceiptHandler}
           onMarkAsHandler={onMarkAsHandler}
+          primaryAction="upload-receipt"
         />
       )}
       <Styled.TableWrapper>

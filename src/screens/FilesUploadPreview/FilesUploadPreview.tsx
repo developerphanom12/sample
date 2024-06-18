@@ -23,6 +23,8 @@ export const FilesUploadPreview: FC = () => {
     onGoBackHandler,
     onCancelClickHandler,
     onSaveClickHandler,
+    onCreateSalesHandler,
+    action
   } = useFilesUploadPreviewState();
 
   useEffect(() => {
@@ -55,11 +57,11 @@ export const FilesUploadPreview: FC = () => {
                 isDisabled={isDisableButton}
                 themedButton="roundedRed"
                 width="roundedBig"
-                onClick={onSaveClickHandler}
+                onClick={action && action === 'sales-invoices' ? onCreateSalesHandler : onSaveClickHandler}
               >
                 {isDisableButton
                   ? 'Choose only 10 receipts'
-                  : `Upload receipt (${previewFiles.length})`}
+                  : `${action && action === 'sales-invoices' ? 'Upload Invoice' : 'Upload Receipt'} (${previewFiles.length})`}
               </Button>
             </Styled.ButtonsBox>
           </Styled.ButtonsBoxWrapper>

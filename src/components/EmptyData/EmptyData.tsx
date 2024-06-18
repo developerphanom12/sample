@@ -53,6 +53,7 @@ export const EmptyData: FC<IEmptyDataProps> = (props) => {
             <FileUploadButton
               onChangeFiles={onAddReceiptHandler}
               isRoundedButton={isRoundedButton}
+              customButtonName="ADD"
             />
           ) : (
             !isUserRole && (

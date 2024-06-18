@@ -25,7 +25,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
     onEmailClick,
     onMarkAsPaidButtonHandler,
     onMarkAsHandler,
-    onSelectFilesHandler,
+    onSelectSalesFilesHandler,
     searchValue,
     setIsDatePickerOpen,
     showActions,
@@ -55,7 +55,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
         onMarkAsPaidButtonHandler={onMarkAsPaidButtonHandler}
         onMarkAsHandler={onMarkAsHandler}
         onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-        onSelectFilesHandler={onSelectFilesHandler}
+        onSelectSalesFilesHandler={onSelectSalesFilesHandler}
         onChangeStatusValueHandler={onChangeStatusValueHandler}
         onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
         statusValue={statusValue}
@@ -75,6 +75,7 @@ export const ActionsPanel: FC<IHeaderPanelProps & IActionMenuContentProps> = (
         isDownloadButtonDisabled={isDownloadButtonDisabled}
         onActionsClick={onActionsClick}
         onDownloadExcelFileHandler={onDownloadExcelFileHandler}
+        primaryAction="upload-invoice"
       />
       <ActionsMenu
         csvLink={csvLink}

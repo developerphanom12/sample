@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { IState } from 'services/redux/reducer';
 
 import { setIsFetchingDate, setReceipts } from '../Inbox/reducer/inbox.reducer';
-import { receiptCreate } from './filesUploadPreview.api';
+import { receiptCreate, salesCreate } from './filesUploadPreview.api';
 import {
   resetState,
   setActiveIndex,
@@ -24,7 +24,8 @@ export const useFilesUploadPreviewState = () => {
 
   const onNavigateToInboxPage = () => navigate(ROUTES.purchaseInvoices);
 
-  const { from } = location.state as LocationState;
+  const { from, action } = location.state as LocationState;
+  // console.log(from);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -86,6 +87,27 @@ export const useFilesUploadPreviewState = () => {
       console.log(error);
     }
   };
+  const onCreateSalesHandler = async () => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+
+      filesArray.forEach((file) => {
+        formData.append('receipt_photos', file);
+      });
+      formData.append('active_account', user.active_account || '');
+      await salesCreate(formData, token);
+
+      dispatch(setIsFetchingDate(true));
+      dispatch(resetState());
+      setIsLoading(false);
+      navigate(from.pathname, { replace: true });
+    } catch (error) {
+      setIsLoading(false);
+      dispatch(setIsFetchingDate(false));
+      console.log(error);
+    }
+  };
 
   const isDisableButton = previewFiles.length > 50;
 
@@ -100,5 +122,7 @@ export const useFilesUploadPreviewState = () => {
     onGoBackHandler,
     onCancelClickHandler,
     onSaveClickHandler,
+    onCreateSalesHandler,
+    action,
   };
 };
