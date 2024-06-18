@@ -48,7 +48,7 @@ box-sizing: border-box; /* Ensure padding is included in the width calculation *
 margin-left:31px;
 border: 1px solid #A5B1BE;
 border-radius:6px;
-height:40px;
+height:54px;
 
 `,
   Description: styled.div`
@@ -95,7 +95,7 @@ font-weight: 600;
   background-color: #DF1C29;
   border-color: #DF1C29;
   color: white;
-  width: 147px;
+  width: 200px;
 }
 &.reject  , &.save , &.cancel{
   margin-left: 10px;

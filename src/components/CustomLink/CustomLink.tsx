@@ -19,7 +19,6 @@ export interface CustomLinkProps {
 
 export const CustomLink = (props: CustomLinkProps) => {
 	const { children, is_sales, to, isLast, tabs, isDisabled, icontype } = props;
-	console.log("@@##$$%%^^**", icontype);
 
 	const { isHover, onMouseEnterHandler, onMouseLeaveHandler } = useCustomLinkState();
 

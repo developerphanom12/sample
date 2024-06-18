@@ -51,8 +51,6 @@ const WIDTH = {
     width: 100%;
   `,
   primary: css`
-    min-width: 110px;
-    max-width: 153px;
     width: auto;
   `,
   secondary: css`
@@ -63,12 +61,13 @@ const WIDTH = {
     height: 40px;
   `,
   rounded: css`
-    width: 80px;
+    min-width: 100px;
+    width: max-content;
+    padding:10px;
     height: 40px;
   `,
   roundedBig: css`
-    max-width: 160px;
-    width: 100%;
+    width: 100px;
     height: 40px;
     box-shadow: none;
   `,
@@ -78,6 +77,9 @@ export const ButtonStyles = {
   Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
     height: 40px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     border-radius: 6px;
     box-shadow: ${(props) =>
       `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};
@@ -86,6 +88,7 @@ export const ButtonStyles = {
     ${(props) => props.width && WIDTH[props.width]};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     opacity: ${(props) => (props.disabled ? 0.8 : 1)};
+    margin-right:10px;
   `,
   Content: styled.div`
     display: flex;

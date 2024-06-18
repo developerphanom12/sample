@@ -97,7 +97,7 @@ export const usePhotoDetailsContentState = () => {
 
   const [state, setState] =
     useState<IusePhotoDetailsContentState>(initialState);
-  const [radioButtonValue, setRadioButtonValue] = useState('');
+  const [ButtonValue, setButtonValue] = useState('');
   const [isPublishStatus, setIsPublishStatus] = useState(
     selectedReceipt?.publish_status || false
   );
@@ -120,10 +120,12 @@ export const usePhotoDetailsContentState = () => {
     optionName: keyof typeof initialState,
     value: string | boolean | number | null | Date | SingleValue<IOption> | any
   ) =>
-    setState((prevState) => ({
+    setState((prevState) => ({      
       ...prevState,
       [optionName]: value,
-    }));
+    })
+  );
+  
 
   const onGetAllMasterItemsHandler = async () => {
     try {
@@ -163,15 +165,20 @@ export const usePhotoDetailsContentState = () => {
     }
   };
 
-  const onChangeRadioButtonHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => setRadioButtonValue(event.target.value);
+  const onChangeRadioButtonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setButtonValue(event.currentTarget.value);
+  };
 
   const onForbiddenCharacterClick = (event: React.KeyboardEvent) => {
     if (event.key === '-' || event.key === 'e' || event.key === '+') {
       event.preventDefault();
     }
   };
+
+  useEffect(()=> {
+    if(ButtonValue != '')
+     onSaveButtonClickHandler();
+  }, [ButtonValue])
 
   const onChangeCategoryFieldHandler = (
     newValue: unknown,
@@ -180,7 +187,9 @@ export const usePhotoDetailsContentState = () => {
 
   const onChangeSupplierFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('supplierValue', event.target.value);
+  ) => {
+     console.log("supplier value----@#$%#$%s" , event.target.value)
+    onChangeStateFieldHandler('supplierValue', event.target.value)};
 
   const onChangeSupplierAccountHandler = (
     newValue: unknown,
@@ -265,7 +274,7 @@ export const usePhotoDetailsContentState = () => {
         payment_status: isPaymentStatus,
         publish_status: isPublishStatus,
         receipt_date: state.dateValue || selectedReceipt?.receipt_date,
-        status: radioButtonValue || selectedReceipt?.status,
+        status: ButtonValue || selectedReceipt?.status,
         supplier: state.supplierValue || selectedReceipt?.supplier,
         supplier_account:
           state.supplierAccountValue?.id || selectedReceipt?.supplier_account,
@@ -277,9 +286,9 @@ export const usePhotoDetailsContentState = () => {
       };
 
       setIsLoading(true);
+      console.log("save button" , payload.supplier);
 
       const { data } = await updateReceiptItem(payload);
-
       setIsLoading(false);
       dispatch(updateReceipt(data));
       dispatch(setIsFetchingDate(true));
@@ -291,6 +300,11 @@ export const usePhotoDetailsContentState = () => {
       dispatch(setIsFetchingDate(false));
     }
   };
+
+  // console.log("ButtonValue" , ButtonValue);
+  console.log("state" , state);
+  console.log("SELECTED" , selectedReceipt);
+
 
   const inputFields = getInputFields(
     [
@@ -320,6 +334,7 @@ export const usePhotoDetailsContentState = () => {
         types: !typesForSelect?.length,
       },
       paymentStatus: isPaymentStatus,
+      publishStatus: isPublishStatus,
     }
   );
 
@@ -331,9 +346,12 @@ export const usePhotoDetailsContentState = () => {
     isLoading,
     inputFields,
     datePickerRef,
-    radioButtonValue,
+    ButtonValue,
     selectedReceipt,
+    isPaymentStatus,
+    isPublishStatus,
     onClickOutsideDatePickerHandler,
+    onChangePublishStatus,
     onDatePickerClickHandler,
     onChangePaymentStatus,
     onChangeRadioButtonHandler,

@@ -1,23 +1,15 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Button } from '../../Button';
-import { ButtonsBoxStyles as Styled } from './ButtonsBox.style';
+import { ButtonsBoxStyles as Styled } from './ButtonsBoxNew.style';
 
 interface IButtonBoxProps {
-  secondButtonText?: string;
-  onUploadButtonClickHandler?: () => Promise<void>;
-  onCancelButtonClickHandler?: () => void;
-  onApproveButtonClickHandler?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onRejectButtonClickHandler?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   isLoading?: boolean;
-  buttonValue?: string;
 }
 
-export const ButtonsBox: FC<IButtonBoxProps> = ({
-  onUploadButtonClickHandler,
-  onCancelButtonClickHandler,
-  onApproveButtonClickHandler,
+export const ButtonsBoxNew: FC<IButtonBoxProps> = ({
+  onRejectButtonClickHandler,
   isLoading,
-  buttonValue,
 }) => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
@@ -32,15 +24,15 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
     }
   };
 
-  const handleApproveButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (onApproveButtonClickHandler) {
+  const handleRejectButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (onRejectButtonClickHandler) {
       const customEvent = {
         ...event,
-        currentTarget: { ...event.currentTarget, value: 'accepted' }
+        currentTarget: { ...event.currentTarget, value: 'rejected' }
       };
-      onApproveButtonClickHandler(customEvent as React.MouseEvent<HTMLButtonElement, MouseEvent>);
+      onRejectButtonClickHandler(customEvent as React.MouseEvent<HTMLButtonElement, MouseEvent>);
     }
-    setSelectedButton('accepted');
+    setSelectedButton('rejected');
   };
 
   useEffect(() => {
@@ -56,30 +48,22 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
     <Styled.ButtonsBox>
       <Styled.ButtonsWrapper>
         <Button
-          onClick={handleApproveButtonClick}
-          themedButton={selectedButton === 'accepted' ? 'roundedRed' : 'roundedWhite'}
+          onClick={handleRejectButtonClick}
+          themedButton={'roundedWhite'}
           width="rounded"
           isLoading={isLoading}
           isDisabled={isLoading}
         >
-          {'Approve & Save'}
+          {'Archive'}
         </Button>
         <Button
-          onClick={onUploadButtonClickHandler}
+          onClick={handleRejectButtonClick}
           themedButton={selectedButton === 'save' ? 'roundedRed' : 'roundedWhite'}
           width="rounded"
           isLoading={isLoading}
           isDisabled={isLoading}
         >
-          {'Save'}
-        </Button>
-        <Button
-          onClick={(event) => handleButtonClick('cancel', onCancelButtonClickHandler, event)}
-          themedButton={selectedButton === 'cancel' ? 'roundedRed' : 'roundedWhite'}
-          width="rounded"
-          isDisabled={isLoading}
-        >
-          {'Cancel'}
+          {'Reject'}
         </Button>
       </Styled.ButtonsWrapper>
     </Styled.ButtonsBox>

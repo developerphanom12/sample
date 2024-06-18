@@ -9,7 +9,7 @@ describe('Radio button component', () => {
   it('Render component', () => {
     render(
       <AppTheme>
-        <RadioButton onChange={onChange} isChecked={false} value={'React'} />
+        <RadioButton onClick={onChange} isChecked={false} value={'React'} />
       </AppTheme>
     );
     expect(screen.getByRole('radio')).toBeInTheDocument();
@@ -19,7 +19,7 @@ describe('Radio button component', () => {
       <AppTheme>
         <RadioButton
           labelText="monday"
-          onChange={onChange}
+          onClick={onChange}
           isChecked={false}
           value={'React'}
         />
