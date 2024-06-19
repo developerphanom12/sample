@@ -363,7 +363,6 @@ export const useInboxState = () => {
 
   const onCheckedPaidHandler = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log('-----paid handler');
       try {
         if (!event.target.id) return;
         onChangeStateFieldHandler('isContentLoading', true);
@@ -385,7 +384,6 @@ export const useInboxState = () => {
   );
   const onCheckedApproveHandler = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log('-----approve handler');
       try {
         if (!event.target.id) return;
         onChangeStateFieldHandler('isContentLoading', true);

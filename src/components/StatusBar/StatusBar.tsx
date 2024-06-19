@@ -15,7 +15,7 @@ export const StatusBar: FC<IStatusBarProps> = (props) => {
 
   return (
     <StatusBarStyles.MainWrapper status={status}>
-      {upperText == "Accepted" ? <Icon type="approvedMark" /> : <Icon type="review" />} {<StatusBarStyles.Text>{upperText}</StatusBarStyles.Text>}
+      {upperText == "Accepted" ? <Icon type="approvedMark" /> : upperText == "Review" ? <Icon type="review" /> : <Icon type="removeCross" />} {<StatusBarStyles.Text>{upperText}</StatusBarStyles.Text>}
     </StatusBarStyles.MainWrapper>
   );
 };

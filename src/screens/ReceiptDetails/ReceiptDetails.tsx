@@ -6,6 +6,10 @@ import { PhotoDetails } from 'components/PhotoDetails';
 
 import { ReceiptDetailsStyles as Styled } from './ReceiptDetails.style';
 import { useReceiptDetailsState } from './receiptDetails.state';
+import { usePhotoDetailsContentState } from 'components/PhotoDetails/PhotoDetailsContent/PhotoDetailsContent.state';
+import { ButtonsBox } from 'components/PhotoDetails/ButtonsBox';
+import { ButtonsBoxNew } from 'components/PhotoDetails/ButtonBoxNew';
+import { CheckboxItem } from 'components/Checkbox';
 
 export const ReceiptDetails: FC = () => {
   const {
@@ -20,6 +24,17 @@ export const ReceiptDetails: FC = () => {
     isImageLoading,
     isPDF,
   } = useReceiptDetailsState();
+
+  const {
+    isLoading,
+    onChangeRadioButtonHandler,
+    onSaveButtonClickHandler,
+    onCancelButtonClickHandler,
+    onChangePaymentStatus,
+    onChangePublishStatus,
+    isPaymentStatus,
+    isPublishStatus
+  } = usePhotoDetailsContentState();
 
   useEffect(() => {
     onGetReceiptImageHandler();
@@ -49,14 +64,18 @@ export const ReceiptDetails: FC = () => {
             <div></div>
             <Styled.Container>
               <Styled.Checkbox>
-                <label>
-                  <Styled.Input type="checkbox" />
-                  Mark as Paid
-                </label>
-                <label>
-                  <Styled.Input type="checkbox" />
-                  Mark as Published
-                </label>
+                <CheckboxItem
+                  name={"Payment status"}
+                  isChecked={isPaymentStatus}
+                  labelText={"Mark as Paid"}
+                  onChange={onChangePaymentStatus}
+                />
+                  <CheckboxItem
+                  name={"Publish status"}
+                  isChecked={isPublishStatus}
+                  labelText={"Mark as Published"}
+                  onChange={onChangePublishStatus}
+                />
               </Styled.Checkbox>
               <Styled.Description>
                 <Styled.DescriptionInput type="text" placeholder="Description" />
@@ -67,13 +86,18 @@ export const ReceiptDetails: FC = () => {
       </Styled.Wrapper>
       <Styled.Footer>
         <div>
-          <Styled.Button>Archive</Styled.Button>
-          <Styled.Button className="reject">Reject</Styled.Button>
+          <ButtonsBoxNew
+            onRejectButtonClickHandler={onChangeRadioButtonHandler}
+            isLoading={isLoading}
+          />
         </div>
-        <div>
-          <Styled.Button className="approve">Approve & Save</Styled.Button>
-          <Styled.Button className="save">Save</Styled.Button>
-          <Styled.Button className="cancel">Cancel</Styled.Button>
+        <div style={{ display: "flex" }}>
+          <ButtonsBox
+            onUploadButtonClickHandler={onSaveButtonClickHandler}
+            onCancelButtonClickHandler={onCancelButtonClickHandler}
+            isLoading={isLoading}
+            onApproveButtonClickHandler={onChangeRadioButtonHandler}
+          />
         </div>
       </Styled.Footer>
     </Styled.Section>

@@ -7,19 +7,19 @@ import {
 
 interface IRadioButtonProps {
   labelText?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
   isChecked: boolean;
   value: string;
 }
 export const RadioButton: FC<IRadioButtonProps> = (props) => {
-  const { labelText, isChecked, value, onChange } = props;
+  const { labelText, isChecked, value, onClick } = props;
   return (
     <Styled.RadioButtonLabel isChecked={isChecked}>
       <RadioButtonWrapper>
         <Styled.HiddenRadioButtonInput
-          onChange={onChange}
+          onClick={onClick}
           value={value}
-          type="radio"
+          type="button"
           checked={isChecked}
         />
         <Styled.StyledRadioButton isChecked={isChecked} />

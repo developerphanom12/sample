@@ -7,7 +7,7 @@ import { RadioButtonsBoxStyles as Styled } from './RadioButtonsBox.style';
 interface IRadioButtonsBox {
   radioButtonValue: string;
   onChangeRadioButtonHandler: (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.MouseEvent<HTMLInputElement>
   ) => void;
 }
 export const RadioButtonsBox: FC<IRadioButtonsBox> = (props) => {
@@ -17,13 +17,13 @@ export const RadioButtonsBox: FC<IRadioButtonsBox> = (props) => {
       <RadioButton
         isChecked={radioButtonValue === 'accepted'}
         value="accepted"
-        onChange={onChangeRadioButtonHandler}
+        onClick={onChangeRadioButtonHandler}
         labelText="Accepted"
       />
       <RadioButton
         isChecked={radioButtonValue === 'rejected'}
         value="rejected"
-        onChange={onChangeRadioButtonHandler}
+        onClick={onChangeRadioButtonHandler}
         labelText="Rejected"
       />
     </Styled.RadioButtonWrapper>

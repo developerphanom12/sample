@@ -17,7 +17,7 @@ interface Item {
 
 const PurchaseTable: React.FC = () => {
     const [items, setItems] = useState<Item[]>([
-        { description: 'Spicy Italian Sub', vatCode: 20, units: 1, price: 5.3, net: 5.3, vat: 0, total: 5.3 }
+        { description: '', vatCode: 0 , units: 0, price: 0, net: 0, vat: 0, total: 0 }
     ]);
 
     const handleItemChange = (index: number, field: keyof Item, value: string | number) => {

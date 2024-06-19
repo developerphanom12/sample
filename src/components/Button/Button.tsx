@@ -13,7 +13,7 @@ export type ButtonStyleProps = {
   isAccout?: boolean;
   type?: 'submit' | 'reset' | 'button';
   isLoading?: boolean;
-  themedButton: TButtonTheme;
+  themedButton?: TButtonTheme;
   width:
   | 'auth'
   | 'primary'
