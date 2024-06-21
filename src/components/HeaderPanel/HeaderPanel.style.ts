@@ -1,4 +1,5 @@
 import { styled } from 'styles/theme';
+import { Link, PathMatch } from 'react-router-dom';
 
 export const HeaderPanelStyles = {
   HeaderPanelWrapper: styled.div`
@@ -60,4 +61,19 @@ export const HeaderPanelStyles = {
     left: 9px;
     transform: translateY(-50%);
   `,
+  Link: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    font-size: ${(props) => props.theme.size.default};
+    max-height: 40px;
+    min-height: 38px;
+    border-radius: 6px;
+    box-shadow: ${(props) =>
+      `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};
+    background-color: ${(props) => props.theme.colors.darkRed};
+    color: ${(props) => props.theme.colors.white};
+    cursor: pointer;
+    `
 };

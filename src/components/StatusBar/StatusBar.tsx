@@ -7,15 +7,17 @@ import { Icon } from 'components/Icons';
 
 interface IStatusBarProps {
   status?: TStatuses;
+  rid?: string;
 }
 export const StatusBar: FC<IStatusBarProps> = (props) => {
-  const { status } = props;
+  const { status, rid } = props;
 
   const upperText = status && getFirstLetterUppercase(status);
 
   return (
     <StatusBarStyles.MainWrapper status={status}>
-      {upperText == "Accepted" ? <Icon type="approvedMark" /> : upperText == "Review" ? <Icon type="review" /> : <Icon type="removeCross" />} {<StatusBarStyles.Text>{upperText}</StatusBarStyles.Text>}
+      {rid && (rid.toUpperCase())}
+      {status && (upperText == "Accepted" ? <Icon type="approvedMark" /> : upperText == "Review" ? <Icon type="review" /> : <Icon type="removeCross" />)} {<StatusBarStyles.Text>{upperText}</StatusBarStyles.Text>}
     </StatusBarStyles.MainWrapper>
   );
 };

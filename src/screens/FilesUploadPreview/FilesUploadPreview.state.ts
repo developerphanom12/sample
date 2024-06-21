@@ -10,7 +10,7 @@ import {
   resetState,
   setActiveIndex,
 } from './reducer/filesUploadPreview.reducer';
-import { LocationState } from './types/filesUploadPreview.types';
+import { LocationState, loany } from './types/filesUploadPreview.types';
 import { INITIAL_STATE } from './filesUploadPreview.constants';
 
 import { ROUTES } from 'constants/routes';
@@ -24,8 +24,11 @@ export const useFilesUploadPreviewState = () => {
 
   const onNavigateToInboxPage = () => navigate(ROUTES.purchaseInvoices);
 
-  const { from, action } = location.state as LocationState;
-  // console.log(from);
+  // const { from } = location.state as LocationState;
+  const { from } = location.state as loany;
+  console.log(location, from);
+
+  const nameToShow = from.state.action === 'receipt' ? '/Upload Receipt' : 'Upload Invoice';
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +66,7 @@ export const useFilesUploadPreviewState = () => {
 
   const onCancelClickHandler = () => {
     dispatch(resetState());
-    navigate(from.pathname, { replace: true });
+    navigate(from.state.action === 'receipt' ? '/purchase-invoices' : '/sales-invoices');
   };
 
   const onSaveClickHandler = async () => {
@@ -101,7 +104,7 @@ export const useFilesUploadPreviewState = () => {
       dispatch(setIsFetchingDate(true));
       dispatch(resetState());
       setIsLoading(false);
-      navigate(from.pathname, { replace: true });
+      navigate(from.state.action === 'receipt' ? '/purchase-invoices' : '/sales-invoices', { replace: true });
     } catch (error) {
       setIsLoading(false);
       dispatch(setIsFetchingDate(false));
@@ -123,6 +126,6 @@ export const useFilesUploadPreviewState = () => {
     onCancelClickHandler,
     onSaveClickHandler,
     onCreateSalesHandler,
-    action,
+    nameToShow,
   };
 };

@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { Button } from 'components/Button';
 import { ReceiptPreviewItem } from 'components/ReceiptPreviewItem';
 import { CustomCarousel } from 'components/CustomCarousel';
-import { NavigationButton } from 'components/NavigationButton';
+// import { NavigationButton } from 'components/NavigationButton';
 import { PdfViewer } from 'components/PdfViewer';
 
 import { useFilesUploadPreviewState } from './FilesUploadPreview.state';
@@ -24,7 +24,7 @@ export const FilesUploadPreview: FC = () => {
     onCancelClickHandler,
     onSaveClickHandler,
     onCreateSalesHandler,
-    action
+    nameToShow
   } = useFilesUploadPreviewState();
 
   useEffect(() => {
@@ -35,15 +35,14 @@ export const FilesUploadPreview: FC = () => {
     <Styled.LayoutWrapper>
       <Styled.MainWrapper>
         <Styled.Wrapper>
-          <Styled.ButtonsBoxWrapper>
-            <Styled.BoxWrapper onClick={onGoBackHandler}>
+            {/* <Styled.BoxWrapper onClick={onGoBackHandler}>
               <NavigationButton
                 themedButton="navigation"
                 iconBehavior="iconPrevious"
               >
                 <Styled.ButtonText>Back to list</Styled.ButtonText>
               </NavigationButton>
-            </Styled.BoxWrapper>
+            </Styled.BoxWrapper> */}
             <Styled.ButtonsBox>
               <Button
                 onClick={onCancelClickHandler}
@@ -57,14 +56,13 @@ export const FilesUploadPreview: FC = () => {
                 isDisabled={isDisableButton}
                 themedButton="roundedRed"
                 width="roundedBig"
-                onClick={action && action === 'sales-invoices' ? onCreateSalesHandler : onSaveClickHandler}
+                onClick={nameToShow && nameToShow === 'Upload Invoice' ? onCreateSalesHandler : onSaveClickHandler}
               >
                 {isDisableButton
                   ? 'Choose only 10 receipts'
-                  : `${action && action === 'sales-invoices' ? 'Upload Invoice' : 'Upload Receipt'} (${previewFiles.length})`}
+                  : `${nameToShow && nameToShow === 'Upload Invoice' ? 'Upload Invoice' : 'Upload Receipt'} (${previewFiles.length})`}
               </Button>
             </Styled.ButtonsBox>
-          </Styled.ButtonsBoxWrapper>
           <Styled.ImageWrapper>
             {curretFileType === 'application/pdf' ? (
               <Styled.PdfWrapper>

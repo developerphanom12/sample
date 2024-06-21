@@ -12,6 +12,7 @@ import { BindSocialAccount } from 'screens/BindSocialAccount';
 import { CapiumLogin } from 'screens/CapiumLogin/CapiumLogin';
 import { Dashboard } from 'screens/Dashboard';
 import { FilesUploadPreview } from 'screens/FilesUploadPreview';
+import { FilesUpload } from 'screens/FilesUpload';
 import { ForgotPassword } from 'screens/ForgotPassword';
 import { Inbox } from 'screens/Inbox';
 import { Invites } from 'screens/Invites';
@@ -95,6 +96,14 @@ export const AppRouter: FC = () => {
             <Route
               path={ROUTES.expenseReport}
               element={<UnderDevelop />}
+            />
+            <Route
+              path={ROUTES.receiptUploadFile}
+              element={<FilesUpload />}
+            />
+            <Route
+              path={ROUTES.invoiceUploadFile}
+              element={<FilesUpload />}
             />
             <Route
               path={ROUTES.filesUploadPreview}

@@ -6,6 +6,6 @@ import { PhotoDetailsTabs } from './PhotoDetailsTabs';
 
 export const PhotoDetails: FC = () => (
   <PhotoDetailsStyles.ContentWrapper>
-      <PhotoDetailsContent />
+      <PhotoDetailsContent /> {/* This section is never called after modification */}
   </PhotoDetailsStyles.ContentWrapper>
 );

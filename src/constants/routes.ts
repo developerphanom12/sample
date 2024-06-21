@@ -1,8 +1,5 @@
 export enum ROUTES {
   home = '/',
-  receiptDetails = 'receipt-details',
-  filesUploadPreview = '/inbox/files-upload-preview',
-  filesUploadPreviewsales = '/sales-invoices/files-upload-preview',
   login = '/login',
   sign_up = '/sign-up',
   manage = '/manage',
@@ -23,7 +20,12 @@ export enum ROUTES {
   invites = '/invites',
   callback = '/callback',
   purchaseInvoices = '/purchase-invoices',
+  receiptDetails = 'receipt-details',
   salesInvoices = '/sales-invoices',
   salesInvoiceDetails = '/sales-invoices/details',
+  receiptUploadFile = '/purchase-invoices/upload-file',
+  invoiceUploadFile = '/sales-invoices/upload-file',
+  filesUploadPreview = '/inbox/files-upload-preview',
+  filesUploadPreviewsales = '/sales-invoices/files-upload-preview',
   notFound = '*',
 }

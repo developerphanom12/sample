@@ -5,9 +5,9 @@ export const PhotoDetailsStyles = {
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.colors.white};
-    padding: 15px 15px 15px 15px;
-    width: 95%;
-    height:90%;
+    padding: 15px;
+    width: 100%;
+    height: auto;
     overflow: hidden;
     border-radius: 10px;
     border: 1px solid #00000040;

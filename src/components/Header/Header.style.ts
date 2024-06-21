@@ -6,7 +6,7 @@ export const HeaderStyles = {
   Header: styled.header``,
   Container: styled.div`
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     background-color: ${(props) => props.theme.colors.darkRed};
     width: 100%;
     max-height: 56px;
@@ -23,6 +23,8 @@ export const HeaderStyles = {
     overflow: hidden;
   `,
   LogoWrapper: styled.div`
+    width: max-content;
+    padding-right: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +40,7 @@ export const HeaderStyles = {
     display: flex;
     justify-content: space-between;
     width: max-content;
+    margin-left: auto;
     @media (max-width: 1278px) {
       width: 80%;
     }

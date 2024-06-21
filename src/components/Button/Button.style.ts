@@ -67,7 +67,7 @@ const WIDTH = {
     height: 40px;
   `,
   roundedBig: css`
-    width: 100px;
+    width: max-content;
     height: 40px;
     box-shadow: none;
   `,
@@ -81,14 +81,16 @@ export const ButtonStyles = {
     font-size: 14px;
     font-weight: 600;
     border-radius: 6px;
+    width: max-content;
     box-shadow: ${(props) =>
       `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};
     background-color: ${(props) => props.theme.colors.lightGray};
     ${(props) => props.themedButton && THEME[props.themedButton]};
-    ${(props) => props.width && WIDTH[props.width]};
+    // ${(props) => props.width && WIDTH[props.width]};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     opacity: ${(props) => (props.disabled ? 0.8 : 1)};
-    margin-right:10px;
+    // margin-right:10px;
+    padding: 10px 20px;
   `,
   Content: styled.div`
     display: flex;

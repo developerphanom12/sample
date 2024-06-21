@@ -120,12 +120,10 @@ export const usePhotoDetailsContentState = () => {
     optionName: keyof typeof initialState,
     value: string | boolean | number | null | Date | SingleValue<IOption> | any
   ) =>
-    setState((prevState) => ({      
+    setState((prevState) => ({
       ...prevState,
       [optionName]: value,
-    })
-  );
-  
+    }));
 
   const onGetAllMasterItemsHandler = async () => {
     try {
@@ -174,11 +172,7 @@ export const usePhotoDetailsContentState = () => {
       event.preventDefault();
     }
   };
-
-  useEffect(()=> {
-    if(ButtonValue != '')
-     onSaveButtonClickHandler();
-  }, [ButtonValue])
+  useEffect(() => { if (ButtonValue != '') saveReceiptHandler(); }, [ButtonValue]);
 
   const onChangeCategoryFieldHandler = (
     newValue: unknown,
@@ -187,9 +181,7 @@ export const usePhotoDetailsContentState = () => {
 
   const onChangeSupplierFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-     console.log("supplier value----@#$%#$%s" , event.target.value)
-    onChangeStateFieldHandler('supplierValue', event.target.value)};
+  ) => { console.log("supplier value----@#$%#$%s", event.target.value); onChangeStateFieldHandler('supplierValue', event.target.value) };
 
   const onChangeSupplierAccountHandler = (
     newValue: unknown,
@@ -231,10 +223,6 @@ export const usePhotoDetailsContentState = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('totalValue', event.target.value);
 
-  const onChangeDescriptionFieldHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('descriptionValue', event.target.value);
-
   const onChangeReceiptIdFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('receiptid', event.target.value);
@@ -262,12 +250,13 @@ export const usePhotoDetailsContentState = () => {
   const onChangePaymentStatus = (event: React.ChangeEvent<HTMLInputElement>) =>
     setIsPaymentStatus(event.target.checked);
 
-  const onSaveButtonClickHandler = async () => {
+  console.log("state----", state);
+  const saveReceiptHandler = async () => {
     try {
+      console.log("state", state);
       const payload: IUpdateReceiptItemPayload = {
         id: selectedReceipt?.id || '',
-        description: state.descriptionValue || selectedReceipt?.description,
-        custom_id: state.receiptid || selectedReceipt?.custom_id,
+        description: state.descriptionValue || selectedReceipt?.description,        // custom_id: state.receiptid || selectedReceipt?.custom_id,
         category: state.categoryValue?.id || selectedReceipt?.category,
         currency: state.currencyValueId || selectedReceipt?.currency.id,
         net: state.netValue || selectedReceipt?.net,
@@ -286,7 +275,7 @@ export const usePhotoDetailsContentState = () => {
       };
 
       setIsLoading(true);
-      console.log("save button" , payload.supplier);
+      console.log("save button", payload.supplier);
 
       const { data } = await updateReceiptItem(payload);
       setIsLoading(false);
@@ -299,12 +288,7 @@ export const usePhotoDetailsContentState = () => {
       setIsLoading(false);
       dispatch(setIsFetchingDate(false));
     }
-  };
-
-  // console.log("ButtonValue" , ButtonValue);
-  console.log("state" , state);
-  console.log("SELECTED" , selectedReceipt);
-
+  };  // console.log("ButtonValue" , ButtonValue);  // console.log("state", state);  // console.log("SELECTED" , selectedReceipt);
 
   const inputFields = getInputFields(
     [
@@ -317,8 +301,7 @@ export const usePhotoDetailsContentState = () => {
       onChangeNetFieldHandler,
       onChangeTaxFieldHandler,
       onChangeTotalFieldHandler,
-      onChangeTypeFieldHandler,
-      onChangeDescriptionFieldHandler,
+      onChangeTypeFieldHandler, //onChangeDescriptionFieldHandler,
       onChangePaymentStatus,
       onChangeReceiptIdFieldHandler,
     ],
@@ -333,8 +316,7 @@ export const usePhotoDetailsContentState = () => {
         suppliers: !suppliersForSelect?.length,
         types: !typesForSelect?.length,
       },
-      paymentStatus: isPaymentStatus,
-      publishStatus: isPublishStatus,
+      paymentStatus: isPaymentStatus,      // publishStatus: isPublishStatus,
     }
   );
 
@@ -345,9 +327,8 @@ export const usePhotoDetailsContentState = () => {
     isOpen,
     isLoading,
     inputFields,
-    datePickerRef,
-    ButtonValue,
-    selectedReceipt,
+    datePickerRef,  //    ButtonValue,
+    selectedReceipt,    
     isPaymentStatus,
     isPublishStatus,
     onClickOutsideDatePickerHandler,
@@ -356,8 +337,13 @@ export const usePhotoDetailsContentState = () => {
     onChangePaymentStatus,
     onChangeRadioButtonHandler,
     onCancelButtonClickHandler,
-    onSaveButtonClickHandler,
+    saveReceiptHandler,
     onGetAllMasterItemsHandler,
     onForbiddenCharacterClick,
   };
 };
+
+
+/* const onChangeDescriptionFieldHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('descriptionValue', event.target.value); */

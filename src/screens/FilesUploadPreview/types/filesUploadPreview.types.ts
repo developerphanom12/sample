@@ -8,3 +8,11 @@ export type LocationState = {
   from: Location;
   action?: string;
 };
+
+export type loany = {
+  from: {
+    state: {
+      action: string;
+    }
+  };
+}

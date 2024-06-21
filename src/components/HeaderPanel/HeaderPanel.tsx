@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { ROUTES } from '../../constants/routes';
+import {Link} from 'react-router-dom';
 
 import { CustomDatePicker } from "components/CustomDatePicker";
 import { DateRangePicker } from "components/CustomDateRangePicker";
@@ -98,7 +100,12 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 						<ThreeDotsMenu dot3ExpReport={dot3ExpReport} onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler} onEmailClick={onEmailClick} onDownloadExcelFileHandler={onDownloadExcelFileHandler} onDeleteItemHandler={onDeleteItemHandler} onMarkAsHandler={onMarkAsHandler} />
 					)}
 				</Styled.ButtonActionsWrapper>
-				<FileUploadButton onChangeFiles={primaryAction === "upload-receipt" ? onSelectFilesHandler : onSelectSalesFilesHandler} customButtonName={primaryAction === "upload-receipt" ? "Upload Receipt" : primaryAction === "upload-invoice" ? "Upload Invoice" : null} />
+				<Link to={{pathname: primaryAction === "upload-receipt" ? ROUTES.receiptUploadFile : ROUTES.invoiceUploadFile}} state= {{action: primaryAction === "upload-receipt" ? "receipt" : "invoice"}}>
+				<Styled.Link>
+					{primaryAction === "upload-receipt" ? "Upload Receipt" : primaryAction === "upload-invoice" ? "Upload Invoice" : null}
+				</Styled.Link>
+				</Link>
+				{/* <FileUploadButton onChangeFiles={primaryAction === "upload-receipt" ? onSelectFilesHandler : onSelectSalesFilesHandler} customButtonName={primaryAction === "upload-receipt" ? "Upload Receipt" : primaryAction === "upload-invoice" ? "Upload Invoice" : null} /> */}
 			</Styled.ButtonsWrapper>
 		</Styled.HeaderPanelWrapper>
 	);

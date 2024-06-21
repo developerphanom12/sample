@@ -45,15 +45,10 @@ export const FilesUploadPreviewStyles = {
     flex: 1;
   `,
   ButtonsBox: styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 255px;
-  `,
-  ButtonsBoxWrapper: styled.div`
     width: 100%;
-    justify-content: space-between;
     display: flex;
-    padding: 0;
+    justify-content: flex-end;
+    gap: 10px;
   `,
   BoxWrapper: styled.div`
     display: flex;
