@@ -5,9 +5,12 @@ import { LoaderComponent } from 'components/Loader';
 import { PaginationPanel } from 'components/PaginationPanel';
 import { TableInboxAdmin } from 'components/Table/TableInboxAdmin';
 
-import { InboxContentStyles as Styled } from './InboxContent.style';
+import { InboxContentStyles as Styled } from 'screens/Inbox/InboxContent/InboxContent.style';
+import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
+import { useCategoriesTabState } from '../ExpenseReportstate';
+import { TableExpense } from 'components/Table/TableExpense/TableInboxAdmin';
 
-export const InboxContent: FC<IInboxContent> = (props) => {
+export const ExpenseContent: FC<IInboxContent> = (props) => {
   const {
     dateValue,
     formattedDate,
@@ -60,36 +63,48 @@ export const InboxContent: FC<IInboxContent> = (props) => {
     requestSort,
   } = props;
 
+  const {
+    isLoading,
+    isModalWindowOpen,
+    modalInputValue,
+    onChangeCategoryNameValueHandler,
+    onCreateCategoryHandler,
+    onEnterCreateCategoryClick,
+    onGetAllCategoriesHandler,
+    onModalWindowToggle,
+    categoriesList,
+    count,
+    date_format,
+    isDeleteModalWindowOpen,
+    onDeleteModalWindowToggle,
+    onDeleteItemClickHandler,
+    onDeleteButtonClickHandler,
+    selectedCategory,
+    isEdit,
+    onEditItemClickHandler,
+    isDisableButton,
+    onSaveButtonClickHandler,
+    onModalWindowCancelClickButtonHandler,
+    onChangeItemsPerPage,
+    onChangePagesAmount,
+    onBlurHandler,
+    onFocusSearchHandler,
+    userRole,
+  } = useCategoriesTabState();
+
+
   return (
     <Styled.Wrapper>
       {!isFetchingReceipts && (
-        <HeaderPanel
-          dot3ExpReport={true}
-          datePickerRef={datePickerRef}
-          statusValue={statusValue}
-          dateFilterValue={dateFilterValue}
-          onSelectFilesHandler={onSelectFilesHandler}
-          onChangeStatusValueHandler={onChangeStatusValueHandler}
-          onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
+        <HeaderPanelMaster
+          isGuard
+          userRole={userRole}
           onChangeSearchValueHandler={onChangeSearchValueHandler}
           searchValue={searchValue}
-          onChangeDate={onChangeDate}
-          onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
-          isDatePickerOpen={isDatePickerOpen}
-          dateValue={dateValue}
-          setIsDatePickerOpen={setIsDatePickerOpen}
-          formattedDate={formattedDate}
-          isInputDate={isInputDate}
-          showActions={showActions}
-          onActionsClick={onActionsClick}
-          onActionsClose={onActionsClose}
-          onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-          onEmailClick={onEmailClick}
-          isDownloadButtonDisabled={isDownloadButtonDisabled}
-          onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-          onDeleteItemHandler={onDeleteReceiptHandler}
-          onMarkAsHandler={onMarkAsHandler}
-          primaryAction="upload-receipt"
+          onAddClickButtonHandler={onModalWindowToggle}
+          onBlurHandler={onBlurHandler}
+          onFocusSearchHandler={onFocusSearchHandler}
+          buttonText="Add Expense Report"
         />
       )}
       <Styled.TableWrapper>
@@ -98,7 +113,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
             <LoaderComponent theme="preview" />
           </Styled.LoaderWrapper>
         )}
-        <TableInboxAdmin
+        <TableExpense
           onCheckedItemHandler={onCheckedItemHandler}
           onCheckedAllItemsHandler={onCheckedAllItemsHandler}
           onCheckedPaidHandler={onCheckedPaidHandler}

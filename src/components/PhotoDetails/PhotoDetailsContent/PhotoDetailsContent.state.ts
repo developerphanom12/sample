@@ -188,7 +188,6 @@ export const usePhotoDetailsContentState = () => {
   const onChangeSupplierFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-     console.log("supplier value----@#$%#$%s" , event.target.value)
     onChangeStateFieldHandler('supplierValue', event.target.value)};
 
   const onChangeSupplierAccountHandler = (

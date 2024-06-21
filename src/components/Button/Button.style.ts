@@ -52,6 +52,7 @@ const WIDTH = {
   `,
   primary: css`
     width: auto;
+    border-radius:6px;
   `,
   secondary: css`
     width: 100px;
@@ -67,7 +68,7 @@ const WIDTH = {
     height: 40px;
   `,
   roundedBig: css`
-    width: 100px;
+    width: max-content;
     height: 40px;
     box-shadow: none;
   `,
@@ -77,10 +78,6 @@ export const ButtonStyles = {
   Button: styled.button<ButtonStyleProps>`
     font-size: ${(props) => props.theme.size.default};
     height: 40px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
     box-shadow: ${(props) =>
       `0px 0px 5px ${props.theme.colors.boxShadowBlackButton}`};
     background-color: ${(props) => props.theme.colors.lightGray};

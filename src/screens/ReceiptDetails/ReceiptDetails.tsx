@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect , memo } from 'react';
 
 import { ReceiptDetailsHeader } from 'components/ReceiptDetailsHeader';
 import { PhotoPreview } from 'components/PhotoPreview';
@@ -7,11 +7,9 @@ import { PhotoDetails } from 'components/PhotoDetails';
 import { ReceiptDetailsStyles as Styled } from './ReceiptDetails.style';
 import { useReceiptDetailsState } from './receiptDetails.state';
 import { usePhotoDetailsContentState } from 'components/PhotoDetails/PhotoDetailsContent/PhotoDetailsContent.state';
-import { ButtonsBox } from 'components/PhotoDetails/ButtonsBox';
-import { ButtonsBoxNew } from 'components/PhotoDetails/ButtonBoxNew';
 import { CheckboxItem } from 'components/Checkbox';
 
-export const ReceiptDetails: FC = () => {
+export const ReceiptDetails: FC = memo(() => {
   const {
     onGoBackHandler,
     onClickGetNextReceiptHandler,
@@ -27,9 +25,6 @@ export const ReceiptDetails: FC = () => {
 
   const {
     isLoading,
-    onChangeRadioButtonHandler,
-    onSaveButtonClickHandler,
-    onCancelButtonClickHandler,
     onChangePaymentStatus,
     onChangePublishStatus,
     isPaymentStatus,
@@ -84,7 +79,7 @@ export const ReceiptDetails: FC = () => {
           </Styled.CheckboxContainer>
         </div>
       </Styled.Wrapper>
-      <Styled.Footer>
+      {/* <Styled.Footer>
         <div>
           <ButtonsBoxNew
             onRejectButtonClickHandler={onChangeRadioButtonHandler}
@@ -99,7 +94,7 @@ export const ReceiptDetails: FC = () => {
             onApproveButtonClickHandler={onChangeRadioButtonHandler}
           />
         </div>
-      </Styled.Footer>
+      </Styled.Footer> */}
     </Styled.Section>
   );
-};
+});

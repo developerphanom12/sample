@@ -33,6 +33,7 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
   };
 
   const handleApproveButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setSelectedButton(null);
     if (onApproveButtonClickHandler) {
       const customEvent = {
         ...event,
@@ -43,15 +44,6 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
     setSelectedButton('accepted');
   };
 
-  useEffect(() => {
-    if (selectedButton) {
-      const timer = setTimeout(() => {
-        setSelectedButton(null);
-      }, 300); // delay in ms, adjust as needed
-      return () => clearTimeout(timer); // cleanup timeout if component unmounts
-    }
-  }, [selectedButton]);
-
   return (
     <Styled.ButtonsBox>
       <Styled.ButtonsWrapper>
@@ -59,17 +51,17 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
           onClick={handleApproveButtonClick}
           themedButton={selectedButton === 'accepted' ? 'roundedRed' : 'roundedWhite'}
           width="rounded"
-          isLoading={isLoading}
-          isDisabled={isLoading}
+          isLoading={selectedButton === 'accepted' && isLoading}
+          isDisabled={selectedButton === 'accepted' && isLoading}
         >
           {'Approve & Save'}
         </Button>
         <Button
-          onClick={onUploadButtonClickHandler}
+          onClick={() => handleButtonClick('save', onUploadButtonClickHandler)}
           themedButton={selectedButton === 'save' ? 'roundedRed' : 'roundedWhite'}
           width="rounded"
-          isLoading={isLoading}
-          isDisabled={isLoading}
+          isLoading={selectedButton === 'save' && isLoading}
+          isDisabled={selectedButton === 'save' && isLoading}
         >
           {'Save'}
         </Button>
@@ -77,7 +69,7 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({
           onClick={(event) => handleButtonClick('cancel', onCancelButtonClickHandler, event)}
           themedButton={selectedButton === 'cancel' ? 'roundedRed' : 'roundedWhite'}
           width="rounded"
-          isDisabled={isLoading}
+          isDisabled={selectedButton === 'cancel' && isLoading}
         >
           {'Cancel'}
         </Button>

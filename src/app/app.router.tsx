@@ -39,7 +39,7 @@ import { ROUTES } from 'constants/routes';
 import { useSelector } from 'react-redux';
 import { getUserExist } from '../screens/Dashboard/dashboard.api';
 import { IState } from '../services/redux/reducer';
-import { UnderDevelop } from 'screens/underDevelop';
+import { ExpenseReport } from 'screens/ExpenseReport';
 
 export const AppRouter: FC = () => {
   setInterseptors();
@@ -94,7 +94,7 @@ export const AppRouter: FC = () => {
             />
             <Route
               path={ROUTES.expenseReport}
-              element={<UnderDevelop />}
+              element={<ExpenseReport />}
             />
             <Route
               path={ROUTES.filesUploadPreview}

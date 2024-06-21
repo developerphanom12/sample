@@ -31,11 +31,9 @@ export const ReceiptDetailsStyles = {
   grid-template-columns:  1fr;
   width:"100%";
   margin-top: 1rem;
+  margin-bottom : 4.5rem;
   height:40px;
   background-color:white;
-  label {
-    margin-bottom: 0.5rem;
-  }
   ${commonTextStyles}
 `,
   Input: styled.input`
@@ -48,7 +46,7 @@ box-sizing: border-box; /* Ensure padding is included in the width calculation *
 margin-left:31px;
 border: 1px solid #A5B1BE;
 border-radius:6px;
-height:54px;
+height:50px;
 
 `,
   Description: styled.div`
