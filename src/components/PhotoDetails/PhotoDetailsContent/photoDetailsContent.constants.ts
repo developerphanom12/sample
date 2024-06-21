@@ -74,7 +74,7 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     {
       type: 'select',
       label: 'Payment Method',
-      value: state.currencyValue,
+      value: paymentStatus,
       options: formatedCurrencies,
       onChangeSelect: funcArray[11],
     },

@@ -57,7 +57,6 @@ export const PhotoDetailsContent: FC = () => {
             <PurchaseTable />
           </Styled.ContentContainer>
         </Styled.FlexContainer>
-      </Styled.MainWrapper>
         <Styled.Footer>
           <div>
             <ButtonsBoxNew
@@ -74,6 +73,7 @@ export const PhotoDetailsContent: FC = () => {
             />
           </div>
         </Styled.Footer>
+        </Styled.MainWrapper>
     </>
   );
 };

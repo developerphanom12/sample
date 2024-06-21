@@ -61,6 +61,8 @@ export const PhotoDetailsContentStyles = {
   Footer: styled.footer`
     position: fixed;
     bottom: 0;
+    left:0;
+    width:100%;
     background-color: ${({ theme }) => theme.colors.white};
     padding: 1rem;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);

@@ -5,20 +5,14 @@ import { CheckboxItem } from 'components/Checkbox/Checkbox';
 import { setIsSorted } from 'services/utils';
 
 import { TableButton } from 'components/Table/TableButton/TableButton';
-import { TableExpenseItem } from './TableExpenseItem/TableExpenseItem';
 import { TableExpenseStyles as Styled } from './TableExpense.style';
-import { TABLE_EXPENSE_COLUMN_NAMES, generateGridTemplateColumns } from './TableExpense.constants';
+import { TABLE_EXPENSE_COLUMN_NAMES, TABLE_GRID_MARKUP, generateGridTemplateColumns } from './TableExpense.constants';
 
 export const TableExpense: FC<TableInboxAdminProps> = memo((props) => {
   const {
-    onCheckedItemHandler,
-    onCheckedPublishMockFuncHandler,
     onCheckedAllItemsHandler,
-    onCheckedPaidHandler,
-    onCheckedApproveHandler,
     receiptList,
     isAllChecked,
-    dateFormat,
     sortField,
     sortOrder,
     requestSort,
@@ -29,7 +23,7 @@ export const TableExpense: FC<TableInboxAdminProps> = memo((props) => {
 
   return (
     <>
-      <Styled.Head gridTemplateColumns={gridTemplateColumns} >
+      <Styled.Head gridTemplateColumns={TABLE_GRID_MARKUP} >
         <Styled.Checkbox>
           <CheckboxItem
             isChecked={isAllChecked}

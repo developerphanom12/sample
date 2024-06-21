@@ -1,8 +1,7 @@
 export const TABLE_GRID_MARKUP = `
-minmax(12px, 30px) minmax(60px, 70px) minmax(70px, 80px)
-minmax(100px, 150px) minmax(145px, 150px) minmax(100px, 130px)
+minmax(40px, 50px) minmax(70px, 200px) minmax(70px, 200px)
+minmax(100px, 200px) minmax(145px, 250px) minmax(100px, 250px)
 minmax(94px, 106px) 
-
 `;
 
 export const TABLE_ID = {

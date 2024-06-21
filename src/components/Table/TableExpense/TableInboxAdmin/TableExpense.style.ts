@@ -4,11 +4,10 @@ import { TABLE_GRID_MARKUP } from './TableExpense.constants';
 export const TableExpenseStyles = {
   Head: styled.div<{ gridTemplateColumns: string }>`
     display: grid;
-    grid-template-columns: ${TABLE_GRID_MARKUP};
+    grid-template-columns: ${({ gridTemplateColumns }) => gridTemplateColumns};;
     border-top: solid 1px ${(props) => props.theme.colors.borderWhite};
     border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
     height: 49px;
-    width: 100%;
   `,
   Checkbox: styled.div`
     display: flex;

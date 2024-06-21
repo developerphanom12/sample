@@ -3,12 +3,10 @@ import { FC, useEffect, memo } from 'react';
 import { EmptyData } from 'components/EmptyData';
 import { LoaderComponent } from 'components/Loader';
 
-import { useCategoriesTabState } from './ExpenseReportstate';
 import { ExpenseStyles as Styled } from './ExpenseReport.style';
 
 import { useInboxState } from 'screens/Inbox/Inbox.state';
 import { Outlet } from 'react-router';
-import { InboxContent } from 'screens/Inbox/InboxContent';
 import { EMPTY_DATA_STRINGS as Strings } from 'constants/strings';
 import { ExpenseContent } from './ExpenseContent';
 
@@ -28,9 +26,7 @@ export const ExpenseReport: FC = memo(() => {
     formattedDate,
     isInputDate,
     setIsDatePickerOpen,
-    isEmailModalWindowOpen,
     onEmailClick,
-    formik,
     onChangeReceiptsPerPage,
     onChangeInputValue,
     onEnterGoToClick,
@@ -50,16 +46,10 @@ export const ExpenseReport: FC = memo(() => {
     inputPaginationValue,
     currentPage,
     pages,
-    checkedIds,
     showActions,
     isAllChecked,
-    csvLink,
-    csvData,
     company,
-    excelRef,
-    excelUrl,
     isDownloadButtonDisabled,
-    isLoading,
     isContentLoading,
     debouncedValue,
     isFetchingReceipts,
@@ -81,22 +71,6 @@ export const ExpenseReport: FC = memo(() => {
     setCurrentPage,
     count,
   } = useInboxState();
-
-  const {
-    isModalWindowOpen,
-    modalInputValue,
-    onChangeCategoryNameValueHandler,
-    onCreateCategoryHandler,
-    onEnterCreateCategoryClick,
-    isDeleteModalWindowOpen,
-    onDeleteModalWindowToggle,
-    onDeleteButtonClickHandler,
-    selectedCategory,
-    isEdit,
-    isDisableButton,
-    onSaveButtonClickHandler,
-    onModalWindowCancelClickButtonHandler,
-  } = useCategoriesTabState();
 
   useEffect(() => {
     onFetchReceiptsHandler({
