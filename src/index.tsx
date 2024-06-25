@@ -7,7 +7,7 @@ import './styles/fonts.css';
 
 const root = createRoot(document.getElementById('root') as Element);
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );

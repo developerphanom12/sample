@@ -23,6 +23,12 @@ interface ISortProps {
   sortField: TReceiptKeys;
   sortOrder: string;
 }
+interface IInvoiceSortProps {
+  sortValue?: string;
+  sortableItems: IInvoice[];
+  sortField: TInvoiceKeys;
+  sortOrder: string;
+}
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -300,6 +306,41 @@ export const getSortedItems = (props: ISortProps) => {
       : 0;
   };
   const sortItemsHandler = (func: (a: IReceipt, b: IReceipt) => number) =>
+    sortableItems.sort(func);
+
+  return { sortItemsHandler, sortByObjValue, sortByValue, sortByDate };
+};
+
+
+export const getSortedInvoiceItems = (props: IInvoiceSortProps) => {
+  const { sortField, sortOrder, sortableItems, sortValue } = props;
+  const descOrder = sortOrder === 'asc' ? 1 : -1;
+  const ascOrder = sortOrder === 'asc' ? -1 : 1;
+
+  const sortByDate = (a: IInvoice, b: IInvoice) => {
+    return Date.parse(a[sortField]) < Date.parse(b[sortField])
+      ? ascOrder
+      : Date.parse(a[sortField]) > Date.parse(b[sortField])
+      ? descOrder
+      : 0;
+  };
+
+  const sortByValue = (a: IInvoice, b: IInvoice) => {
+    return a[sortField] < b[sortField]
+      ? ascOrder
+      : a[sortField] > b[sortField]
+      ? descOrder
+      : 0;
+  };
+
+  const sortByObjValue = (a: IInvoice, b: IInvoice) => {
+    return a[sortField]?.[sortValue || ''] < b[sortField]?.[sortValue || '']
+      ? ascOrder
+      : a[sortField]?.[sortValue || ''] > b[sortField]?.[sortValue || '']
+      ? descOrder
+      : 0;
+  };
+  const sortItemsHandler = (func: (a: IInvoice, b: IInvoice) => number) =>
     sortableItems.sort(func);
 
   return { sortItemsHandler, sortByObjValue, sortByValue, sortByDate };

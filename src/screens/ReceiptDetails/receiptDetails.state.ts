@@ -8,6 +8,7 @@ import { selectReceipt } from '../Inbox/reducer/inbox.reducer';
 import { getReceiptImage } from './receiptDetails.api';
 
 export const useReceiptDetailsState = () => {
+  console.log('!!!!!!!!!!!!!!!!! - RD parent state');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

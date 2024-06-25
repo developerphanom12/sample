@@ -8,6 +8,7 @@ interface IButtonBoxProps {
 }
 
 export const ButtonsBoxNew: FC<IButtonBoxProps> = ({ onRejectButtonClickHandler, isLoading }) => {
+	console.log('!!!!!!!!!!!!!!!!! - RDContent child-buttonNew');
 	const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
 	const handleButtonClick = (buttonType: string, handler?: () => void | Promise<void>, event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

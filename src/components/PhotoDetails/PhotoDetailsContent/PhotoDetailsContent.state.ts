@@ -29,6 +29,7 @@ import { ROUTES } from 'constants/routes';
 import { DATE_FORMATS } from 'constants/strings';
 
 export const usePhotoDetailsContentState = () => {
+	console.log('!!!!!!!!!!!!!!!!! - RDContent child-form-state');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -66,18 +67,19 @@ export const usePhotoDetailsContentState = () => {
   const initialState = {
     ...photoDetailsContentInitialState,
     currencyValue: currentCurrency,
-    payment: currentCurrency,
-    typeValue: currentType,
+    // paymentStatus: isPaymentStatus,
+    paymentTypeValue: currentType,
     categoryValue: currentCategory,
     supplierAccountValue: currentSupplierAccount,
   };
 
   useEffect(() => {
+    // console.log('===================', selectedReceipt);
     setState((prevState) => ({
       ...prevState,
       statusValue: selectedReceipt?.status || '',
       categoryValue: currentCategory || null,
-      typeValue: currentType || null,
+      paymentTypeValue: currentType || null,
       dateValue: selectedReceipt?.receipt_date || null,
       supplierValue: selectedReceipt?.supplier || '',
       supplierAccountValue: currentSupplierAccount || null,
@@ -92,6 +94,7 @@ export const usePhotoDetailsContentState = () => {
       formattedDate: selectedReceipt?.receipt_date
         ? format(new Date(selectedReceipt?.receipt_date), company.date_format)
         : '',
+      paymentStatus: selectedReceipt?.payment_status || false,
     }));
   }, [selectedReceipt?.id]);
 
@@ -104,6 +107,9 @@ export const usePhotoDetailsContentState = () => {
   const [isPaymentStatus, setIsPaymentStatus] = useState(
     selectedReceipt?.payment_status || false
   );
+  const paymentStatusFromState = state?.paymentStatus !== (null || undefined) ? state.paymentStatus : selectedReceipt?.payment_status;
+  // console.log(paymentStatusFromState);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -119,11 +125,12 @@ export const usePhotoDetailsContentState = () => {
   const onChangeStateFieldHandler = (
     optionName: keyof typeof initialState,
     value: string | boolean | number | null | Date | SingleValue<IOption> | any
-  ) =>
+  ) =>{
+    // console.log('##########',value);
     setState((prevState) => ({
       ...prevState,
       [optionName]: value,
-    }));
+    }))};
 
   const onGetAllMasterItemsHandler = async () => {
     try {
@@ -196,10 +203,14 @@ export const usePhotoDetailsContentState = () => {
     onChangeStateFieldHandler('currencyValueId', newValue.id);
   };
 
-  const onChangeTypeFieldHandler = (
+  const onChangePaymentTypeFieldHandler = (
     newValue: unknown,
     actionMeta: ActionMeta<unknown>
-  ) => onChangeStateFieldHandler('typeValue', newValue);
+  ) => onChangeStateFieldHandler('paymentTypeValue', newValue);
+
+  const onChangeDescriptionFieldHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('descriptionValue', event.target.value);
 
   const onChangeTaxFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -244,10 +255,23 @@ export const usePhotoDetailsContentState = () => {
       setIsOpen(false);
   };
 
-  const onChangePublishStatus = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setIsPublishStatus(event.target.checked);
+  const onChangePublishStatus = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    // console.log(event.target.checked);
+    // setIsPublishStatus(event.target.checked);
+    onChangeStateFieldHandler('publishedStatus', event.target.checked);
+  }
 
-  const onChangePaymentStatus = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const onChangePaymentStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(event.target.checked);
+    // setIsPaymentStatus(event.target.checked);
+    onChangeStateFieldHandler('paymentStatus', event.target.checked);
+  }
+  const paymentStatusHandler = (newStatus: boolean) => {
+    // console.log(newStatus);
+    // setIsPaymentStatus(event.target.checked);
+    onChangeStateFieldHandler('paymentStatus', newStatus);
+  }
+  const onChangePublished = (event: React.ChangeEvent<HTMLInputElement>) =>
     setIsPaymentStatus(event.target.checked);
 
   console.log("state----", state);
@@ -260,7 +284,8 @@ export const usePhotoDetailsContentState = () => {
         category: state.categoryValue?.id || selectedReceipt?.category,
         currency: state.currencyValueId || selectedReceipt?.currency.id,
         net: state.netValue || selectedReceipt?.net,
-        payment_status: isPaymentStatus,
+        payment_status: state.paymentStatus === true ? true : state.paymentStatus === false ? false : selectedReceipt?.payment_status,
+        // payment_status: state.paymentStatus  || selectedReceipt?.payment_status,
         publish_status: isPublishStatus,
         receipt_date: state.dateValue || selectedReceipt?.receipt_date,
         status: ButtonValue || selectedReceipt?.status,
@@ -269,16 +294,16 @@ export const usePhotoDetailsContentState = () => {
           state.supplierAccountValue?.id || selectedReceipt?.supplier_account,
         tax: state.taxValue || selectedReceipt?.tax,
         total: state.totalValue || selectedReceipt?.total,
-        payment_type: state.typeValue?.id || selectedReceipt?.payment_type,
+        payment_type: state.paymentTypeValue?.id || selectedReceipt?.payment_type,
         vat_code: state.vatCodeValue || selectedReceipt?.vat_code,
         active_account: active_account || '',
       };
 
-      setIsLoading(true);
-      console.log("save button", payload.supplier);
+      // setIsLoading(true);
+      console.log("save button", state.paymentStatus ,payload.payment_status);
 
       const { data } = await updateReceiptItem(payload);
-      setIsLoading(false);
+      // setIsLoading(false);
       dispatch(updateReceipt(data));
       dispatch(setIsFetchingDate(true));
 
@@ -301,8 +326,10 @@ export const usePhotoDetailsContentState = () => {
       onChangeNetFieldHandler,
       onChangeTaxFieldHandler,
       onChangeTotalFieldHandler,
-      onChangeTypeFieldHandler, //onChangeDescriptionFieldHandler,
+      onChangePaymentTypeFieldHandler, 
       onChangePaymentStatus,
+      onChangePublished,
+      onChangeDescriptionFieldHandler,
       onChangeReceiptIdFieldHandler,
     ],
     {
@@ -316,7 +343,8 @@ export const usePhotoDetailsContentState = () => {
         suppliers: !suppliersForSelect?.length,
         types: !typesForSelect?.length,
       },
-      paymentStatus: isPaymentStatus,      // publishStatus: isPublishStatus,
+      paymentStatus: isPaymentStatus,      
+      publishStatus: isPublishStatus,
     }
   );
 
@@ -331,6 +359,8 @@ export const usePhotoDetailsContentState = () => {
     selectedReceipt,    
     isPaymentStatus,
     isPublishStatus,
+    paymentStatusFromState,
+    paymentStatusHandler,
     onClickOutsideDatePickerHandler,
     onChangePublishStatus,
     onDatePickerClickHandler,
@@ -342,8 +372,3 @@ export const usePhotoDetailsContentState = () => {
     onForbiddenCharacterClick,
   };
 };
-
-
-/* const onChangeDescriptionFieldHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('descriptionValue', event.target.value); */

@@ -7,17 +7,21 @@ export const PhotoDetailsContentStyles = {
     background: ${({ theme }) => theme.colors.white};
     padding: 15px;
     width: 100%;
-    height: auto;
+    min-height: 60vh;
+    // height: 100%;
+    flex-grow: 1;
     overflow: hidden;
     border-radius: 10px;
-    border: 1px solid #00000040;
+    border: 1px solid ${({ theme }) => theme.colors.gray};
   `,
 
   MainWrapper: styled.div`
   overflow-y:auto;
+  height: 100%;
 `,
   Wrapper: styled.div`
     width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: auto;
@@ -80,6 +84,37 @@ export const PhotoDetailsContentStyles = {
   margin-top: 20px;
 `,
 
+ReceiptStatusContainer: styled.div`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  gap: 15px;
+  width:"100%";
+  margin-top: 10px;
+  height: max-content;
+  // background-color: #f0f;
+`,
+  Input: styled.input`
+  margin-right:10px;
+`,
+  DescriptionInput: styled.input`
+    width: 100%; /* Make the input take full width */
+    padding: 15px; /* Add some padding for better appearance */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+    border: 1px solid #A5B1BE;
+    border-radius:6px;
+    // height:54px;
+  `,
+  Description: styled.div`
+  flex: 1; 
+`,
+  CheckboxContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+
 Footer: styled.footer`
 position: fixed;
 bottom: 0;
@@ -123,3 +158,5 @@ font-weight: 600;
   }
 `,
 };
+
+  // ${commonTextStyles}

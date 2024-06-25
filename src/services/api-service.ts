@@ -123,6 +123,7 @@ export const apiServices = {
     return instance.post(`${requestUrl}`, payload);
   },
   fetchData: async (requestUrl: string, params?: {}) => {
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', requestUrl, params);
     return instance.get(`${requestUrl}`, { params });
   },
   changeData: async (requestUrl: string, payload: any) => {

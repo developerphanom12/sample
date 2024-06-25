@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import { SalesInvoicesTable } from 'components/Table/SalesInvoices';
 
@@ -37,7 +37,6 @@ export const SalesInvoices: FC = () => {
     isDatePickerOpen,
     isDownloadButtonDisabled,
     isEmailModalWindowOpen,
-    isFetchingData,
     isLoading,
     location,
     onActionsClick,
@@ -72,13 +71,37 @@ export const SalesInvoices: FC = () => {
     setIsDatePickerOpen,
     setIsSentSuccessPopup,
     showActions,
-    sortedReceipts,
+    sortedInvoices,
     statusValue,
     dateFilterValue,
     totalCount,
     invoice_formik,
     onMarkAsHandler,
+
+    onFetchSalesInvoicesHandler,
+    active_account,
+    count,
+    isFetchingInvoice
   } = useSalesInvoicesState();
+
+  useEffect(() => {
+    onFetchSalesInvoicesHandler({
+      ...fetchParams,
+      skip: 0,
+    });
+    if (debouncedValue || isCompanyChanged) {
+      setCurrentPage(0);
+    }
+  }, [debouncedValue, active_account]);
+
+  useEffect(() => {
+    if (count) {
+      onChangePagesAmount(Number(receiptsPerPage.value), count);
+    }
+  }, [receiptsPerPage, count, active_account]);
+
+  const isEmptyScreen = !isFetchingInvoice && !totalCount;
+
   return (
     <Styled.Wrapper>
       <ActionsPanel
@@ -124,7 +147,7 @@ export const SalesInvoices: FC = () => {
       />
       <SalesInvoicesTable
         onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-        invoicesList={[]}
+        invoicesList={sortedInvoices}
         isAllChecked={false}
         onCheckedPaidHandler={onCheckedPaidHandler}
         onCheckedApproveHandler={onCheckedApproveHandler}

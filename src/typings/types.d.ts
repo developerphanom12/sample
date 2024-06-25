@@ -9,21 +9,21 @@ declare global {
     type: 'capium' | 'google';
   }
   interface IusePhotoDetailsContentState {
+    receiptid: string;
     statusValue: string;
+    paymentTypeValue: SingleValue<IOption> | any;
     categoryValue: IOption | any;
-    typeValue: SingleValue<IOption> | any;
-    dateValue: Date | null;
     supplierValue: string | null;
     supplierAccountValue: IOption | any;
     currencyValue: SingleValue<IOption> | any;
-    payment: IOption | any;
+    paymentStatus: IOption | any;
     currencyValueId: string;
+    descriptionValue: string;
+    netValue: number | null;
+    vatCodeValue: string;
     taxValue: number | null;
     totalValue: number | null;
-    descriptionValue: string;
-    receiptid: string;
-    vatCodeValue: string;
-    netValue: number | null;
+    dateValue: Date | null;
     formattedDate: string;
   }
   interface IHeaderPanelProps {
@@ -126,6 +126,7 @@ declare global {
   }
 
   type TReceiptKeys = keyof IReceipt;
+  type TInvoiceKeys = keyof IInvoice;
   type TSorterOrder = 'asc' | 'desc' | '';
 
   interface TableInboxAdminProps {
@@ -174,6 +175,27 @@ declare global {
     status: string;
     supplier: string | null;
     supplier_account: ISelectItem | null;
+    tax: number | null;
+    total: number | null;
+    payment_type: ISelectItem | null;
+    vat_code: string | null;
+    payment_status: boolean;
+    approve_status: boolean;
+    publish_status: boolean;
+    isChecked: boolean;
+  }
+  interface IInvoice {
+    category: ISelectItem | null;
+    currency: ICurrency;
+    description: string | null;
+    id: string;
+    custom_id: string;
+    net: number | null;
+    photos: string[];
+    invoice_date: Date;
+    status: string;
+    customer: string | null;
+    customer_account: ISelectItem | null;
     tax: number | null;
     total: number | null;
     payment_type: ISelectItem | null;

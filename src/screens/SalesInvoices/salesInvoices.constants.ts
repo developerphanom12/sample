@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
   dataToSend: [],
   excelUrl: '',
   csvData: '',
-  isFetchingData: true,
+  isFetchingInvoice: true,
   isContentLoading: false,
 };
 

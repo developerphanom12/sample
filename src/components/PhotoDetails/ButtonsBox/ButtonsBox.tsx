@@ -13,6 +13,7 @@ interface IButtonBoxProps {
 }
 
 export const ButtonsBox: FC<IButtonBoxProps> = ({ saveReceiptHandler, onCancelButtonClickHandler, onApproveButtonClickHandler, isLoading, buttonValue }) => {
+	console.log('!!!!!!!!!!!!!!!!! - RDContent child-buttonold');
 	const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
 	const handleButtonClick = (buttonType: string, handler?: () => void | Promise<void>, event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

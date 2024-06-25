@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
 import { setIsSorted } from 'services/utils';
-import { ISalesInvoice } from '../../../screens/SalesInvoices/types/salesInvoices.types';
+// import { ISalesInvoice } from '../../../screens/SalesInvoices/types/salesInvoices.types';
 
 import { CheckboxItem } from '../../Checkbox';
 import { TableButton } from '../TableButton/TableButton';
@@ -10,12 +10,12 @@ import { TableStyles as Styled } from '../TableGlobalStyles';
 import {
   TABLE_COLUMN_NAMES,
   TABLE_GRID_MARKUP,
-} from './salesInvoices.constants';
+} from './salesInvoiceTable.constants';
 import { SalesInvoicesItem } from './SalesInvoicesItem';
 
 interface ISalesInvoicesTableProps
   extends Omit<TableInboxAdminProps, 'receiptList'> {
-  invoicesList: ISalesInvoice[];
+  invoicesList: IInvoice[];
 }
 export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
   (props) => {
@@ -31,6 +31,8 @@ export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
       sortOrder,
       requestSort,
     } = props;
+
+    console.warn('@!@!@!@!@!@', invoicesList);
 
     return (
       <>
@@ -75,7 +77,7 @@ export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
               vatCode={invoice.vat_code}
               tax={invoice.tax}
               status={invoice.status}
-              supplier={invoice.supplier}
+              customer={invoice.customer}
               isChecked={invoice.isChecked}
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}

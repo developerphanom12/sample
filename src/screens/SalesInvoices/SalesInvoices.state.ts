@@ -13,24 +13,26 @@ import { useToggle } from 'hooks/useToggle';
 import { useDebounce } from 'hooks/useDebounce';
 import { useSelectFiles } from 'hooks/useSelectFiles';
 import { usePagination } from 'hooks/usePagination';
-import { useSortableData } from 'hooks/useSortTableData';
+import { useSortInvoiceTable } from 'hooks/useSortInvoiceTable';
 
 // import { formikInitialValues, INITIAL_STATE } from './inbox.constants';
 
 import { ROUTES } from 'constants/routes';
 import { IuseSalesInvoicesState } from './types/salesInvoices.types';
 import { formikInitialValues, INITIAL_STATE } from './salesInvoices.constants';
+import { getInvoices } from './sales.api';
+import { setInvoicesList, setIsCompanyChanged, setIsFetchingDate } from './reducer/salesInvoices.reducer';
 
 export const useSalesInvoicesState = () => {
   const {
-    salesInvoices: {
+    invoices: {
       totalCount,
       count,
-      salesInvoices,
+      invoicesList,
       isCompanyChanged,
       isAllChecked,
     },
-    user: { user, userInfo },
+    user: { user: {active_account}, userInfo: { company }, token },
   } = useSelector((state: IState) => state);
 
   const [state, setState] = useState<IuseSalesInvoicesState>(INITIAL_STATE);
@@ -91,7 +93,7 @@ export const useSalesInvoicesState = () => {
     skip: currentPage * +receiptsPerPage.value,
     date_start: dateStart || '',
     date_end: dateEnd || '',
-    active_account: user.active_account || '',
+    active_account: active_account || '',
   };
 
   const onSelectFiles = useSelectFiles();
@@ -107,7 +109,33 @@ export const useSalesInvoicesState = () => {
 
   const onFetchSalesInvoicesHandler = async (params?: any) => {
     try {
+      setState((prevState) => ({
+        ...prevState,
+        isContentLoading: true,
+        checkedIds: [],
+      }));
+      const { data } = await getInvoices({
+        ...params,
+        active_account: active_account || '',
+      });
+
+      console.warn('%%%%%', data);
+      isCompanyChanged && dispatch(setIsCompanyChanged(false));
+      dispatch(
+        setInvoicesList({
+          count: data.count,
+          data: data.data,
+          totalCount: data.totalCount,
+        })
+      );
+      setState((prevState) => ({
+        ...prevState,
+        isEmptyData: data.totalCount ? false : true,
+        isFetchingReceipts: false,
+        isContentLoading: false,
+      }));
     } catch (error) {
+      dispatch(setIsFetchingDate(false));
       setState((prevState) => ({
         ...prevState,
         isFetchingReceipts: false,
@@ -133,7 +161,7 @@ export const useSalesInvoicesState = () => {
     setState((prevState) => ({
       ...prevState,
       dateValue: isEqual ? null : date,
-      formattedDate: isEqual ? '' : format(date, userInfo.company.date_format),
+      formattedDate: isEqual ? '' : format(date, company.date_format),
     }));
     setIsDatePickerOpen();
     const dateStart = setAndFormatDateToISO(date.toISOString());
@@ -229,7 +257,7 @@ export const useSalesInvoicesState = () => {
         console.log(error);
       }
     },
-    [user.active_account, fetchParams, salesInvoices]
+    [active_account, fetchParams, invoicesList]
   );
   const onCheckedApproveHandler = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -241,7 +269,7 @@ export const useSalesInvoicesState = () => {
         console.log(error);
       }
     },
-    [user.active_account, fetchParams, salesInvoices]
+    [active_account, fetchParams, invoicesList]
   );
 
   const onCheckedPublishMockFuncHandler = useCallback(
@@ -254,7 +282,7 @@ export const useSalesInvoicesState = () => {
   const onCheckedAllItemsHandler = useCallback(() => {}, [
     dispatch,
     isAllChecked,
-    salesInvoices,
+    invoicesList,
   ]);
 
   const csvLink = useRef<
@@ -328,12 +356,12 @@ export const useSalesInvoicesState = () => {
   const datePickerRef = useRef<HTMLButtonElement>(null);
 
   const {
-    items: sortedReceipts,
+    items: sortedInvoices,
     requestSort,
     sortField,
     sortOrder,
-  } = useSortableData({
-    items: [],
+  } = useSortInvoiceTable({
+    items: invoicesList,
   });
 
   return {
@@ -343,7 +371,7 @@ export const useSalesInvoicesState = () => {
     setCurrentPage,
     totalCount,
     fetchParams,
-    sortedReceipts,
+    sortedInvoices,
     requestSort,
     sortField,
     sortOrder,
@@ -396,5 +424,8 @@ export const useSalesInvoicesState = () => {
     onMarkAsPaidButtonHandler,
     onMarkAsHandler,
     onClickOutsideDatePickerHandler,
+
+    onFetchSalesInvoicesHandler,
+    active_account,
   };
 };

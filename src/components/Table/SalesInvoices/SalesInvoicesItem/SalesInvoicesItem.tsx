@@ -7,7 +7,7 @@ import { CheckboxItem } from 'components/Checkbox/Checkbox';
 import { StatusLabel } from 'components/StatusLabel/StatusLabel';
 
 import { TableItemStyles as Styled } from '../../TableGlobalStyles';
-import { TABLE_GRID_MARKUP } from '../salesInvoices.constants';
+import { TABLE_GRID_MARKUP } from '../salesInvoiceTable.constants';
 
 import { useSalesInvoicesItemState } from './SalesInvoicesItem.state';
 
@@ -47,8 +47,8 @@ export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
     date,
     net,
     status,
-    supplier,
-    supplierAccount,
+    customer,
+    // customerAccount,
     total,
     vatCode,
     tax,
