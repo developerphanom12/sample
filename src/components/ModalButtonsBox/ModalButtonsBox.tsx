@@ -36,17 +36,7 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
       buttonPosition={buttonPosition}
     >
       <Styled.ButtonsWrapper isCancelButton={isCancelButton}>
-        <Button
-          onClick={onSaveButtonCLickHandler}
-          themedButton="roundedRed"
-          width="rounded"
-          isDisabled={isDisableButton}
-          isLoading={isLoading}
-          type={type}
-        >
-          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Save' : 'Send'}
-        </Button>
-        {!isCancelButton && (
+      {!isCancelButton && (
           <Button
             onClick={onCancelClickHandler}
             themedButton="roundedWhite"
@@ -55,6 +45,17 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
             Cancel
           </Button>
         )}
+        <Button
+          onClick={onSaveButtonCLickHandler}
+          themedButton="roundedRed"
+          width="rounded"
+          isDisabled={isDisableButton}
+          isLoading={isLoading}
+          type={type}
+        >
+          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Add' : 'Send'}
+        </Button>
+
       </Styled.ButtonsWrapper>
     </Styled.ButtonsBox>
   );

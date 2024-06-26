@@ -64,7 +64,6 @@ const WIDTH = {
   rounded: css`
     min-width: 100px;
     width: max-content;
-    padding:10px;
     height: 40px;
   `,
   roundedBig: css`

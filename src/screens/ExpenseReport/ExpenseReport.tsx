@@ -1,41 +1,89 @@
-import { FC, useEffect, memo } from 'react';
+import { FC, useEffect } from 'react';
 
 import { EmptyData } from 'components/EmptyData';
 import { LoaderComponent } from 'components/Loader';
 
-import { ExpenseStyles as Styled } from './ExpenseReport.style';
+import { useExpenseReportState } from './ExpenseReportstate';
+import { CategoriesTabStyles as Styled } from 'screens/Master/CategoriesTab/CategoriesTab.style';
 
-import { useInboxState } from 'screens/Inbox/Inbox.state';
-import { Outlet } from 'react-router';
-import { EMPTY_DATA_STRINGS as Strings } from 'constants/strings';
+import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 import { ExpenseContent } from './ExpenseContent';
+import { useInboxState } from 'screens/Inbox/Inbox.state';
+import { MasterExpenseModalWindowBox } from 'components/MasterExpenseModalWindowBox';
 
-export const ExpenseReport: FC = memo(() => {
+export const ExpenseReport: FC = () => {
+  const {
+    isLoading,
+    isModalWindowOpen,
+    modalInputValue,
+    modalInputDate,
+    modalInputName,
+    onChangeExpenseUserValueHandler,
+    onChangeSearchValueHandler,
+    onCreateExpenseHandler,
+    onEnterCreateCategoryClick,
+    onGetAllCategoriesHandler,
+    onModalWindowToggle,
+    searchValue,
+    categoriesList,
+    count,
+    date_format,
+    isDeleteModalWindowOpen,
+    onDeleteModalWindowToggle,
+    onDeleteItemClickHandler,
+    onDeleteButtonClickHandler,
+    selectedCategory,
+    isEdit,
+    onEditItemClickHandler,
+    isDisableButton,
+    onSaveButtonClickHandler,
+    onModalWindowCancelClickButtonHandler,
+    onChangeItemsPerPage,
+    onChangeInputValue,
+    onChangePage,
+    onEnterGoToClick,
+    onGoToClick,
+    onForwardClick,
+    onBackwardClick,
+    onChangePagesAmount,
+    onBlurHandler,
+    onFocusSearchHandler,
+    currentPage,
+    inputPaginationValue,
+    itemsPerPage,
+    pages,
+    isFetchingData,
+    isEmptyData,
+    debouncedValue,
+    isFocus,
+    isContentLoading,
+    isSearching,
+    searchedItems,
+    active_account,
+    userRole,
+    onChangeExpenseDateValueHandler,
+    onChangeExpenseNameValueHandler,
+  } = useExpenseReportState();
+
   const {
     onSelectFilesHandler,
     onFetchReceiptsHandler,
     onChangeStatusValueHandler,
     onChangeDateFilterValueHandler,
-    onChangeSearchValueHandler,
     onChangeDate,
     isDatePickerOpen,
     dateValue,
-    searchValue,
     statusValue,
     dateFilterValue,
     formattedDate,
     isInputDate,
     setIsDatePickerOpen,
+    isEmailModalWindowOpen,
     onEmailClick,
+    formik,
     onChangeReceiptsPerPage,
-    onChangeInputValue,
-    onEnterGoToClick,
-    onGoToClick,
-    onForwardClick,
-    onBackwardClick,
     onActionsClick,
     onActionsClose,
-    onChangePage,
     onCheckedItemHandler,
     onCheckedAllItemsHandler,
     onClickDownloadCSVButtonHandler,
@@ -43,21 +91,22 @@ export const ExpenseReport: FC = memo(() => {
     onCheckedApproveHandler,
     onCheckedPublishMockFuncHandler,
     receiptsPerPage,
-    inputPaginationValue,
-    currentPage,
-    pages,
+    checkedIds,
     showActions,
     isAllChecked,
+    csvLink,
+    csvData,
     company,
+    excelRef,
+    excelUrl,
     isDownloadButtonDisabled,
-    isContentLoading,
-    debouncedValue,
     isFetchingReceipts,
     location,
     datePickerRef,
-    active_account,
+    isSentSuccessPopup,
+    setIsSentSuccessPopup,
+    onCloseModalWindowHandler,
     onClickOutsideDatePickerHandler,
-    onChangePagesAmount,
     onDownloadExcelFileHandler,
     onDeleteReceiptHandler,
     onMarkAsHandler,
@@ -69,102 +118,100 @@ export const ExpenseReport: FC = memo(() => {
     isCompanyChanged,
     requestSort,
     setCurrentPage,
-    count,
   } = useInboxState();
 
   useEffect(() => {
-    onFetchReceiptsHandler({
-      ...fetchParams,
-      skip: 0,
-    });
-    if (debouncedValue || isCompanyChanged) {
-      setCurrentPage(0);
-    }
-  }, [debouncedValue, active_account]);
+    !searchValue &&
+      onGetAllCategoriesHandler({
+        take: +itemsPerPage.value,
+        skip: currentPage * +itemsPerPage.value,
+      });
+  }, [searchValue, active_account]);
 
   useEffect(() => {
-    if (count) {
-      onChangePagesAmount(Number(receiptsPerPage.value), count);
-    }
-  }, [receiptsPerPage, count, active_account]);
+    debouncedValue &&
+      onGetAllCategoriesHandler(
+        {
+          search: debouncedValue,
+        },
+        isSearching
+      );
+  }, [debouncedValue]);
 
-  const isEmptyScreen = !isFetchingReceipts && !totalCount;
-
+  useEffect(() => {
+    if (!count) return;
+    onChangePagesAmount(+itemsPerPage.value, count);
+  }, [count, itemsPerPage]);
 
   return (
     <>
-      {location.pathname !== '/expense-report' ? (
-        <Outlet />
-      ) : isFetchingReceipts ? (
+      <MasterExpenseModalWindowBox
+        isLoading={isLoading}
+        onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
+        onChangeInputValueHandler={onChangeExpenseUserValueHandler}
+        onChangeExpenseDateValueHandler={onChangeExpenseDateValueHandler}
+        onChangeExpenseNameValueHandler={onChangeExpenseNameValueHandler}
+        onEnterCreateItemClick={onEnterCreateCategoryClick}
+        onSaveButtonCLickHandler={
+          isEdit ? onSaveButtonClickHandler : onCreateExpenseHandler
+        }
+        isModalWindowOpen={isModalWindowOpen}
+        headerText={'Add to Expense Report'}
+        inputValue={modalInputValue}
+        dateValue={modalInputDate}
+        reportName={modalInputName}
+        onDeleteButtonClickHandler={onDeleteButtonClickHandler}
+        deleteItemName={`‘${selectedCategory?.name}’`}
+        categoryName="category"
+        isDeleteModalWindowOpen={isDeleteModalWindowOpen}
+        onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
+        isDisableButton={isDisableButton}
+      />
+      {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : totalCount ? (
-        <>
-          {!isFetchingReceipts ? (
-            <ExpenseContent
-              datePickerRef={datePickerRef}
-              pages={pages}
-              currentPage={currentPage}
-              onChangeReceiptsPerPage={onChangeReceiptsPerPage}
-              onChangeInputValue={onChangeInputValue}
-              inputPaginationValue={inputPaginationValue}
-              receiptsPerPage={receiptsPerPage}
-              onChangePage={onChangePage}
-              onEnterGoToClick={onEnterGoToClick}
-              onGoToClick={onGoToClick}
-              onForwardClick={onForwardClick}
-              onBackwardClick={onBackwardClick}
-              statusValue={statusValue}
-              dateFilterValue={dateFilterValue}
-              onSelectFilesHandler={onSelectFilesHandler}
-              onChangeStatusValueHandler={onChangeStatusValueHandler}
-              onChangeDateFilterValueHandler={onChangeDateFilterValueHandler}
-              onChangeSearchValueHandler={onChangeSearchValueHandler}
-              searchValue={searchValue}
-              onChangeDate={onChangeDate}
-              onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
-              isDatePickerOpen={isDatePickerOpen}
-              dateValue={dateValue}
-              setIsDatePickerOpen={setIsDatePickerOpen}
-              formattedDate={formattedDate}
-              isInputDate={isInputDate}
-              showActions={showActions}
-              onActionsClick={onActionsClick}
-              onActionsClose={onActionsClose}
-              onClickDownloadCSVButtonHandler={onClickDownloadCSVButtonHandler}
-              onEmailClick={onEmailClick}
-              isDownloadButtonDisabled={isDownloadButtonDisabled}
-              onDownloadExcelFileHandler={onDownloadExcelFileHandler}
-              onDeleteReceiptHandler={onDeleteReceiptHandler}
-              onMarkAsHandler={onMarkAsHandler}
-              isContentLoading={isContentLoading}
-              onCheckedItemHandler={onCheckedItemHandler}
-              onCheckedAllItemsHandler={onCheckedAllItemsHandler}
-              onCheckedPaidHandler={onCheckedPaidHandler}
-              onCheckedApproveHandler={onCheckedApproveHandler}
-              onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-              receiptList={sortedReceipts}
-              requestSort={requestSort}
-              isAllChecked={isAllChecked}
-              dateFormat={company.date_format}
-              isFetchingReceipts={isFetchingReceipts}
-              sortField={sortField}
-              sortOrder={sortOrder}
-            />
-          ) : null}
-        </>
-      ) : isEmptyScreen ? (
+      ) : !isFetchingData && isEmptyData && !categoriesList?.length ? (
         <EmptyData
-          isUploadFile={true}
-          buttonText={Strings.buttonText}
-          firstSubtitle={Strings.firstSubtitle}
-          secondSubtitle={Strings.secondSubtitle}
-          title={Strings.title}
-          isRoundedButton
-          onAddReceiptHandler={onSelectFilesHandler}
+          isUploadFile={false}
+          buttonText={Strings.categories.buttonText}
+          firstSubtitle={Strings.categories.firstSubtitle}
+          secondSubtitle={Strings.categories.secondSubtitle}
+          title={Strings.categories.title}
+          onClick={onModalWindowToggle}
+          userRole={userRole}
         />
-      ) : null}
+      ) : (
+        <ExpenseContent
+          userRole={userRole}
+          isContentLoading={isContentLoading}
+          isFetchingData={isFetchingData}
+          isFocus={isFocus}
+          categories={categoriesList}
+          currentPage={currentPage}
+          dateFormat={date_format}
+          inputPaginationValue={inputPaginationValue}
+          onAddClickButtonHandler={onModalWindowToggle}
+          onBackwardClick={onBackwardClick}
+          onChangeInputValue={onChangeInputValue}
+          onChangeReceiptsPerPage={onChangeItemsPerPage}
+          onChangeSearchValueHandler={onChangeSearchValueHandler}
+          onDeleteIconClickHandler={onDeleteItemClickHandler}
+          onEditIconClickHandler={onEditItemClickHandler}
+          onForwardClick={onForwardClick}
+          onEnterGoToClick={onEnterGoToClick}
+          onGoToClick={onGoToClick}
+          pages={pages}
+          receiptsPerPage={itemsPerPage}
+          searchValue={searchValue}
+          tabName="Category"
+          onBlurHandler={onBlurHandler}
+          onFocusSearchHandler={onFocusSearchHandler}
+          onChangePage={onChangePage}
+          searchedItems={searchedItems}
+          receiptList={sortedReceipts}
+        />
+      )}
     </>
   );
-});
+};

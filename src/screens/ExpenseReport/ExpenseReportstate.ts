@@ -18,8 +18,9 @@ import {
 import { setCategories, setTabItem } from '../Master/reducer/master.reducer';
 import { IuseMasterState } from '../Master/types/master.types';
 import { TAB_INITIAL_STATE } from '../Master/master.constants';
+import { createExpenseTabItem } from './expense.api';
 
-export const useCategoriesTabState = () => {
+export const useExpenseReportState = () => {
   const initialState = TAB_INITIAL_STATE;
 
   const dispatch = useDispatch();
@@ -67,9 +68,17 @@ export const useCategoriesTabState = () => {
   };
   const debouncedValue = useDebounce(state.searchValue, 250);
 
-  const onChangeCategoryNameValueHandler = (
+  const onChangeExpenseUserValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('modalInputValue', event.target.value);
+
+  const onChangeExpenseDateValueHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('modalInputDate', event.target.value);
+
+  const onChangeExpenseNameValueHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler('modalInputName', event.target.value);
 
   const onGetAllCategoriesHandler = async (
     params?: ISearchParams,
@@ -103,14 +112,14 @@ export const useCategoriesTabState = () => {
     }
   };
 
-  const onCreateCategoryHandler = async () => {
+  const onCreateExpenseHandler = async () => {
     try {
       onChangeStateFieldHandler('isLoading', true);
       !count && onChangeStateFieldHandler('isFetchingData', true);
 
-      await createTabItem(
-        { name: state.modalInputValue, active_account },
-        'category'
+      await createExpenseTabItem(
+        { report_for: state.modalInputValue, date: state.modalInputDate, report_name: state.modalInputName,  active_account },
+        'expense-report'
       );
       onChangePageHandler(0);
       await onGetAllCategoriesHandler({
@@ -139,7 +148,7 @@ export const useCategoriesTabState = () => {
 
   const onEnterCreateCategoryClick = (event: React.KeyboardEvent) => {
     if (event.key !== 'Enter') return;
-    state.isEdit ? onSaveButtonClickHandler() : onCreateCategoryHandler();
+    state.isEdit ? onSaveButtonClickHandler() : onCreateExpenseHandler();
   };
 
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -298,13 +307,15 @@ export const useCategoriesTabState = () => {
     if (!count) return;
     onChangePagesAmount(+newValue?.value, count);
   };
-  const isDisableButton = state.modalInputValue === state.prevInputValue;
+  const isDisableButton = state.modalInputValue === state.prevInputValue && state.modalInputDate === state.prevInputValue;
 
   const onModalWindowCancelClickButtonHandler = () => {
     onModalWindowToggle();
     setState((prevState) => ({
       ...prevState,
       modalInputValue: '',
+      modalInputDate:'',
+      modalInputName:'',
       isEdit: false,
     }));
   };
@@ -331,9 +342,11 @@ export const useCategoriesTabState = () => {
     onDeleteModalWindowToggle,
     isModalWindowOpen,
     onModalWindowToggle,
-    onChangeCategoryNameValueHandler,
-    onCreateCategoryHandler,
+    onChangeExpenseUserValueHandler,
+    onCreateExpenseHandler,
     onEnterCreateCategoryClick,
+    onChangeExpenseDateValueHandler,
+    onChangeExpenseNameValueHandler,
     date_format,
     categoriesList,
     count,

@@ -2,6 +2,8 @@ export interface IuseMasterState {
   isEdit?: boolean;
   searchValue: string;
   modalInputValue: string;
+  modalInputDate: string;
+  modalInputName: string;
   prevInputValue: string;
   isLoading: boolean;
   isEmptyData?: boolean;

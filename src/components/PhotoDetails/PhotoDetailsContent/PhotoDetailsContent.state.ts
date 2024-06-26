@@ -120,12 +120,12 @@ export const usePhotoDetailsContentState = () => {
     optionName: keyof typeof initialState,
     value: string | boolean | number | null | Date | SingleValue<IOption> | any
   ) =>
-    setState((prevState) => ({      
+    setState((prevState) => ({
       ...prevState,
       [optionName]: value,
     })
-  );
-  
+    );
+
 
   const onGetAllMasterItemsHandler = async () => {
     try {
@@ -175,9 +175,9 @@ export const usePhotoDetailsContentState = () => {
     }
   };
 
-  useEffect(()=> {
-    if(ButtonValue != '')
-     onSaveButtonClickHandler();
+  useEffect(() => {
+    if (ButtonValue != '')
+      onSaveButtonClickHandler();
   }, [ButtonValue])
 
   const onChangeCategoryFieldHandler = (
@@ -188,7 +188,8 @@ export const usePhotoDetailsContentState = () => {
   const onChangeSupplierFieldHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    onChangeStateFieldHandler('supplierValue', event.target.value)};
+    onChangeStateFieldHandler('supplierValue', event.target.value)
+  };
 
   const onChangeSupplierAccountHandler = (
     newValue: unknown,
@@ -285,7 +286,7 @@ export const usePhotoDetailsContentState = () => {
       };
 
       setIsLoading(true);
-      console.log("save button" , payload.supplier);
+      console.log("payment1", selectedReceipt?.payment_status);
 
       const { data } = await updateReceiptItem(payload);
       setIsLoading(false);
@@ -299,11 +300,6 @@ export const usePhotoDetailsContentState = () => {
       dispatch(setIsFetchingDate(false));
     }
   };
-
-  // console.log("ButtonValue" , ButtonValue);
-  console.log("state" , state);
-  console.log("SELECTED" , selectedReceipt);
-
 
   const inputFields = getInputFields(
     [

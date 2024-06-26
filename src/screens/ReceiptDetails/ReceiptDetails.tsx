@@ -79,22 +79,6 @@ export const ReceiptDetails: FC = memo(() => {
           </Styled.CheckboxContainer>
         </div>
       </Styled.Wrapper>
-      {/* <Styled.Footer>
-        <div>
-          <ButtonsBoxNew
-            onRejectButtonClickHandler={onChangeRadioButtonHandler}
-            isLoading={isLoading}
-          />
-        </div>
-        <div style={{ display: "flex" }}>
-          <ButtonsBox
-            onUploadButtonClickHandler={onSaveButtonClickHandler}
-            onCancelButtonClickHandler={onCancelButtonClickHandler}
-            isLoading={isLoading}
-            onApproveButtonClickHandler={onChangeRadioButtonHandler}
-          />
-        </div>
-      </Styled.Footer> */}
     </Styled.Section>
   );
 });

@@ -19,6 +19,7 @@ export const Styled = {
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.lightBlack};
+    line-height:3;
   `,
   Input: styled.input<{
     isError?: boolean;
@@ -82,4 +83,8 @@ export const Styled = {
     width: 100%;
     position: relative;
   `,
+  InputExpenseWrapper: styled.div<{ isNoMargin?: boolean }>`
+  width: 100%;
+  position: relative;
+`,
 };
