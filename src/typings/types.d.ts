@@ -144,7 +144,7 @@ declare global {
     onCheckedApproveHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => Promise<void>;
-    dateFormat?: string;
+    dateFormat: string;
     sortField: string;
     sortOrder: TSorterOrder;
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;

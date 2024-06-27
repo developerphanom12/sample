@@ -38,7 +38,7 @@ interface TableInboxAdminProps {
   paymentStatus: boolean;
   approveStatus: boolean;
   publishStatus: boolean;
-  dateFormat?: string;
+  dateFormat: string;
 }
 
 export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
@@ -85,7 +85,9 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
       <Styled.Selector>
-       
+        {!!date
+          ? format(new Date(date), dateFormat)
+          : '---'}
       </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>

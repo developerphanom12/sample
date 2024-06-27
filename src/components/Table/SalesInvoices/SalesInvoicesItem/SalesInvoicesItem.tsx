@@ -36,7 +36,7 @@ interface TableInboxAdminProps {
   customId: string;
   publishStatus: boolean;
   paymentStatus: boolean;
-  dateFormat?: string;
+  dateFormat: string;
 }
 
 export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
@@ -80,7 +80,9 @@ export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
       <Styled.Selector>
-
+        {!!date
+          ? format(new Date(date), dateFormat)
+          : '---'}
       </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>
