@@ -80,7 +80,6 @@ export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-              dateFormat={dateFormat}
             />
           ))
         ) : (

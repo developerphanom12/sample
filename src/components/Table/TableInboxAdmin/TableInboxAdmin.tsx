@@ -50,8 +50,8 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
         })}
         <Styled.Text>Status</Styled.Text>
       </Styled.Head>
-      {receiptList.length ? (
-        receiptList.map((receipt, index) => (
+      {receiptList?.length ? (
+        receiptList?.map((receipt, index) => (
           <TableInboxAdminItem
           paymentStatus={receipt.payment_status}
           approveStatus={receipt.approve_status}

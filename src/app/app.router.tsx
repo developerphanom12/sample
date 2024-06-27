@@ -40,6 +40,7 @@ import { useSelector } from 'react-redux';
 import { getUserExist } from '../screens/Dashboard/dashboard.api';
 import { IState } from '../services/redux/reducer';
 import { ExpenseReport } from 'screens/ExpenseReport';
+import { ExpenseDetails } from 'screens/ExpenseDetails';
 
 export const AppRouter: FC = () => {
   setInterseptors();
@@ -95,6 +96,10 @@ export const AppRouter: FC = () => {
             <Route
               path={ROUTES.expenseReport}
               element={<ExpenseReport />}
+            />
+            <Route
+              path={ROUTES.expenseDetails}
+              element={<ExpenseDetails />}
             />
             <Route
               path={ROUTES.filesUploadPreview}

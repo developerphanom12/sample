@@ -118,7 +118,7 @@ export const useExpenseReportState = () => {
       !count && onChangeStateFieldHandler('isFetchingData', true);
 
       await createExpenseTabItem(
-        { report_for: state.modalInputValue, date: state.modalInputDate, report_name: state.modalInputName,  active_account },
+        { report_for: state.modalInputValue, date: state.modalInputDate, report_name: state.modalInputName , active_account },
         'expense-report'
       );
       onChangePageHandler(0);

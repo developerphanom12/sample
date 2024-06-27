@@ -136,7 +136,7 @@ declare global {
     onCheckedPublishMockFuncHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => void;
-    receiptList: IReceipt[];
+    receiptList?: IReceipt[];
     isAllChecked: boolean;
     onCheckedPaidHandler: (
       event: React.ChangeEvent<HTMLInputElement>
@@ -144,7 +144,7 @@ declare global {
     onCheckedApproveHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => Promise<void>;
-    dateFormat: string;
+    dateFormat?: string;
     sortField: string;
     sortOrder: TSorterOrder;
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;

@@ -62,8 +62,7 @@ export const StyledReactSelect = styled(Select)<{
     margin-top: 1px;
   }
   .Select__menu-list{
-    height: 100%;
-    max-height: 70vh;
+    height: max-content;
   }
   .Select__option {
     border-radius: 5px;

@@ -5,10 +5,10 @@ import { CheckboxItem } from 'components/Checkbox/Checkbox';
 import { setIsSorted } from 'services/utils';
 
 import { TableButton } from 'components/Table/TableButton/TableButton';
-import { TableExpenseStyles as Styled } from './TableExpense.style';
-import { TABLE_EXPENSE_COLUMN_NAMES, TABLE_GRID_MARKUP, generateGridTemplateColumns } from './TableExpense.constants';
+import { TableExpenseDetailsStyles as Styled } from './TableExpenseDetails.style';
+import { TABLE_EXPENSE_DETAILS_COLUMN_NAMES, TABLE_GRID_MARKUP } from './TableExpenseDetails.constants';
 
-export const TableExpense: FC<TableInboxAdminProps> = memo((props) => {
+export const TableExpenseDetails: FC<TableInboxAdminProps> = memo((props) => {
   const {
     onCheckedAllItemsHandler,
     receiptList,
@@ -17,9 +17,6 @@ export const TableExpense: FC<TableInboxAdminProps> = memo((props) => {
     sortOrder,
     requestSort,
   } = props;
-
-  const columnCount = TABLE_EXPENSE_COLUMN_NAMES.length + 2;
-  const gridTemplateColumns = generateGridTemplateColumns(columnCount);
 
   return (
     <>
@@ -31,7 +28,7 @@ export const TableExpense: FC<TableInboxAdminProps> = memo((props) => {
             name="allChecked"
           />
         </Styled.Checkbox>
-        {TABLE_EXPENSE_COLUMN_NAMES.map((item) => {
+        {TABLE_EXPENSE_DETAILS_COLUMN_NAMES.map((item) => {
           const isSorted = setIsSorted(sortField, sortOrder, item.id);
           return (
             <Styled.Selector

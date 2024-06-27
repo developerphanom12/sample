@@ -1,6 +1,7 @@
 export enum ROUTES {
   home = '/',
   receiptDetails = 'receipt-details',
+  expenseDetails = 'expense-details',
   filesUploadPreview = '/inbox/files-upload-preview',
   filesUploadPreviewsales = '/sales-invoices/files-upload-preview',
   login = '/login',
