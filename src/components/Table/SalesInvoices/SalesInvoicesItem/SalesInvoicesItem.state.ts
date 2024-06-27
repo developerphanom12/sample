@@ -3,28 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { IState } from 'services/redux/reducer';
 
-import { selectReceipt } from 'screens/Inbox/reducer/inbox.reducer';
+import { selectInvoice } from 'screens/SalesInvoices/reducer/salesInvoices.reducer';
 
 import { ROUTES } from 'constants/routes';
 
-interface IuseTableInboxAdminItemState {
-  itemIndex: number;
+interface IuseTableInvoiceItemState {
+  invoiceId: string;
+  invoiceIndex: number;
 }
 
 export const useSalesInvoicesItemState = (
-  props: IuseTableInboxAdminItemState
+  props: IuseTableInvoiceItemState
 ) => {
-  const { itemIndex } = props;
+  const { invoiceIndex } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user = useSelector((state: IState) => state.user);
 
-  const onReceiptDetailsClickHandler = (
+  const onInvoiceDetailsClickHandler = (
     event: React.MouseEvent<HTMLDivElement>
   ) => {
-    dispatch(selectReceipt(itemIndex));
-    navigate(ROUTES.receiptDetails);
+    dispatch(selectInvoice(invoiceIndex));
+    navigate(ROUTES.invoiceDetails);
   };
-  return { ...user.userInfo, onReceiptDetailsClickHandler };
+  return { ...user.userInfo, onInvoiceDetailsClickHandler };
 };

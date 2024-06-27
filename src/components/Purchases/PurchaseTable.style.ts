@@ -8,12 +8,12 @@ export const commonTextStyles = `
 `;
 
 export const InvoiceTableStyles = {
-    PurchaseTableWrapper: styled.div`
+  ReceiptItemTable: styled.div`
       width: 100%;
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
-      margin-top: 15px;
+      margin-top: 10px;
     `,
     Table: styled.table`
       width: 100%;
@@ -37,6 +37,16 @@ export const InvoiceTableStyles = {
       padding: 8px;
       ${commonTextStyles}
     `,
+    InputWrapper: styled.div`
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+    `,
+    Label: styled.div`
+      font-size: ${({ theme }) => theme.size.xnormal};
+      font-weight: 600;
+    `,
     Input: styled.input`
       width: 100%;
       box-sizing: border-box;
@@ -53,9 +63,9 @@ export const InvoiceTableStyles = {
     `,
     Summary: styled.div`
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: flex-end;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
       gap: 20px;
       ${commonTextStyles}
     `,
@@ -89,4 +99,27 @@ export const InvoiceTableStyles = {
         color: #3742fa;
       }
     `,
+    Addnew: styled.a`
+      color: #1E90FF;
+      text-decoration: underline;
+      cursor: pointer;
+      ${commonTextStyles}
+  
+      &:hover {
+        color: #3742fa;
+      }
+    `,
+    Total: styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: space-between;
+      justify-content: flex-end;
+      flex: 0 0 30%;
+      padding-right: 40px;
+      gap: 20px;
+      ${commonTextStyles}
+    `,
+    InputDiv: styled.div`
+      width: 50%;
+    `
 };

@@ -1,7 +1,7 @@
 import { styled } from 'styles/theme';
 
 export const PhotoDetailsContentStyles = {
-  Formwrapper: styled.div`
+  ReceiptDetailContent: styled.div`
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.colors.white};
@@ -13,19 +13,16 @@ export const PhotoDetailsContentStyles = {
     overflow: hidden;
     border-radius: 10px;
     border: 1px solid ${({ theme }) => theme.colors.gray};
+    overflow-y:auto;
   `,
-
-  MainWrapper: styled.div`
-  overflow-y:auto;
-  height: 100%;
-`,
-  Wrapper: styled.div`
+  FormFieldWrapper: styled.div`
     width: 100%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: auto;
     gap:20px;
+    margin-bottom: 35px
   `,
   FieldWrapper: styled.div`
     display: flex;
@@ -71,19 +68,17 @@ export const PhotoDetailsContentStyles = {
     display:flex;
     align-items: center;
   `,
-  FlexContainer: styled.div`
+  ReceiptItemTable: styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-`,
-  ContentContainer: styled.div`
-  flex-grow: 1;
-  overflow-y: auto;
+  h4 {
+    margin-left: 8px;
+  }
 `,
   ButtonsBoxWrapper: styled.div`
   margin-top: 20px;
 `,
-
 ReceiptStatusContainer: styled.div`
   flex-shrink: 0;
   display: flex;

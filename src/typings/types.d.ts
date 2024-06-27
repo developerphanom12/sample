@@ -17,6 +17,7 @@ declare global {
     supplierAccountValue: IOption | any;
     currencyValue: SingleValue<IOption> | any;
     paymentStatus: IOption | any;
+    isPublished: IOption | any;
     currencyValueId: string;
     descriptionValue: string;
     netValue: number | null;
@@ -221,6 +222,28 @@ declare global {
     requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     dot3ExpReport?: boolean;
     primaryAction?: string | null;
+  }
+
+  interface TableInvoiceProps {
+    onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onCheckedAllItemsHandler?: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
+    onCheckedPublishMockFuncHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
+    invoicesList: IInvoice[];
+    isAllChecked: boolean;
+    onCheckedPaidHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => Promise<void>;
+    onCheckedApproveHandler: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => Promise<void>;
+    dateFormat: string;
+    sortField: string;
+    sortOrder: TSorterOrder;
+    requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   }
 
   interface IOption {

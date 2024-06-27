@@ -22,7 +22,7 @@ export enum ROUTES {
   purchaseInvoices = '/purchase-invoices',
   receiptDetails = 'receipt-details',
   salesInvoices = '/sales-invoices',
-  salesInvoiceDetails = '/sales-invoices/details',
+  invoiceDetails = '/invoice-details',
   receiptUploadFile = '/purchase-invoices/upload-file',
   invoiceUploadFile = '/sales-invoices/upload-file',
   filesUploadPreview = '/inbox/files-upload-preview',

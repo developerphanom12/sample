@@ -1,9 +1,9 @@
 export const TABLE_GRID_MARKUP = `
-  minmax(33px, 43px) minmax(65px, 75px) minmax(95px, 105px)
-  minmax(115px, 165px) minmax(160px, 170px) minmax(115px, 165px)
-  minmax(94px, 106px) minmax(73px, 85px) minmax(73px, 85px)
-  minmax(73px, 85px) minmax(83px, 95px)
-  minmax(73px, 85px) minmax(100px, 130px);
+minmax(12px, 30px) minmax(60px, 70px) minmax(70px, 80px)
+minmax(100px, 150px) minmax(145px, 150px) minmax(100px, 130px)
+minmax(94px, 106px) minmax(60px, 75px) minmax(60px, 75px)
+minmax(60px, 75px) minmax(83px, 95px)
+minmax(60px, 65px) minmax(90px, 85px) minmax(100px, 95px) minmax(90px, 105px);
 `;
 
 export const TABLE_ID = {
@@ -18,16 +18,16 @@ export const TABLE_ID = {
 
 export const TABLE_COLUMN_NAMES = [
   {
-    id: 'receipt_date',
+    id: 'invoice_date',
     name: 'Date',
   },
   {
-    id: 'supplier',
-    name: 'Supplier',
+    id: 'customer',
+    name: 'Customer',
   },
   {
-    id: 'supplier_account',
-    name: 'Supplier Account',
+    id: 'customer_account',
+    name: 'Cust. Account',
   },
   {
     id: 'category',
@@ -56,5 +56,13 @@ export const TABLE_COLUMN_NAMES = [
   {
     id: 'payment_status',
     name: 'Paid',
+  },
+  {
+    id: 'approve',
+    name: 'Approve',
+  },
+  {
+    id: 'published',
+    name: 'Published',
   },
 ];

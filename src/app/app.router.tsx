@@ -90,7 +90,7 @@ export const AppRouter: FC = () => {
               element={<SalesInvoices />}
             ></Route>
             <Route
-              path={ROUTES.salesInvoiceDetails}
+              path={ROUTES.invoiceDetails}
               element={<SalesInvoicesDetails />}
             />
             <Route

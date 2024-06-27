@@ -13,7 +13,7 @@ interface IInvoiceIds {
 }
 
 export const getInvoices = (params?: IGetInvoicesParams) => {
-  const URL = '/sale/get-all';
+  const URL = '/sale-invoice/get-all';
 
   params && removeEmptyField(params);
   return apiServices.fetchData(URL, params);

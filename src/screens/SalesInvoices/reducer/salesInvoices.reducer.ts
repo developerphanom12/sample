@@ -62,7 +62,7 @@ export const SalesInvoicesSlice = createSlice({
       }));
       state.isAllChecked = action.payload;
     },
-    updateReceipt: (
+    updateInvoice: (
       state: IINVOICE_INITIAL_STATE,
       action: PayloadAction<IInvoice>
     ) => {
@@ -70,7 +70,7 @@ export const SalesInvoicesSlice = createSlice({
         receipt.id === action.payload.id ? action.payload : receipt
       );
     },
-    selectReceiptWithId: (
+    selectInvoiceWithId: (
       state: IINVOICE_INITIAL_STATE,
       action: PayloadAction<string>
     ) => {
@@ -81,7 +81,7 @@ export const SalesInvoicesSlice = createSlice({
       state.selectedInvoice =
         state.invoicesList.find((item, index) => index === activeIndex) || null;
     },
-    selectReceipt: (
+    selectInvoice: (
       state: IINVOICE_INITIAL_STATE,
       action: PayloadAction<number>
     ) => {
@@ -104,6 +104,6 @@ export const SalesInvoicesSlice = createSlice({
   },
 });
 
-export const { setInvoicesList, setIsCompanyChanged, setIsFetchingDate } = SalesInvoicesSlice.actions;
+export const { setInvoicesList, selectInvoice, selectInvoiceWithId, updateInvoice, setIsCompanyChanged, setIsFetchingDate, setCheckedItem, setCheckedAllItems } = SalesInvoicesSlice.actions;
 
 export const salesInvoicesReducer = SalesInvoicesSlice.reducer;

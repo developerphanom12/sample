@@ -6,15 +6,16 @@ import { getCorrectCustomId } from 'services/utils';
 import { CheckboxItem } from 'components/Checkbox/Checkbox';
 import { StatusLabel } from 'components/StatusLabel/StatusLabel';
 
-import { TableItemStyles as Styled } from '../../TableGlobalStyles';
-import { TABLE_GRID_MARKUP } from '../salesInvoiceTable.constants';
-
+import { TableInvoiceitemStyles as Styled } from './TableInvoiceItem.style';  // import { TABLE_GRID_MARKUP } from '../salesInvoiceTable.constants';
 import { useSalesInvoicesItemState } from './SalesInvoicesItem.state';
 
-interface TableInboxAdminProps {
+interface TableInvoiceProps {
   isVisited?: boolean;
   onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onCheckedPaidHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => Promise<void>;
+  onCheckedApproveHandler: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => Promise<void>;
   onCheckedPublishMockFuncHandler: (
@@ -23,23 +24,24 @@ interface TableInboxAdminProps {
   isChecked: boolean;
   tax: number | null;
   date: Date;
-  supplier: string | null;
-  supplierAccount?: string | null;
+  customer?: string | null;
+  customerAccount?: string | null;
   category?: string | null;
   vatCode: string | null;
   currency: string | null;
   net: number | null;
   total: number | null;
   status: string;
-  receiptId: string;
-  receiptIndex: number;
+  invoiceId: string;
+  invoiceIndex: number;
   customId: string;
-  publishStatus: boolean;
   paymentStatus: boolean;
+  approveStatus: boolean;
+  publishStatus: boolean;
   dateFormat: string;
 }
 
-export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
+export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
   const {
     isChecked,
     category,
@@ -48,51 +50,54 @@ export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
     net,
     status,
     customer,
-    // customerAccount,
+    customerAccount,
     total,
     vatCode,
     tax,
-    receiptId,
-    receiptIndex,
+    invoiceId,
+    invoiceIndex,
     customId,
     paymentStatus,
+    approveStatus,
     publishStatus,
     dateFormat,
     onCheckedPaidHandler,
+    onCheckedApproveHandler,
     onCheckedItemHandler,
     onCheckedPublishMockFuncHandler,
   } = props;
 
-  const { onReceiptDetailsClickHandler } = useSalesInvoicesItemState({
-    itemIndex: receiptIndex,
+  const { onInvoiceDetailsClickHandler } = useSalesInvoicesItemState({
+    invoiceId,
+    invoiceIndex,
   });
-
+  // console.warn(customer, invoiceId, customId);
   return (
-    <Styled.Item templateColumns={TABLE_GRID_MARKUP}>
+    <Styled.Item>
       <Styled.Checkbox>
         <CheckboxItem
-          name={receiptId}
+          name={invoiceId}
           isChecked={isChecked}
           onChange={onCheckedItemHandler}
         />
       </Styled.Checkbox>
-      <Styled.View id={receiptId} onClick={onReceiptDetailsClickHandler}>
+      <Styled.View id={invoiceId} onClick={onInvoiceDetailsClickHandler}>
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
-      <Styled.Selector>
+      {/* <Styled.Selector>
         {!!date
           ? format(new Date(date), dateFormat)
           : format(new Date(), dateFormat)}
+      </Styled.Selector> */}
+      {/* <Styled.Selector>
+        <Styled.ValueWrapper>{customer || '---'}</Styled.ValueWrapper>
       </Styled.Selector>
       <Styled.Selector>
-        <Styled.ValueWrapper>{supplier || '---'}</Styled.ValueWrapper>
-      </Styled.Selector>
-      <Styled.Selector>
-        <Styled.ValueWrapper>{supplierAccount || '---'}</Styled.ValueWrapper>
-      </Styled.Selector>
-      <Styled.Selector>
+        <Styled.ValueWrapper>{customerAccount || '---'}</Styled.ValueWrapper>
+      </Styled.Selector> */}
+      {/* <Styled.Selector>
         <Styled.ValueWrapper>{category || '---'}</Styled.ValueWrapper>
-      </Styled.Selector>
+      </Styled.Selector> */}
       <Styled.Selector>
         <Styled.ValueWrapper>{vatCode || '---'}</Styled.ValueWrapper>
       </Styled.Selector>
@@ -110,19 +115,33 @@ export const SalesInvoicesItem: React.FC<TableInboxAdminProps> = (props) => {
         <CheckboxItem
           isChecked={publishStatus}
           onChange={onCheckedPublishMockFuncHandler}
-          name={receiptId}
+          name={invoiceId}
         />
       </Styled.Checkbox>
       <Styled.Checkbox isBorder>
         <CheckboxItem
           isChecked={paymentStatus}
           onChange={onCheckedPaidHandler}
-          name={receiptId}
+          name={invoiceId}
         />
       </Styled.Checkbox>
-      <Styled.Status>
+      {/* <Styled.Checkbox isBorder>
+        <CheckboxItem
+          isChecked={approveStatus} //aproved
+          onChange={onCheckedApproveHandler}
+          name={invoiceId}
+        />
+      </Styled.Checkbox> */}
+      <Styled.Checkbox isBorder>
+        <CheckboxItem
+          isChecked={publishStatus} //published
+          onChange={onCheckedPublishMockFuncHandler}
+          name={invoiceId}
+        />
+      </Styled.Checkbox>
+      {/* <Styled.Status>
         <StatusLabel status={status as Statuses} />
-      </Styled.Status>
+      </Styled.Status> */}
     </Styled.Item>
   );
 };

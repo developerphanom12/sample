@@ -23,7 +23,7 @@ export const TableInboxAdmin: FC<TableInboxAdminProps> = memo((props) => {
     sortOrder,
     requestSort,
   } = props;
-
+  console.warn('@!@!@!@!@!@', receiptList);
   return (
     <>
       <Styled.Head>

@@ -36,6 +36,8 @@ export const FieldsBox: FC<IFieldsBox> = (props) => {
     onDatePickerClickHandler,
   } = props;
 
+  const expression = "\b(?:Net|Tax|Total)\b";
+
   const isInputField = (item: any): item is { inputType: string; value: string; isTextArea?: boolean } => {
     return item.type === 'input' || item.type === 'number';
   };
@@ -47,6 +49,7 @@ export const FieldsBox: FC<IFieldsBox> = (props) => {
   return (
     <>
       {inputFields.map((item) => (
+        item.label != "Net" && item.label != "Tax" && item.label != "Total" &&
         <PhotoDetailsContentItem key={item.label} label={item.label}>
           {item.type === 'date' ? (
             <CustomDatePicker

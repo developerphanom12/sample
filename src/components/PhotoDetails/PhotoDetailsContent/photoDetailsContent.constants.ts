@@ -14,6 +14,7 @@ export const photoDetailsContentInitialState = {
   formattedDate: '',
   paymentStatus: false,
   publishedStatus: false,
+  isPublished: false,
 };
 
 interface IData {
@@ -87,27 +88,27 @@ export const getInputFields = (funcArray: any[], data: IData) => {
     //   value: state.vatCodeValue,
     //   onChange: funcArray[5],
     // },
-    // {
-    //   type: 'input',
-    //   inputType: 'number',
-    //   label: 'Net',
-    //   value: state.netValue || '',
-    //   onChange: funcArray[6],
-    // },
-    // {
-    //   type: 'input',
-    //   inputType: 'number',
-    //   label: 'Tax',
-    //   value: state.taxValue || '',
-    //   onChange: funcArray[7],
-    // },
-    // {
-    //   type: 'input',
-    //   inputType: 'number',
-    //   label: 'Total',
-    //   value: state.totalValue || '',
-    //   onChange: funcArray[8],
-    // },
+    {
+      type: 'input',
+      inputType: 'number',
+      label: 'Net',
+      value: state.netValue || '',
+      onChange: funcArray[6],
+    },
+    {
+      type: 'input',
+      inputType: 'number',
+      label: 'Tax',
+      value: state.taxValue || '',
+      onChange: funcArray[7],
+    },
+    {
+      type: 'input',
+      inputType: 'number',
+      label: 'Total',
+      value: state.totalValue || '',
+      onChange: funcArray[8],
+    },
     {
       type: 'select',
       label: 'Payment Type',

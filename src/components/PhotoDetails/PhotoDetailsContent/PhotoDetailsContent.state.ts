@@ -108,6 +108,7 @@ export const usePhotoDetailsContentState = () => {
     selectedReceipt?.payment_status || false
   );
   const paymentStatusFromState = state?.paymentStatus !== (null || undefined) ? state.paymentStatus : selectedReceipt?.payment_status;
+  const publishStatusFromState = state.isPublished !== (null || undefined) ? state.isPublished : selectedReceipt?.publish_status;
   // console.log(paymentStatusFromState);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -271,6 +272,11 @@ export const usePhotoDetailsContentState = () => {
     // setIsPaymentStatus(event.target.checked);
     onChangeStateFieldHandler('paymentStatus', newStatus);
   }
+  const publishStatusHandler = (newStatus: boolean) => {
+    // console.log(newStatus);
+    // setIsPaymentStatus(event.target.checked);
+    onChangeStateFieldHandler('isPublished', newStatus);
+  }
   const onChangePublished = (event: React.ChangeEvent<HTMLInputElement>) =>
     setIsPaymentStatus(event.target.checked);
 
@@ -359,8 +365,10 @@ export const usePhotoDetailsContentState = () => {
     selectedReceipt,    
     isPaymentStatus,
     isPublishStatus,
+    publishStatusFromState,
     paymentStatusFromState,
     paymentStatusHandler,
+    publishStatusHandler,
     onClickOutsideDatePickerHandler,
     onChangePublishStatus,
     onDatePickerClickHandler,

@@ -17,21 +17,40 @@ export const ReceiptDetails: FC = () => {
 
 	// const { isLoading, onChangeRadioButtonHandler, saveReceiptHandler, onCancelButtonClickHandler, onChangePaymentStatus, paymentStatus, onChangePublishStatus, isPaymentStatus, isPublishStatus } = usePhotoDetailsContentState();
 	const [changePaid, setChangePaid] = useState(false);
-	const fnChangePaid = ():void => {
+	const fnChangePaid = (): void => {
 		setChangePaid(false);
-	}
+	};
 	const [actionValue, setActionValue] = useState(false);
-	const fnSetvalue = ( event: React.ChangeEvent<HTMLInputElement> ):void => {
+	const fnSetvalue = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		// console.log(event.target.checked);
 		setActionValue(event.target.checked);
 		setChangePaid(true);
-	}
+	};
 	const [payStatus, setPayStatus] = useState(false);
 	const getPayStatus = (what: boolean | undefined) => {
 		if (what === undefined) {
 			setPayStatus(false);
 		} else {
 			setPayStatus(what);
+		}
+	};
+	// -------------->
+	const [changePublish, setchangePublish] = useState(false);
+	const fnChangePublish = (): void => {
+		setchangePublish(false);
+	};
+	const [newPublish, setNewPublish] = useState(false);
+	const fnSetPublish = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		// console.log(event.target.checked);
+		setNewPublish(event.target.checked);
+		setchangePublish(true);
+	};
+	const [livePublish, setLivePublish] = useState(false);
+	const getLivePublish = (what: boolean | undefined) => {
+		if (what === undefined) {
+			setLivePublish(false);
+		} else {
+			setLivePublish(what);
 		}
 	};
 
@@ -53,24 +72,22 @@ export const ReceiptDetails: FC = () => {
 				<PhotoPreview imageSrc={imageSrc} isImageLoading={isImageLoading} isPDF={isPDF} />
 				<Styled.ReceiptDetailWrapper>
 					{/* <PhotoDetails /> */}
-					<PhotoDetailsContent changePaid={changePaid} fnChangePaid={fnChangePaid} actionValue={actionValue} fnGetPayStatus={getPayStatus} />
+					<PhotoDetailsContent changePaid={changePaid} fnChangePaid={fnChangePaid} actionValue={actionValue} fnGetPayStatus={getPayStatus} changePublish={changePublish} fnChangePublish={fnChangePublish} newPublish={newPublish} getLivePublish={getLivePublish} />
 					<Styled.ReceiptStatusContainer>
 						<Styled.CheckboxContainer>
 							<CheckboxItem
 								name={"Payment status"}
 								isChecked={payStatus || false}
-								// isChecked={false}
 								labelText={"Mark as Paid"}
 								onChange={fnSetvalue}
 								// onChange={onChangePaymentStatus}
 							/>
-							{/* <CheckboxItem
+							<CheckboxItem
 								name={"Publish status"}
-								isChecked={isPublishStatus}
-								// isChecked={true}
+								isChecked={livePublish || false}
 								labelText={"Mark as Published"}
-								onChange={onChangePublishStatus}
-							/> */}
+								onChange={fnSetPublish}
+							/>
 						</Styled.CheckboxContainer>
 						<Styled.Description>
 							<Styled.DescriptionInput type="text" placeholder="Description" />

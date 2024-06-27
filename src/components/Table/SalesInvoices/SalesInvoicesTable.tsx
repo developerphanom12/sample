@@ -1,29 +1,21 @@
 import { FC, memo } from 'react';
 
-import { setIsSorted } from 'services/utils';
-// import { ISalesInvoice } from '../../../screens/SalesInvoices/types/salesInvoices.types';
-
 import { CheckboxItem } from '../../Checkbox';
+
+import { setIsSorted } from 'services/utils'; // import { ISalesInvoice } from '../../../screens/SalesInvoices/types/salesInvoices.types';
+
 import { TableButton } from '../TableButton/TableButton';
-import { TableStyles as Styled } from '../TableGlobalStyles';
-
-import {
-  TABLE_COLUMN_NAMES,
-  TABLE_GRID_MARKUP,
-} from './salesInvoiceTable.constants';
 import { SalesInvoicesItem } from './SalesInvoicesItem';
+import { TableSalesInvoiceStyles as Styled } from './SalesInvoiceTable.style';
+import {  TABLE_COLUMN_NAMES,  TABLE_GRID_MARKUP,} from './salesInvoiceTable.constants';  // interface ISalesInvoicesTableProps  extends Omit<TableInvoiceProps, 'invoiceList'> {  invoicesList: IInvoice[];}
 
-interface ISalesInvoicesTableProps
-  extends Omit<TableInboxAdminProps, 'receiptList'> {
-  invoicesList: IInvoice[];
-}
-export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
-  (props) => {
+export const SalesInvoicesTable: FC<TableInvoiceProps> = memo((props) => {
     const {
       onCheckedItemHandler,
       onCheckedPublishMockFuncHandler,
       onCheckedAllItemsHandler,
       onCheckedPaidHandler,
+      onCheckedApproveHandler,
       invoicesList,
       isAllChecked,
       dateFormat,
@@ -31,12 +23,9 @@ export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
       sortOrder,
       requestSort,
     } = props;
-
-    console.warn('@!@!@!@!@!@', invoicesList);
-
     return (
       <>
-        <Styled.Head templateColumns={TABLE_GRID_MARKUP}>
+        <Styled.Head>
           <Styled.Checkbox>
             <CheckboxItem
               isChecked={isAllChecked}
@@ -62,28 +51,33 @@ export const SalesInvoicesTable: FC<ISalesInvoicesTableProps> = memo(
         </Styled.Head>
         {invoicesList.length ? (
           invoicesList.map((invoice, index) => (
+            <>
+            {/* {console.warn('@!@!@!@!@!@', invoice)} */}
             <SalesInvoicesItem
-              publishStatus={invoice.publish_status}
-              paymentStatus={invoice.payment_status}
+              publishStatus={invoice?.publish_status}
+              approveStatus={invoice?.approve_status}
+              paymentStatus={invoice?.payment_status}
               key={invoice.id}
-              receiptIndex={index}
-              customId={invoice.custom_id}
-              receiptId={invoice.id}
-              currency={invoice.currency.value}
+              invoiceIndex={index}
+              customId={invoice?.custom_id}
+              invoiceId={invoice?.id}
+              currency={invoice?.currency.value}
               category={''}
-              date={invoice.invoice_date}
-              net={invoice.net}
-              total={invoice.total}
-              vatCode={invoice.vat_code}
-              tax={invoice.tax}
-              status={invoice.status}
-              customer={invoice.customer}
-              isChecked={invoice.isChecked}
+              date={invoice?.invoice_date}
+              net={invoice?.net}
+              total={invoice?.total}
+              vatCode={invoice?.vat_code}
+              tax={invoice?.tax}
+              status={invoice?.status}
+              customer={invoice?.customer}
+              isChecked={invoice?.isChecked}
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
+              onCheckedApproveHandler={onCheckedApproveHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
               dateFormat={dateFormat}
             />
+            </>
           ))
         ) : (
           <Styled.EmptyContentWrapper>

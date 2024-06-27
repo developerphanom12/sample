@@ -13,7 +13,7 @@ export const receiptCreate = (payload: FormData, token: string) => {
   });
 };
 export const salesCreate = (payload: FormData, token: string) => {
-  const URL = `${CONFIG.apiUrl}sale/create`;
+  const URL = `${CONFIG.apiUrl}sale-invoice/create`;
   console.warn('yehhhhhhhhh-------------------------');
 
   // return new Promise((resolve, reject) => {
