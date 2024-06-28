@@ -50,6 +50,7 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 	} = props;
 	const ref = useOutsideClick(onActionsClose);
 	return (
+		<>
 		<Styled.HeaderPanelWrapper>
 			<Styled.PannelLeftWrapper>
 				<Styled.SearchInputWrapper>
@@ -108,5 +109,6 @@ export const HeaderPanel: FC<IHeaderPanelProps> = (props) => {
 				{/* <FileUploadButton onChangeFiles={primaryAction === "upload-receipt" ? onSelectFilesHandler : onSelectSalesFilesHandler} customButtonName={primaryAction === "upload-receipt" ? "Upload Receipt" : primaryAction === "upload-invoice" ? "Upload Invoice" : null} /> */}
 			</Styled.ButtonsWrapper>
 		</Styled.HeaderPanelWrapper>
+		</>
 	);
 };
