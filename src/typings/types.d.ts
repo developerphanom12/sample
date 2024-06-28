@@ -27,6 +27,24 @@ declare global {
     dateValue: Date | null;
     formattedDate: string;
   }
+  interface IuseexpenseContentState {
+    statusValue: string;
+    categoryValue: IOption | any;
+    typeValue: SingleValue<IOption> | any;
+    dateValue: Date | null;
+    supplierValue: string | null;
+    supplierAccountValue: IOption | any;
+    currencyValue: SingleValue<IOption> | any;
+    payment: IOption | any;
+    currencyValueId: string;
+    taxValue: number | null;
+    totalValue: number | null;
+    descriptionValue: string;
+    receiptid: string;
+    vatCodeValue: string;
+    netValue: number | null;
+    formattedDate: string;
+  }
   interface IHeaderPanelProps {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteItemHandler: () => Promise<void>;
@@ -138,7 +156,7 @@ declare global {
     onCheckedPublishMockFuncHandler: (
       event: React.ChangeEvent<HTMLInputElement>
     ) => void;
-    receiptList: IReceipt[];
+    receiptList?: IReceipt[];
     isAllChecked: boolean;
     onCheckedPaidHandler: (
       event: React.ChangeEvent<HTMLInputElement>
@@ -342,6 +360,28 @@ declare global {
     tableRowTheme: 'companyUser' | 'company';
   }
 
+  interface IMasterExpenseModalWindowProps {
+    isDisableButton?: boolean;
+    isLoading: boolean;
+    onCloseModalWindowHandler: () => void;
+    onChangeInputValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    onChangeExpenseDateValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    onChangeExpenseNameValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    onSaveButtonCLickHandler: () => Promise<void>;
+    onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
+    isModalWindowOpen: boolean;
+    headerText: string;
+    inputValue: string;
+    dateValue:string;
+    reportName:string;
+  }
+
   interface IMasterModalWindowProps {
     isDisableButton?: boolean;
     isLoading: boolean;
@@ -369,6 +409,10 @@ declare global {
   interface IModalWindowsBox
     extends IMasterModalWindowProps,
       IDeleteModalWindowProps {}
+
+  interface IModalExpenseWindowsBox
+      extends IMasterExpenseModalWindowProps,
+        IDeleteModalWindowProps {}
 
   interface IPaginationState {
     itemsPerPage: SingleValue<IOption> | any;
@@ -492,6 +536,7 @@ export {
   IMemberTableProps,
   IMember,
   IModalWindowsBox,
+  IModalExpenseWindowsBox,
   IPaginationState,
   TableSettingsProps,
   TRoles,

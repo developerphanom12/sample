@@ -80,7 +80,6 @@ export const ExpenseReportTable: FC<ISalesInvoicesTableProps> = memo(
               onCheckedItemHandler={onCheckedItemHandler}
               onCheckedPaidHandler={onCheckedPaidHandler}
               onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-              dateFormat={dateFormat}
             />
           ))
         ) : (

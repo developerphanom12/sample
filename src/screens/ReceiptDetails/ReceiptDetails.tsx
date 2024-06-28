@@ -6,7 +6,7 @@ import { PhotoDetailsContent } from "components/PhotoDetails/PhotoDetailsContent
 
 import { ReceiptDetailsStyles as Styled } from "./ReceiptDetails.style";
 import { useReceiptDetailsState } from "./receiptDetails.state";
-import { usePhotoDetailsContentState } from "components/PhotoDetails/PhotoDetailsContent/PhotoDetailsContent.state";
+// import { usePhotoDetailsContentState } from "components/PhotoDetails/PhotoDetailsContent/PhotoDetailsContent.state";
 // import { ButtonsBox } from "components/PhotoDetails/ButtonsBox";
 // import { ButtonsBoxNew } from 'components/PhotoDetails/ButtonBoxNew';
 import { CheckboxItem } from "components/Checkbox";

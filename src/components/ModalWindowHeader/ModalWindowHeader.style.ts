@@ -2,9 +2,9 @@ import { styled } from 'styles/theme';
 
 export const ModalWindowHeaderStyles = {
   HeaderBox: styled.div`
-    padding: 28px 33px 25px 33px;
+    padding: 28px 33px 10px 33px;
     display: flex;
-    align-items: center;
+    
     justify-content: center;
     width: 100%;
   `,

@@ -9,6 +9,8 @@ export const TAB_INITIAL_STATE = {
   isEdit: false,
   searchValue: '',
   modalInputValue: '',
+  modalInputDate:'',
+  modalInputName:'',
   prevInputValue: '',
   isLoading: false,
   isEmptyData: false,

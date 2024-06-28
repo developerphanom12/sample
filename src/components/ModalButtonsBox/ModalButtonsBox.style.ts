@@ -4,6 +4,8 @@ export const ModalButtonsBoxStyles = {
   ButtonsBox: styled.div<{ isNoPadding?: boolean; buttonPosition?: string }>`
     display: flex;
     width: 100%;
+    align-items:center;
+    margin-top:25px;
     justify-content: ${({ buttonPosition }) =>
       buttonPosition ? buttonPosition : 'center'};
     padding: ${({ isNoPadding }) => (isNoPadding ? '0' : '0px 33px 0 33px')};

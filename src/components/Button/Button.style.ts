@@ -52,6 +52,7 @@ const WIDTH = {
   `,
   primary: css`
     width: auto;
+    border-radius:6px;
   `,
   secondary: css`
     width: 100px;
@@ -63,7 +64,6 @@ const WIDTH = {
   rounded: css`
     min-width: 100px;
     width: max-content;
-    padding:10px;
     height: 40px;
   `,
   roundedBig: css`

@@ -111,7 +111,7 @@ export const InboxContent: FC<IInboxContent> = (props) => {
 					sortOrder={sortOrder}
 					requestSort={requestSort}
 				/>
-				{receiptList.length ? (
+				{receiptList?.length ? (
 					<PaginationPanel
 						pages={pages}
 						currentPage={currentPage}

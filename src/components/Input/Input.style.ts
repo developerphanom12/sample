@@ -19,6 +19,7 @@ export const Styled = {
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.lightBlack};
+    line-height:3;
   `,
   Input: styled.input<{
     isError?: boolean;
@@ -67,7 +68,7 @@ export const Styled = {
     font-size: ${(props) => props.theme.size.default};
     padding: 10px;
     background-color: ${(props) => props.theme.colors.white};
-    height: ${(props) => props.inputHeight || '45px'};
+    height: ${(props) => props.inputHeight || '50px'};
     width: 100%;
     border-radius: 6px;
     border: none;
@@ -82,4 +83,8 @@ export const Styled = {
     width: 100%;
     position: relative;
   `,
+  InputExpenseWrapper: styled.div<{ isNoMargin?: boolean }>`
+  width: 100%;
+  position: relative;
+`,
 };

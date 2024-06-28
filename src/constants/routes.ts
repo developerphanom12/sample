@@ -4,6 +4,7 @@ export enum ROUTES {
   sign_up = '/sign-up',
   manage = '/manage',
   expenseReport = '/expense-report',
+  expenseDetails = 'expense-details',
   settings = '/settings',
   termsOfService = '/settings/terms-of-service',
   privacyPolicy = '/settings/privacy-policy',
