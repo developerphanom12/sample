@@ -26,7 +26,7 @@ export const SalesInvoices: FC = () => {
     dataToSend,
     dateEnd,
     dateStart,
-    dateValue,
+    invoiceDate,
     debouncedValue,
     fetchParams,
     formattedDate,
@@ -119,7 +119,7 @@ export const SalesInvoices: FC = () => {
         onChangeDate={onChangeDate}
         onClickOutsideDatePickerHandler={onClickOutsideDatePickerHandler}
         isDatePickerOpen={isDatePickerOpen}
-        dateValue={dateValue}
+        dateValue={invoiceDate}
         setIsDatePickerOpen={setIsDatePickerOpen}
         formattedDate={formattedDate}
         isInputDate={isInputDate}
@@ -148,6 +148,7 @@ export const SalesInvoices: FC = () => {
       <SalesInvoicesTable
         onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
         invoicesList={sortedInvoices}
+        sortedInvoices={sortedInvoices}
         isAllChecked={false}
         onCheckedPaidHandler={onCheckedPaidHandler}
         onCheckedApproveHandler={onCheckedApproveHandler}

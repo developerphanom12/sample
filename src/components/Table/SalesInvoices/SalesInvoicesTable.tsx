@@ -22,6 +22,8 @@ export const SalesInvoicesTable: FC<TableInvoiceProps> = memo((props) => {
       sortField,
       sortOrder,
       requestSort,
+
+      sortedInvoices
     } = props;
     return (
       <>
@@ -49,8 +51,8 @@ export const SalesInvoicesTable: FC<TableInvoiceProps> = memo((props) => {
           })}
           <Styled.Text>Status</Styled.Text>
         </Styled.Head>
-        {invoicesList.length ? (
-          invoicesList.map((invoice, index) => (
+        {sortedInvoices.length ? (
+          sortedInvoices.map((invoice, index) => (
             <>
             {/* {console.warn('@!@!@!@!@!@', invoice)} */}
             <SalesInvoicesItem
@@ -63,7 +65,7 @@ export const SalesInvoicesTable: FC<TableInvoiceProps> = memo((props) => {
               invoiceId={invoice?.id}
               currency={invoice?.currency.value}
               category={''}
-              date={invoice?.invoice_date}
+              date={invoice?.saleinvoice_date}
               net={invoice?.net}
               total={invoice?.total}
               vatCode={invoice?.vat_code}

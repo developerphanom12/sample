@@ -49,7 +49,7 @@ export interface IuseSalesInvoicesState {
   };
   isContentLoading: boolean;
   searchValue: string;
-  dateValue: Date | null;
+  invoiceDate: Date | null;
   formattedDate: string;
   isInputDate: boolean;
   showActions: boolean;

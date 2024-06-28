@@ -23,7 +23,7 @@ interface TableInvoiceProps {
   ) => void;
   isChecked: boolean;
   tax: number | null;
-  date: Date;
+  date?: Date;
   customer?: string | null;
   customerAccount?: string | null;
   category?: string | null;
@@ -71,7 +71,7 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
     invoiceId,
     invoiceIndex,
   });
-  // console.warn(customer, invoiceId, customId);
+  console.warn('DATe:', date);
   return (
     <Styled.Item>
       <Styled.Checkbox>
@@ -85,9 +85,9 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
       {/* <Styled.Selector>
-        {!!date
+        {date
           ? format(new Date(date), dateFormat)
-          : format(new Date(), dateFormat)}
+          : '---' }
       </Styled.Selector> */}
       {/* <Styled.Selector>
         <Styled.ValueWrapper>{customer || '---'}</Styled.ValueWrapper>

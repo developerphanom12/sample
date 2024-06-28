@@ -28,7 +28,7 @@ export const useSortInvoiceTable = (props: IProps) => {
         const { sortByDate, sortByObjValue, sortByValue, sortItemsHandler } =
             getSortedInvoiceItems({
                 sortableItems,
-                sortField: sortField || 'invoice_date',
+                sortField: sortField || 'saleinvoice_date',
                 sortOrder,
                 sortValue: sortField === 'currency' ? 'value' : 'name',
             });
@@ -37,14 +37,14 @@ export const useSortInvoiceTable = (props: IProps) => {
             if (isSortNameType) {
                 sortItemsHandler(sortByObjValue);
             }
-            if (sortField === 'invoice_date') {
+            if (sortField === 'saleinvoice_date') {
                 sortItemsHandler(sortByDate);
             }
             sortItemsHandler(sortByValue);
         }
 
         if (nullItems.length) {
-            if (sortField === 'invoice_date') {
+            if (sortField === 'saleinvoice_date') {
                 return sortOrder === 'asc'
                     ? sortableItems.concat(nullItems || [])
                     : nullItems?.concat(sortableItems);

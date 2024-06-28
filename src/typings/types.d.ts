@@ -211,7 +211,7 @@ declare global {
     custom_id: string;
     net: number | null;
     photos: string[];
-    invoice_date: Date;
+    saleinvoice_date: Date;
     status: string;
     customer: string | null;
     customer_account: ISelectItem | null;
@@ -251,6 +251,7 @@ declare global {
       event: React.ChangeEvent<HTMLInputElement>
     ) => void;
     invoicesList: IInvoice[];
+    sortedInvoices: IInvoice[];
     isAllChecked: boolean;
     onCheckedPaidHandler: (
       event: React.ChangeEvent<HTMLInputElement>

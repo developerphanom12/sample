@@ -34,6 +34,7 @@ export const useSalesInvoicesState = () => {
     },
     user: { user: {active_account}, userInfo: { company }, token },
   } = useSelector((state: IState) => state);
+  console.log('IN-LIST', invoicesList);
 
   const [state, setState] = useState<IuseSalesInvoicesState>(INITIAL_STATE);
 
@@ -59,10 +60,10 @@ export const useSalesInvoicesState = () => {
   const debouncedValue = useDebounce(state.searchValue, 250);
 
   const dateStart =
-    state.dateValue && setAndFormatDateToISO(state.dateValue.toISOString());
+    state.invoiceDate && setAndFormatDateToISO(state.invoiceDate.toISOString());
   const dateEnd =
-    state.dateValue &&
-    setAndFormatDateToISO(state?.dateValue.toISOString(), true);
+    state.invoiceDate &&
+    setAndFormatDateToISO(state?.invoiceDate.toISOString(), true);
 
   const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
@@ -157,7 +158,7 @@ export const useSalesInvoicesState = () => {
   };
 
   const onChangeDate = async (date: Date) => {
-    const isEqual = state.dateValue?.toISOString() === date.toISOString();
+    const isEqual = state.invoiceDate?.toISOString() === date.toISOString();
     setState((prevState) => ({
       ...prevState,
       dateValue: isEqual ? null : date,
