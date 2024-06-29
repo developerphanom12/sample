@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
   formattedDate: '',
   isInputDate: false,
   showActions: false,
-  checkedIds: [],
+  checkedInvoiceIds: [],
   isLoading: false,
   dataToSend: [],
   excelUrl: '',

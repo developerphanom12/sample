@@ -14,7 +14,7 @@ export const SalesInvoices: FC = () => {
     onCheckedPublishMockFuncHandler,
     onCheckedPaidHandler,
     onCheckedApproveHandler,
-    checkedIds,
+    checkedInvoiceIds,
     onDeleteInvoiceHandler,
     datePickerRef,
     excelRef,
@@ -141,7 +141,7 @@ export const SalesInvoices: FC = () => {
         formikMeta={invoice_formik.getFieldMeta}
         isValid={false}
         isLoading={isLoading}
-        checkedIds={checkedIds}
+        checkedIds={checkedInvoiceIds}
         onDeleteItemHandler={onDeleteInvoiceHandler}
         onFormHandleSubmit={invoice_formik.handleSubmit}
         primaryAction="uplaod-invoice"

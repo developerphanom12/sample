@@ -53,7 +53,7 @@ export interface IuseSalesInvoicesState {
   formattedDate: string;
   isInputDate: boolean;
   showActions: boolean;
-  checkedIds: string[];
+  checkedInvoiceIds: string[];
   isLoading: boolean;
   csvData: string;
   dataToSend: string[];

@@ -238,11 +238,11 @@ export const useSalesInvoicesState = () => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setState((prevState) => ({
         ...prevState,
-        checkedIds: prevState.checkedIds.includes(event.target.id)
-          ? prevState.checkedIds.filter(
+        checkedIds: prevState.checkedInvoiceIds.includes(event.target.id)
+          ? prevState.checkedInvoiceIds.filter(
               (item: string) => item !== event.target.id
             )
-          : [...prevState.checkedIds, event.target.id],
+          : [...prevState.checkedInvoiceIds, event.target.id],
       }));
     },
     []
@@ -296,7 +296,7 @@ export const useSalesInvoicesState = () => {
 
   const onDownloadExcelFileHandler = async () => {
     try {
-      if (!state.checkedIds.length) return;
+      if (!state.checkedInvoiceIds.length) return;
 
       const url = URL.createObjectURL(new Blob([]));
       onChangeStateFieldHandler('excelUrl', url);
