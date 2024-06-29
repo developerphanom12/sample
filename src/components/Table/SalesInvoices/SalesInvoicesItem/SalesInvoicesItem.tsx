@@ -23,7 +23,7 @@ interface TableInvoiceProps {
   ) => void;
   isChecked: boolean;
   tax: number | null;
-  date?: Date;
+  date?: Date | null;
   customer?: string | null;
   customerAccount?: string | null;
   category?: string | null;
@@ -71,7 +71,7 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
     invoiceId,
     invoiceIndex,
   });
-  console.warn('DATe:', date);
+  console.warn('DATe:', date, dateFormat);
   return (
     <Styled.Item>
       <Styled.Checkbox>
@@ -84,20 +84,20 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
       <Styled.View id={invoiceId} onClick={onInvoiceDetailsClickHandler}>
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
-      {/* <Styled.Selector>
-        {date
+      <Styled.Selector>
+        {!!date && dateFormat
           ? format(new Date(date), dateFormat)
           : '---' }
-      </Styled.Selector> */}
-      {/* <Styled.Selector>
+      </Styled.Selector>
+      <Styled.Selector>
         <Styled.ValueWrapper>{customer || '---'}</Styled.ValueWrapper>
       </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{customerAccount || '---'}</Styled.ValueWrapper>
-      </Styled.Selector> */}
-      {/* <Styled.Selector>
+      </Styled.Selector>
+      <Styled.Selector>
         <Styled.ValueWrapper>{category || '---'}</Styled.ValueWrapper>
-      </Styled.Selector> */}
+      </Styled.Selector>
       <Styled.Selector>
         <Styled.ValueWrapper>{vatCode || '---'}</Styled.ValueWrapper>
       </Styled.Selector>
@@ -125,13 +125,13 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
           name={invoiceId}
         />
       </Styled.Checkbox>
-      {/* <Styled.Checkbox isBorder>
+      <Styled.Checkbox isBorder>
         <CheckboxItem
           isChecked={approveStatus} //aproved
           onChange={onCheckedApproveHandler}
           name={invoiceId}
         />
-      </Styled.Checkbox> */}
+      </Styled.Checkbox>
       <Styled.Checkbox isBorder>
         <CheckboxItem
           isChecked={publishStatus} //published
@@ -139,9 +139,9 @@ export const SalesInvoicesItem: React.FC<TableInvoiceProps> = (props) => {
           name={invoiceId}
         />
       </Styled.Checkbox>
-      {/* <Styled.Status>
+      <Styled.Status>
         <StatusLabel status={status as Statuses} />
-      </Styled.Status> */}
+      </Styled.Status>
     </Styled.Item>
   );
 };

@@ -71,7 +71,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
     receiptId,
     receiptIndex,
   });
-
+  console.log('receipt', date, dateFormat);
   return (
     <Styled.Item>
       <Styled.Checkbox>
@@ -85,7 +85,7 @@ export const TableInboxAdminItem: React.FC<TableInboxAdminProps> = (props) => {
         <Styled.Link>{getCorrectCustomId(customId)}</Styled.Link>
       </Styled.View>
       <Styled.Selector>
-        {!!date
+        {!!date && dateFormat
           ? format(new Date(date), dateFormat)
           : '---'}
       </Styled.Selector>

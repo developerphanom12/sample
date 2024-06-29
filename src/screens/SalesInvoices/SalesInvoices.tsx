@@ -50,7 +50,6 @@ export const SalesInvoices: FC = () => {
     onChangeSearchValueHandler,
     onChangeStatusValueHandler,
     onChangeDateFilterValueHandler,
-    onCheckedAllItemsHandler,
     onCheckedItemHandler,
     onClickDownloadCSVButtonHandler,
     onClickOutsideDatePickerHandler,
@@ -81,7 +80,9 @@ export const SalesInvoices: FC = () => {
     onFetchSalesInvoicesHandler,
     active_account,
     count,
-    isFetchingInvoice
+    isFetchingInvoice,
+    onCheckedAllItemsHandler,
+    company
   } = useSalesInvoicesState();
 
   useEffect(() => {
@@ -152,10 +153,11 @@ export const SalesInvoices: FC = () => {
         isAllChecked={false}
         onCheckedPaidHandler={onCheckedPaidHandler}
         onCheckedApproveHandler={onCheckedApproveHandler}
-        dateFormat={''}
+        dateFormat={company.date_format}
         sortField={sortField}
         sortOrder={sortOrder}
         requestSort={requestSort}
+        onCheckedAllItemsHandler={onCheckedAllItemsHandler}
       />
     </Styled.Wrapper>
   );

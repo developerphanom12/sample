@@ -140,7 +140,6 @@ export const useInboxState = () => {
         ...params,
         active_account: active_account || '',
       });
-
       isCompanyChanged && dispatch(setIsCompanyChanged(false));
       dispatch(
         setReceipts({
