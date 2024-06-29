@@ -21,7 +21,7 @@ import { ROUTES } from 'constants/routes';
 import { IuseSalesInvoicesState } from './types/salesInvoices.types';
 import { formikInitialValues, INITIAL_STATE } from './salesInvoices.constants';
 import { getInvoices } from './sales.api';
-import { setInvoicesList, setIsCompanyChanged, setIsFetchingDate } from './reducer/salesInvoices.reducer';
+import { setInvoicesList, setIsCompanyChanged, setIsFetchingDate, setCheckedAllItems } from './reducer/salesInvoices.reducer';
 
 export const useSalesInvoicesState = () => {
   const {
@@ -280,11 +280,13 @@ export const useSalesInvoicesState = () => {
     []
   );
 
-  const onCheckedAllItemsHandler = useCallback(() => {}, [
-    dispatch,
-    isAllChecked,
-    invoicesList,
-  ]);
+  const onCheckedAllItemsHandler = useCallback(() => {
+    dispatch(setCheckedAllItems(!isAllChecked));
+    setState((prevState) => ({
+      ...prevState,
+      checkedInvoiceIds: !isAllChecked ? invoicesList?.map((invoice) => invoice.id) : [],
+    }));
+  }, [dispatch, isAllChecked, invoicesList]);
 
   const csvLink = useRef<
     CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }
@@ -418,15 +420,16 @@ export const useSalesInvoicesState = () => {
     onForwardClick,
     onBackwardClick,
     onCheckedItemHandler,
-    onCheckedAllItemsHandler,
     onClickDownloadCSVButtonHandler,
     onCheckedPublishMockFuncHandler,
     onDeleteInvoiceHandler,
     onMarkAsPaidButtonHandler,
     onMarkAsHandler,
     onClickOutsideDatePickerHandler,
-
+    
     onFetchSalesInvoicesHandler,
     active_account,
+    onCheckedAllItemsHandler,
+    company
   };
 };
