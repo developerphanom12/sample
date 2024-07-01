@@ -25,6 +25,13 @@ import {
   IPostEmailReport,
   IuseReportState,
 } from './types/expenseReport.types';
+import { setReports, setIsCompanyChanged, setIsFetchingDate, } from './reducer';
+import {
+  setCheckedAllItems,
+  setCheckedItem,
+  
+  setReceipts,
+} from './reducer/inbox.reducer';
 
 export const useExpenseReportState = () => {
   const initialState = TAB_INITIAL_STATE;
@@ -33,19 +40,16 @@ export const useExpenseReportState = () => {
   const [state, setState] = useState<IuseMasterState>(initialState);
 
   const {
-    invoices: {
+    reports: {
       totalCount,
       count,
-      invoicesList,
+      reportsList,
       isCompanyChanged,
       isAllChecked,
     },
     user: { user: {active_account}, userInfo: { company }, token },
   } = useSelector((state: IState) => state);
-  console.log('IN-LIST', invoicesList);
-
-  const userRole = getUserRole(accounts || [], active_account || '')
-    ?.role as TRoles;
+  console.log('IN-LIST', reportsList);
 
     const onFetchReportHandler = async (params?: IGetReportParams) => {
       try {
@@ -60,7 +64,7 @@ export const useExpenseReportState = () => {
         });
         isCompanyChanged && dispatch(setIsCompanyChanged(false));
         dispatch(
-          setReceipts({
+          setReports({
             count: data.count,
             data: data.data,
             totalCount: data.totalCount,

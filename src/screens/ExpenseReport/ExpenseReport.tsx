@@ -63,62 +63,9 @@ export const ExpenseReport: FC = () => {
     userRole,
     onChangeExpenseDateValueHandler,
     onChangeExpenseNameValueHandler,
-  } = useExpenseReportState();
 
-  const {
-    onSelectFilesHandler,
-    onFetchReceiptsHandler,
-    onChangeStatusValueHandler,
-    onChangeDateFilterValueHandler,
-    onChangeDate,
-    isDatePickerOpen,
-    dateValue,
-    statusValue,
-    dateFilterValue,
-    formattedDate,
-    isInputDate,
-    setIsDatePickerOpen,
-    isEmailModalWindowOpen,
-    onEmailClick,
-    formik,
-    onChangeReceiptsPerPage,
-    onActionsClick,
-    onActionsClose,
-    onCheckedItemHandler,
-    onCheckedAllItemsHandler,
-    onClickDownloadCSVButtonHandler,
-    onCheckedPaidHandler,
-    onCheckedApproveHandler,
-    onCheckedPublishMockFuncHandler,
-    receiptsPerPage,
-    checkedIds,
-    showActions,
-    isAllChecked,
-    csvLink,
-    csvData,
-    company,
-    excelRef,
-    excelUrl,
-    isDownloadButtonDisabled,
-    isFetchingReceipts,
-    location,
-    datePickerRef,
-    isSentSuccessPopup,
-    setIsSentSuccessPopup,
-    onCloseModalWindowHandler,
-    onClickOutsideDatePickerHandler,
-    onDownloadExcelFileHandler,
-    onDeleteReceiptHandler,
-    onMarkAsHandler,
-    sortField,
-    sortOrder,
-    sortedReceipts,
-    fetchParams,
-    totalCount,
-    isCompanyChanged,
-    requestSort,
-    setCurrentPage,
-  } = useInboxState();
+    onFetchReportHandler
+  } = useExpenseReportState();
 
   useEffect(() => {
     !searchValue &&
@@ -142,6 +89,16 @@ export const ExpenseReport: FC = () => {
     if (!count) return;
     onChangePagesAmount(+itemsPerPage.value, count);
   }, [count, itemsPerPage]);
+
+  useEffect(() => {
+    onFetchReportHandler({
+      ...fetchParams,
+      skip: 0,
+    });
+    if (debouncedValue || isCompanyChanged) {
+      setCurrentPage(0);
+    }
+  }, [debouncedValue, active_account]);
 
   return (
     <>
