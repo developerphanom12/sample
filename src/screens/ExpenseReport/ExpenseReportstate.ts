@@ -18,7 +18,13 @@ import {
 import { setCategories, setTabItem } from '../Master/reducer/master.reducer';
 import { IuseMasterState } from '../Master/types/master.types';
 import { TAB_INITIAL_STATE } from '../Master/master.constants';
-import { createExpenseTabItem } from './expense.api';
+import { getReports } from './expenseReport.api';
+
+import {
+  IGetReportParams,
+  IPostEmailReport,
+  IuseReportState,
+} from './types/expenseReport.types';
 
 export const useExpenseReportState = () => {
   const initialState = TAB_INITIAL_STATE;
@@ -27,20 +33,57 @@ export const useExpenseReportState = () => {
   const [state, setState] = useState<IuseMasterState>(initialState);
 
   const {
-    master: {
-      categories: { data: categoriesList, count },
-      selectedCategory,
+    invoices: {
+      totalCount,
+      count,
+      invoicesList,
+      isCompanyChanged,
+      isAllChecked,
     },
-    user: {
-      user: { active_account, accounts },
-      userInfo: {
-        company: { date_format },
-      },
-    },
+    user: { user: {active_account}, userInfo: { company }, token },
   } = useSelector((state: IState) => state);
+  console.log('IN-LIST', invoicesList);
 
   const userRole = getUserRole(accounts || [], active_account || '')
     ?.role as TRoles;
+
+    const onFetchReportHandler = async (params?: IGetReportParams) => {
+      try {
+        setState((prevState) => ({
+          ...prevState,
+          isContentLoading: true,
+          checkedIds: [],
+        }));
+        const { data } = await getReports({
+          ...params,
+          active_account: active_account || '',
+        });
+        isCompanyChanged && dispatch(setIsCompanyChanged(false));
+        dispatch(
+          setReceipts({
+            count: data.count,
+            data: data.data,
+            totalCount: data.totalCount,
+          })
+        );
+        setState((prevState) => ({
+          ...prevState,
+          isEmptyData: data.totalCount ? false : true,
+          isFetchingReceipts: false,
+          isContentLoading: false,
+        }));
+      } catch (error) {
+        dispatch(setIsFetchingDate(false));
+        setState((prevState) => ({
+          ...prevState,
+          isFetchingReceipts: false,
+          isEmptyData: false,
+          isContentLoading: false,
+          checkedIds: [],
+        }));
+        console.log(error);
+      }
+    };
 
   const onChangeStateFieldHandler = (
     optionName: keyof typeof TAB_INITIAL_STATE,
@@ -363,5 +406,7 @@ export const useExpenseReportState = () => {
     onEnterGoToClick,
     onForwardClick,
     onBackwardClick,
+
+    onFetchReportHandler
   };
 };

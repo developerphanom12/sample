@@ -305,7 +305,7 @@ export const usePhotoDetailsContentState = () => {
         active_account: active_account || '',
       };
 
-      // setIsLoading(true);
+      setIsLoading(true);
       console.log("save button", state.paymentStatus ,payload.payment_status);
 
       const { data } = await updateReceiptItem(payload);

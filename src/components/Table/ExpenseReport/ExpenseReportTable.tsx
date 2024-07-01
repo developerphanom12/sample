@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
 import { setIsSorted } from 'services/utils';
-import { ISalesInvoice } from '../../../screens/SalesInvoices/types/salesInvoices.types';
+import { IExpenseReport } from 'screens/ExpenseReport/types/expenseReport.types';
 
 import { CheckboxItem } from '../../Checkbox';
 import { TableButton } from '../TableButton/TableButton';
@@ -13,11 +13,11 @@ import {
 } from './ExpenseReport.constants';
 import { SalesInvoicesItem } from './ExpenseReportItem';
 
-interface ISalesInvoicesTableProps
+interface IExpReportTableProps
   extends Omit<TableInboxAdminProps, 'receiptList'> {
-  invoicesList: ISalesInvoice[];
+  invoicesList: IExpenseReport[];
 }
-export const ExpenseReportTable: FC<ISalesInvoicesTableProps> = memo(
+export const ExpenseReportTable: FC<IExpReportTableProps> = memo(
   (props) => {
     const {
       onCheckedItemHandler,

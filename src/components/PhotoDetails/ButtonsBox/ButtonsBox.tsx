@@ -13,7 +13,7 @@ interface IButtonBoxProps {
 }
 
 export const ButtonsBox: FC<IButtonBoxProps> = ({ saveReceiptHandler, onCancelButtonClickHandler, onApproveButtonClickHandler, isLoading, buttonValue }) => {
-	console.log('!!!!!!!!!!!!!!!!! - RDContent child-buttonold');
+	// console.log('!!!!!!!!!!!!!!!!! - RDContent child-buttonold');
 	const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
 	const handleButtonClick = (buttonType: string, handler?: () => void | Promise<void>, event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -38,7 +38,7 @@ export const ButtonsBox: FC<IButtonBoxProps> = ({ saveReceiptHandler, onCancelBu
 		if (selectedButton) {
 			const timer = setTimeout(() => {
 				setSelectedButton(null);
-			}, 300); // delay in ms, adjust as needed
+			}, 2000); // delay in ms, adjust as needed
 			return () => clearTimeout(timer); // cleanup timeout if component unmounts
 		}
 	}, [selectedButton]);

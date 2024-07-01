@@ -30,6 +30,7 @@ export const markAsPaid = (receiptsIds: IReceiptsIds) => {
 };
 export const markAsUnpaid = (receiptsIds: IReceiptsIds) => {
   const URL = '/receipt/mark-unpaid';
+  // console.log(URL,receiptsIds);
   return apiServices.postData(URL, receiptsIds);
 };
 export const markAsApproved = (receiptsIds: IReceiptsIds) => {

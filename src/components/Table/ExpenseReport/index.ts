@@ -1,1 +1,1 @@
-export * from './ExpenseReport';
+export * from './ExpenseReportTable';

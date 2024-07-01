@@ -5,6 +5,7 @@ import { SalesInvoicesTable } from 'components/Table/SalesInvoices';
 import { ActionsPanel } from './ActionsPanel';
 import { useSalesInvoicesState } from './SalesInvoices.state';
 import { SalesInvoicesStyles as Styled } from './SalesInvoices.styles';
+import { PaginationPanel } from 'components/PaginationPanel';
 
 export const SalesInvoices: FC = () => {
   const {
@@ -158,6 +159,19 @@ export const SalesInvoices: FC = () => {
         sortOrder={sortOrder}
         requestSort={requestSort}
         onCheckedAllItemsHandler={onCheckedAllItemsHandler}
+      />
+      <PaginationPanel 
+        pages={pages}
+        currentPage={currentPage}
+        onChangeReceiptsPerPage={onChangeReceiptsPerPage}
+        onChangeInputValue={onChangeInputValue}
+        inputPaginationValue={inputPaginationValue}
+        receiptsPerPage={receiptsPerPage}
+        onChangePage={onChangePage}
+        onEnterGoToClick={onEnterGoToClick}
+        onGoToClick={onGoToClick}
+        onForwardClick={onForwardClick}
+        onBackwardClick={onBackwardClick}
       />
     </Styled.Wrapper>
   );
