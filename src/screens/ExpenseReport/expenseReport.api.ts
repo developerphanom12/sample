@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { apiServices } from 'services/api-service';
 import { removeEmptyField } from 'services/utils';
 
-import { IGetReportParams, IPostEmailReport, ICreateExpense } from './types/expenseReport.types';
+import { IcreateReportHandlerParams, ICreateReportApi } from './types/expenseReport.types';
 
 import { CONFIG } from 'constants/config';
 
@@ -11,22 +11,18 @@ import { CONFIG } from 'constants/config';
 //   receipts: string[];
 //   active_account?: string;
 // }
-
-// type Direction = 'expense-report';
-
-export const getReports = (params?: IGetReportParams) => {
-  const URL = '/receipt/get-all';
+export const getAllReportsApi = (params?: IcreateReportHandlerParams) => {
+  const URL = '/expense-report/get-all';
   params && removeEmptyField(params);
   return apiServices.fetchData(URL, params);
 };
 
-// export const createExpenseTabItem = (
-//   payload: ICreateExpense,
-//   urlDirection: Direction
-// ) => {
-//   const URL = `${urlDirection}/create`;
-//   return apiServices.postData(URL, payload);
-// };
+export const createExpenseReportApi = (
+  payload: ICreateReportApi,
+) => {
+  const URL = '/expense-report/create';
+  return apiServices.postData(URL, payload);
+};
 // export const updateExpenseTabItem = (
 //   payload: ICreateExpense,
 //   urlDirection: Direction

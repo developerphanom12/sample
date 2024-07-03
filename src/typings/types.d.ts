@@ -361,26 +361,35 @@ declare global {
     tableRowTheme: 'companyUser' | 'company';
   }
 
-  interface IMasterExpenseModalWindowProps {
-    isDisableButton?: boolean;
+  interface IExpenseReportModalWindowProps {
+    // isDisableButton?: boolean;
     isLoading: boolean;
-    onCloseModalWindowHandler: () => void;
-    onChangeInputValueHandler: (
+    onChangeReportFormHandler: (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
-    onChangeExpenseDateValueHandler: (
+    onChangeReportForHandler: (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
-    onChangeExpenseNameValueHandler: (
+    onChangeReportDateHandler: (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
-    onSaveButtonCLickHandler: () => Promise<void>;
-    onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
+    onChangeReportNameHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    modalReportCreateButtonHandler: any;
+    modalReportCancelButtonHandler: any;
+
+    // onCloseDeleteModalWindowHandler: any;
+    // onSaveButtonCLickHandler: () => Promise<void>;
+    // onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
     isModalWindowOpen: boolean;
+    onModalWindowToggle: any;
+
     headerText: string;
-    inputValue: string;
-    dateValue:string;
-    reportName:string;
+    radioReportFormType: number;
+    inputValueReportFor: string;
+    inputValueReportDate: Date | null | string;
+    inputValueReportName: string;
   }
 
   interface IMasterModalWindowProps {
@@ -398,12 +407,12 @@ declare global {
   }
 
   interface IDeleteModalWindowProps {
-    isLoading: boolean;
-    onCloseDeleteModalWindowHandler: () => void;
-    onDeleteButtonClickHandler: () => Promise<void>;
-    isDeleteModalWindowOpen: boolean;
-    deleteItemName: string;
-    categoryName: string;
+    isLoading?: boolean;
+    onCloseDeleteModalWindowHandler?: () => void;
+    onDeleteButtonClickHandler?: () => Promise<void>;
+    isDeleteModalWindowOpen?: boolean;
+    deleteItemName?: string;
+    categoryName?: string;
     account?: string;
   }
 
@@ -412,7 +421,7 @@ declare global {
       IDeleteModalWindowProps {}
 
   interface IModalExpenseWindowsBox
-      extends IMasterExpenseModalWindowProps,
+      extends IExpenseReportModalWindowProps,
         IDeleteModalWindowProps {}
 
   interface IPaginationState {

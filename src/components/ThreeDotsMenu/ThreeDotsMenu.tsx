@@ -18,28 +18,28 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
 	const {
 		isLoading,
 		isModalWindowOpen,
-		modalInputValue,
-		modalInputDate,
-		modalInputName,
-		onChangeExpenseUserValueHandler,
-		onCreateExpenseHandler,
+		// modalInputValue,
+		// modalInputDate,
+		// modalInputName,
+		// onChangeExpenseUserValueHandler,
+		// onCreateExpenseHandler,
 		onEnterCreateCategoryClick,
 		onModalWindowToggle,
-		isDeleteModalWindowOpen,
-		onDeleteModalWindowToggle,
-		onDeleteButtonClickHandler,
-		selectedCategory,
-		isEdit,
-		isDisableButton,
-		onSaveButtonClickHandler,
-		onModalWindowCancelClickButtonHandler,
-		onChangeExpenseDateValueHandler,
-		onChangeExpenseNameValueHandler,
+		// isDeleteModalWindowOpen,
+		// onDeleteModalWindowToggle,
+		// onDeleteButtonClickHandler,
+		// selectedCategory,
+		// isEdit,
+		// isDisableButton,
+		// onSaveButtonClickHandler,
+		// onModalWindowCancelClickButtonHandler,
+		// onChangeExpenseDateValueHandler,
+		// onChangeExpenseNameValueHandler,
 	} = useExpenseReportState();
 	const { onMarkAsPaidButtonHandler, onMarkAsHandler, onClickDownloadCSVButtonHandler, onDownloadExcelFileHandler, onEmailClick, onDeleteItemHandler } = props;
 	return (
 		<>
-			<MasterExpenseModalWindowBox
+			{/* <MasterExpenseModalWindowBox
 				isLoading={isLoading}
 				onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
 				onChangeInputValueHandler={onChangeExpenseUserValueHandler}
@@ -60,7 +60,7 @@ export const ThreeDotsMenu = (props: IThreeDotsMenu) => {
 				isDeleteModalWindowOpen={isDeleteModalWindowOpen}
 				onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
 				isDisableButton={isDisableButton}
-			/>
+			/> */}
 			<Styled.Wrapper>
 				{props?.dot3ExpReport ? <Styled.Item onClick={onModalWindowToggle}>Add to Expense Report</Styled.Item> : null}
 				<Styled.Item onClick={() => onMarkAsHandler('paid')}>Mark as paid</Styled.Item>

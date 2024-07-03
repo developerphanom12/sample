@@ -35,52 +35,33 @@ export interface ISelectItemReport {
     isCompanyChanged: boolean;
   }
   
-  export interface IGetReportParams {
-    active_account?: string;
-    status?: string;
-    date_filter?: string;
-    search?: string;
-    date_start?: string;
-    date_end?: string;
-    take?: number;
-    skip?: number;
-  }
-  
-  export interface IPostEmailReport {
-    active_account: string;
-    message?: string;
-    receipts: string[];
-    to: string;
-    subject: string;
-  }
-  
   export interface IuseReportState {
-    isFetchingReceipts: boolean;
-    statusValue: {
-      value: string;
-      label: string;
-    };
-    dateFilterValue: {
-      value: string;
-      label: string;
-    };
-    isContentLoading: boolean;
+    isEdit?: boolean;
     searchValue: string;
-    dateValue: Date | null;
-    dateRangeValue: Date[] | null;
-    formattedDate: string;
-    isInputDate: boolean;
-    showActions: boolean;
-    checkedIds: string[];
     isLoading: boolean;
-    csvData: string;
-    receiptsToSend: string[];
-    excelUrl: string;
+    isEmptyData?: boolean;
+    isFetchingReports?: boolean;
+    isContentLoading?: boolean;
+    isFocus?: boolean;
+    checkedReportIds: string[];
+    searchedItems: ITabItem[];
+    isSearching: boolean;
+    modalReportFormType: number;
+    modalInputReportFor: string;
+    modalInputReportDate: Date | null | string;
+    modalInputReportName: string;
   }
 
-  export interface ICreateExpense {
+  export interface ICreateReportApi {
     report_for: string;
-    date: string;
+    report_date: Date | null | string;
     report_name: string;
+    report_receipt?: string[];
     active_account?: string | null;
+  }
+  export interface IcreateReportHandlerParams {
+    active_account?: string;
+    search?: string;
+    take?: number;
+    skip?: number;
   }

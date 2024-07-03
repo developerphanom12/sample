@@ -118,7 +118,7 @@ width: 100%;
 background-color: ${({ theme }) => theme.colors.white};
 padding: 1rem;
 box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-z-index: 1000; /* Adjust the z-index as needed */
+z-index: 11; /* Adjust the z-index as needed */
 text-align: center;
 border: 1px solid #0000000D;
 max-height: 75px;

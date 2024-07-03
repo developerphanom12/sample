@@ -1,54 +1,51 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { DeleteModalWindow } from 'components/DeleteModalWindow';
-import { MasterExpenseModalWindow } from 'components/MasterExpenseModalWindow/MasterModalWindow';
+import { DeleteModalWindow } from "components/DeleteModalWindow";
+import { MasterExpenseModalWindow } from "components/MasterExpenseModalWindow/MasterModalWindow";
 
 export const MasterExpenseModalWindowBox: FC<IModalExpenseWindowsBox> = (props) => {
-  const {
-    deleteItemName,
-    headerText,
-    inputValue,
-    isLoading,
-    isModalWindowOpen,
-    onChangeInputValueHandler,
-    onChangeExpenseDateValueHandler,
-    onChangeExpenseNameValueHandler,
-    onCloseModalWindowHandler,
-    onDeleteButtonClickHandler,
-    onSaveButtonCLickHandler,
-    onEnterCreateItemClick,
-    isDeleteModalWindowOpen,
-    onCloseDeleteModalWindowHandler,
-    isDisableButton,
-    categoryName,
-    dateValue,
-    reportName
-  } = props;
-  return (
-    <>
-      <MasterExpenseModalWindow
-        isDisableButton={isDisableButton}
-        onCloseModalWindowHandler={onCloseModalWindowHandler}
-        isModalWindowOpen={isModalWindowOpen}
-        headerText={headerText}
-        onChangeInputValueHandler={onChangeInputValueHandler}
-        onChangeExpenseDateValueHandler={onChangeExpenseDateValueHandler}
-        onChangeExpenseNameValueHandler={onChangeExpenseNameValueHandler}
-        onSaveButtonCLickHandler={onSaveButtonCLickHandler}
-        onEnterCreateItemClick={onEnterCreateItemClick}
-        inputValue={inputValue}
-        dateValue={dateValue}
-        reportName={reportName}
-        isLoading={isLoading}
-      />
-      <DeleteModalWindow
-        onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler}
-        onDeleteButtonClickHandler={onDeleteButtonClickHandler}
-        isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        deleteItemName={deleteItemName}
-        isLoading={isLoading}
-        categoryName={categoryName}
-      />
-    </>
-  );
+	const {
+		isLoading,
+		deleteItemName,
+		isModalWindowOpen,
+		headerText,
+		radioReportFormType,
+		inputValueReportFor,
+		inputValueReportDate,
+		inputValueReportName,
+		onChangeReportFormHandler,
+		onChangeReportForHandler,
+		onChangeReportDateHandler,
+		onChangeReportNameHandler,
+		onDeleteButtonClickHandler,
+		// onSaveButtonCLickHandler,
+		// onEnterCreateItemClick,
+		isDeleteModalWindowOpen,
+		onCloseDeleteModalWindowHandler,
+		// isDisableButton,
+		categoryName,
+		// dateValue,
+		// reportName
+	} = props;
+	return (
+		<>
+			<MasterExpenseModalWindow
+				// isDisableButton={isDisableButton}
+				isModalWindowOpen={isModalWindowOpen}
+				headerText={headerText}
+				radioReportFormType={radioReportFormType}
+				onChangeReportFormHandler={onChangeReportFormHandler}
+				inputValueReportFor={inputValueReportFor}
+				onChangeReportForHandler={onChangeReportForHandler}
+				inputValueReportDate={inputValueReportDate}
+				onChangeReportDateHandler={onChangeReportDateHandler}
+				inputValueReportName={inputValueReportName}
+				onChangeReportNameHandler={onChangeReportNameHandler}
+				// onEnterCreateItemClick={onEnterCreateItemClick}
+				// onSaveButtonCLickHandler={onSaveButtonCLickHandler}
+				isLoading={isLoading}
+			/>
+			{/* <DeleteModalWindow onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler} onDeleteButtonClickHandler={onDeleteButtonClickHandler} isDeleteModalWindowOpen={isDeleteModalWindowOpen} deleteItemName={deleteItemName} isLoading={isLoading} categoryName={categoryName} /> */}
+		</>
+	);
 };

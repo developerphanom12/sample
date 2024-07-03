@@ -15,61 +15,69 @@ export const ExpenseReport: FC = () => {
   const {
     isLoading,
     isModalWindowOpen,
-    modalInputValue,
-    modalInputDate,
-    modalInputName,
-    onChangeExpenseUserValueHandler,
-    onChangeSearchValueHandler,
-    onCreateExpenseHandler,
-    onEnterCreateCategoryClick,
-    onGetAllCategoriesHandler,
     onModalWindowToggle,
+    onChangeSearchValueHandler,
+
+    //form value and handler
+    modalReportFormType,
+    modalInputReportFor,
+    modalInputReportDate,
+    modalInputReportName,
+    onChangeReportFormHandler,
+    onChangeReportForHandler,
+    onChangeReportDateHandler,
+    onChangeReportNameHandler,
+    modalReportCreateButtonHandler,
+    modalReportCancelButtonHandler,
+    onEnterCreateCategoryClick,
+
+    // onGetAllCategoriesHandler,
     searchValue,
-    categoriesList,
+    reportsList,
+    sortedReports,
+    isCompanyChanged,
     count,
-    date_format,
-    isDeleteModalWindowOpen,
-    onDeleteModalWindowToggle,
-    onDeleteItemClickHandler,
-    onDeleteButtonClickHandler,
-    selectedCategory,
+    company,
+    // onDeleteItemClickHandler,
+    // onDeleteButtonClickHandler,
+    // selectedCategory,
     isEdit,
-    onEditItemClickHandler,
-    isDisableButton,
-    onSaveButtonClickHandler,
-    onModalWindowCancelClickButtonHandler,
-    onChangeItemsPerPage,
+    // onEditItemClickHandler,
+    // isDisableButton,
+    // onSaveButtonClickHandler,
+    setItemsPerPage,
+    setCurrentPage,
     onChangeInputValue,
     onChangePage,
     onEnterGoToClick,
     onGoToClick,
     onForwardClick,
     onBackwardClick,
-    onChangePagesAmount,
+    // onChangePagesAmount,
     onBlurHandler,
     onFocusSearchHandler,
     currentPage,
-    inputPaginationValue,
+    // inputPaginationValue,
     itemsPerPage,
     pages,
-    isFetchingData,
+    isFetchingReports,
     isEmptyData,
     debouncedValue,
     isFocus,
     isContentLoading,
     isSearching,
     searchedItems,
+
     active_account,
     userRole,
-    onChangeExpenseDateValueHandler,
-    onChangeExpenseNameValueHandler,
 
-    onFetchReportHandler
+    onFetchReportHandler,
+    reportFetchParams,
   } = useExpenseReportState();
 
   useEffect(() => {
     !searchValue &&
-      onGetAllCategoriesHandler({
+    onFetchReportHandler({
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
       });
@@ -77,22 +85,22 @@ export const ExpenseReport: FC = () => {
 
   useEffect(() => {
     debouncedValue &&
-      onGetAllCategoriesHandler(
+    onFetchReportHandler(
         {
           search: debouncedValue,
         },
-        isSearching
+        // isSearching
       );
   }, [debouncedValue]);
 
-  useEffect(() => {
-    if (!count) return;
-    onChangePagesAmount(+itemsPerPage.value, count);
-  }, [count, itemsPerPage]);
+  // useEffect(() => {
+  //   if (!count) return;
+  //   onChangePagesAmount(+itemsPerPage.value, count);
+  // }, [count, itemsPerPage]);
 
   useEffect(() => {
     onFetchReportHandler({
-      ...fetchParams,
+      ...reportFetchParams,
       skip: 0,
     });
     if (debouncedValue || isCompanyChanged) {
@@ -104,31 +112,32 @@ export const ExpenseReport: FC = () => {
     <>
       <MasterExpenseModalWindowBox
         isLoading={isLoading}
-        onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
-        onChangeInputValueHandler={onChangeExpenseUserValueHandler}
-        onChangeExpenseDateValueHandler={onChangeExpenseDateValueHandler}
-        onChangeExpenseNameValueHandler={onChangeExpenseNameValueHandler}
-        onEnterCreateItemClick={onEnterCreateCategoryClick}
-        onSaveButtonCLickHandler={
-          isEdit ? onSaveButtonClickHandler : onCreateExpenseHandler
-        }
-        isModalWindowOpen={isModalWindowOpen}
         headerText={'Add to Expense Report'}
-        inputValue={modalInputValue}
-        dateValue={modalInputDate}
-        reportName={modalInputName}
-        onDeleteButtonClickHandler={onDeleteButtonClickHandler}
-        deleteItemName={`‘${selectedCategory?.name}’`}
-        categoryName="category"
-        isDeleteModalWindowOpen={isDeleteModalWindowOpen}
-        onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
-        isDisableButton={isDisableButton}
+        // isDisableButton={isDisableButton}
+
+        radioReportFormType={modalReportFormType}
+        onChangeReportFormHandler={onChangeReportFormHandler}
+        inputValueReportFor={modalInputReportFor}
+        onChangeReportForHandler={onChangeReportForHandler}
+        inputValueReportDate={modalInputReportDate}
+        onChangeReportDateHandler={onChangeReportDateHandler}
+        inputValueReportName={modalInputReportName}
+        onChangeReportNameHandler={onChangeReportNameHandler}
+
+        modalReportCreateButtonHandler={modalReportCreateButtonHandler}
+        modalReportCancelButtonHandler={modalReportCancelButtonHandler}
+        // onEnterCreateItemClick={onEnterCreateCategoryClick}
+        // onSaveButtonCLickHandler={
+          //   isEdit ? onSaveButtonClickHandler : onCreateExpenseHandler
+        // }
+        isModalWindowOpen={isModalWindowOpen}
+        onModalWindowToggle={onModalWindowToggle}
       />
-      {isFetchingData ? (
+      {isFetchingReports ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !isFetchingData && isEmptyData && !categoriesList?.length ? (
+      ) : !isFetchingReports && isEmptyData && !reportsList?.length ? (
         <EmptyData
           isUploadFile={false}
           buttonText={Strings.categories.buttonText}
@@ -142,19 +151,19 @@ export const ExpenseReport: FC = () => {
         <ExpenseContent
           userRole={userRole}
           isContentLoading={isContentLoading}
-          isFetchingData={isFetchingData}
+          isFetchingData={isFetchingReports}
           isFocus={isFocus}
-          categories={categoriesList}
+          reportsList={reportsList}
           currentPage={currentPage}
-          dateFormat={date_format}
-          inputPaginationValue={inputPaginationValue}
+          dateFormat={company.date_format}
+          // inputPaginationValue={inputPaginationValue}
           onAddClickButtonHandler={onModalWindowToggle}
           onBackwardClick={onBackwardClick}
           onChangeInputValue={onChangeInputValue}
-          onChangeReceiptsPerPage={onChangeItemsPerPage}
+          // onChangeReceiptsPerPage={onChangeItemsPerPage}
           onChangeSearchValueHandler={onChangeSearchValueHandler}
-          onDeleteIconClickHandler={onDeleteItemClickHandler}
-          onEditIconClickHandler={onEditItemClickHandler}
+          // onDeleteIconClickHandler={onDeleteItemClickHandler}
+          // onEditIconClickHandler={onEditItemClickHandler}
           onForwardClick={onForwardClick}
           onEnterGoToClick={onEnterGoToClick}
           onGoToClick={onGoToClick}
@@ -166,7 +175,7 @@ export const ExpenseReport: FC = () => {
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}
           searchedItems={searchedItems}
-          receiptList={sortedReceipts}
+          receiptList={sortedReports}
         />
       )}
     </>

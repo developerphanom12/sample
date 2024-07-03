@@ -2,7 +2,7 @@ import { COLORS, Z_INDEX } from 'styles/theme';
 
 export const overlay = {
   background: COLORS.overlay,
-  zIndex: Z_INDEX.l,
+  zIndex: Z_INDEX.max,
 };
 
 export const modalContentStyles = {
