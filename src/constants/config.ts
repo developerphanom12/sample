@@ -7,6 +7,6 @@ const ENV_HASH_MAP: Record<string, string> = {
 };
 
 export const CONFIG = {
-  // apiUrl: ENV_HASH_MAP['development'],
-  apiUrl: ENV_HASH_MAP['local'],
+  apiUrl: ENV_HASH_MAP['development'],
+  // apiUrl: ENV_HASH_MAP['local'],
 };
