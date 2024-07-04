@@ -2,29 +2,40 @@ import { FC, useState } from 'react';
 import ReactModal from 'react-modal';
 import Select, { SingleValue } from 'react-select';
 
-import { Input } from '../Input';
-import { ModalButtonsBox } from '../ModalButtonsBox';
-import { ModalWindowHeader } from '../ModalWindowHeader';
-import {
-  MasterModalWindowStyles as Styled,
-  MasterModalStyles,
-} from './MasterModalWindow.style';
+import { Input } from '../../../components/Input';
+import { ModalButtonsBox } from '../../../components/ModalButtonsBox';
+import { ModalWindowHeader } from '../../../components/ModalWindowHeader';
+import { MasterModalWindowStyles as Styled, MasterModalStyles} from './ReportModal.style';
+import { IReportModal } from '../types/expenseReport.types';
 
-export const MasterExpenseModalWindow: FC<IMasterExpenseModalWindowProps> = (props) => {
+export const ReportModal: FC<IReportModal> = (props) => {
   const {
-    isModalWindowOpen,
-    headerText,
     isLoading,
-    isDisableButton,
-    inputValue,
-    dateValue,
-    reportName,
-    onCloseModalWindowHandler,
-    onSaveButtonCLickHandler,
-    onEnterCreateItemClick,
-    onChangeInputValueHandler,
-    onChangeExpenseDateValueHandler,
-    onChangeExpenseNameValueHandler
+		deleteItemName,
+		isModalWindowOpen,
+    onModalWindowToggle,
+		headerText,
+		radioReportFormType,
+		inputValueReportFor,
+		inputValueReportDate,
+    inputValueReportSelectedDate,
+		inputValueReportName,
+		onChangeReportFormHandler,
+		onChangeReportForHandler,
+		onChangeReportDateHandler,
+		onChangeReportNameHandler,
+    
+    modalReportCreateButtonHandler,
+    modalReportCancelButtonHandler,
+		// onSaveButtonCLickHandler,
+		// onEnterCreateItemClick,
+		onDeleteButtonClickHandler,
+		isDeleteModalWindowOpen,
+		onCloseDeleteModalWindowHandler,
+		// isDisableButton,
+		categoryName,
+		// dateValue,
+		// reportName
   } = props;
 
   const [isNewReport, setIsNewReport] = useState(true);
@@ -52,7 +63,7 @@ export const MasterExpenseModalWindow: FC<IMasterExpenseModalWindowProps> = (pro
   return (
     <ReactModal
       isOpen={isModalWindowOpen}
-      onRequestClose={onCloseModalWindowHandler}
+      onRequestClose={onModalWindowToggle}
       ariaHideApp={false}
       style={MasterModalStyles}
     >
@@ -80,25 +91,27 @@ export const MasterExpenseModalWindow: FC<IMasterExpenseModalWindowProps> = (pro
         {isNewReport ? (
           <>
             <Input
-              onChangeValue={onChangeInputValueHandler}
-              value={inputValue}
+              onChangeValue={onChangeReportForHandler}
+              value={inputValueReportFor}
               text="Report For"
-              onKeyDown={onEnterCreateItemClick}
+              // onKeyDown={onEnterCreateItemClick}
               isRemoveBorder
             />
             <Input
-              onChangeValue={onChangeExpenseDateValueHandler}
-              value={dateValue}
+              onChangeValue={onChangeReportDateHandler}
+              value={inputValueReportDate}
               text="Report Date"
-              onKeyDown={onEnterCreateItemClick}
+              // onKeyDown={onEnterCreateItemClick}
               isRemoveBorder
               inputType="date"
+              isInputDate={true}
+              selectedDate={inputValueReportSelectedDate}
             />
             <Input
-              onChangeValue={onChangeExpenseNameValueHandler}
-              value={reportName}
+              onChangeValue={onChangeReportNameHandler}
+              value={inputValueReportName}
               text="Report Name"
-              onKeyDown={onEnterCreateItemClick}
+              // onKeyDown={onEnterCreateItemClick}
               isRemoveBorder
             />
           </>
@@ -117,10 +130,10 @@ export const MasterExpenseModalWindow: FC<IMasterExpenseModalWindowProps> = (pro
       </Styled.MainContentWrapper>
       <ModalButtonsBox
         isLoading={isLoading}
-        onCancelClickHandler={onCloseModalWindowHandler}
-        onSaveButtonCLickHandler={onSaveButtonCLickHandler}
+        onCancelClickHandler={onModalWindowToggle}
+        onSaveButtonCLickHandler={modalReportCreateButtonHandler}
         isSaveButton
-        isDisableButton={isDisableButton}
+        // isDisableButton={isDisableButton}
       />
     </ReactModal>
   );

@@ -8,8 +8,7 @@ import { CategoriesTabStyles as Styled } from 'screens/Master/CategoriesTab/Cate
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 import { ExpenseContent } from './ExpenseContent';
-import { useInboxState } from 'screens/Inbox/Inbox.state';
-import { MasterExpenseModalWindowBox } from 'components/MasterExpenseModalWindowBox';
+import { ReportModal } from './reportModal';
 
 export const ExpenseReport: FC = () => {
   const {
@@ -19,11 +18,12 @@ export const ExpenseReport: FC = () => {
     onChangeSearchValueHandler,
 
     //form value and handler
-    modalReportFormType,
+    isNewReport,
     modalInputReportFor,
     modalInputReportDate,
+    modalInputReportSelectedDate,
     modalInputReportName,
-    onChangeReportFormHandler,
+    onChangeReportFormType,
     onChangeReportForHandler,
     onChangeReportDateHandler,
     onChangeReportNameHandler,
@@ -110,29 +110,6 @@ export const ExpenseReport: FC = () => {
 
   return (
     <>
-      <MasterExpenseModalWindowBox
-        isLoading={isLoading}
-        headerText={'Add to Expense Report'}
-        // isDisableButton={isDisableButton}
-
-        radioReportFormType={modalReportFormType}
-        onChangeReportFormHandler={onChangeReportFormHandler}
-        inputValueReportFor={modalInputReportFor}
-        onChangeReportForHandler={onChangeReportForHandler}
-        inputValueReportDate={modalInputReportDate}
-        onChangeReportDateHandler={onChangeReportDateHandler}
-        inputValueReportName={modalInputReportName}
-        onChangeReportNameHandler={onChangeReportNameHandler}
-
-        modalReportCreateButtonHandler={modalReportCreateButtonHandler}
-        modalReportCancelButtonHandler={modalReportCancelButtonHandler}
-        // onEnterCreateItemClick={onEnterCreateCategoryClick}
-        // onSaveButtonCLickHandler={
-          //   isEdit ? onSaveButtonClickHandler : onCreateExpenseHandler
-        // }
-        isModalWindowOpen={isModalWindowOpen}
-        onModalWindowToggle={onModalWindowToggle}
-      />
       {isFetchingReports ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
@@ -154,6 +131,7 @@ export const ExpenseReport: FC = () => {
           isFetchingData={isFetchingReports}
           isFocus={isFocus}
           reportsList={reportsList}
+          sortedReportList={sortedReports}
           currentPage={currentPage}
           dateFormat={company.date_format}
           // inputPaginationValue={inputPaginationValue}
@@ -175,9 +153,33 @@ export const ExpenseReport: FC = () => {
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}
           searchedItems={searchedItems}
-          receiptList={sortedReports}
         />
       )}
+      <ReportModal
+        isLoading={isLoading}
+        headerText={'Add to Expense Report'}
+        // isDisableButton={isDisableButton}
+
+        radioReportFormType={isNewReport}
+        onChangeReportFormHandler={onChangeReportFormType}
+        inputValueReportFor={modalInputReportFor}
+        onChangeReportForHandler={onChangeReportForHandler}
+        inputValueReportDate={modalInputReportDate}
+        inputValueReportSelectedDate={modalInputReportSelectedDate}
+        onChangeReportDateHandler={onChangeReportDateHandler}
+        inputValueReportName={modalInputReportName}
+        onChangeReportNameHandler={onChangeReportNameHandler}
+
+        modalReportCreateButtonHandler={modalReportCreateButtonHandler}
+        modalReportCancelButtonHandler={modalReportCancelButtonHandler}
+        // onEnterCreateItemClick={onEnterCreateCategoryClick}
+        // onSaveButtonCLickHandler={
+          //   isEdit ? onSaveButtonClickHandler : onCreateExpenseHandler
+        // }
+        isModalWindowOpen={isModalWindowOpen}
+        onModalWindowToggle={onModalWindowToggle}
+      />
+			{/* <DeleteModalWindow onCloseDeleteModalWindowHandler={onCloseDeleteModalWindowHandler} onDeleteButtonClickHandler={onDeleteButtonClickHandler} isDeleteModalWindowOpen={isDeleteModalWindowOpen} deleteItemName={deleteItemName} isLoading={isLoading} categoryName={categoryName} /> */}
     </>
   );
 };

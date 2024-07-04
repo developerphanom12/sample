@@ -36,7 +36,8 @@ export const useExpenseReportState = () => {
       isAllChecked,
     },
     user: { user: {active_account, accounts}, userInfo: { company }, token },
-  } = useSelector((state: IState) => state);  console.log('IN-LIST', reportsList);
+  } = useSelector((state: IState) => state);
+  console.log('report-LIST', reportsList);
 
   const userRole = getUserRole(accounts || [], active_account || '')
     ?.role as TRoles;
@@ -63,6 +64,7 @@ export const useExpenseReportState = () => {
           ...params,
           active_account: active_account || '',
         });
+        console.log(data);
         isCompanyChanged && dispatch(setIsCompanyChanged(false));
         dispatch(
           setReports({
@@ -74,14 +76,14 @@ export const useExpenseReportState = () => {
         setState((prevState) => ({
           ...prevState,
           isEmptyData: data.totalCount ? false : true,
-          isFetchingReceipts: false,
+          isFetchingReports: false,
           isContentLoading: false,
         }));
       } catch (error) {
         dispatch(setIsFetchingDate(false));
         setState((prevState) => ({
           ...prevState,
-          isFetchingReceipts: false,
+          isFetchingReports: false,
           isEmptyData: false,
           isContentLoading: false,
           checkedIds: [],
@@ -148,7 +150,7 @@ export const useExpenseReportState = () => {
     }));
   };
 
-  const onChangeReportFormHandler = (
+  const onChangeReportFormType = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => onChangeStateFieldHandler('modalInputReportFor', event.target.value);
 
@@ -338,7 +340,7 @@ export const useExpenseReportState = () => {
     onEnterCreateCategoryClick,
     
     // form handler
-    onChangeReportFormHandler,
+    onChangeReportFormType,
     onChangeReportForHandler,
     onChangeReportDateHandler,
     onChangeReportNameHandler,

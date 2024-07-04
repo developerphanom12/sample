@@ -4,7 +4,7 @@ import { Styled } from './Input.style';
 import { ErrorText } from '../ErrorText';
 import { CustomDatePicker } from '../CustomDatePicker';
 
-interface InputProps {
+interface InputDatePickerProps {
   isRemoveBorder?: boolean;
   inputHeight?: string;
   isTextArea?: boolean;
@@ -30,7 +30,7 @@ interface InputProps {
   isDisabled?: boolean;
 }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const Input: React.FC<InputDatePickerProps> = (props) => {
   const {
     text,
     inputName,

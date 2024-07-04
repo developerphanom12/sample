@@ -9,9 +9,10 @@ export const REPORT_INITIAL_STATE = {
   checkedReportIds: [],
   searchedItems: [],
   isSearching: false,
-  modalReportFormType: 0,
+  isNewReport: true,
   modalInputReportFor: '',
   modalInputReportDate: '',
+  modalInputReportSelectedDate: new Date(),
   modalInputReportName: '',
 };
 

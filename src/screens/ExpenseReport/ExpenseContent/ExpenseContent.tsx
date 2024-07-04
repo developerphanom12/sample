@@ -5,7 +5,7 @@ import { PaginationPanel } from 'components/PaginationPanel';
 
 import { InboxContentStyles as Styled } from 'screens/Inbox/InboxContent/InboxContent.style';
 import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
-import { TableExpense } from 'components/Table/TableExpense/TableInboxAdmin';
+import { TableReportExpense } from 'components/Table/TableReportExp/TableReportExpense';
 
 export const ExpenseContent: FC<any> = (props) => {
   const {
@@ -34,9 +34,9 @@ export const ExpenseContent: FC<any> = (props) => {
     pages,
     receiptsPerPage,
     onChangePage,
-    isFetchingReceipts,
+    isFetchingReports,
     datePickerRef,
-    receiptList,
+    sortedReportList,
     sortField,
     sortOrder,
     requestSort,
@@ -60,20 +60,17 @@ export const ExpenseContent: FC<any> = (props) => {
             <LoaderComponent theme="preview" />
           </Styled.LoaderWrapper>
         )}
-        <TableExpense
+        <TableReportExpense
+          isAllChecked={isAllChecked}
           onCheckedItemHandler={onCheckedItemHandler}
           onCheckedAllItemsHandler={onCheckedAllItemsHandler}
-          onCheckedPaidHandler={onCheckedPaidHandler}
-          onCheckedApproveHandler={onCheckedApproveHandler}
-          onCheckedPublishMockFuncHandler={onCheckedPublishMockFuncHandler}
-          receiptList={receiptList}
-          isAllChecked={isAllChecked}
+          sortedReportList={sortedReportList}
           dateFormat={dateFormat}
           sortField={sortField}
           sortOrder={sortOrder}
           requestSort={requestSort}
         />
-        {receiptList.length ? (
+        {sortedReportList.length ? (
           <PaginationPanel
             pages={pages}
             currentPage={currentPage}

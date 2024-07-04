@@ -1,67 +1,133 @@
 import { ICurrency } from '../../SignUp/types/signup.types';
 
+export interface IReportTableProps {
+  onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onCheckedAllItemsHandler?: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  isAllChecked: boolean;
+  dateFormat: string;
+  sortField: string;
+  sortOrder: TSorterOrder;
+  requestSort: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  sortedReportList?: IReportList[];
+}
+type TSorterOrder = 'asc' | 'desc' | '';
+
+export interface IReportList {
+  expense_report_id: string;
+  isChecked: boolean;
+  description?: string | null;
+  expense_report_for: string;
+  expense_created_date: Date;
+  expense_report_name: string;
+  report_total_tax: number | null;
+  report_total_amount: number | null;
+}
+
 export interface IExpenseReport {
-    currency: ICurrency;
-    id: string;
-    custom_id: string;
-    net: number | null;
-    photos: string[];
-    invoice_date: Date;
-    due_date: Date;
-    status: string;
-    supplier: string | null;
-    tax: number | null;
-    total: number | null;
-    vat_code: string | null;
-    publish_status: boolean;
-    payment_status: boolean;
-    isChecked: boolean;
+  reportId: string;
+  isChecked: boolean;
+  key: string;
+  reportIndex: number;
+  reportName: string;
+  date: Date | string;
+  tax: number | string | null;
+  total: number | string | null;
 }
 
 export interface ISelectItemReport {
-    id: string;
-    created: string;
-    name: string;
-  }
-  
-  export interface IREPORT_INITIAL_STATE {
-    count: number | null;
-    totalCount: number | null;
-    reportsList: IReceipt[];
-    selectedReport: IReceipt | null;
-    selectedReportIndex: number | null;
-    isFetchingReportData: boolean;
-    isAllChecked: boolean;
-    isCompanyChanged: boolean;
-  }
-  
-  export interface IuseReportState {
-    isEdit?: boolean;
-    searchValue: string;
-    isLoading: boolean;
-    isEmptyData?: boolean;
-    isFetchingReports?: boolean;
-    isContentLoading?: boolean;
-    isFocus?: boolean;
-    checkedReportIds: string[];
-    searchedItems: ITabItem[];
-    isSearching: boolean;
-    modalReportFormType: number;
-    modalInputReportFor: string;
-    modalInputReportDate: Date | null | string;
-    modalInputReportName: string;
-  }
+  id: string;
+  created: string;
+  name: string;
+}
 
-  export interface ICreateReportApi {
-    report_for: string;
-    report_date: Date | null | string;
-    report_name: string;
-    report_receipt?: string[];
-    active_account?: string | null;
-  }
-  export interface IcreateReportHandlerParams {
-    active_account?: string;
-    search?: string;
-    take?: number;
-    skip?: number;
-  }
+export interface IREPORT_INITIAL_STATE {
+  count: number | null;
+  totalCount: number | null;
+  reportsList: IReceipt[];
+  selectedReport: IReceipt | null;
+  selectedReportIndex: number | null;
+  isFetchingReportData: boolean;
+  isAllChecked: boolean;
+  isCompanyChanged: boolean;
+}
+
+export interface IuseReportState {
+  isEdit?: boolean;
+  searchValue: string;
+  isLoading: boolean;
+  isEmptyData?: boolean;
+  isFetchingReports?: boolean;
+  isContentLoading?: boolean;
+  isFocus?: boolean;
+  checkedReportIds: string[];
+  searchedItems: ITabItem[];
+  isSearching: boolean;
+  isNewReport: boolean;
+  modalInputReportFor: string;
+  modalInputReportDate: string;
+  modalInputReportSelectedDate: Date | null;
+  modalInputReportName: string;
+}
+
+export interface ICreateReportApi {
+  report_for: string;
+  report_date: Date | null | string;
+  report_name: string;
+  report_receipt?: string[];
+  active_account?: string | null;
+}
+export interface IcreateReportHandlerParams {
+  active_account?: string;
+  search?: string;
+  take?: number;
+  skip?: number;
+}
+
+
+interface IReportActionModalProps {
+  // isDisableButton?: boolean;
+  isLoading?: boolean;
+  onChangeReportFormHandler: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onChangeReportForHandler: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onChangeReportDateHandler: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onChangeReportNameHandler: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  modalReportCreateButtonHandler: any;
+  modalReportCancelButtonHandler: any;
+
+  // onCloseDeleteModalWindowHandler: any;
+  // onSaveButtonCLickHandler: () => Promise<void>;
+  // onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
+  isModalWindowOpen: boolean;
+  onModalWindowToggle: any;
+
+  headerText: string;
+  radioReportFormType: boolean;
+  inputValueReportFor: string;
+  inputValueReportDate: string;
+  inputValueReportSelectedDate: Date | null;
+  inputValueReportName: string;
+}
+
+interface IReportDeleteModalProps {
+  isLoading?: boolean;
+  onCloseDeleteModalWindowHandler?: () => void;
+  onDeleteButtonClickHandler?: () => Promise<void>;
+  isDeleteModalWindowOpen?: boolean;
+  deleteItemName?: string;
+  categoryName?: string;
+  account?: string;
+}
+
+export interface IReportModal
+  extends IReportActionModalProps,
+  IReportDeleteModalProps { }

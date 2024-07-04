@@ -2,7 +2,7 @@ import React from "react";
 
 import { ThreeDotsMenuStyles as Styled } from "./ThreeDotsMenu.style";
 import { useExpenseReportState } from "screens/ExpenseReport/ExpenseReportstate";
-import { MasterExpenseModalWindowBox } from "components/MasterExpenseModalWindowBox";
+// import { MasterExpenseModalWindowBox } from "components/MasterExpenseModalWindowBox";
 
 export interface IThreeDotsMenu {
 	onMarkAsPaidButtonHandler?: () => Promise<void>;
