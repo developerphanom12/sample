@@ -1,0 +1,13 @@
+{
+  "i18n-ally.localesPaths": [
+    "web/frontend/locales"
+  ],
+  "i18n-ally.enabledFrameworks": [
+    "i18next-shopify"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "[liquid]": {
+    "editor.defaultFormatter": "Shopify.theme-check-vscode",
+    "editor.formatOnSave": true
+  }
+}

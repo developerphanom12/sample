@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      .slider {
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid transparent;
+      }
+
+      .selectElement {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+      }
+
+      .selectElement.visible {
+        display: block;
+      }
+
+      .sizeElement,
+      .colorElement {
+        cursor: pointer;
+
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .colorElement.selectedColor.deselected {
+        color: #0e1b4dbf;
+        font-weight: 400;
+      }
+
+      .sizesContainer h2.sizesHeading {
+        font-size: 14px;
+        margin: 5px 0px;
+        font-weight: 600;
+      }
+
+      .productContainer {
+        position: relative;
+        padding: 10px 5px;
+        background-color: #fff;
+        width: 247px;
+        margin: 5px;
+        border-radius: 10px;
+      }
+      .sizesList {
+        width: 47px;
+        display: grid;
+        gap: 10px;
+        padding: 5px 10px 20px;
+      }
+
+      div#colorsList {
+        height: 170px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 10px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0px 10px;
+        font-size: 14px;
+        margin: 0px;
+      }
+
+      .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        background-color: #fff;
+        @media (max-width: 765px) {
+          flex-direction: column;
+        }
+      }
+
+      .sizesContainer h3 {
+        margin: 0px;
+        color: #000;
+        font-size: 17px;
+        padding: 10px;
+      }
+
+      .sizesList {
+        display: flex;
+        width: 100%;
+        flex: 1;
+      }
+      .sizeElement {
+        height: 30px;
+        width: 30px;
+      }
+
+      .product-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 85%;
+      }
+      .slider.slick-initialized.slick-slider {
+        padding: 0px !important;
+      }
+      .product-section img {
+        width: 100%;
+        height: 300px;
+      }
+      .productContainer h2,
+      h4 {
+        font-size: 15px;
+        margin: 5px 3px;
+        padding: 0px;
+        color: #000;
+        font-family: 'Times New Roman', Times, serif;
+      }
+      .productContainer h4 {
+        font-weight: 400;
+      }
+      .productContainer h2 {
+        font-weight: '600';
+        z-index: 2;
+      }
+      h2.sizesHeading {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0px 10px;
+        font-family: 'Times New Roman', Times, serif;
+        color: #3a0000;
+      }
+
+      .colorElement.selectedColor {
+        color: #000;
+        font-weight: 600;
+      }
+
+      img.thumbnail.slick-slide {
+        border-radius: 50%;
+        border: 1px solid lightgray;
+        padding: 2px;
+        height: 30px;
+        width: 30px !important;
+        margin: 3px;
+        cursor: pointer;
+      }
+      img.slick-slide.slick-current.slick-active {
+        object-fit: cover;
+        width: 270px;
+      }
+      .slick-list.draggable {
+        padding: 0px !important;
+      }
+      .slick-track {
+        margin: 0 !important;
+        transform: translate3d(0px, 0px, 0px) !important;
+      }
+      .sizeElement {
+        border-radius: 5px;
+        text-align: center;
+        background: #1a1a1a;
+        color: #fff;
+        cursor: pointer;
+      }
+      .sizeElement.selectedSize.selected {
+        background-color: #000;
+        font-weight: 700;
+        color: #ffe1e1;
+      }
+
+      .addToCartButton {
+        font-family: 'poppins', 'sans-serif';
+        line-height: 38px;
+        position: relative;
+        bottom: -330px;
+        z-index: 0;
+        transform: translateY(-10px);
+        background-color: #262626;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 267px;
+        opacity: 0;
+        word-spacing: 1px;
+        letter-spacing: 1px;
+        margin-left: 2px;
+        font-size: 14px;
+        transition: 0.5s ease-in-out;
+        border-top-left-radius: 1px;
+        border-top-right-radius: 1px;
+        font-weight: 600;
+      }
+      .addToCartButton:hover {
+        background: #d25b5b;
+      }
+
+      .priceOption:hover {
+        cursor: pointer;
+      }
+      li.priceOption.selectedPriceOption {
+        font-weight: 600;
+        color: #000;
+      }
+      .productContainer:hover .addToCartButton {
+        opacity: 1;
+        transform: translateY(-29px);
+        transition: 0.3s ease;
+        z-index: 1;
+      }
+
+      .selectedOptions {
+        padding: 0px 10px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+      }
+
+      .sizes,
+      .colors,
+      .prices {
+        font-size: 13px;
+      }
+      div#collectionList ul {
+        height: 150px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      .sizesContainer.right {
+        text-align: center;
+        background: red;
+        order: 2; /* or any other appropriate styling for right positioning */
+        /* Add any other styling for right positioning here */
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+    >
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+      async
+    ></script>
+
+    <div class="container">
+      <div class="sizesContainer">
+        <div class="selectedOptions" id="selectedOptions">
+          <div class="colors" id="colors"></div>
+          <div class="sizes" id="sizes"></div>
+          <div class="prices" id="prices"></div>
+        </div>
+        <h3>Collection Filter App</h3>
+        <div id="collectionList" class="collectionList"></div>
+        <h2 class="sizesHeading">Available Sizes</h2>
+        <div class="sizesList" id="sizesList"></div>
+
+        <div class="color">
+          <h2 class="sizesHeading">Available Colors</h2>
+          <div class="colorList" id="colorsList"></div>
+        </div>
+
+        <div class="priceContainer">
+          <h2 class="sizesHeading">Price</h2>
+          <ul class="priceList">
+            <li class="priceOption" data-min="0" data-max="300">0 - 10</li>
+            <li class="priceOption" data-min="301" data-max="600">301 - 600</li>
+            <li class="priceOption" data-min="601" data-max="1000">601 - 1000</li>
+            <li class="priceOption" data-min="1001" data-max="99999">1001+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-section">
+        <div class="slider"></div>
+      </div>
+    </div>
+    <script>
+      function setSizesContainerOrder(order) {
+        const sizesContainer = document.querySelector('.sizesContainer');
+        if (sizesContainer) {
+          if (order === "2") {
+            sizesContainer.classList.add('right');
+            sizesContainer.classList.remove('left');
+          } else if (order === "1") {
+            sizesContainer.classList.add('left');
+            sizesContainer.classList.remove('right');
+          } else {
+            sizesContainer.classList.remove('right');
+            sizesContainer.classList.remove('left');
+          }
+        }
+      }
+      
+      async function fetchSizesContainerOrder() {
+        try {
+          const shopDomain = '{{shop.domain}}';
+          const response = await fetch(`/apps/proxies/apiProduct/getorderdesign?shopName=${encodeURIComponent(shopDomain)}`);
+          const data = await response.json();
+          return data.data; 
+        } catch (error) {
+          console.error('Error fetching sizesContainerOrder:', error);
+          return null;
+        }
+      }
+      
+      document.addEventListener('DOMContentLoaded', async function () {
+        const sizesContainerOrder = await fetchSizesContainerOrder();
+        if (sizesContainerOrder !== null) {
+          setSizesContainerOrder(sizesContainerOrder);
+        }
+      });
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          // Fetch and display collections, get default collectionId
+          const defaultCollectionId = await fetchAndDisplayCollections();
+      
+          // Fetch product data and display products
+          const productData = await fetchProductData();
+          displayProducts(productData);
+      
+          const defaultSize = 'S'; // Example default size
+      
+          // Fetch and display products with default size and default collectionId
+          await fetchAndDisplayProducts(defaultSize, null, defaultCollectionId);
+      
+          // Example of updating collectionId based on user interaction (e.g., click event)
+          const collectionListDiv = document.getElementById('collectionList');
+          collectionListDiv.addEventListener('click', function(event) {
+            const clickedLi = event.target.closest('li');
+            if (clickedLi) {
+              const selectedCollectionId = clickedLi.dataset.collectionId;
+              fetchAndDisplayProducts(defaultSize, null, selectedCollectionId);
+            }
+          });
+        } catch (error) {
+          console.error('Error fetching or displaying data:', error);
+        }
+      });
+      
+
+      async function fetchProductData() {
+        try {
+          const shopDomain = '{{shop.domain}}';
+          const response = await fetch(`/apps/proxies/apiProduct/getproduct?shopName=${encodeURIComponent(shopDomain)}`);
+          return await response.json();
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+          return null;
+        }
+      }
+      {% comment %} async function fethorderdesignpannel() {
+        try {
+          const shopDomain = '{{shop.domain}}';
+          const response = await fetch(`/apps/proxies/orderdesign?shopName=${encodeURIComponent(shopDomain)}`);
+          return await response.json();
+        } catch (error) {
+          console.error('Error fetching product data:', error);
+          return null;
+        }
+      } {% endcomment %}
+
+      async function fetchAndDisplayProducts(size, color, collectionId) {
+        const productInfo = document.querySelector('.product-section');
+        if (!productInfo) {
+          console.error('Product info element not found.');
+          return;
+        }
+
+        try {
+          const sizeParam = size ? `sizes=${size}` : '';
+          const colorParam = color ? `&colors=${color}` : '';
+          const priceOption = document.querySelector('.selectedPriceOption');
+          const collectionParam = collectionId ? `&collectionId=${collectionId}` : '';
+          const shopDomain = '{{shop.domain}}';
+          let minPrice = null;
+          let maxPrice = null;
+          if (priceOption) {
+            minPrice = priceOption.dataset.min;
+            maxPrice = priceOption.dataset.max;
+          }
+          const priceParam = minPrice && maxPrice ? `&minPrice=${minPrice}&maxPrice=${maxPrice}` : '';
+
+          const response = await fetch(
+            `/apps/proxies/apiProduct/getfilter?${sizeParam}${colorParam}${priceParam}${collectionParam}&shopName=${shopDomain}`
+          );
+          const data = await response.json();
+          console.log('data', data);
+          productInfo.innerHTML = '';
+
+          if (data.products.length > 0) {
+            data.products.forEach((product) => {
+              const productContainer = document.createElement('div');
+              productContainer.classList.add('productContainer');
+
+              const sliderContainer = document.createElement('div');
+              sliderContainer.classList.add('slider');
+
+              function addAddToCartButton(productContainer, variantId, handle) {
+                productContainer.appendChild(addToCartButton);
+              }
+
+              const addToCartButton = document.createElement('button');
+              addToCartButton.textContent = 'Add to Cart';
+
+              product.variants.forEach((variant) => {
+                if (variant.image) {
+                  const img = document.createElement('img');
+                  img.src = variant.image;
+                  sliderContainer.appendChild(img);
+
+                  addToCartButton.classList.add('addToCartButton');
+
+                  // Add event listener to the button if needed
+                  addToCartButton.addEventListener('click', () => {
+                    addToCart(variantId, handleId);
+                  });
+                  const variantId = product.variants[0].id;
+                  const handleId = product.handle; // Assuming the first variant is selected
+                  // Assuming the first variant is selected
+                  addAddToCartButton(productContainer, variantId, handleId);
+                  productContainer.appendChild(addToCartButton);
+                  console.log(handleId, 'handleId');
+                }
+              });
+
+              // Initialize slick slider for the main images
+              $(sliderContainer).slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                asNavFor: '.thumbnails',
+                arrows: false,
+                fade: true,
+                adaptiveHeight: true,
+              });
+              // ---------------------------thumbnail-----------------------------------------------
+              const thumbnailContainer = document.createElement('div');
+              thumbnailContainer.classList.add('thumbnails');
+
+              const colorsAdded = new Set(); // Create a set to track added colors for thumbnails
+
+              product.variants.forEach((variant) => {
+                if (variant.image) {
+                  const color = variant.selectedOptions
+                    .find((option) => option.name.toLowerCase() === 'color')
+                    ?.value.toLowerCase();
+                  if (color && !colorsAdded.has(color)) {
+                    const thumbnailImg = document.createElement('img');
+                    thumbnailImg.src = variant.image;
+                    thumbnailImg.classList.add('thumbnail');
+                    thumbnailImg.addEventListener('click', () => {
+                      $(sliderContainer).slick('slickGoTo', $(thumbnailImg).index());
+                    });
+                    thumbnailContainer.appendChild(thumbnailImg);
+
+                    colorsAdded.add(color); // Add color to the set
+                  }
+                }
+              });
+
+              // Initialize slick slider for the thumbnails
+              // Calculate the number of thumbnails to show dynamically
+
+              $(thumbnailContainer).slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: '.slider',
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true,
+              });
+
+              productContainer.appendChild(sliderContainer);
+              // ------------------------------------------end---------------------------------------------
+
+              const titleElement = document.createElement('h2');
+              titleElement.textContent = product.title;
+              productContainer.appendChild(titleElement);
+
+              const priceElement = document.createElement('h4');
+              priceElement.textContent = `$${product.variants[0].price}`; // Displaying the price of the first variant
+              productContainer.appendChild(priceElement);
+
+              // Display the selected color
+              const selectedColorElement = document.createElement('p');
+              // selectedColorElement.textContent = `Selected Color: ${color}`;
+              productContainer.appendChild(selectedColorElement);
+
+              productInfo.appendChild(productContainer);
+              productContainer.appendChild(thumbnailContainer);
+            });
+          } else {
+            const noDataMessage = document.createElement('p');
+            noDataMessage.textContent = 'No products found for the selected size and color.';
+            productInfo.appendChild(noDataMessage);
+          }
+        } catch (error) {
+          productInfo.innerHTML = '<p>No matching products were found..</p>';
+          console.error('Error fetching product data:', error);
+        }
+      }
+
+      function addAddToCartButton(productContainer, variantId, handle) {
+        const addToCartButton = document.createElement('button');
+        addToCartButton.textContent = 'Add to Cart';
+        addToCartButton.addEventListener('click', () => {
+          addToCart(variantId, handle);
+        });
+        productContainer.appendChild(addToCartButton);
+      }
+
+      async function addToCart(variantId, handle) {
+        try {
+          const parts = variantId.split('/');
+          const numericId = parts[parts.length - 1];
+          const formattedTitle = handle.replace(/\s+/g, '-');
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              id: numericId,
+              quantity: 1,
+            }),
+          });
+          if (response.ok) {
+            console.log('Product added to cart successfully.');
+            window.location.href = `/products/${formattedTitle}`;
+          } else {
+            console.error('Error adding product to cart:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error adding product to cart:', error);
+        }
+      }
+
+     
+  function updateSelection(element, container, fetchData) {
+    const selectedClass = 'selected';
+    const deselectedClass = 'deselected';
+
+    if (element.classList.contains(selectedClass)) {
+      element.classList.remove(selectedClass);
+      element.classList.add(deselectedClass);
+
+      if (container.id === 'sizesList') {
+        selectedSize = null;
+      } else if (container.id === 'colorsList') {
+        selectedColor = null;
+      } else if (container.id === 'collectionList') {
+        selectedCollection = null;
+      }
+    } else {
+      const selectedElement = container.querySelector(`.${selectedClass}`);
+
+      if (selectedElement) {
+        selectedElement.classList.remove(selectedClass);
+        selectedElement.classList.add(deselectedClass);
+      }
+
+      element.classList.add(selectedClass);
+      element.classList.remove(deselectedClass);
+
+      if (container.id === 'sizesList') {
+        selectedSize = element.textContent;
+      } else if (container.id === 'colorsList') {
+        selectedColor = element.textContent;
+      } else if (container.id === 'collectionList') {
+        selectedCollection = {
+          id: element.dataset.collectionId,
+          title: element.textContent
+        };
+      }
+    }
+
+    updateSelectedOptions();
+    fetchData(selectedSize, selectedColor, selectedCollection ? selectedCollection.id : null);
+  }
+
+  function updateSelectedOptions() {
+    const selectedOptionsDiv = document.getElementById('selectedOptions');
+    if (!selectedOptionsDiv) return;
+
+    let selectedOptionsText = 'Selected options: ';
+    if (selectedSize) {
+      selectedOptionsText += `Size: ${selectedSize}, `;
+    }
+    if (selectedColor) {
+      selectedOptionsText += `Color: ${selectedColor}, `;
+    }
+    if (selectedCollection) {
+      selectedOptionsText += `Collection: ${selectedCollection.title}, `;
+    }
+    if (selectedPriceOption) {
+      const minPrice = selectedPriceOption.dataset.min;
+      const maxPrice = selectedPriceOption.dataset.max;
+      selectedOptionsText += `Price: ${minPrice} - ${maxPrice}, `;
+    }
+
+    selectedOptionsText = selectedOptionsText.slice(0, -2);
+
+    selectedOptionsDiv.textContent = selectedOptionsText;
+  }
+
+  const sizesContainer = document.getElementById('sizesList');
+  const colorsContainer = document.getElementById('colorsList');
+  const priceOptions = document.querySelectorAll('.priceOption');
+  const collectionOptions = document.querySelectorAll('.collectionItem');
+
+  let selectedSize = null;
+  let selectedColor = null;
+  let selectedPriceOption = null;
+  let selectedCollection = null;
+
+  sizesContainer.addEventListener('click', (event) => {
+    if (event.target.classList.contains('sizeElement')) {
+      updateSelection(event.target, sizesContainer, fetchAndDisplayProducts);
+    }
+  });
+
+  colorsContainer.addEventListener('click', (event) => {
+    if (event.target.classList.contains('colorElement')) {
+      updateSelection(event.target, colorsContainer, fetchAndDisplayProducts);
+    }
+  });
+
+  priceOptions.forEach((option) => {
+    option.addEventListener('click', async () => {
+      const selectedOption = document.querySelector('.selectedPriceOption');
+      if (selectedOption) {
+        selectedOption.classList.remove('selectedPriceOption');
+      }
+
+      if (selectedOption !== option) {
+        option.classList.add('selectedPriceOption');
+        selectedPriceOption = option;
+      } else {
+        selectedPriceOption = null;
+      }
+      updateSelectedOptions();
+      await fetchAndDisplayProducts(selectedSize, selectedColor, selectedCollection ? selectedCollection.id : null);
+    });
+  });
+      const clearColorButton = document.getElementById('clearColorButton');
+      clearColorButton.addEventListener('click', () => {
+        selectedColor = null;
+        const selectedElement = colorsContainer.querySelector('.selected');
+        if (selectedElement) {
+          selectedElement.classList.remove('selected');
+        }
+        updateSelectedOptions();
+        fetchAndDisplayProducts(selectedSize, selectedColor, selectedCollection ? selectedCollection.id : null);
+      });
+    
+      const clearSizeButton = document.getElementById('clearSizeButton');
+      clearSizeButton.addEventListener('click', () => {
+        selectedSize = null;
+        const selectedElement = sizesContainer.querySelector('.selected');
+        if (selectedElement) {
+          selectedElement.classList.remove('selected');
+        }
+        updateSelectedOptions();
+        fetchAndDisplayProducts(selectedSize, selectedColor, selectedCollection ? selectedCollection.id : null);
+      });
+    
+      const clearPriceButton = document.getElementById('clearPriceButton');
+      clearPriceButton.addEventListener('click', () => {
+        selectedPriceOption = null;
+        const selectedOption = document.querySelector('.selectedPriceOption');
+        if (selectedOption) {
+          selectedOption.classList.remove('selectedPriceOption');
+        }
+        updateSelectedOptions();
+        fetchAndDisplayProducts(selectedSize, selectedColor, selectedCollection ? selectedCollection.id : null);
+      });
+
+      function getTextColor(backgroundColor) {
+        const rgb = parseInt(backgroundColor.slice(1), 16);
+        const r = (rgb >> 16) & 0xff;
+        const g = (rgb >> 8) & 0xff;
+        const b = (rgb >> 0) & 0xff;
+        const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        return luminance > 128 ? '#000000' : '#ffffff'; // Black for light backgrounds, white for dark backgrounds
+      }
+
+      async function displayProducts(data) {
+        try {
+          const colorResponse = await fetch('/apps/proxies/apiProduct/getcolorlist');
+          const colorData = await colorResponse.json();
+      
+          console.log("Color data from API:", colorData); // Check the fetched color data in console
+      
+          if (colorData.success === 200) {
+            const colorMap = {};
+            colorData.data.forEach(color => {
+              colorMap[color.color.toUpperCase()] = color.color; // Store color_name for background
+            });
+      
+            sizesContainer.innerHTML = '';
+            colorsContainer.innerHTML = '';
+      
+            if (!data || !data.products || data.products.edges.length === 0) {
+              const noDataMessage = document.createElement('p');
+              noDataMessage.textContent = 'No data available.';
+              sizesContainer.appendChild(noDataMessage);
+              return;
+            }
+      
+            const sizesSet = new Set();
+      
+            data.products.edges.forEach((productEdge) => {
+              productEdge.node.variants.edges.forEach((variantEdge) => {
+                variantEdge.node.selectedOptions.forEach((option) => {
+                  if (option.name.toLowerCase() === 'size') {
+                    sizesSet.add(option.value.toUpperCase());
+                  }
+                });
+              });
+            });
+      
+            const sizesArray = Array.from(sizesSet).sort();
+            const colorsArray = Object.keys(colorMap).sort(); // Use Object.keys to get color names
+      
+            // Display sizes
+            if (sizesArray.length > 0) {
+              sizesArray.forEach((size) => {
+                const sizeElement = document.createElement('div');
+                sizeElement.classList.add('sizeElement');
+                sizeElement.textContent = size;
+                sizesContainer.appendChild(sizeElement);
+              });
+            } else {
+              const noSizesMessage = document.createElement('p');
+              noSizesMessage.textContent = 'No sizes available.';
+              sizesContainer.appendChild(noSizesMessage);
+            }
+      
+            // Display colors dynamically
+            if (colorsArray.length > 0) {
+              colorsArray.forEach((colorName) => {
+                const colorElement = document.createElement('div');
+                colorElement.classList.add('colorElement');
+                colorElement.textContent = colorMap[colorName.toUpperCase()]; // Set color name
+      
+                // Set background color based on color_name
+                const backgroundColor = colorMap[colorName.toUpperCase()];
+                colorElement.style.backgroundColor = backgroundColor;
+      
+                // Set text color for better visibility
+                colorElement.style.color = getTextColor(backgroundColor);
+      
+                colorsContainer.appendChild(colorElement);
+              });
+            } else {
+              const noColorsMessage = document.createElement('p');
+              noColorsMessage.textContent = 'No colors available.';
+              colorsContainer.appendChild(noColorsMessage);
+            }
+      
+          } else {
+            console.error('Failed to fetch color data:', colorData.message);
+          }
+        } catch (error) {
+          console.error('Error fetching color data:', error);
+        }
+      }
+      
+      
+      async function fetchAndDisplayCollections() {
+        try {
+          const response = await fetch(`/apps/proxies/apiProduct/getcollectionslist?shopName={{shop.domain}}`);
+          const responseData = await response.json();
+      
+          if (responseData.status === 200) {
+            const mysqlData = responseData.data.mysqlData;
+      
+            if (mysqlData && mysqlData.length > 0) {
+              // Assuming you want to use the first collection_id as default
+              const defaultCollectionId = mysqlData[0].collection_id;
+      
+              displayCollections(responseData.data);
+      
+              return defaultCollectionId; // Return the default collectionId
+            } else {
+              console.error('No collections found or empty mysqlData array.');
+            }
+          } else {
+            console.error('Error fetching collections:', responseData.status);
+          }
+        } catch (error) {
+          console.error('Error fetching collections:', error);
+        }
+      
+        return null; // Return null if no default collectionId is found
+      }
+      
+      
+      function displayCollections(data) {
+        const collectionListDiv = document.getElementById('collectionList');
+        const { mysqlData, shopifyData } = data;
+      
+        if (!mysqlData || mysqlData.length === 0) {
+          collectionListDiv.innerText = 'No collections found in MySQL data.';
+          return;
+        }
+      
+        collectionListDiv.innerHTML = '';
+      
+        const ul = document.createElement('ul');
+      
+        // Process and display MySQL data
+        mysqlData.forEach((collection) => {
+          const li = document.createElement('li');
+          li.textContent = collection.collection_name;
+          li.dataset.collectionId = collection.collection_id;
+          li.addEventListener('click', () => {
+            updateSelection(li, collectionListDiv, fetchAndDisplayProducts);
+          });
+          ul.appendChild(li);
+        });
+      
+        // Process and display Shopify data
+        if (shopifyData && shopifyData.data && shopifyData.data.collections && shopifyData.data.collections.edges) {
+          shopifyData.data.collections.edges.forEach((edge) => {
+            const collection = edge.node;
+            const li = document.createElement('li');
+            li.textContent = collection.title;
+            li.dataset.collectionId = collection.id;
+            li.addEventListener('click', () => {
+              updateSelection(li, collectionListDiv, fetchAndDisplayProducts);
+            });
+            ul.appendChild(li);
+          });
+        }
+      
+        collectionListDiv.appendChild(ul);
+      }
+    
+    </script>
+  </body>
+</html>

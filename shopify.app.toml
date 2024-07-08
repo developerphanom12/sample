@@ -1,0 +1,38 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "05ab46c3999338f66433094baca6bee0"
+name = "Collection-Filter"
+handle = "collection-filter-7"
+application_url = "https://baking-revolutionary-uk-submitted.trycloudflare.com"
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "fashion-hub-444.myshopify.com"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_product_listings,read_products,write_products"
+
+[auth]
+redirect_urls = [
+  "https://baking-revolutionary-uk-submitted.trycloudflare.com/auth/callback",
+  "https://baking-revolutionary-uk-submitted.trycloudflare.com/auth/shopify/callback",
+  "https://baking-revolutionary-uk-submitted.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+  [webhooks.privacy_compliance]
+  customer_deletion_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/customer_deletion"
+  customer_data_request_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/charge"
+  shop_deletion_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/deletion"
+
+[app_proxy]
+url = "https://baking-revolutionary-uk-submitted.trycloudflare.com"
+subpath = "proxies"
+prefix = "apps"
+
+[pos]
+embedded = false

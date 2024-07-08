@@ -1,0 +1,240 @@
+{% comment %} {{ shop.name }}
+{{ shop.domain }}
+{{ product.title }}
+<!doctype html>
+  <html lang="en">
+    <head>
+      <style>
+        .product-section {
+          margin-bottom: 20px;
+        }
+  
+        .productContainer {
+          padding: 10px;
+          margin-bottom: 10px;
+  
+  
+        }
+  
+        .productContainer img {
+          width: 73px;
+          height: 263px;
+          margin-bottom: 10px;
+        }
+  
+        .sizesContainer {
+          margin-top: 20px;
+        }
+  
+        .sizesHeading {
+          color: #abff00;
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 12px;
+        }
+  
+        .sizesList {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+  
+        .sizeElement {
+          padding: 8px 12px;
+          background-color: #f0f0f0;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+  
+        .sizeElement:hover {
+          background-color: #8f8f8f;
+        }
+        .deselected {
+          color: black;
+          /* Change color to black for deselected elements */
+        }
+        .priceList {
+          list-style: none;
+        }
+  
+        .priceContainer {
+          list-style: none;
+        }
+  
+        .priceList {
+          display: flex;
+          gap: 28px;
+          margin: 0px list-style: none;
+        }
+  
+        .priceOption:hover {
+          background-color: #8f8f8f;
+        }
+        .selectedPriceOption {
+          color: red;
+        }
+        .selectedSize {
+          color: red;
+        }
+  
+        .priceOption {
+          cursor: pointer
+        }
+  
+        .colorElement {
+          padding: 8px 12px;
+          background-color: #f0f0f0;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+  
+        .colorList {
+          display: flex;
+        }
+  
+        .colorElement:hover {
+          background-color: #8f8f8f;
+        }
+  
+        .selectedColor {
+          color: red
+        }
+        img.slick-slide.slick-cloned {
+          object-fit: contain;
+        }
+  
+        .slider {
+          width: 80%;
+          margin: 20px auto auto;
+        }
+  
+        .main-image {
+          max-height: 400px;
+          width: auto;
+          margin: auto;
+        }
+  
+        .thumbnail {
+          width: 80px;
+          height: auto;
+          margin: 5px;
+          cursor: pointer;
+        }
+        .thumbnailImg {
+          width: 12px;
+          height: 12px cursor: pointer;
+        }
+        .collectionList ul  {
+        list-style:none;
+        }
+  
+        .thumbnailImg img {}
+      </style>
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+      >
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+      >
+      <!-- Include jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
+    </head>
+    <body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+  
+      <div class="product-section">
+        <div class="slider"></div>
+      </div>
+  
+      <div id="collectionList"></div>
+  
+      <div class="sizesContainer">
+        <h2 class="sizesHeading">Available Sizes</h2>
+        <div class="sizesList" id="sizesList"></div>
+        <h2 class="sizesHeading">Available Colors</h2>
+        <div class="colorList" id="colorsList"></div>
+  
+        <div class="priceContainer">
+          <div class="priceHeading">Price</div>
+          <ul class="priceList">
+            <li
+              class="priceOption"
+              data-min="0"
+              data-max="300"
+            >
+              0 - 10
+            </li>
+            <li
+              class="priceOption"
+              data-min="301"
+              data-max="600"
+            >
+              301 - 600
+            </li>
+            <li
+              class="priceOption"
+              data-min="601"
+              data-max="1000"
+            >
+              601 - 1000
+            </li>
+            <li
+              class="priceOption"
+              data-min="1001"
+              data-max="99999"
+            >
+              1001+
+            </li>
+          </ul>
+        </div>
+  
+        <div id="selectedOptions"></div>
+      </div>
+      <div id="selectedOptions"></div>
+      <div class="product-section">
+        <div class="slider"></div>
+      </div>
+  
+
+    <script>
+      async function fetchAndDisplayCollections() {
+        try {
+          const response = await fetch(`apps/proxies/collectionslist?shopName={{shop.domain}}`);
+          const data = await response.json();
+          displayCollections(data.data);
+        } catch (error) {
+          console.error('Error fetching collections:', error);
+        }
+      }
+function displayCollections(collections) {
+  const collectionListDiv = document.getElementById('collectionList');
+  if (!collections || collections.length === 0) {
+    collectionListDiv.innerText = 'No collections found.';
+    return;
+  }
+
+  collectionListDiv.innerHTML = '';
+
+  const ul = document.createElement('ul');
+
+
+  collections.forEach((collection) => {
+    const li = document.createElement('li');
+    li.textContent = collection.title;
+    ul.appendChild(li);
+    
+  });
+
+  collectionListDiv.appendChild(ul);
+}
+
+document.addEventListener('DOMContentLoaded', fetchAndDisplayCollections);
+    </script>
+  </body>
+</html> {% endcomment %}
