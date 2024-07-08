@@ -59,7 +59,7 @@ export const FilesUploadPreview: FC = () => {
                 onClick={nameToShow && nameToShow === 'Upload Invoice' ? onCreateSalesHandler : onSaveClickHandler}
               >
                 {isDisableButton
-                  ? 'Choose only 10 receipts'
+                  ? 'Choose only 50 receipts'
                   : `${nameToShow && nameToShow === 'Upload Invoice' ? 'Upload Invoice' : 'Upload Receipt'} (${previewFiles.length})`}
               </Button>
             </Styled.ButtonsBox>
