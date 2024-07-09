@@ -10,11 +10,15 @@ import { DeliveryMethod, Session } from "@shopify/shopify-api";
 import Stripe from 'stripe';
 import { FilterRoutes } from "./routes/FilterRoutes.js";
 const stripe = new Stripe('sk_test_51LXnk3SJnGxZHiXjkgEjb9t9x26OZ7ZrEbshcB5jISX6ThscyeOUThQH7EHyHXwpTvZ0vJPFUj9QE3aWsC4q91eq0075BWV3Vg');
-const PORT = parseInt(
-  process.env.BACKEND_PORT || process.env.PORT || "3000",
-  10
-);
 
+import dotenv  from 'dotenv'
+ 
+dotenv.config(); 
+
+const PORT = 
+  process.env.BACKEND_PORT 
+
+  console.log("port",PORT)
 const STATIC_PATH =
   process.env.NODE_ENV === "production"
     ? `${process.cwd()}/frontend/dist`
@@ -486,7 +490,7 @@ app.post("/api/colors", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  console.log(`Server is running on ${PORT} `);
 });
 
 app.use(shopify.cspHeaders());

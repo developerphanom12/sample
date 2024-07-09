@@ -1,3 +1,4 @@
+import 'dotenv/config'; // Add this line to load environment variables
 import { BillingInterval, LATEST_API_VERSION } from "@shopify/shopify-api";
 import { shopifyApp } from "@shopify/shopify-app-express";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
@@ -15,6 +16,10 @@ const billingConfig = {
 
 const shopify = shopifyApp({
   api: {
+    apiKey: process.env.SHOPIFY_API_KEY,
+    apiSecretKey: process.env.SHOPIFY_SECRET_KEY,
+    scopes: process.env.SHOPIFY_SCOPES.split(','),
+    hostName: process.env.SHOPIFY_HOST_NAME,
     apiVersion: LATEST_API_VERSION,
     restResources,
     billing: undefined,
