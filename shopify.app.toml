@@ -3,7 +3,7 @@
 client_id = "05ab46c3999338f66433094baca6bee0"
 name = "Collection-Filter"
 handle = "collection-filter-7"
-application_url = "https://naval-sauce-dude-kits.trycloudflare.com"
+application_url = "https://binary-clean-involves-was.trycloudflare.com"
 embedded = false
 
 [build]
@@ -16,21 +16,21 @@ scopes = "read_product_listings,read_products,write_products"
 
 [auth]
 redirect_urls = [
-  "https://naval-sauce-dude-kits.trycloudflare.com/auth/callback",
-  "https://naval-sauce-dude-kits.trycloudflare.com/auth/shopify/callback",
-  "https://naval-sauce-dude-kits.trycloudflare.com/api/auth/callback"
+  "https://binary-clean-involves-was.trycloudflare.com/auth/callback",
+  "https://binary-clean-involves-was.trycloudflare.com/auth/shopify/callback",
+  "https://binary-clean-involves-was.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
 api_version = "2024-04"
 
   [webhooks.privacy_compliance]
-  customer_deletion_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/customer_deletion"
-  customer_data_request_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/charge"
-  shop_deletion_url = "https://structure-protected-january-fcc.trycloudflare.com/api/webhooks/deletion"
+  customer_deletion_url = "https://binary-clean-involves-was.trycloudflare.com/api/webhooks/customer_deletion"
+  customer_data_request_url = "https://binary-clean-involves-was.trycloudflare.com/api/webhooks/charge"
+  shop_deletion_url = "https://binary-clean-involves-was.trycloudflare.com/api/webhooks/deletion"
 
 [app_proxy]
-url = "https://naval-sauce-dude-kits.trycloudflare.com"
+url = "https://binary-clean-involves-was.trycloudflare.com"
 subpath = "proxies"
 prefix = "apps"
 
