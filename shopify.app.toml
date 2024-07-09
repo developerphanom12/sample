@@ -3,7 +3,7 @@
 client_id = "05ab46c3999338f66433094baca6bee0"
 name = "Collection-Filter"
 handle = "collection-filter-7"
-application_url = "https://binary-clean-involves-was.trycloudflare.com"
+application_url = "https://officer-jacksonville-resorts-taxes.trycloudflare.com"
 embedded = false
 
 [build]
@@ -16,9 +16,9 @@ scopes = "read_product_listings,read_products,write_products"
 
 [auth]
 redirect_urls = [
-  "https://binary-clean-involves-was.trycloudflare.com/auth/callback",
-  "https://binary-clean-involves-was.trycloudflare.com/auth/shopify/callback",
-  "https://binary-clean-involves-was.trycloudflare.com/api/auth/callback"
+  "https://officer-jacksonville-resorts-taxes.trycloudflare.com/auth/callback",
+  "https://officer-jacksonville-resorts-taxes.trycloudflare.com/auth/shopify/callback",
+  "https://officer-jacksonville-resorts-taxes.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -30,7 +30,7 @@ api_version = "2024-04"
   shop_deletion_url = "https://binary-clean-involves-was.trycloudflare.com/api/webhooks/deletion"
 
 [app_proxy]
-url = "https://binary-clean-involves-was.trycloudflare.com"
+url = "https://officer-jacksonville-resorts-taxes.trycloudflare.com"
 subpath = "proxies"
 prefix = "apps"
 
