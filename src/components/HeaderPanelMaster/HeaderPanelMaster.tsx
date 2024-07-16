@@ -32,7 +32,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             isHiddenLabel
             isNoMargin
             inputTheme="search"
-            placeHolder="Search here"
+            placeHolder="Search"
           />
           <Styled.IconWrapper>
             <Icon type="smallSearchIcon" />
@@ -46,6 +46,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             themedButton="primary"
             width="primary"
           >
+             <Icon type="addSign" />
             {buttonText}
           </Button>
         </Styled.ButtonWrapper>

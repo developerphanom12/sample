@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SingleValue } from 'react-select';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleValue } from "react-select";
 
-import { getUserRole } from 'services/utils';
-import { IState } from 'services/redux/reducer';
-import { useToggle } from 'hooks/useToggle';
-import { useDebounce } from 'hooks/useDebounce';
-import { usePagination } from 'hooks/usePagination';
+import { getUserRole } from "services/utils";
+import { IState } from "services/redux/reducer";
+import { useToggle } from "hooks/useToggle";
+import { useDebounce } from "hooks/useDebounce";
+import { usePagination } from "hooks/usePagination";
 
 import {
   createTabItem,
@@ -14,13 +14,13 @@ import {
   getAllTabItems,
   getTabItemById,
   deleteTabItem,
-} from '../master.api';
+} from "../master.api";
 
-import { setSupplierAccounts, setTabItem } from '../reducer/master.reducer';
-import { IuseMasterState } from '../types/master.types';
-import { TAB_INITIAL_STATE } from '../master.constants';
+import { setCustomer, setTabItem } from "../reducer/master.reducer";
+import { IuseMasterState } from "../types/master.types";
+import { TAB_INITIAL_STATE } from "../master.constants";
 
-export const useSuppliersTabState = () => {
+export const useCustomersTabState = () => {
   const initialState = TAB_INITIAL_STATE;
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const useSuppliersTabState = () => {
 
   const {
     master: {
-      supplierAccounts: { data: suppliersList, count },
+      supplier: { data: suppliersList, count },
       selectedCategory,
     },
     user: {
@@ -39,11 +39,11 @@ export const useSuppliersTabState = () => {
     },
   } = useSelector((state: IState) => state);
 
-  const userRole = getUserRole(accounts || [], active_account || '')
+  const userRole = getUserRole(accounts || [], active_account || "")
     ?.role as TRoles;
 
   useEffect(() => {
-    !count && onChangeStateFieldHandler('isEmptyData', true);
+    !count && onChangeStateFieldHandler("isEmptyData", true);
   }, []);
 
   const onChangeStateFieldHandler = (
@@ -69,26 +69,26 @@ export const useSuppliersTabState = () => {
     }));
   };
 
-  const onFocusSearchHandler = () => onChangeStateFieldHandler('isFocus', true);
-  const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);
+  const onFocusSearchHandler = () => onChangeStateFieldHandler("isFocus", true);
+  const onBlurHandler = () => onChangeStateFieldHandler("isFocus", false);
 
   const onChangeCategoryNameValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('modalInputValue', event.target.value);
+  ) => onChangeStateFieldHandler("modalInputValue", event.target.value);
 
-  const onGetAllSuppliersHandler = async (
+  const onGetCustomerHandler = async (
     params?: ISearchParams,
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isContentLoading', true);
-      const { data } = await getAllTabItems('supplier', {
+      onChangeStateFieldHandler("isContentLoading", true);
+      const { data } = await getAllTabItems("customer", {
         ...params,
         active_account,
       });
       isSearching
-        ? onChangeStateFieldHandler('searchedItems', data.data)
-        : dispatch(setSupplierAccounts({ data: data.data, count: data.count }));
+        ? onChangeStateFieldHandler("searchedItems", data.data)
+        : dispatch(setCustomer({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
         isContentLoading: false,
@@ -110,21 +110,21 @@ export const useSuppliersTabState = () => {
     }
   };
 
-  const onCreateSupplierHandler = async () => {
+  const onCreateCustomerHandler = async () => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
-      !count && onChangeStateFieldHandler('isFetchingData', true);
+      onChangeStateFieldHandler("isLoading", true);
+      !count && onChangeStateFieldHandler("isFetchingData", true);
       await createTabItem(
         { name: state.modalInputValue, active_account },
-        'supplier'
+        "supplier"
       );
       onChangePage({ selected: 0 });
 
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
-        searchValue: '',
-        modalInputValue: '',
+        searchValue: "",
+        modalInputValue: "",
       }));
       onModalWindowToggle();
     } catch (error) {
@@ -132,16 +132,16 @@ export const useSuppliersTabState = () => {
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
-        searchValue: '',
+        searchValue: "",
         isFetchingData: false,
-        modalInputValue: '',
+        modalInputValue: "",
       }));
     }
   };
 
-  const onEnterCreateSupplierClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter') return;
-    state.isEdit ? onSaveButtonClickHandler() : onCreateSupplierHandler();
+  const onEnterCreateCustomerClick = (event: React.KeyboardEvent) => {
+    if (event.key !== "Enter") return;
+    state.isEdit ? onSaveButtonClickHandler() : onCreateCustomerHandler();
   };
 
   const [isModalWindowOpen, onModalWindowToggle] = useToggle();
@@ -149,7 +149,7 @@ export const useSuppliersTabState = () => {
 
   const onDeleteItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier', active_account);
+      const { data } = await getTabItemById(itemId, "supplier", active_account);
       dispatch(setTabItem(data));
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -161,9 +161,9 @@ export const useSuppliersTabState = () => {
     try {
       const isLastElementOnPage = suppliersList.length === 1;
       onDeleteItem(count, isLastElementOnPage);
-      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
-      count !== 1 && onChangeStateFieldHandler('isContentLoading', true);
-      onChangeStateFieldHandler('isLoading', true);
+      count === 1 && onChangeStateFieldHandler("isFetchingData", true);
+      count !== 1 && onChangeStateFieldHandler("isContentLoading", true);
+      onChangeStateFieldHandler("isLoading", true);
 
       const skip =
         currentPage === 0
@@ -173,30 +173,30 @@ export const useSuppliersTabState = () => {
           : currentPage * +itemsPerPage.value;
 
       await deleteTabItem(
-        selectedCategory?.id || '',
-        'supplier',
+        selectedCategory?.id || "",
+        "supplier",
         active_account
       );
 
-      const { data } = await getAllTabItems('supplier', {
+      const { data } = await getAllTabItems("supplier", {
         take: +itemsPerPage.value,
         skip,
         active_account,
       });
-      dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
+      dispatch(setCustomer({ count: data.count, data: data.data }));
 
-      onChangeStateFieldHandler('isContentLoading', false);
-      onChangeStateFieldHandler('isEmptyData', data.count ? false : true);
-      count === 1 && onChangeStateFieldHandler('isFetchingData', false);
-      onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('searchValue', '');
+      onChangeStateFieldHandler("isContentLoading", false);
+      onChangeStateFieldHandler("isEmptyData", data.count ? false : true);
+      count === 1 && onChangeStateFieldHandler("isFetchingData", false);
+      onChangeStateFieldHandler("isLoading", false);
+      onChangeStateFieldHandler("searchValue", "");
       onDeleteModalWindowToggle();
     } catch (error) {
-      onChangeStateFieldHandler('isEmptyData', !count ? true : false);
-      onChangeStateFieldHandler('isFetchingData', false);
-      onChangeStateFieldHandler('isContentLoading', false);
-      onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('searchValue', '');
+      onChangeStateFieldHandler("isEmptyData", !count ? true : false);
+      onChangeStateFieldHandler("isFetchingData", false);
+      onChangeStateFieldHandler("isContentLoading", false);
+      onChangeStateFieldHandler("isLoading", false);
+      onChangeStateFieldHandler("searchValue", "");
       onDeleteModalWindowToggle();
       console.log(error);
     }
@@ -204,20 +204,20 @@ export const useSuppliersTabState = () => {
 
   const onEditItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier', active_account);
+      const { data } = await getTabItemById(itemId, "supplier", active_account);
       dispatch(setTabItem(data));
       onModalWindowToggle();
       setState((prevState) => ({
         ...prevState,
-        modalInputValue: data?.name || '',
+        modalInputValue: data?.name || "",
         prevInputValue: data?.name,
         isEdit: true,
       }));
     } catch (error) {
       setState((prevState) => ({
         ...prevState,
-        modalInputValue: '',
-        prevInputValue: '',
+        modalInputValue: "",
+        prevInputValue: "",
         isEdit: false,
       }));
       console.log(error);
@@ -226,26 +226,26 @@ export const useSuppliersTabState = () => {
 
   const onSaveButtonClickHandler = async () => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
+      onChangeStateFieldHandler("isLoading", true);
       await updateTabItem(
         {
-          id: selectedCategory?.id || '',
+          id: selectedCategory?.id || "",
           name: state.modalInputValue,
           active_account,
         },
-        'supplier'
+        "supplier"
       );
-      const { data } = await getAllTabItems('supplier', {
+      const { data } = await getAllTabItems("supplier", {
         active_account,
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
       });
-      dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
+      dispatch(setCustomer({ count: data.count, data: data.data }));
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
         isEdit: false,
-        modalInputValue: '',
+        modalInputValue: "",
       }));
       onModalWindowToggle();
     } catch (error) {
@@ -253,7 +253,7 @@ export const useSuppliersTabState = () => {
         ...prevState,
         isEdit: false,
         isLoading: false,
-        modalInputValue: '',
+        modalInputValue: "",
       }));
       console.log(error);
       onModalWindowToggle();
@@ -266,23 +266,23 @@ export const useSuppliersTabState = () => {
     onModalWindowToggle();
     setState((prevState) => ({
       ...prevState,
-      modalInputValue: '',
+      modalInputValue: "",
       isEdit: false,
     }));
   };
 
   const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
-    onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
-    state.searchValue && onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler("isContentLoading", true);
+    onChangeStateFieldHandler("isFocus", true);
+    state.searchValue && onChangeStateFieldHandler("searchValue", "");
 
-    await onGetAllSuppliersHandler({
+    await onGetCustomerHandler({
       take: +itemsPerPage.value,
       skip: suppliersList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
-    onChangeStateFieldHandler('isFocus', false);
+    onChangeStateFieldHandler("isFocus", false);
   };
 
   const {
@@ -304,11 +304,11 @@ export const useSuppliersTabState = () => {
 
   const onChangeItemsPerPage = (newValue: IOption) => {
     setItemsPerPage(newValue);
-    onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
-    onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler("isContentLoading", true);
+    onChangeStateFieldHandler("isFocus", true);
+    onChangeStateFieldHandler("searchValue", "");
 
-    onGetAllSuppliersHandler({ take: Number(newValue.value) });
+    onGetCustomerHandler({ take: Number(newValue.value) });
     setCurrentPage(0);
     if (!count) return;
     onChangePagesAmount(Number(newValue.value), count);
@@ -328,13 +328,13 @@ export const useSuppliersTabState = () => {
     onFocusSearchHandler,
     selectedCategory,
     onChangeSearchValueHandler,
-    onGetAllSuppliersHandler,
+    onGetCustomerHandler,
     onDeleteModalWindowToggle,
     isModalWindowOpen,
     onModalWindowToggle,
     onChangeCategoryNameValueHandler,
-    onCreateSupplierHandler,
-    onEnterCreateSupplierClick,
+    onCreateCustomerHandler,
+    onEnterCreateCustomerClick,
     date_format,
     suppliersList,
     count,

@@ -1,40 +1,40 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect } from 'react';
 
-import { EmptyData } from "components/EmptyData";
-import { LoaderComponent } from "components/Loader";
-import { MasterModalWindowsBox } from "components/MasterModalWindowsBox";
+import { EmptyData } from 'components/EmptyData';
+import { LoaderComponent } from 'components/Loader';
+import { MasterModalWindowsBox } from 'components/MasterModalWindowsBox';
 
-import { useCategoriesTabState } from "./CategoriesTab.state";
-import { CategoriesTabStyles as Styled } from "./CategoriesTab.style";
-import { CategoryContent } from "./CategoryContent";
+import { useSupplierTabState } from './SupplierTab.state';
+import { SupplierTabStyles as Styled } from './SupplierTab.style';
 
-import { EMPTY_DATA_STRINGS_MASTER as Strings } from "constants/strings";
+import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
+import { SupplierContent } from './SupplierContent/SupplierContent';
 
-export const CategoriesTab: FC = () => {
+export const SupplierTab: FC = () => {
   const {
+    date_format,
     isLoading,
     isModalWindowOpen,
     modalInputValue,
     onChangeCategoryNameValueHandler,
     onChangeSearchValueHandler,
-    onCreateCategoryHandler,
-    onEnterCreateCategoryClick,
-    onGetAllCategoriesHandler,
+    onCreateSupplierHandler,
+    onEnterCreateSupplierClick,
+    onGetSupplierHandler,
     onModalWindowToggle,
+    onModalWindowCancelClickButtonHandler,
     searchValue,
-    categoriesList,
+    selectedCategory,
+    suppliersList,
+    isEdit,
     count,
-    date_format,
     isDeleteModalWindowOpen,
     onDeleteModalWindowToggle,
     onDeleteItemClickHandler,
     onDeleteButtonClickHandler,
-    selectedCategory,
-    isEdit,
     onEditItemClickHandler,
     isDisableButton,
     onSaveButtonClickHandler,
-    onModalWindowCancelClickButtonHandler,
     onChangeItemsPerPage,
     onChangeInputValue,
     onChangePage,
@@ -43,26 +43,27 @@ export const CategoriesTab: FC = () => {
     onForwardClick,
     onBackwardClick,
     onChangePagesAmount,
-    onBlurHandler,
-    onFocusSearchHandler,
     currentPage,
     inputPaginationValue,
     itemsPerPage,
     pages,
+    onBlurHandler,
+    onFocusSearchHandler,
+    debouncedValue,
+    isContentLoading,
+    isFocus,
     isFetchingData,
     isEmptyData,
-    debouncedValue,
-    isFocus,
-    isContentLoading,
+    isHeaderPanel,
     isSearching,
     searchedItems,
     active_account,
     userRole,
-  } = useCategoriesTabState();
+  } = useSupplierTabState();
 
   useEffect(() => {
     !searchValue &&
-      onGetAllCategoriesHandler({
+    onGetSupplierHandler({
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
       });
@@ -70,17 +71,12 @@ export const CategoriesTab: FC = () => {
 
   useEffect(() => {
     debouncedValue &&
-      onGetAllCategoriesHandler(
-        {
-          search: debouncedValue,
-        },
-        isSearching
-      );
+      onGetSupplierHandler({ search: debouncedValue }, isSearching);
   }, [debouncedValue]);
 
   useEffect(() => {
     if (!count) return;
-    onChangePagesAmount(+itemsPerPage.value, count);
+    onChangePagesAmount(Number(itemsPerPage.value), count);
   }, [count, itemsPerPage]);
 
   return (
@@ -89,42 +85,49 @@ export const CategoriesTab: FC = () => {
         isLoading={isLoading}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
-        onEnterCreateItemClick={onEnterCreateCategoryClick}
         onSaveButtonCLickHandler={
-          isEdit ? onSaveButtonClickHandler : onCreateCategoryHandler
+          isEdit ? onSaveButtonClickHandler : onCreateSupplierHandler
         }
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? "Edit Category" : "Insert Category"}
+        onEnterCreateItemClick={onEnterCreateSupplierClick}
+        headerText={
+          isEdit ? 'Edit Supplier' : 'Add Supplier'
+        }
+        text="Supplier Name"
         inputValue={modalInputValue}
-        text="Name"
-        onDeleteButtonClickHandler={onDeleteButtonClickHandler}
-        deleteItemName={`‘${selectedCategory?.name}’`}
-        categoryName="category"
-        isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
+        onDeleteButtonClickHandler={onDeleteButtonClickHandler}
+        isDeleteModalWindowOpen={isDeleteModalWindowOpen}
+        deleteItemName={`‘${selectedCategory?.name}’`}
         isDisableButton={isDisableButton}
+        categoryName="supplier"
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !isFetchingData && isEmptyData && !categoriesList?.length ? (
+      ) : !suppliersList?.length &&
+        !searchValue &&
+        !isFetchingData &&
+        !isContentLoading &&
+        isEmptyData ? (
         <EmptyData
           isUploadFile={false}
-          buttonText={Strings.categories.buttonText}
-          firstSubtitle={Strings.categories.firstSubtitle}
-          secondSubtitle={Strings.categories.secondSubtitle}
-          title={Strings.categories.title}
+          buttonText={Strings.suppliers.buttonText}
+          firstSubtitle={Strings.suppliers.firstSubtitle}
+          secondSubtitle={Strings.suppliers.secondSubtitle}
+          title={Strings.suppliers.title}
           onClick={onModalWindowToggle}
           userRole={userRole}
         />
-      ) : (
-        <CategoryContent
+      ) : !isFetchingData && isHeaderPanel ? (
+        <SupplierContent
           userRole={userRole}
+          searchedItems={searchedItems}
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}
           isFocus={isFocus}
-          categories={categoriesList}
+          categories={suppliersList}
           currentPage={currentPage}
           dateFormat={date_format}
           inputPaginationValue={inputPaginationValue}
@@ -145,9 +148,8 @@ export const CategoriesTab: FC = () => {
           onBlurHandler={onBlurHandler}
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}
-          searchedItems={searchedItems}
         />
-      )}
+      ) : null}
     </>
   );
 };

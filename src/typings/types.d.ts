@@ -373,6 +373,7 @@ declare global {
     isModalWindowOpen: boolean;
     headerText: string;
     inputValue: string;
+    text:string;
   }
 
   interface IDeleteModalWindowProps {

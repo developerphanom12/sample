@@ -42,6 +42,8 @@ import { ReactComponent as profileIcon } from 'assets/icons/profile-icon.svg';
 import { ReactComponent as logoutIcon } from 'assets/icons/logout-icon.svg';
 import { ReactComponent as googleIcon } from 'assets/icons/google-icon.svg';
 import { ReactComponent as approvedMark } from 'assets/icons/approved-mark.svg';
+import { ReactComponent as addSign } from 'assets/icons/add-sign.svg';
+
 
 import { string } from 'yup/lib/locale';
 
@@ -61,6 +63,7 @@ const ICONS: Record<string, FunctionComponent<SVGProps<SVGSVGElement>>> = {
   purchasesIcon,
   invitesIcon,
   salesIcon,
+  addSign,
   expReportIcon,
   manageIcon,
   settingsIcon,

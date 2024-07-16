@@ -1,6 +1,6 @@
 import { styled } from 'styles/theme';
 
-export const SupliersTabStyles = {
+export const CustomerAccTabStyles = {
   LoaderWrapper: styled.div`
     display: flex;
     align-items: center;

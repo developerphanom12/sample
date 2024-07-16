@@ -7,6 +7,7 @@ export const TableMasterStyles = {
     border-bottom: solid 1px ${(props) => props.theme.colors.lightBlack};
     height: 49px;
     width: 100%;
+    flex: 1;
     padding-left: 22px;
   `,
   Actions: styled.div`
@@ -22,6 +23,7 @@ export const TableMasterStyles = {
   `,
   Column: styled.div<{ width?: string }>`
     display: flex;
+    flex: 1;
     align-items: center;
     width: ${(props) => (props.width ? `${props.width}px` : '180px')};
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};

@@ -47,6 +47,7 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
     <>
       <InsertUserModalWindow
         modalFields={modalFields}
+        text="Name"
         isLoading={isLoading}
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onCloseModalWindowHandler}

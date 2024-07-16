@@ -7,6 +7,7 @@ export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
   const {
     deleteItemName,
     headerText,
+    text,
     inputValue,
     isLoading,
     isModalWindowOpen,
@@ -27,6 +28,7 @@ export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
         onCloseModalWindowHandler={onCloseModalWindowHandler}
         isModalWindowOpen={isModalWindowOpen}
         headerText={headerText}
+        text={text}
         onChangeInputValueHandler={onChangeInputValueHandler}
         onSaveButtonCLickHandler={onSaveButtonCLickHandler}
         onEnterCreateItemClick={onEnterCreateItemClick}

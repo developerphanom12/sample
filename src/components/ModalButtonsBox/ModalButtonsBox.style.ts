@@ -14,6 +14,7 @@ export const ModalButtonsBoxStyles = {
     isCancelButton?: boolean;
   }>`
     display: flex;
+    gap: 10px;
     justify-content: ${({ isCancelButton }) =>
       isCancelButton ? 'flex-end' : 'space-between'};
     max-width: 175px;

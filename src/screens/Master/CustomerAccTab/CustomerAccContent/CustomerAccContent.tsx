@@ -1,14 +1,14 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { HeaderPanelMaster } from 'components/HeaderPanelMaster';
-import { LoaderComponent } from 'components/Loader';
-import { PaginationPanel } from 'components/PaginationPanel';
-import { TableMaster } from 'components/Table/TableMaster';
+import { HeaderPanelMaster } from "components/HeaderPanelMaster";
+import { LoaderComponent } from "components/Loader";
+import { PaginationPanel } from "components/PaginationPanel";
+import { TableMaster } from "components/Table/TableMaster";
 
-import { ITabContentProps } from '../../types/master.types';
-import { SupplierContentStyles as Styled } from './SupplierContent.style';
+import { ITabContentProps } from "../../types/master.types";
+import { CustomerAccContentStyles as Styled } from "./CustomerAccContent.style";
 
-export const SupplierContent: FC<ITabContentProps> = (props) => {
+export const CustomerAccContent: FC<ITabContentProps> = (props) => {
   const {
     categories,
     dateFormat,
@@ -47,7 +47,7 @@ export const SupplierContent: FC<ITabContentProps> = (props) => {
         onAddClickButtonHandler={onAddClickButtonHandler}
         onBlurHandler={onBlurHandler}
         onFocusSearchHandler={onFocusSearchHandler}
-        buttonText="Create Supplier Account"
+        buttonText="Add Customer Account"
         userRole={userRole}
       />
       {isContentLoading && isFocus ? (

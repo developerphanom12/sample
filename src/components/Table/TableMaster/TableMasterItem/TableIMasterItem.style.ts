@@ -41,6 +41,7 @@ export const TableMasterItemStyles = {
     border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
     padding-left: 13px;
     display: flex;
+    flex: 1;
     align-items: center;
     width: ${(props) => (props.width ? `${props.width}px` : '180px')};
     &:last-child {

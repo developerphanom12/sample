@@ -1,12 +1,12 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect } from "react";
 
-import { SettingsItemPageContent } from 'components/SettingsItemPageContent';
-import { LoaderComponent } from 'components/Loader';
-import { SuccessPopup } from 'components/SuccessPopup';
+import { SettingsItemPageContent } from "components/SettingsItemPageContent";
+import { LoaderComponent } from "components/Loader";
+import { SuccessPopup } from "components/SuccessPopup";
 
-import { UserListStyles as Styled } from './UserList.styles';
-import { useUserListState } from './UserList.state';
-import { ModalBox } from './ModalBox';
+import { UserListStyles as Styled } from "./UserList.styles";
+import { useUserListState } from "./UserList.state";
+import { ModalBox } from "./ModalBox";
 
 export const UsersList: FC = () => {
   const {
@@ -80,17 +80,18 @@ export const UsersList: FC = () => {
     <Styled.Section>
       <ModalBox
         modalFields={
-          role?.value === 'owner' && !isEdit
+          role?.value === "owner" && !isEdit
             ? modalFields.slice(0, 3)
             : modalFields
         }
+        text="Name"
         isLoading={isLoading}
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onSaveButtonCLickHandler={formik.handleSubmit}
         onEnterCreateItemClick={onEnterInsertUser}
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? 'Edit User' : 'Insert User'}
+        headerText={isEdit ? "Edit User" : "Insert User"}
         formikMeta={formik.getFieldMeta}
         formikProps={formik.getFieldProps}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
@@ -110,8 +111,8 @@ export const UsersList: FC = () => {
         }
         titleText={
           isResentSuccessPopup
-            ? 'Invitation resent successfully'
-            : 'Invitation sent successfully'
+            ? "Invitation resent successfully"
+            : "Invitation sent successfully"
         }
       />
       {isFetchingData ? (

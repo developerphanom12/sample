@@ -53,7 +53,7 @@ export const ModalButtonsBox: FC<IModalButtonsBox> = (props) => {
           isLoading={isLoading}
           type={type}
         >
-          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Add' : 'Send'}
+          {!!saveButtonText ? saveButtonText : isSaveButton ? 'Save' : 'Send'}
         </Button>
 
       </Styled.ButtonsWrapper>

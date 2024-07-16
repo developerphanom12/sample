@@ -93,6 +93,7 @@ export const TypesTab: FC = () => {
           isEdit ? onSaveButtonClickHandler : onCreateTypeHandler
         }
         inputValue={modalInputValue}
+         text="Name"
         isLoading={isLoading}
       />
       <DeleteModalWindow

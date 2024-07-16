@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import { MasterItem } from 'screens/Master/MasterItem';
-import { TableMasterProps } from 'screens/Master/types/master.types';
+import { MasterItem } from "screens/Master/MasterItem";
+import { TableMasterProps } from "screens/Master/types/master.types";
 
-import { TableButton } from '../TableButton/TableButton';
-import { TableMasterStyles as Styled } from './TableMaster.style';
+import { TableButton } from "../TableButton/TableButton";
+import { TableMasterStyles as Styled } from "./TableMaster.style";
 
 export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
   const {
@@ -21,7 +21,7 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
   return (
     <>
       <Styled.Head>
-        <Styled.Actions>Actions</Styled.Actions>
+        <Styled.Actions>Action</Styled.Actions>
         <Styled.Column width="200">
           <TableButton>{tabName}</TableButton>
         </Styled.Column>

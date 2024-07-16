@@ -42,6 +42,14 @@ export const EMPTY_DATA_STRINGS_MASTER = {
       'You can do that by using Create Supplier Account button below',
     buttonText: 'Create Supplier Account',
   },
+  customers: {
+    title: 'Customer accounts will be shown here...',
+    firstSubtitle:
+      'We have created everything for you, please add your customers account to start.',
+    secondSubtitle:
+      'You can do that by using Create Customer Account button below',
+    buttonText: 'Create Customer Account',
+  },
   type: {
     title: 'Payment types will be shown here...',
     firstSubtitle:

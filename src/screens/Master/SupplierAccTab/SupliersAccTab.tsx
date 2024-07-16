@@ -4,13 +4,13 @@ import { EmptyData } from 'components/EmptyData';
 import { LoaderComponent } from 'components/Loader';
 import { MasterModalWindowsBox } from 'components/MasterModalWindowsBox';
 
-import { useSuppliersTabState } from './SupliersTab.state';
-import { SupliersTabStyles as Styled } from './SupliersTab.style';
+import { useSuppliersAccTabState } from './SupliersAccTab.state';
+import { SupliersAccTabStyles as Styled } from './SupliersAccTab.style';
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
-import { SupplierContent } from './SupplierContent/SupplierContent';
+import { SupplierAccContent } from './SupplierAccContent/SupplierAccContent';
 
-export const SupliersTab: FC = () => {
+export const SupliersAccTab: FC = () => {
   const {
     date_format,
     isLoading,
@@ -25,7 +25,7 @@ export const SupliersTab: FC = () => {
     onModalWindowCancelClickButtonHandler,
     searchValue,
     selectedCategory,
-    suppliersList,
+    suppliersAccList,
     isEdit,
     count,
     isDeleteModalWindowOpen,
@@ -59,7 +59,7 @@ export const SupliersTab: FC = () => {
     searchedItems,
     active_account,
     userRole,
-  } = useSuppliersTabState();
+  } = useSuppliersAccTabState();
 
   useEffect(() => {
     !searchValue &&
@@ -91,8 +91,9 @@ export const SupliersTab: FC = () => {
         isModalWindowOpen={isModalWindowOpen}
         onEnterCreateItemClick={onEnterCreateSupplierClick}
         headerText={
-          isEdit ? 'Edit Supplier Account' : 'Insert Supplier Account'
+          isEdit ? 'Edit Supplier Account' : 'Add Supplier Account'
         }
+        text="Supplier Account Name"
         inputValue={modalInputValue}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
@@ -105,7 +106,7 @@ export const SupliersTab: FC = () => {
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />
         </Styled.LoaderWrapper>
-      ) : !suppliersList?.length &&
+      ) : !suppliersAccList?.length &&
         !searchValue &&
         !isFetchingData &&
         !isContentLoading &&
@@ -120,13 +121,13 @@ export const SupliersTab: FC = () => {
           userRole={userRole}
         />
       ) : !isFetchingData && isHeaderPanel ? (
-        <SupplierContent
+        <SupplierAccContent
           userRole={userRole}
           searchedItems={searchedItems}
           isContentLoading={isContentLoading}
           isFetchingData={isFetchingData}
           isFocus={isFocus}
-          categories={suppliersList}
+          categories={suppliersAccList}
           currentPage={currentPage}
           dateFormat={date_format}
           inputPaginationValue={inputPaginationValue}
@@ -143,7 +144,7 @@ export const SupliersTab: FC = () => {
           pages={pages}
           receiptsPerPage={itemsPerPage}
           searchValue={searchValue}
-          tabName="Supplier Account"
+          tabName="Name"
           onBlurHandler={onBlurHandler}
           onFocusSearchHandler={onFocusSearchHandler}
           onChangePage={onChangePage}

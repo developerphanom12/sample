@@ -107,6 +107,7 @@ export const Invites = () => {
         onEnterCreateItemClick={onEnterCreatetInvite}
         isModalWindowOpen={isModalWindowOpen}
         headerText={isEdit ? 'Edit Invitation' : 'Create Invitation'}
+        text="Name"
         formikMeta={formik.getFieldMeta}
         formikProps={formik.getFieldProps}
         isEdit={isEdit}

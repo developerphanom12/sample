@@ -5,9 +5,12 @@ import { useMasterState } from "./Master.state";
 import { MasterStyles as Styled } from "./Master.style";
 import { CategoriesTab } from "./CategoriesTab";
 import { TypesTab } from "./TypesTab/TypesTab";
-import { SupliersTab } from "./SupliersTab/SupliersTab";
+import { SupliersAccTab } from "./SupplierAccTab/SupliersAccTab";
 
 import { MASTER_TABS } from "constants/header-links";
+import { SupplierTab } from "./Supplier/SupplierTab";
+import { CustomersTab } from "./Customers/CustomersTab";
+import { CustomerAccTab } from "./CustomerAccTab/CustomerAccTab";
 
 export const Master: React.FC = () => {
 	const activeTabName = useMasterState();
@@ -16,11 +19,11 @@ export const Master: React.FC = () => {
 			<Styled.ContentWrapper>
 				{activeTabName === MASTER_TABS[0] ? (
 					<Styled.TabContent>
-						<UnderDevelop />
+						<SupplierTab />
 					</Styled.TabContent>
 				) : activeTabName === MASTER_TABS[1] ? (
 					<Styled.TabContent>
-						<SupliersTab />
+						<SupliersAccTab />
 					</Styled.TabContent>
 				) : activeTabName === MASTER_TABS[2] ? (
 					<Styled.TabContent>
@@ -28,11 +31,11 @@ export const Master: React.FC = () => {
 					</Styled.TabContent>
 				) : activeTabName === MASTER_TABS[3] ? (
 					<Styled.TabContent>
-						<UnderDevelop />
+						<CustomersTab />
 					</Styled.TabContent>
 				) : activeTabName === MASTER_TABS[4] ? (
 					<Styled.TabContent>
-						<UnderDevelop />
+						<CustomerAccTab />
 					</Styled.TabContent>
 				) : activeTabName === MASTER_TABS[5] ? (
 					<Styled.TabContent>

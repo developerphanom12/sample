@@ -20,6 +20,7 @@ export const MasterModalWindow: FC<IMasterModalWindowProps> = (props) => {
     onChangeInputValueHandler,
     onSaveButtonCLickHandler,
     onEnterCreateItemClick,
+    text,
   } = props;
   return (
     <ReactModal
@@ -33,7 +34,7 @@ export const MasterModalWindow: FC<IMasterModalWindowProps> = (props) => {
         <Input
           onChangeValue={onChangeInputValueHandler}
           value={inputValue}
-          text="Name"
+          text={text}
           onKeyDown={onEnterCreateItemClick}
           isRemoveBorder
         />

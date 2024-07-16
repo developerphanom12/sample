@@ -1,7 +1,7 @@
 import { apiServices } from 'services/api-service';
 import { IUpdateCategory, ICreateCategory } from './types/master.types';
 
-type Direction = 'category' | 'supplier' | 'payment-type';
+type Direction = 'category' | 'supplier' | 'suppliers' | 'customer'| 'customerAcc' | 'payment-type';
 
 export const createTabItem = (
   payload: ICreateCategory,

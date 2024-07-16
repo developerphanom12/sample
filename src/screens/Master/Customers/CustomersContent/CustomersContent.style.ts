@@ -1,6 +1,6 @@
 import { styled } from 'styles/theme';
 
-export const CategoryContentStyles = {
+export const CustomersContentStyles = {
   TableWrapper: styled.div`
     width: 100%;
   `,
@@ -8,7 +8,7 @@ export const CategoryContentStyles = {
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
-    flex: 1 ;
+    flex: 1 0 auto;
   `,
   LoaderWrapper: styled.div`
     display: flex;
