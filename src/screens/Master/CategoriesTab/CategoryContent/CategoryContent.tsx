@@ -55,7 +55,6 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
       ) : (
         <Styled.TableWrapper>
           <TableMaster
-            userRole={userRole}
             tabName={tabName}
             categories={categories}
             searchedItems={searchedItems}
@@ -63,6 +62,7 @@ export const CategoryContent: FC<ITabContentProps> = (props) => {
             onDeleteIconClickHandler={onDeleteIconClickHandler}
             onEditIconClickHandler={onEditIconClickHandler}
             searchValue={searchValue}
+            userRole={userRole}
           />
           {(searchValue && searchedItems?.length) ||
           (!searchValue && categories.length) ? (

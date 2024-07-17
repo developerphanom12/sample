@@ -2,13 +2,13 @@ import { FC, useEffect } from 'react';
 
 import { EmptyData } from 'components/EmptyData';
 import { LoaderComponent } from 'components/Loader';
-import { MasterModalWindowsBox } from 'components/MasterModalWindowsBox';
 
 import { useSuppliersAccTabState } from './SupliersAccTab.state';
 import { SupliersAccTabStyles as Styled } from './SupliersAccTab.style';
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 import { SupplierAccContent } from './SupplierAccContent/SupplierAccContent';
+import { MasterModalWindowsBoxAcc } from 'components/MasterModalWindowsBox/MasterModalWindowsBoxAcc';
 
 export const SupliersAccTab: FC = () => {
   const {
@@ -81,7 +81,7 @@ export const SupliersAccTab: FC = () => {
 
   return (
     <>
-      <MasterModalWindowsBox
+      <MasterModalWindowsBoxAcc
         isLoading={isLoading}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
@@ -95,6 +95,7 @@ export const SupliersAccTab: FC = () => {
         }
         text="Supplier Account Name"
         inputValue={modalInputValue}
+        code="Code"
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
@@ -102,6 +103,7 @@ export const SupliersAccTab: FC = () => {
         isDisableButton={isDisableButton}
         categoryName="supplier account"
       />
+      
       {isFetchingData ? (
         <Styled.LoaderWrapper>
           <LoaderComponent theme="preview" />

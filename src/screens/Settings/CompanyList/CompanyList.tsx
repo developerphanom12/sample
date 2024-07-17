@@ -87,6 +87,7 @@ export const CompanyList: FC = () => {
           isEdit ? onUpdateCompanyHandler : onCreateCompanyHandler
         }
          text="Name"
+      
         onEnterCreateItemClick={onEnterCreateCompany}
         onUploadCompanyLogoHandler={onUploadCompanyLogoHandler}
         inputValue={companyName}

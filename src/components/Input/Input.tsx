@@ -18,6 +18,7 @@ interface InputProps {
   touched?: boolean;
   isHiddenLabel?: boolean;
   text?: string;
+  code?:string;
   onChangeValue?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;

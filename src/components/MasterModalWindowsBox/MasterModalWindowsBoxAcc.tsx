@@ -2,12 +2,14 @@ import { FC } from 'react';
 
 import { MasterModalWindow } from 'components/MasterModalWindow';
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
+import { MasterModalWindowAcc } from 'components/MasterModalWindow/MasterModalWindowAcc';
 
-export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
+export const MasterModalWindowsBoxAcc: FC<IModalWindowsBoxAcc> = (props) => {
   const {
     deleteItemName,
     headerText,
     text,
+    code,
     inputValue,
     isLoading,
     isModalWindowOpen,
@@ -20,16 +22,16 @@ export const MasterModalWindowsBox: FC<IModalWindowsBox> = (props) => {
     onCloseDeleteModalWindowHandler,
     isDisableButton,
     categoryName,
-  
   } = props;
   return (
     <>
-      <MasterModalWindow
+      <MasterModalWindowAcc
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onCloseModalWindowHandler}
         isModalWindowOpen={isModalWindowOpen}
         headerText={headerText}
         text={text}
+        code={code}
         onChangeInputValueHandler={onChangeInputValueHandler}
         onSaveButtonCLickHandler={onSaveButtonCLickHandler}
         onEnterCreateItemClick={onEnterCreateItemClick}

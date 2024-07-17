@@ -60,6 +60,7 @@ export const ModalBox: FC<IUserListModalBoxProps> = (props) => {
         isEdit={isEdit}
         isInvitation={isInvitation}
         isUserList={isUserList}
+       
       />
       <DeleteModalWindow
         isLoading={isLoading}

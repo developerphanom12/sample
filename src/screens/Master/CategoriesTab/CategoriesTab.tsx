@@ -94,7 +94,6 @@ export const CategoriesTab: FC = () => {
           isEdit ? onSaveButtonClickHandler : onCreateCategoryHandler
         }
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? "Edit Category" : "Insert Category"}
         inputValue={modalInputValue}
         text="Name"
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
@@ -103,6 +102,7 @@ export const CategoriesTab: FC = () => {
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         isDisableButton={isDisableButton}
+        headerText={isEdit ? "Edit Category" : "Add Category"}
       />
       {isFetchingData ? (
         <Styled.LoaderWrapper>

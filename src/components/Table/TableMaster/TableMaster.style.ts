@@ -19,14 +19,14 @@ export const TableMasterStyles = {
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.lightBlack};
     font-weight: ${(props) => props.theme.fontWeight.semiBold};
-    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    /* border-right: solid 1px ${(props) => props.theme.colors.borderWhite}; */
   `,
   Column: styled.div<{ width?: string }>`
     display: flex;
     flex: 1;
     align-items: center;
     width: ${(props) => (props.width ? `${props.width}px` : '180px')};
-    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    /* border-right: solid 1px ${(props) => props.theme.colors.borderWhite}; */
     padding-left: 13px;
     &:last-child {
       border-right: none;

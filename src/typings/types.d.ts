@@ -1,12 +1,12 @@
-import React from 'react';
-import { boolean } from 'yup';
+import React from "react";
+import { boolean } from "yup";
 
 declare global {
   interface IOAuthLogin {
     socialAccountId?: string;
     email: string;
     fullName: string;
-    type: 'capium' | 'google';
+    type: "capium" | "google";
   }
   interface IusePhotoDetailsContentState {
     receiptid: string;
@@ -49,10 +49,12 @@ declare global {
     datePickerRef: React.RefObject<HTMLButtonElement>;
     onDeleteItemHandler: () => Promise<void>;
     onMarkAsPaidButtonHandler?: () => Promise<void>; //depreceated
-    onMarkAsHandler: (mark:string) => Promise<void>;  // used this instead
+    onMarkAsHandler: (mark: string) => Promise<void>; // used this instead
     onClickDownloadCSVButtonHandler: () => Promise<void>;
     onSelectFilesHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onSelectSalesFilesHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSelectSalesFilesHandler?: (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => void;
     onChangeStatusValueHandler: (
       newValue: unknown,
       actionMeta: ActionMeta<unknown>
@@ -62,7 +64,7 @@ declare global {
       actionMeta: ActionMeta<unknown>
     ) => void;
     statusValue: IOption;
-    dateFilterValue: Ioption
+    dateFilterValue: Ioption;
     onChangeSearchValueHandler: (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
@@ -146,7 +148,7 @@ declare global {
 
   type TReceiptKeys = keyof IReceipt;
   type TInvoiceKeys = keyof IInvoice;
-  type TSorterOrder = 'asc' | 'desc' | '';
+  type TSorterOrder = "asc" | "desc" | "";
 
   interface TableInboxAdminProps {
     onCheckedItemHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -226,7 +228,7 @@ declare global {
   }
 
   interface IInboxContent
-    extends Omit<IHeaderPanelProps, 'onDeleteItemHandler'>,
+    extends Omit<IHeaderPanelProps, "onDeleteItemHandler">,
       TableInboxAdminProps,
       IPagination {
     onDeleteReceiptHandler: () => Promise<void>;
@@ -273,34 +275,34 @@ declare global {
   }
 
   enum Statuses {
-    processing = 'processing',
-    review = 'review',
-    accepted = 'accepted',
-    rejected = 'rejected',
+    processing = "processing",
+    review = "review",
+    accepted = "accepted",
+    rejected = "rejected",
   }
 
   enum DateFilterOption {
-    today = 'today',
-    yesterday = 'yesterday',
-    thisweek = 'thisweek',
-    lastweek = 'lastweek',
-    thismonth = 'thismonth',
-    lastmonth = 'lastmonth',
-    thisquater = 'thisquater',
-    lastquater = 'lastquater',
-    thisyear = 'thisyear',
-    lastyear = 'lastyear',
-    cutsomrange = 'cutsom range',
-    cutsomdate = 'cutsom date'
+    today = "today",
+    yesterday = "yesterday",
+    thisweek = "thisweek",
+    lastweek = "lastweek",
+    thismonth = "thismonth",
+    lastmonth = "lastmonth",
+    thisquater = "thisquater",
+    lastquater = "lastquater",
+    thisyear = "thisyear",
+    lastyear = "lastyear",
+    cutsomrange = "cutsom range",
+    cutsomdate = "cutsom date",
   }
 
   enum ButtonTheme {
-    primary = 'primary',
-    secondary = 'secondary',
-    capium = 'capium',
-    roundedRed = 'roundedRed',
-    roundedWhite = 'roundedWhite',
-    threeDots = 'threeDots',
+    primary = "primary",
+    secondary = "secondary",
+    capium = "capium",
+    roundedRed = "roundedRed",
+    roundedWhite = "roundedWhite",
+    threeDots = "threeDots",
   }
 
   type TButtonTheme = keyof typeof ButtonTheme;
@@ -321,10 +323,10 @@ declare global {
   type TStatuses = keyof typeof Statuses;
 
   enum Roles {
-    owner = 'owner',
-    user = 'user',
-    admin = 'admin',
-    accountant = 'accountant',
+    owner = "owner",
+    user = "user",
+    admin = "admin",
+    accountant = "accountant",
   }
   type TRoles = keyof typeof Roles;
 
@@ -358,7 +360,7 @@ declare global {
     createdAt: string;
     createdBy: string;
     dateFormat: string;
-    tableRowTheme: 'companyUser' | 'company';
+    tableRowTheme: "companyUser" | "company";
   }
 
   interface IMasterModalWindowProps {
@@ -373,7 +375,23 @@ declare global {
     isModalWindowOpen: boolean;
     headerText: string;
     inputValue: string;
-    text:string;
+    text: string;
+  }
+
+  interface IMasterModalWindowAccProps {
+    isDisableButton?: boolean;
+    isLoading: boolean;
+    onCloseModalWindowHandler: () => void;
+    onChangeInputValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+    onSaveButtonCLickHandler: () => Promise<void>;
+    onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
+    isModalWindowOpen: boolean;
+    headerText: string;
+    inputValue: string;
+    text: string;
+    code: string;
   }
 
   interface IDeleteModalWindowProps {
@@ -388,6 +406,10 @@ declare global {
 
   interface IModalWindowsBox
     extends IMasterModalWindowProps,
+      IDeleteModalWindowProps {}
+
+  interface IModalWindowsBoxAcc
+    extends IMasterModalWindowAccProps,
       IDeleteModalWindowProps {}
 
   interface IPaginationState {
@@ -457,7 +479,7 @@ declare global {
   }
 
   interface ICompaniesSwitcher {
-    company: Omit<ICompany, 'currency'>;
+    company: Omit<ICompany, "currency">;
     id: string;
     name: string;
     role: string;

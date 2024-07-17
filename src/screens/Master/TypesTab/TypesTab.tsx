@@ -1,15 +1,15 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect } from "react";
 
-import { DeleteModalWindow } from 'components/DeleteModalWindow';
-import { MasterModalWindow } from 'components/MasterModalWindow';
-import { EmptyData } from 'components/EmptyData';
-import { LoaderComponent } from 'components/Loader';
+import { DeleteModalWindow } from "components/DeleteModalWindow";
+import { MasterModalWindow } from "components/MasterModalWindow";
+import { EmptyData } from "components/EmptyData";
+import { LoaderComponent } from "components/Loader";
 
-import { useTypesTabState } from './TypesTab.state';
-import { TypesTabStyles as Styled } from './TypesTab.style';
-import { TypesContent } from './TypesContent/TypesContent';
+import { useTypesTabState } from "./TypesTab.state";
+import { TypesTabStyles as Styled } from "./TypesTab.style";
+import { TypesContent } from "./TypesContent/TypesContent";
 
-import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
+import { EMPTY_DATA_STRINGS_MASTER as Strings } from "constants/strings";
 
 export const TypesTab: FC = () => {
   const {
@@ -86,14 +86,14 @@ export const TypesTab: FC = () => {
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         isModalWindowOpen={isModalWindowOpen}
-        headerText={isEdit ? 'Edit Payment Type' : 'Insert Payment Type'}
+        headerText={isEdit ? "Edit Payment Type" : "Insert Payment Type"}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
         onEnterCreateItemClick={onEnterCreateTypeClick}
         onSaveButtonCLickHandler={
           isEdit ? onSaveButtonClickHandler : onCreateTypeHandler
         }
         inputValue={modalInputValue}
-         text="Name"
+        text="Name"
         isLoading={isLoading}
       />
       <DeleteModalWindow

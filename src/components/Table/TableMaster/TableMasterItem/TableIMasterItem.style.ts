@@ -5,7 +5,7 @@ export const TableMasterItemStyles = {
     display: flex;
     background-color: ${(props) => props.theme.colors.white};
     border-bottom: solid 1px ${(props) => props.theme.colors.borderWhite};
-    min-height: 30px;
+    min-height: 38px;
     max-height: fit-content;
     width: 100%;
     padding-left: 22px;
@@ -13,7 +13,7 @@ export const TableMasterItemStyles = {
   Action: styled.div`
     display: flex;
     align-items: center;
-    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    /* border-right: solid 1px ${(props) => props.theme.colors.borderWhite}; */
     max-width: 80px;
     min-width: 70px;
     width: 100%;
@@ -38,7 +38,7 @@ export const TableMasterItemStyles = {
   Column: styled.div<{ width?: string }>`
     font-size: ${(props) => props.theme.size.default};
     color: ${(props) => props.theme.colors.black};
-    border-right: solid 1px ${(props) => props.theme.colors.borderWhite};
+    /* border-right: solid 1px ${(props) => props.theme.colors.borderWhite}; */
     padding-left: 13px;
     display: flex;
     flex: 1;

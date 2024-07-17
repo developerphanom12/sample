@@ -2,13 +2,13 @@ import { FC, useEffect } from 'react';
 
 import { EmptyData } from 'components/EmptyData';
 import { LoaderComponent } from 'components/Loader';
-import { MasterModalWindowsBox } from 'components/MasterModalWindowsBox';
 
 import { useCustomerAccTabState } from './CustomerAccTab.state';
 import { CustomerAccTabStyles as Styled } from './CustomerAccTab.style';
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 import { CustomerAccContent } from './CustomerAccContent/CustomerAccContent';
+import { MasterModalWindowsBoxAcc } from 'components/MasterModalWindowsBox/MasterModalWindowsBoxAcc';
 
 export const CustomerAccTab: FC = () => {
   const {
@@ -81,7 +81,7 @@ export const CustomerAccTab: FC = () => {
 
   return (
     <>
-      <MasterModalWindowsBox
+      <MasterModalWindowsBoxAcc
         isLoading={isLoading}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
@@ -94,6 +94,7 @@ export const CustomerAccTab: FC = () => {
           isEdit ? 'Edit Customer Account' : 'Add Customer Account'
         }
         text="Customer Account Name"
+        code="Code"
         inputValue={modalInputValue}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}

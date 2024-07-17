@@ -21,7 +21,9 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
   return (
     <>
       <Styled.Head>
-        <Styled.Actions>Action</Styled.Actions>
+      <Styled.Column width="200">
+          <TableButton>ID</TableButton>
+        </Styled.Column>
         <Styled.Column width="200">
           <TableButton>{tabName}</TableButton>
         </Styled.Column>
@@ -31,19 +33,21 @@ export const TableMaster: React.FC<TableMasterProps> = memo((props) => {
         <Styled.Column width="200">
           <TableButton>Created By</TableButton>
         </Styled.Column>
+        <Styled.Actions>Action</Styled.Actions>
+
       </Styled.Head>
       {searchedItems?.length && searchValue ? (
         searchedItems?.map((category) => (
           <MasterItem
-            key={category.id}
-            userRole={userRole}
-            categoryId={category.id}
-            categoryName={category.name}
-            createdDate={category.created}
-            categoryCreator={category.creator.name}
-            dateFormat={dateFormat}
-            onDeleteIconClickHandler={onDeleteIconClickHandler}
-            onEditIconClickHandler={onEditIconClickHandler}
+          userRole={userRole}
+          categoryId={category.id}
+          categoryName={category.name}
+          createdDate={category.created}
+          categoryCreator={category.creator.name}
+          dateFormat={dateFormat}
+          onDeleteIconClickHandler={onDeleteIconClickHandler}
+          onEditIconClickHandler={onEditIconClickHandler}
+          key={category.id}
           />
         ))
       ) : searchValue && !searchedItems?.length ? (

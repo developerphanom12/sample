@@ -1,9 +1,9 @@
-import React from 'react';
-import { format } from 'date-fns';
+import React from "react";
+import { format } from "date-fns";
 
-import { Icon } from 'components/Icons/Icons';
+import { Icon } from "components/Icons/Icons";
 
-import { TableMasterItemStyles } from './TableIMasterItem.style';
+import { TableMasterItemStyles } from "./TableIMasterItem.style";
 
 interface TableMasterItemProps {
   userRole: TRoles;
@@ -26,9 +26,23 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
     onEditIconHandler,
   } = props;
 
-  const isActionDisabled = userRole === 'user';
+  const isActionDisabled = userRole === "user";
   return (
     <TableMasterItemStyles.Item>
+      <TableMasterItemStyles.Column width="200">
+        CU201
+      </TableMasterItemStyles.Column>
+      <TableMasterItemStyles.Column width="200">
+        <TableMasterItemStyles.NameWrapper>
+          {categoryName}
+        </TableMasterItemStyles.NameWrapper>
+      </TableMasterItemStyles.Column>
+      <TableMasterItemStyles.Column>
+        {format(new Date(createdDate), dateFormat)}
+      </TableMasterItemStyles.Column>
+      <TableMasterItemStyles.Column width="200">
+        {categoryCreator}
+      </TableMasterItemStyles.Column>
       <TableMasterItemStyles.Action>
         <TableMasterItemStyles.ActionButton
           isDisabled={isActionDisabled}
@@ -43,17 +57,6 @@ export const TableMasterItem: React.FC<TableMasterItemProps> = (props) => {
           <Icon type="remove" />
         </TableMasterItemStyles.ActionButton>
       </TableMasterItemStyles.Action>
-      <TableMasterItemStyles.Column width="200">
-        <TableMasterItemStyles.NameWrapper>
-          {categoryName}
-        </TableMasterItemStyles.NameWrapper>
-      </TableMasterItemStyles.Column>
-      <TableMasterItemStyles.Column>
-        {format(new Date(createdDate), dateFormat)}
-      </TableMasterItemStyles.Column>
-      <TableMasterItemStyles.Column width="200">
-        {categoryCreator}
-      </TableMasterItemStyles.Column>
     </TableMasterItemStyles.Item>
   );
 };

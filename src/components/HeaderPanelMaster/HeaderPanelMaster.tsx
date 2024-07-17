@@ -32,7 +32,7 @@ export const HeaderPanelMaster: FC<IHeaderPanelMasterProps> = (props) => {
             isHiddenLabel
             isNoMargin
             inputTheme="search"
-            placeHolder="Search"
+            placeHolder="Search here with name"
           />
           <Styled.IconWrapper>
             <Icon type="smallSearchIcon" />
