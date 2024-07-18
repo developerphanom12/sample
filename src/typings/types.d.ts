@@ -393,6 +393,28 @@ declare global {
     text: string;
     code: string;
   }
+  interface IMasterModalSupplierAccProps {
+    isDisableButton?: boolean;
+    isLoading: boolean;
+    onCloseModalWindowHandler: () => void;
+
+    onChangeInputValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+
+    onChangeInputCodeValueHandler: (
+      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void;
+
+    onSaveButtonCLickHandler: () => Promise<void>;
+    onEnterCreateItemClick: (event: React.KeyboardEvent) => void;
+    isModalWindowOpen: boolean;
+    headerText: string;
+    inputValue: string;
+    inputCodeValue:string;
+    text: string;
+    textCode: string;
+  }
 
   interface IDeleteModalWindowProps {
     isLoading?: boolean;
@@ -410,6 +432,10 @@ declare global {
 
   interface IModalWindowsBoxAcc
     extends IMasterModalWindowAccProps,
+      IDeleteModalWindowProps {}
+
+  interface IModalBoxSupplierAcc
+    extends IMasterModalSupplierAccProps,
       IDeleteModalWindowProps {}
 
   interface IPaginationState {

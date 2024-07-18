@@ -1,8 +1,6 @@
 export const ModalWIndowConstants = {
   addCategory: 'Insert Category',
   editCategory: 'Edit Category',
-  addSupplier: 'Insert Supplier',
-  editSupplier: 'Edit Supplier',
   addCustomer: 'Insert Customer',
   editCustomer: 'Edit Customer'
 };

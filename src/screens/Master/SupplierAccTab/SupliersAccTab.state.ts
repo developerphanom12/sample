@@ -1,30 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { SingleValue } from 'react-select';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleValue } from "react-select";
 
-import { getUserRole } from 'services/utils';
-import { IState } from 'services/redux/reducer';
-import { useToggle } from 'hooks/useToggle';
-import { useDebounce } from 'hooks/useDebounce';
-import { usePagination } from 'hooks/usePagination';
+import { getUserRole } from "services/utils";
+import { IState } from "services/redux/reducer";
+import { useToggle } from "hooks/useToggle";
+import { useDebounce } from "hooks/useDebounce";
+import { usePagination } from "hooks/usePagination";
+
+import { setSupplierAccounts, setTabItem } from "../reducer/master.reducer";
+import { IuseMasterSupplierAccState } from "../types/master.types";
 
 import {
-  createTabItem,
-  updateTabItem,
+  createTabAccItem,
+  deleteTabItem,
   getAllTabItems,
   getTabItemById,
-  deleteTabItem,
-} from '../master.api';
-
-import { setSupplierAccounts, setTabItem } from '../reducer/master.reducer';
-import { IuseMasterState } from '../types/master.types';
-import { TAB_INITIAL_STATE } from '../master.constants';
+  updateTabAccItem,
+} from "./SupplierAcc.api";
+import { TAB_INITIAL_STATE } from "./SupplierAcc.constant";
 
 export const useSuppliersAccTabState = () => {
   const initialState = TAB_INITIAL_STATE;
 
   const dispatch = useDispatch();
-  const [state, setState] = useState<IuseMasterState>(initialState);
+  const [state, setState] = useState<IuseMasterSupplierAccState>(initialState);
 
   const {
     master: {
@@ -39,11 +39,11 @@ export const useSuppliersAccTabState = () => {
     },
   } = useSelector((state: IState) => state);
 
-  const userRole = getUserRole(accounts || [], active_account || '')
+  const userRole = getUserRole(accounts || [], active_account || "")
     ?.role as TRoles;
 
   useEffect(() => {
-    !count && onChangeStateFieldHandler('isEmptyData', true);
+    !count && onChangeStateFieldHandler("isEmptyData", true);
   }, []);
 
   const onChangeStateFieldHandler = (
@@ -69,26 +69,29 @@ export const useSuppliersAccTabState = () => {
     }));
   };
 
-  const onFocusSearchHandler = () => onChangeStateFieldHandler('isFocus', true);
-  const onBlurHandler = () => onChangeStateFieldHandler('isFocus', false);
+  const onFocusSearchHandler = () => onChangeStateFieldHandler("isFocus", true);
+  const onBlurHandler = () => onChangeStateFieldHandler("isFocus", false);
 
   const onChangeCategoryNameValueHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => onChangeStateFieldHandler('modalInputValue', event.target.value);
+  ) => onChangeStateFieldHandler("modalInputValue", event.target.value);
 
- 
+  const onChangeCategoryCodeValueHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChangeStateFieldHandler("modalInputCodeValue", event.target.value);
+
   const onGetAllSuppliersHandler = async (
     params?: ISearchParams,
     isSearching?: boolean
   ) => {
     try {
-      onChangeStateFieldHandler('isContentLoading', true);
-      const { data } = await getAllTabItems('supplier', {
+      onChangeStateFieldHandler("isContentLoading", true);
+      const { data } = await getAllTabItems("supplier", {
         ...params,
         active_account,
       });
       isSearching
-        ? onChangeStateFieldHandler('searchedItems', data.data)
+        ? onChangeStateFieldHandler("searchedItems", data.data)
         : dispatch(setSupplierAccounts({ data: data.data, count: data.count }));
       setState((prevState) => ({
         ...prevState,
@@ -113,20 +116,23 @@ export const useSuppliersAccTabState = () => {
 
   const onCreateSupplierHandler = async () => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
-      !count && onChangeStateFieldHandler('isFetchingData', true);
-      await createTabItem(
-        { name: state.modalInputValue, active_account },
-        'supplier'
+      onChangeStateFieldHandler("isLoading", true);
+      !count && onChangeStateFieldHandler("isFetchingData", true);
+      await createTabAccItem(
+        {
+          name: state.modalInputValue,
+          code: state.modalInputCodeValue,
+          active_account,
+        },
+        "supplier"
       );
       onChangePage({ selected: 0 });
 
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
-        searchValue: '',
-        modalInputValue: '',
-       
+        searchValue: "",
+        modalInputValue: "",
       }));
       onModalWindowToggle();
     } catch (error) {
@@ -134,16 +140,15 @@ export const useSuppliersAccTabState = () => {
       setState((prevState) => ({
         ...prevState,
         isLoading: false,
-        searchValue: '',
+        searchValue: "",
         isFetchingData: false,
-        modalInputValue: '',
-        
+        modalInputValue: "",
       }));
     }
   };
 
   const onEnterCreateSupplierClick = (event: React.KeyboardEvent) => {
-    if (event.key !== 'Enter') return;
+    if (event.key !== "Enter") return;
     state.isEdit ? onSaveButtonClickHandler() : onCreateSupplierHandler();
   };
 
@@ -152,7 +157,7 @@ export const useSuppliersAccTabState = () => {
 
   const onDeleteItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier', active_account);
+      const { data } = await getTabItemById(itemId, "supplier", active_account);
       dispatch(setTabItem(data));
       onDeleteModalWindowToggle();
     } catch (error) {
@@ -164,9 +169,9 @@ export const useSuppliersAccTabState = () => {
     try {
       const isLastElementOnPage = suppliersAccList.length === 1;
       onDeleteItem(count, isLastElementOnPage);
-      count === 1 && onChangeStateFieldHandler('isFetchingData', true);
-      count !== 1 && onChangeStateFieldHandler('isContentLoading', true);
-      onChangeStateFieldHandler('isLoading', true);
+      count === 1 && onChangeStateFieldHandler("isFetchingData", true);
+      count !== 1 && onChangeStateFieldHandler("isContentLoading", true);
+      onChangeStateFieldHandler("isLoading", true);
 
       const skip =
         currentPage === 0
@@ -176,30 +181,30 @@ export const useSuppliersAccTabState = () => {
           : currentPage * +itemsPerPage.value;
 
       await deleteTabItem(
-        selectedCategory?.id || '',
-        'supplier',
+        selectedCategory?.id || "",
+        "supplier",
         active_account
       );
 
-      const { data } = await getAllTabItems('supplier', {
+      const { data } = await getAllTabItems("supplier", {
         take: +itemsPerPage.value,
         skip,
         active_account,
       });
       dispatch(setSupplierAccounts({ count: data.count, data: data.data }));
 
-      onChangeStateFieldHandler('isContentLoading', false);
-      onChangeStateFieldHandler('isEmptyData', data.count ? false : true);
-      count === 1 && onChangeStateFieldHandler('isFetchingData', false);
-      onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('searchValue', '');
+      onChangeStateFieldHandler("isContentLoading", false);
+      onChangeStateFieldHandler("isEmptyData", data.count ? false : true);
+      count === 1 && onChangeStateFieldHandler("isFetchingData", false);
+      onChangeStateFieldHandler("isLoading", false);
+      onChangeStateFieldHandler("searchValue", "");
       onDeleteModalWindowToggle();
     } catch (error) {
-      onChangeStateFieldHandler('isEmptyData', !count ? true : false);
-      onChangeStateFieldHandler('isFetchingData', false);
-      onChangeStateFieldHandler('isContentLoading', false);
-      onChangeStateFieldHandler('isLoading', false);
-      onChangeStateFieldHandler('searchValue', '');
+      onChangeStateFieldHandler("isEmptyData", !count ? true : false);
+      onChangeStateFieldHandler("isFetchingData", false);
+      onChangeStateFieldHandler("isContentLoading", false);
+      onChangeStateFieldHandler("isLoading", false);
+      onChangeStateFieldHandler("searchValue", "");
       onDeleteModalWindowToggle();
       console.log(error);
     }
@@ -207,20 +212,20 @@ export const useSuppliersAccTabState = () => {
 
   const onEditItemClickHandler = async (itemId: string) => {
     try {
-      const { data } = await getTabItemById(itemId, 'supplier', active_account);
+      const { data } = await getTabItemById(itemId, "supplier", active_account);
       dispatch(setTabItem(data));
       onModalWindowToggle();
       setState((prevState) => ({
         ...prevState,
-        modalInputValue: data?.name || '',
+        modalInputValue: data?.name || "",
         prevInputValue: data?.name,
         isEdit: true,
       }));
     } catch (error) {
       setState((prevState) => ({
         ...prevState,
-        modalInputValue: '',
-        prevInputValue: '',
+        modalInputValue: "",
+        prevInputValue: "",
         isEdit: false,
       }));
       console.log(error);
@@ -229,16 +234,17 @@ export const useSuppliersAccTabState = () => {
 
   const onSaveButtonClickHandler = async () => {
     try {
-      onChangeStateFieldHandler('isLoading', true);
-      await updateTabItem(
+      onChangeStateFieldHandler("isLoading", true);
+      await updateTabAccItem(
         {
-          id: selectedCategory?.id || '',
+          id: selectedCategory?.id || "",
           name: state.modalInputValue,
+          code: state.modalInputCodeValue,
           active_account,
         },
-        'supplier'
+        "supplier"
       );
-      const { data } = await getAllTabItems('supplier', {
+      const { data } = await getAllTabItems("supplier", {
         active_account,
         take: +itemsPerPage.value,
         skip: currentPage * +itemsPerPage.value,
@@ -248,8 +254,7 @@ export const useSuppliersAccTabState = () => {
         ...prevState,
         isLoading: false,
         isEdit: false,
-        modalInputValue: '',
-
+        modalInputValue: "",
       }));
       onModalWindowToggle();
     } catch (error) {
@@ -257,8 +262,8 @@ export const useSuppliersAccTabState = () => {
         ...prevState,
         isEdit: false,
         isLoading: false,
-        modalInputValue: '',
-        codeInputValue:''
+        modalInputValue: "",
+        codeInputValue: "",
       }));
       console.log(error);
       onModalWindowToggle();
@@ -271,23 +276,23 @@ export const useSuppliersAccTabState = () => {
     onModalWindowToggle();
     setState((prevState) => ({
       ...prevState,
-      modalInputValue: '',
+      modalInputValue: "",
       isEdit: false,
     }));
   };
 
   const onChangePage = async ({ selected }: IPaginationData) => {
     onChangePageHandler(selected);
-    onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
-    state.searchValue && onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler("isContentLoading", true);
+    onChangeStateFieldHandler("isFocus", true);
+    state.searchValue && onChangeStateFieldHandler("searchValue", "");
 
     await onGetAllSuppliersHandler({
       take: +itemsPerPage.value,
       skip: suppliersAccList.length === 1 ? 0 : selected * +itemsPerPage.value,
       active_account,
     });
-    onChangeStateFieldHandler('isFocus', false);
+    onChangeStateFieldHandler("isFocus", false);
   };
 
   const {
@@ -309,9 +314,9 @@ export const useSuppliersAccTabState = () => {
 
   const onChangeItemsPerPage = (newValue: IOption) => {
     setItemsPerPage(newValue);
-    onChangeStateFieldHandler('isContentLoading', true);
-    onChangeStateFieldHandler('isFocus', true);
-    onChangeStateFieldHandler('searchValue', '');
+    onChangeStateFieldHandler("isContentLoading", true);
+    onChangeStateFieldHandler("isFocus", true);
+    onChangeStateFieldHandler("searchValue", "");
 
     onGetAllSuppliersHandler({ take: Number(newValue.value) });
     setCurrentPage(0);
@@ -338,6 +343,7 @@ export const useSuppliersAccTabState = () => {
     isModalWindowOpen,
     onModalWindowToggle,
     onChangeCategoryNameValueHandler,
+    onChangeCategoryCodeValueHandler,
     onCreateSupplierHandler,
     onEnterCreateSupplierClick,
     date_format,

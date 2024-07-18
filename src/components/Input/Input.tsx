@@ -18,7 +18,7 @@ interface InputProps {
   touched?: boolean;
   isHiddenLabel?: boolean;
   text?: string;
-  code?:string;
+  textCode?:string;
   onChangeValue?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -35,6 +35,7 @@ export const Input: React.FC<InputProps> = (props) => {
   const {
     text,
     inputName,
+    textCode,
     inputTheme,
     isTextArea,
     inputHeight,
@@ -57,7 +58,7 @@ export const Input: React.FC<InputProps> = (props) => {
   } = props;
   return (
     <Styled.InputWrapper data-testid="input-component" isNoMargin={isNoMargin}>
-      {isHiddenLabel ? null : <Styled.Label>{text}</Styled.Label>}
+      {isHiddenLabel ? null : <Styled.Label>{text}{textCode}</Styled.Label>}
       {isTextArea ? (
         <Styled.TextArea
           inputHeight={inputHeight}

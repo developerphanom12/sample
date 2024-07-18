@@ -1,18 +1,20 @@
 import { FC } from 'react';
 
 import { DeleteModalWindow } from 'components/DeleteModalWindow';
-import { MasterModalWindowAcc } from 'components/MasterModalWindow/MasterModalWindowAcc';
+import { MasterModalSupplierAcc } from 'components/MasterModalWindow/MasterModalSupplierAcc';
 
-export const MasterModalWindowsBoxAcc: FC<IModalWindowsBoxAcc> = (props) => {
+export const MasterModalBoxSupplierAcc: FC<IModalBoxSupplierAcc> = (props) => {
   const {
     deleteItemName,
     headerText,
     text,
-    code,
+    textCode,
     inputValue,
+    inputCodeValue,
     isLoading,
     isModalWindowOpen,
     onChangeInputValueHandler,
+    onChangeInputCodeValueHandler,
     onCloseModalWindowHandler,
     onDeleteButtonClickHandler,
     onSaveButtonCLickHandler,
@@ -24,17 +26,19 @@ export const MasterModalWindowsBoxAcc: FC<IModalWindowsBoxAcc> = (props) => {
   } = props;
   return (
     <>
-      <MasterModalWindowAcc
+      <MasterModalSupplierAcc
         isDisableButton={isDisableButton}
         onCloseModalWindowHandler={onCloseModalWindowHandler}
         isModalWindowOpen={isModalWindowOpen}
         headerText={headerText}
         text={text}
-        code={code}
+        textCode={textCode}
         onChangeInputValueHandler={onChangeInputValueHandler}
+        onChangeInputCodeValueHandler={onChangeInputCodeValueHandler}
         onSaveButtonCLickHandler={onSaveButtonCLickHandler}
         onEnterCreateItemClick={onEnterCreateItemClick}
         inputValue={inputValue}
+        inputCodeValue={inputCodeValue}
         isLoading={isLoading}
 
       />

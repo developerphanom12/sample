@@ -8,7 +8,7 @@ import { SupliersAccTabStyles as Styled } from './SupliersAccTab.style';
 
 import { EMPTY_DATA_STRINGS_MASTER as Strings } from 'constants/strings';
 import { SupplierAccContent } from './SupplierAccContent/SupplierAccContent';
-import { MasterModalWindowsBoxAcc } from 'components/MasterModalWindowsBox/MasterModalWindowsBoxAcc';
+import { MasterModalBoxSupplierAcc } from 'components/MasterModalWindowsBox/MasterModalBoxSupplierAcc';
 
 export const SupliersAccTab: FC = () => {
   const {
@@ -16,7 +16,9 @@ export const SupliersAccTab: FC = () => {
     isLoading,
     isModalWindowOpen,
     modalInputValue,
+    modalInputCodeValue,
     onChangeCategoryNameValueHandler,
+    onChangeCategoryCodeValueHandler,
     onChangeSearchValueHandler,
     onCreateSupplierHandler,
     onEnterCreateSupplierClick,
@@ -81,10 +83,11 @@ export const SupliersAccTab: FC = () => {
 
   return (
     <>
-      <MasterModalWindowsBoxAcc
+      <MasterModalBoxSupplierAcc
         isLoading={isLoading}
         onCloseModalWindowHandler={onModalWindowCancelClickButtonHandler}
         onChangeInputValueHandler={onChangeCategoryNameValueHandler}
+        onChangeInputCodeValueHandler={onChangeCategoryCodeValueHandler}
         onSaveButtonCLickHandler={
           isEdit ? onSaveButtonClickHandler : onCreateSupplierHandler
         }
@@ -94,8 +97,9 @@ export const SupliersAccTab: FC = () => {
           isEdit ? 'Edit Supplier Account' : 'Add Supplier Account'
         }
         text="Supplier Account Name"
+        textCode="Code"
         inputValue={modalInputValue}
-        code="Code"
+        inputCodeValue={modalInputCodeValue}
         onCloseDeleteModalWindowHandler={onDeleteModalWindowToggle}
         onDeleteButtonClickHandler={onDeleteButtonClickHandler}
         isDeleteModalWindowOpen={isDeleteModalWindowOpen}
